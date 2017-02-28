@@ -14,27 +14,30 @@
 
 from django.shortcuts import render, render_to_response, HttpResponse, redirect, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from . import APP_NAME
+from . import APP_NAME, __version__
 from cartoview_map_viewer import views as viewer_views
 
 
-def view_map(request, instance_id):
+def view(request, instance_id):
     instance = viewer_views._resolve_appinstance(request, instance_id, 'base.view_resourcebase', viewer_views._PERMISSION_MSG_VIEW)
     context = {
-        "instance": instance
+        "instance": instance,
+        "dbv": __version__
     }
     return render(request, "%s/dashboard.html" % APP_NAME, context)
 
 @login_required
 def new(request):
     context = {
-        "editMode": True
+        "editMode": True,
+        "dbv": __version__
     }
     return viewer_views.new(request, app_name=APP_NAME, template="%s/dashboard.html" % APP_NAME, context=context)
 
 @login_required
 def edit(request, instance_id):
     context = {
-        "editMode": True
+        "editMode": True,
+        "dbv": __version__
     }
     return viewer_views.edit(request, instance_id, template="%s/dashboard.html" % APP_NAME, context=context)
