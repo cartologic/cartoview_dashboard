@@ -54,7 +54,7 @@ module.exports = {
 };
 
 // Load all entry points
-var files = fs.readdirSync(__dirname + '/lib').filter(function(element, index, array){
+var files = fs.readdirSync(__dirname + '/src').filter(function(element, index, array){
     return element.match(/^.+\.jsx$/);
 });
 
@@ -62,5 +62,5 @@ for(var idx in files){
     var file = files[idx];
     if(file.startsWith("._")) continue;
     var module_name = file.replace(/\.jsx$/,'');
-    module.exports.entry[module_name] = './lib/' + file;
+    module.exports.entry[module_name] = './src/' + file;
 }

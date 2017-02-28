@@ -1,0 +1,6 @@
+<wps:Input>
+  <ows:Identifier>groupByAttributes</ows:Identifier>
+  <wps:Data>
+    <wps:LiteralData>__attributes__</wps:LiteralData>
+  </wps:Data>
+</wps:Input>

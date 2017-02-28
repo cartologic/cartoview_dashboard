@@ -89,4 +89,3 @@ ENV/
 .ropeproject
 static/cartoview_dashboard/node_modules
 static/cartoview_dashboard/build
-
