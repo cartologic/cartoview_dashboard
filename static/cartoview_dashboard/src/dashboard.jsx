@@ -25,7 +25,7 @@ global.modalStyle = modalStyle;
 class Dashboard extends React.Component{
   constructor(props){
     super(props);
-    this.containers = [];
+
     this.state = {
       widgets: props.widgets,
       title: props.title,
@@ -35,6 +35,7 @@ class Dashboard extends React.Component{
   }
 
   render(){
+    this.containers = [];
     var header, addWidget;
     if(this.props.editMode){
       header = <div>
