@@ -1,0 +1,77 @@
+body{
+    background-color: #f0f0f0;
+}
+body.edit-mode{
+  padding-top: 60px;
+}
+.btn,
+.btn-sm,
+.btn-xs,
+.form-control{
+  border-radius: 0;
+}
+.map-widget{
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+.map-ct{
+    height: 400px;
+    width: 100%;
+    margin: 0;
+}
+.map-panel
+{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+.zoom-buttons {
+    margin-left: 5px;
+    position: absolute;
+    top: 5px;
+}
+.widget-ct{
+
+}
+.widget-ct  .panel .panel-body{
+    padding: 0;
+}
+.panel{
+
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px;
+  box-sizing: border-box;
+  border-radius: 0;
+}
+.widget-ct .panel{
+  height: 100%;
+  width: 100%;
+}
+.widget{
+    width:100%;
+    height: 100%;
+    position: relative;
+}
+
+.bar-chart-ct,
+.line-chart-ct,
+.doughnut-chart-ct{
+    padding: 10px;
+}
+.btn.btn-save-dashboard,
+.btn.btn-add-widget{
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px;
+  width: 60px;
+  height: 60px;
+  border: none;
+}
+
+.btn.btn-add-widget{
+  top: 90px;
+}

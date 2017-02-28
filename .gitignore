@@ -87,3 +87,6 @@ ENV/
 
 # Rope project settings
 .ropeproject
+static/cartoview_dashboard/node_modules
+static/cartoview_dashboard/build
+

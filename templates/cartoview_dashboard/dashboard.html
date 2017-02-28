@@ -1,0 +1,96 @@
+{% load viewer_helper_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>GeoDashboard Demo</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <link rel="shortcut icon" type="image/png" href="{{ STATIC_URL }}cartoview/img/icon.png"/>
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en,Object.assign"></script>
+    <link rel="stylesheet" href="https://boundlessgeo.github.io/sdk/dist/css/components.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="{{STATIC_URL}}cartoview_dashboard/css/dashboard.css" >
+<body>
+  <div class="container">
+    {% if editMode %}
+      <form id="csrf-form">
+        {% csrf_token %}
+      </form>
+      <button class="btn btn-danger btn-lg btn-save-dashboard" onclick="saveDashboard()" title="Save Dashboard">
+        <i class="glyphicon glyphicon-floppy-disk"></i>
+      </button>
+    {% endif %}
+    <div class="row" id="dash"></div>
+  </div>
+
+    <script src="https://boundlessgeo.github.io/sdk/dist/js/full.js"></script>
+    <script src="{{ STATIC_URL }}cartoview_dashboard/dist/commons.js"></script>
+    <script src="{{ STATIC_URL }}cartoview_dashboard/dist/dashboard.bundle.js"></script>
+    <script src="{{ STATIC_URL }}cartoview_dashboard/dist/wps-client.bundle.js"></script>
+    <script src="{{ STATIC_URL }}cartoview_dashboard/dist/map-widget.bundle.js"></script>
+    <script src="{{ STATIC_URL }}cartoview_dashboard/dist/aggregate-widget.bundle.js"></script>
+    <script src="{{ STATIC_URL }}cartoview_dashboard/dist/charts-widget.bundle.js"></script>
+
+
+    <script type="text/javascript">
+    var props = {};
+    //{% if instance %}
+    var isNew = false;
+    props = {{ instance.config | safe }};
+    props.title = {{ instance.title | dump_json }};
+    props.abstract = {{ instance.abstract | dump_json }};
+    //{% else %}
+    var isNew = true;
+    props.widgets = [{
+        type: 'MapWidget',
+        props:{},
+        width: "8"
+    }];
+    //{% endif %}
+
+    //{% if editMode %}
+    props.editMode = true;
+    //{% endif %}
+
+    props.ref = function(d){
+      window.mainDashbord = d;
+    };
+
+    var dash = React.createElement(Dashboard, props);
+    ReactDOM.render(dash, document.getElementById("dash"));
+
+    function getMapConfigUrl(id){
+      return "/maps/" + id + "/data"
+    }
+    function saveDashboard(){
+        var csrfForm = document.getElementById("csrf-form");
+        var formData = new FormData(csrfForm);
+        var state = window.mainDashbord.state;
+        formData.append("title", state.title);
+        formData.append("abstract", state.title);
+        formData.append("config", JSON.stringify({ widgets: window.mainDashbord.getWidgetsConfig() }));
+        fetch("", {
+          credentials: 'include',
+          method: 'POST',
+          body: formData
+        }).then(function(response) {
+          if(response.status == 200){
+            response.json().then(function(resJson){
+              if(resJson.success){
+                if(isNew) window.location = "../" + resJson.id + "/edit/";
+              }
+            });
+          }
+        });
+    }
+    </script>
+
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+    <script type="text/babel">
+    </script> -->
+
+</body>
+</html>
