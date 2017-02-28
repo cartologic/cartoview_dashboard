@@ -130,7 +130,7 @@ class Dashboard extends React.Component{
   getWidgetsConfig(){
     var configs = [];
     this.containers.map((ct) => {
-      if(!ct.state.deleted) {
+      if(ct && !(ct.state && ct.state.deleted)) {
         configs.push(ct.getConfig());
       }
     })
