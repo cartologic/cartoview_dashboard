@@ -5,9 +5,100 @@ var Line = require("react-chartjs").Line;
 var Doughnut = require("react-chartjs").Doughnut;
 var Bar = require("react-chartjs").Bar;
 
-// var Bar = ChartJs.Bar;
-// var Line = ChartJs.Line;
-// var Doughnut = ChartJs.Doughnut;
+class ChartWidgetConfigForm extends React.Component{
+  constructor(props){
+    super(props)
+    this.state = {
+      layers : [],
+      attributes: [],
+      config: props.config
+    };
+    this.layersHash = [];
+  }
+  render (){
+    var initLayerValue = (input) => {
+      this._layerInput = input;
+      if(input) input.value = this.props.config.typeName;
+    };
+    var initAttrValue = (input) => {
+      this._attrInput = input;
+      if(input) input.value = this.props.config.aggregationAttribute;
+    };
+    var initFunctionValue = (input) => {
+      this._functionInput = input;
+      if(input) input.value = this.props.config.aggregationFunction;
+    };
+    var initGroupByValue = (input) => {
+      this._groupByInput = input;
+      if(input && this.props.config.groupBy) input.value = this.props.config.groupBy.attributes;
+    };
+    var isNumber = a => ['xsd:int', 'xsd:long', 'xsd:double'].indexOf(a.attribute_type) != -1;
+    var isString = a => ['xsd:string'].indexOf(a.attribute_type) != -1;
+    return <div>
+      <div className="form-group">
+        <label>Layer</label>
+        <select className="form-control" ref={ initLayerValue } onChange={(e) => this.updateAttributes(e)}>
+          {this.state.layers.map(m => <option value={m.typename}>{m.title}</option>) }
+        </select>
+      </div>
+      <div className="form-group">
+        <label>Aggregation Attribute</label>
+        <select className="form-control" ref={ initAttrValue } >
+          {this.state.attributes.filter(a => isNumber(a) ).map(a => <option value={a.attribute}>{a.attribute_label || a.attribute}</option>) }
+        </select>
+      </div>
+      <div className="form-group">
+        <label>Aggregation Function</label>
+        <select className="form-control" ref={ initFunctionValue }>
+          <option value="Sum">Sum</option>
+          <option value="Count">Count</option>
+          <option value="Average">Average</option>
+          <option value="Max">Max</option>
+          <option value="Min">Min</option>
+          <option value="Median">Median</option>
+          <option value="StdDev">StdDev</option>
+        </select>
+      </div>
+      <div className="form-group">
+        <label>Group By Attribute</label>
+        <select className="form-control" ref={ initGroupByValue } >
+          {this.state.attributes.filter(a => isString(a) ).map(a => <option value={a.attribute}>{a.attribute_label || a.attribute}</option>) }
+        </select>
+      </div>
+    </div>
+  }
+  updateAttributes(){
+    this.state.config.typeName = this._layerInput.value;
+    this.setState({config:this.state.config});
+    getAttributesData(this.layersHash[this._layerInput.value].id).then(res => this.setState({attributes:res.objects}) );
+  }
+  componentWillMount(){
+    getLayersData().then(res => {
+      this.setLayers(res);
+      if(this.props.config.typeName){
+        var layerId = this.layersHash[this.props.config.typeName].id;
+        getAttributesData(layerId).then(res => this.setState({attributes:res.objects}) );
+      }
+    });
+
+  }
+  setLayers(res){
+    this.setState({layers:res.objects});
+    res.objects.map(l => this.layersHash[l.typename] = l);
+
+  }
+  getConfig(){
+    return {
+      typeName: this._layerInput.value,
+      aggregationAttribute: this._attrInput.value,
+      aggregationFunction: this._functionInput.value,
+      groupBy: {
+          attributes: this._groupByInput.value
+      }
+    };
+  }
+}
+
 
 
 class BaseChartWidget extends BaseWidget {
@@ -45,6 +136,13 @@ class BaseChartWidget extends BaseWidget {
     this.setState({
       data: this.state.data
     });
+  }
+
+  configInput(){
+    return <ChartWidgetConfigForm config={this.state.config} ref={(m) => this._configForm = m }/>;
+  }
+  getNewConfig(){
+    return this._configForm.getConfig();
   }
 
 }

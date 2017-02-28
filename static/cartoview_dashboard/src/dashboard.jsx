@@ -38,7 +38,7 @@ class Dashboard extends React.Component{
     this.containers = [];
     var header, addWidget;
     if(this.props.editMode){
-      header = <div>
+      header = <div className="md-col-6">
         <div className="form-group">
           <label>Title</label>
           <input className="form-control" value={this.state.title}
@@ -52,7 +52,8 @@ class Dashboard extends React.Component{
       </div>;
 
       addWidget = <div>
-        <button className="btn btn-info btn-lg btn-add-widget" onClick={(e)=> this.showAddWidgetDialog(e) }>
+        <button className="btn btn-info btn-lg btn-db-actions btn-add-widget"
+          onClick={(e)=> this.showAddWidgetDialog(e) }>
           <i className="glyphicon glyphicon-plus"></i>
         </button>
         <Modal className="modal-dialog" isOpen={this.state.addWidgetDialogIsOpen} style={modalStyle}>

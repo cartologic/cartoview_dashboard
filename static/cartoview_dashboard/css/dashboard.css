@@ -60,8 +60,8 @@ body.edit-mode{
 .doughnut-chart-ct{
     padding: 10px;
 }
-.btn.btn-save-dashboard,
-.btn.btn-add-widget{
+
+.btn.btn-db-actions{
   position: fixed;
   top: 20px;
   left: 20px;
@@ -72,6 +72,12 @@ body.edit-mode{
   border: none;
 }
 
+a.btn.btn-db-actions{
+  line-height: 40px;
+}
+.btn.btn-view-db{
+  top: 160px;
+}
 .btn.btn-add-widget{
   top: 90px;
 }
