@@ -1,0 +1,11 @@
+<ogc:Filter>
+
+  <ogc:BBOX>
+    <ogc:PropertyName>the_geom</ogc:PropertyName>
+    <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3857">
+      <gml:upperCorner>__minx__ __miny__</gml:upperCorner>
+      <gml:lowerCorner>__maxx__ __maxy__</gml:lowerCorner>
+    </gml:Envelope>
+  </ogc:BBOX>
+
+</ogc:Filter>

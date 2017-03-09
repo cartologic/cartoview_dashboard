@@ -3,41 +3,31 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>GeoDashboard Demo</title>
+  <title>
+    {% if instance %}
+    {{ instance.title }}
+    {% else %}
+    New Dashboard
+    {% endif %}
+  </title>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" >
     <link rel="shortcut icon" type="image/png" href="{{ STATIC_URL }}cartoview/img/icon.png"/>
-    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en,Object.assign"></script>
-    <link rel="stylesheet" href="https://boundlessgeo.github.io/sdk/dist/css/components.min.css">
+    <!-- <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en,Object.assign"></script> -->
+    <!-- <link rel="stylesheet" href="https://boundlessgeo.github.io/sdk/dist/css/components.min.css"> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
     <link rel="stylesheet" href="{{STATIC_URL}}cartoview_dashboard/css/dashboard.css?v={{dbv}}" >
 <body>
   <div class="container">
-    {% if editMode %}
-      <form id="csrf-form">
-        {% csrf_token %}
-      </form>
-      <button class="btn btn-danger btn-lg btn-db-actions btn-save-db" onclick="saveDashboard()" title="Save Dashboard">
-        <i class="glyphicon glyphicon-floppy-disk"></i>
-      </button>
-      {% if instance %}
-      <a class="btn btn-warning btn-lg btn-tb btn-db-actions btn-view-db" href="../view/" title="View Dashboard">
-        <i class="glyphicon glyphicon-eye-open"></i>
-      </a>
-      {% endif %}
-    {% else %}
-      {% if request.user.pk == instance.owner.pk %}
-      <a class="btn btn-danger btn-lg btn-db-actions btn-edit-db" href="../edit/" title="Edit Dashboard">
-        <i class="glyphicon glyphicon-pencil"></i>
-      </a>
-      {% endif %}
-    {% endif %}
-
     <div class="row" id="dash"></div>
   </div>
-
-    <script src="https://boundlessgeo.github.io/sdk/dist/js/full.js"></script>
+  <form id="csrf-form">
+    {% csrf_token %}
+  </form>
+    <!-- <script src="{{ STATIC_URL }}cartoview_dashboard/node_modules/react/dist/react.js"></script>
+    <script src="{{ STATIC_URL }}cartoview_dashboard/node_modules/react-dom/dist/react-dom.js"></script> -->
+    <!-- <script src="https://boundlessgeo.github.io/sdk/dist/js/full.js"></script> -->
     <script src="{{ STATIC_URL }}cartoview_dashboard/dist/commons.js?v={{dbv}}"></script>
     <script src="{{ STATIC_URL }}cartoview_dashboard/dist/dashboard.bundle.js?v={{dbv}}"></script>
     <script src="{{ STATIC_URL }}cartoview_dashboard/dist/wps-client.bundle.js?v={{dbv}}"></script>
@@ -49,25 +39,43 @@
     //{% if instance %}
     var isNew = false;
     props = {{ instance.config | safe }};
+
+    props.id = "{{ instance.id | safe }}";
     props.title = {{ instance.title | dump_json }};
     props.abstract = {{ instance.abstract | dump_json }};
+    props.isOwner = {% if request.user == instance.owner %} true {% else %} false {% endif %};
     //{% else %}
     var isNew = true;
-    props.widgets = [{
-        type: 'MapWidget',
-        props:{},
-        width: 2
-    }];
+    props.widgets = {};
+    props.layout = {
+      rows: [{
+        columns: [{
+          className: 'col-md-12',
+          widgets: [],
+        }],
+      },
+      {
+        columns: [{
+          className: 'col-md-8',
+          widgets: [],
+        },
+        {
+          className: 'col-md-4',
+          widgets: [],
+        }],
+      }],
+    };
     //{% endif %}
 
-    //{% if editMode %}
-    props.editMode = true;
+    //{% if editable %}
+    props.editable = true;
     //{% endif %}
 
     props.ref = function(d){
       window.mainDashbord = d;
     };
-
+    props.isNew = isNew;
+    console.debug(props)
     var dash = React.createElement(Dashboard, props);
     ReactDOM.render(dash, document.getElementById("dash"));
 
@@ -97,16 +105,27 @@
     function getLayersData(){
       return getRestData(URLS.rest + "geonodelayer/");
     }
-    function getAttributesData(layerId){
-      return getRestData(URLS.rest + "geonodelayerattribute/?layer=" + layerId);
+    function getAttributesData(typename){
+      return getRestData(URLS.rest + "geonodelayerattribute/?layer__typename=" + typename);
     }
-    function saveDashboard(){
+    function addWidget(){
+      mainDashbord.showAddWidgetDialog();
+    }
+    function saveDashboard(config){
         var csrfForm = document.getElementById("csrf-form");
         var formData = new FormData(csrfForm);
-        var state = window.mainDashbord.state;
-        formData.append("title", state.title);
-        formData.append("abstract", state.title);
-        formData.append("config", JSON.stringify({ widgets: window.mainDashbord.getWidgetsConfig() }));
+        Object.keys(config).forEach(function(key){
+          formData.append(key, config[key]);
+        });
+        // console.debug(config);
+
+        // var state = window.mainDashbord.state;
+        // formData.append("title", state.title);
+        // if(!title || title.trim() == ""){
+        //
+        // }
+        // formData.append("abstract", state.title);
+        // formData.append("config", JSON.stringify({widgets: window.mainDashbord.getWidgetsConfig() }));
         fetch("", {
           credentials: 'include',
           method: 'POST',

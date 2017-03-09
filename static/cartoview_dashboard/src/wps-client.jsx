@@ -1,7 +1,8 @@
 
 const xmlTpls = {
     aggregate: require( './wps-xml/aggregate/aggregate.xml'),
-    groupBy: require( './wps-xml/aggregate/group-by.xml')
+    groupBy: require( './wps-xml/aggregate/group-by.xml'),
+    filters: require( './wps-xml/aggregate/filters.xml')
 }
 class WpsClient {
     constructor(config) {

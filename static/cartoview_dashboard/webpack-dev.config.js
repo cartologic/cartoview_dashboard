@@ -38,17 +38,18 @@ module.exports = {
     plugins: [
       new webpack.DefinePlugin({
         "process.env": {
-          NODE_ENV: JSON.stringify('production')
+          NODE_ENV: JSON.stringify('development')
+          // NODE_ENV: JSON.stringify('production')
         }
       }),
       new webpack.optimize.CommonsChunkPlugin({
         name: 'commons', filename: 'commons.js'
       }),
-      new webpack.optimize.UglifyJsPlugin({
-        compressor: {
-          warnings: false,
-        },
-      }),
+      // new webpack.optimize.UglifyJsPlugin({
+      //   compressor: {
+      //     warnings: false,
+      //   },
+      // }),
     ]
 };
 

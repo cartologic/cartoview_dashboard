@@ -29,7 +29,7 @@ def view(request, instance_id):
 @login_required
 def new(request):
     context = {
-        "editMode": True,
+        "editable": True,
         "dbv": __version__
     }
     return viewer_views.new(request, app_name=APP_NAME, template="%s/dashboard.html" % APP_NAME, context=context)
@@ -37,7 +37,7 @@ def new(request):
 @login_required
 def edit(request, instance_id):
     context = {
-        "editMode": True,
+        "editable": True,
         "dbv": __version__
     }
     return viewer_views.edit(request, instance_id, template="%s/dashboard.html" % APP_NAME, context=context)
