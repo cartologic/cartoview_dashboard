@@ -1,0 +1,48 @@
+import React, { Component } from 'react';
+import FieldSet from './components/FieldSet.jsx';
+import ReactMarkdown from 'react-markdown';
+import CodeMirror from 'react-codemirror';
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/mode/markdown/markdown.js';
+
+class MarkdownWidget extends BaseWidget {
+  static displayName = "Markdown";
+  render() {
+    const style = {
+      padding: "10px 20px"
+    }
+    return <div style={style}>
+      <ReactMarkdown source={this.state.config.markdown} />
+    </div>;
+  }
+}
+class ConfigForm extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      markdown: props.widget.getConfig().markdown || ""
+    }
+  }
+  render(){
+    const options = {
+			lineNumbers: true,
+      mode: 'markdown'
+		};
+
+    const onChange = (markdown) => {
+      this.setState({markdown})
+    }
+		return <CodeMirror value={this.state.markdown} onChange={onChange} options={options} />
+  }
+  getData(){
+    return {
+      markdown: this.state.markdown
+    }
+  }
+}
+
+
+MarkdownWidget.ConfigForm = ConfigForm;
+
+Dashboard.registerWidget(MarkdownWidget);
+export default MarkdownWidget;
