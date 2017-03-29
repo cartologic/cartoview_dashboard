@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FieldSet from './components/FieldSet.jsx';
+import Events from './events/Events.jsx';
 
 class AggregateWidget extends BaseWidget {
   constructor(props) {
@@ -11,26 +12,13 @@ class AggregateWidget extends BaseWidget {
     this.configFieldSetClass = ConfigFieldSet;
   }
 
-  // getConfigFormOptions(){
-  //   if(!this.state.config.aggregationAttribute){
-  //     configFormOptions.aggregationAttribute.options = {};
-  //   }
-  //   return configFormOptions;
-  // }
-
-
   componentDidMount()  {
-    this.context.dataManager.subscribe('extentChange', (extent) => {
+    Events.on('mapExtentChanged', (map, extent) => {
       this.update(this.state.config, extent);
     })
     this.update(this.state.config);
   }
-  // shouldComponentUpdate(nextProps, nextState){
-  //   if(this.state.config != nextState.config ){
-  //     this.update(nextState.config);
-  //   }
-  //   return true;
-  // }
+
   update(config, extent){
     if(config.typeName){
       config = Object.assign({}, config)

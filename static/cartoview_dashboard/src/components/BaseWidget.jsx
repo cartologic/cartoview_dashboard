@@ -1,7 +1,6 @@
 import React, {PropTypes} from 'react';
 import FieldSet from './FieldSet.jsx';
 import ConfigManager from '../managers/ConfigManager.jsx';
-import DataManager from '../managers/DataManager.jsx';
 
 class BaseWidget extends React.Component {
   constructor(props){
@@ -40,7 +39,6 @@ class JSONConfigFieldSet extends FieldSet {
 }
 BaseWidget.ConfigForm = JSONConfigFieldSet;
 BaseWidget.contextTypes = {
-  configManager: PropTypes.instanceOf(ConfigManager),
-  dataManager: PropTypes.instanceOf(DataManager),
+  configManager: PropTypes.instanceOf(ConfigManager)
 };
 export default BaseWidget;

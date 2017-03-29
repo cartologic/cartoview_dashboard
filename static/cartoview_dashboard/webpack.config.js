@@ -6,11 +6,11 @@ var fs = require('fs');
 module.exports = {
     context: __dirname,
     entry: {
-       commons: ["react", "react-dom",],
+       commons: ["react", "react-dom", 'openlayers'],
     },
     output: {
         path: __dirname + "/dist",
-        filename: "[name].bundle.js",
+        filename: "[name].bundle.min.js",
         sourceMapFilename: "[file].map",
     },
     module: {
@@ -42,7 +42,7 @@ module.exports = {
         }
       }),
       new webpack.optimize.CommonsChunkPlugin({
-        name: 'commons', filename: 'commons.js'
+        name: 'commons', filename: 'commons.min.js'
       }),
       new webpack.optimize.UglifyJsPlugin({
         compressor: {

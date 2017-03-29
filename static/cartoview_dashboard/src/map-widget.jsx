@@ -3,12 +3,14 @@ import ReactDOM from 'react-dom';
 import MapConfigTransformService from 'boundless-sdk/services/MapConfigTransformService';
 import MapConfigService from 'boundless-sdk/services/MapConfigService';
 import FieldSet from './components/FieldSet.jsx';
+import Events from './events/Events.jsx';
 
 import ol from 'openlayers';
 
 class MapWidget extends BaseWidget {
     constructor(props) {
         super(props);
+        this.loaded = false;
         this.map = new ol.Map({
             //controls: [new ol.control.Attribution({collapsible: false}), new ol.control.ScaleLine()],
             layers: [
@@ -17,11 +19,8 @@ class MapWidget extends BaseWidget {
             view: new ol.View({center: [0, 0], zoom: 3})
         });
         this.map.on('moveend', () => {
-          
-          if(this.context.dataManager){
             var extent = this.map.getView().calculateExtent( this.map.getSize() );
-            this.context.dataManager.populate('extentChange', extent)
-          }
+            Events.emit('mapExtentChanged', this.map, extent, this);
         });
 
     }
@@ -46,6 +45,8 @@ class MapWidget extends BaseWidget {
             }).then((config) => {
                 if(config) {
                     MapConfigService.load(MapConfigTransformService.transform(config), this.map);
+                    this.ready = true;
+                    Events.emit('mapReady', this.map, this);
                 }
             });
 

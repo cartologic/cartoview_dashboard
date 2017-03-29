@@ -8,7 +8,6 @@ import Container from './Container.jsx';
 import AddWidgetDialog from './AddWidgetDialog.jsx';
 import CustomFrame from './CustomFrame.jsx';
 import ConfigManager from '../managers/ConfigManager.jsx';
-import DataManager from '../managers/DataManager.jsx';
 import Toolbar from './DashboardToolbar.jsx';
 import WidgetConfigDialog from './WidgetConfigDialog.jsx';
 
@@ -47,13 +46,11 @@ class Dashboard extends Component {
     };
     console.log(this.state);
     this.configManager = new ConfigManager(this);
-    this.dataManager = new DataManager(this);
     this.widgets = {};
   }
   getChildContext() {
     return {
-      configManager: this.configManager,
-      dataManager: this.dataManager
+      configManager: this.configManager
     }
   }
   /**
@@ -191,8 +188,7 @@ class Dashboard extends Component {
   }
 }
 Dashboard.childContextTypes = {
-  configManager: PropTypes.instanceOf(ConfigManager),
-  dataManager: PropTypes.instanceOf(DataManager),
+  configManager: PropTypes.instanceOf(ConfigManager)
 };
 
 

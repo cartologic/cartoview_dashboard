@@ -17,6 +17,17 @@ class ConfigManager{
   endEditWidgetConfig = (widget, config) => {
     this.dashboard.updateWidget(widget, config);
   }
+  getMapWidget(){
+    var {widgets} = this.dashboard.state;
+    var mapWidget = null;
+    Object.keys(widgets).forEach((id) => {
+      if(widgets[id].type.name=="MapWidget"){
+        mapWidget = this.dashboard.widgets[id];
+        return false;
+      }
+    });
+    return mapWidget;
+  }
   save = () => {
     var {widgets, layout} = this.dashboard.state;
     const widgetsConfig = {};

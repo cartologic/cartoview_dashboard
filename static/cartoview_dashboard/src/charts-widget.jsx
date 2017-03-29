@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FieldSet from './components/FieldSet.jsx';
 import {Line, Doughnut, Bar} from 'react-chartjs-2';
+import Events from './events/Events.jsx';
 
 class BaseChartWidget extends BaseWidget {
   constructor(props) {
@@ -38,9 +39,9 @@ class BaseChartWidget extends BaseWidget {
   //   }
   // }
   componentDidMount()  {
-    this.context.dataManager.subscribe('extentChange', (extent) => {
+    Events.on('mapExtentChanged', (map, extent) => {
       this.update(this.state.config, extent);
-    })
+    });
     this.update(this.state.config);
   }
   update(config, extent){

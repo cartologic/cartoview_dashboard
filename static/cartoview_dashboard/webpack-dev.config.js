@@ -6,7 +6,7 @@ var fs = require('fs');
 module.exports = {
     context: __dirname,
     entry: {
-       commons: ["react", "react-dom",],
+       commons: ["react", "react-dom", 'openlayers'],
     },
     output: {
         path: __dirname + "/dist",

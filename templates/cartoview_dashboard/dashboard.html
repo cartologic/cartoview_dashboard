@@ -16,7 +16,8 @@
     <link rel="shortcut icon" type="image/png" href="{{ STATIC_URL }}cartoview/img/icon.png"/>
     <!-- <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en,Object.assign"></script> -->
     <!-- <link rel="stylesheet" href="https://boundlessgeo.github.io/sdk/dist/css/components.min.css"> -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" > -->
+    <link rel="stylesheet" href="{{STATIC_URL}}bootstrap/css/bootstrap.min.css" >
     <link rel="stylesheet" href="{{STATIC_URL}}cartoview_dashboard/css/dashboard.css?v={{dbv}}" >
 <body>
   <div class="container">
@@ -35,6 +36,8 @@
     <script src="{{ STATIC_URL }}cartoview_dashboard/dist/aggregate-widget.bundle.js?v={{dbv}}"></script>
     <script src="{{ STATIC_URL }}cartoview_dashboard/dist/charts-widget.bundle.js?v={{dbv}}"></script>
     <script src="{{ STATIC_URL }}cartoview_dashboard/dist/markdown-widget.bundle.js?v={{dbv}}"></script>
+    <script src="{{ STATIC_URL }}cartoview_dashboard/dist/legend-widget.bundle.js?v={{dbv}}"></script>
+    <script src="{{ STATIC_URL }}cartoview_dashboard/dist/identify-widget.bundle.js?v={{dbv}}"></script>
     <script type="text/javascript">
     var props = {};
     //{% if instance %}
