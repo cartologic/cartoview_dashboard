@@ -1,0 +1,14 @@
+.identify-no-results{
+  padding: 10px;
+}
+.identify-navigate{
+  padding: 0 5px;
+}
+.identify-result-ct{
+  overflow: auto;
+  min-height: 100px;
+  max-height: 300px;
+}
+.identify-result-layer-title{
+  margin-left: 10px;
+}
