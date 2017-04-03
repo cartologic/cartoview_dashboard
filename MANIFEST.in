@@ -1,0 +1,9 @@
+include __init__.py
+include installer.py
+include models.py
+include settings.py
+include urls.py
+include views.py
+recursive-include static/cartoview_dashboard/dist *
+recursive-include static/cartoview_dashboard/css *
+recursive-include templates *
