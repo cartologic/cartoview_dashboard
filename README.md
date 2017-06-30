@@ -1,4 +1,5 @@
 # Dashboard Application for Cartoview
+
 Create dashboard with map, chart, summary, identify. The dashboard components is using Geoserver WPS to query to request results.
 Installation
 ============
