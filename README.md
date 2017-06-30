@@ -1,6 +1,5 @@
 # Dashboard Application for Cartoview
-Build your dashboard in cartoview uisng your maps and layers
-
+Create dashboard with map, chart, summary, identify. The dashboard components is using Geoserver WPS to query to request results.
 Installation
 ============
 - For users, Please refer to [Cartoview documentation](http://cartologic.github.io/market/)
