@@ -76,6 +76,7 @@ body.edit-mode{
   bottom: 20px;
   right: 20px;
   width: 60px;
+  z-index: 1000;
 }
 .db-actions-ct .btn{
   border-radius: 50%;
@@ -84,6 +85,7 @@ body.edit-mode{
   height: 56px;
   border: none;
   margin-bottom: 10px;
+  z-index: 1000;
 }
 
 .db-actions-ct a.btn{

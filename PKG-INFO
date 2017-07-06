@@ -1,0 +1,33 @@
+Metadata-Version: 1.1
+Name: cartoview_dashboard
+Version: 1.1.3
+Summary: Create your Geo Dashboard using your maps and layers.
+Home-page: https://github.com/cartologic/cartoview_dashboard
+Author: Cartologic
+Author-email: info@cartologic.com
+License: BSD
+Description: # Dashboard Application for Cartoview
+        Build your dashboard in cartoview uisng your maps and layers
+        
+        Installation
+        ============
+        - For users, Please refer to [Cartoview documentation](http://cartologic.github.io/market/)
+        
+        - For development
+        
+        clone from github
+        ```
+        git clone https://github.com/cartologic/cartoview_dashboard.git
+        ```
+        then download and build the client javascript files
+        ```
+        cd cartoview_dashboard/static/cartoview_dashboard
+        npm install
+        npm run dev
+        ```
+        
+Keywords: cartoview,gis,geonode,django,web mapping,applications,apps,dashboard
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Framework :: Django :: 1.8
+Classifier: Topic :: Scientific/Engineering :: GIS

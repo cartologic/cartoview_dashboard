@@ -1,7 +1,9 @@
 {% load viewer_helper_tags %}
+
 <!DOCTYPE html>
 <html>
 <head>
+
   <meta charset="utf-8">
   <title>
     {% if instance %}
@@ -18,7 +20,10 @@
     <!-- <link rel="stylesheet" href="https://boundlessgeo.github.io/sdk/dist/css/components.min.css"> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
     <!-- <link rel="stylesheet" href="{{STATIC_URL}}bootstrap/css/bootstrap.min.css" > -->
+
     <link rel="stylesheet" href="{{STATIC_URL}}cartoview_dashboard/css/dashboard.css?v={{dbv}}" >
+
+</head>
 <body>
   <div class="container">
     <div class="row" id="dash"></div>
