@@ -5,9 +5,25 @@ from cartoview.app_manager.views import StandardAppViews, AppsThumbnail
 from geonode.maps.views import _PERMISSION_MSG_VIEW
 import json
 from django.http import HttpResponse
+from geonode.maps.models import Map
 from cartoview.app_manager.models import AppInstance, App
 from cartoview_map_viewer import views as viewer_views
 from django.utils.decorators import method_decorator
+
+
+class DashBoardThumbnail(AppsThumbnail):
+
+    def create_thumbnail(self):
+        instance = self.instance
+        parsed_config = json.loads(instance.config)
+        for k, v in parsed_config.get("widgets", {}).items():
+            if isinstance(v, dict):
+                type = v.get('type', "")
+                if type == "MapWidget":
+                    id = int(v.get('config', {}).get("mapId", None))
+                    map_obj = Map.objects.get(id=id)
+                    instance.thumbnail_url = map_obj.get_thumbnail_url()
+                    instance.save()
 
 
 class Dashboard(StandardAppViews):
@@ -35,7 +51,7 @@ class Dashboard(StandardAppViews):
         instance_obj.abstract = abstract
         instance_obj.map_id = map_id
         instance_obj.save()
-        thumbnail_obj = AppsThumbnail(instance_obj)
+        thumbnail_obj = DashBoardThumbnail(instance_obj)
         thumbnail_obj.create_thumbnail()
         res_json.update(dict(success=True, id=instance_obj.id))
         return HttpResponse(json.dumps(res_json),
