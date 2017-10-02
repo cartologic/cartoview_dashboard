@@ -1,6 +1,60 @@
 webpackJsonp([1],{
 
-/***/ 229:
+/***/ 103:
+/***/ (function(module, exports, __webpack_require__) {
+
+var encode = __webpack_require__(365),
+    decode = __webpack_require__(363);
+
+exports.decode = function(data, level){
+	return (!level || level <= 0 ? decode.XML : decode.HTML)(data);
+};
+
+exports.decodeStrict = function(data, level){
+	return (!level || level <= 0 ? decode.XML : decode.HTMLStrict)(data);
+};
+
+exports.encode = function(data, level){
+	return (!level || level <= 0 ? encode.XML : encode.HTML)(data);
+};
+
+exports.encodeXML = encode.XML;
+
+exports.encodeHTML4 =
+exports.encodeHTML5 =
+exports.encodeHTML  = encode.HTML;
+
+exports.decodeXML =
+exports.decodeXMLStrict = decode.XML;
+
+exports.decodeHTML4 =
+exports.decodeHTML5 =
+exports.decodeHTML = decode.HTML;
+
+exports.decodeHTML4Strict =
+exports.decodeHTML5Strict =
+exports.decodeHTMLStrict = decode.HTMLStrict;
+
+exports.escape = encode.escape;
+
+
+/***/ }),
+
+/***/ 104:
+/***/ (function(module, exports) {
+
+module.exports = {"Aacute":"Á","aacute":"á","Abreve":"Ă","abreve":"ă","ac":"∾","acd":"∿","acE":"∾̳","Acirc":"Â","acirc":"â","acute":"´","Acy":"А","acy":"а","AElig":"Æ","aelig":"æ","af":"⁡","Afr":"𝔄","afr":"𝔞","Agrave":"À","agrave":"à","alefsym":"ℵ","aleph":"ℵ","Alpha":"Α","alpha":"α","Amacr":"Ā","amacr":"ā","amalg":"⨿","amp":"&","AMP":"&","andand":"⩕","And":"⩓","and":"∧","andd":"⩜","andslope":"⩘","andv":"⩚","ang":"∠","ange":"⦤","angle":"∠","angmsdaa":"⦨","angmsdab":"⦩","angmsdac":"⦪","angmsdad":"⦫","angmsdae":"⦬","angmsdaf":"⦭","angmsdag":"⦮","angmsdah":"⦯","angmsd":"∡","angrt":"∟","angrtvb":"⊾","angrtvbd":"⦝","angsph":"∢","angst":"Å","angzarr":"⍼","Aogon":"Ą","aogon":"ą","Aopf":"𝔸","aopf":"𝕒","apacir":"⩯","ap":"≈","apE":"⩰","ape":"≊","apid":"≋","apos":"'","ApplyFunction":"⁡","approx":"≈","approxeq":"≊","Aring":"Å","aring":"å","Ascr":"𝒜","ascr":"𝒶","Assign":"≔","ast":"*","asymp":"≈","asympeq":"≍","Atilde":"Ã","atilde":"ã","Auml":"Ä","auml":"ä","awconint":"∳","awint":"⨑","backcong":"≌","backepsilon":"϶","backprime":"‵","backsim":"∽","backsimeq":"⋍","Backslash":"∖","Barv":"⫧","barvee":"⊽","barwed":"⌅","Barwed":"⌆","barwedge":"⌅","bbrk":"⎵","bbrktbrk":"⎶","bcong":"≌","Bcy":"Б","bcy":"б","bdquo":"„","becaus":"∵","because":"∵","Because":"∵","bemptyv":"⦰","bepsi":"϶","bernou":"ℬ","Bernoullis":"ℬ","Beta":"Β","beta":"β","beth":"ℶ","between":"≬","Bfr":"𝔅","bfr":"𝔟","bigcap":"⋂","bigcirc":"◯","bigcup":"⋃","bigodot":"⨀","bigoplus":"⨁","bigotimes":"⨂","bigsqcup":"⨆","bigstar":"★","bigtriangledown":"▽","bigtriangleup":"△","biguplus":"⨄","bigvee":"⋁","bigwedge":"⋀","bkarow":"⤍","blacklozenge":"⧫","blacksquare":"▪","blacktriangle":"▴","blacktriangledown":"▾","blacktriangleleft":"◂","blacktriangleright":"▸","blank":"␣","blk12":"▒","blk14":"░","blk34":"▓","block":"█","bne":"=⃥","bnequiv":"≡⃥","bNot":"⫭","bnot":"⌐","Bopf":"𝔹","bopf":"𝕓","bot":"⊥","bottom":"⊥","bowtie":"⋈","boxbox":"⧉","boxdl":"┐","boxdL":"╕","boxDl":"╖","boxDL":"╗","boxdr":"┌","boxdR":"╒","boxDr":"╓","boxDR":"╔","boxh":"─","boxH":"═","boxhd":"┬","boxHd":"╤","boxhD":"╥","boxHD":"╦","boxhu":"┴","boxHu":"╧","boxhU":"╨","boxHU":"╩","boxminus":"⊟","boxplus":"⊞","boxtimes":"⊠","boxul":"┘","boxuL":"╛","boxUl":"╜","boxUL":"╝","boxur":"└","boxuR":"╘","boxUr":"╙","boxUR":"╚","boxv":"│","boxV":"║","boxvh":"┼","boxvH":"╪","boxVh":"╫","boxVH":"╬","boxvl":"┤","boxvL":"╡","boxVl":"╢","boxVL":"╣","boxvr":"├","boxvR":"╞","boxVr":"╟","boxVR":"╠","bprime":"‵","breve":"˘","Breve":"˘","brvbar":"¦","bscr":"𝒷","Bscr":"ℬ","bsemi":"⁏","bsim":"∽","bsime":"⋍","bsolb":"⧅","bsol":"\\","bsolhsub":"⟈","bull":"•","bullet":"•","bump":"≎","bumpE":"⪮","bumpe":"≏","Bumpeq":"≎","bumpeq":"≏","Cacute":"Ć","cacute":"ć","capand":"⩄","capbrcup":"⩉","capcap":"⩋","cap":"∩","Cap":"⋒","capcup":"⩇","capdot":"⩀","CapitalDifferentialD":"ⅅ","caps":"∩︀","caret":"⁁","caron":"ˇ","Cayleys":"ℭ","ccaps":"⩍","Ccaron":"Č","ccaron":"č","Ccedil":"Ç","ccedil":"ç","Ccirc":"Ĉ","ccirc":"ĉ","Cconint":"∰","ccups":"⩌","ccupssm":"⩐","Cdot":"Ċ","cdot":"ċ","cedil":"¸","Cedilla":"¸","cemptyv":"⦲","cent":"¢","centerdot":"·","CenterDot":"·","cfr":"𝔠","Cfr":"ℭ","CHcy":"Ч","chcy":"ч","check":"✓","checkmark":"✓","Chi":"Χ","chi":"χ","circ":"ˆ","circeq":"≗","circlearrowleft":"↺","circlearrowright":"↻","circledast":"⊛","circledcirc":"⊚","circleddash":"⊝","CircleDot":"⊙","circledR":"®","circledS":"Ⓢ","CircleMinus":"⊖","CirclePlus":"⊕","CircleTimes":"⊗","cir":"○","cirE":"⧃","cire":"≗","cirfnint":"⨐","cirmid":"⫯","cirscir":"⧂","ClockwiseContourIntegral":"∲","CloseCurlyDoubleQuote":"”","CloseCurlyQuote":"’","clubs":"♣","clubsuit":"♣","colon":":","Colon":"∷","Colone":"⩴","colone":"≔","coloneq":"≔","comma":",","commat":"@","comp":"∁","compfn":"∘","complement":"∁","complexes":"ℂ","cong":"≅","congdot":"⩭","Congruent":"≡","conint":"∮","Conint":"∯","ContourIntegral":"∮","copf":"𝕔","Copf":"ℂ","coprod":"∐","Coproduct":"∐","copy":"©","COPY":"©","copysr":"℗","CounterClockwiseContourIntegral":"∳","crarr":"↵","cross":"✗","Cross":"⨯","Cscr":"𝒞","cscr":"𝒸","csub":"⫏","csube":"⫑","csup":"⫐","csupe":"⫒","ctdot":"⋯","cudarrl":"⤸","cudarrr":"⤵","cuepr":"⋞","cuesc":"⋟","cularr":"↶","cularrp":"⤽","cupbrcap":"⩈","cupcap":"⩆","CupCap":"≍","cup":"∪","Cup":"⋓","cupcup":"⩊","cupdot":"⊍","cupor":"⩅","cups":"∪︀","curarr":"↷","curarrm":"⤼","curlyeqprec":"⋞","curlyeqsucc":"⋟","curlyvee":"⋎","curlywedge":"⋏","curren":"¤","curvearrowleft":"↶","curvearrowright":"↷","cuvee":"⋎","cuwed":"⋏","cwconint":"∲","cwint":"∱","cylcty":"⌭","dagger":"†","Dagger":"‡","daleth":"ℸ","darr":"↓","Darr":"↡","dArr":"⇓","dash":"‐","Dashv":"⫤","dashv":"⊣","dbkarow":"⤏","dblac":"˝","Dcaron":"Ď","dcaron":"ď","Dcy":"Д","dcy":"д","ddagger":"‡","ddarr":"⇊","DD":"ⅅ","dd":"ⅆ","DDotrahd":"⤑","ddotseq":"⩷","deg":"°","Del":"∇","Delta":"Δ","delta":"δ","demptyv":"⦱","dfisht":"⥿","Dfr":"𝔇","dfr":"𝔡","dHar":"⥥","dharl":"⇃","dharr":"⇂","DiacriticalAcute":"´","DiacriticalDot":"˙","DiacriticalDoubleAcute":"˝","DiacriticalGrave":"`","DiacriticalTilde":"˜","diam":"⋄","diamond":"⋄","Diamond":"⋄","diamondsuit":"♦","diams":"♦","die":"¨","DifferentialD":"ⅆ","digamma":"ϝ","disin":"⋲","div":"÷","divide":"÷","divideontimes":"⋇","divonx":"⋇","DJcy":"Ђ","djcy":"ђ","dlcorn":"⌞","dlcrop":"⌍","dollar":"$","Dopf":"𝔻","dopf":"𝕕","Dot":"¨","dot":"˙","DotDot":"⃜","doteq":"≐","doteqdot":"≑","DotEqual":"≐","dotminus":"∸","dotplus":"∔","dotsquare":"⊡","doublebarwedge":"⌆","DoubleContourIntegral":"∯","DoubleDot":"¨","DoubleDownArrow":"⇓","DoubleLeftArrow":"⇐","DoubleLeftRightArrow":"⇔","DoubleLeftTee":"⫤","DoubleLongLeftArrow":"⟸","DoubleLongLeftRightArrow":"⟺","DoubleLongRightArrow":"⟹","DoubleRightArrow":"⇒","DoubleRightTee":"⊨","DoubleUpArrow":"⇑","DoubleUpDownArrow":"⇕","DoubleVerticalBar":"∥","DownArrowBar":"⤓","downarrow":"↓","DownArrow":"↓","Downarrow":"⇓","DownArrowUpArrow":"⇵","DownBreve":"̑","downdownarrows":"⇊","downharpoonleft":"⇃","downharpoonright":"⇂","DownLeftRightVector":"⥐","DownLeftTeeVector":"⥞","DownLeftVectorBar":"⥖","DownLeftVector":"↽","DownRightTeeVector":"⥟","DownRightVectorBar":"⥗","DownRightVector":"⇁","DownTeeArrow":"↧","DownTee":"⊤","drbkarow":"⤐","drcorn":"⌟","drcrop":"⌌","Dscr":"𝒟","dscr":"𝒹","DScy":"Ѕ","dscy":"ѕ","dsol":"⧶","Dstrok":"Đ","dstrok":"đ","dtdot":"⋱","dtri":"▿","dtrif":"▾","duarr":"⇵","duhar":"⥯","dwangle":"⦦","DZcy":"Џ","dzcy":"џ","dzigrarr":"⟿","Eacute":"É","eacute":"é","easter":"⩮","Ecaron":"Ě","ecaron":"ě","Ecirc":"Ê","ecirc":"ê","ecir":"≖","ecolon":"≕","Ecy":"Э","ecy":"э","eDDot":"⩷","Edot":"Ė","edot":"ė","eDot":"≑","ee":"ⅇ","efDot":"≒","Efr":"𝔈","efr":"𝔢","eg":"⪚","Egrave":"È","egrave":"è","egs":"⪖","egsdot":"⪘","el":"⪙","Element":"∈","elinters":"⏧","ell":"ℓ","els":"⪕","elsdot":"⪗","Emacr":"Ē","emacr":"ē","empty":"∅","emptyset":"∅","EmptySmallSquare":"◻","emptyv":"∅","EmptyVerySmallSquare":"▫","emsp13":" ","emsp14":" ","emsp":" ","ENG":"Ŋ","eng":"ŋ","ensp":" ","Eogon":"Ę","eogon":"ę","Eopf":"𝔼","eopf":"𝕖","epar":"⋕","eparsl":"⧣","eplus":"⩱","epsi":"ε","Epsilon":"Ε","epsilon":"ε","epsiv":"ϵ","eqcirc":"≖","eqcolon":"≕","eqsim":"≂","eqslantgtr":"⪖","eqslantless":"⪕","Equal":"⩵","equals":"=","EqualTilde":"≂","equest":"≟","Equilibrium":"⇌","equiv":"≡","equivDD":"⩸","eqvparsl":"⧥","erarr":"⥱","erDot":"≓","escr":"ℯ","Escr":"ℰ","esdot":"≐","Esim":"⩳","esim":"≂","Eta":"Η","eta":"η","ETH":"Ð","eth":"ð","Euml":"Ë","euml":"ë","euro":"€","excl":"!","exist":"∃","Exists":"∃","expectation":"ℰ","exponentiale":"ⅇ","ExponentialE":"ⅇ","fallingdotseq":"≒","Fcy":"Ф","fcy":"ф","female":"♀","ffilig":"ﬃ","fflig":"ﬀ","ffllig":"ﬄ","Ffr":"𝔉","ffr":"𝔣","filig":"ﬁ","FilledSmallSquare":"◼","FilledVerySmallSquare":"▪","fjlig":"fj","flat":"♭","fllig":"ﬂ","fltns":"▱","fnof":"ƒ","Fopf":"𝔽","fopf":"𝕗","forall":"∀","ForAll":"∀","fork":"⋔","forkv":"⫙","Fouriertrf":"ℱ","fpartint":"⨍","frac12":"½","frac13":"⅓","frac14":"¼","frac15":"⅕","frac16":"⅙","frac18":"⅛","frac23":"⅔","frac25":"⅖","frac34":"¾","frac35":"⅗","frac38":"⅜","frac45":"⅘","frac56":"⅚","frac58":"⅝","frac78":"⅞","frasl":"⁄","frown":"⌢","fscr":"𝒻","Fscr":"ℱ","gacute":"ǵ","Gamma":"Γ","gamma":"γ","Gammad":"Ϝ","gammad":"ϝ","gap":"⪆","Gbreve":"Ğ","gbreve":"ğ","Gcedil":"Ģ","Gcirc":"Ĝ","gcirc":"ĝ","Gcy":"Г","gcy":"г","Gdot":"Ġ","gdot":"ġ","ge":"≥","gE":"≧","gEl":"⪌","gel":"⋛","geq":"≥","geqq":"≧","geqslant":"⩾","gescc":"⪩","ges":"⩾","gesdot":"⪀","gesdoto":"⪂","gesdotol":"⪄","gesl":"⋛︀","gesles":"⪔","Gfr":"𝔊","gfr":"𝔤","gg":"≫","Gg":"⋙","ggg":"⋙","gimel":"ℷ","GJcy":"Ѓ","gjcy":"ѓ","gla":"⪥","gl":"≷","glE":"⪒","glj":"⪤","gnap":"⪊","gnapprox":"⪊","gne":"⪈","gnE":"≩","gneq":"⪈","gneqq":"≩","gnsim":"⋧","Gopf":"𝔾","gopf":"𝕘","grave":"`","GreaterEqual":"≥","GreaterEqualLess":"⋛","GreaterFullEqual":"≧","GreaterGreater":"⪢","GreaterLess":"≷","GreaterSlantEqual":"⩾","GreaterTilde":"≳","Gscr":"𝒢","gscr":"ℊ","gsim":"≳","gsime":"⪎","gsiml":"⪐","gtcc":"⪧","gtcir":"⩺","gt":">","GT":">","Gt":"≫","gtdot":"⋗","gtlPar":"⦕","gtquest":"⩼","gtrapprox":"⪆","gtrarr":"⥸","gtrdot":"⋗","gtreqless":"⋛","gtreqqless":"⪌","gtrless":"≷","gtrsim":"≳","gvertneqq":"≩︀","gvnE":"≩︀","Hacek":"ˇ","hairsp":" ","half":"½","hamilt":"ℋ","HARDcy":"Ъ","hardcy":"ъ","harrcir":"⥈","harr":"↔","hArr":"⇔","harrw":"↭","Hat":"^","hbar":"ℏ","Hcirc":"Ĥ","hcirc":"ĥ","hearts":"♥","heartsuit":"♥","hellip":"…","hercon":"⊹","hfr":"𝔥","Hfr":"ℌ","HilbertSpace":"ℋ","hksearow":"⤥","hkswarow":"⤦","hoarr":"⇿","homtht":"∻","hookleftarrow":"↩","hookrightarrow":"↪","hopf":"𝕙","Hopf":"ℍ","horbar":"―","HorizontalLine":"─","hscr":"𝒽","Hscr":"ℋ","hslash":"ℏ","Hstrok":"Ħ","hstrok":"ħ","HumpDownHump":"≎","HumpEqual":"≏","hybull":"⁃","hyphen":"‐","Iacute":"Í","iacute":"í","ic":"⁣","Icirc":"Î","icirc":"î","Icy":"И","icy":"и","Idot":"İ","IEcy":"Е","iecy":"е","iexcl":"¡","iff":"⇔","ifr":"𝔦","Ifr":"ℑ","Igrave":"Ì","igrave":"ì","ii":"ⅈ","iiiint":"⨌","iiint":"∭","iinfin":"⧜","iiota":"℩","IJlig":"Ĳ","ijlig":"ĳ","Imacr":"Ī","imacr":"ī","image":"ℑ","ImaginaryI":"ⅈ","imagline":"ℐ","imagpart":"ℑ","imath":"ı","Im":"ℑ","imof":"⊷","imped":"Ƶ","Implies":"⇒","incare":"℅","in":"∈","infin":"∞","infintie":"⧝","inodot":"ı","intcal":"⊺","int":"∫","Int":"∬","integers":"ℤ","Integral":"∫","intercal":"⊺","Intersection":"⋂","intlarhk":"⨗","intprod":"⨼","InvisibleComma":"⁣","InvisibleTimes":"⁢","IOcy":"Ё","iocy":"ё","Iogon":"Į","iogon":"į","Iopf":"𝕀","iopf":"𝕚","Iota":"Ι","iota":"ι","iprod":"⨼","iquest":"¿","iscr":"𝒾","Iscr":"ℐ","isin":"∈","isindot":"⋵","isinE":"⋹","isins":"⋴","isinsv":"⋳","isinv":"∈","it":"⁢","Itilde":"Ĩ","itilde":"ĩ","Iukcy":"І","iukcy":"і","Iuml":"Ï","iuml":"ï","Jcirc":"Ĵ","jcirc":"ĵ","Jcy":"Й","jcy":"й","Jfr":"𝔍","jfr":"𝔧","jmath":"ȷ","Jopf":"𝕁","jopf":"𝕛","Jscr":"𝒥","jscr":"𝒿","Jsercy":"Ј","jsercy":"ј","Jukcy":"Є","jukcy":"є","Kappa":"Κ","kappa":"κ","kappav":"ϰ","Kcedil":"Ķ","kcedil":"ķ","Kcy":"К","kcy":"к","Kfr":"𝔎","kfr":"𝔨","kgreen":"ĸ","KHcy":"Х","khcy":"х","KJcy":"Ќ","kjcy":"ќ","Kopf":"𝕂","kopf":"𝕜","Kscr":"𝒦","kscr":"𝓀","lAarr":"⇚","Lacute":"Ĺ","lacute":"ĺ","laemptyv":"⦴","lagran":"ℒ","Lambda":"Λ","lambda":"λ","lang":"⟨","Lang":"⟪","langd":"⦑","langle":"⟨","lap":"⪅","Laplacetrf":"ℒ","laquo":"«","larrb":"⇤","larrbfs":"⤟","larr":"←","Larr":"↞","lArr":"⇐","larrfs":"⤝","larrhk":"↩","larrlp":"↫","larrpl":"⤹","larrsim":"⥳","larrtl":"↢","latail":"⤙","lAtail":"⤛","lat":"⪫","late":"⪭","lates":"⪭︀","lbarr":"⤌","lBarr":"⤎","lbbrk":"❲","lbrace":"{","lbrack":"[","lbrke":"⦋","lbrksld":"⦏","lbrkslu":"⦍","Lcaron":"Ľ","lcaron":"ľ","Lcedil":"Ļ","lcedil":"ļ","lceil":"⌈","lcub":"{","Lcy":"Л","lcy":"л","ldca":"⤶","ldquo":"“","ldquor":"„","ldrdhar":"⥧","ldrushar":"⥋","ldsh":"↲","le":"≤","lE":"≦","LeftAngleBracket":"⟨","LeftArrowBar":"⇤","leftarrow":"←","LeftArrow":"←","Leftarrow":"⇐","LeftArrowRightArrow":"⇆","leftarrowtail":"↢","LeftCeiling":"⌈","LeftDoubleBracket":"⟦","LeftDownTeeVector":"⥡","LeftDownVectorBar":"⥙","LeftDownVector":"⇃","LeftFloor":"⌊","leftharpoondown":"↽","leftharpoonup":"↼","leftleftarrows":"⇇","leftrightarrow":"↔","LeftRightArrow":"↔","Leftrightarrow":"⇔","leftrightarrows":"⇆","leftrightharpoons":"⇋","leftrightsquigarrow":"↭","LeftRightVector":"⥎","LeftTeeArrow":"↤","LeftTee":"⊣","LeftTeeVector":"⥚","leftthreetimes":"⋋","LeftTriangleBar":"⧏","LeftTriangle":"⊲","LeftTriangleEqual":"⊴","LeftUpDownVector":"⥑","LeftUpTeeVector":"⥠","LeftUpVectorBar":"⥘","LeftUpVector":"↿","LeftVectorBar":"⥒","LeftVector":"↼","lEg":"⪋","leg":"⋚","leq":"≤","leqq":"≦","leqslant":"⩽","lescc":"⪨","les":"⩽","lesdot":"⩿","lesdoto":"⪁","lesdotor":"⪃","lesg":"⋚︀","lesges":"⪓","lessapprox":"⪅","lessdot":"⋖","lesseqgtr":"⋚","lesseqqgtr":"⪋","LessEqualGreater":"⋚","LessFullEqual":"≦","LessGreater":"≶","lessgtr":"≶","LessLess":"⪡","lesssim":"≲","LessSlantEqual":"⩽","LessTilde":"≲","lfisht":"⥼","lfloor":"⌊","Lfr":"𝔏","lfr":"𝔩","lg":"≶","lgE":"⪑","lHar":"⥢","lhard":"↽","lharu":"↼","lharul":"⥪","lhblk":"▄","LJcy":"Љ","ljcy":"љ","llarr":"⇇","ll":"≪","Ll":"⋘","llcorner":"⌞","Lleftarrow":"⇚","llhard":"⥫","lltri":"◺","Lmidot":"Ŀ","lmidot":"ŀ","lmoustache":"⎰","lmoust":"⎰","lnap":"⪉","lnapprox":"⪉","lne":"⪇","lnE":"≨","lneq":"⪇","lneqq":"≨","lnsim":"⋦","loang":"⟬","loarr":"⇽","lobrk":"⟦","longleftarrow":"⟵","LongLeftArrow":"⟵","Longleftarrow":"⟸","longleftrightarrow":"⟷","LongLeftRightArrow":"⟷","Longleftrightarrow":"⟺","longmapsto":"⟼","longrightarrow":"⟶","LongRightArrow":"⟶","Longrightarrow":"⟹","looparrowleft":"↫","looparrowright":"↬","lopar":"⦅","Lopf":"𝕃","lopf":"𝕝","loplus":"⨭","lotimes":"⨴","lowast":"∗","lowbar":"_","LowerLeftArrow":"↙","LowerRightArrow":"↘","loz":"◊","lozenge":"◊","lozf":"⧫","lpar":"(","lparlt":"⦓","lrarr":"⇆","lrcorner":"⌟","lrhar":"⇋","lrhard":"⥭","lrm":"‎","lrtri":"⊿","lsaquo":"‹","lscr":"𝓁","Lscr":"ℒ","lsh":"↰","Lsh":"↰","lsim":"≲","lsime":"⪍","lsimg":"⪏","lsqb":"[","lsquo":"‘","lsquor":"‚","Lstrok":"Ł","lstrok":"ł","ltcc":"⪦","ltcir":"⩹","lt":"<","LT":"<","Lt":"≪","ltdot":"⋖","lthree":"⋋","ltimes":"⋉","ltlarr":"⥶","ltquest":"⩻","ltri":"◃","ltrie":"⊴","ltrif":"◂","ltrPar":"⦖","lurdshar":"⥊","luruhar":"⥦","lvertneqq":"≨︀","lvnE":"≨︀","macr":"¯","male":"♂","malt":"✠","maltese":"✠","Map":"⤅","map":"↦","mapsto":"↦","mapstodown":"↧","mapstoleft":"↤","mapstoup":"↥","marker":"▮","mcomma":"⨩","Mcy":"М","mcy":"м","mdash":"—","mDDot":"∺","measuredangle":"∡","MediumSpace":" ","Mellintrf":"ℳ","Mfr":"𝔐","mfr":"𝔪","mho":"℧","micro":"µ","midast":"*","midcir":"⫰","mid":"∣","middot":"·","minusb":"⊟","minus":"−","minusd":"∸","minusdu":"⨪","MinusPlus":"∓","mlcp":"⫛","mldr":"…","mnplus":"∓","models":"⊧","Mopf":"𝕄","mopf":"𝕞","mp":"∓","mscr":"𝓂","Mscr":"ℳ","mstpos":"∾","Mu":"Μ","mu":"μ","multimap":"⊸","mumap":"⊸","nabla":"∇","Nacute":"Ń","nacute":"ń","nang":"∠⃒","nap":"≉","napE":"⩰̸","napid":"≋̸","napos":"ŉ","napprox":"≉","natural":"♮","naturals":"ℕ","natur":"♮","nbsp":" ","nbump":"≎̸","nbumpe":"≏̸","ncap":"⩃","Ncaron":"Ň","ncaron":"ň","Ncedil":"Ņ","ncedil":"ņ","ncong":"≇","ncongdot":"⩭̸","ncup":"⩂","Ncy":"Н","ncy":"н","ndash":"–","nearhk":"⤤","nearr":"↗","neArr":"⇗","nearrow":"↗","ne":"≠","nedot":"≐̸","NegativeMediumSpace":"​","NegativeThickSpace":"​","NegativeThinSpace":"​","NegativeVeryThinSpace":"​","nequiv":"≢","nesear":"⤨","nesim":"≂̸","NestedGreaterGreater":"≫","NestedLessLess":"≪","NewLine":"\n","nexist":"∄","nexists":"∄","Nfr":"𝔑","nfr":"𝔫","ngE":"≧̸","nge":"≱","ngeq":"≱","ngeqq":"≧̸","ngeqslant":"⩾̸","nges":"⩾̸","nGg":"⋙̸","ngsim":"≵","nGt":"≫⃒","ngt":"≯","ngtr":"≯","nGtv":"≫̸","nharr":"↮","nhArr":"⇎","nhpar":"⫲","ni":"∋","nis":"⋼","nisd":"⋺","niv":"∋","NJcy":"Њ","njcy":"њ","nlarr":"↚","nlArr":"⇍","nldr":"‥","nlE":"≦̸","nle":"≰","nleftarrow":"↚","nLeftarrow":"⇍","nleftrightarrow":"↮","nLeftrightarrow":"⇎","nleq":"≰","nleqq":"≦̸","nleqslant":"⩽̸","nles":"⩽̸","nless":"≮","nLl":"⋘̸","nlsim":"≴","nLt":"≪⃒","nlt":"≮","nltri":"⋪","nltrie":"⋬","nLtv":"≪̸","nmid":"∤","NoBreak":"⁠","NonBreakingSpace":" ","nopf":"𝕟","Nopf":"ℕ","Not":"⫬","not":"¬","NotCongruent":"≢","NotCupCap":"≭","NotDoubleVerticalBar":"∦","NotElement":"∉","NotEqual":"≠","NotEqualTilde":"≂̸","NotExists":"∄","NotGreater":"≯","NotGreaterEqual":"≱","NotGreaterFullEqual":"≧̸","NotGreaterGreater":"≫̸","NotGreaterLess":"≹","NotGreaterSlantEqual":"⩾̸","NotGreaterTilde":"≵","NotHumpDownHump":"≎̸","NotHumpEqual":"≏̸","notin":"∉","notindot":"⋵̸","notinE":"⋹̸","notinva":"∉","notinvb":"⋷","notinvc":"⋶","NotLeftTriangleBar":"⧏̸","NotLeftTriangle":"⋪","NotLeftTriangleEqual":"⋬","NotLess":"≮","NotLessEqual":"≰","NotLessGreater":"≸","NotLessLess":"≪̸","NotLessSlantEqual":"⩽̸","NotLessTilde":"≴","NotNestedGreaterGreater":"⪢̸","NotNestedLessLess":"⪡̸","notni":"∌","notniva":"∌","notnivb":"⋾","notnivc":"⋽","NotPrecedes":"⊀","NotPrecedesEqual":"⪯̸","NotPrecedesSlantEqual":"⋠","NotReverseElement":"∌","NotRightTriangleBar":"⧐̸","NotRightTriangle":"⋫","NotRightTriangleEqual":"⋭","NotSquareSubset":"⊏̸","NotSquareSubsetEqual":"⋢","NotSquareSuperset":"⊐̸","NotSquareSupersetEqual":"⋣","NotSubset":"⊂⃒","NotSubsetEqual":"⊈","NotSucceeds":"⊁","NotSucceedsEqual":"⪰̸","NotSucceedsSlantEqual":"⋡","NotSucceedsTilde":"≿̸","NotSuperset":"⊃⃒","NotSupersetEqual":"⊉","NotTilde":"≁","NotTildeEqual":"≄","NotTildeFullEqual":"≇","NotTildeTilde":"≉","NotVerticalBar":"∤","nparallel":"∦","npar":"∦","nparsl":"⫽⃥","npart":"∂̸","npolint":"⨔","npr":"⊀","nprcue":"⋠","nprec":"⊀","npreceq":"⪯̸","npre":"⪯̸","nrarrc":"⤳̸","nrarr":"↛","nrArr":"⇏","nrarrw":"↝̸","nrightarrow":"↛","nRightarrow":"⇏","nrtri":"⋫","nrtrie":"⋭","nsc":"⊁","nsccue":"⋡","nsce":"⪰̸","Nscr":"𝒩","nscr":"𝓃","nshortmid":"∤","nshortparallel":"∦","nsim":"≁","nsime":"≄","nsimeq":"≄","nsmid":"∤","nspar":"∦","nsqsube":"⋢","nsqsupe":"⋣","nsub":"⊄","nsubE":"⫅̸","nsube":"⊈","nsubset":"⊂⃒","nsubseteq":"⊈","nsubseteqq":"⫅̸","nsucc":"⊁","nsucceq":"⪰̸","nsup":"⊅","nsupE":"⫆̸","nsupe":"⊉","nsupset":"⊃⃒","nsupseteq":"⊉","nsupseteqq":"⫆̸","ntgl":"≹","Ntilde":"Ñ","ntilde":"ñ","ntlg":"≸","ntriangleleft":"⋪","ntrianglelefteq":"⋬","ntriangleright":"⋫","ntrianglerighteq":"⋭","Nu":"Ν","nu":"ν","num":"#","numero":"№","numsp":" ","nvap":"≍⃒","nvdash":"⊬","nvDash":"⊭","nVdash":"⊮","nVDash":"⊯","nvge":"≥⃒","nvgt":">⃒","nvHarr":"⤄","nvinfin":"⧞","nvlArr":"⤂","nvle":"≤⃒","nvlt":"<⃒","nvltrie":"⊴⃒","nvrArr":"⤃","nvrtrie":"⊵⃒","nvsim":"∼⃒","nwarhk":"⤣","nwarr":"↖","nwArr":"⇖","nwarrow":"↖","nwnear":"⤧","Oacute":"Ó","oacute":"ó","oast":"⊛","Ocirc":"Ô","ocirc":"ô","ocir":"⊚","Ocy":"О","ocy":"о","odash":"⊝","Odblac":"Ő","odblac":"ő","odiv":"⨸","odot":"⊙","odsold":"⦼","OElig":"Œ","oelig":"œ","ofcir":"⦿","Ofr":"𝔒","ofr":"𝔬","ogon":"˛","Ograve":"Ò","ograve":"ò","ogt":"⧁","ohbar":"⦵","ohm":"Ω","oint":"∮","olarr":"↺","olcir":"⦾","olcross":"⦻","oline":"‾","olt":"⧀","Omacr":"Ō","omacr":"ō","Omega":"Ω","omega":"ω","Omicron":"Ο","omicron":"ο","omid":"⦶","ominus":"⊖","Oopf":"𝕆","oopf":"𝕠","opar":"⦷","OpenCurlyDoubleQuote":"“","OpenCurlyQuote":"‘","operp":"⦹","oplus":"⊕","orarr":"↻","Or":"⩔","or":"∨","ord":"⩝","order":"ℴ","orderof":"ℴ","ordf":"ª","ordm":"º","origof":"⊶","oror":"⩖","orslope":"⩗","orv":"⩛","oS":"Ⓢ","Oscr":"𝒪","oscr":"ℴ","Oslash":"Ø","oslash":"ø","osol":"⊘","Otilde":"Õ","otilde":"õ","otimesas":"⨶","Otimes":"⨷","otimes":"⊗","Ouml":"Ö","ouml":"ö","ovbar":"⌽","OverBar":"‾","OverBrace":"⏞","OverBracket":"⎴","OverParenthesis":"⏜","para":"¶","parallel":"∥","par":"∥","parsim":"⫳","parsl":"⫽","part":"∂","PartialD":"∂","Pcy":"П","pcy":"п","percnt":"%","period":".","permil":"‰","perp":"⊥","pertenk":"‱","Pfr":"𝔓","pfr":"𝔭","Phi":"Φ","phi":"φ","phiv":"ϕ","phmmat":"ℳ","phone":"☎","Pi":"Π","pi":"π","pitchfork":"⋔","piv":"ϖ","planck":"ℏ","planckh":"ℎ","plankv":"ℏ","plusacir":"⨣","plusb":"⊞","pluscir":"⨢","plus":"+","plusdo":"∔","plusdu":"⨥","pluse":"⩲","PlusMinus":"±","plusmn":"±","plussim":"⨦","plustwo":"⨧","pm":"±","Poincareplane":"ℌ","pointint":"⨕","popf":"𝕡","Popf":"ℙ","pound":"£","prap":"⪷","Pr":"⪻","pr":"≺","prcue":"≼","precapprox":"⪷","prec":"≺","preccurlyeq":"≼","Precedes":"≺","PrecedesEqual":"⪯","PrecedesSlantEqual":"≼","PrecedesTilde":"≾","preceq":"⪯","precnapprox":"⪹","precneqq":"⪵","precnsim":"⋨","pre":"⪯","prE":"⪳","precsim":"≾","prime":"′","Prime":"″","primes":"ℙ","prnap":"⪹","prnE":"⪵","prnsim":"⋨","prod":"∏","Product":"∏","profalar":"⌮","profline":"⌒","profsurf":"⌓","prop":"∝","Proportional":"∝","Proportion":"∷","propto":"∝","prsim":"≾","prurel":"⊰","Pscr":"𝒫","pscr":"𝓅","Psi":"Ψ","psi":"ψ","puncsp":" ","Qfr":"𝔔","qfr":"𝔮","qint":"⨌","qopf":"𝕢","Qopf":"ℚ","qprime":"⁗","Qscr":"𝒬","qscr":"𝓆","quaternions":"ℍ","quatint":"⨖","quest":"?","questeq":"≟","quot":"\"","QUOT":"\"","rAarr":"⇛","race":"∽̱","Racute":"Ŕ","racute":"ŕ","radic":"√","raemptyv":"⦳","rang":"⟩","Rang":"⟫","rangd":"⦒","range":"⦥","rangle":"⟩","raquo":"»","rarrap":"⥵","rarrb":"⇥","rarrbfs":"⤠","rarrc":"⤳","rarr":"→","Rarr":"↠","rArr":"⇒","rarrfs":"⤞","rarrhk":"↪","rarrlp":"↬","rarrpl":"⥅","rarrsim":"⥴","Rarrtl":"⤖","rarrtl":"↣","rarrw":"↝","ratail":"⤚","rAtail":"⤜","ratio":"∶","rationals":"ℚ","rbarr":"⤍","rBarr":"⤏","RBarr":"⤐","rbbrk":"❳","rbrace":"}","rbrack":"]","rbrke":"⦌","rbrksld":"⦎","rbrkslu":"⦐","Rcaron":"Ř","rcaron":"ř","Rcedil":"Ŗ","rcedil":"ŗ","rceil":"⌉","rcub":"}","Rcy":"Р","rcy":"р","rdca":"⤷","rdldhar":"⥩","rdquo":"”","rdquor":"”","rdsh":"↳","real":"ℜ","realine":"ℛ","realpart":"ℜ","reals":"ℝ","Re":"ℜ","rect":"▭","reg":"®","REG":"®","ReverseElement":"∋","ReverseEquilibrium":"⇋","ReverseUpEquilibrium":"⥯","rfisht":"⥽","rfloor":"⌋","rfr":"𝔯","Rfr":"ℜ","rHar":"⥤","rhard":"⇁","rharu":"⇀","rharul":"⥬","Rho":"Ρ","rho":"ρ","rhov":"ϱ","RightAngleBracket":"⟩","RightArrowBar":"⇥","rightarrow":"→","RightArrow":"→","Rightarrow":"⇒","RightArrowLeftArrow":"⇄","rightarrowtail":"↣","RightCeiling":"⌉","RightDoubleBracket":"⟧","RightDownTeeVector":"⥝","RightDownVectorBar":"⥕","RightDownVector":"⇂","RightFloor":"⌋","rightharpoondown":"⇁","rightharpoonup":"⇀","rightleftarrows":"⇄","rightleftharpoons":"⇌","rightrightarrows":"⇉","rightsquigarrow":"↝","RightTeeArrow":"↦","RightTee":"⊢","RightTeeVector":"⥛","rightthreetimes":"⋌","RightTriangleBar":"⧐","RightTriangle":"⊳","RightTriangleEqual":"⊵","RightUpDownVector":"⥏","RightUpTeeVector":"⥜","RightUpVectorBar":"⥔","RightUpVector":"↾","RightVectorBar":"⥓","RightVector":"⇀","ring":"˚","risingdotseq":"≓","rlarr":"⇄","rlhar":"⇌","rlm":"‏","rmoustache":"⎱","rmoust":"⎱","rnmid":"⫮","roang":"⟭","roarr":"⇾","robrk":"⟧","ropar":"⦆","ropf":"𝕣","Ropf":"ℝ","roplus":"⨮","rotimes":"⨵","RoundImplies":"⥰","rpar":")","rpargt":"⦔","rppolint":"⨒","rrarr":"⇉","Rrightarrow":"⇛","rsaquo":"›","rscr":"𝓇","Rscr":"ℛ","rsh":"↱","Rsh":"↱","rsqb":"]","rsquo":"’","rsquor":"’","rthree":"⋌","rtimes":"⋊","rtri":"▹","rtrie":"⊵","rtrif":"▸","rtriltri":"⧎","RuleDelayed":"⧴","ruluhar":"⥨","rx":"℞","Sacute":"Ś","sacute":"ś","sbquo":"‚","scap":"⪸","Scaron":"Š","scaron":"š","Sc":"⪼","sc":"≻","sccue":"≽","sce":"⪰","scE":"⪴","Scedil":"Ş","scedil":"ş","Scirc":"Ŝ","scirc":"ŝ","scnap":"⪺","scnE":"⪶","scnsim":"⋩","scpolint":"⨓","scsim":"≿","Scy":"С","scy":"с","sdotb":"⊡","sdot":"⋅","sdote":"⩦","searhk":"⤥","searr":"↘","seArr":"⇘","searrow":"↘","sect":"§","semi":";","seswar":"⤩","setminus":"∖","setmn":"∖","sext":"✶","Sfr":"𝔖","sfr":"𝔰","sfrown":"⌢","sharp":"♯","SHCHcy":"Щ","shchcy":"щ","SHcy":"Ш","shcy":"ш","ShortDownArrow":"↓","ShortLeftArrow":"←","shortmid":"∣","shortparallel":"∥","ShortRightArrow":"→","ShortUpArrow":"↑","shy":"­","Sigma":"Σ","sigma":"σ","sigmaf":"ς","sigmav":"ς","sim":"∼","simdot":"⩪","sime":"≃","simeq":"≃","simg":"⪞","simgE":"⪠","siml":"⪝","simlE":"⪟","simne":"≆","simplus":"⨤","simrarr":"⥲","slarr":"←","SmallCircle":"∘","smallsetminus":"∖","smashp":"⨳","smeparsl":"⧤","smid":"∣","smile":"⌣","smt":"⪪","smte":"⪬","smtes":"⪬︀","SOFTcy":"Ь","softcy":"ь","solbar":"⌿","solb":"⧄","sol":"/","Sopf":"𝕊","sopf":"𝕤","spades":"♠","spadesuit":"♠","spar":"∥","sqcap":"⊓","sqcaps":"⊓︀","sqcup":"⊔","sqcups":"⊔︀","Sqrt":"√","sqsub":"⊏","sqsube":"⊑","sqsubset":"⊏","sqsubseteq":"⊑","sqsup":"⊐","sqsupe":"⊒","sqsupset":"⊐","sqsupseteq":"⊒","square":"□","Square":"□","SquareIntersection":"⊓","SquareSubset":"⊏","SquareSubsetEqual":"⊑","SquareSuperset":"⊐","SquareSupersetEqual":"⊒","SquareUnion":"⊔","squarf":"▪","squ":"□","squf":"▪","srarr":"→","Sscr":"𝒮","sscr":"𝓈","ssetmn":"∖","ssmile":"⌣","sstarf":"⋆","Star":"⋆","star":"☆","starf":"★","straightepsilon":"ϵ","straightphi":"ϕ","strns":"¯","sub":"⊂","Sub":"⋐","subdot":"⪽","subE":"⫅","sube":"⊆","subedot":"⫃","submult":"⫁","subnE":"⫋","subne":"⊊","subplus":"⪿","subrarr":"⥹","subset":"⊂","Subset":"⋐","subseteq":"⊆","subseteqq":"⫅","SubsetEqual":"⊆","subsetneq":"⊊","subsetneqq":"⫋","subsim":"⫇","subsub":"⫕","subsup":"⫓","succapprox":"⪸","succ":"≻","succcurlyeq":"≽","Succeeds":"≻","SucceedsEqual":"⪰","SucceedsSlantEqual":"≽","SucceedsTilde":"≿","succeq":"⪰","succnapprox":"⪺","succneqq":"⪶","succnsim":"⋩","succsim":"≿","SuchThat":"∋","sum":"∑","Sum":"∑","sung":"♪","sup1":"¹","sup2":"²","sup3":"³","sup":"⊃","Sup":"⋑","supdot":"⪾","supdsub":"⫘","supE":"⫆","supe":"⊇","supedot":"⫄","Superset":"⊃","SupersetEqual":"⊇","suphsol":"⟉","suphsub":"⫗","suplarr":"⥻","supmult":"⫂","supnE":"⫌","supne":"⊋","supplus":"⫀","supset":"⊃","Supset":"⋑","supseteq":"⊇","supseteqq":"⫆","supsetneq":"⊋","supsetneqq":"⫌","supsim":"⫈","supsub":"⫔","supsup":"⫖","swarhk":"⤦","swarr":"↙","swArr":"⇙","swarrow":"↙","swnwar":"⤪","szlig":"ß","Tab":"\t","target":"⌖","Tau":"Τ","tau":"τ","tbrk":"⎴","Tcaron":"Ť","tcaron":"ť","Tcedil":"Ţ","tcedil":"ţ","Tcy":"Т","tcy":"т","tdot":"⃛","telrec":"⌕","Tfr":"𝔗","tfr":"𝔱","there4":"∴","therefore":"∴","Therefore":"∴","Theta":"Θ","theta":"θ","thetasym":"ϑ","thetav":"ϑ","thickapprox":"≈","thicksim":"∼","ThickSpace":"  ","ThinSpace":" ","thinsp":" ","thkap":"≈","thksim":"∼","THORN":"Þ","thorn":"þ","tilde":"˜","Tilde":"∼","TildeEqual":"≃","TildeFullEqual":"≅","TildeTilde":"≈","timesbar":"⨱","timesb":"⊠","times":"×","timesd":"⨰","tint":"∭","toea":"⤨","topbot":"⌶","topcir":"⫱","top":"⊤","Topf":"𝕋","topf":"𝕥","topfork":"⫚","tosa":"⤩","tprime":"‴","trade":"™","TRADE":"™","triangle":"▵","triangledown":"▿","triangleleft":"◃","trianglelefteq":"⊴","triangleq":"≜","triangleright":"▹","trianglerighteq":"⊵","tridot":"◬","trie":"≜","triminus":"⨺","TripleDot":"⃛","triplus":"⨹","trisb":"⧍","tritime":"⨻","trpezium":"⏢","Tscr":"𝒯","tscr":"𝓉","TScy":"Ц","tscy":"ц","TSHcy":"Ћ","tshcy":"ћ","Tstrok":"Ŧ","tstrok":"ŧ","twixt":"≬","twoheadleftarrow":"↞","twoheadrightarrow":"↠","Uacute":"Ú","uacute":"ú","uarr":"↑","Uarr":"↟","uArr":"⇑","Uarrocir":"⥉","Ubrcy":"Ў","ubrcy":"ў","Ubreve":"Ŭ","ubreve":"ŭ","Ucirc":"Û","ucirc":"û","Ucy":"У","ucy":"у","udarr":"⇅","Udblac":"Ű","udblac":"ű","udhar":"⥮","ufisht":"⥾","Ufr":"𝔘","ufr":"𝔲","Ugrave":"Ù","ugrave":"ù","uHar":"⥣","uharl":"↿","uharr":"↾","uhblk":"▀","ulcorn":"⌜","ulcorner":"⌜","ulcrop":"⌏","ultri":"◸","Umacr":"Ū","umacr":"ū","uml":"¨","UnderBar":"_","UnderBrace":"⏟","UnderBracket":"⎵","UnderParenthesis":"⏝","Union":"⋃","UnionPlus":"⊎","Uogon":"Ų","uogon":"ų","Uopf":"𝕌","uopf":"𝕦","UpArrowBar":"⤒","uparrow":"↑","UpArrow":"↑","Uparrow":"⇑","UpArrowDownArrow":"⇅","updownarrow":"↕","UpDownArrow":"↕","Updownarrow":"⇕","UpEquilibrium":"⥮","upharpoonleft":"↿","upharpoonright":"↾","uplus":"⊎","UpperLeftArrow":"↖","UpperRightArrow":"↗","upsi":"υ","Upsi":"ϒ","upsih":"ϒ","Upsilon":"Υ","upsilon":"υ","UpTeeArrow":"↥","UpTee":"⊥","upuparrows":"⇈","urcorn":"⌝","urcorner":"⌝","urcrop":"⌎","Uring":"Ů","uring":"ů","urtri":"◹","Uscr":"𝒰","uscr":"𝓊","utdot":"⋰","Utilde":"Ũ","utilde":"ũ","utri":"▵","utrif":"▴","uuarr":"⇈","Uuml":"Ü","uuml":"ü","uwangle":"⦧","vangrt":"⦜","varepsilon":"ϵ","varkappa":"ϰ","varnothing":"∅","varphi":"ϕ","varpi":"ϖ","varpropto":"∝","varr":"↕","vArr":"⇕","varrho":"ϱ","varsigma":"ς","varsubsetneq":"⊊︀","varsubsetneqq":"⫋︀","varsupsetneq":"⊋︀","varsupsetneqq":"⫌︀","vartheta":"ϑ","vartriangleleft":"⊲","vartriangleright":"⊳","vBar":"⫨","Vbar":"⫫","vBarv":"⫩","Vcy":"В","vcy":"в","vdash":"⊢","vDash":"⊨","Vdash":"⊩","VDash":"⊫","Vdashl":"⫦","veebar":"⊻","vee":"∨","Vee":"⋁","veeeq":"≚","vellip":"⋮","verbar":"|","Verbar":"‖","vert":"|","Vert":"‖","VerticalBar":"∣","VerticalLine":"|","VerticalSeparator":"❘","VerticalTilde":"≀","VeryThinSpace":" ","Vfr":"𝔙","vfr":"𝔳","vltri":"⊲","vnsub":"⊂⃒","vnsup":"⊃⃒","Vopf":"𝕍","vopf":"𝕧","vprop":"∝","vrtri":"⊳","Vscr":"𝒱","vscr":"𝓋","vsubnE":"⫋︀","vsubne":"⊊︀","vsupnE":"⫌︀","vsupne":"⊋︀","Vvdash":"⊪","vzigzag":"⦚","Wcirc":"Ŵ","wcirc":"ŵ","wedbar":"⩟","wedge":"∧","Wedge":"⋀","wedgeq":"≙","weierp":"℘","Wfr":"𝔚","wfr":"𝔴","Wopf":"𝕎","wopf":"𝕨","wp":"℘","wr":"≀","wreath":"≀","Wscr":"𝒲","wscr":"𝓌","xcap":"⋂","xcirc":"◯","xcup":"⋃","xdtri":"▽","Xfr":"𝔛","xfr":"𝔵","xharr":"⟷","xhArr":"⟺","Xi":"Ξ","xi":"ξ","xlarr":"⟵","xlArr":"⟸","xmap":"⟼","xnis":"⋻","xodot":"⨀","Xopf":"𝕏","xopf":"𝕩","xoplus":"⨁","xotime":"⨂","xrarr":"⟶","xrArr":"⟹","Xscr":"𝒳","xscr":"𝓍","xsqcup":"⨆","xuplus":"⨄","xutri":"△","xvee":"⋁","xwedge":"⋀","Yacute":"Ý","yacute":"ý","YAcy":"Я","yacy":"я","Ycirc":"Ŷ","ycirc":"ŷ","Ycy":"Ы","ycy":"ы","yen":"¥","Yfr":"𝔜","yfr":"𝔶","YIcy":"Ї","yicy":"ї","Yopf":"𝕐","yopf":"𝕪","Yscr":"𝒴","yscr":"𝓎","YUcy":"Ю","yucy":"ю","yuml":"ÿ","Yuml":"Ÿ","Zacute":"Ź","zacute":"ź","Zcaron":"Ž","zcaron":"ž","Zcy":"З","zcy":"з","Zdot":"Ż","zdot":"ż","zeetrf":"ℨ","ZeroWidthSpace":"​","Zeta":"Ζ","zeta":"ζ","zfr":"𝔷","Zfr":"ℨ","ZHcy":"Ж","zhcy":"ж","zigrarr":"⇝","zopf":"𝕫","Zopf":"ℤ","Zscr":"𝒵","zscr":"𝓏","zwj":"‍","zwnj":"‌"}
+
+/***/ }),
+
+/***/ 105:
+/***/ (function(module, exports) {
+
+module.exports = {"amp":"&","apos":"'","gt":">","lt":"<","quot":"\""}
+
+/***/ }),
+
+/***/ 285:
 /***/ (function(module, exports, __webpack_require__) {
 
 // CodeMirror, copyright (c) by Marijn Haverbeke and others
@@ -8,7 +62,7 @@ webpackJsonp([1],{
 
 (function(mod) {
   if (true) // CommonJS
-    mod(__webpack_require__(42), __webpack_require__(297), __webpack_require__(296));
+    mod(__webpack_require__(53), __webpack_require__(351), __webpack_require__(350));
   else if (typeof define == "function" && define.amd) // AMD
     define(["../../lib/codemirror", "../xml/xml", "../meta"], mod);
   else // Plain browser env
@@ -40,21 +94,21 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
   if (modeCfg.maxBlockquoteDepth === undefined)
     modeCfg.maxBlockquoteDepth = 0;
 
-  // Should underscores in words open/close em/strong?
-  if (modeCfg.underscoresBreakWords === undefined)
-    modeCfg.underscoresBreakWords = true;
-
-  // Use `fencedCodeBlocks` to configure fenced code blocks. false to
-  // disable, string to specify a precise regexp that the fence should
-  // match, and true to allow three or more backticks or tildes (as
-  // per CommonMark).
-
   // Turn on task lists? ("- [ ] " and "- [x] ")
   if (modeCfg.taskLists === undefined) modeCfg.taskLists = false;
 
   // Turn on strikethrough syntax
   if (modeCfg.strikethrough === undefined)
     modeCfg.strikethrough = false;
+
+  if (modeCfg.emoji === undefined)
+    modeCfg.emoji = false;
+
+  if (modeCfg.fencedCodeBlockHighlighting === undefined)
+    modeCfg.fencedCodeBlockHighlighting = true;
+
+  if (modeCfg.xml === undefined)
+    modeCfg.xml = true;
 
   // Allow token types to be overridden by user-provided token types.
   if (modeCfg.tokenTypeOverrides === undefined)
@@ -78,7 +132,8 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
     linkHref: "string",
     em: "em",
     strong: "strong",
-    strikethrough: "strikethrough"
+    strikethrough: "strikethrough",
+    emoji: "builtin"
   };
 
   for (var tokenType in tokenTypes) {
@@ -89,12 +144,14 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
 
   var hrRE = /^([*\-_])(?:\s*\1){2,}\s*$/
   ,   listRE = /^(?:[*\-+]|^[0-9]+([.)]))\s+/
-  ,   taskListRE = /^\[(x| )\](?=\s)/ // Must follow listRE
+  ,   taskListRE = /^\[(x| )\](?=\s)/i // Must follow listRE
   ,   atxHeaderRE = modeCfg.allowAtxHeaderWithoutSpace ? /^(#+)/ : /^(#+)(?: |$)/
   ,   setextHeaderRE = /^ *(?:\={1,}|-{1,})\s*$/
-  ,   textRE = /^[^#!\[\]*_\\<>` "'(~]+/
-  ,   fencedCodeRE = new RegExp("^(" + (modeCfg.fencedCodeBlocks === true ? "~~~+|```+" : modeCfg.fencedCodeBlocks) +
-                                ")[ \\t]*([\\w+#\-]*)");
+  ,   textRE = /^[^#!\[\]*_\\<>` "'(~:]+/
+  ,   fencedCodeRE = /^(~~~+|```+)[ \t]*([\w+#-]*)[^\n`]*$/
+  ,   linkDefRE = /^\s*\[[^\]]+?\]:\s*\S+(\s*\S*\s*)?$/ // naive link-definition
+  ,   punctuation = /[!\"#$%&\'()*+,\-\.\/:;<=>?@\[\\\]^_`{|}~—]/
+  ,   expandedTab = "    " // CommonMark specifies tab as 4 spaces
 
   function switchInline(stream, state, f) {
     state.f = state.inline = f;
@@ -134,76 +191,80 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
     state.trailingSpaceNewLine = false;
     // Mark this line as blank
     state.prevLine = state.thisLine
-    state.thisLine = null
+    state.thisLine = {stream: null}
     return null;
   }
 
   function blockNormal(stream, state) {
-
-    var sol = stream.sol();
-
-    var prevLineIsList = state.list !== false,
-        prevLineIsIndentedCode = state.indentedCode;
+    var firstTokenOnLine = stream.column() === state.indentation;
+    var prevLineLineIsEmpty = lineIsEmpty(state.prevLine.stream);
+    var prevLineIsIndentedCode = state.indentedCode;
+    var prevLineIsHr = state.prevLine.hr;
+    var prevLineIsList = state.list !== false;
+    var maxNonCodeIndentation = (state.listStack[state.listStack.length - 1] || 0) + 3;
 
     state.indentedCode = false;
 
-    if (prevLineIsList) {
-      if (state.indentationDiff >= 0) { // Continued list
-        if (state.indentationDiff < 4) { // Only adjust indentation if *not* a code block
-          state.indentation -= state.indentationDiff;
+    var lineIndentation = state.indentation;
+    // compute once per line (on first token)
+    if (state.indentationDiff === null) {
+      state.indentationDiff = state.indentation;
+      if (prevLineIsList) {
+        state.list = null;
+        // While this list item's marker's indentation is less than the deepest
+        //  list item's content's indentation,pop the deepest list item
+        //  indentation off the stack, and update block indentation state
+        while (lineIndentation < state.listStack[state.listStack.length - 1]) {
+          state.listStack.pop();
+          if (state.listStack.length) {
+            state.indentation = state.listStack[state.listStack.length - 1];
+          // less than the first list's indent -> the line is no longer a list
+          } else {
+            state.list = false;
+          }
         }
-        state.list = null;
-      } else if (state.indentation > 0) {
-        state.list = null;
-      } else { // No longer a list
-        state.list = false;
+        if (state.list !== false) {
+          state.indentationDiff = lineIndentation - state.listStack[state.listStack.length - 1]
+        }
       }
     }
 
+    // not comprehensive (currently only for setext detection purposes)
+    var allowsInlineContinuation = (
+        !prevLineLineIsEmpty && !prevLineIsHr && !state.prevLine.header &&
+        (!prevLineIsList || !prevLineIsIndentedCode) &&
+        !state.prevLine.fencedCodeEnd
+    );
+
+    var isHr = (state.list === false || prevLineIsHr || prevLineLineIsEmpty) &&
+      state.indentation <= maxNonCodeIndentation && stream.match(hrRE);
+
     var match = null;
-    if (state.indentationDiff >= 4) {
+    if (state.indentationDiff >= 4 && (prevLineIsIndentedCode || state.prevLine.fencedCodeEnd ||
+         state.prevLine.header || prevLineLineIsEmpty)) {
       stream.skipToEnd();
-      if (prevLineIsIndentedCode || lineIsEmpty(state.prevLine)) {
-        state.indentation -= 4;
-        state.indentedCode = true;
-        return tokenTypes.code;
-      } else {
-        return null;
-      }
+      state.indentedCode = true;
+      return tokenTypes.code;
     } else if (stream.eatSpace()) {
       return null;
-    } else if ((match = stream.match(atxHeaderRE)) && match[1].length <= 6) {
+    } else if (firstTokenOnLine && state.indentation <= maxNonCodeIndentation && (match = stream.match(atxHeaderRE)) && match[1].length <= 6) {
+      state.quote = 0;
       state.header = match[1].length;
+      state.thisLine.header = true;
       if (modeCfg.highlightFormatting) state.formatting = "header";
       state.f = state.inline;
       return getType(state);
-    } else if (!lineIsEmpty(state.prevLine) && !state.quote && !prevLineIsList &&
-               !prevLineIsIndentedCode && (match = stream.match(setextHeaderRE))) {
-      state.header = match[0].charAt(0) == '=' ? 1 : 2;
-      if (modeCfg.highlightFormatting) state.formatting = "header";
-      state.f = state.inline;
-      return getType(state);
-    } else if (stream.eat('>')) {
-      state.quote = sol ? 1 : state.quote + 1;
+    } else if (state.indentation <= maxNonCodeIndentation && stream.eat('>')) {
+      state.quote = firstTokenOnLine ? 1 : state.quote + 1;
       if (modeCfg.highlightFormatting) state.formatting = "quote";
       stream.eatSpace();
       return getType(state);
-    } else if (stream.peek() === '[') {
-      return switchInline(stream, state, footnoteLink);
-    } else if (stream.match(hrRE, true)) {
-      state.hr = true;
-      return tokenTypes.hr;
-    } else if (match = stream.match(listRE)) {
+    } else if (!isHr && !state.setext && firstTokenOnLine && state.indentation <= maxNonCodeIndentation && (match = stream.match(listRE))) {
       var listType = match[1] ? "ol" : "ul";
-      state.indentation = stream.column() + stream.current().length;
-      state.list = true;
 
-      // While this list item's marker's indentation
-      // is less than the deepest list item's content's indentation,
-      // pop the deepest list item indentation off the stack.
-      while (state.listStack && stream.column() < state.listStack[state.listStack.length - 1]) {
-        state.listStack.pop();
-      }
+      state.indentation = lineIndentation + stream.current().length;
+      state.list = true;
+      state.quote = 0;
 
       // Add this list item's content's indentation to the stack
       state.listStack.push(state.indentation);
@@ -214,15 +275,47 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
       state.f = state.inline;
       if (modeCfg.highlightFormatting) state.formatting = ["list", "list-" + listType];
       return getType(state);
-    } else if (modeCfg.fencedCodeBlocks && (match = stream.match(fencedCodeRE, true))) {
-      state.fencedChars = match[1]
+    } else if (firstTokenOnLine && state.indentation <= maxNonCodeIndentation && (match = stream.match(fencedCodeRE, true))) {
+      state.quote = 0;
+      state.fencedEndRE = new RegExp(match[1] + "+ *$");
       // try switching mode
-      state.localMode = getMode(match[2]);
+      state.localMode = modeCfg.fencedCodeBlockHighlighting && getMode(match[2]);
       if (state.localMode) state.localState = CodeMirror.startState(state.localMode);
       state.f = state.block = local;
       if (modeCfg.highlightFormatting) state.formatting = "code-block";
       state.code = -1
       return getType(state);
+    // SETEXT has lowest block-scope precedence after HR, so check it after
+    //  the others (code, blockquote, list...)
+    } else if (
+      // if setext set, indicates line after ---/===
+      state.setext || (
+        // line before ---/===
+        (!allowsInlineContinuation || !prevLineIsList) && !state.quote && state.list === false &&
+        !state.code && !isHr && !linkDefRE.test(stream.string) &&
+        (match = stream.lookAhead(1)) && (match = match.match(setextHeaderRE))
+      )
+    ) {
+      if ( !state.setext ) {
+        state.header = match[0].charAt(0) == '=' ? 1 : 2;
+        state.setext = state.header;
+      } else {
+        state.header = state.setext;
+        // has no effect on type so we can reset it now
+        state.setext = 0;
+        stream.skipToEnd();
+        if (modeCfg.highlightFormatting) state.formatting = "header";
+      }
+      state.thisLine.header = true;
+      state.f = state.inline;
+      return getType(state);
+    } else if (isHr) {
+      stream.skipToEnd();
+      state.hr = true;
+      state.thisLine.hr = true;
+      return tokenTypes.hr;
+    } else if (stream.peek() === '[') {
+      return switchInline(stream, state, footnoteLink);
     }
 
     return switchInline(stream, state, state.inline);
@@ -244,17 +337,21 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
   }
 
   function local(stream, state) {
-    if (state.fencedChars && stream.match(state.fencedChars)) {
+    var currListInd = state.listStack[state.listStack.length - 1] || 0;
+    var hasExitedList = state.indentation < currListInd;
+    var maxFencedEndInd = currListInd + 3;
+    if (state.fencedEndRE && state.indentation <= maxFencedEndInd && (hasExitedList || stream.match(state.fencedEndRE))) {
       if (modeCfg.highlightFormatting) state.formatting = "code-block";
-      var returnType = getType(state)
+      var returnType;
+      if (!hasExitedList) returnType = getType(state)
       state.localMode = state.localState = null;
       state.block = blockNormal;
       state.f = inlineNormal;
-      state.fencedChars = null;
+      state.fencedEndRE = null;
       state.code = 0
+      state.thisLine.fencedCodeEnd = true;
+      if (hasExitedList) return switchBlock(stream, state, state.block);
       return returnType;
-    } else if (state.fencedChars && stream.skipTo(state.fencedChars)) {
-      return "comment"
     } else if (state.localMode) {
       return state.localMode.token(stream, state.localState);
     } else {
@@ -306,6 +403,7 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
       if (state.strong) { styles.push(tokenTypes.strong); }
       if (state.em) { styles.push(tokenTypes.em); }
       if (state.strikethrough) { styles.push(tokenTypes.strikethrough); }
+      if (state.emoji) { styles.push(tokenTypes.emoji); }
       if (state.linkText) { styles.push(tokenTypes.linkText); }
       if (state.code) { styles.push(tokenTypes.code); }
       if (state.image) { styles.push(tokenTypes.image); }
@@ -364,7 +462,7 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
     }
 
     if (state.taskList) {
-      var taskOpen = stream.match(taskListRE, true)[1] !== "x";
+      var taskOpen = stream.match(taskListRE, true)[1] === " ";
       if (taskOpen) state.taskOpen = true;
       else state.taskClosed = true;
       if (modeCfg.highlightFormatting) state.formatting = "task";
@@ -380,9 +478,6 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
       return getType(state);
     }
 
-    // Get sol() value now, before character is consumed
-    var sol = stream.sol();
-
     var ch = stream.next();
 
     // Matches link titles present on next line
@@ -392,7 +487,7 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
       if (ch === '(') {
         matchCh = ')';
       }
-      matchCh = (matchCh+'').replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1");
+      matchCh = (matchCh+'').replace(/([.?*+^\[\]\\(){}|-])/g, "\\$1");
       var regex = '^\\s*(?:[^' + matchCh + '\\\\]+|\\\\\\\\|\\\\.)' + matchCh;
       if (stream.match(new RegExp(regex), true)) {
         return tokenTypes.linkHref;
@@ -405,7 +500,7 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
       if (modeCfg.highlightFormatting) state.formatting = "code";
       stream.eatWhile('`');
       var count = stream.current().length
-      if (state.code == 0) {
+      if (state.code == 0 && (!state.quote || count == 1)) {
         state.code = count
         return getType(state)
       } else if (count == state.code) { // Must be exact
@@ -452,17 +547,17 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
       return type;
     }
 
-    if (ch === '[' && stream.match(/[^\]]*\](\(.*\)| ?\[.*?\])/, false) && !state.image) {
+    if (ch === '[' && !state.image) {
       state.linkText = true;
       if (modeCfg.highlightFormatting) state.formatting = "link";
       return getType(state);
     }
 
-    if (ch === ']' && state.linkText && stream.match(/\(.*?\)| ?\[.*?\]/, false)) {
+    if (ch === ']' && state.linkText) {
       if (modeCfg.highlightFormatting) state.formatting = "link";
       var type = getType(state);
       state.linkText = false;
-      state.inline = state.f = linkHref;
+      state.inline = state.f = stream.match(/\(.*?\)| ?\[.*?\]/, false) ? linkHref : inlineNormal
       return type;
     }
 
@@ -490,7 +585,7 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
       return type + tokenTypes.linkEmail;
     }
 
-    if (ch === '<' && stream.match(/^(!--|[a-z]+(?:\s+[a-z_:.\-]+(?:\s*=\s*[^ >]+)?)*\s*>)/i, false)) {
+    if (modeCfg.xml && ch === '<' && stream.match(/^(!--|[a-z]+(?:\s+[a-z_:.\-]+(?:\s*=\s*[^ >]+)?)*\s*>)/i, false)) {
       var end = stream.string.indexOf(">", stream.pos);
       if (end != -1) {
         var atts = stream.string.substring(stream.start, end);
@@ -501,44 +596,37 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
       return switchBlock(stream, state, htmlBlock);
     }
 
-    if (ch === '<' && stream.match(/^\/\w*?>/)) {
+    if (modeCfg.xml && ch === '<' && stream.match(/^\/\w*?>/)) {
       state.md_inside = false;
       return "tag";
-    }
-
-    var ignoreUnderscore = false;
-    if (!modeCfg.underscoresBreakWords) {
-      if (ch === '_' && stream.peek() !== '_' && stream.match(/(\w)/, false)) {
-        var prevPos = stream.pos - 2;
-        if (prevPos >= 0) {
-          var prevCh = stream.string.charAt(prevPos);
-          if (prevCh !== '_' && prevCh.match(/(\w)/, false)) {
-            ignoreUnderscore = true;
-          }
-        }
+    } else if (ch === "*" || ch === "_") {
+      var len = 1, before = stream.pos == 1 ? " " : stream.string.charAt(stream.pos - 2)
+      while (len < 3 && stream.eat(ch)) len++
+      var after = stream.peek() || " "
+      // See http://spec.commonmark.org/0.27/#emphasis-and-strong-emphasis
+      var leftFlanking = !/\s/.test(after) && (!punctuation.test(after) || /\s/.test(before) || punctuation.test(before))
+      var rightFlanking = !/\s/.test(before) && (!punctuation.test(before) || /\s/.test(after) || punctuation.test(after))
+      var setEm = null, setStrong = null
+      if (len % 2) { // Em
+        if (!state.em && leftFlanking && (ch === "*" || !rightFlanking || punctuation.test(before)))
+          setEm = true
+        else if (state.em == ch && rightFlanking && (ch === "*" || !leftFlanking || punctuation.test(after)))
+          setEm = false
       }
-    }
-    if (ch === '*' || (ch === '_' && !ignoreUnderscore)) {
-      if (sol && stream.peek() === ' ') {
-        // Do nothing, surrounded by newline and space
-      } else if (state.strong === ch && stream.eat(ch)) { // Remove STRONG
-        if (modeCfg.highlightFormatting) state.formatting = "strong";
-        var t = getType(state);
-        state.strong = false;
-        return t;
-      } else if (!state.strong && stream.eat(ch)) { // Add STRONG
-        state.strong = ch;
-        if (modeCfg.highlightFormatting) state.formatting = "strong";
-        return getType(state);
-      } else if (state.em === ch) { // Remove EM
-        if (modeCfg.highlightFormatting) state.formatting = "em";
-        var t = getType(state);
-        state.em = false;
-        return t;
-      } else if (!state.em) { // Add EM
-        state.em = ch;
-        if (modeCfg.highlightFormatting) state.formatting = "em";
-        return getType(state);
+      if (len > 1) { // Strong
+        if (!state.strong && leftFlanking && (ch === "*" || !rightFlanking || punctuation.test(before)))
+          setStrong = true
+        else if (state.strong == ch && rightFlanking && (ch === "*" || !leftFlanking || punctuation.test(after)))
+          setStrong = false
+      }
+      if (setStrong != null || setEm != null) {
+        if (modeCfg.highlightFormatting) state.formatting = setEm == null ? "strong" : setStrong == null ? "em" : "strong em"
+        if (setEm === true) state.em = ch
+        if (setStrong === true) state.strong = ch
+        var t = getType(state)
+        if (setEm === false) state.em = false
+        if (setStrong === false) state.strong = false
+        return t
       }
     } else if (ch === ' ') {
       if (stream.eat('*') || stream.eat('_')) { // Probably surrounded by spaces
@@ -571,6 +659,14 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
           }
         }
       }
+    }
+
+    if (modeCfg.emoji && ch === ":" && stream.match(/^[a-z_\d+-]+:/)) {
+      state.emoji = true;
+      if (modeCfg.highlightFormatting) state.formatting = "emoji";
+      var retType = getType(state);
+      state.emoji = false;
+      return retType;
     }
 
     if (ch === ' ') {
@@ -611,7 +707,7 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
     }
     var ch = stream.next();
     if (ch === '(' || ch === '[') {
-      state.f = state.inline = getLinkHrefInside(ch === "(" ? ")" : "]", 0);
+      state.f = state.inline = getLinkHrefInside(ch === "(" ? ")" : "]");
       if (modeCfg.highlightFormatting) state.formatting = "link-string";
       state.linkHref = true;
       return getType(state);
@@ -621,7 +717,7 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
 
   var linkRE = {
     ")": /^(?:[^\\\(\)]|\\.|\((?:[^\\\(\)]|\\.)*\))*?(?=\))/,
-    "]": /^(?:[^\\\[\]]|\\.|\[(?:[^\\\[\\]]|\\.)*\])*?(?=\])/
+    "]": /^(?:[^\\\[\]]|\\.|\[(?:[^\\\[\]]|\\.)*\])*?(?=\])/
   }
 
   function getLinkHrefInside(endChar) {
@@ -689,8 +785,8 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
       return {
         f: blockNormal,
 
-        prevLine: null,
-        thisLine: null,
+        prevLine: {stream: null},
+        thisLine: {stream: null},
 
         block: blockNormal,
         htmlState: null,
@@ -707,6 +803,7 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
         em: false,
         strong: false,
         header: 0,
+        setext: 0,
         hr: false,
         taskList: false,
         list: false,
@@ -715,7 +812,8 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
         trailingSpace: 0,
         trailingSpaceNewLine: false,
         strikethrough: false,
-        fencedChars: null
+        emoji: false,
+        fencedEndRE: null
       };
     },
 
@@ -736,12 +834,15 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
         inline: s.inline,
         text: s.text,
         formatting: false,
+        linkText: s.linkText,
         linkTitle: s.linkTitle,
         code: s.code,
         em: s.em,
         strong: s.strong,
         strikethrough: s.strikethrough,
+        emoji: s.emoji,
         header: s.header,
+        setext: s.setext,
         hr: s.hr,
         taskList: s.taskList,
         list: s.list,
@@ -751,7 +852,7 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
         trailingSpace: s.trailingSpace,
         trailingSpaceNewLine: s.trailingSpaceNewLine,
         md_inside: s.md_inside,
-        fencedChars: s.fencedChars
+        fencedEndRE: s.fencedEndRE
       };
     },
 
@@ -760,21 +861,17 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
       // Reset state.formatting
       state.formatting = false;
 
-      if (stream != state.thisLine) {
-        var forceBlankLine = state.header || state.hr;
-
-        // Reset state.header and state.hr
+      if (stream != state.thisLine.stream) {
         state.header = 0;
         state.hr = false;
 
-        if (stream.match(/^\s*$/, true) || forceBlankLine) {
+        if (stream.match(/^\s*$/, true)) {
           blankLine(state);
-          if (!forceBlankLine) return null
-          state.prevLine = null
+          return null;
         }
 
         state.prevLine = state.thisLine
-        state.thisLine = stream
+        state.thisLine = {stream: stream}
 
         // Reset state.taskList
         state.taskList = false;
@@ -784,10 +881,12 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
         state.trailingSpaceNewLine = false;
 
         state.f = state.block;
-        var indentation = stream.match(/^\s*/, true)[0].replace(/\t/g, '    ').length;
-        state.indentationDiff = Math.min(indentation - state.indentation, 4);
-        state.indentation = state.indentation + state.indentationDiff;
-        if (indentation > 0) return null;
+        if (state.f != htmlBlock) {
+          var indentation = stream.match(/^\s*/, true)[0].replace(/\t/g, expandedTab).length;
+          state.indentation = indentation;
+          state.indentationDiff = null;
+          if (indentation > 0) return null;
+        }
       }
       return state.f(stream, state);
     },
@@ -796,6 +895,12 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
       if (state.block == htmlBlock) return {state: state.htmlState, mode: htmlMode};
       if (state.localState) return {state: state.localState, mode: state.localMode};
       return {state: state, mode: mode};
+    },
+
+    indent: function(state, textAfter, line) {
+      if (state.block == htmlBlock && htmlMode.indent) return htmlMode.indent(state.htmlState, textAfter, line)
+      if (state.localState && state.localMode.indent) return state.localMode.indent(state.localState, textAfter, line)
+      return CodeMirror.Pass
     },
 
     blankLine: blankLine,
@@ -815,17 +920,17 @@ CodeMirror.defineMIME("text/x-markdown", "markdown");
 
 /***/ }),
 
-/***/ 234:
+/***/ 290:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var React = __webpack_require__(3);
-var ReactDOM = __webpack_require__(16);
+var React = __webpack_require__(1);
+var ReactDOM = __webpack_require__(19);
 var findDOMNode = ReactDOM.findDOMNode;
-var className = __webpack_require__(295);
-var debounce = __webpack_require__(331);
+var className = __webpack_require__(349);
+var debounce = __webpack_require__(376);
 
 function normalizeLineEndings(str) {
 	if (!str) return str;
@@ -853,7 +958,7 @@ var CodeMirror = React.createClass({
 		};
 	},
 	getCodeMirrorInstance: function getCodeMirrorInstance() {
-		return this.props.codeMirrorInstance || __webpack_require__(42);
+		return this.props.codeMirrorInstance || __webpack_require__(53);
 	},
 	getInitialState: function getInitialState() {
 		return {
@@ -933,77 +1038,77 @@ module.exports = CodeMirror;
 
 /***/ }),
 
-/***/ 235:
+/***/ 291:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var React = __webpack_require__(3);
-var Parser = __webpack_require__(303).Parser;
-var ReactRenderer = __webpack_require__(299);
+var React = __webpack_require__(1);
+var Parser = __webpack_require__(359).Parser;
+var ReactRenderer = __webpack_require__(355);
+var propTypes = __webpack_require__(43);
 
-var propTypes = React.PropTypes;
+function ReactMarkdown(props) {
+    React.Component.call(this, props);
+}
 
-var ReactMarkdown = React.createClass({
-    displayName: 'ReactMarkdown',
+ReactMarkdown.prototype = Object.create(React.Component.prototype);
+ReactMarkdown.prototype.constructor = ReactMarkdown;
 
-    propTypes: {
-        className: propTypes.string,
-        containerProps: propTypes.object,
-        source: propTypes.string.isRequired,
-        containerTagName: propTypes.string,
-        childBefore: propTypes.object,
-        childAfter: propTypes.object,
-        sourcePos: propTypes.bool,
-        escapeHtml: propTypes.bool,
-        skipHtml: propTypes.bool,
-        softBreak: propTypes.string,
-        allowNode: propTypes.func,
-        allowedTypes: propTypes.array,
-        disallowedTypes: propTypes.array,
-        transformLinkUri: propTypes.func,
-        transformImageUri: propTypes.func,
-        unwrapDisallowed: propTypes.bool,
-        renderers: propTypes.object,
-        walker: propTypes.func,
-        parserOptions: propTypes.object
-    },
+ReactMarkdown.prototype.render = function() {
+    var containerProps = this.props.containerProps || {};
+    var renderer = new ReactRenderer(this.props);
+    var parser = new Parser(this.props.parserOptions);
+    var ast = parser.parse(this.props.source || '');
 
-    getDefaultProps: function() {
-        return {
-            containerTagName: 'div',
-            parserOptions: {}
-        };
-    },
+    if (this.props.walker) {
+        var walker = ast.walker();
+        var event;
 
-    render: function() {
-        var containerProps = this.props.containerProps || {};
-        var renderer = new ReactRenderer(this.props);
-        var parser = new Parser(this.props.parserOptions);
-        var ast = parser.parse(this.props.source || '');
-
-        if (this.props.walker) {
-            var walker = ast.walker();
-            var event;
-
-            while ((event = walker.next())) {
-                this.props.walker.call(this, event, walker);
-            }
+        while ((event = walker.next())) {
+            this.props.walker.call(this, event, walker);
         }
-
-        if (this.props.className) {
-            containerProps.className = this.props.className;
-        }
-
-        return React.createElement.apply(React,
-            [this.props.containerTagName, containerProps, this.props.childBefore]
-                .concat(renderer.render(ast).concat(
-                    [this.props.childAfter]
-                ))
-        );
     }
-});
+
+    if (this.props.className) {
+        containerProps.className = this.props.className;
+    }
+
+    return React.createElement.apply(React,
+        [this.props.containerTagName, containerProps, this.props.childBefore]
+            .concat(renderer.render(ast).concat(
+                [this.props.childAfter]
+            ))
+    );
+};
+
+ReactMarkdown.propTypes = {
+    className: propTypes.string,
+    containerProps: propTypes.object,
+    source: propTypes.string.isRequired,
+    containerTagName: propTypes.string,
+    childBefore: propTypes.object,
+    childAfter: propTypes.object,
+    sourcePos: propTypes.bool,
+    escapeHtml: propTypes.bool,
+    skipHtml: propTypes.bool,
+    softBreak: propTypes.string,
+    allowNode: propTypes.func,
+    allowedTypes: propTypes.array,
+    disallowedTypes: propTypes.array,
+    transformLinkUri: propTypes.func,
+    transformImageUri: propTypes.func,
+    unwrapDisallowed: propTypes.bool,
+    renderers: propTypes.object,
+    walker: propTypes.func,
+    parserOptions: propTypes.object
+};
+
+ReactMarkdown.defaultProps = {
+    containerTagName: 'div',
+    parserOptions: {}
+};
 
 ReactMarkdown.types = ReactRenderer.types;
 ReactMarkdown.renderers = ReactRenderer.renderers;
@@ -1014,16 +1119,16 @@ module.exports = ReactMarkdown;
 
 /***/ }),
 
-/***/ 236:
+/***/ 292:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(312);
+var content = __webpack_require__(372);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(40)(content, {});
+var update = __webpack_require__(50)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -1041,18 +1146,18 @@ if(false) {
 
 /***/ }),
 
-/***/ 27:
+/***/ 30:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var encode = __webpack_require__(335);
-var decode = __webpack_require__(334);
+var encode = __webpack_require__(466);
+var decode = __webpack_require__(465);
 
 var C_BACKSLASH = 92;
 
-var decodeHTML = __webpack_require__(80).decodeHTML;
+var decodeHTML = __webpack_require__(103).decodeHTML;
 
 var ENTITY = "&(?:#x[a-f0-9]{1,8}|#[0-9]{1,8}|[a-z][a-z0-9]{1,31});";
 
@@ -1152,7 +1257,7 @@ module.exports = { unescapeString: unescapeString,
 
 /***/ }),
 
-/***/ 295:
+/***/ 349:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -1208,7 +1313,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 296:
+/***/ 350:
 /***/ (function(module, exports, __webpack_require__) {
 
 // CodeMirror, copyright (c) by Marijn Haverbeke and others
@@ -1216,7 +1321,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 (function(mod) {
   if (true) // CommonJS
-    mod(__webpack_require__(42));
+    mod(__webpack_require__(53));
   else if (typeof define == "function" && define.amd) // AMD
     define(["../lib/codemirror"], mod);
   else // Plain browser env
@@ -1226,7 +1331,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
   CodeMirror.modeInfo = [
     {name: "APL", mime: "text/apl", mode: "apl", ext: ["dyalog", "apl"]},
-    {name: "PGP", mimes: ["application/pgp", "application/pgp-keys", "application/pgp-signature"], mode: "asciiarmor", ext: ["pgp"]},
+    {name: "PGP", mimes: ["application/pgp", "application/pgp-encrypted", "application/pgp-keys", "application/pgp-signature"], mode: "asciiarmor", ext: ["asc", "pgp", "sig"]},
     {name: "ASN.1", mime: "text/x-ttcn-asn", mode: "asn.1", ext: ["asn", "asn1"]},
     {name: "Asterisk", mime: "text/x-asterisk", mode: "asterisk", file: /^extensions\.conf$/i},
     {name: "Brainfuck", mime: "text/x-brainfuck", mode: "brainfuck", ext: ["b", "bf"]},
@@ -1238,7 +1343,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
     {name: "ClojureScript", mime: "text/x-clojurescript", mode: "clojure", ext: ["cljs"]},
     {name: "Closure Stylesheets (GSS)", mime: "text/x-gss", mode: "css", ext: ["gss"]},
     {name: "CMake", mime: "text/x-cmake", mode: "cmake", ext: ["cmake", "cmake.in"], file: /^CMakeLists.txt$/},
-    {name: "CoffeeScript", mime: "text/x-coffeescript", mode: "coffeescript", ext: ["coffee"], alias: ["coffee", "coffee-script"]},
+    {name: "CoffeeScript", mimes: ["application/vnd.coffeescript", "text/coffeescript", "text/x-coffeescript"], mode: "coffeescript", ext: ["coffee"], alias: ["coffee", "coffee-script"]},
     {name: "Common Lisp", mime: "text/x-common-lisp", mode: "commonlisp", ext: ["cl", "lisp", "el"], alias: ["lisp"]},
     {name: "Cypher", mime: "application/x-cypher-query", mode: "cypher", ext: ["cyp", "cypher"]},
     {name: "Cython", mime: "text/x-cython", mode: "python", ext: ["pyx", "pxd", "pxi"]},
@@ -1260,6 +1365,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
     {name: "Embedded Javascript", mime: "application/x-ejs", mode: "htmlembedded", ext: ["ejs"]},
     {name: "Embedded Ruby", mime: "application/x-erb", mode: "htmlembedded", ext: ["erb"]},
     {name: "Erlang", mime: "text/x-erlang", mode: "erlang", ext: ["erl"]},
+    {name: "Esper", mime: "text/x-esper", mode: "sql"},
     {name: "Factor", mime: "text/x-factor", mode: "factor", ext: ["factor"]},
     {name: "FCL", mime: "text/x-fcl", mode: "fcl"},
     {name: "Forth", mime: "text/x-forth", mode: "forth", ext: ["forth", "fth", "4th"]},
@@ -1304,7 +1410,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
     {name: "MySQL", mime: "text/x-mysql", mode: "sql"},
     {name: "Nginx", mime: "text/x-nginx-conf", mode: "nginx", file: /nginx.*\.conf$/i},
     {name: "NSIS", mime: "text/x-nsis", mode: "nsis", ext: ["nsh", "nsi"]},
-    {name: "NTriples", mime: "text/n-triples", mode: "ntriples", ext: ["nt"]},
+    {name: "NTriples", mimes: ["application/n-triples", "application/n-quads", "text/n-triples"],
+     mode: "ntriples", ext: ["nt", "nq"]},
     {name: "Objective C", mime: "text/x-objectivec", mode: "clike", ext: ["m", "mm"], alias: ["objective-c", "objc"]},
     {name: "OCaml", mime: "text/x-ocaml", mode: "mllike", ext: ["ml", "mli", "mll", "mly"]},
     {name: "Octave", mime: "text/x-octave", mode: "octave", ext: ["m"]},
@@ -1312,7 +1419,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
     {name: "Pascal", mime: "text/x-pascal", mode: "pascal", ext: ["p", "pas"]},
     {name: "PEG.js", mime: "null", mode: "pegjs", ext: ["jsonld"]},
     {name: "Perl", mime: "text/x-perl", mode: "perl", ext: ["pl", "pm"]},
-    {name: "PHP", mime: "application/x-httpd-php", mode: "php", ext: ["php", "php3", "php4", "php5", "phtml"]},
+    {name: "PHP", mime: "application/x-httpd-php", mode: "php", ext: ["php", "php3", "php4", "php5", "php7", "phtml"]},
     {name: "Pig", mime: "text/x-pig", mode: "pig", ext: ["pig"]},
     {name: "Plain Text", mime: "text/plain", mode: "null", ext: ["txt", "text", "conf", "def", "list", "log"]},
     {name: "PLSQL", mime: "text/x-plsql", mode: "sql", ext: ["pls"]},
@@ -1333,7 +1440,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
     {name: "Scala", mime: "text/x-scala", mode: "clike", ext: ["scala"]},
     {name: "Scheme", mime: "text/x-scheme", mode: "scheme", ext: ["scm", "ss"]},
     {name: "SCSS", mime: "text/x-scss", mode: "css", ext: ["scss"]},
-    {name: "Shell", mime: "text/x-sh", mode: "shell", ext: ["sh", "ksh", "bash"], alias: ["bash", "sh", "zsh"], file: /^PKGBUILD$/},
+    {name: "Shell", mimes: ["text/x-sh", "application/x-sh"], mode: "shell", ext: ["sh", "ksh", "bash"], alias: ["bash", "sh", "zsh"], file: /^PKGBUILD$/},
     {name: "Sieve", mime: "application/sieve", mode: "sieve", ext: ["siv", "sieve"]},
     {name: "Slim", mimes: ["text/x-slim", "application/x-slim"], mode: "slim", ext: ["slim"]},
     {name: "Smalltalk", mime: "text/x-stsrc", mode: "smalltalk", ext: ["st"]},
@@ -1349,7 +1456,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
     {name: "Swift", mime: "text/x-swift", mode: "swift", ext: ["swift"]},
     {name: "sTeX", mime: "text/x-stex", mode: "stex"},
     {name: "LaTeX", mime: "text/x-latex", mode: "stex", ext: ["text", "ltx"], alias: ["tex"]},
-    {name: "SystemVerilog", mime: "text/x-systemverilog", mode: "verilog", ext: ["v"]},
+    {name: "SystemVerilog", mime: "text/x-systemverilog", mode: "verilog", ext: ["v", "sv", "svh"]},
     {name: "Tcl", mime: "text/x-tcl", mode: "tcl", ext: ["tcl"]},
     {name: "Textile", mime: "text/x-textile", mode: "textile", ext: ["textile"]},
     {name: "TiddlyWiki ", mime: "text/x-tiddlywiki", mode: "tiddlywiki"},
@@ -1429,7 +1536,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 297:
+/***/ 351:
 /***/ (function(module, exports, __webpack_require__) {
 
 // CodeMirror, copyright (c) by Marijn Haverbeke and others
@@ -1437,7 +1544,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 (function(mod) {
   if (true) // CommonJS
-    mod(__webpack_require__(42));
+    mod(__webpack_require__(53));
   else if (typeof define == "function" && define.amd) // AMD
     define(["../../lib/codemirror"], mod);
   else // Plain browser env
@@ -1830,17 +1937,17 @@ if (!CodeMirror.mimeModes.hasOwnProperty("text/html"))
 
 /***/ }),
 
-/***/ 299:
+/***/ 355:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var React = __webpack_require__(3);
-var assign = __webpack_require__(44);
-var isPlainObject = __webpack_require__(333);
-var xssFilters = __webpack_require__(426);
-var pascalCase = __webpack_require__(346);
+var React = __webpack_require__(1);
+var assign = __webpack_require__(54);
+var isPlainObject = __webpack_require__(377);
+var xssFilters = __webpack_require__(589);
+var pascalCase = __webpack_require__(477);
 
 var typeAliases = {
     blockquote: 'block_quote',
@@ -1896,6 +2003,7 @@ var coreTypes = Object.keys(defaultRenderers);
 function getCoreProps(props) {
     return {
         'key': props.nodeKey,
+        'className': props.className,
         'data-sourcepos': props['data-sourcepos']
     };
 }
@@ -1915,11 +2023,13 @@ function normalizeRenderers(renderers) {
 }
 
 function HtmlRenderer(props) {
+    var coreProps = getCoreProps(props);
     var nodeProps = props.escapeHtml ? {} : { dangerouslySetInnerHTML: { __html: props.literal } };
     var children = props.escapeHtml ? [props.literal] : null;
 
     if (props.escapeHtml || !props.skipHtml) {
-        return createElement(props.isBlock ? 'div' : 'span', nodeProps, children);
+        var actualProps = assign(coreProps, nodeProps);
+        return createElement(props.isBlock ? 'div' : 'span', actualProps, children);
     }
 }
 
@@ -1987,6 +2097,7 @@ function getNodeProps(node, key, opts, renderer) {
             var codeInfo = node.info ? node.info.split(/ +/) : [];
             if (codeInfo.length > 0 && codeInfo[0].length > 0) {
                 props.language = codeInfo[0];
+                props.codeinfo = codeInfo;
             }
             break;
         case 'code':
@@ -2242,16 +2353,16 @@ module.exports = ReactRenderer;
 
 /***/ }),
 
-/***/ 300:
+/***/ 356:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Node = __webpack_require__(52);
-var unescapeString = __webpack_require__(27).unescapeString;
-var OPENTAG = __webpack_require__(27).OPENTAG;
-var CLOSETAG = __webpack_require__(27).CLOSETAG;
+var Node = __webpack_require__(72);
+var unescapeString = __webpack_require__(30).unescapeString;
+var OPENTAG = __webpack_require__(30).OPENTAG;
+var CLOSETAG = __webpack_require__(30).CLOSETAG;
 
 var CODE_INDENT = 4;
 
@@ -2262,7 +2373,7 @@ var C_LESSTHAN = 60;
 var C_SPACE = 32;
 var C_OPEN_BRACKET = 91;
 
-var InlineParser = __webpack_require__(304);
+var InlineParser = __webpack_require__(360);
 
 var reHtmlBlockOpen = [
    /./, // dummy for 0
@@ -3120,7 +3231,7 @@ module.exports = Parser;
 
 /***/ }),
 
-/***/ 301:
+/***/ 357:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3187,13 +3298,13 @@ if (String.fromCodePoint) {
 
 /***/ }),
 
-/***/ 302:
+/***/ 358:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var escapeXml = __webpack_require__(27).escapeXml;
+var escapeXml = __webpack_require__(30).escapeXml;
 
 // Helper function to produce an HTML tag.
 var tag = function(name, attrs, selfclosing) {
@@ -3481,7 +3592,7 @@ module.exports = HtmlRenderer;
 
 /***/ }),
 
-/***/ 303:
+/***/ 359:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3499,29 +3610,29 @@ module.exports = HtmlRenderer;
 // console.log(renderer.render(parser.parse('Hello *world*')));
 
 module.exports.version = '0.24.0'
-module.exports.Node = __webpack_require__(52);
-module.exports.Parser = __webpack_require__(300);
-module.exports.HtmlRenderer = __webpack_require__(302);
-module.exports.XmlRenderer = __webpack_require__(306);
+module.exports.Node = __webpack_require__(72);
+module.exports.Parser = __webpack_require__(356);
+module.exports.HtmlRenderer = __webpack_require__(358);
+module.exports.XmlRenderer = __webpack_require__(362);
 
 
 /***/ }),
 
-/***/ 304:
+/***/ 360:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Node = __webpack_require__(52);
-var common = __webpack_require__(27);
-var normalizeReference = __webpack_require__(305);
+var Node = __webpack_require__(72);
+var common = __webpack_require__(30);
+var normalizeReference = __webpack_require__(361);
 
 var normalizeURI = common.normalizeURI;
 var unescapeString = common.unescapeString;
-var fromCodePoint = __webpack_require__(301);
-var decodeHTML = __webpack_require__(80).decodeHTML;
-__webpack_require__(422); // Polyfill for String.prototype.repeat
+var fromCodePoint = __webpack_require__(357);
+var decodeHTML = __webpack_require__(103).decodeHTML;
+__webpack_require__(585); // Polyfill for String.prototype.repeat
 
 // Constants for character codes:
 
@@ -4446,7 +4557,7 @@ module.exports = InlineParser;
 
 /***/ }),
 
-/***/ 305:
+/***/ 361:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4496,13 +4607,13 @@ module.exports = function(string) {
 
 /***/ }),
 
-/***/ 306:
+/***/ 362:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var escapeXml = __webpack_require__(27).escapeXml;
+var escapeXml = __webpack_require__(30).escapeXml;
 
 // Helper function to produce an XML tag.
 var tag = function(name, attrs, selfclosing) {
@@ -4681,13 +4792,13 @@ module.exports = XmlRenderer;
 
 /***/ }),
 
-/***/ 307:
+/***/ 363:
 /***/ (function(module, exports, __webpack_require__) {
 
-var entityMap = __webpack_require__(81),
-    legacyMap = __webpack_require__(311),
-    xmlMap    = __webpack_require__(82),
-    decodeCodePoint = __webpack_require__(308);
+var entityMap = __webpack_require__(104),
+    legacyMap = __webpack_require__(367),
+    xmlMap    = __webpack_require__(105),
+    decodeCodePoint = __webpack_require__(364);
 
 var decodeXMLStrict  = getStrictDecoder(xmlMap),
     decodeHTMLStrict = getStrictDecoder(entityMap);
@@ -4759,10 +4870,10 @@ module.exports = {
 
 /***/ }),
 
-/***/ 308:
+/***/ 364:
 /***/ (function(module, exports, __webpack_require__) {
 
-var decodeMap = __webpack_require__(310);
+var decodeMap = __webpack_require__(366);
 
 module.exports = decodeCodePoint;
 
@@ -4792,15 +4903,15 @@ function decodeCodePoint(codePoint){
 
 /***/ }),
 
-/***/ 309:
+/***/ 365:
 /***/ (function(module, exports, __webpack_require__) {
 
-var inverseXML = getInverseObj(__webpack_require__(82)),
+var inverseXML = getInverseObj(__webpack_require__(105)),
     xmlReplacer = getInverseReplacer(inverseXML);
 
 exports.XML = getInverse(inverseXML, xmlReplacer);
 
-var inverseHTML = getInverseObj(__webpack_require__(81)),
+var inverseHTML = getInverseObj(__webpack_require__(104)),
     htmlReplacer = getInverseReplacer(inverseHTML);
 
 exports.HTML = getInverse(inverseHTML, htmlReplacer);
@@ -4872,229 +4983,36 @@ exports.escape = escapeXML;
 
 /***/ }),
 
-/***/ 31:
+/***/ 366:
 /***/ (function(module, exports) {
 
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function() {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		var result = [];
-		for(var i = 0; i < this.length; i++) {
-			var item = this[i];
-			if(item[2]) {
-				result.push("@media " + item[2] + "{" + item[1] + "}");
-			} else {
-				result.push(item[1]);
-			}
-		}
-		return result.join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
+module.exports = {"0":65533,"128":8364,"130":8218,"131":402,"132":8222,"133":8230,"134":8224,"135":8225,"136":710,"137":8240,"138":352,"139":8249,"140":338,"142":381,"145":8216,"146":8217,"147":8220,"148":8221,"149":8226,"150":8211,"151":8212,"152":732,"153":8482,"154":353,"155":8250,"156":339,"158":382,"159":376}
 
 /***/ }),
 
-/***/ 310:
+/***/ 367:
 /***/ (function(module, exports) {
 
-module.exports = {
-	"0": 65533,
-	"128": 8364,
-	"130": 8218,
-	"131": 402,
-	"132": 8222,
-	"133": 8230,
-	"134": 8224,
-	"135": 8225,
-	"136": 710,
-	"137": 8240,
-	"138": 352,
-	"139": 8249,
-	"140": 338,
-	"142": 381,
-	"145": 8216,
-	"146": 8217,
-	"147": 8220,
-	"148": 8221,
-	"149": 8226,
-	"150": 8211,
-	"151": 8212,
-	"152": 732,
-	"153": 8482,
-	"154": 353,
-	"155": 8250,
-	"156": 339,
-	"158": 382,
-	"159": 376
-};
+module.exports = {"Aacute":"Á","aacute":"á","Acirc":"Â","acirc":"â","acute":"´","AElig":"Æ","aelig":"æ","Agrave":"À","agrave":"à","amp":"&","AMP":"&","Aring":"Å","aring":"å","Atilde":"Ã","atilde":"ã","Auml":"Ä","auml":"ä","brvbar":"¦","Ccedil":"Ç","ccedil":"ç","cedil":"¸","cent":"¢","copy":"©","COPY":"©","curren":"¤","deg":"°","divide":"÷","Eacute":"É","eacute":"é","Ecirc":"Ê","ecirc":"ê","Egrave":"È","egrave":"è","ETH":"Ð","eth":"ð","Euml":"Ë","euml":"ë","frac12":"½","frac14":"¼","frac34":"¾","gt":">","GT":">","Iacute":"Í","iacute":"í","Icirc":"Î","icirc":"î","iexcl":"¡","Igrave":"Ì","igrave":"ì","iquest":"¿","Iuml":"Ï","iuml":"ï","laquo":"«","lt":"<","LT":"<","macr":"¯","micro":"µ","middot":"·","nbsp":" ","not":"¬","Ntilde":"Ñ","ntilde":"ñ","Oacute":"Ó","oacute":"ó","Ocirc":"Ô","ocirc":"ô","Ograve":"Ò","ograve":"ò","ordf":"ª","ordm":"º","Oslash":"Ø","oslash":"ø","Otilde":"Õ","otilde":"õ","Ouml":"Ö","ouml":"ö","para":"¶","plusmn":"±","pound":"£","quot":"\"","QUOT":"\"","raquo":"»","reg":"®","REG":"®","sect":"§","shy":"­","sup1":"¹","sup2":"²","sup3":"³","szlig":"ß","THORN":"Þ","thorn":"þ","times":"×","Uacute":"Ú","uacute":"ú","Ucirc":"Û","ucirc":"û","Ugrave":"Ù","ugrave":"ù","uml":"¨","Uuml":"Ü","uuml":"ü","Yacute":"Ý","yacute":"ý","yen":"¥","yuml":"ÿ"}
 
 /***/ }),
 
-/***/ 311:
-/***/ (function(module, exports) {
-
-module.exports = {
-	"Aacute": "Á",
-	"aacute": "á",
-	"Acirc": "Â",
-	"acirc": "â",
-	"acute": "´",
-	"AElig": "Æ",
-	"aelig": "æ",
-	"Agrave": "À",
-	"agrave": "à",
-	"amp": "&",
-	"AMP": "&",
-	"Aring": "Å",
-	"aring": "å",
-	"Atilde": "Ã",
-	"atilde": "ã",
-	"Auml": "Ä",
-	"auml": "ä",
-	"brvbar": "¦",
-	"Ccedil": "Ç",
-	"ccedil": "ç",
-	"cedil": "¸",
-	"cent": "¢",
-	"copy": "©",
-	"COPY": "©",
-	"curren": "¤",
-	"deg": "°",
-	"divide": "÷",
-	"Eacute": "É",
-	"eacute": "é",
-	"Ecirc": "Ê",
-	"ecirc": "ê",
-	"Egrave": "È",
-	"egrave": "è",
-	"ETH": "Ð",
-	"eth": "ð",
-	"Euml": "Ë",
-	"euml": "ë",
-	"frac12": "½",
-	"frac14": "¼",
-	"frac34": "¾",
-	"gt": ">",
-	"GT": ">",
-	"Iacute": "Í",
-	"iacute": "í",
-	"Icirc": "Î",
-	"icirc": "î",
-	"iexcl": "¡",
-	"Igrave": "Ì",
-	"igrave": "ì",
-	"iquest": "¿",
-	"Iuml": "Ï",
-	"iuml": "ï",
-	"laquo": "«",
-	"lt": "<",
-	"LT": "<",
-	"macr": "¯",
-	"micro": "µ",
-	"middot": "·",
-	"nbsp": " ",
-	"not": "¬",
-	"Ntilde": "Ñ",
-	"ntilde": "ñ",
-	"Oacute": "Ó",
-	"oacute": "ó",
-	"Ocirc": "Ô",
-	"ocirc": "ô",
-	"Ograve": "Ò",
-	"ograve": "ò",
-	"ordf": "ª",
-	"ordm": "º",
-	"Oslash": "Ø",
-	"oslash": "ø",
-	"Otilde": "Õ",
-	"otilde": "õ",
-	"Ouml": "Ö",
-	"ouml": "ö",
-	"para": "¶",
-	"plusmn": "±",
-	"pound": "£",
-	"quot": "\"",
-	"QUOT": "\"",
-	"raquo": "»",
-	"reg": "®",
-	"REG": "®",
-	"sect": "§",
-	"shy": "­",
-	"sup1": "¹",
-	"sup2": "²",
-	"sup3": "³",
-	"szlig": "ß",
-	"THORN": "Þ",
-	"thorn": "þ",
-	"times": "×",
-	"Uacute": "Ú",
-	"uacute": "ú",
-	"Ucirc": "Û",
-	"ucirc": "û",
-	"Ugrave": "Ù",
-	"ugrave": "ù",
-	"uml": "¨",
-	"Uuml": "Ü",
-	"uuml": "ü",
-	"Yacute": "Ý",
-	"yacute": "ý",
-	"yen": "¥",
-	"yuml": "ÿ"
-};
-
-/***/ }),
-
-/***/ 312:
+/***/ 372:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(31)();
+exports = module.exports = __webpack_require__(40)();
 // imports
 
 
 // module
-exports.push([module.i, "/* BASICS */\n\n.CodeMirror {\n  /* Set height, width, borders, and global font properties here */\n  font-family: monospace;\n  height: 300px;\n  color: black;\n}\n\n/* PADDING */\n\n.CodeMirror-lines {\n  padding: 4px 0; /* Vertical padding around content */\n}\n.CodeMirror pre {\n  padding: 0 4px; /* Horizontal padding of content */\n}\n\n.CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler {\n  background-color: white; /* The little square between H and V scrollbars */\n}\n\n/* GUTTER */\n\n.CodeMirror-gutters {\n  border-right: 1px solid #ddd;\n  background-color: #f7f7f7;\n  white-space: nowrap;\n}\n.CodeMirror-linenumbers {}\n.CodeMirror-linenumber {\n  padding: 0 3px 0 5px;\n  min-width: 20px;\n  text-align: right;\n  color: #999;\n  white-space: nowrap;\n}\n\n.CodeMirror-guttermarker { color: black; }\n.CodeMirror-guttermarker-subtle { color: #999; }\n\n/* CURSOR */\n\n.CodeMirror-cursor {\n  border-left: 1px solid black;\n  border-right: none;\n  width: 0;\n}\n/* Shown when moving in bi-directional text */\n.CodeMirror div.CodeMirror-secondarycursor {\n  border-left: 1px solid silver;\n}\n.cm-fat-cursor .CodeMirror-cursor {\n  width: auto;\n  border: 0 !important;\n  background: #7e7;\n}\n.cm-fat-cursor div.CodeMirror-cursors {\n  z-index: 1;\n}\n\n.cm-animate-fat-cursor {\n  width: auto;\n  border: 0;\n  -webkit-animation: blink 1.06s steps(1) infinite;\n  -moz-animation: blink 1.06s steps(1) infinite;\n  animation: blink 1.06s steps(1) infinite;\n  background-color: #7e7;\n}\n@-moz-keyframes blink {\n  0% {}\n  50% { background-color: transparent; }\n  100% {}\n}\n@-webkit-keyframes blink {\n  0% {}\n  50% { background-color: transparent; }\n  100% {}\n}\n@keyframes blink {\n  0% {}\n  50% { background-color: transparent; }\n  100% {}\n}\n\n/* Can style cursor different in overwrite (non-insert) mode */\n.CodeMirror-overwrite .CodeMirror-cursor {}\n\n.cm-tab { display: inline-block; text-decoration: inherit; }\n\n.CodeMirror-rulers {\n  position: absolute;\n  left: 0; right: 0; top: -50px; bottom: -20px;\n  overflow: hidden;\n}\n.CodeMirror-ruler {\n  border-left: 1px solid #ccc;\n  top: 0; bottom: 0;\n  position: absolute;\n}\n\n/* DEFAULT THEME */\n\n.cm-s-default .cm-header {color: blue;}\n.cm-s-default .cm-quote {color: #090;}\n.cm-negative {color: #d44;}\n.cm-positive {color: #292;}\n.cm-header, .cm-strong {font-weight: bold;}\n.cm-em {font-style: italic;}\n.cm-link {text-decoration: underline;}\n.cm-strikethrough {text-decoration: line-through;}\n\n.cm-s-default .cm-keyword {color: #708;}\n.cm-s-default .cm-atom {color: #219;}\n.cm-s-default .cm-number {color: #164;}\n.cm-s-default .cm-def {color: #00f;}\n.cm-s-default .cm-variable,\n.cm-s-default .cm-punctuation,\n.cm-s-default .cm-property,\n.cm-s-default .cm-operator {}\n.cm-s-default .cm-variable-2 {color: #05a;}\n.cm-s-default .cm-variable-3 {color: #085;}\n.cm-s-default .cm-comment {color: #a50;}\n.cm-s-default .cm-string {color: #a11;}\n.cm-s-default .cm-string-2 {color: #f50;}\n.cm-s-default .cm-meta {color: #555;}\n.cm-s-default .cm-qualifier {color: #555;}\n.cm-s-default .cm-builtin {color: #30a;}\n.cm-s-default .cm-bracket {color: #997;}\n.cm-s-default .cm-tag {color: #170;}\n.cm-s-default .cm-attribute {color: #00c;}\n.cm-s-default .cm-hr {color: #999;}\n.cm-s-default .cm-link {color: #00c;}\n\n.cm-s-default .cm-error {color: #f00;}\n.cm-invalidchar {color: #f00;}\n\n.CodeMirror-composing { border-bottom: 2px solid; }\n\n/* Default styles for common addons */\n\ndiv.CodeMirror span.CodeMirror-matchingbracket {color: #0f0;}\ndiv.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}\n.CodeMirror-matchingtag { background: rgba(255, 150, 0, .3); }\n.CodeMirror-activeline-background {background: #e8f2ff;}\n\n/* STOP */\n\n/* The rest of this file contains styles related to the mechanics of\n   the editor. You probably shouldn't touch them. */\n\n.CodeMirror {\n  position: relative;\n  overflow: hidden;\n  background: white;\n}\n\n.CodeMirror-scroll {\n  overflow: scroll !important; /* Things will break if this is overridden */\n  /* 30px is the magic margin used to hide the element's real scrollbars */\n  /* See overflow: hidden in .CodeMirror */\n  margin-bottom: -30px; margin-right: -30px;\n  padding-bottom: 30px;\n  height: 100%;\n  outline: none; /* Prevent dragging from highlighting the element */\n  position: relative;\n}\n.CodeMirror-sizer {\n  position: relative;\n  border-right: 30px solid transparent;\n}\n\n/* The fake, visible scrollbars. Used to force redraw during scrolling\n   before actual scrolling happens, thus preventing shaking and\n   flickering artifacts. */\n.CodeMirror-vscrollbar, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler {\n  position: absolute;\n  z-index: 6;\n  display: none;\n}\n.CodeMirror-vscrollbar {\n  right: 0; top: 0;\n  overflow-x: hidden;\n  overflow-y: scroll;\n}\n.CodeMirror-hscrollbar {\n  bottom: 0; left: 0;\n  overflow-y: hidden;\n  overflow-x: scroll;\n}\n.CodeMirror-scrollbar-filler {\n  right: 0; bottom: 0;\n}\n.CodeMirror-gutter-filler {\n  left: 0; bottom: 0;\n}\n\n.CodeMirror-gutters {\n  position: absolute; left: 0; top: 0;\n  min-height: 100%;\n  z-index: 3;\n}\n.CodeMirror-gutter {\n  white-space: normal;\n  height: 100%;\n  display: inline-block;\n  vertical-align: top;\n  margin-bottom: -30px;\n}\n.CodeMirror-gutter-wrapper {\n  position: absolute;\n  z-index: 4;\n  background: none !important;\n  border: none !important;\n}\n.CodeMirror-gutter-background {\n  position: absolute;\n  top: 0; bottom: 0;\n  z-index: 4;\n}\n.CodeMirror-gutter-elt {\n  position: absolute;\n  cursor: default;\n  z-index: 4;\n}\n.CodeMirror-gutter-wrapper ::selection { background-color: transparent }\n.CodeMirror-gutter-wrapper ::-moz-selection { background-color: transparent }\n\n.CodeMirror-lines {\n  cursor: text;\n  min-height: 1px; /* prevents collapsing before first draw */\n}\n.CodeMirror pre {\n  /* Reset some styles that the rest of the page might have set */\n  -moz-border-radius: 0; -webkit-border-radius: 0; border-radius: 0;\n  border-width: 0;\n  background: transparent;\n  font-family: inherit;\n  font-size: inherit;\n  margin: 0;\n  white-space: pre;\n  word-wrap: normal;\n  line-height: inherit;\n  color: inherit;\n  z-index: 2;\n  position: relative;\n  overflow: visible;\n  -webkit-tap-highlight-color: transparent;\n  -webkit-font-variant-ligatures: contextual;\n  font-variant-ligatures: contextual;\n}\n.CodeMirror-wrap pre {\n  word-wrap: break-word;\n  white-space: pre-wrap;\n  word-break: normal;\n}\n\n.CodeMirror-linebackground {\n  position: absolute;\n  left: 0; right: 0; top: 0; bottom: 0;\n  z-index: 0;\n}\n\n.CodeMirror-linewidget {\n  position: relative;\n  z-index: 2;\n  overflow: auto;\n}\n\n.CodeMirror-widget {}\n\n.CodeMirror-rtl pre { direction: rtl; }\n\n.CodeMirror-code {\n  outline: none;\n}\n\n/* Force content-box sizing for the elements where we expect it */\n.CodeMirror-scroll,\n.CodeMirror-sizer,\n.CodeMirror-gutter,\n.CodeMirror-gutters,\n.CodeMirror-linenumber {\n  -moz-box-sizing: content-box;\n  box-sizing: content-box;\n}\n\n.CodeMirror-measure {\n  position: absolute;\n  width: 100%;\n  height: 0;\n  overflow: hidden;\n  visibility: hidden;\n}\n\n.CodeMirror-cursor {\n  position: absolute;\n  pointer-events: none;\n}\n.CodeMirror-measure pre { position: static; }\n\ndiv.CodeMirror-cursors {\n  visibility: hidden;\n  position: relative;\n  z-index: 3;\n}\ndiv.CodeMirror-dragcursors {\n  visibility: visible;\n}\n\n.CodeMirror-focused div.CodeMirror-cursors {\n  visibility: visible;\n}\n\n.CodeMirror-selected { background: #d9d9d9; }\n.CodeMirror-focused .CodeMirror-selected { background: #d7d4f0; }\n.CodeMirror-crosshair { cursor: crosshair; }\n.CodeMirror-line::selection, .CodeMirror-line > span::selection, .CodeMirror-line > span > span::selection { background: #d7d4f0; }\n.CodeMirror-line::-moz-selection, .CodeMirror-line > span::-moz-selection, .CodeMirror-line > span > span::-moz-selection { background: #d7d4f0; }\n\n.cm-searching {\n  background: #ffa;\n  background: rgba(255, 255, 0, .4);\n}\n\n/* Used to force a border model for a node */\n.cm-force-border { padding-right: .1px; }\n\n@media print {\n  /* Hide the cursor when printing */\n  .CodeMirror div.CodeMirror-cursors {\n    visibility: hidden;\n  }\n}\n\n/* See issue #2901 */\n.cm-tab-wrap-hack:after { content: ''; }\n\n/* Help users use markselection to safely style text background */\nspan.CodeMirror-selectedtext { background: none; }\n", ""]);
+exports.push([module.i, "/* BASICS */\n\n.CodeMirror {\n  /* Set height, width, borders, and global font properties here */\n  font-family: monospace;\n  height: 300px;\n  color: black;\n  direction: ltr;\n}\n\n/* PADDING */\n\n.CodeMirror-lines {\n  padding: 4px 0; /* Vertical padding around content */\n}\n.CodeMirror pre {\n  padding: 0 4px; /* Horizontal padding of content */\n}\n\n.CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler {\n  background-color: white; /* The little square between H and V scrollbars */\n}\n\n/* GUTTER */\n\n.CodeMirror-gutters {\n  border-right: 1px solid #ddd;\n  background-color: #f7f7f7;\n  white-space: nowrap;\n}\n.CodeMirror-linenumbers {}\n.CodeMirror-linenumber {\n  padding: 0 3px 0 5px;\n  min-width: 20px;\n  text-align: right;\n  color: #999;\n  white-space: nowrap;\n}\n\n.CodeMirror-guttermarker { color: black; }\n.CodeMirror-guttermarker-subtle { color: #999; }\n\n/* CURSOR */\n\n.CodeMirror-cursor {\n  border-left: 1px solid black;\n  border-right: none;\n  width: 0;\n}\n/* Shown when moving in bi-directional text */\n.CodeMirror div.CodeMirror-secondarycursor {\n  border-left: 1px solid silver;\n}\n.cm-fat-cursor .CodeMirror-cursor {\n  width: auto;\n  border: 0 !important;\n  background: #7e7;\n}\n.cm-fat-cursor div.CodeMirror-cursors {\n  z-index: 1;\n}\n\n.cm-animate-fat-cursor {\n  width: auto;\n  border: 0;\n  -webkit-animation: blink 1.06s steps(1) infinite;\n  -moz-animation: blink 1.06s steps(1) infinite;\n  animation: blink 1.06s steps(1) infinite;\n  background-color: #7e7;\n}\n@-moz-keyframes blink {\n  0% {}\n  50% { background-color: transparent; }\n  100% {}\n}\n@-webkit-keyframes blink {\n  0% {}\n  50% { background-color: transparent; }\n  100% {}\n}\n@keyframes blink {\n  0% {}\n  50% { background-color: transparent; }\n  100% {}\n}\n\n/* Can style cursor different in overwrite (non-insert) mode */\n.CodeMirror-overwrite .CodeMirror-cursor {}\n\n.cm-tab { display: inline-block; text-decoration: inherit; }\n\n.CodeMirror-rulers {\n  position: absolute;\n  left: 0; right: 0; top: -50px; bottom: -20px;\n  overflow: hidden;\n}\n.CodeMirror-ruler {\n  border-left: 1px solid #ccc;\n  top: 0; bottom: 0;\n  position: absolute;\n}\n\n/* DEFAULT THEME */\n\n.cm-s-default .cm-header {color: blue;}\n.cm-s-default .cm-quote {color: #090;}\n.cm-negative {color: #d44;}\n.cm-positive {color: #292;}\n.cm-header, .cm-strong {font-weight: bold;}\n.cm-em {font-style: italic;}\n.cm-link {text-decoration: underline;}\n.cm-strikethrough {text-decoration: line-through;}\n\n.cm-s-default .cm-keyword {color: #708;}\n.cm-s-default .cm-atom {color: #219;}\n.cm-s-default .cm-number {color: #164;}\n.cm-s-default .cm-def {color: #00f;}\n.cm-s-default .cm-variable,\n.cm-s-default .cm-punctuation,\n.cm-s-default .cm-property,\n.cm-s-default .cm-operator {}\n.cm-s-default .cm-variable-2 {color: #05a;}\n.cm-s-default .cm-variable-3, .cm-s-default .cm-type {color: #085;}\n.cm-s-default .cm-comment {color: #a50;}\n.cm-s-default .cm-string {color: #a11;}\n.cm-s-default .cm-string-2 {color: #f50;}\n.cm-s-default .cm-meta {color: #555;}\n.cm-s-default .cm-qualifier {color: #555;}\n.cm-s-default .cm-builtin {color: #30a;}\n.cm-s-default .cm-bracket {color: #997;}\n.cm-s-default .cm-tag {color: #170;}\n.cm-s-default .cm-attribute {color: #00c;}\n.cm-s-default .cm-hr {color: #999;}\n.cm-s-default .cm-link {color: #00c;}\n\n.cm-s-default .cm-error {color: #f00;}\n.cm-invalidchar {color: #f00;}\n\n.CodeMirror-composing { border-bottom: 2px solid; }\n\n/* Default styles for common addons */\n\ndiv.CodeMirror span.CodeMirror-matchingbracket {color: #0f0;}\ndiv.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}\n.CodeMirror-matchingtag { background: rgba(255, 150, 0, .3); }\n.CodeMirror-activeline-background {background: #e8f2ff;}\n\n/* STOP */\n\n/* The rest of this file contains styles related to the mechanics of\n   the editor. You probably shouldn't touch them. */\n\n.CodeMirror {\n  position: relative;\n  overflow: hidden;\n  background: white;\n}\n\n.CodeMirror-scroll {\n  overflow: scroll !important; /* Things will break if this is overridden */\n  /* 30px is the magic margin used to hide the element's real scrollbars */\n  /* See overflow: hidden in .CodeMirror */\n  margin-bottom: -30px; margin-right: -30px;\n  padding-bottom: 30px;\n  height: 100%;\n  outline: none; /* Prevent dragging from highlighting the element */\n  position: relative;\n}\n.CodeMirror-sizer {\n  position: relative;\n  border-right: 30px solid transparent;\n}\n\n/* The fake, visible scrollbars. Used to force redraw during scrolling\n   before actual scrolling happens, thus preventing shaking and\n   flickering artifacts. */\n.CodeMirror-vscrollbar, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler {\n  position: absolute;\n  z-index: 6;\n  display: none;\n}\n.CodeMirror-vscrollbar {\n  right: 0; top: 0;\n  overflow-x: hidden;\n  overflow-y: scroll;\n}\n.CodeMirror-hscrollbar {\n  bottom: 0; left: 0;\n  overflow-y: hidden;\n  overflow-x: scroll;\n}\n.CodeMirror-scrollbar-filler {\n  right: 0; bottom: 0;\n}\n.CodeMirror-gutter-filler {\n  left: 0; bottom: 0;\n}\n\n.CodeMirror-gutters {\n  position: absolute; left: 0; top: 0;\n  min-height: 100%;\n  z-index: 3;\n}\n.CodeMirror-gutter {\n  white-space: normal;\n  height: 100%;\n  display: inline-block;\n  vertical-align: top;\n  margin-bottom: -30px;\n}\n.CodeMirror-gutter-wrapper {\n  position: absolute;\n  z-index: 4;\n  background: none !important;\n  border: none !important;\n}\n.CodeMirror-gutter-background {\n  position: absolute;\n  top: 0; bottom: 0;\n  z-index: 4;\n}\n.CodeMirror-gutter-elt {\n  position: absolute;\n  cursor: default;\n  z-index: 4;\n}\n.CodeMirror-gutter-wrapper ::selection { background-color: transparent }\n.CodeMirror-gutter-wrapper ::-moz-selection { background-color: transparent }\n\n.CodeMirror-lines {\n  cursor: text;\n  min-height: 1px; /* prevents collapsing before first draw */\n}\n.CodeMirror pre {\n  /* Reset some styles that the rest of the page might have set */\n  -moz-border-radius: 0; -webkit-border-radius: 0; border-radius: 0;\n  border-width: 0;\n  background: transparent;\n  font-family: inherit;\n  font-size: inherit;\n  margin: 0;\n  white-space: pre;\n  word-wrap: normal;\n  line-height: inherit;\n  color: inherit;\n  z-index: 2;\n  position: relative;\n  overflow: visible;\n  -webkit-tap-highlight-color: transparent;\n  -webkit-font-variant-ligatures: contextual;\n  font-variant-ligatures: contextual;\n}\n.CodeMirror-wrap pre {\n  word-wrap: break-word;\n  white-space: pre-wrap;\n  word-break: normal;\n}\n\n.CodeMirror-linebackground {\n  position: absolute;\n  left: 0; right: 0; top: 0; bottom: 0;\n  z-index: 0;\n}\n\n.CodeMirror-linewidget {\n  position: relative;\n  z-index: 2;\n  overflow: auto;\n}\n\n.CodeMirror-widget {}\n\n.CodeMirror-rtl pre { direction: rtl; }\n\n.CodeMirror-code {\n  outline: none;\n}\n\n/* Force content-box sizing for the elements where we expect it */\n.CodeMirror-scroll,\n.CodeMirror-sizer,\n.CodeMirror-gutter,\n.CodeMirror-gutters,\n.CodeMirror-linenumber {\n  -moz-box-sizing: content-box;\n  box-sizing: content-box;\n}\n\n.CodeMirror-measure {\n  position: absolute;\n  width: 100%;\n  height: 0;\n  overflow: hidden;\n  visibility: hidden;\n}\n\n.CodeMirror-cursor {\n  position: absolute;\n  pointer-events: none;\n}\n.CodeMirror-measure pre { position: static; }\n\ndiv.CodeMirror-cursors {\n  visibility: hidden;\n  position: relative;\n  z-index: 3;\n}\ndiv.CodeMirror-dragcursors {\n  visibility: visible;\n}\n\n.CodeMirror-focused div.CodeMirror-cursors {\n  visibility: visible;\n}\n\n.CodeMirror-selected { background: #d9d9d9; }\n.CodeMirror-focused .CodeMirror-selected { background: #d7d4f0; }\n.CodeMirror-crosshair { cursor: crosshair; }\n.CodeMirror-line::selection, .CodeMirror-line > span::selection, .CodeMirror-line > span > span::selection { background: #d7d4f0; }\n.CodeMirror-line::-moz-selection, .CodeMirror-line > span::-moz-selection, .CodeMirror-line > span > span::-moz-selection { background: #d7d4f0; }\n\n.cm-searching {\n  background-color: #ffa;\n  background-color: rgba(255, 255, 0, .4);\n}\n\n/* Used to force a border model for a node */\n.cm-force-border { padding-right: .1px; }\n\n@media print {\n  /* Hide the cursor when printing */\n  .CodeMirror div.CodeMirror-cursors {\n    visibility: hidden;\n  }\n}\n\n/* See issue #2901 */\n.cm-tab-wrap-hack:after { content: ''; }\n\n/* Help users use markselection to safely style text background */\nspan.CodeMirror-selectedtext { background: none; }\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ 331:
+/***/ 376:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/**
@@ -5475,11 +5393,11 @@ function toNumber(value) {
 
 module.exports = debounce;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
 
 /***/ }),
 
-/***/ 333:
+/***/ 377:
 /***/ (function(module, exports) {
 
 /**
@@ -5625,7 +5543,99 @@ module.exports = isPlainObject;
 
 /***/ }),
 
-/***/ 334:
+/***/ 40:
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function() {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		var result = [];
+		for(var i = 0; i < this.length; i++) {
+			var item = this[i];
+			if(item[2]) {
+				result.push("@media " + item[2] + "{" + item[1] + "}");
+			} else {
+				result.push(item[1]);
+			}
+		}
+		return result.join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+
+/***/ }),
+
+/***/ 43:
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+if (true) {
+  var REACT_ELEMENT_TYPE = (typeof Symbol === 'function' &&
+    Symbol.for &&
+    Symbol.for('react.element')) ||
+    0xeac7;
+
+  var isValidElement = function(object) {
+    return typeof object === 'object' &&
+      object !== null &&
+      object.$$typeof === REACT_ELEMENT_TYPE;
+  };
+
+  // By explicitly using `prop-types` you are opting into new development behavior.
+  // http://fb.me/prop-types-in-prod
+  var throwOnDirectAccess = true;
+  module.exports = __webpack_require__(64)(isValidElement, throwOnDirectAccess);
+} else {
+  // By explicitly using `prop-types` you are opting into new production behavior.
+  // http://fb.me/prop-types-in-prod
+  module.exports = require('./factoryWithThrowingShims')();
+}
+
+
+/***/ }),
+
+/***/ 465:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5755,7 +5765,7 @@ module.exports = decode;
 
 /***/ }),
 
-/***/ 335:
+/***/ 466:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5861,7 +5871,7 @@ module.exports = encode;
 
 /***/ }),
 
-/***/ 346:
+/***/ 477:
 /***/ (function(module, exports) {
 
 /*!
@@ -5889,7 +5899,7 @@ module.exports = pascalcase;
 
 /***/ }),
 
-/***/ 40:
+/***/ 50:
 /***/ (function(module, exports) {
 
 /*
@@ -6142,7 +6152,7 @@ function updateLink(linkElement, obj) {
 
 /***/ }),
 
-/***/ 42:
+/***/ 53:
 /***/ (function(module, exports, __webpack_require__) {
 
 // CodeMirror, copyright (c) by Marijn Haverbeke and others
@@ -6426,13 +6436,18 @@ function skipExtendingChars(str, pos, dir) {
 }
 
 // Returns the value from the range [`from`; `to`] that satisfies
-// `pred` and is closest to `from`. Assumes that at least `to` satisfies `pred`.
+// `pred` and is closest to `from`. Assumes that at least `to`
+// satisfies `pred`. Supports `from` being greater than `to`.
 function findFirst(pred, from, to) {
+  // At any point we are certain `to` satisfies `pred`, don't know
+  // whether `from` does.
+  var dir = from > to ? -1 : 1;
   for (;;) {
-    if (Math.abs(from - to) <= 1) { return pred(from) ? from : to }
-    var mid = Math.floor((from + to) / 2);
+    if (from == to) { return from }
+    var midF = (from + to) / 2, mid = dir < 0 ? Math.ceil(midF) : Math.floor(midF);
+    if (mid == from) { return pred(mid) ? from : to }
     if (pred(mid)) { to = mid; }
-    else { from = mid; }
+    else { from = mid + dir; }
   }
 }
 
@@ -7044,12 +7059,12 @@ function findMaxLine(cm) {
 // BIDI HELPERS
 
 function iterateBidiSections(order, from, to, f) {
-  if (!order) { return f(from, to, "ltr") }
+  if (!order) { return f(from, to, "ltr", 0) }
   var found = false;
   for (var i = 0; i < order.length; ++i) {
     var part = order[i];
     if (part.from < to && part.to > from || from == to && part.to == from) {
-      f(Math.max(part.from, from), Math.min(part.to, to), part.level == 1 ? "rtl" : "ltr");
+      f(Math.max(part.from, from), Math.min(part.to, to), part.level == 1 ? "rtl" : "ltr", i);
       found = true;
     }
   }
@@ -7250,112 +7265,6 @@ function getOrder(line, direction) {
   var order = line.order;
   if (order == null) { order = line.order = bidiOrdering(line.text, direction); }
   return order
-}
-
-function moveCharLogically(line, ch, dir) {
-  var target = skipExtendingChars(line.text, ch + dir, dir);
-  return target < 0 || target > line.text.length ? null : target
-}
-
-function moveLogically(line, start, dir) {
-  var ch = moveCharLogically(line, start.ch, dir);
-  return ch == null ? null : new Pos(start.line, ch, dir < 0 ? "after" : "before")
-}
-
-function endOfLine(visually, cm, lineObj, lineNo, dir) {
-  if (visually) {
-    var order = getOrder(lineObj, cm.doc.direction);
-    if (order) {
-      var part = dir < 0 ? lst(order) : order[0];
-      var moveInStorageOrder = (dir < 0) == (part.level == 1);
-      var sticky = moveInStorageOrder ? "after" : "before";
-      var ch;
-      // With a wrapped rtl chunk (possibly spanning multiple bidi parts),
-      // it could be that the last bidi part is not on the last visual line,
-      // since visual lines contain content order-consecutive chunks.
-      // Thus, in rtl, we are looking for the first (content-order) character
-      // in the rtl chunk that is on the last line (that is, the same line
-      // as the last (content-order) character).
-      if (part.level > 0) {
-        var prep = prepareMeasureForLine(cm, lineObj);
-        ch = dir < 0 ? lineObj.text.length - 1 : 0;
-        var targetTop = measureCharPrepared(cm, prep, ch).top;
-        ch = findFirst(function (ch) { return measureCharPrepared(cm, prep, ch).top == targetTop; }, (dir < 0) == (part.level == 1) ? part.from : part.to - 1, ch);
-        if (sticky == "before") { ch = moveCharLogically(lineObj, ch, 1, true); }
-      } else { ch = dir < 0 ? part.to : part.from; }
-      return new Pos(lineNo, ch, sticky)
-    }
-  }
-  return new Pos(lineNo, dir < 0 ? lineObj.text.length : 0, dir < 0 ? "before" : "after")
-}
-
-function moveVisually(cm, line, start, dir) {
-  var bidi = getOrder(line, cm.doc.direction);
-  if (!bidi) { return moveLogically(line, start, dir) }
-  if (start.ch >= line.text.length) {
-    start.ch = line.text.length;
-    start.sticky = "before";
-  } else if (start.ch <= 0) {
-    start.ch = 0;
-    start.sticky = "after";
-  }
-  var partPos = getBidiPartAt(bidi, start.ch, start.sticky), part = bidi[partPos];
-  if (cm.doc.direction == "ltr" && part.level % 2 == 0 && (dir > 0 ? part.to > start.ch : part.from < start.ch)) {
-    // Case 1: We move within an ltr part in an ltr editor. Even with wrapped lines,
-    // nothing interesting happens.
-    return moveLogically(line, start, dir)
-  }
-
-  var mv = function (pos, dir) { return moveCharLogically(line, pos instanceof Pos ? pos.ch : pos, dir); };
-  var prep;
-  var getWrappedLineExtent = function (ch) {
-    if (!cm.options.lineWrapping) { return {begin: 0, end: line.text.length} }
-    prep = prep || prepareMeasureForLine(cm, line);
-    return wrappedLineExtentChar(cm, line, prep, ch)
-  };
-  var wrappedLineExtent = getWrappedLineExtent(start.sticky == "before" ? mv(start, -1) : start.ch);
-
-  if (cm.doc.direction == "rtl" || part.level == 1) {
-    var moveInStorageOrder = (part.level == 1) == (dir < 0);
-    var ch = mv(start, moveInStorageOrder ? 1 : -1);
-    if (ch != null && (!moveInStorageOrder ? ch >= part.from && ch >= wrappedLineExtent.begin : ch <= part.to && ch <= wrappedLineExtent.end)) {
-      // Case 2: We move within an rtl part or in an rtl editor on the same visual line
-      var sticky = moveInStorageOrder ? "before" : "after";
-      return new Pos(start.line, ch, sticky)
-    }
-  }
-
-  // Case 3: Could not move within this bidi part in this visual line, so leave
-  // the current bidi part
-
-  var searchInVisualLine = function (partPos, dir, wrappedLineExtent) {
-    var getRes = function (ch, moveInStorageOrder) { return moveInStorageOrder
-      ? new Pos(start.line, mv(ch, 1), "before")
-      : new Pos(start.line, ch, "after"); };
-
-    for (; partPos >= 0 && partPos < bidi.length; partPos += dir) {
-      var part = bidi[partPos];
-      var moveInStorageOrder = (dir > 0) == (part.level != 1);
-      var ch = moveInStorageOrder ? wrappedLineExtent.begin : mv(wrappedLineExtent.end, -1);
-      if (part.from <= ch && ch < part.to) { return getRes(ch, moveInStorageOrder) }
-      ch = moveInStorageOrder ? part.from : mv(part.to, -1);
-      if (wrappedLineExtent.begin <= ch && ch < wrappedLineExtent.end) { return getRes(ch, moveInStorageOrder) }
-    }
-  };
-
-  // Case 3a: Look for other bidi parts on the same visual line
-  var res = searchInVisualLine(partPos + dir, dir, wrappedLineExtent);
-  if (res) { return res }
-
-  // Case 3b: Look for other bidi parts on the next visual line
-  var nextCh = dir > 0 ? wrappedLineExtent.end : mv(wrappedLineExtent.begin, -1);
-  if (nextCh != null && !(dir > 0 && nextCh == line.text.length)) {
-    res = searchInVisualLine(dir > 0 ? 0 : bidi.length - 1, dir, getWrappedLineExtent(nextCh));
-    if (res) { return res }
-  }
-
-  // Case 4: Nowhere to move
-  return null
 }
 
 // EVENT HANDLING
@@ -7642,12 +7551,13 @@ function startState(mode, a1, a2) {
 // Fed to the mode parsers, provides helper functions to make
 // parsers more succinct.
 
-var StringStream = function(string, tabSize) {
+var StringStream = function(string, tabSize, lineOracle) {
   this.pos = this.start = 0;
   this.string = string;
   this.tabSize = tabSize || 8;
   this.lastColumnPos = this.lastColumnValue = 0;
   this.lineStart = 0;
+  this.lineOracle = lineOracle;
 };
 
 StringStream.prototype.eol = function () {return this.pos >= this.string.length};
@@ -7714,23 +7624,65 @@ StringStream.prototype.hideFirstChars = function (n, inner) {
   try { return inner() }
   finally { this.lineStart -= n; }
 };
+StringStream.prototype.lookAhead = function (n) {
+  var oracle = this.lineOracle;
+  return oracle && oracle.lookAhead(n)
+};
+
+var SavedContext = function(state, lookAhead) {
+  this.state = state;
+  this.lookAhead = lookAhead;
+};
+
+var Context = function(doc, state, line, lookAhead) {
+  this.state = state;
+  this.doc = doc;
+  this.line = line;
+  this.maxLookAhead = lookAhead || 0;
+};
+
+Context.prototype.lookAhead = function (n) {
+  var line = this.doc.getLine(this.line + n);
+  if (line != null && n > this.maxLookAhead) { this.maxLookAhead = n; }
+  return line
+};
+
+Context.prototype.nextLine = function () {
+  this.line++;
+  if (this.maxLookAhead > 0) { this.maxLookAhead--; }
+};
+
+Context.fromSaved = function (doc, saved, line) {
+  if (saved instanceof SavedContext)
+    { return new Context(doc, copyState(doc.mode, saved.state), line, saved.lookAhead) }
+  else
+    { return new Context(doc, copyState(doc.mode, saved), line) }
+};
+
+Context.prototype.save = function (copy) {
+  var state = copy !== false ? copyState(this.doc.mode, this.state) : this.state;
+  return this.maxLookAhead > 0 ? new SavedContext(state, this.maxLookAhead) : state
+};
+
 
 // Compute a style array (an array starting with a mode generation
 // -- for invalidation -- followed by pairs of end positions and
 // style strings), which is used to highlight the tokens on the
 // line.
-function highlightLine(cm, line, state, forceToEnd) {
+function highlightLine(cm, line, context, forceToEnd) {
   // A styles array always starts with a number identifying the
   // mode/overlays that it is based on (for easy invalidation).
   var st = [cm.state.modeGen], lineClasses = {};
   // Compute the base array of styles
-  runMode(cm, line.text, cm.doc.mode, state, function (end, style) { return st.push(end, style); },
-    lineClasses, forceToEnd);
+  runMode(cm, line.text, cm.doc.mode, context, function (end, style) { return st.push(end, style); },
+          lineClasses, forceToEnd);
+  var state = context.state;
 
   // Run overlays, adjust style array.
   var loop = function ( o ) {
     var overlay = cm.state.overlays[o], i = 1, at = 0;
-    runMode(cm, line.text, overlay.mode, true, function (end, style) {
+    context.state = true;
+    runMode(cm, line.text, overlay.mode, context, function (end, style) {
       var start = i;
       // Ensure there's a token end at the current position, and that i points at it
       while (at < end) {
@@ -7754,49 +7706,54 @@ function highlightLine(cm, line, state, forceToEnd) {
   };
 
   for (var o = 0; o < cm.state.overlays.length; ++o) loop( o );
+  context.state = state;
 
   return {styles: st, classes: lineClasses.bgClass || lineClasses.textClass ? lineClasses : null}
 }
 
 function getLineStyles(cm, line, updateFrontier) {
   if (!line.styles || line.styles[0] != cm.state.modeGen) {
-    var state = getStateBefore(cm, lineNo(line));
-    var result = highlightLine(cm, line, line.text.length > cm.options.maxHighlightLength ? copyState(cm.doc.mode, state) : state);
-    line.stateAfter = state;
+    var context = getContextBefore(cm, lineNo(line));
+    var resetState = line.text.length > cm.options.maxHighlightLength && copyState(cm.doc.mode, context.state);
+    var result = highlightLine(cm, line, context);
+    if (resetState) { context.state = resetState; }
+    line.stateAfter = context.save(!resetState);
     line.styles = result.styles;
     if (result.classes) { line.styleClasses = result.classes; }
     else if (line.styleClasses) { line.styleClasses = null; }
-    if (updateFrontier === cm.doc.frontier) { cm.doc.frontier++; }
+    if (updateFrontier === cm.doc.highlightFrontier)
+      { cm.doc.modeFrontier = Math.max(cm.doc.modeFrontier, ++cm.doc.highlightFrontier); }
   }
   return line.styles
 }
 
-function getStateBefore(cm, n, precise) {
+function getContextBefore(cm, n, precise) {
   var doc = cm.doc, display = cm.display;
-  if (!doc.mode.startState) { return true }
-  var pos = findStartLine(cm, n, precise), state = pos > doc.first && getLine(doc, pos-1).stateAfter;
-  if (!state) { state = startState(doc.mode); }
-  else { state = copyState(doc.mode, state); }
-  doc.iter(pos, n, function (line) {
-    processLine(cm, line.text, state);
-    var save = pos == n - 1 || pos % 5 == 0 || pos >= display.viewFrom && pos < display.viewTo;
-    line.stateAfter = save ? copyState(doc.mode, state) : null;
-    ++pos;
+  if (!doc.mode.startState) { return new Context(doc, true, n) }
+  var start = findStartLine(cm, n, precise);
+  var saved = start > doc.first && getLine(doc, start - 1).stateAfter;
+  var context = saved ? Context.fromSaved(doc, saved, start) : new Context(doc, startState(doc.mode), start);
+
+  doc.iter(start, n, function (line) {
+    processLine(cm, line.text, context);
+    var pos = context.line;
+    line.stateAfter = pos == n - 1 || pos % 5 == 0 || pos >= display.viewFrom && pos < display.viewTo ? context.save() : null;
+    context.nextLine();
   });
-  if (precise) { doc.frontier = pos; }
-  return state
+  if (precise) { doc.modeFrontier = context.line; }
+  return context
 }
 
 // Lightweight form of highlight -- proceed over this line and
 // update state, but don't save a style array. Used for lines that
 // aren't currently visible.
-function processLine(cm, text, state, startAt) {
+function processLine(cm, text, context, startAt) {
   var mode = cm.doc.mode;
-  var stream = new StringStream(text, cm.options.tabSize);
+  var stream = new StringStream(text, cm.options.tabSize, context);
   stream.start = stream.pos = startAt || 0;
-  if (text == "") { callBlankLine(mode, state); }
+  if (text == "") { callBlankLine(mode, context.state); }
   while (!stream.eol()) {
-    readToken(mode, stream, state);
+    readToken(mode, stream, context.state);
     stream.start = stream.pos;
   }
 }
@@ -7817,26 +7774,26 @@ function readToken(mode, stream, state, inner) {
   throw new Error("Mode " + mode.name + " failed to advance stream.")
 }
 
+var Token = function(stream, type, state) {
+  this.start = stream.start; this.end = stream.pos;
+  this.string = stream.current();
+  this.type = type || null;
+  this.state = state;
+};
+
 // Utility for getTokenAt and getLineTokens
 function takeToken(cm, pos, precise, asArray) {
-  var getObj = function (copy) { return ({
-    start: stream.start, end: stream.pos,
-    string: stream.current(),
-    type: style || null,
-    state: copy ? copyState(doc.mode, state) : state
-  }); };
-
   var doc = cm.doc, mode = doc.mode, style;
   pos = clipPos(doc, pos);
-  var line = getLine(doc, pos.line), state = getStateBefore(cm, pos.line, precise);
-  var stream = new StringStream(line.text, cm.options.tabSize), tokens;
+  var line = getLine(doc, pos.line), context = getContextBefore(cm, pos.line, precise);
+  var stream = new StringStream(line.text, cm.options.tabSize, context), tokens;
   if (asArray) { tokens = []; }
   while ((asArray || stream.pos < pos.ch) && !stream.eol()) {
     stream.start = stream.pos;
-    style = readToken(mode, stream, state);
-    if (asArray) { tokens.push(getObj(true)); }
+    style = readToken(mode, stream, context.state);
+    if (asArray) { tokens.push(new Token(stream, style, copyState(doc.mode, context.state))); }
   }
-  return asArray ? tokens : getObj()
+  return asArray ? tokens : new Token(stream, style, context.state)
 }
 
 function extractLineClasses(type, output) {
@@ -7854,21 +7811,21 @@ function extractLineClasses(type, output) {
 }
 
 // Run the given mode's parser over a line, calling f for each token.
-function runMode(cm, text, mode, state, f, lineClasses, forceToEnd) {
+function runMode(cm, text, mode, context, f, lineClasses, forceToEnd) {
   var flattenSpans = mode.flattenSpans;
   if (flattenSpans == null) { flattenSpans = cm.options.flattenSpans; }
   var curStart = 0, curStyle = null;
-  var stream = new StringStream(text, cm.options.tabSize), style;
+  var stream = new StringStream(text, cm.options.tabSize, context), style;
   var inner = cm.options.addModeClass && [null];
-  if (text == "") { extractLineClasses(callBlankLine(mode, state), lineClasses); }
+  if (text == "") { extractLineClasses(callBlankLine(mode, context.state), lineClasses); }
   while (!stream.eol()) {
     if (stream.pos > cm.options.maxHighlightLength) {
       flattenSpans = false;
-      if (forceToEnd) { processLine(cm, text, state, stream.pos); }
+      if (forceToEnd) { processLine(cm, text, context, stream.pos); }
       stream.pos = text.length;
       style = null;
     } else {
-      style = extractLineClasses(readToken(mode, stream, state, inner), lineClasses);
+      style = extractLineClasses(readToken(mode, stream, context.state, inner), lineClasses);
     }
     if (inner) {
       var mName = inner[0].name;
@@ -7903,8 +7860,9 @@ function findStartLine(cm, n, precise) {
   var lim = precise ? -1 : n - (cm.doc.mode.innerMode ? 1000 : 100);
   for (var search = n; search > lim; --search) {
     if (search <= doc.first) { return doc.first }
-    var line = getLine(doc, search - 1);
-    if (line.stateAfter && (!precise || search <= doc.frontier)) { return search }
+    var line = getLine(doc, search - 1), after = line.stateAfter;
+    if (after && (!precise || search + (after instanceof SavedContext ? after.lookAhead : 0) <= doc.modeFrontier))
+      { return search }
     var indented = countColumn(line.text, null, cm.options.tabSize);
     if (minline == null || minindent > indented) {
       minline = search - 1;
@@ -7912,6 +7870,23 @@ function findStartLine(cm, n, precise) {
     }
   }
   return minline
+}
+
+function retreatFrontier(doc, n) {
+  doc.modeFrontier = Math.min(doc.modeFrontier, n);
+  if (doc.highlightFrontier < n - 10) { return }
+  var start = doc.first;
+  for (var line = n - 1; line > start; line--) {
+    var saved = getLine(doc, line).stateAfter;
+    // change is on 3
+    // state on line 1 looked ahead 2 -- so saw 3
+    // test 1 + 2 < 3 should cover this
+    if (saved && (!(saved instanceof SavedContext) || line + saved.lookAhead < n)) {
+      start = line + 1;
+      break
+    }
+  }
+  doc.highlightFrontier = Math.min(doc.highlightFrontier, start);
 }
 
 // LINE DATA STRUCTURE
@@ -8790,18 +8765,34 @@ function clearCaches(cm) {
   cm.display.lineNumChars = null;
 }
 
-function pageScrollX() { return window.pageXOffset || (document.documentElement || document.body).scrollLeft }
-function pageScrollY() { return window.pageYOffset || (document.documentElement || document.body).scrollTop }
+function pageScrollX() {
+  // Work around https://bugs.chromium.org/p/chromium/issues/detail?id=489206
+  // which causes page_Offset and bounding client rects to use
+  // different reference viewports and invalidate our calculations.
+  if (chrome && android) { return -(document.body.getBoundingClientRect().left - parseInt(getComputedStyle(document.body).marginLeft)) }
+  return window.pageXOffset || (document.documentElement || document.body).scrollLeft
+}
+function pageScrollY() {
+  if (chrome && android) { return -(document.body.getBoundingClientRect().top - parseInt(getComputedStyle(document.body).marginTop)) }
+  return window.pageYOffset || (document.documentElement || document.body).scrollTop
+}
+
+function widgetTopHeight(lineObj) {
+  var height = 0;
+  if (lineObj.widgets) { for (var i = 0; i < lineObj.widgets.length; ++i) { if (lineObj.widgets[i].above)
+    { height += widgetHeight(lineObj.widgets[i]); } } }
+  return height
+}
 
 // Converts a {top, bottom, left, right} box from line-local
 // coordinates into another coordinate system. Context may be one of
 // "line", "div" (display.lineDiv), "local"./null (editor), "window",
 // or "page".
 function intoCoordSystem(cm, lineObj, rect, context, includeWidgets) {
-  if (!includeWidgets && lineObj.widgets) { for (var i = 0; i < lineObj.widgets.length; ++i) { if (lineObj.widgets[i].above) {
-    var size = widgetHeight(lineObj.widgets[i]);
-    rect.top += size; rect.bottom += size;
-  } } }
+  if (!includeWidgets) {
+    var height = widgetTopHeight(lineObj);
+    rect.top += height; rect.bottom += height;
+  }
   if (context == "line") { return rect }
   if (!context) { context = "local"; }
   var yOff = heightAtLine(lineObj);
@@ -8876,7 +8867,7 @@ function cursorCoords(cm, pos, context, lineObj, preparedMeasure, varHeight) {
   if (!order) { return get(sticky == "before" ? ch - 1 : ch, sticky == "before") }
 
   function getBidi(ch, partPos, invert) {
-    var part = order[partPos], right = (part.level % 2) != 0;
+    var part = order[partPos], right = part.level == 1;
     return get(invert ? ch - 1 : ch, right != invert)
   }
   var partPos = getBidiPartAt(order, ch, sticky);
@@ -8934,67 +8925,146 @@ function coordsChar(cm, x, y) {
 }
 
 function wrappedLineExtent(cm, lineObj, preparedMeasure, y) {
-  var measure = function (ch) { return intoCoordSystem(cm, lineObj, measureCharPrepared(cm, preparedMeasure, ch), "line"); };
+  y -= widgetTopHeight(lineObj);
   var end = lineObj.text.length;
-  var begin = findFirst(function (ch) { return measure(ch - 1).bottom <= y; }, end, 0);
-  end = findFirst(function (ch) { return measure(ch).top > y; }, begin, end);
+  var begin = findFirst(function (ch) { return measureCharPrepared(cm, preparedMeasure, ch - 1).bottom <= y; }, end, 0);
+  end = findFirst(function (ch) { return measureCharPrepared(cm, preparedMeasure, ch).top > y; }, begin, end);
   return {begin: begin, end: end}
 }
 
 function wrappedLineExtentChar(cm, lineObj, preparedMeasure, target) {
+  if (!preparedMeasure) { preparedMeasure = prepareMeasureForLine(cm, lineObj); }
   var targetTop = intoCoordSystem(cm, lineObj, measureCharPrepared(cm, preparedMeasure, target), "line").top;
   return wrappedLineExtent(cm, lineObj, preparedMeasure, targetTop)
 }
 
+// Returns true if the given side of a box is after the given
+// coordinates, in top-to-bottom, left-to-right order.
+function boxIsAfter(box, x, y, left) {
+  return box.bottom <= y ? false : box.top > y ? true : (left ? box.left : box.right) > x
+}
+
 function coordsCharInner(cm, lineObj, lineNo$$1, x, y) {
+  // Move y into line-local coordinate space
   y -= heightAtLine(lineObj);
-  var begin = 0, end = lineObj.text.length;
   var preparedMeasure = prepareMeasureForLine(cm, lineObj);
-  var pos;
+  // When directly calling `measureCharPrepared`, we have to adjust
+  // for the widgets at this line.
+  var widgetHeight$$1 = widgetTopHeight(lineObj);
+  var begin = 0, end = lineObj.text.length, ltr = true;
+
   var order = getOrder(lineObj, cm.doc.direction);
+  // If the line isn't plain left-to-right text, first figure out
+  // which bidi section the coordinates fall into.
   if (order) {
-    if (cm.options.lineWrapping) {
-      var assign;
-      ((assign = wrappedLineExtent(cm, lineObj, preparedMeasure, y), begin = assign.begin, end = assign.end, assign));
-    }
-    pos = new Pos(lineNo$$1, begin);
-    var beginLeft = cursorCoords(cm, pos, "line", lineObj, preparedMeasure).left;
-    var dir = beginLeft < x ? 1 : -1;
-    var prevDiff, diff = beginLeft - x, prevPos;
-    do {
-      prevDiff = diff;
-      prevPos = pos;
-      pos = moveVisually(cm, lineObj, pos, dir);
-      if (pos == null || pos.ch < begin || end <= (pos.sticky == "before" ? pos.ch - 1 : pos.ch)) {
-        pos = prevPos;
-        break
-      }
-      diff = cursorCoords(cm, pos, "line", lineObj, preparedMeasure).left - x;
-    } while ((dir < 0) != (diff < 0) && (Math.abs(diff) <= Math.abs(prevDiff)))
-    if (Math.abs(diff) > Math.abs(prevDiff)) {
-      if ((diff < 0) == (prevDiff < 0)) { throw new Error("Broke out of infinite loop in coordsCharInner") }
-      pos = prevPos;
-    }
-  } else {
-    var ch = findFirst(function (ch) {
-      var box = intoCoordSystem(cm, lineObj, measureCharPrepared(cm, preparedMeasure, ch), "line");
-      if (box.top > y) {
-        // For the cursor stickiness
-        end = Math.min(ch, end);
-        return true
-      }
-      else if (box.bottom <= y) { return false }
-      else if (box.left > x) { return true }
-      else if (box.right < x) { return false }
-      else { return (x - box.left < box.right - x) }
-    }, begin, end);
-    ch = skipExtendingChars(lineObj.text, ch, 1);
-    pos = new Pos(lineNo$$1, ch, ch == end ? "before" : "after");
+    var part = (cm.options.lineWrapping ? coordsBidiPartWrapped : coordsBidiPart)
+                 (cm, lineObj, lineNo$$1, preparedMeasure, order, x, y);
+    ltr = part.level != 1;
+    // The awkward -1 offsets are needed because findFirst (called
+    // on these below) will treat its first bound as inclusive,
+    // second as exclusive, but we want to actually address the
+    // characters in the part's range
+    begin = ltr ? part.from : part.to - 1;
+    end = ltr ? part.to : part.from - 1;
   }
-  var coords = cursorCoords(cm, pos, "line", lineObj, preparedMeasure);
-  if (y < coords.top || coords.bottom < y) { pos.outside = true; }
-  pos.xRel = x < coords.left ? -1 : (x > coords.right ? 1 : 0);
-  return pos
+
+  // A binary search to find the first character whose bounding box
+  // starts after the coordinates. If we run across any whose box wrap
+  // the coordinates, store that.
+  var chAround = null, boxAround = null;
+  var ch = findFirst(function (ch) {
+    var box = measureCharPrepared(cm, preparedMeasure, ch);
+    box.top += widgetHeight$$1; box.bottom += widgetHeight$$1;
+    if (!boxIsAfter(box, x, y, false)) { return false }
+    if (box.top <= y && box.left <= x) {
+      chAround = ch;
+      boxAround = box;
+    }
+    return true
+  }, begin, end);
+
+  var baseX, sticky, outside = false;
+  // If a box around the coordinates was found, use that
+  if (boxAround) {
+    // Distinguish coordinates nearer to the left or right side of the box
+    var atLeft = x - boxAround.left < boxAround.right - x, atStart = atLeft == ltr;
+    ch = chAround + (atStart ? 0 : 1);
+    sticky = atStart ? "after" : "before";
+    baseX = atLeft ? boxAround.left : boxAround.right;
+  } else {
+    // (Adjust for extended bound, if necessary.)
+    if (!ltr && (ch == end || ch == begin)) { ch++; }
+    // To determine which side to associate with, get the box to the
+    // left of the character and compare it's vertical position to the
+    // coordinates
+    sticky = ch == 0 ? "after" : ch == lineObj.text.length ? "before" :
+      (measureCharPrepared(cm, preparedMeasure, ch - (ltr ? 1 : 0)).bottom + widgetHeight$$1 <= y) == ltr ?
+      "after" : "before";
+    // Now get accurate coordinates for this place, in order to get a
+    // base X position
+    var coords = cursorCoords(cm, Pos(lineNo$$1, ch, sticky), "line", lineObj, preparedMeasure);
+    baseX = coords.left;
+    outside = y < coords.top || y >= coords.bottom;
+  }
+
+  ch = skipExtendingChars(lineObj.text, ch, 1);
+  return PosWithInfo(lineNo$$1, ch, sticky, outside, x - baseX)
+}
+
+function coordsBidiPart(cm, lineObj, lineNo$$1, preparedMeasure, order, x, y) {
+  // Bidi parts are sorted left-to-right, and in a non-line-wrapping
+  // situation, we can take this ordering to correspond to the visual
+  // ordering. This finds the first part whose end is after the given
+  // coordinates.
+  var index = findFirst(function (i) {
+    var part = order[i], ltr = part.level != 1;
+    return boxIsAfter(cursorCoords(cm, Pos(lineNo$$1, ltr ? part.to : part.from, ltr ? "before" : "after"),
+                                   "line", lineObj, preparedMeasure), x, y, true)
+  }, 0, order.length - 1);
+  var part = order[index];
+  // If this isn't the first part, the part's start is also after
+  // the coordinates, and the coordinates aren't on the same line as
+  // that start, move one part back.
+  if (index > 0) {
+    var ltr = part.level != 1;
+    var start = cursorCoords(cm, Pos(lineNo$$1, ltr ? part.from : part.to, ltr ? "after" : "before"),
+                             "line", lineObj, preparedMeasure);
+    if (boxIsAfter(start, x, y, true) && start.top > y)
+      { part = order[index - 1]; }
+  }
+  return part
+}
+
+function coordsBidiPartWrapped(cm, lineObj, _lineNo, preparedMeasure, order, x, y) {
+  // In a wrapped line, rtl text on wrapping boundaries can do things
+  // that don't correspond to the ordering in our `order` array at
+  // all, so a binary search doesn't work, and we want to return a
+  // part that only spans one line so that the binary search in
+  // coordsCharInner is safe. As such, we first find the extent of the
+  // wrapped line, and then do a flat search in which we discard any
+  // spans that aren't on the line.
+  var ref = wrappedLineExtent(cm, lineObj, preparedMeasure, y);
+  var begin = ref.begin;
+  var end = ref.end;
+  var part = null, closestDist = null;
+  for (var i = 0; i < order.length; i++) {
+    var p = order[i];
+    if (p.from >= end || p.to <= begin) { continue }
+    var ltr = p.level != 1;
+    var endX = measureCharPrepared(cm, preparedMeasure, ltr ? Math.min(end, p.to) - 1 : Math.max(begin, p.from)).right;
+    // Weigh against spans ending before this, so that they are only
+    // picked if nothing ends after
+    var dist = endX < x ? x - endX + 1e9 : endX - x;
+    if (!part || closestDist > dist) {
+      part = p;
+      closestDist = dist;
+    }
+  }
+  if (!part) { part = order[order.length - 1]; }
+  // Clip the part to the wrapped line.
+  if (part.from < begin) { part = {from: begin, to: part.to, level: part.level}; }
+  if (part.to > end) { part = {from: part.from, to: end, level: part.level}; }
+  return part
 }
 
 var measureText;
@@ -9120,12 +9190,14 @@ function updateSelection(cm) {
 }
 
 function prepareSelection(cm, primary) {
+  if ( primary === void 0 ) primary = true;
+
   var doc = cm.doc, result = {};
   var curFragment = result.cursors = document.createDocumentFragment();
   var selFragment = result.selection = document.createDocumentFragment();
 
   for (var i = 0; i < doc.sel.ranges.length; i++) {
-    if (primary === false && i == doc.sel.primIndex) { continue }
+    if (!primary && i == doc.sel.primIndex) { continue }
     var range$$1 = doc.sel.ranges[i];
     if (range$$1.from().line >= cm.display.viewTo || range$$1.to().line < cm.display.viewFrom) { continue }
     var collapsed = range$$1.empty();
@@ -9156,6 +9228,8 @@ function drawSelectionCursor(cm, head, output) {
   }
 }
 
+function cmpCoords(a, b) { return a.top - b.top || a.left - b.left }
+
 // Draws the given range as a highlighted selection
 function drawSelectionRange(cm, range$$1, output) {
   var display = cm.display, doc = cm.doc;
@@ -9178,30 +9252,48 @@ function drawSelectionRange(cm, range$$1, output) {
       return charCoords(cm, Pos(line, ch), "div", lineObj, bias)
     }
 
-    iterateBidiSections(getOrder(lineObj, doc.direction), fromArg || 0, toArg == null ? lineLen : toArg, function (from, to, dir) {
-      var leftPos = coords(from, "left"), rightPos, left, right;
-      if (from == to) {
-        rightPos = leftPos;
-        left = right = leftPos.left;
-      } else {
-        rightPos = coords(to - 1, "right");
-        if (dir == "rtl") { var tmp = leftPos; leftPos = rightPos; rightPos = tmp; }
-        left = leftPos.left;
-        right = rightPos.right;
+    var order = getOrder(lineObj, doc.direction);
+    iterateBidiSections(order, fromArg || 0, toArg == null ? lineLen : toArg, function (from, to, dir, i) {
+      var fromPos = coords(from, dir == "ltr" ? "left" : "right");
+      var toPos = coords(to - 1, dir == "ltr" ? "right" : "left");
+      if (dir == "ltr") {
+        var fromLeft = fromArg == null && from == 0 ? leftSide : fromPos.left;
+        var toRight = toArg == null && to == lineLen ? rightSide : toPos.right;
+        if (toPos.top - fromPos.top <= 3) { // Single line
+          add(fromLeft, toPos.top, toRight - fromLeft, toPos.bottom);
+        } else { // Multiple lines
+          add(fromLeft, fromPos.top, null, fromPos.bottom);
+          if (fromPos.bottom < toPos.top) { add(leftSide, fromPos.bottom, null, toPos.top); }
+          add(leftSide, toPos.top, toPos.right, toPos.bottom);
+        }
+      } else if (from < to) { // RTL
+        var fromRight = fromArg == null && from == 0 ? rightSide : fromPos.right;
+        var toLeft = toArg == null && to == lineLen ? leftSide : toPos.left;
+        if (toPos.top - fromPos.top <= 3) { // Single line
+          add(toLeft, toPos.top, fromRight - toLeft, toPos.bottom);
+        } else { // Multiple lines
+          var topLeft = leftSide;
+          if (i) {
+            var topEnd = wrappedLineExtentChar(cm, lineObj, null, from).end;
+            // The coordinates returned for an RTL wrapped space tend to
+            // be complete bogus, so try to skip that here.
+            topLeft = coords(topEnd - (/\s/.test(lineObj.text.charAt(topEnd - 1)) ? 2 : 1), "left").left;
+          }
+          add(topLeft, fromPos.top, fromRight - topLeft, fromPos.bottom);
+          if (fromPos.bottom < toPos.top) { add(leftSide, fromPos.bottom, null, toPos.top); }
+          var botWidth = null;
+          if (i < order.length  - 1 || true) {
+            var botStart = wrappedLineExtentChar(cm, lineObj, null, to).begin;
+            botWidth = coords(botStart, "right").right - toLeft;
+          }
+          add(toLeft, toPos.top, botWidth, toPos.bottom);
+        }
       }
-      if (fromArg == null && from == 0) { left = leftSide; }
-      if (rightPos.top - leftPos.top > 3) { // Different lines, draw top part
-        add(left, leftPos.top, null, leftPos.bottom);
-        left = leftSide;
-        if (leftPos.bottom < rightPos.top) { add(left, leftPos.bottom, null, rightPos.top); }
-      }
-      if (toArg == null && to == lineLen) { right = rightSide; }
-      if (!start || leftPos.top < start.top || leftPos.top == start.top && leftPos.left < start.left)
-        { start = leftPos; }
-      if (!end || rightPos.bottom > end.bottom || rightPos.bottom == end.bottom && rightPos.right > end.right)
-        { end = rightPos; }
-      if (left < leftSide + 1) { left = leftSide; }
-      add(left, rightPos.top, right - left, rightPos.bottom);
+
+      if (!start || cmpCoords(fromPos, start) < 0) { start = fromPos; }
+      if (cmpCoords(toPos, start) < 0) { start = toPos; }
+      if (!end || cmpCoords(fromPos, end) < 0) { end = fromPos; }
+      if (cmpCoords(toPos, end) < 0) { end = toPos; }
     });
     return {start: start, end: end}
   }
@@ -9286,6 +9378,64 @@ function onBlur(cm, e) {
   setTimeout(function () { if (!cm.state.focused) { cm.display.shift = false; } }, 150);
 }
 
+// Read the actual heights of the rendered lines, and update their
+// stored heights to match.
+function updateHeightsInViewport(cm) {
+  var display = cm.display;
+  var prevBottom = display.lineDiv.offsetTop;
+  for (var i = 0; i < display.view.length; i++) {
+    var cur = display.view[i], height = (void 0);
+    if (cur.hidden) { continue }
+    if (ie && ie_version < 8) {
+      var bot = cur.node.offsetTop + cur.node.offsetHeight;
+      height = bot - prevBottom;
+      prevBottom = bot;
+    } else {
+      var box = cur.node.getBoundingClientRect();
+      height = box.bottom - box.top;
+    }
+    var diff = cur.line.height - height;
+    if (height < 2) { height = textHeight(display); }
+    if (diff > .005 || diff < -.005) {
+      updateLineHeight(cur.line, height);
+      updateWidgetHeight(cur.line);
+      if (cur.rest) { for (var j = 0; j < cur.rest.length; j++)
+        { updateWidgetHeight(cur.rest[j]); } }
+    }
+  }
+}
+
+// Read and store the height of line widgets associated with the
+// given line.
+function updateWidgetHeight(line) {
+  if (line.widgets) { for (var i = 0; i < line.widgets.length; ++i)
+    { line.widgets[i].height = line.widgets[i].node.parentNode.offsetHeight; } }
+}
+
+// Compute the lines that are visible in a given viewport (defaults
+// the the current scroll position). viewport may contain top,
+// height, and ensure (see op.scrollToPos) properties.
+function visibleLines(display, doc, viewport) {
+  var top = viewport && viewport.top != null ? Math.max(0, viewport.top) : display.scroller.scrollTop;
+  top = Math.floor(top - paddingTop(display));
+  var bottom = viewport && viewport.bottom != null ? viewport.bottom : top + display.wrapper.clientHeight;
+
+  var from = lineAtHeight(doc, top), to = lineAtHeight(doc, bottom);
+  // Ensure is a {from: {line, ch}, to: {line, ch}} object, and
+  // forces those lines into the viewport (if possible).
+  if (viewport && viewport.ensure) {
+    var ensureFrom = viewport.ensure.from.line, ensureTo = viewport.ensure.to.line;
+    if (ensureFrom < from) {
+      from = ensureFrom;
+      to = lineAtHeight(doc, heightAtLine(getLine(doc, ensureFrom)) + display.wrapper.clientHeight);
+    } else if (Math.min(ensureTo, doc.lastLine()) >= to) {
+      from = lineAtHeight(doc, heightAtLine(getLine(doc, ensureTo)) - display.wrapper.clientHeight);
+      to = ensureTo;
+    }
+  }
+  return {from: from, to: Math.max(to, from + 1)}
+}
+
 // Re-align line numbers and gutter marks to compensate for
 // horizontal scrolling.
 function alignHorizontally(cm) {
@@ -9329,195 +9479,176 @@ function maybeUpdateLineNumberWidth(cm) {
   return false
 }
 
-// Read the actual heights of the rendered lines, and update their
-// stored heights to match.
-function updateHeightsInViewport(cm) {
-  var display = cm.display;
-  var prevBottom = display.lineDiv.offsetTop;
-  for (var i = 0; i < display.view.length; i++) {
-    var cur = display.view[i], height = (void 0);
-    if (cur.hidden) { continue }
-    if (ie && ie_version < 8) {
-      var bot = cur.node.offsetTop + cur.node.offsetHeight;
-      height = bot - prevBottom;
-      prevBottom = bot;
-    } else {
-      var box = cur.node.getBoundingClientRect();
-      height = box.bottom - box.top;
-    }
-    var diff = cur.line.height - height;
-    if (height < 2) { height = textHeight(display); }
-    if (diff > .001 || diff < -.001) {
-      updateLineHeight(cur.line, height);
-      updateWidgetHeight(cur.line);
-      if (cur.rest) { for (var j = 0; j < cur.rest.length; j++)
-        { updateWidgetHeight(cur.rest[j]); } }
-    }
+// SCROLLING THINGS INTO VIEW
+
+// If an editor sits on the top or bottom of the window, partially
+// scrolled out of view, this ensures that the cursor is visible.
+function maybeScrollWindow(cm, rect) {
+  if (signalDOMEvent(cm, "scrollCursorIntoView")) { return }
+
+  var display = cm.display, box = display.sizer.getBoundingClientRect(), doScroll = null;
+  if (rect.top + box.top < 0) { doScroll = true; }
+  else if (rect.bottom + box.top > (window.innerHeight || document.documentElement.clientHeight)) { doScroll = false; }
+  if (doScroll != null && !phantom) {
+    var scrollNode = elt("div", "\u200b", null, ("position: absolute;\n                         top: " + (rect.top - display.viewOffset - paddingTop(cm.display)) + "px;\n                         height: " + (rect.bottom - rect.top + scrollGap(cm) + display.barHeight) + "px;\n                         left: " + (rect.left) + "px; width: " + (Math.max(2, rect.right - rect.left)) + "px;"));
+    cm.display.lineSpace.appendChild(scrollNode);
+    scrollNode.scrollIntoView(doScroll);
+    cm.display.lineSpace.removeChild(scrollNode);
   }
 }
 
-// Read and store the height of line widgets associated with the
-// given line.
-function updateWidgetHeight(line) {
-  if (line.widgets) { for (var i = 0; i < line.widgets.length; ++i)
-    { line.widgets[i].height = line.widgets[i].node.parentNode.offsetHeight; } }
+// Scroll a given position into view (immediately), verifying that
+// it actually became visible (as line heights are accurately
+// measured, the position of something may 'drift' during drawing).
+function scrollPosIntoView(cm, pos, end, margin) {
+  if (margin == null) { margin = 0; }
+  var rect;
+  if (!cm.options.lineWrapping && pos == end) {
+    // Set pos and end to the cursor positions around the character pos sticks to
+    // If pos.sticky == "before", that is around pos.ch - 1, otherwise around pos.ch
+    // If pos == Pos(_, 0, "before"), pos and end are unchanged
+    pos = pos.ch ? Pos(pos.line, pos.sticky == "before" ? pos.ch - 1 : pos.ch, "after") : pos;
+    end = pos.sticky == "before" ? Pos(pos.line, pos.ch + 1, "before") : pos;
+  }
+  for (var limit = 0; limit < 5; limit++) {
+    var changed = false;
+    var coords = cursorCoords(cm, pos);
+    var endCoords = !end || end == pos ? coords : cursorCoords(cm, end);
+    rect = {left: Math.min(coords.left, endCoords.left),
+            top: Math.min(coords.top, endCoords.top) - margin,
+            right: Math.max(coords.left, endCoords.left),
+            bottom: Math.max(coords.bottom, endCoords.bottom) + margin};
+    var scrollPos = calculateScrollPos(cm, rect);
+    var startTop = cm.doc.scrollTop, startLeft = cm.doc.scrollLeft;
+    if (scrollPos.scrollTop != null) {
+      updateScrollTop(cm, scrollPos.scrollTop);
+      if (Math.abs(cm.doc.scrollTop - startTop) > 1) { changed = true; }
+    }
+    if (scrollPos.scrollLeft != null) {
+      setScrollLeft(cm, scrollPos.scrollLeft);
+      if (Math.abs(cm.doc.scrollLeft - startLeft) > 1) { changed = true; }
+    }
+    if (!changed) { break }
+  }
+  return rect
 }
 
-// Compute the lines that are visible in a given viewport (defaults
-// the the current scroll position). viewport may contain top,
-// height, and ensure (see op.scrollToPos) properties.
-function visibleLines(display, doc, viewport) {
-  var top = viewport && viewport.top != null ? Math.max(0, viewport.top) : display.scroller.scrollTop;
-  top = Math.floor(top - paddingTop(display));
-  var bottom = viewport && viewport.bottom != null ? viewport.bottom : top + display.wrapper.clientHeight;
+// Scroll a given set of coordinates into view (immediately).
+function scrollIntoView(cm, rect) {
+  var scrollPos = calculateScrollPos(cm, rect);
+  if (scrollPos.scrollTop != null) { updateScrollTop(cm, scrollPos.scrollTop); }
+  if (scrollPos.scrollLeft != null) { setScrollLeft(cm, scrollPos.scrollLeft); }
+}
 
-  var from = lineAtHeight(doc, top), to = lineAtHeight(doc, bottom);
-  // Ensure is a {from: {line, ch}, to: {line, ch}} object, and
-  // forces those lines into the viewport (if possible).
-  if (viewport && viewport.ensure) {
-    var ensureFrom = viewport.ensure.from.line, ensureTo = viewport.ensure.to.line;
-    if (ensureFrom < from) {
-      from = ensureFrom;
-      to = lineAtHeight(doc, heightAtLine(getLine(doc, ensureFrom)) + display.wrapper.clientHeight);
-    } else if (Math.min(ensureTo, doc.lastLine()) >= to) {
-      from = lineAtHeight(doc, heightAtLine(getLine(doc, ensureTo)) - display.wrapper.clientHeight);
-      to = ensureTo;
-    }
+// Calculate a new scroll position needed to scroll the given
+// rectangle into view. Returns an object with scrollTop and
+// scrollLeft properties. When these are undefined, the
+// vertical/horizontal position does not need to be adjusted.
+function calculateScrollPos(cm, rect) {
+  var display = cm.display, snapMargin = textHeight(cm.display);
+  if (rect.top < 0) { rect.top = 0; }
+  var screentop = cm.curOp && cm.curOp.scrollTop != null ? cm.curOp.scrollTop : display.scroller.scrollTop;
+  var screen = displayHeight(cm), result = {};
+  if (rect.bottom - rect.top > screen) { rect.bottom = rect.top + screen; }
+  var docBottom = cm.doc.height + paddingVert(display);
+  var atTop = rect.top < snapMargin, atBottom = rect.bottom > docBottom - snapMargin;
+  if (rect.top < screentop) {
+    result.scrollTop = atTop ? 0 : rect.top;
+  } else if (rect.bottom > screentop + screen) {
+    var newTop = Math.min(rect.top, (atBottom ? docBottom : rect.bottom) - screen);
+    if (newTop != screentop) { result.scrollTop = newTop; }
   }
-  return {from: from, to: Math.max(to, from + 1)}
+
+  var screenleft = cm.curOp && cm.curOp.scrollLeft != null ? cm.curOp.scrollLeft : display.scroller.scrollLeft;
+  var screenw = displayWidth(cm) - (cm.options.fixedGutter ? display.gutters.offsetWidth : 0);
+  var tooWide = rect.right - rect.left > screenw;
+  if (tooWide) { rect.right = rect.left + screenw; }
+  if (rect.left < 10)
+    { result.scrollLeft = 0; }
+  else if (rect.left < screenleft)
+    { result.scrollLeft = Math.max(0, rect.left - (tooWide ? 0 : 10)); }
+  else if (rect.right > screenw + screenleft - 3)
+    { result.scrollLeft = rect.right + (tooWide ? 0 : 10) - screenw; }
+  return result
+}
+
+// Store a relative adjustment to the scroll position in the current
+// operation (to be applied when the operation finishes).
+function addToScrollTop(cm, top) {
+  if (top == null) { return }
+  resolveScrollToPos(cm);
+  cm.curOp.scrollTop = (cm.curOp.scrollTop == null ? cm.doc.scrollTop : cm.curOp.scrollTop) + top;
+}
+
+// Make sure that at the end of the operation the current cursor is
+// shown.
+function ensureCursorVisible(cm) {
+  resolveScrollToPos(cm);
+  var cur = cm.getCursor();
+  cm.curOp.scrollToPos = {from: cur, to: cur, margin: cm.options.cursorScrollMargin};
+}
+
+function scrollToCoords(cm, x, y) {
+  if (x != null || y != null) { resolveScrollToPos(cm); }
+  if (x != null) { cm.curOp.scrollLeft = x; }
+  if (y != null) { cm.curOp.scrollTop = y; }
+}
+
+function scrollToRange(cm, range$$1) {
+  resolveScrollToPos(cm);
+  cm.curOp.scrollToPos = range$$1;
+}
+
+// When an operation has its scrollToPos property set, and another
+// scroll action is applied before the end of the operation, this
+// 'simulates' scrolling that position into view in a cheap way, so
+// that the effect of intermediate scroll commands is not ignored.
+function resolveScrollToPos(cm) {
+  var range$$1 = cm.curOp.scrollToPos;
+  if (range$$1) {
+    cm.curOp.scrollToPos = null;
+    var from = estimateCoords(cm, range$$1.from), to = estimateCoords(cm, range$$1.to);
+    scrollToCoordsRange(cm, from, to, range$$1.margin);
+  }
+}
+
+function scrollToCoordsRange(cm, from, to, margin) {
+  var sPos = calculateScrollPos(cm, {
+    left: Math.min(from.left, to.left),
+    top: Math.min(from.top, to.top) - margin,
+    right: Math.max(from.right, to.right),
+    bottom: Math.max(from.bottom, to.bottom) + margin
+  });
+  scrollToCoords(cm, sPos.scrollLeft, sPos.scrollTop);
 }
 
 // Sync the scrollable area and scrollbars, ensure the viewport
 // covers the visible area.
-function setScrollTop(cm, val) {
+function updateScrollTop(cm, val) {
   if (Math.abs(cm.doc.scrollTop - val) < 2) { return }
-  cm.doc.scrollTop = val;
   if (!gecko) { updateDisplaySimple(cm, {top: val}); }
-  if (cm.display.scroller.scrollTop != val) { cm.display.scroller.scrollTop = val; }
-  cm.display.scrollbars.setScrollTop(val);
+  setScrollTop(cm, val, true);
   if (gecko) { updateDisplaySimple(cm); }
   startWorker(cm, 100);
 }
+
+function setScrollTop(cm, val, forceScroll) {
+  val = Math.min(cm.display.scroller.scrollHeight - cm.display.scroller.clientHeight, val);
+  if (cm.display.scroller.scrollTop == val && !forceScroll) { return }
+  cm.doc.scrollTop = val;
+  cm.display.scrollbars.setScrollTop(val);
+  if (cm.display.scroller.scrollTop != val) { cm.display.scroller.scrollTop = val; }
+}
+
 // Sync scroller and scrollbar, ensure the gutter elements are
 // aligned.
-function setScrollLeft(cm, val, isScroller) {
-  if (isScroller ? val == cm.doc.scrollLeft : Math.abs(cm.doc.scrollLeft - val) < 2) { return }
+function setScrollLeft(cm, val, isScroller, forceScroll) {
   val = Math.min(val, cm.display.scroller.scrollWidth - cm.display.scroller.clientWidth);
+  if ((isScroller ? val == cm.doc.scrollLeft : Math.abs(cm.doc.scrollLeft - val) < 2) && !forceScroll) { return }
   cm.doc.scrollLeft = val;
   alignHorizontally(cm);
   if (cm.display.scroller.scrollLeft != val) { cm.display.scroller.scrollLeft = val; }
   cm.display.scrollbars.setScrollLeft(val);
-}
-
-// Since the delta values reported on mouse wheel events are
-// unstandardized between browsers and even browser versions, and
-// generally horribly unpredictable, this code starts by measuring
-// the scroll effect that the first few mouse wheel events have,
-// and, from that, detects the way it can convert deltas to pixel
-// offsets afterwards.
-//
-// The reason we want to know the amount a wheel event will scroll
-// is that it gives us a chance to update the display before the
-// actual scrolling happens, reducing flickering.
-
-var wheelSamples = 0;
-var wheelPixelsPerUnit = null;
-// Fill in a browser-detected starting value on browsers where we
-// know one. These don't have to be accurate -- the result of them
-// being wrong would just be a slight flicker on the first wheel
-// scroll (if it is large enough).
-if (ie) { wheelPixelsPerUnit = -.53; }
-else if (gecko) { wheelPixelsPerUnit = 15; }
-else if (chrome) { wheelPixelsPerUnit = -.7; }
-else if (safari) { wheelPixelsPerUnit = -1/3; }
-
-function wheelEventDelta(e) {
-  var dx = e.wheelDeltaX, dy = e.wheelDeltaY;
-  if (dx == null && e.detail && e.axis == e.HORIZONTAL_AXIS) { dx = e.detail; }
-  if (dy == null && e.detail && e.axis == e.VERTICAL_AXIS) { dy = e.detail; }
-  else if (dy == null) { dy = e.wheelDelta; }
-  return {x: dx, y: dy}
-}
-function wheelEventPixels(e) {
-  var delta = wheelEventDelta(e);
-  delta.x *= wheelPixelsPerUnit;
-  delta.y *= wheelPixelsPerUnit;
-  return delta
-}
-
-function onScrollWheel(cm, e) {
-  var delta = wheelEventDelta(e), dx = delta.x, dy = delta.y;
-
-  var display = cm.display, scroll = display.scroller;
-  // Quit if there's nothing to scroll here
-  var canScrollX = scroll.scrollWidth > scroll.clientWidth;
-  var canScrollY = scroll.scrollHeight > scroll.clientHeight;
-  if (!(dx && canScrollX || dy && canScrollY)) { return }
-
-  // Webkit browsers on OS X abort momentum scrolls when the target
-  // of the scroll event is removed from the scrollable element.
-  // This hack (see related code in patchDisplay) makes sure the
-  // element is kept around.
-  if (dy && mac && webkit) {
-    outer: for (var cur = e.target, view = display.view; cur != scroll; cur = cur.parentNode) {
-      for (var i = 0; i < view.length; i++) {
-        if (view[i].node == cur) {
-          cm.display.currentWheelTarget = cur;
-          break outer
-        }
-      }
-    }
-  }
-
-  // On some browsers, horizontal scrolling will cause redraws to
-  // happen before the gutter has been realigned, causing it to
-  // wriggle around in a most unseemly way. When we have an
-  // estimated pixels/delta value, we just handle horizontal
-  // scrolling entirely here. It'll be slightly off from native, but
-  // better than glitching out.
-  if (dx && !gecko && !presto && wheelPixelsPerUnit != null) {
-    if (dy && canScrollY)
-      { setScrollTop(cm, Math.max(0, Math.min(scroll.scrollTop + dy * wheelPixelsPerUnit, scroll.scrollHeight - scroll.clientHeight))); }
-    setScrollLeft(cm, Math.max(0, Math.min(scroll.scrollLeft + dx * wheelPixelsPerUnit, scroll.scrollWidth - scroll.clientWidth)));
-    // Only prevent default scrolling if vertical scrolling is
-    // actually possible. Otherwise, it causes vertical scroll
-    // jitter on OSX trackpads when deltaX is small and deltaY
-    // is large (issue #3579)
-    if (!dy || (dy && canScrollY))
-      { e_preventDefault(e); }
-    display.wheelStartX = null; // Abort measurement, if in progress
-    return
-  }
-
-  // 'Project' the visible viewport to cover the area that is being
-  // scrolled into view (if we know enough to estimate it).
-  if (dy && wheelPixelsPerUnit != null) {
-    var pixels = dy * wheelPixelsPerUnit;
-    var top = cm.doc.scrollTop, bot = top + display.wrapper.clientHeight;
-    if (pixels < 0) { top = Math.max(0, top + pixels - 50); }
-    else { bot = Math.min(cm.doc.height, bot + pixels + 50); }
-    updateDisplaySimple(cm, {top: top, bottom: bot});
-  }
-
-  if (wheelSamples < 20) {
-    if (display.wheelStartX == null) {
-      display.wheelStartX = scroll.scrollLeft; display.wheelStartY = scroll.scrollTop;
-      display.wheelDX = dx; display.wheelDY = dy;
-      setTimeout(function () {
-        if (display.wheelStartX == null) { return }
-        var movedX = scroll.scrollLeft - display.wheelStartX;
-        var movedY = scroll.scrollTop - display.wheelStartY;
-        var sample = (movedY && display.wheelDY && movedY / display.wheelDY) ||
-          (movedX && display.wheelDX && movedX / display.wheelDX);
-        display.wheelStartX = display.wheelStartY = null;
-        if (!sample) { return }
-        wheelPixelsPerUnit = (wheelPixelsPerUnit * wheelSamples + sample) / (wheelSamples + 1);
-        ++wheelSamples;
-      }, 200);
-    } else {
-      display.wheelDX += dx; display.wheelDY += dy;
-    }
-  }
 }
 
 // SCROLLBARS
@@ -9597,12 +9728,12 @@ NativeScrollbars.prototype.update = function (measure) {
 
 NativeScrollbars.prototype.setScrollLeft = function (pos) {
   if (this.horiz.scrollLeft != pos) { this.horiz.scrollLeft = pos; }
-  if (this.disableHoriz) { this.enableZeroWidthBar(this.horiz, this.disableHoriz); }
+  if (this.disableHoriz) { this.enableZeroWidthBar(this.horiz, this.disableHoriz, "horiz"); }
 };
 
 NativeScrollbars.prototype.setScrollTop = function (pos) {
   if (this.vert.scrollTop != pos) { this.vert.scrollTop = pos; }
-  if (this.disableVert) { this.enableZeroWidthBar(this.vert, this.disableVert); }
+  if (this.disableVert) { this.enableZeroWidthBar(this.vert, this.disableVert, "vert"); }
 };
 
 NativeScrollbars.prototype.zeroWidthHack = function () {
@@ -9613,17 +9744,18 @@ NativeScrollbars.prototype.zeroWidthHack = function () {
   this.disableVert = new Delayed;
 };
 
-NativeScrollbars.prototype.enableZeroWidthBar = function (bar, delay) {
+NativeScrollbars.prototype.enableZeroWidthBar = function (bar, delay, type) {
   bar.style.pointerEvents = "auto";
   function maybeDisable() {
     // To find out whether the scrollbar is still visible, we
     // check whether the element under the pixel in the bottom
-    // left corner of the scrollbar box is the scrollbar box
+    // right corner of the scrollbar box is the scrollbar box
     // itself (when the bar is still visible) or its filler child
     // (when the bar is hidden). If it is still visible, we keep
     // it enabled, if it's hidden, we disable pointer events.
     var box = bar.getBoundingClientRect();
-    var elt$$1 = document.elementFromPoint(box.left + 1, box.bottom - 1);
+    var elt$$1 = type == "vert" ? document.elementFromPoint(box.right - 1, (box.top + box.bottom) / 2)
+        : document.elementFromPoint((box.right + box.left) / 2, box.bottom - 1);
     if (elt$$1 != bar) { bar.style.pointerEvents = "none"; }
     else { delay.set(1000, maybeDisable); }
   }
@@ -9695,137 +9827,10 @@ function initScrollbars(cm) {
     node.setAttribute("cm-not-content", "true");
   }, function (pos, axis) {
     if (axis == "horizontal") { setScrollLeft(cm, pos); }
-    else { setScrollTop(cm, pos); }
+    else { updateScrollTop(cm, pos); }
   }, cm);
   if (cm.display.scrollbars.addClass)
     { addClass(cm.display.wrapper, cm.display.scrollbars.addClass); }
-}
-
-// SCROLLING THINGS INTO VIEW
-
-// If an editor sits on the top or bottom of the window, partially
-// scrolled out of view, this ensures that the cursor is visible.
-function maybeScrollWindow(cm, rect) {
-  if (signalDOMEvent(cm, "scrollCursorIntoView")) { return }
-
-  var display = cm.display, box = display.sizer.getBoundingClientRect(), doScroll = null;
-  if (rect.top + box.top < 0) { doScroll = true; }
-  else if (rect.bottom + box.top > (window.innerHeight || document.documentElement.clientHeight)) { doScroll = false; }
-  if (doScroll != null && !phantom) {
-    var scrollNode = elt("div", "\u200b", null, ("position: absolute;\n                         top: " + (rect.top - display.viewOffset - paddingTop(cm.display)) + "px;\n                         height: " + (rect.bottom - rect.top + scrollGap(cm) + display.barHeight) + "px;\n                         left: " + (rect.left) + "px; width: " + (Math.max(2, rect.right - rect.left)) + "px;"));
-    cm.display.lineSpace.appendChild(scrollNode);
-    scrollNode.scrollIntoView(doScroll);
-    cm.display.lineSpace.removeChild(scrollNode);
-  }
-}
-
-// Scroll a given position into view (immediately), verifying that
-// it actually became visible (as line heights are accurately
-// measured, the position of something may 'drift' during drawing).
-function scrollPosIntoView(cm, pos, end, margin) {
-  if (margin == null) { margin = 0; }
-  var rect;
-  for (var limit = 0; limit < 5; limit++) {
-    var changed = false;
-    var coords = cursorCoords(cm, pos);
-    var endCoords = !end || end == pos ? coords : cursorCoords(cm, end);
-    rect = {left: Math.min(coords.left, endCoords.left),
-            top: Math.min(coords.top, endCoords.top) - margin,
-            right: Math.max(coords.left, endCoords.left),
-            bottom: Math.max(coords.bottom, endCoords.bottom) + margin};
-    var scrollPos = calculateScrollPos(cm, rect);
-    var startTop = cm.doc.scrollTop, startLeft = cm.doc.scrollLeft;
-    if (scrollPos.scrollTop != null) {
-      setScrollTop(cm, scrollPos.scrollTop);
-      if (Math.abs(cm.doc.scrollTop - startTop) > 1) { changed = true; }
-    }
-    if (scrollPos.scrollLeft != null) {
-      setScrollLeft(cm, scrollPos.scrollLeft);
-      if (Math.abs(cm.doc.scrollLeft - startLeft) > 1) { changed = true; }
-    }
-    if (!changed) { break }
-  }
-  return rect
-}
-
-// Scroll a given set of coordinates into view (immediately).
-function scrollIntoView(cm, rect) {
-  var scrollPos = calculateScrollPos(cm, rect);
-  if (scrollPos.scrollTop != null) { setScrollTop(cm, scrollPos.scrollTop); }
-  if (scrollPos.scrollLeft != null) { setScrollLeft(cm, scrollPos.scrollLeft); }
-}
-
-// Calculate a new scroll position needed to scroll the given
-// rectangle into view. Returns an object with scrollTop and
-// scrollLeft properties. When these are undefined, the
-// vertical/horizontal position does not need to be adjusted.
-function calculateScrollPos(cm, rect) {
-  var display = cm.display, snapMargin = textHeight(cm.display);
-  if (rect.top < 0) { rect.top = 0; }
-  var screentop = cm.curOp && cm.curOp.scrollTop != null ? cm.curOp.scrollTop : display.scroller.scrollTop;
-  var screen = displayHeight(cm), result = {};
-  if (rect.bottom - rect.top > screen) { rect.bottom = rect.top + screen; }
-  var docBottom = cm.doc.height + paddingVert(display);
-  var atTop = rect.top < snapMargin, atBottom = rect.bottom > docBottom - snapMargin;
-  if (rect.top < screentop) {
-    result.scrollTop = atTop ? 0 : rect.top;
-  } else if (rect.bottom > screentop + screen) {
-    var newTop = Math.min(rect.top, (atBottom ? docBottom : rect.bottom) - screen);
-    if (newTop != screentop) { result.scrollTop = newTop; }
-  }
-
-  var screenleft = cm.curOp && cm.curOp.scrollLeft != null ? cm.curOp.scrollLeft : display.scroller.scrollLeft;
-  var screenw = displayWidth(cm) - (cm.options.fixedGutter ? display.gutters.offsetWidth : 0);
-  var tooWide = rect.right - rect.left > screenw;
-  if (tooWide) { rect.right = rect.left + screenw; }
-  if (rect.left < 10)
-    { result.scrollLeft = 0; }
-  else if (rect.left < screenleft)
-    { result.scrollLeft = Math.max(0, rect.left - (tooWide ? 0 : 10)); }
-  else if (rect.right > screenw + screenleft - 3)
-    { result.scrollLeft = rect.right + (tooWide ? 0 : 10) - screenw; }
-  return result
-}
-
-// Store a relative adjustment to the scroll position in the current
-// operation (to be applied when the operation finishes).
-function addToScrollPos(cm, left, top) {
-  if (left != null || top != null) { resolveScrollToPos(cm); }
-  if (left != null)
-    { cm.curOp.scrollLeft = (cm.curOp.scrollLeft == null ? cm.doc.scrollLeft : cm.curOp.scrollLeft) + left; }
-  if (top != null)
-    { cm.curOp.scrollTop = (cm.curOp.scrollTop == null ? cm.doc.scrollTop : cm.curOp.scrollTop) + top; }
-}
-
-// Make sure that at the end of the operation the current cursor is
-// shown.
-function ensureCursorVisible(cm) {
-  resolveScrollToPos(cm);
-  var cur = cm.getCursor(), from = cur, to = cur;
-  if (!cm.options.lineWrapping) {
-    from = cur.ch ? Pos(cur.line, cur.ch - 1) : cur;
-    to = Pos(cur.line, cur.ch + 1);
-  }
-  cm.curOp.scrollToPos = {from: from, to: to, margin: cm.options.cursorScrollMargin};
-}
-
-// When an operation has its scrollToPos property set, and another
-// scroll action is applied before the end of the operation, this
-// 'simulates' scrolling that position into view in a cheap way, so
-// that the effect of intermediate scroll commands is not ignored.
-function resolveScrollToPos(cm) {
-  var range$$1 = cm.curOp.scrollToPos;
-  if (range$$1) {
-    cm.curOp.scrollToPos = null;
-    var from = estimateCoords(cm, range$$1.from), to = estimateCoords(cm, range$$1.to);
-    var sPos = calculateScrollPos(cm, {
-      left: Math.min(from.left, to.left),
-      top: Math.min(from.top, to.top) - range$$1.margin,
-      right: Math.max(from.right, to.right),
-      bottom: Math.max(from.bottom, to.bottom) + range$$1.margin
-    });
-    cm.scrollTo(sPos.scrollLeft, sPos.scrollTop);
-  }
 }
 
 // Operations are used to wrap a series of changes to the editor
@@ -9918,7 +9923,7 @@ function endOperation_R2(op) {
   }
 
   if (op.updatedDisplay || op.selectionChanged)
-    { op.preparedSelection = display.input.prepareSelection(op.focus); }
+    { op.preparedSelection = display.input.prepareSelection(); }
 }
 
 function endOperation_W2(op) {
@@ -9931,7 +9936,7 @@ function endOperation_W2(op) {
     cm.display.maxLineChanged = false;
   }
 
-  var takeFocus = op.focus && op.focus == activeElt() && (!document.hasFocus || document.hasFocus());
+  var takeFocus = op.focus && op.focus == activeElt();
   if (op.preparedSelection)
     { cm.display.input.showSelection(op.preparedSelection, takeFocus); }
   if (op.updatedDisplay || op.startHeight != cm.doc.height)
@@ -9956,17 +9961,9 @@ function endOperation_finish(op) {
     { display.wheelStartX = display.wheelStartY = null; }
 
   // Propagate the scroll position to the actual DOM scroller
-  if (op.scrollTop != null && (display.scroller.scrollTop != op.scrollTop || op.forceScroll)) {
-    doc.scrollTop = Math.max(0, Math.min(display.scroller.scrollHeight - display.scroller.clientHeight, op.scrollTop));
-    display.scrollbars.setScrollTop(doc.scrollTop);
-    display.scroller.scrollTop = doc.scrollTop;
-  }
-  if (op.scrollLeft != null && (display.scroller.scrollLeft != op.scrollLeft || op.forceScroll)) {
-    doc.scrollLeft = Math.max(0, Math.min(display.scroller.scrollWidth - display.scroller.clientWidth, op.scrollLeft));
-    display.scrollbars.setScrollLeft(doc.scrollLeft);
-    display.scroller.scrollLeft = doc.scrollLeft;
-    alignHorizontally(cm);
-  }
+  if (op.scrollTop != null) { setScrollTop(cm, op.scrollTop, op.forceScroll); }
+
+  if (op.scrollLeft != null) { setScrollLeft(cm, op.scrollLeft, true, true); }
   // If we need to scroll a specific position into view, do so.
   if (op.scrollToPos) {
     var rect = scrollPosIntoView(cm, clipPos(doc, op.scrollToPos.from),
@@ -10179,22 +10176,23 @@ function countDirtyView(cm) {
 // HIGHLIGHT WORKER
 
 function startWorker(cm, time) {
-  if (cm.doc.mode.startState && cm.doc.frontier < cm.display.viewTo)
+  if (cm.doc.highlightFrontier < cm.display.viewTo)
     { cm.state.highlight.set(time, bind(highlightWorker, cm)); }
 }
 
 function highlightWorker(cm) {
   var doc = cm.doc;
-  if (doc.frontier < doc.first) { doc.frontier = doc.first; }
-  if (doc.frontier >= cm.display.viewTo) { return }
+  if (doc.highlightFrontier >= cm.display.viewTo) { return }
   var end = +new Date + cm.options.workTime;
-  var state = copyState(doc.mode, getStateBefore(cm, doc.frontier));
+  var context = getContextBefore(cm, doc.highlightFrontier);
   var changedLines = [];
 
-  doc.iter(doc.frontier, Math.min(doc.first + doc.size, cm.display.viewTo + 500), function (line) {
-    if (doc.frontier >= cm.display.viewFrom) { // Visible
-      var oldStyles = line.styles, tooLong = line.text.length > cm.options.maxHighlightLength;
-      var highlighted = highlightLine(cm, line, tooLong ? copyState(doc.mode, state) : state, true);
+  doc.iter(context.line, Math.min(doc.first + doc.size, cm.display.viewTo + 500), function (line) {
+    if (context.line >= cm.display.viewFrom) { // Visible
+      var oldStyles = line.styles;
+      var resetState = line.text.length > cm.options.maxHighlightLength ? copyState(doc.mode, context.state) : null;
+      var highlighted = highlightLine(cm, line, context, true);
+      if (resetState) { context.state = resetState; }
       line.styles = highlighted.styles;
       var oldCls = line.styleClasses, newCls = highlighted.classes;
       if (newCls) { line.styleClasses = newCls; }
@@ -10202,19 +10200,22 @@ function highlightWorker(cm) {
       var ischange = !oldStyles || oldStyles.length != line.styles.length ||
         oldCls != newCls && (!oldCls || !newCls || oldCls.bgClass != newCls.bgClass || oldCls.textClass != newCls.textClass);
       for (var i = 0; !ischange && i < oldStyles.length; ++i) { ischange = oldStyles[i] != line.styles[i]; }
-      if (ischange) { changedLines.push(doc.frontier); }
-      line.stateAfter = tooLong ? state : copyState(doc.mode, state);
+      if (ischange) { changedLines.push(context.line); }
+      line.stateAfter = context.save();
+      context.nextLine();
     } else {
       if (line.text.length <= cm.options.maxHighlightLength)
-        { processLine(cm, line.text, state); }
-      line.stateAfter = doc.frontier % 5 == 0 ? copyState(doc.mode, state) : null;
+        { processLine(cm, line.text, context); }
+      line.stateAfter = context.line % 5 == 0 ? context.save() : null;
+      context.nextLine();
     }
-    ++doc.frontier;
     if (+new Date > end) {
       startWorker(cm, cm.options.workDelay);
       return true
     }
   });
+  doc.highlightFrontier = context.line;
+  doc.modeFrontier = Math.max(doc.modeFrontier, context.line);
   if (changedLines.length) { runInOp(cm, function () {
     for (var i = 0; i < changedLines.length; i++)
       { regLineChange(cm, changedLines[i], "text"); }
@@ -10257,6 +10258,36 @@ function maybeClipScrollbars(cm) {
     display.sizer.style.marginBottom = -display.nativeBarWidth + "px";
     display.sizer.style.borderRightWidth = scrollGap(cm) + "px";
     display.scrollbarsClipped = true;
+  }
+}
+
+function selectionSnapshot(cm) {
+  if (cm.hasFocus()) { return null }
+  var active = activeElt();
+  if (!active || !contains(cm.display.lineDiv, active)) { return null }
+  var result = {activeElt: active};
+  if (window.getSelection) {
+    var sel = window.getSelection();
+    if (sel.anchorNode && sel.extend && contains(cm.display.lineDiv, sel.anchorNode)) {
+      result.anchorNode = sel.anchorNode;
+      result.anchorOffset = sel.anchorOffset;
+      result.focusNode = sel.focusNode;
+      result.focusOffset = sel.focusOffset;
+    }
+  }
+  return result
+}
+
+function restoreSelection(snapshot) {
+  if (!snapshot || !snapshot.activeElt || snapshot.activeElt == activeElt()) { return }
+  snapshot.activeElt.focus();
+  if (snapshot.anchorNode && contains(document.body, snapshot.anchorNode) && contains(document.body, snapshot.focusNode)) {
+    var sel = window.getSelection(), range$$1 = document.createRange();
+    range$$1.setEnd(snapshot.anchorNode, snapshot.anchorOffset);
+    range$$1.collapse(false);
+    sel.removeAllRanges();
+    sel.addRange(range$$1);
+    sel.extend(snapshot.focusNode, snapshot.focusOffset);
   }
 }
 
@@ -10309,14 +10340,14 @@ function updateDisplayIfNeeded(cm, update) {
 
   // For big changes, we hide the enclosing element during the
   // update, since that speeds up the operations on most browsers.
-  var focused = activeElt();
+  var selSnapshot = selectionSnapshot(cm);
   if (toUpdate > 4) { display.lineDiv.style.display = "none"; }
   patchDisplay(cm, display.updateLineNumbers, update.dims);
   if (toUpdate > 4) { display.lineDiv.style.display = ""; }
   display.renderedView = display.view;
   // There might have been a widget with a focused element that got
   // hidden or updated, if so re-focus it.
-  if (focused && activeElt() != focused && focused.offsetHeight) { focused.focus(); }
+  restoreSelection(selSnapshot);
 
   // Prevent selection and cursors from interfering with the scroll
   // width and height.
@@ -10355,6 +10386,7 @@ function postUpdateDisplay(cm, update) {
     updateSelection(cm);
     updateScrollbars(cm, barMeasure);
     setDocumentHeight(cm, barMeasure);
+    update.force = false;
   }
 
   update.signal(cm, "update", cm);
@@ -10461,6 +10493,117 @@ function setGuttersForLineNumbers(options) {
   } else if (found > -1 && !options.lineNumbers) {
     options.gutters = options.gutters.slice(0);
     options.gutters.splice(found, 1);
+  }
+}
+
+// Since the delta values reported on mouse wheel events are
+// unstandardized between browsers and even browser versions, and
+// generally horribly unpredictable, this code starts by measuring
+// the scroll effect that the first few mouse wheel events have,
+// and, from that, detects the way it can convert deltas to pixel
+// offsets afterwards.
+//
+// The reason we want to know the amount a wheel event will scroll
+// is that it gives us a chance to update the display before the
+// actual scrolling happens, reducing flickering.
+
+var wheelSamples = 0;
+var wheelPixelsPerUnit = null;
+// Fill in a browser-detected starting value on browsers where we
+// know one. These don't have to be accurate -- the result of them
+// being wrong would just be a slight flicker on the first wheel
+// scroll (if it is large enough).
+if (ie) { wheelPixelsPerUnit = -.53; }
+else if (gecko) { wheelPixelsPerUnit = 15; }
+else if (chrome) { wheelPixelsPerUnit = -.7; }
+else if (safari) { wheelPixelsPerUnit = -1/3; }
+
+function wheelEventDelta(e) {
+  var dx = e.wheelDeltaX, dy = e.wheelDeltaY;
+  if (dx == null && e.detail && e.axis == e.HORIZONTAL_AXIS) { dx = e.detail; }
+  if (dy == null && e.detail && e.axis == e.VERTICAL_AXIS) { dy = e.detail; }
+  else if (dy == null) { dy = e.wheelDelta; }
+  return {x: dx, y: dy}
+}
+function wheelEventPixels(e) {
+  var delta = wheelEventDelta(e);
+  delta.x *= wheelPixelsPerUnit;
+  delta.y *= wheelPixelsPerUnit;
+  return delta
+}
+
+function onScrollWheel(cm, e) {
+  var delta = wheelEventDelta(e), dx = delta.x, dy = delta.y;
+
+  var display = cm.display, scroll = display.scroller;
+  // Quit if there's nothing to scroll here
+  var canScrollX = scroll.scrollWidth > scroll.clientWidth;
+  var canScrollY = scroll.scrollHeight > scroll.clientHeight;
+  if (!(dx && canScrollX || dy && canScrollY)) { return }
+
+  // Webkit browsers on OS X abort momentum scrolls when the target
+  // of the scroll event is removed from the scrollable element.
+  // This hack (see related code in patchDisplay) makes sure the
+  // element is kept around.
+  if (dy && mac && webkit) {
+    outer: for (var cur = e.target, view = display.view; cur != scroll; cur = cur.parentNode) {
+      for (var i = 0; i < view.length; i++) {
+        if (view[i].node == cur) {
+          cm.display.currentWheelTarget = cur;
+          break outer
+        }
+      }
+    }
+  }
+
+  // On some browsers, horizontal scrolling will cause redraws to
+  // happen before the gutter has been realigned, causing it to
+  // wriggle around in a most unseemly way. When we have an
+  // estimated pixels/delta value, we just handle horizontal
+  // scrolling entirely here. It'll be slightly off from native, but
+  // better than glitching out.
+  if (dx && !gecko && !presto && wheelPixelsPerUnit != null) {
+    if (dy && canScrollY)
+      { updateScrollTop(cm, Math.max(0, scroll.scrollTop + dy * wheelPixelsPerUnit)); }
+    setScrollLeft(cm, Math.max(0, scroll.scrollLeft + dx * wheelPixelsPerUnit));
+    // Only prevent default scrolling if vertical scrolling is
+    // actually possible. Otherwise, it causes vertical scroll
+    // jitter on OSX trackpads when deltaX is small and deltaY
+    // is large (issue #3579)
+    if (!dy || (dy && canScrollY))
+      { e_preventDefault(e); }
+    display.wheelStartX = null; // Abort measurement, if in progress
+    return
+  }
+
+  // 'Project' the visible viewport to cover the area that is being
+  // scrolled into view (if we know enough to estimate it).
+  if (dy && wheelPixelsPerUnit != null) {
+    var pixels = dy * wheelPixelsPerUnit;
+    var top = cm.doc.scrollTop, bot = top + display.wrapper.clientHeight;
+    if (pixels < 0) { top = Math.max(0, top + pixels - 50); }
+    else { bot = Math.min(cm.doc.height, bot + pixels + 50); }
+    updateDisplaySimple(cm, {top: top, bottom: bot});
+  }
+
+  if (wheelSamples < 20) {
+    if (display.wheelStartX == null) {
+      display.wheelStartX = scroll.scrollLeft; display.wheelStartY = scroll.scrollTop;
+      display.wheelDX = dx; display.wheelDY = dy;
+      setTimeout(function () {
+        if (display.wheelStartX == null) { return }
+        var movedX = scroll.scrollLeft - display.wheelStartX;
+        var movedY = scroll.scrollTop - display.wheelStartY;
+        var sample = (movedY && display.wheelDY && movedY / display.wheelDY) ||
+          (movedX && display.wheelDX && movedX / display.wheelDX);
+        display.wheelStartX = display.wheelStartY = null;
+        if (!sample) { return }
+        wheelPixelsPerUnit = (wheelPixelsPerUnit * wheelSamples + sample) / (wheelSamples + 1);
+        ++wheelSamples;
+      }, 200);
+    } else {
+      display.wheelDX += dx; display.wheelDY += dy;
+    }
   }
 }
 
@@ -10617,7 +10760,7 @@ function resetModeState(cm) {
     if (line.stateAfter) { line.stateAfter = null; }
     if (line.styles) { line.styles = null; }
   });
-  cm.doc.frontier = cm.doc.first;
+  cm.doc.modeFrontier = cm.doc.highlightFrontier = cm.doc.first;
   startWorker(cm, 100);
   cm.state.modeGen++;
   if (cm.curOp) { regChange(cm); }
@@ -10951,8 +11094,8 @@ function copyHistoryArray(events, newGroup, instantiateSel) {
 // include a given position (and optionally a second position).
 // Otherwise, simply returns the range between the given positions.
 // Used for cursor motion and such.
-function extendRange(doc, range, head, other) {
-  if (doc.cm && doc.cm.display.shift || doc.extend) {
+function extendRange(range, head, other, extend) {
+  if (extend) {
     var anchor = range.anchor;
     if (other) {
       var posBefore = cmp(head, anchor) < 0;
@@ -10970,16 +11113,18 @@ function extendRange(doc, range, head, other) {
 }
 
 // Extend the primary selection range, discard the rest.
-function extendSelection(doc, head, other, options) {
-  setSelection(doc, new Selection([extendRange(doc, doc.sel.primary(), head, other)], 0), options);
+function extendSelection(doc, head, other, options, extend) {
+  if (extend == null) { extend = doc.cm && (doc.cm.display.shift || doc.extend); }
+  setSelection(doc, new Selection([extendRange(doc.sel.primary(), head, other, extend)], 0), options);
 }
 
 // Extend all selections (pos is an array of selections with length
 // equal the number of selections)
 function extendSelections(doc, heads, options) {
   var out = [];
+  var extend = doc.cm && (doc.cm.display.shift || doc.extend);
   for (var i = 0; i < doc.sel.ranges.length; i++)
-    { out[i] = extendRange(doc, doc.sel.ranges[i], heads[i], null); }
+    { out[i] = extendRange(doc.sel.ranges[i], heads[i], null, extend); }
   var newSel = normalizeSelection(out, doc.sel.primIndex);
   setSelection(doc, newSel, options);
 }
@@ -11060,7 +11205,7 @@ function setSelectionInner(doc, sel) {
 // Verify that the selection does not partially select any atomic
 // marked ranges.
 function reCheckSelection(doc) {
-  setSelectionInner(doc, skipAtomicInSelection(doc, doc.sel, null, false), sel_dontScroll);
+  setSelectionInner(doc, skipAtomicInSelection(doc, doc.sel, null, false));
 }
 
 // Return a selection that does not partially select any atomic
@@ -11185,7 +11330,7 @@ function makeChange(doc, change, ignoreReadOnly) {
   var split = sawReadOnlySpans && !ignoreReadOnly && removeReadOnlyRanges(doc, change.from, change.to);
   if (split) {
     for (var i = split.length - 1; i >= 0; --i)
-      { makeChangeInner(doc, {from: split[i].from, to: split[i].to, text: i ? [""] : change.text}); }
+      { makeChangeInner(doc, {from: split[i].from, to: split[i].to, text: i ? [""] : change.text, origin: change.origin}); }
   } else {
     makeChangeInner(doc, change);
   }
@@ -11363,8 +11508,7 @@ function makeChangeSingleDocInEditor(cm, change, spans) {
     if (recomputeMaxLength) { cm.curOp.updateMaxLine = true; }
   }
 
-  // Adjust frontier, schedule worker
-  doc.frontier = Math.min(doc.frontier, from.line);
+  retreatFrontier(doc, from.line);
   startWorker(cm, 400);
 
   var lendiff = change.text.length - (to.line - from.line) - 1;
@@ -11392,7 +11536,8 @@ function makeChangeSingleDocInEditor(cm, change, spans) {
 
 function replaceRange(doc, code, from, to, origin) {
   if (!to) { to = from; }
-  if (cmp(to, from) < 0) { var tmp = to; to = from; from = tmp; }
+  if (cmp(to, from) < 0) { var assign;
+    (assign = [to, from], from = assign[0], to = assign[1], assign); }
   if (typeof code == "string") { code = doc.splitLines(code); }
   makeChange(doc, {from: from, to: to, text: code, origin: origin});
 }
@@ -11474,7 +11619,7 @@ function changeLine(doc, handle, changeType, op) {
 //
 // See also http://marijnhaverbeke.nl/blog/codemirror-line-tree.html
 
-var LeafChunk = function(lines) {
+function LeafChunk(lines) {
   var this$1 = this;
 
   this.lines = lines;
@@ -11485,47 +11630,49 @@ var LeafChunk = function(lines) {
     height += lines[i].height;
   }
   this.height = height;
-};
+}
 
-LeafChunk.prototype.chunkSize = function () { return this.lines.length };
+LeafChunk.prototype = {
+  chunkSize: function chunkSize() { return this.lines.length },
 
-// Remove the n lines at offset 'at'.
-LeafChunk.prototype.removeInner = function (at, n) {
+  // Remove the n lines at offset 'at'.
+  removeInner: function removeInner(at, n) {
     var this$1 = this;
 
-  for (var i = at, e = at + n; i < e; ++i) {
-    var line = this$1.lines[i];
-    this$1.height -= line.height;
-    cleanUpLine(line);
-    signalLater(line, "delete");
+    for (var i = at, e = at + n; i < e; ++i) {
+      var line = this$1.lines[i];
+      this$1.height -= line.height;
+      cleanUpLine(line);
+      signalLater(line, "delete");
+    }
+    this.lines.splice(at, n);
+  },
+
+  // Helper used to collapse a small branch into a single leaf.
+  collapse: function collapse(lines) {
+    lines.push.apply(lines, this.lines);
+  },
+
+  // Insert the given array of lines at offset 'at', count them as
+  // having the given height.
+  insertInner: function insertInner(at, lines, height) {
+    var this$1 = this;
+
+    this.height += height;
+    this.lines = this.lines.slice(0, at).concat(lines).concat(this.lines.slice(at));
+    for (var i = 0; i < lines.length; ++i) { lines[i].parent = this$1; }
+  },
+
+  // Used to iterate over a part of the tree.
+  iterN: function iterN(at, n, op) {
+    var this$1 = this;
+
+    for (var e = at + n; at < e; ++at)
+      { if (op(this$1.lines[at])) { return true } }
   }
-  this.lines.splice(at, n);
 };
 
-// Helper used to collapse a small branch into a single leaf.
-LeafChunk.prototype.collapse = function (lines) {
-  lines.push.apply(lines, this.lines);
-};
-
-// Insert the given array of lines at offset 'at', count them as
-// having the given height.
-LeafChunk.prototype.insertInner = function (at, lines, height) {
-    var this$1 = this;
-
-  this.height += height;
-  this.lines = this.lines.slice(0, at).concat(lines).concat(this.lines.slice(at));
-  for (var i = 0; i < lines.length; ++i) { lines[i].parent = this$1; }
-};
-
-// Used to iterate over a part of the tree.
-LeafChunk.prototype.iterN = function (at, n, op) {
-    var this$1 = this;
-
-  for (var e = at + n; at < e; ++at)
-    { if (op(this$1.lines[at])) { return true } }
-};
-
-var BranchChunk = function(children) {
+function BranchChunk(children) {
   var this$1 = this;
 
   this.children = children;
@@ -11538,104 +11685,106 @@ var BranchChunk = function(children) {
   this.size = size;
   this.height = height;
   this.parent = null;
-};
+}
 
-BranchChunk.prototype.chunkSize = function () { return this.size };
+BranchChunk.prototype = {
+  chunkSize: function chunkSize() { return this.size },
 
-BranchChunk.prototype.removeInner = function (at, n) {
+  removeInner: function removeInner(at, n) {
     var this$1 = this;
 
-  this.size -= n;
-  for (var i = 0; i < this.children.length; ++i) {
-    var child = this$1.children[i], sz = child.chunkSize();
-    if (at < sz) {
-      var rm = Math.min(n, sz - at), oldHeight = child.height;
-      child.removeInner(at, rm);
-      this$1.height -= oldHeight - child.height;
-      if (sz == rm) { this$1.children.splice(i--, 1); child.parent = null; }
-      if ((n -= rm) == 0) { break }
-      at = 0;
-    } else { at -= sz; }
-  }
-  // If the result is smaller than 25 lines, ensure that it is a
-  // single leaf node.
-  if (this.size - n < 25 &&
-      (this.children.length > 1 || !(this.children[0] instanceof LeafChunk))) {
-    var lines = [];
-    this.collapse(lines);
-    this.children = [new LeafChunk(lines)];
-    this.children[0].parent = this;
-  }
-};
+    this.size -= n;
+    for (var i = 0; i < this.children.length; ++i) {
+      var child = this$1.children[i], sz = child.chunkSize();
+      if (at < sz) {
+        var rm = Math.min(n, sz - at), oldHeight = child.height;
+        child.removeInner(at, rm);
+        this$1.height -= oldHeight - child.height;
+        if (sz == rm) { this$1.children.splice(i--, 1); child.parent = null; }
+        if ((n -= rm) == 0) { break }
+        at = 0;
+      } else { at -= sz; }
+    }
+    // If the result is smaller than 25 lines, ensure that it is a
+    // single leaf node.
+    if (this.size - n < 25 &&
+        (this.children.length > 1 || !(this.children[0] instanceof LeafChunk))) {
+      var lines = [];
+      this.collapse(lines);
+      this.children = [new LeafChunk(lines)];
+      this.children[0].parent = this;
+    }
+  },
 
-BranchChunk.prototype.collapse = function (lines) {
+  collapse: function collapse(lines) {
     var this$1 = this;
 
-  for (var i = 0; i < this.children.length; ++i) { this$1.children[i].collapse(lines); }
-};
+    for (var i = 0; i < this.children.length; ++i) { this$1.children[i].collapse(lines); }
+  },
 
-BranchChunk.prototype.insertInner = function (at, lines, height) {
+  insertInner: function insertInner(at, lines, height) {
     var this$1 = this;
 
-  this.size += lines.length;
-  this.height += height;
-  for (var i = 0; i < this.children.length; ++i) {
-    var child = this$1.children[i], sz = child.chunkSize();
-    if (at <= sz) {
-      child.insertInner(at, lines, height);
-      if (child.lines && child.lines.length > 50) {
-        // To avoid memory thrashing when child.lines is huge (e.g. first view of a large file), it's never spliced.
-        // Instead, small slices are taken. They're taken in order because sequential memory accesses are fastest.
-        var remaining = child.lines.length % 25 + 25;
-        for (var pos = remaining; pos < child.lines.length;) {
-          var leaf = new LeafChunk(child.lines.slice(pos, pos += 25));
-          child.height -= leaf.height;
-          this$1.children.splice(++i, 0, leaf);
-          leaf.parent = this$1;
+    this.size += lines.length;
+    this.height += height;
+    for (var i = 0; i < this.children.length; ++i) {
+      var child = this$1.children[i], sz = child.chunkSize();
+      if (at <= sz) {
+        child.insertInner(at, lines, height);
+        if (child.lines && child.lines.length > 50) {
+          // To avoid memory thrashing when child.lines is huge (e.g. first view of a large file), it's never spliced.
+          // Instead, small slices are taken. They're taken in order because sequential memory accesses are fastest.
+          var remaining = child.lines.length % 25 + 25;
+          for (var pos = remaining; pos < child.lines.length;) {
+            var leaf = new LeafChunk(child.lines.slice(pos, pos += 25));
+            child.height -= leaf.height;
+            this$1.children.splice(++i, 0, leaf);
+            leaf.parent = this$1;
+          }
+          child.lines = child.lines.slice(0, remaining);
+          this$1.maybeSpill();
         }
-        child.lines = child.lines.slice(0, remaining);
-        this$1.maybeSpill();
+        break
       }
-      break
+      at -= sz;
     }
-    at -= sz;
-  }
-};
+  },
 
-// When a node has grown, check whether it should be split.
-BranchChunk.prototype.maybeSpill = function () {
-  if (this.children.length <= 10) { return }
-  var me = this;
-  do {
-    var spilled = me.children.splice(me.children.length - 5, 5);
-    var sibling = new BranchChunk(spilled);
-    if (!me.parent) { // Become the parent node
-      var copy = new BranchChunk(me.children);
-      copy.parent = me;
-      me.children = [copy, sibling];
-      me = copy;
-   } else {
-      me.size -= sibling.size;
-      me.height -= sibling.height;
-      var myIndex = indexOf(me.parent.children, me);
-      me.parent.children.splice(myIndex + 1, 0, sibling);
-    }
-    sibling.parent = me.parent;
-  } while (me.children.length > 10)
-  me.parent.maybeSpill();
-};
+  // When a node has grown, check whether it should be split.
+  maybeSpill: function maybeSpill() {
+    if (this.children.length <= 10) { return }
+    var me = this;
+    do {
+      var spilled = me.children.splice(me.children.length - 5, 5);
+      var sibling = new BranchChunk(spilled);
+      if (!me.parent) { // Become the parent node
+        var copy = new BranchChunk(me.children);
+        copy.parent = me;
+        me.children = [copy, sibling];
+        me = copy;
+     } else {
+        me.size -= sibling.size;
+        me.height -= sibling.height;
+        var myIndex = indexOf(me.parent.children, me);
+        me.parent.children.splice(myIndex + 1, 0, sibling);
+      }
+      sibling.parent = me.parent;
+    } while (me.children.length > 10)
+    me.parent.maybeSpill();
+  },
 
-BranchChunk.prototype.iterN = function (at, n, op) {
+  iterN: function iterN(at, n, op) {
     var this$1 = this;
 
-  for (var i = 0; i < this.children.length; ++i) {
-    var child = this$1.children[i], sz = child.chunkSize();
-    if (at < sz) {
-      var used = Math.min(n, sz - at);
-      if (child.iterN(at, used, op)) { return true }
-      if ((n -= used) == 0) { break }
-      at = 0;
-    } else { at -= sz; }
+    for (var i = 0; i < this.children.length; ++i) {
+      var child = this$1.children[i], sz = child.chunkSize();
+      if (at < sz) {
+        var used = Math.min(n, sz - at);
+        if (child.iterN(at, used, op)) { return true }
+        if ((n -= used) == 0) { break }
+        at = 0;
+      } else { at -= sz; }
+    }
   }
 };
 
@@ -11688,7 +11837,7 @@ eventMixin(LineWidget);
 
 function adjustScrollWhenAboveVisible(cm, line, diff) {
   if (heightAtLine(line) < ((cm.curOp && cm.curOp.scrollTop) || cm.doc.scrollTop))
-    { addToScrollPos(cm, null, diff); }
+    { addToScrollTop(cm, diff); }
 }
 
 function addLineWidget(doc, handle, node, options) {
@@ -11703,7 +11852,7 @@ function addLineWidget(doc, handle, node, options) {
     if (cm && !lineIsHidden(doc, line)) {
       var aboveVisible = heightAtLine(line) < doc.scrollTop;
       updateLineHeight(line, line.height + widgetHeight(widget));
-      if (aboveVisible) { addToScrollPos(cm, null, widget.height); }
+      if (aboveVisible) { addToScrollTop(cm, widget.height); }
       cm.curOp.forceUpdate = true;
     }
     return true
@@ -12005,7 +12154,7 @@ var Doc = function(text, mode, firstLine, lineSep, direction) {
   this.scrollTop = this.scrollLeft = 0;
   this.cantEdit = false;
   this.cleanGeneration = 1;
-  this.frontier = firstLine;
+  this.modeFrontier = this.highlightFrontier = firstLine;
   var start = Pos(firstLine, 0);
   this.sel = simpleSelection(start);
   this.history = new History(null);
@@ -12051,7 +12200,8 @@ Doc.prototype = createObj(BranchChunk.prototype, {
     var top = Pos(this.first, 0), last = this.first + this.size - 1;
     makeChange(this, {from: top, to: Pos(last, getLine(this, last).text.length),
                       text: this.splitLines(code), origin: "setValue", full: true}, true);
-    setSelection(this, simpleSelection(top));
+    if (this.cm) { scrollToCoords(this.cm, 0, 0); }
+    setSelection(this, simpleSelection(top), sel_dontScroll);
   }),
   replaceRange: function(code, from, to, origin) {
     from = clipPos(this, from);
@@ -12527,8 +12677,8 @@ function clearDragCursor(cm) {
 // garbage collected.
 
 function forEachCodeMirror(f) {
-  if (!document.body.getElementsByClassName) { return }
-  var byClass = document.body.getElementsByClassName("CodeMirror");
+  if (!document.getElementsByClassName) { return }
+  var byClass = document.getElementsByClassName("CodeMirror");
   for (var i = 0; i < byClass.length; i++) {
     var cm = byClass[i].CodeMirror;
     if (cm) { f(cm); }
@@ -12702,16 +12852,21 @@ function isModifierKey(value) {
   return name == "Ctrl" || name == "Alt" || name == "Shift" || name == "Mod"
 }
 
-// Look up the name of a key as indicated by an event object.
-function keyName(event, noShift) {
-  if (presto && event.keyCode == 34 && event["char"]) { return false }
-  var base = keyNames[event.keyCode], name = base;
-  if (name == null || event.altGraphKey) { return false }
+function addModifierNames(name, event, noShift) {
+  var base = name;
   if (event.altKey && base != "Alt") { name = "Alt-" + name; }
   if ((flipCtrlCmd ? event.metaKey : event.ctrlKey) && base != "Ctrl") { name = "Ctrl-" + name; }
   if ((flipCtrlCmd ? event.ctrlKey : event.metaKey) && base != "Cmd") { name = "Cmd-" + name; }
   if (!noShift && event.shiftKey && base != "Shift") { name = "Shift-" + name; }
   return name
+}
+
+// Look up the name of a key as indicated by an event object.
+function keyName(event, noShift) {
+  if (presto && event.keyCode == 34 && event["char"]) { return false }
+  var name = keyNames[event.keyCode];
+  if (name == null || event.altGraphKey) { return false }
+  return addModifierNames(name, event, noShift)
 }
 
 function getKeyMap(val) {
@@ -12741,6 +12896,112 @@ function deleteNearSelection(cm, compute) {
       { replaceRange(cm.doc, "", kill[i].from, kill[i].to, "+delete"); }
     ensureCursorVisible(cm);
   });
+}
+
+function moveCharLogically(line, ch, dir) {
+  var target = skipExtendingChars(line.text, ch + dir, dir);
+  return target < 0 || target > line.text.length ? null : target
+}
+
+function moveLogically(line, start, dir) {
+  var ch = moveCharLogically(line, start.ch, dir);
+  return ch == null ? null : new Pos(start.line, ch, dir < 0 ? "after" : "before")
+}
+
+function endOfLine(visually, cm, lineObj, lineNo, dir) {
+  if (visually) {
+    var order = getOrder(lineObj, cm.doc.direction);
+    if (order) {
+      var part = dir < 0 ? lst(order) : order[0];
+      var moveInStorageOrder = (dir < 0) == (part.level == 1);
+      var sticky = moveInStorageOrder ? "after" : "before";
+      var ch;
+      // With a wrapped rtl chunk (possibly spanning multiple bidi parts),
+      // it could be that the last bidi part is not on the last visual line,
+      // since visual lines contain content order-consecutive chunks.
+      // Thus, in rtl, we are looking for the first (content-order) character
+      // in the rtl chunk that is on the last line (that is, the same line
+      // as the last (content-order) character).
+      if (part.level > 0) {
+        var prep = prepareMeasureForLine(cm, lineObj);
+        ch = dir < 0 ? lineObj.text.length - 1 : 0;
+        var targetTop = measureCharPrepared(cm, prep, ch).top;
+        ch = findFirst(function (ch) { return measureCharPrepared(cm, prep, ch).top == targetTop; }, (dir < 0) == (part.level == 1) ? part.from : part.to - 1, ch);
+        if (sticky == "before") { ch = moveCharLogically(lineObj, ch, 1); }
+      } else { ch = dir < 0 ? part.to : part.from; }
+      return new Pos(lineNo, ch, sticky)
+    }
+  }
+  return new Pos(lineNo, dir < 0 ? lineObj.text.length : 0, dir < 0 ? "before" : "after")
+}
+
+function moveVisually(cm, line, start, dir) {
+  var bidi = getOrder(line, cm.doc.direction);
+  if (!bidi) { return moveLogically(line, start, dir) }
+  if (start.ch >= line.text.length) {
+    start.ch = line.text.length;
+    start.sticky = "before";
+  } else if (start.ch <= 0) {
+    start.ch = 0;
+    start.sticky = "after";
+  }
+  var partPos = getBidiPartAt(bidi, start.ch, start.sticky), part = bidi[partPos];
+  if (cm.doc.direction == "ltr" && part.level % 2 == 0 && (dir > 0 ? part.to > start.ch : part.from < start.ch)) {
+    // Case 1: We move within an ltr part in an ltr editor. Even with wrapped lines,
+    // nothing interesting happens.
+    return moveLogically(line, start, dir)
+  }
+
+  var mv = function (pos, dir) { return moveCharLogically(line, pos instanceof Pos ? pos.ch : pos, dir); };
+  var prep;
+  var getWrappedLineExtent = function (ch) {
+    if (!cm.options.lineWrapping) { return {begin: 0, end: line.text.length} }
+    prep = prep || prepareMeasureForLine(cm, line);
+    return wrappedLineExtentChar(cm, line, prep, ch)
+  };
+  var wrappedLineExtent = getWrappedLineExtent(start.sticky == "before" ? mv(start, -1) : start.ch);
+
+  if (cm.doc.direction == "rtl" || part.level == 1) {
+    var moveInStorageOrder = (part.level == 1) == (dir < 0);
+    var ch = mv(start, moveInStorageOrder ? 1 : -1);
+    if (ch != null && (!moveInStorageOrder ? ch >= part.from && ch >= wrappedLineExtent.begin : ch <= part.to && ch <= wrappedLineExtent.end)) {
+      // Case 2: We move within an rtl part or in an rtl editor on the same visual line
+      var sticky = moveInStorageOrder ? "before" : "after";
+      return new Pos(start.line, ch, sticky)
+    }
+  }
+
+  // Case 3: Could not move within this bidi part in this visual line, so leave
+  // the current bidi part
+
+  var searchInVisualLine = function (partPos, dir, wrappedLineExtent) {
+    var getRes = function (ch, moveInStorageOrder) { return moveInStorageOrder
+      ? new Pos(start.line, mv(ch, 1), "before")
+      : new Pos(start.line, ch, "after"); };
+
+    for (; partPos >= 0 && partPos < bidi.length; partPos += dir) {
+      var part = bidi[partPos];
+      var moveInStorageOrder = (dir > 0) == (part.level != 1);
+      var ch = moveInStorageOrder ? wrappedLineExtent.begin : mv(wrappedLineExtent.end, -1);
+      if (part.from <= ch && ch < part.to) { return getRes(ch, moveInStorageOrder) }
+      ch = moveInStorageOrder ? part.from : mv(part.to, -1);
+      if (wrappedLineExtent.begin <= ch && ch < wrappedLineExtent.end) { return getRes(ch, moveInStorageOrder) }
+    }
+  };
+
+  // Case 3a: Look for other bidi parts on the same visual line
+  var res = searchInVisualLine(partPos + dir, dir, wrappedLineExtent);
+  if (res) { return res }
+
+  // Case 3b: Look for other bidi parts on the next visual line
+  var nextCh = dir > 0 ? wrappedLineExtent.end : mv(wrappedLineExtent.begin, -1);
+  if (nextCh != null && !(dir > 0 && nextCh == line.text.length)) {
+    res = searchInVisualLine(dir > 0 ? 0 : bidi.length - 1, dir, getWrappedLineExtent(nextCh));
+    if (res) { return res }
+  }
+
+  // Case 4: Nowhere to move
+  return null
 }
 
 // Commands are parameter-less actions that can be performed on an
@@ -12792,15 +13053,15 @@ var commands = {
     {origin: "+move", bias: -1}
   ); },
   goLineRight: function (cm) { return cm.extendSelectionsBy(function (range) {
-    var top = cm.charCoords(range.head, "div").top + 5;
+    var top = cm.cursorCoords(range.head, "div").top + 5;
     return cm.coordsChar({left: cm.display.lineDiv.offsetWidth + 100, top: top}, "div")
   }, sel_move); },
   goLineLeft: function (cm) { return cm.extendSelectionsBy(function (range) {
-    var top = cm.charCoords(range.head, "div").top + 5;
+    var top = cm.cursorCoords(range.head, "div").top + 5;
     return cm.coordsChar({left: 0, top: top}, "div")
   }, sel_move); },
   goLineLeftSmart: function (cm) { return cm.extendSelectionsBy(function (range) {
-    var top = cm.charCoords(range.head, "div").top + 5;
+    var top = cm.cursorCoords(range.head, "div").top + 5;
     var pos = cm.coordsChar({left: 0, top: top}, "div");
     if (pos.ch < cm.getLine(pos.line).search(/\S/)) { return lineStartSmart(cm, range.head) }
     return pos
@@ -12940,6 +13201,9 @@ function lookupKeyForEditor(cm, name, handle) {
     || lookupKey(name, cm.options.keyMap, handle, cm)
 }
 
+// Note that, despite the name, this function is also used to check
+// for bound mouse clicks.
+
 var stopSeq = new Delayed;
 function dispatchKey(cm, name, e, handle) {
   var seq = cm.state.keySeq;
@@ -13051,6 +13315,37 @@ function onKeyPress(e) {
   cm.display.input.onKeyPress(e);
 }
 
+var DOUBLECLICK_DELAY = 400;
+
+var PastClick = function(time, pos, button) {
+  this.time = time;
+  this.pos = pos;
+  this.button = button;
+};
+
+PastClick.prototype.compare = function (time, pos, button) {
+  return this.time + DOUBLECLICK_DELAY > time &&
+    cmp(pos, this.pos) == 0 && button == this.button
+};
+
+var lastClick;
+var lastDoubleClick;
+function clickRepeat(pos, button) {
+  var now = +new Date;
+  if (lastDoubleClick && lastDoubleClick.compare(now, pos, button)) {
+    lastClick = lastDoubleClick = null;
+    return "triple"
+  } else if (lastClick && lastClick.compare(now, pos, button)) {
+    lastDoubleClick = new PastClick(now, pos, button);
+    lastClick = null;
+    return "double"
+  } else {
+    lastClick = new PastClick(now, pos, button);
+    lastDoubleClick = null;
+    return "single"
+  }
+}
+
 // A mouse down can be a single click, double click, triple click,
 // start of selection drag, start of text drag, new cursor
 // (ctrl-click), rectangle drag (alt-drag), or xwin
@@ -13072,72 +13367,91 @@ function onMouseDown(e) {
     return
   }
   if (clickInGutter(cm, e)) { return }
-  var start = posFromMouse(cm, e);
+  var pos = posFromMouse(cm, e), button = e_button(e), repeat = pos ? clickRepeat(pos, button) : "single";
   window.focus();
 
-  switch (e_button(e)) {
-  case 1:
-    // #3261: make sure, that we're not starting a second selection
-    if (cm.state.selectingText)
-      { cm.state.selectingText(e); }
-    else if (start)
-      { leftButtonDown(cm, e, start); }
-    else if (e_target(e) == display.scroller)
-      { e_preventDefault(e); }
-    break
-  case 2:
-    if (webkit) { cm.state.lastMiddleDown = +new Date; }
-    if (start) { extendSelection(cm.doc, start); }
+  // #3261: make sure, that we're not starting a second selection
+  if (button == 1 && cm.state.selectingText)
+    { cm.state.selectingText(e); }
+
+  if (pos && handleMappedButton(cm, button, pos, repeat, e)) { return }
+
+  if (button == 1) {
+    if (pos) { leftButtonDown(cm, pos, repeat, e); }
+    else if (e_target(e) == display.scroller) { e_preventDefault(e); }
+  } else if (button == 2) {
+    if (pos) { extendSelection(cm.doc, pos); }
     setTimeout(function () { return display.input.focus(); }, 20);
-    e_preventDefault(e);
-    break
-  case 3:
+  } else if (button == 3) {
     if (captureRightClick) { onContextMenu(cm, e); }
     else { delayBlurEvent(cm); }
-    break
   }
 }
 
-var lastClick;
-var lastDoubleClick;
-function leftButtonDown(cm, e, start) {
+function handleMappedButton(cm, button, pos, repeat, event) {
+  var name = "Click";
+  if (repeat == "double") { name = "Double" + name; }
+  else if (repeat == "triple") { name = "Triple" + name; }
+  name = (button == 1 ? "Left" : button == 2 ? "Middle" : "Right") + name;
+
+  return dispatchKey(cm,  addModifierNames(name, event), event, function (bound) {
+    if (typeof bound == "string") { bound = commands[bound]; }
+    if (!bound) { return false }
+    var done = false;
+    try {
+      if (cm.isReadOnly()) { cm.state.suppressEdits = true; }
+      done = bound(cm, pos) != Pass;
+    } finally {
+      cm.state.suppressEdits = false;
+    }
+    return done
+  })
+}
+
+function configureMouse(cm, repeat, event) {
+  var option = cm.getOption("configureMouse");
+  var value = option ? option(cm, repeat, event) : {};
+  if (value.unit == null) {
+    var rect = chromeOS ? event.shiftKey && event.metaKey : event.altKey;
+    value.unit = rect ? "rectangle" : repeat == "single" ? "char" : repeat == "double" ? "word" : "line";
+  }
+  if (value.extend == null || cm.doc.extend) { value.extend = cm.doc.extend || event.shiftKey; }
+  if (value.addNew == null) { value.addNew = mac ? event.metaKey : event.ctrlKey; }
+  if (value.moveOnDrag == null) { value.moveOnDrag = !(mac ? event.altKey : event.ctrlKey); }
+  return value
+}
+
+function leftButtonDown(cm, pos, repeat, event) {
   if (ie) { setTimeout(bind(ensureFocus, cm), 0); }
   else { cm.curOp.focus = activeElt(); }
 
-  var now = +new Date, type;
-  if (lastDoubleClick && lastDoubleClick.time > now - 400 && cmp(lastDoubleClick.pos, start) == 0) {
-    type = "triple";
-  } else if (lastClick && lastClick.time > now - 400 && cmp(lastClick.pos, start) == 0) {
-    type = "double";
-    lastDoubleClick = {time: now, pos: start};
-  } else {
-    type = "single";
-    lastClick = {time: now, pos: start};
-  }
+  var behavior = configureMouse(cm, repeat, event);
 
-  var sel = cm.doc.sel, modifier = mac ? e.metaKey : e.ctrlKey, contained;
+  var sel = cm.doc.sel, contained;
   if (cm.options.dragDrop && dragAndDrop && !cm.isReadOnly() &&
-      type == "single" && (contained = sel.contains(start)) > -1 &&
-      (cmp((contained = sel.ranges[contained]).from(), start) < 0 || start.xRel > 0) &&
-      (cmp(contained.to(), start) > 0 || start.xRel < 0))
-    { leftButtonStartDrag(cm, e, start, modifier); }
+      repeat == "single" && (contained = sel.contains(pos)) > -1 &&
+      (cmp((contained = sel.ranges[contained]).from(), pos) < 0 || pos.xRel > 0) &&
+      (cmp(contained.to(), pos) > 0 || pos.xRel < 0))
+    { leftButtonStartDrag(cm, event, pos, behavior); }
   else
-    { leftButtonSelect(cm, e, start, type, modifier); }
+    { leftButtonSelect(cm, event, pos, behavior); }
 }
 
 // Start a text drag. When it ends, see if any dragging actually
 // happen, and treat as a click if it didn't.
-function leftButtonStartDrag(cm, e, start, modifier) {
-  var display = cm.display, startTime = +new Date;
-  var dragEnd = operation(cm, function (e2) {
+function leftButtonStartDrag(cm, event, pos, behavior) {
+  var display = cm.display, moved = false;
+  var dragEnd = operation(cm, function (e) {
     if (webkit) { display.scroller.draggable = false; }
     cm.state.draggingText = false;
     off(document, "mouseup", dragEnd);
+    off(document, "mousemove", mouseMove);
+    off(display.scroller, "dragstart", dragStart);
     off(display.scroller, "drop", dragEnd);
-    if (Math.abs(e.clientX - e2.clientX) + Math.abs(e.clientY - e2.clientY) < 10) {
-      e_preventDefault(e2);
-      if (!modifier && +new Date - 200 < startTime)
-        { extendSelection(cm.doc, start); }
+    if (!moved) {
+      e_preventDefault(e);
+      if (!behavior.addNew)
+        { extendSelection(cm.doc, pos, null, null, behavior.extend); }
       // Work around unexplainable focus problem in IE9 (#2127) and Chrome (#3081)
       if (webkit || ie && ie_version == 9)
         { setTimeout(function () {document.body.focus(); display.input.focus();}, 20); }
@@ -13145,23 +13459,40 @@ function leftButtonStartDrag(cm, e, start, modifier) {
         { display.input.focus(); }
     }
   });
+  var mouseMove = function(e2) {
+    moved = moved || Math.abs(event.clientX - e2.clientX) + Math.abs(event.clientY - e2.clientY) >= 10;
+  };
+  var dragStart = function () { return moved = true; };
   // Let the drag handler handle this.
   if (webkit) { display.scroller.draggable = true; }
   cm.state.draggingText = dragEnd;
-  dragEnd.copy = mac ? e.altKey : e.ctrlKey;
+  dragEnd.copy = !behavior.moveOnDrag;
   // IE's approach to draggable
   if (display.scroller.dragDrop) { display.scroller.dragDrop(); }
   on(document, "mouseup", dragEnd);
+  on(document, "mousemove", mouseMove);
+  on(display.scroller, "dragstart", dragStart);
   on(display.scroller, "drop", dragEnd);
+
+  delayBlurEvent(cm);
+  setTimeout(function () { return display.input.focus(); }, 20);
+}
+
+function rangeForUnit(cm, pos, unit) {
+  if (unit == "char") { return new Range(pos, pos) }
+  if (unit == "word") { return cm.findWordAt(pos) }
+  if (unit == "line") { return new Range(Pos(pos.line, 0), clipPos(cm.doc, Pos(pos.line + 1, 0))) }
+  var result = unit(cm, pos);
+  return new Range(result.from, result.to)
 }
 
 // Normal selection, as opposed to text dragging.
-function leftButtonSelect(cm, e, start, type, addNew) {
+function leftButtonSelect(cm, event, start, behavior) {
   var display = cm.display, doc = cm.doc;
-  e_preventDefault(e);
+  e_preventDefault(event);
 
   var ourRange, ourIndex, startSel = doc.sel, ranges = startSel.ranges;
-  if (addNew && !e.shiftKey) {
+  if (behavior.addNew && !behavior.extend) {
     ourIndex = doc.sel.contains(start);
     if (ourIndex > -1)
       { ourRange = ranges[ourIndex]; }
@@ -13172,28 +13503,19 @@ function leftButtonSelect(cm, e, start, type, addNew) {
     ourIndex = doc.sel.primIndex;
   }
 
-  if (chromeOS ? e.shiftKey && e.metaKey : e.altKey) {
-    type = "rect";
-    if (!addNew) { ourRange = new Range(start, start); }
-    start = posFromMouse(cm, e, true, true);
+  if (behavior.unit == "rectangle") {
+    if (!behavior.addNew) { ourRange = new Range(start, start); }
+    start = posFromMouse(cm, event, true, true);
     ourIndex = -1;
-  } else if (type == "double") {
-    var word = cm.findWordAt(start);
-    if (cm.display.shift || doc.extend)
-      { ourRange = extendRange(doc, ourRange, word.anchor, word.head); }
-    else
-      { ourRange = word; }
-  } else if (type == "triple") {
-    var line = new Range(Pos(start.line, 0), clipPos(doc, Pos(start.line + 1, 0)));
-    if (cm.display.shift || doc.extend)
-      { ourRange = extendRange(doc, ourRange, line.anchor, line.head); }
-    else
-      { ourRange = line; }
   } else {
-    ourRange = extendRange(doc, ourRange, start);
+    var range$$1 = rangeForUnit(cm, start, behavior.unit);
+    if (behavior.extend)
+      { ourRange = extendRange(ourRange, range$$1.anchor, range$$1.head, behavior.extend); }
+    else
+      { ourRange = range$$1; }
   }
 
-  if (!addNew) {
+  if (!behavior.addNew) {
     ourIndex = 0;
     setSelection(doc, new Selection([ourRange], 0), sel_mouse);
     startSel = doc.sel;
@@ -13201,7 +13523,7 @@ function leftButtonSelect(cm, e, start, type, addNew) {
     ourIndex = ranges.length;
     setSelection(doc, normalizeSelection(ranges.concat([ourRange]), ourIndex),
                  {scroll: false, origin: "*mouse"});
-  } else if (ranges.length > 1 && ranges[ourIndex].empty() && type == "single" && !e.shiftKey) {
+  } else if (ranges.length > 1 && ranges[ourIndex].empty() && behavior.unit == "char" && !behavior.extend) {
     setSelection(doc, normalizeSelection(ranges.slice(0, ourIndex).concat(ranges.slice(ourIndex + 1)), 0),
                  {scroll: false, origin: "*mouse"});
     startSel = doc.sel;
@@ -13214,7 +13536,7 @@ function leftButtonSelect(cm, e, start, type, addNew) {
     if (cmp(lastPos, pos) == 0) { return }
     lastPos = pos;
 
-    if (type == "rect") {
+    if (behavior.unit == "rectangle") {
       var ranges = [], tabSize = cm.options.tabSize;
       var startCol = countColumn(getLine(doc, start.line).text, start.ch, tabSize);
       var posCol = countColumn(getLine(doc, pos.line).text, pos.ch, tabSize);
@@ -13233,23 +13555,17 @@ function leftButtonSelect(cm, e, start, type, addNew) {
       cm.scrollIntoView(pos);
     } else {
       var oldRange = ourRange;
-      var anchor = oldRange.anchor, head = pos;
-      if (type != "single") {
-        var range$$1;
-        if (type == "double")
-          { range$$1 = cm.findWordAt(pos); }
-        else
-          { range$$1 = new Range(Pos(pos.line, 0), clipPos(doc, Pos(pos.line + 1, 0))); }
-        if (cmp(range$$1.anchor, anchor) > 0) {
-          head = range$$1.head;
-          anchor = minPos(oldRange.from(), range$$1.anchor);
-        } else {
-          head = range$$1.anchor;
-          anchor = maxPos(oldRange.to(), range$$1.head);
-        }
+      var range$$1 = rangeForUnit(cm, pos, behavior.unit);
+      var anchor = oldRange.anchor, head;
+      if (cmp(range$$1.anchor, anchor) > 0) {
+        head = range$$1.head;
+        anchor = minPos(oldRange.from(), range$$1.anchor);
+      } else {
+        head = range$$1.anchor;
+        anchor = maxPos(oldRange.to(), range$$1.head);
       }
       var ranges$1 = startSel.ranges.slice(0);
-      ranges$1[ourIndex] = new Range(clipPos(doc, anchor), head);
+      ranges$1[ourIndex] = bidiSimplify(cm, new Range(clipPos(doc, anchor), head));
       setSelection(doc, normalizeSelection(ranges$1, ourIndex), sel_mouse);
     }
   }
@@ -13263,7 +13579,7 @@ function leftButtonSelect(cm, e, start, type, addNew) {
 
   function extend(e) {
     var curCount = ++counter;
-    var cur = posFromMouse(cm, e, true, type == "rect");
+    var cur = posFromMouse(cm, e, true, behavior.unit == "rectangle");
     if (!cur) { return }
     if (cmp(cur, lastPos) != 0) {
       cm.curOp.focus = activeElt();
@@ -13301,13 +13617,52 @@ function leftButtonSelect(cm, e, start, type, addNew) {
   on(document, "mouseup", up);
 }
 
+// Used when mouse-selecting to adjust the anchor to the proper side
+// of a bidi jump depending on the visual position of the head.
+function bidiSimplify(cm, range$$1) {
+  var anchor = range$$1.anchor;
+  var head = range$$1.head;
+  var anchorLine = getLine(cm.doc, anchor.line);
+  if (cmp(anchor, head) == 0 && anchor.sticky == head.sticky) { return range$$1 }
+  var order = getOrder(anchorLine);
+  if (!order) { return range$$1 }
+  var index = getBidiPartAt(order, anchor.ch, anchor.sticky), part = order[index];
+  if (part.from != anchor.ch && part.to != anchor.ch) { return range$$1 }
+  var boundary = index + ((part.from == anchor.ch) == (part.level != 1) ? 0 : 1);
+  if (boundary == 0 || boundary == order.length) { return range$$1 }
+
+  // Compute the relative visual position of the head compared to the
+  // anchor (<0 is to the left, >0 to the right)
+  var leftSide;
+  if (head.line != anchor.line) {
+    leftSide = (head.line - anchor.line) * (cm.doc.direction == "ltr" ? 1 : -1) > 0;
+  } else {
+    var headIndex = getBidiPartAt(order, head.ch, head.sticky);
+    var dir = headIndex - index || (head.ch - anchor.ch) * (part.level == 1 ? -1 : 1);
+    if (headIndex == boundary - 1 || headIndex == boundary)
+      { leftSide = dir < 0; }
+    else
+      { leftSide = dir > 0; }
+  }
+
+  var usePart = order[boundary + (leftSide ? -1 : 0)];
+  var from = leftSide == (usePart.level == 1);
+  var ch = from ? usePart.from : usePart.to, sticky = from ? "after" : "before";
+  return anchor.ch == ch && anchor.sticky == sticky ? range$$1 : new Range(new Pos(anchor.line, ch, sticky), head)
+}
+
 
 // Determines whether an event happened in the gutter, and fires the
 // handlers for the corresponding event.
 function gutterEvent(cm, e, type, prevent) {
   var mX, mY;
-  try { mX = e.clientX; mY = e.clientY; }
-  catch(e) { return false }
+  if (e.touches) {
+    mX = e.touches[0].clientX;
+    mY = e.touches[0].clientY;
+  } else {
+    try { mX = e.clientX; mY = e.clientY; }
+    catch(e) { return false }
+  }
   if (mX >= Math.floor(cm.display.gutters.getBoundingClientRect().right)) { return false }
   if (prevent) { e_preventDefault(e); }
 
@@ -13429,6 +13784,7 @@ function defineOptions(CodeMirror) {
     if (next.attach) { next.attach(cm, prev || null); }
   });
   option("extraKeys", null);
+  option("configureMouse", null);
 
   option("lineWrapping", false, wrappingChanged, true);
   option("gutters", [], function (cm) {
@@ -13456,14 +13812,12 @@ function defineOptions(CodeMirror) {
 
   option("resetSelectionOnContextMenu", true);
   option("lineWiseCopyCut", true);
+  option("pasteLinesPerSelection", true);
 
   option("readOnly", false, function (cm, val) {
     if (val == "nocursor") {
       onBlur(cm);
       cm.display.input.blur();
-      cm.display.disabled = true;
-    } else {
-      cm.display.disabled = false;
     }
     cm.display.input.readOnlyChanged(val);
   });
@@ -13646,7 +14000,7 @@ function registerEventHandlers(cm) {
     return dx * dx + dy * dy > 20 * 20
   }
   on(d.scroller, "touchstart", function (e) {
-    if (!signalDOMEvent(cm, e) && !isMouseLikeTouchEvent(e)) {
+    if (!signalDOMEvent(cm, e) && !isMouseLikeTouchEvent(e) && !clickInGutter(cm, e)) {
       d.input.ensurePolled();
       clearTimeout(touchFinished);
       var now = +new Date;
@@ -13684,7 +14038,7 @@ function registerEventHandlers(cm) {
   // area, ensure viewport is updated when scrolling.
   on(d.scroller, "scroll", function () {
     if (d.scroller.clientHeight) {
-      setScrollTop(cm, d.scroller.scrollTop);
+      updateScrollTop(cm, d.scroller.scrollTop);
       setScrollLeft(cm, d.scroller.scrollLeft, true);
       signal(cm, "scroll", cm);
     }
@@ -13728,7 +14082,7 @@ function indentLine(cm, n, how, aggressive) {
     // Fall back to "prev" when the mode doesn't have an indentation
     // method.
     if (!doc.mode.indent) { how = "prev"; }
-    else { state = getStateBefore(cm, n); }
+    else { state = getContextBefore(cm, n).state; }
   }
 
   var tabSize = cm.options.tabSize;
@@ -13804,7 +14158,7 @@ function applyTextInput(cm, inserted, deleted, sel, origin) {
         for (var i = 0; i < lastCopied.text.length; i++)
           { multiPaste.push(doc.splitLines(lastCopied.text[i])); }
       }
-    } else if (textLines.length == sel.ranges.length) {
+    } else if (textLines.length == sel.ranges.length && cm.options.pasteLinesPerSelection) {
       multiPaste = map(textLines, function (l) { return [l]; });
     }
   }
@@ -14064,7 +14418,7 @@ var addEditorMethods = function(CodeMirror) {
     getStateAfter: function(line, precise) {
       var doc = this.doc;
       line = clipLine(doc, line == null ? doc.first + doc.size - 1: line);
-      return getStateBefore(this, line + 1, precise)
+      return getContextBefore(this, line + 1, precise).state
     },
 
     cursorCoords: function(start, mode) {
@@ -14145,6 +14499,7 @@ var addEditorMethods = function(CodeMirror) {
     triggerOnKeyDown: methodOp(onKeyDown),
     triggerOnKeyPress: methodOp(onKeyPress),
     triggerOnKeyUp: onKeyUp,
+    triggerOnMouseDown: methodOp(onMouseDown),
 
     execCommand: function(cmd) {
       if (commands.hasOwnProperty(cmd))
@@ -14217,7 +14572,7 @@ var addEditorMethods = function(CodeMirror) {
         goals.push(headPos.left);
         var pos = findPosV(this$1, headPos, dir, unit);
         if (unit == "page" && range$$1 == doc.sel.primary())
-          { addToScrollPos(this$1, null, charCoords(this$1, pos, "div").top - headPos.top); }
+          { addToScrollTop(this$1, charCoords(this$1, pos, "div").top - headPos.top); }
         return pos
       }, sel_move);
       if (goals.length) { for (var i = 0; i < doc.sel.ranges.length; i++)
@@ -14254,11 +14609,7 @@ var addEditorMethods = function(CodeMirror) {
     hasFocus: function() { return this.display.input.getField() == activeElt() },
     isReadOnly: function() { return !!(this.options.readOnly || this.doc.cantEdit) },
 
-    scrollTo: methodOp(function(x, y) {
-      if (x != null || y != null) { resolveScrollToPos(this); }
-      if (x != null) { this.curOp.scrollLeft = x; }
-      if (y != null) { this.curOp.scrollTop = y; }
-    }),
+    scrollTo: methodOp(function (x, y) { scrollToCoords(this, x, y); }),
     getScrollInfo: function() {
       var scroller = this.display.scroller;
       return {left: scroller.scrollLeft, top: scroller.scrollTop,
@@ -14280,16 +14631,9 @@ var addEditorMethods = function(CodeMirror) {
       range$$1.margin = margin || 0;
 
       if (range$$1.from.line != null) {
-        resolveScrollToPos(this);
-        this.curOp.scrollToPos = range$$1;
+        scrollToRange(this, range$$1);
       } else {
-        var sPos = calculateScrollPos(this, {
-          left: Math.min(range$$1.from.left, range$$1.to.left),
-          top: Math.min(range$$1.from.top, range$$1.to.top) - range$$1.margin,
-          right: Math.max(range$$1.from.right, range$$1.to.right),
-          bottom: Math.max(range$$1.from.bottom, range$$1.to.bottom) + range$$1.margin
-        });
-        this.scrollTo(sPos.scrollLeft, sPos.scrollTop);
+        scrollToCoordsRange(this, range$$1.from, range$$1.to, range$$1.margin);
       }
     }),
 
@@ -14311,13 +14655,15 @@ var addEditorMethods = function(CodeMirror) {
     }),
 
     operation: function(f){return runInOp(this, f)},
+    startOperation: function(){return startOperation(this)},
+    endOperation: function(){return endOperation(this)},
 
     refresh: methodOp(function() {
       var oldHeight = this.display.cachedTextHeight;
       regChange(this);
       this.curOp.forceUpdate = true;
       clearCaches(this);
-      this.scrollTo(this.doc.scrollLeft, this.doc.scrollTop);
+      scrollToCoords(this, this.doc.scrollLeft, this.doc.scrollTop);
       updateGutterSpace(this);
       if (oldHeight == null || Math.abs(oldHeight - textHeight(this.display)) > .5)
         { estimateLineHeights(this); }
@@ -14330,7 +14676,7 @@ var addEditorMethods = function(CodeMirror) {
       attachDoc(this, doc);
       clearCaches(this);
       this.display.input.reset();
-      this.scrollTo(doc.scrollLeft, doc.scrollTop);
+      scrollToCoords(this, doc.scrollLeft, doc.scrollTop);
       this.curOp.forceScroll = true;
       signalLater(this, "swapDoc", this, old);
       return old
@@ -14541,36 +14887,41 @@ ContentEditableInput.prototype.showSelection = function (info, takeFocus) {
 };
 
 ContentEditableInput.prototype.showPrimarySelection = function () {
-  var sel = window.getSelection(), prim = this.cm.doc.sel.primary();
-  var curAnchor = domToPos(this.cm, sel.anchorNode, sel.anchorOffset);
-  var curFocus = domToPos(this.cm, sel.focusNode, sel.focusOffset);
-  if (curAnchor && !curAnchor.bad && curFocus && !curFocus.bad &&
-      cmp(minPos(curAnchor, curFocus), prim.from()) == 0 &&
-      cmp(maxPos(curAnchor, curFocus), prim.to()) == 0)
-    { return }
+  var sel = window.getSelection(), cm = this.cm, prim = cm.doc.sel.primary();
+  var from = prim.from(), to = prim.to();
 
-  var start = posToDOM(this.cm, prim.from());
-  var end = posToDOM(this.cm, prim.to());
-  if (!start && !end) {
+  if (cm.display.viewTo == cm.display.viewFrom || from.line >= cm.display.viewTo || to.line < cm.display.viewFrom) {
     sel.removeAllRanges();
     return
   }
 
-  var view = this.cm.display.view;
-  var old = sel.rangeCount && sel.getRangeAt(0);
-  if (!start) {
-    start = {node: view[0].measure.map[2], offset: 0};
-  } else if (!end) { // FIXME dangerously hacky
+  var curAnchor = domToPos(cm, sel.anchorNode, sel.anchorOffset);
+  var curFocus = domToPos(cm, sel.focusNode, sel.focusOffset);
+  if (curAnchor && !curAnchor.bad && curFocus && !curFocus.bad &&
+      cmp(minPos(curAnchor, curFocus), from) == 0 &&
+      cmp(maxPos(curAnchor, curFocus), to) == 0)
+    { return }
+
+  var view = cm.display.view;
+  var start = (from.line >= cm.display.viewFrom && posToDOM(cm, from)) ||
+      {node: view[0].measure.map[2], offset: 0};
+  var end = to.line < cm.display.viewTo && posToDOM(cm, to);
+  if (!end) {
     var measure = view[view.length - 1].measure;
     var map$$1 = measure.maps ? measure.maps[measure.maps.length - 1] : measure.map;
     end = {node: map$$1[map$$1.length - 1], offset: map$$1[map$$1.length - 2] - map$$1[map$$1.length - 3]};
   }
 
-  var rng;
+  if (!start || !end) {
+    sel.removeAllRanges();
+    return
+  }
+
+  var old = sel.rangeCount && sel.getRangeAt(0), rng;
   try { rng = range(start.node, start.offset, end.offset, end.node); }
   catch(e) {} // Our model of the DOM might be outdated, in which case the range we try to set can be impossible
   if (rng) {
-    if (!gecko && this.cm.state.focused) {
+    if (!gecko && cm.state.focused) {
       sel.collapse(start.node, start.offset);
       if (!rng.collapsed) {
         sel.removeAllRanges();
@@ -14849,7 +15200,7 @@ function domTextBetween(cm, from, to, fromLine, toLine) {
       var markerID = node.getAttribute("cm-marker"), range$$1;
       if (markerID) {
         var found = cm.findMarks(Pos(fromLine, 0), Pos(toLine + 1, 0), recognizeMarker(+markerID));
-        if (found.length && (range$$1 = found[0].find()))
+        if (found.length && (range$$1 = found[0].find(0)))
           { addText(getBetween(cm.doc, range$$1.from, range$$1.to).join(lineSep)); }
         return
       }
@@ -14958,9 +15309,6 @@ var TextareaInput = function(cm) {
   this.pollingFast = false;
   // Self-resetting timeout for the poller
   this.polling = new Delayed();
-  // Tracks when input.reset has punted to just putting a short
-  // string into the textarea instead of the full selection.
-  this.inaccurateSelection = false;
   // Used to work around IE issue with selection being forgotten when focus moves away from textarea
   this.hasSelection = false;
   this.composing = null;
@@ -14997,12 +15345,6 @@ TextareaInput.prototype.init = function (display) {
     if (signalDOMEvent(cm, e)) { return }
     if (cm.somethingSelected()) {
       setLastCopied({lineWise: false, text: cm.getSelections()});
-      if (input.inaccurateSelection) {
-        input.prevInput = "";
-        input.inaccurateSelection = false;
-        te.value = lastCopied.text.join("\n");
-        selectInput(te);
-      }
     } else if (!cm.options.lineWiseCopyCut) {
       return
     } else {
@@ -15080,14 +15422,11 @@ TextareaInput.prototype.showSelection = function (drawn) {
 // Reset the input to correspond to the selection (or to be empty,
 // when not typing and nothing is selected)
 TextareaInput.prototype.reset = function (typing) {
-  if (this.contextMenuPending) { return }
-  var minimal, selected, cm = this.cm, doc = cm.doc;
+  if (this.contextMenuPending || this.composing) { return }
+  var cm = this.cm;
   if (cm.somethingSelected()) {
     this.prevInput = "";
-    var range$$1 = doc.sel.primary();
-    minimal = hasCopyEvent &&
-      (range$$1.to().line - range$$1.from().line > 100 || (selected = cm.getSelection()).length > 1000);
-    var content = minimal ? "-" : selected || cm.getSelection();
+    var content = cm.getSelection();
     this.textarea.value = content;
     if (cm.state.focused) { selectInput(this.textarea); }
     if (ie && ie_version >= 9) { this.hasSelection = content; }
@@ -15095,7 +15434,6 @@ TextareaInput.prototype.reset = function (typing) {
     this.prevInput = this.textarea.value = "";
     if (ie && ie_version >= 9) { this.hasSelection = null; }
   }
-  this.inaccurateSelection = minimal;
 };
 
 TextareaInput.prototype.getField = function () { return this.textarea };
@@ -15290,6 +15628,7 @@ TextareaInput.prototype.onContextMenu = function (e) {
 
 TextareaInput.prototype.readOnlyChanged = function (val) {
   if (!val) { this.reset(); }
+  this.textarea.disabled = val == "nocursor";
 };
 
 TextareaInput.prototype.setUneditable = function () {};
@@ -15445,7 +15784,7 @@ CodeMirror$1.fromTextArea = fromTextArea;
 
 addLegacyProps(CodeMirror$1);
 
-CodeMirror$1.version = "5.25.0";
+CodeMirror$1.version = "5.30.0";
 
 return CodeMirror$1;
 
@@ -15454,7 +15793,651 @@ return CodeMirror$1;
 
 /***/ }),
 
-/***/ 422:
+/***/ 54:
+/***/ (function(module, exports) {
+
+/**
+ * lodash (Custom Build) <https://lodash.com/>
+ * Build: `lodash modularize exports="npm" -o ./`
+ * Copyright jQuery Foundation and other contributors <https://jquery.org/>
+ * Released under MIT license <https://lodash.com/license>
+ * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+ * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+ */
+
+/** Used as references for various `Number` constants. */
+var MAX_SAFE_INTEGER = 9007199254740991;
+
+/** `Object#toString` result references. */
+var argsTag = '[object Arguments]',
+    funcTag = '[object Function]',
+    genTag = '[object GeneratorFunction]';
+
+/** Used to detect unsigned integer values. */
+var reIsUint = /^(?:0|[1-9]\d*)$/;
+
+/**
+ * A faster alternative to `Function#apply`, this function invokes `func`
+ * with the `this` binding of `thisArg` and the arguments of `args`.
+ *
+ * @private
+ * @param {Function} func The function to invoke.
+ * @param {*} thisArg The `this` binding of `func`.
+ * @param {Array} args The arguments to invoke `func` with.
+ * @returns {*} Returns the result of `func`.
+ */
+function apply(func, thisArg, args) {
+  switch (args.length) {
+    case 0: return func.call(thisArg);
+    case 1: return func.call(thisArg, args[0]);
+    case 2: return func.call(thisArg, args[0], args[1]);
+    case 3: return func.call(thisArg, args[0], args[1], args[2]);
+  }
+  return func.apply(thisArg, args);
+}
+
+/**
+ * The base implementation of `_.times` without support for iteratee shorthands
+ * or max array length checks.
+ *
+ * @private
+ * @param {number} n The number of times to invoke `iteratee`.
+ * @param {Function} iteratee The function invoked per iteration.
+ * @returns {Array} Returns the array of results.
+ */
+function baseTimes(n, iteratee) {
+  var index = -1,
+      result = Array(n);
+
+  while (++index < n) {
+    result[index] = iteratee(index);
+  }
+  return result;
+}
+
+/**
+ * Creates a unary function that invokes `func` with its argument transformed.
+ *
+ * @private
+ * @param {Function} func The function to wrap.
+ * @param {Function} transform The argument transform.
+ * @returns {Function} Returns the new function.
+ */
+function overArg(func, transform) {
+  return function(arg) {
+    return func(transform(arg));
+  };
+}
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var objectToString = objectProto.toString;
+
+/** Built-in value references. */
+var propertyIsEnumerable = objectProto.propertyIsEnumerable;
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeKeys = overArg(Object.keys, Object),
+    nativeMax = Math.max;
+
+/** Detect if properties shadowing those on `Object.prototype` are non-enumerable. */
+var nonEnumShadows = !propertyIsEnumerable.call({ 'valueOf': 1 }, 'valueOf');
+
+/**
+ * Creates an array of the enumerable property names of the array-like `value`.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @param {boolean} inherited Specify returning inherited property names.
+ * @returns {Array} Returns the array of property names.
+ */
+function arrayLikeKeys(value, inherited) {
+  // Safari 8.1 makes `arguments.callee` enumerable in strict mode.
+  // Safari 9 makes `arguments.length` enumerable in strict mode.
+  var result = (isArray(value) || isArguments(value))
+    ? baseTimes(value.length, String)
+    : [];
+
+  var length = result.length,
+      skipIndexes = !!length;
+
+  for (var key in value) {
+    if ((inherited || hasOwnProperty.call(value, key)) &&
+        !(skipIndexes && (key == 'length' || isIndex(key, length)))) {
+      result.push(key);
+    }
+  }
+  return result;
+}
+
+/**
+ * Assigns `value` to `key` of `object` if the existing value is not equivalent
+ * using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+ * for equality comparisons.
+ *
+ * @private
+ * @param {Object} object The object to modify.
+ * @param {string} key The key of the property to assign.
+ * @param {*} value The value to assign.
+ */
+function assignValue(object, key, value) {
+  var objValue = object[key];
+  if (!(hasOwnProperty.call(object, key) && eq(objValue, value)) ||
+      (value === undefined && !(key in object))) {
+    object[key] = value;
+  }
+}
+
+/**
+ * The base implementation of `_.keys` which doesn't treat sparse arrays as dense.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names.
+ */
+function baseKeys(object) {
+  if (!isPrototype(object)) {
+    return nativeKeys(object);
+  }
+  var result = [];
+  for (var key in Object(object)) {
+    if (hasOwnProperty.call(object, key) && key != 'constructor') {
+      result.push(key);
+    }
+  }
+  return result;
+}
+
+/**
+ * The base implementation of `_.rest` which doesn't validate or coerce arguments.
+ *
+ * @private
+ * @param {Function} func The function to apply a rest parameter to.
+ * @param {number} [start=func.length-1] The start position of the rest parameter.
+ * @returns {Function} Returns the new function.
+ */
+function baseRest(func, start) {
+  start = nativeMax(start === undefined ? (func.length - 1) : start, 0);
+  return function() {
+    var args = arguments,
+        index = -1,
+        length = nativeMax(args.length - start, 0),
+        array = Array(length);
+
+    while (++index < length) {
+      array[index] = args[start + index];
+    }
+    index = -1;
+    var otherArgs = Array(start + 1);
+    while (++index < start) {
+      otherArgs[index] = args[index];
+    }
+    otherArgs[start] = array;
+    return apply(func, this, otherArgs);
+  };
+}
+
+/**
+ * Copies properties of `source` to `object`.
+ *
+ * @private
+ * @param {Object} source The object to copy properties from.
+ * @param {Array} props The property identifiers to copy.
+ * @param {Object} [object={}] The object to copy properties to.
+ * @param {Function} [customizer] The function to customize copied values.
+ * @returns {Object} Returns `object`.
+ */
+function copyObject(source, props, object, customizer) {
+  object || (object = {});
+
+  var index = -1,
+      length = props.length;
+
+  while (++index < length) {
+    var key = props[index];
+
+    var newValue = customizer
+      ? customizer(object[key], source[key], key, object, source)
+      : undefined;
+
+    assignValue(object, key, newValue === undefined ? source[key] : newValue);
+  }
+  return object;
+}
+
+/**
+ * Creates a function like `_.assign`.
+ *
+ * @private
+ * @param {Function} assigner The function to assign values.
+ * @returns {Function} Returns the new assigner function.
+ */
+function createAssigner(assigner) {
+  return baseRest(function(object, sources) {
+    var index = -1,
+        length = sources.length,
+        customizer = length > 1 ? sources[length - 1] : undefined,
+        guard = length > 2 ? sources[2] : undefined;
+
+    customizer = (assigner.length > 3 && typeof customizer == 'function')
+      ? (length--, customizer)
+      : undefined;
+
+    if (guard && isIterateeCall(sources[0], sources[1], guard)) {
+      customizer = length < 3 ? undefined : customizer;
+      length = 1;
+    }
+    object = Object(object);
+    while (++index < length) {
+      var source = sources[index];
+      if (source) {
+        assigner(object, source, index, customizer);
+      }
+    }
+    return object;
+  });
+}
+
+/**
+ * Checks if `value` is a valid array-like index.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @param {number} [length=MAX_SAFE_INTEGER] The upper bounds of a valid index.
+ * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
+ */
+function isIndex(value, length) {
+  length = length == null ? MAX_SAFE_INTEGER : length;
+  return !!length &&
+    (typeof value == 'number' || reIsUint.test(value)) &&
+    (value > -1 && value % 1 == 0 && value < length);
+}
+
+/**
+ * Checks if the given arguments are from an iteratee call.
+ *
+ * @private
+ * @param {*} value The potential iteratee value argument.
+ * @param {*} index The potential iteratee index or key argument.
+ * @param {*} object The potential iteratee object argument.
+ * @returns {boolean} Returns `true` if the arguments are from an iteratee call,
+ *  else `false`.
+ */
+function isIterateeCall(value, index, object) {
+  if (!isObject(object)) {
+    return false;
+  }
+  var type = typeof index;
+  if (type == 'number'
+        ? (isArrayLike(object) && isIndex(index, object.length))
+        : (type == 'string' && index in object)
+      ) {
+    return eq(object[index], value);
+  }
+  return false;
+}
+
+/**
+ * Checks if `value` is likely a prototype object.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a prototype, else `false`.
+ */
+function isPrototype(value) {
+  var Ctor = value && value.constructor,
+      proto = (typeof Ctor == 'function' && Ctor.prototype) || objectProto;
+
+  return value === proto;
+}
+
+/**
+ * Performs a
+ * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+ * comparison between two values to determine if they are equivalent.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to compare.
+ * @param {*} other The other value to compare.
+ * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
+ * @example
+ *
+ * var object = { 'a': 1 };
+ * var other = { 'a': 1 };
+ *
+ * _.eq(object, object);
+ * // => true
+ *
+ * _.eq(object, other);
+ * // => false
+ *
+ * _.eq('a', 'a');
+ * // => true
+ *
+ * _.eq('a', Object('a'));
+ * // => false
+ *
+ * _.eq(NaN, NaN);
+ * // => true
+ */
+function eq(value, other) {
+  return value === other || (value !== value && other !== other);
+}
+
+/**
+ * Checks if `value` is likely an `arguments` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an `arguments` object,
+ *  else `false`.
+ * @example
+ *
+ * _.isArguments(function() { return arguments; }());
+ * // => true
+ *
+ * _.isArguments([1, 2, 3]);
+ * // => false
+ */
+function isArguments(value) {
+  // Safari 8.1 makes `arguments.callee` enumerable in strict mode.
+  return isArrayLikeObject(value) && hasOwnProperty.call(value, 'callee') &&
+    (!propertyIsEnumerable.call(value, 'callee') || objectToString.call(value) == argsTag);
+}
+
+/**
+ * Checks if `value` is classified as an `Array` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an array, else `false`.
+ * @example
+ *
+ * _.isArray([1, 2, 3]);
+ * // => true
+ *
+ * _.isArray(document.body.children);
+ * // => false
+ *
+ * _.isArray('abc');
+ * // => false
+ *
+ * _.isArray(_.noop);
+ * // => false
+ */
+var isArray = Array.isArray;
+
+/**
+ * Checks if `value` is array-like. A value is considered array-like if it's
+ * not a function and has a `value.length` that's an integer greater than or
+ * equal to `0` and less than or equal to `Number.MAX_SAFE_INTEGER`.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is array-like, else `false`.
+ * @example
+ *
+ * _.isArrayLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isArrayLike(document.body.children);
+ * // => true
+ *
+ * _.isArrayLike('abc');
+ * // => true
+ *
+ * _.isArrayLike(_.noop);
+ * // => false
+ */
+function isArrayLike(value) {
+  return value != null && isLength(value.length) && !isFunction(value);
+}
+
+/**
+ * This method is like `_.isArrayLike` except that it also checks if `value`
+ * is an object.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an array-like object,
+ *  else `false`.
+ * @example
+ *
+ * _.isArrayLikeObject([1, 2, 3]);
+ * // => true
+ *
+ * _.isArrayLikeObject(document.body.children);
+ * // => true
+ *
+ * _.isArrayLikeObject('abc');
+ * // => false
+ *
+ * _.isArrayLikeObject(_.noop);
+ * // => false
+ */
+function isArrayLikeObject(value) {
+  return isObjectLike(value) && isArrayLike(value);
+}
+
+/**
+ * Checks if `value` is classified as a `Function` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a function, else `false`.
+ * @example
+ *
+ * _.isFunction(_);
+ * // => true
+ *
+ * _.isFunction(/abc/);
+ * // => false
+ */
+function isFunction(value) {
+  // The use of `Object#toString` avoids issues with the `typeof` operator
+  // in Safari 8-9 which returns 'object' for typed array and other constructors.
+  var tag = isObject(value) ? objectToString.call(value) : '';
+  return tag == funcTag || tag == genTag;
+}
+
+/**
+ * Checks if `value` is a valid array-like length.
+ *
+ * **Note:** This method is loosely based on
+ * [`ToLength`](http://ecma-international.org/ecma-262/7.0/#sec-tolength).
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
+ * @example
+ *
+ * _.isLength(3);
+ * // => true
+ *
+ * _.isLength(Number.MIN_VALUE);
+ * // => false
+ *
+ * _.isLength(Infinity);
+ * // => false
+ *
+ * _.isLength('3');
+ * // => false
+ */
+function isLength(value) {
+  return typeof value == 'number' &&
+    value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+}
+
+/**
+ * Checks if `value` is the
+ * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+ * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+ * @example
+ *
+ * _.isObject({});
+ * // => true
+ *
+ * _.isObject([1, 2, 3]);
+ * // => true
+ *
+ * _.isObject(_.noop);
+ * // => true
+ *
+ * _.isObject(null);
+ * // => false
+ */
+function isObject(value) {
+  var type = typeof value;
+  return !!value && (type == 'object' || type == 'function');
+}
+
+/**
+ * Checks if `value` is object-like. A value is object-like if it's not `null`
+ * and has a `typeof` result of "object".
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+ * @example
+ *
+ * _.isObjectLike({});
+ * // => true
+ *
+ * _.isObjectLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isObjectLike(_.noop);
+ * // => false
+ *
+ * _.isObjectLike(null);
+ * // => false
+ */
+function isObjectLike(value) {
+  return !!value && typeof value == 'object';
+}
+
+/**
+ * Assigns own enumerable string keyed properties of source objects to the
+ * destination object. Source objects are applied from left to right.
+ * Subsequent sources overwrite property assignments of previous sources.
+ *
+ * **Note:** This method mutates `object` and is loosely based on
+ * [`Object.assign`](https://mdn.io/Object/assign).
+ *
+ * @static
+ * @memberOf _
+ * @since 0.10.0
+ * @category Object
+ * @param {Object} object The destination object.
+ * @param {...Object} [sources] The source objects.
+ * @returns {Object} Returns `object`.
+ * @see _.assignIn
+ * @example
+ *
+ * function Foo() {
+ *   this.a = 1;
+ * }
+ *
+ * function Bar() {
+ *   this.c = 3;
+ * }
+ *
+ * Foo.prototype.b = 2;
+ * Bar.prototype.d = 4;
+ *
+ * _.assign({ 'a': 0 }, new Foo, new Bar);
+ * // => { 'a': 1, 'c': 3 }
+ */
+var assign = createAssigner(function(object, source) {
+  if (nonEnumShadows || isPrototype(source) || isArrayLike(source)) {
+    copyObject(source, keys(source), object);
+    return;
+  }
+  for (var key in source) {
+    if (hasOwnProperty.call(source, key)) {
+      assignValue(object, key, source[key]);
+    }
+  }
+});
+
+/**
+ * Creates an array of the own enumerable property names of `object`.
+ *
+ * **Note:** Non-object values are coerced to objects. See the
+ * [ES spec](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
+ * for more details.
+ *
+ * @static
+ * @since 0.1.0
+ * @memberOf _
+ * @category Object
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names.
+ * @example
+ *
+ * function Foo() {
+ *   this.a = 1;
+ *   this.b = 2;
+ * }
+ *
+ * Foo.prototype.c = 3;
+ *
+ * _.keys(new Foo);
+ * // => ['a', 'b'] (iteration order is not guaranteed)
+ *
+ * _.keys('hi');
+ * // => ['0', '1']
+ */
+function keys(object) {
+  return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
+}
+
+module.exports = assign;
+
+
+/***/ }),
+
+/***/ 585:
 /***/ (function(module, exports) {
 
 /*! http://mths.be/repeat v0.2.0 by @mathias */
@@ -15511,7 +16494,7 @@ if (!String.prototype.repeat) {
 
 /***/ }),
 
-/***/ 426:
+/***/ 589:
 /***/ (function(module, exports) {
 
 /*
@@ -16617,7 +17600,7 @@ exports.uriFragmentInHTMLComment = exports.uriComponentInHTMLComment;
 
 /***/ }),
 
-/***/ 433:
+/***/ 596:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16627,25 +17610,25 @@ exports.__esModule = true;
 
 var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
-var _react = __webpack_require__(3);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _FieldSet = __webpack_require__(7);
+var _FieldSet = __webpack_require__(9);
 
 var _FieldSet2 = _interopRequireDefault(_FieldSet);
 
-var _reactMarkdown = __webpack_require__(235);
+var _reactMarkdown = __webpack_require__(291);
 
 var _reactMarkdown2 = _interopRequireDefault(_reactMarkdown);
 
-var _reactCodemirror = __webpack_require__(234);
+var _reactCodemirror = __webpack_require__(290);
 
 var _reactCodemirror2 = _interopRequireDefault(_reactCodemirror);
 
-__webpack_require__(236);
+__webpack_require__(292);
 
-__webpack_require__(229);
+__webpack_require__(285);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16728,651 +17711,7 @@ exports.default = MarkdownWidget;
 
 /***/ }),
 
-/***/ 44:
-/***/ (function(module, exports) {
-
-/**
- * lodash (Custom Build) <https://lodash.com/>
- * Build: `lodash modularize exports="npm" -o ./`
- * Copyright jQuery Foundation and other contributors <https://jquery.org/>
- * Released under MIT license <https://lodash.com/license>
- * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
- * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
- */
-
-/** Used as references for various `Number` constants. */
-var MAX_SAFE_INTEGER = 9007199254740991;
-
-/** `Object#toString` result references. */
-var argsTag = '[object Arguments]',
-    funcTag = '[object Function]',
-    genTag = '[object GeneratorFunction]';
-
-/** Used to detect unsigned integer values. */
-var reIsUint = /^(?:0|[1-9]\d*)$/;
-
-/**
- * A faster alternative to `Function#apply`, this function invokes `func`
- * with the `this` binding of `thisArg` and the arguments of `args`.
- *
- * @private
- * @param {Function} func The function to invoke.
- * @param {*} thisArg The `this` binding of `func`.
- * @param {Array} args The arguments to invoke `func` with.
- * @returns {*} Returns the result of `func`.
- */
-function apply(func, thisArg, args) {
-  switch (args.length) {
-    case 0: return func.call(thisArg);
-    case 1: return func.call(thisArg, args[0]);
-    case 2: return func.call(thisArg, args[0], args[1]);
-    case 3: return func.call(thisArg, args[0], args[1], args[2]);
-  }
-  return func.apply(thisArg, args);
-}
-
-/**
- * The base implementation of `_.times` without support for iteratee shorthands
- * or max array length checks.
- *
- * @private
- * @param {number} n The number of times to invoke `iteratee`.
- * @param {Function} iteratee The function invoked per iteration.
- * @returns {Array} Returns the array of results.
- */
-function baseTimes(n, iteratee) {
-  var index = -1,
-      result = Array(n);
-
-  while (++index < n) {
-    result[index] = iteratee(index);
-  }
-  return result;
-}
-
-/**
- * Creates a unary function that invokes `func` with its argument transformed.
- *
- * @private
- * @param {Function} func The function to wrap.
- * @param {Function} transform The argument transform.
- * @returns {Function} Returns the new function.
- */
-function overArg(func, transform) {
-  return function(arg) {
-    return func(transform(arg));
-  };
-}
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/**
- * Used to resolve the
- * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
- * of values.
- */
-var objectToString = objectProto.toString;
-
-/** Built-in value references. */
-var propertyIsEnumerable = objectProto.propertyIsEnumerable;
-
-/* Built-in method references for those with the same name as other `lodash` methods. */
-var nativeKeys = overArg(Object.keys, Object),
-    nativeMax = Math.max;
-
-/** Detect if properties shadowing those on `Object.prototype` are non-enumerable. */
-var nonEnumShadows = !propertyIsEnumerable.call({ 'valueOf': 1 }, 'valueOf');
-
-/**
- * Creates an array of the enumerable property names of the array-like `value`.
- *
- * @private
- * @param {*} value The value to query.
- * @param {boolean} inherited Specify returning inherited property names.
- * @returns {Array} Returns the array of property names.
- */
-function arrayLikeKeys(value, inherited) {
-  // Safari 8.1 makes `arguments.callee` enumerable in strict mode.
-  // Safari 9 makes `arguments.length` enumerable in strict mode.
-  var result = (isArray(value) || isArguments(value))
-    ? baseTimes(value.length, String)
-    : [];
-
-  var length = result.length,
-      skipIndexes = !!length;
-
-  for (var key in value) {
-    if ((inherited || hasOwnProperty.call(value, key)) &&
-        !(skipIndexes && (key == 'length' || isIndex(key, length)))) {
-      result.push(key);
-    }
-  }
-  return result;
-}
-
-/**
- * Assigns `value` to `key` of `object` if the existing value is not equivalent
- * using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
- * for equality comparisons.
- *
- * @private
- * @param {Object} object The object to modify.
- * @param {string} key The key of the property to assign.
- * @param {*} value The value to assign.
- */
-function assignValue(object, key, value) {
-  var objValue = object[key];
-  if (!(hasOwnProperty.call(object, key) && eq(objValue, value)) ||
-      (value === undefined && !(key in object))) {
-    object[key] = value;
-  }
-}
-
-/**
- * The base implementation of `_.keys` which doesn't treat sparse arrays as dense.
- *
- * @private
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of property names.
- */
-function baseKeys(object) {
-  if (!isPrototype(object)) {
-    return nativeKeys(object);
-  }
-  var result = [];
-  for (var key in Object(object)) {
-    if (hasOwnProperty.call(object, key) && key != 'constructor') {
-      result.push(key);
-    }
-  }
-  return result;
-}
-
-/**
- * The base implementation of `_.rest` which doesn't validate or coerce arguments.
- *
- * @private
- * @param {Function} func The function to apply a rest parameter to.
- * @param {number} [start=func.length-1] The start position of the rest parameter.
- * @returns {Function} Returns the new function.
- */
-function baseRest(func, start) {
-  start = nativeMax(start === undefined ? (func.length - 1) : start, 0);
-  return function() {
-    var args = arguments,
-        index = -1,
-        length = nativeMax(args.length - start, 0),
-        array = Array(length);
-
-    while (++index < length) {
-      array[index] = args[start + index];
-    }
-    index = -1;
-    var otherArgs = Array(start + 1);
-    while (++index < start) {
-      otherArgs[index] = args[index];
-    }
-    otherArgs[start] = array;
-    return apply(func, this, otherArgs);
-  };
-}
-
-/**
- * Copies properties of `source` to `object`.
- *
- * @private
- * @param {Object} source The object to copy properties from.
- * @param {Array} props The property identifiers to copy.
- * @param {Object} [object={}] The object to copy properties to.
- * @param {Function} [customizer] The function to customize copied values.
- * @returns {Object} Returns `object`.
- */
-function copyObject(source, props, object, customizer) {
-  object || (object = {});
-
-  var index = -1,
-      length = props.length;
-
-  while (++index < length) {
-    var key = props[index];
-
-    var newValue = customizer
-      ? customizer(object[key], source[key], key, object, source)
-      : undefined;
-
-    assignValue(object, key, newValue === undefined ? source[key] : newValue);
-  }
-  return object;
-}
-
-/**
- * Creates a function like `_.assign`.
- *
- * @private
- * @param {Function} assigner The function to assign values.
- * @returns {Function} Returns the new assigner function.
- */
-function createAssigner(assigner) {
-  return baseRest(function(object, sources) {
-    var index = -1,
-        length = sources.length,
-        customizer = length > 1 ? sources[length - 1] : undefined,
-        guard = length > 2 ? sources[2] : undefined;
-
-    customizer = (assigner.length > 3 && typeof customizer == 'function')
-      ? (length--, customizer)
-      : undefined;
-
-    if (guard && isIterateeCall(sources[0], sources[1], guard)) {
-      customizer = length < 3 ? undefined : customizer;
-      length = 1;
-    }
-    object = Object(object);
-    while (++index < length) {
-      var source = sources[index];
-      if (source) {
-        assigner(object, source, index, customizer);
-      }
-    }
-    return object;
-  });
-}
-
-/**
- * Checks if `value` is a valid array-like index.
- *
- * @private
- * @param {*} value The value to check.
- * @param {number} [length=MAX_SAFE_INTEGER] The upper bounds of a valid index.
- * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
- */
-function isIndex(value, length) {
-  length = length == null ? MAX_SAFE_INTEGER : length;
-  return !!length &&
-    (typeof value == 'number' || reIsUint.test(value)) &&
-    (value > -1 && value % 1 == 0 && value < length);
-}
-
-/**
- * Checks if the given arguments are from an iteratee call.
- *
- * @private
- * @param {*} value The potential iteratee value argument.
- * @param {*} index The potential iteratee index or key argument.
- * @param {*} object The potential iteratee object argument.
- * @returns {boolean} Returns `true` if the arguments are from an iteratee call,
- *  else `false`.
- */
-function isIterateeCall(value, index, object) {
-  if (!isObject(object)) {
-    return false;
-  }
-  var type = typeof index;
-  if (type == 'number'
-        ? (isArrayLike(object) && isIndex(index, object.length))
-        : (type == 'string' && index in object)
-      ) {
-    return eq(object[index], value);
-  }
-  return false;
-}
-
-/**
- * Checks if `value` is likely a prototype object.
- *
- * @private
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a prototype, else `false`.
- */
-function isPrototype(value) {
-  var Ctor = value && value.constructor,
-      proto = (typeof Ctor == 'function' && Ctor.prototype) || objectProto;
-
-  return value === proto;
-}
-
-/**
- * Performs a
- * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
- * comparison between two values to determine if they are equivalent.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to compare.
- * @param {*} other The other value to compare.
- * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
- * @example
- *
- * var object = { 'a': 1 };
- * var other = { 'a': 1 };
- *
- * _.eq(object, object);
- * // => true
- *
- * _.eq(object, other);
- * // => false
- *
- * _.eq('a', 'a');
- * // => true
- *
- * _.eq('a', Object('a'));
- * // => false
- *
- * _.eq(NaN, NaN);
- * // => true
- */
-function eq(value, other) {
-  return value === other || (value !== value && other !== other);
-}
-
-/**
- * Checks if `value` is likely an `arguments` object.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is an `arguments` object,
- *  else `false`.
- * @example
- *
- * _.isArguments(function() { return arguments; }());
- * // => true
- *
- * _.isArguments([1, 2, 3]);
- * // => false
- */
-function isArguments(value) {
-  // Safari 8.1 makes `arguments.callee` enumerable in strict mode.
-  return isArrayLikeObject(value) && hasOwnProperty.call(value, 'callee') &&
-    (!propertyIsEnumerable.call(value, 'callee') || objectToString.call(value) == argsTag);
-}
-
-/**
- * Checks if `value` is classified as an `Array` object.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is an array, else `false`.
- * @example
- *
- * _.isArray([1, 2, 3]);
- * // => true
- *
- * _.isArray(document.body.children);
- * // => false
- *
- * _.isArray('abc');
- * // => false
- *
- * _.isArray(_.noop);
- * // => false
- */
-var isArray = Array.isArray;
-
-/**
- * Checks if `value` is array-like. A value is considered array-like if it's
- * not a function and has a `value.length` that's an integer greater than or
- * equal to `0` and less than or equal to `Number.MAX_SAFE_INTEGER`.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is array-like, else `false`.
- * @example
- *
- * _.isArrayLike([1, 2, 3]);
- * // => true
- *
- * _.isArrayLike(document.body.children);
- * // => true
- *
- * _.isArrayLike('abc');
- * // => true
- *
- * _.isArrayLike(_.noop);
- * // => false
- */
-function isArrayLike(value) {
-  return value != null && isLength(value.length) && !isFunction(value);
-}
-
-/**
- * This method is like `_.isArrayLike` except that it also checks if `value`
- * is an object.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is an array-like object,
- *  else `false`.
- * @example
- *
- * _.isArrayLikeObject([1, 2, 3]);
- * // => true
- *
- * _.isArrayLikeObject(document.body.children);
- * // => true
- *
- * _.isArrayLikeObject('abc');
- * // => false
- *
- * _.isArrayLikeObject(_.noop);
- * // => false
- */
-function isArrayLikeObject(value) {
-  return isObjectLike(value) && isArrayLike(value);
-}
-
-/**
- * Checks if `value` is classified as a `Function` object.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a function, else `false`.
- * @example
- *
- * _.isFunction(_);
- * // => true
- *
- * _.isFunction(/abc/);
- * // => false
- */
-function isFunction(value) {
-  // The use of `Object#toString` avoids issues with the `typeof` operator
-  // in Safari 8-9 which returns 'object' for typed array and other constructors.
-  var tag = isObject(value) ? objectToString.call(value) : '';
-  return tag == funcTag || tag == genTag;
-}
-
-/**
- * Checks if `value` is a valid array-like length.
- *
- * **Note:** This method is loosely based on
- * [`ToLength`](http://ecma-international.org/ecma-262/7.0/#sec-tolength).
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
- * @example
- *
- * _.isLength(3);
- * // => true
- *
- * _.isLength(Number.MIN_VALUE);
- * // => false
- *
- * _.isLength(Infinity);
- * // => false
- *
- * _.isLength('3');
- * // => false
- */
-function isLength(value) {
-  return typeof value == 'number' &&
-    value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
-}
-
-/**
- * Checks if `value` is the
- * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
- * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is an object, else `false`.
- * @example
- *
- * _.isObject({});
- * // => true
- *
- * _.isObject([1, 2, 3]);
- * // => true
- *
- * _.isObject(_.noop);
- * // => true
- *
- * _.isObject(null);
- * // => false
- */
-function isObject(value) {
-  var type = typeof value;
-  return !!value && (type == 'object' || type == 'function');
-}
-
-/**
- * Checks if `value` is object-like. A value is object-like if it's not `null`
- * and has a `typeof` result of "object".
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
- * @example
- *
- * _.isObjectLike({});
- * // => true
- *
- * _.isObjectLike([1, 2, 3]);
- * // => true
- *
- * _.isObjectLike(_.noop);
- * // => false
- *
- * _.isObjectLike(null);
- * // => false
- */
-function isObjectLike(value) {
-  return !!value && typeof value == 'object';
-}
-
-/**
- * Assigns own enumerable string keyed properties of source objects to the
- * destination object. Source objects are applied from left to right.
- * Subsequent sources overwrite property assignments of previous sources.
- *
- * **Note:** This method mutates `object` and is loosely based on
- * [`Object.assign`](https://mdn.io/Object/assign).
- *
- * @static
- * @memberOf _
- * @since 0.10.0
- * @category Object
- * @param {Object} object The destination object.
- * @param {...Object} [sources] The source objects.
- * @returns {Object} Returns `object`.
- * @see _.assignIn
- * @example
- *
- * function Foo() {
- *   this.a = 1;
- * }
- *
- * function Bar() {
- *   this.c = 3;
- * }
- *
- * Foo.prototype.b = 2;
- * Bar.prototype.d = 4;
- *
- * _.assign({ 'a': 0 }, new Foo, new Bar);
- * // => { 'a': 1, 'c': 3 }
- */
-var assign = createAssigner(function(object, source) {
-  if (nonEnumShadows || isPrototype(source) || isArrayLike(source)) {
-    copyObject(source, keys(source), object);
-    return;
-  }
-  for (var key in source) {
-    if (hasOwnProperty.call(source, key)) {
-      assignValue(object, key, source[key]);
-    }
-  }
-});
-
-/**
- * Creates an array of the own enumerable property names of `object`.
- *
- * **Note:** Non-object values are coerced to objects. See the
- * [ES spec](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
- * for more details.
- *
- * @static
- * @since 0.1.0
- * @memberOf _
- * @category Object
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of property names.
- * @example
- *
- * function Foo() {
- *   this.a = 1;
- *   this.b = 2;
- * }
- *
- * Foo.prototype.c = 3;
- *
- * _.keys(new Foo);
- * // => ['a', 'b'] (iteration order is not guaranteed)
- *
- * _.keys('hi');
- * // => ['0', '1']
- */
-function keys(object) {
-  return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
-}
-
-module.exports = assign;
-
-
-/***/ }),
-
-/***/ 52:
+/***/ 72:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17651,7 +17990,7 @@ module.exports = Node;
 
 /***/ }),
 
-/***/ 7:
+/***/ 9:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17665,7 +18004,7 @@ var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" &
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _react = __webpack_require__(3);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -17813,2192 +18152,6 @@ var FieldSet = function (_Component2) {
 
 exports.default = FieldSet;
 
-/***/ }),
-
-/***/ 80:
-/***/ (function(module, exports, __webpack_require__) {
-
-var encode = __webpack_require__(309),
-    decode = __webpack_require__(307);
-
-exports.decode = function(data, level){
-	return (!level || level <= 0 ? decode.XML : decode.HTML)(data);
-};
-
-exports.decodeStrict = function(data, level){
-	return (!level || level <= 0 ? decode.XML : decode.HTMLStrict)(data);
-};
-
-exports.encode = function(data, level){
-	return (!level || level <= 0 ? encode.XML : encode.HTML)(data);
-};
-
-exports.encodeXML = encode.XML;
-
-exports.encodeHTML4 =
-exports.encodeHTML5 =
-exports.encodeHTML  = encode.HTML;
-
-exports.decodeXML =
-exports.decodeXMLStrict = decode.XML;
-
-exports.decodeHTML4 =
-exports.decodeHTML5 =
-exports.decodeHTML = decode.HTML;
-
-exports.decodeHTML4Strict =
-exports.decodeHTML5Strict =
-exports.decodeHTMLStrict = decode.HTMLStrict;
-
-exports.escape = encode.escape;
-
-
-/***/ }),
-
-/***/ 81:
-/***/ (function(module, exports) {
-
-module.exports = {
-	"Aacute": "Á",
-	"aacute": "á",
-	"Abreve": "Ă",
-	"abreve": "ă",
-	"ac": "∾",
-	"acd": "∿",
-	"acE": "∾̳",
-	"Acirc": "Â",
-	"acirc": "â",
-	"acute": "´",
-	"Acy": "А",
-	"acy": "а",
-	"AElig": "Æ",
-	"aelig": "æ",
-	"af": "⁡",
-	"Afr": "𝔄",
-	"afr": "𝔞",
-	"Agrave": "À",
-	"agrave": "à",
-	"alefsym": "ℵ",
-	"aleph": "ℵ",
-	"Alpha": "Α",
-	"alpha": "α",
-	"Amacr": "Ā",
-	"amacr": "ā",
-	"amalg": "⨿",
-	"amp": "&",
-	"AMP": "&",
-	"andand": "⩕",
-	"And": "⩓",
-	"and": "∧",
-	"andd": "⩜",
-	"andslope": "⩘",
-	"andv": "⩚",
-	"ang": "∠",
-	"ange": "⦤",
-	"angle": "∠",
-	"angmsdaa": "⦨",
-	"angmsdab": "⦩",
-	"angmsdac": "⦪",
-	"angmsdad": "⦫",
-	"angmsdae": "⦬",
-	"angmsdaf": "⦭",
-	"angmsdag": "⦮",
-	"angmsdah": "⦯",
-	"angmsd": "∡",
-	"angrt": "∟",
-	"angrtvb": "⊾",
-	"angrtvbd": "⦝",
-	"angsph": "∢",
-	"angst": "Å",
-	"angzarr": "⍼",
-	"Aogon": "Ą",
-	"aogon": "ą",
-	"Aopf": "𝔸",
-	"aopf": "𝕒",
-	"apacir": "⩯",
-	"ap": "≈",
-	"apE": "⩰",
-	"ape": "≊",
-	"apid": "≋",
-	"apos": "'",
-	"ApplyFunction": "⁡",
-	"approx": "≈",
-	"approxeq": "≊",
-	"Aring": "Å",
-	"aring": "å",
-	"Ascr": "𝒜",
-	"ascr": "𝒶",
-	"Assign": "≔",
-	"ast": "*",
-	"asymp": "≈",
-	"asympeq": "≍",
-	"Atilde": "Ã",
-	"atilde": "ã",
-	"Auml": "Ä",
-	"auml": "ä",
-	"awconint": "∳",
-	"awint": "⨑",
-	"backcong": "≌",
-	"backepsilon": "϶",
-	"backprime": "‵",
-	"backsim": "∽",
-	"backsimeq": "⋍",
-	"Backslash": "∖",
-	"Barv": "⫧",
-	"barvee": "⊽",
-	"barwed": "⌅",
-	"Barwed": "⌆",
-	"barwedge": "⌅",
-	"bbrk": "⎵",
-	"bbrktbrk": "⎶",
-	"bcong": "≌",
-	"Bcy": "Б",
-	"bcy": "б",
-	"bdquo": "„",
-	"becaus": "∵",
-	"because": "∵",
-	"Because": "∵",
-	"bemptyv": "⦰",
-	"bepsi": "϶",
-	"bernou": "ℬ",
-	"Bernoullis": "ℬ",
-	"Beta": "Β",
-	"beta": "β",
-	"beth": "ℶ",
-	"between": "≬",
-	"Bfr": "𝔅",
-	"bfr": "𝔟",
-	"bigcap": "⋂",
-	"bigcirc": "◯",
-	"bigcup": "⋃",
-	"bigodot": "⨀",
-	"bigoplus": "⨁",
-	"bigotimes": "⨂",
-	"bigsqcup": "⨆",
-	"bigstar": "★",
-	"bigtriangledown": "▽",
-	"bigtriangleup": "△",
-	"biguplus": "⨄",
-	"bigvee": "⋁",
-	"bigwedge": "⋀",
-	"bkarow": "⤍",
-	"blacklozenge": "⧫",
-	"blacksquare": "▪",
-	"blacktriangle": "▴",
-	"blacktriangledown": "▾",
-	"blacktriangleleft": "◂",
-	"blacktriangleright": "▸",
-	"blank": "␣",
-	"blk12": "▒",
-	"blk14": "░",
-	"blk34": "▓",
-	"block": "█",
-	"bne": "=⃥",
-	"bnequiv": "≡⃥",
-	"bNot": "⫭",
-	"bnot": "⌐",
-	"Bopf": "𝔹",
-	"bopf": "𝕓",
-	"bot": "⊥",
-	"bottom": "⊥",
-	"bowtie": "⋈",
-	"boxbox": "⧉",
-	"boxdl": "┐",
-	"boxdL": "╕",
-	"boxDl": "╖",
-	"boxDL": "╗",
-	"boxdr": "┌",
-	"boxdR": "╒",
-	"boxDr": "╓",
-	"boxDR": "╔",
-	"boxh": "─",
-	"boxH": "═",
-	"boxhd": "┬",
-	"boxHd": "╤",
-	"boxhD": "╥",
-	"boxHD": "╦",
-	"boxhu": "┴",
-	"boxHu": "╧",
-	"boxhU": "╨",
-	"boxHU": "╩",
-	"boxminus": "⊟",
-	"boxplus": "⊞",
-	"boxtimes": "⊠",
-	"boxul": "┘",
-	"boxuL": "╛",
-	"boxUl": "╜",
-	"boxUL": "╝",
-	"boxur": "└",
-	"boxuR": "╘",
-	"boxUr": "╙",
-	"boxUR": "╚",
-	"boxv": "│",
-	"boxV": "║",
-	"boxvh": "┼",
-	"boxvH": "╪",
-	"boxVh": "╫",
-	"boxVH": "╬",
-	"boxvl": "┤",
-	"boxvL": "╡",
-	"boxVl": "╢",
-	"boxVL": "╣",
-	"boxvr": "├",
-	"boxvR": "╞",
-	"boxVr": "╟",
-	"boxVR": "╠",
-	"bprime": "‵",
-	"breve": "˘",
-	"Breve": "˘",
-	"brvbar": "¦",
-	"bscr": "𝒷",
-	"Bscr": "ℬ",
-	"bsemi": "⁏",
-	"bsim": "∽",
-	"bsime": "⋍",
-	"bsolb": "⧅",
-	"bsol": "\\",
-	"bsolhsub": "⟈",
-	"bull": "•",
-	"bullet": "•",
-	"bump": "≎",
-	"bumpE": "⪮",
-	"bumpe": "≏",
-	"Bumpeq": "≎",
-	"bumpeq": "≏",
-	"Cacute": "Ć",
-	"cacute": "ć",
-	"capand": "⩄",
-	"capbrcup": "⩉",
-	"capcap": "⩋",
-	"cap": "∩",
-	"Cap": "⋒",
-	"capcup": "⩇",
-	"capdot": "⩀",
-	"CapitalDifferentialD": "ⅅ",
-	"caps": "∩︀",
-	"caret": "⁁",
-	"caron": "ˇ",
-	"Cayleys": "ℭ",
-	"ccaps": "⩍",
-	"Ccaron": "Č",
-	"ccaron": "č",
-	"Ccedil": "Ç",
-	"ccedil": "ç",
-	"Ccirc": "Ĉ",
-	"ccirc": "ĉ",
-	"Cconint": "∰",
-	"ccups": "⩌",
-	"ccupssm": "⩐",
-	"Cdot": "Ċ",
-	"cdot": "ċ",
-	"cedil": "¸",
-	"Cedilla": "¸",
-	"cemptyv": "⦲",
-	"cent": "¢",
-	"centerdot": "·",
-	"CenterDot": "·",
-	"cfr": "𝔠",
-	"Cfr": "ℭ",
-	"CHcy": "Ч",
-	"chcy": "ч",
-	"check": "✓",
-	"checkmark": "✓",
-	"Chi": "Χ",
-	"chi": "χ",
-	"circ": "ˆ",
-	"circeq": "≗",
-	"circlearrowleft": "↺",
-	"circlearrowright": "↻",
-	"circledast": "⊛",
-	"circledcirc": "⊚",
-	"circleddash": "⊝",
-	"CircleDot": "⊙",
-	"circledR": "®",
-	"circledS": "Ⓢ",
-	"CircleMinus": "⊖",
-	"CirclePlus": "⊕",
-	"CircleTimes": "⊗",
-	"cir": "○",
-	"cirE": "⧃",
-	"cire": "≗",
-	"cirfnint": "⨐",
-	"cirmid": "⫯",
-	"cirscir": "⧂",
-	"ClockwiseContourIntegral": "∲",
-	"CloseCurlyDoubleQuote": "”",
-	"CloseCurlyQuote": "’",
-	"clubs": "♣",
-	"clubsuit": "♣",
-	"colon": ":",
-	"Colon": "∷",
-	"Colone": "⩴",
-	"colone": "≔",
-	"coloneq": "≔",
-	"comma": ",",
-	"commat": "@",
-	"comp": "∁",
-	"compfn": "∘",
-	"complement": "∁",
-	"complexes": "ℂ",
-	"cong": "≅",
-	"congdot": "⩭",
-	"Congruent": "≡",
-	"conint": "∮",
-	"Conint": "∯",
-	"ContourIntegral": "∮",
-	"copf": "𝕔",
-	"Copf": "ℂ",
-	"coprod": "∐",
-	"Coproduct": "∐",
-	"copy": "©",
-	"COPY": "©",
-	"copysr": "℗",
-	"CounterClockwiseContourIntegral": "∳",
-	"crarr": "↵",
-	"cross": "✗",
-	"Cross": "⨯",
-	"Cscr": "𝒞",
-	"cscr": "𝒸",
-	"csub": "⫏",
-	"csube": "⫑",
-	"csup": "⫐",
-	"csupe": "⫒",
-	"ctdot": "⋯",
-	"cudarrl": "⤸",
-	"cudarrr": "⤵",
-	"cuepr": "⋞",
-	"cuesc": "⋟",
-	"cularr": "↶",
-	"cularrp": "⤽",
-	"cupbrcap": "⩈",
-	"cupcap": "⩆",
-	"CupCap": "≍",
-	"cup": "∪",
-	"Cup": "⋓",
-	"cupcup": "⩊",
-	"cupdot": "⊍",
-	"cupor": "⩅",
-	"cups": "∪︀",
-	"curarr": "↷",
-	"curarrm": "⤼",
-	"curlyeqprec": "⋞",
-	"curlyeqsucc": "⋟",
-	"curlyvee": "⋎",
-	"curlywedge": "⋏",
-	"curren": "¤",
-	"curvearrowleft": "↶",
-	"curvearrowright": "↷",
-	"cuvee": "⋎",
-	"cuwed": "⋏",
-	"cwconint": "∲",
-	"cwint": "∱",
-	"cylcty": "⌭",
-	"dagger": "†",
-	"Dagger": "‡",
-	"daleth": "ℸ",
-	"darr": "↓",
-	"Darr": "↡",
-	"dArr": "⇓",
-	"dash": "‐",
-	"Dashv": "⫤",
-	"dashv": "⊣",
-	"dbkarow": "⤏",
-	"dblac": "˝",
-	"Dcaron": "Ď",
-	"dcaron": "ď",
-	"Dcy": "Д",
-	"dcy": "д",
-	"ddagger": "‡",
-	"ddarr": "⇊",
-	"DD": "ⅅ",
-	"dd": "ⅆ",
-	"DDotrahd": "⤑",
-	"ddotseq": "⩷",
-	"deg": "°",
-	"Del": "∇",
-	"Delta": "Δ",
-	"delta": "δ",
-	"demptyv": "⦱",
-	"dfisht": "⥿",
-	"Dfr": "𝔇",
-	"dfr": "𝔡",
-	"dHar": "⥥",
-	"dharl": "⇃",
-	"dharr": "⇂",
-	"DiacriticalAcute": "´",
-	"DiacriticalDot": "˙",
-	"DiacriticalDoubleAcute": "˝",
-	"DiacriticalGrave": "`",
-	"DiacriticalTilde": "˜",
-	"diam": "⋄",
-	"diamond": "⋄",
-	"Diamond": "⋄",
-	"diamondsuit": "♦",
-	"diams": "♦",
-	"die": "¨",
-	"DifferentialD": "ⅆ",
-	"digamma": "ϝ",
-	"disin": "⋲",
-	"div": "÷",
-	"divide": "÷",
-	"divideontimes": "⋇",
-	"divonx": "⋇",
-	"DJcy": "Ђ",
-	"djcy": "ђ",
-	"dlcorn": "⌞",
-	"dlcrop": "⌍",
-	"dollar": "$",
-	"Dopf": "𝔻",
-	"dopf": "𝕕",
-	"Dot": "¨",
-	"dot": "˙",
-	"DotDot": "⃜",
-	"doteq": "≐",
-	"doteqdot": "≑",
-	"DotEqual": "≐",
-	"dotminus": "∸",
-	"dotplus": "∔",
-	"dotsquare": "⊡",
-	"doublebarwedge": "⌆",
-	"DoubleContourIntegral": "∯",
-	"DoubleDot": "¨",
-	"DoubleDownArrow": "⇓",
-	"DoubleLeftArrow": "⇐",
-	"DoubleLeftRightArrow": "⇔",
-	"DoubleLeftTee": "⫤",
-	"DoubleLongLeftArrow": "⟸",
-	"DoubleLongLeftRightArrow": "⟺",
-	"DoubleLongRightArrow": "⟹",
-	"DoubleRightArrow": "⇒",
-	"DoubleRightTee": "⊨",
-	"DoubleUpArrow": "⇑",
-	"DoubleUpDownArrow": "⇕",
-	"DoubleVerticalBar": "∥",
-	"DownArrowBar": "⤓",
-	"downarrow": "↓",
-	"DownArrow": "↓",
-	"Downarrow": "⇓",
-	"DownArrowUpArrow": "⇵",
-	"DownBreve": "̑",
-	"downdownarrows": "⇊",
-	"downharpoonleft": "⇃",
-	"downharpoonright": "⇂",
-	"DownLeftRightVector": "⥐",
-	"DownLeftTeeVector": "⥞",
-	"DownLeftVectorBar": "⥖",
-	"DownLeftVector": "↽",
-	"DownRightTeeVector": "⥟",
-	"DownRightVectorBar": "⥗",
-	"DownRightVector": "⇁",
-	"DownTeeArrow": "↧",
-	"DownTee": "⊤",
-	"drbkarow": "⤐",
-	"drcorn": "⌟",
-	"drcrop": "⌌",
-	"Dscr": "𝒟",
-	"dscr": "𝒹",
-	"DScy": "Ѕ",
-	"dscy": "ѕ",
-	"dsol": "⧶",
-	"Dstrok": "Đ",
-	"dstrok": "đ",
-	"dtdot": "⋱",
-	"dtri": "▿",
-	"dtrif": "▾",
-	"duarr": "⇵",
-	"duhar": "⥯",
-	"dwangle": "⦦",
-	"DZcy": "Џ",
-	"dzcy": "џ",
-	"dzigrarr": "⟿",
-	"Eacute": "É",
-	"eacute": "é",
-	"easter": "⩮",
-	"Ecaron": "Ě",
-	"ecaron": "ě",
-	"Ecirc": "Ê",
-	"ecirc": "ê",
-	"ecir": "≖",
-	"ecolon": "≕",
-	"Ecy": "Э",
-	"ecy": "э",
-	"eDDot": "⩷",
-	"Edot": "Ė",
-	"edot": "ė",
-	"eDot": "≑",
-	"ee": "ⅇ",
-	"efDot": "≒",
-	"Efr": "𝔈",
-	"efr": "𝔢",
-	"eg": "⪚",
-	"Egrave": "È",
-	"egrave": "è",
-	"egs": "⪖",
-	"egsdot": "⪘",
-	"el": "⪙",
-	"Element": "∈",
-	"elinters": "⏧",
-	"ell": "ℓ",
-	"els": "⪕",
-	"elsdot": "⪗",
-	"Emacr": "Ē",
-	"emacr": "ē",
-	"empty": "∅",
-	"emptyset": "∅",
-	"EmptySmallSquare": "◻",
-	"emptyv": "∅",
-	"EmptyVerySmallSquare": "▫",
-	"emsp13": " ",
-	"emsp14": " ",
-	"emsp": " ",
-	"ENG": "Ŋ",
-	"eng": "ŋ",
-	"ensp": " ",
-	"Eogon": "Ę",
-	"eogon": "ę",
-	"Eopf": "𝔼",
-	"eopf": "𝕖",
-	"epar": "⋕",
-	"eparsl": "⧣",
-	"eplus": "⩱",
-	"epsi": "ε",
-	"Epsilon": "Ε",
-	"epsilon": "ε",
-	"epsiv": "ϵ",
-	"eqcirc": "≖",
-	"eqcolon": "≕",
-	"eqsim": "≂",
-	"eqslantgtr": "⪖",
-	"eqslantless": "⪕",
-	"Equal": "⩵",
-	"equals": "=",
-	"EqualTilde": "≂",
-	"equest": "≟",
-	"Equilibrium": "⇌",
-	"equiv": "≡",
-	"equivDD": "⩸",
-	"eqvparsl": "⧥",
-	"erarr": "⥱",
-	"erDot": "≓",
-	"escr": "ℯ",
-	"Escr": "ℰ",
-	"esdot": "≐",
-	"Esim": "⩳",
-	"esim": "≂",
-	"Eta": "Η",
-	"eta": "η",
-	"ETH": "Ð",
-	"eth": "ð",
-	"Euml": "Ë",
-	"euml": "ë",
-	"euro": "€",
-	"excl": "!",
-	"exist": "∃",
-	"Exists": "∃",
-	"expectation": "ℰ",
-	"exponentiale": "ⅇ",
-	"ExponentialE": "ⅇ",
-	"fallingdotseq": "≒",
-	"Fcy": "Ф",
-	"fcy": "ф",
-	"female": "♀",
-	"ffilig": "ﬃ",
-	"fflig": "ﬀ",
-	"ffllig": "ﬄ",
-	"Ffr": "𝔉",
-	"ffr": "𝔣",
-	"filig": "ﬁ",
-	"FilledSmallSquare": "◼",
-	"FilledVerySmallSquare": "▪",
-	"fjlig": "fj",
-	"flat": "♭",
-	"fllig": "ﬂ",
-	"fltns": "▱",
-	"fnof": "ƒ",
-	"Fopf": "𝔽",
-	"fopf": "𝕗",
-	"forall": "∀",
-	"ForAll": "∀",
-	"fork": "⋔",
-	"forkv": "⫙",
-	"Fouriertrf": "ℱ",
-	"fpartint": "⨍",
-	"frac12": "½",
-	"frac13": "⅓",
-	"frac14": "¼",
-	"frac15": "⅕",
-	"frac16": "⅙",
-	"frac18": "⅛",
-	"frac23": "⅔",
-	"frac25": "⅖",
-	"frac34": "¾",
-	"frac35": "⅗",
-	"frac38": "⅜",
-	"frac45": "⅘",
-	"frac56": "⅚",
-	"frac58": "⅝",
-	"frac78": "⅞",
-	"frasl": "⁄",
-	"frown": "⌢",
-	"fscr": "𝒻",
-	"Fscr": "ℱ",
-	"gacute": "ǵ",
-	"Gamma": "Γ",
-	"gamma": "γ",
-	"Gammad": "Ϝ",
-	"gammad": "ϝ",
-	"gap": "⪆",
-	"Gbreve": "Ğ",
-	"gbreve": "ğ",
-	"Gcedil": "Ģ",
-	"Gcirc": "Ĝ",
-	"gcirc": "ĝ",
-	"Gcy": "Г",
-	"gcy": "г",
-	"Gdot": "Ġ",
-	"gdot": "ġ",
-	"ge": "≥",
-	"gE": "≧",
-	"gEl": "⪌",
-	"gel": "⋛",
-	"geq": "≥",
-	"geqq": "≧",
-	"geqslant": "⩾",
-	"gescc": "⪩",
-	"ges": "⩾",
-	"gesdot": "⪀",
-	"gesdoto": "⪂",
-	"gesdotol": "⪄",
-	"gesl": "⋛︀",
-	"gesles": "⪔",
-	"Gfr": "𝔊",
-	"gfr": "𝔤",
-	"gg": "≫",
-	"Gg": "⋙",
-	"ggg": "⋙",
-	"gimel": "ℷ",
-	"GJcy": "Ѓ",
-	"gjcy": "ѓ",
-	"gla": "⪥",
-	"gl": "≷",
-	"glE": "⪒",
-	"glj": "⪤",
-	"gnap": "⪊",
-	"gnapprox": "⪊",
-	"gne": "⪈",
-	"gnE": "≩",
-	"gneq": "⪈",
-	"gneqq": "≩",
-	"gnsim": "⋧",
-	"Gopf": "𝔾",
-	"gopf": "𝕘",
-	"grave": "`",
-	"GreaterEqual": "≥",
-	"GreaterEqualLess": "⋛",
-	"GreaterFullEqual": "≧",
-	"GreaterGreater": "⪢",
-	"GreaterLess": "≷",
-	"GreaterSlantEqual": "⩾",
-	"GreaterTilde": "≳",
-	"Gscr": "𝒢",
-	"gscr": "ℊ",
-	"gsim": "≳",
-	"gsime": "⪎",
-	"gsiml": "⪐",
-	"gtcc": "⪧",
-	"gtcir": "⩺",
-	"gt": ">",
-	"GT": ">",
-	"Gt": "≫",
-	"gtdot": "⋗",
-	"gtlPar": "⦕",
-	"gtquest": "⩼",
-	"gtrapprox": "⪆",
-	"gtrarr": "⥸",
-	"gtrdot": "⋗",
-	"gtreqless": "⋛",
-	"gtreqqless": "⪌",
-	"gtrless": "≷",
-	"gtrsim": "≳",
-	"gvertneqq": "≩︀",
-	"gvnE": "≩︀",
-	"Hacek": "ˇ",
-	"hairsp": " ",
-	"half": "½",
-	"hamilt": "ℋ",
-	"HARDcy": "Ъ",
-	"hardcy": "ъ",
-	"harrcir": "⥈",
-	"harr": "↔",
-	"hArr": "⇔",
-	"harrw": "↭",
-	"Hat": "^",
-	"hbar": "ℏ",
-	"Hcirc": "Ĥ",
-	"hcirc": "ĥ",
-	"hearts": "♥",
-	"heartsuit": "♥",
-	"hellip": "…",
-	"hercon": "⊹",
-	"hfr": "𝔥",
-	"Hfr": "ℌ",
-	"HilbertSpace": "ℋ",
-	"hksearow": "⤥",
-	"hkswarow": "⤦",
-	"hoarr": "⇿",
-	"homtht": "∻",
-	"hookleftarrow": "↩",
-	"hookrightarrow": "↪",
-	"hopf": "𝕙",
-	"Hopf": "ℍ",
-	"horbar": "―",
-	"HorizontalLine": "─",
-	"hscr": "𝒽",
-	"Hscr": "ℋ",
-	"hslash": "ℏ",
-	"Hstrok": "Ħ",
-	"hstrok": "ħ",
-	"HumpDownHump": "≎",
-	"HumpEqual": "≏",
-	"hybull": "⁃",
-	"hyphen": "‐",
-	"Iacute": "Í",
-	"iacute": "í",
-	"ic": "⁣",
-	"Icirc": "Î",
-	"icirc": "î",
-	"Icy": "И",
-	"icy": "и",
-	"Idot": "İ",
-	"IEcy": "Е",
-	"iecy": "е",
-	"iexcl": "¡",
-	"iff": "⇔",
-	"ifr": "𝔦",
-	"Ifr": "ℑ",
-	"Igrave": "Ì",
-	"igrave": "ì",
-	"ii": "ⅈ",
-	"iiiint": "⨌",
-	"iiint": "∭",
-	"iinfin": "⧜",
-	"iiota": "℩",
-	"IJlig": "Ĳ",
-	"ijlig": "ĳ",
-	"Imacr": "Ī",
-	"imacr": "ī",
-	"image": "ℑ",
-	"ImaginaryI": "ⅈ",
-	"imagline": "ℐ",
-	"imagpart": "ℑ",
-	"imath": "ı",
-	"Im": "ℑ",
-	"imof": "⊷",
-	"imped": "Ƶ",
-	"Implies": "⇒",
-	"incare": "℅",
-	"in": "∈",
-	"infin": "∞",
-	"infintie": "⧝",
-	"inodot": "ı",
-	"intcal": "⊺",
-	"int": "∫",
-	"Int": "∬",
-	"integers": "ℤ",
-	"Integral": "∫",
-	"intercal": "⊺",
-	"Intersection": "⋂",
-	"intlarhk": "⨗",
-	"intprod": "⨼",
-	"InvisibleComma": "⁣",
-	"InvisibleTimes": "⁢",
-	"IOcy": "Ё",
-	"iocy": "ё",
-	"Iogon": "Į",
-	"iogon": "į",
-	"Iopf": "𝕀",
-	"iopf": "𝕚",
-	"Iota": "Ι",
-	"iota": "ι",
-	"iprod": "⨼",
-	"iquest": "¿",
-	"iscr": "𝒾",
-	"Iscr": "ℐ",
-	"isin": "∈",
-	"isindot": "⋵",
-	"isinE": "⋹",
-	"isins": "⋴",
-	"isinsv": "⋳",
-	"isinv": "∈",
-	"it": "⁢",
-	"Itilde": "Ĩ",
-	"itilde": "ĩ",
-	"Iukcy": "І",
-	"iukcy": "і",
-	"Iuml": "Ï",
-	"iuml": "ï",
-	"Jcirc": "Ĵ",
-	"jcirc": "ĵ",
-	"Jcy": "Й",
-	"jcy": "й",
-	"Jfr": "𝔍",
-	"jfr": "𝔧",
-	"jmath": "ȷ",
-	"Jopf": "𝕁",
-	"jopf": "𝕛",
-	"Jscr": "𝒥",
-	"jscr": "𝒿",
-	"Jsercy": "Ј",
-	"jsercy": "ј",
-	"Jukcy": "Є",
-	"jukcy": "є",
-	"Kappa": "Κ",
-	"kappa": "κ",
-	"kappav": "ϰ",
-	"Kcedil": "Ķ",
-	"kcedil": "ķ",
-	"Kcy": "К",
-	"kcy": "к",
-	"Kfr": "𝔎",
-	"kfr": "𝔨",
-	"kgreen": "ĸ",
-	"KHcy": "Х",
-	"khcy": "х",
-	"KJcy": "Ќ",
-	"kjcy": "ќ",
-	"Kopf": "𝕂",
-	"kopf": "𝕜",
-	"Kscr": "𝒦",
-	"kscr": "𝓀",
-	"lAarr": "⇚",
-	"Lacute": "Ĺ",
-	"lacute": "ĺ",
-	"laemptyv": "⦴",
-	"lagran": "ℒ",
-	"Lambda": "Λ",
-	"lambda": "λ",
-	"lang": "⟨",
-	"Lang": "⟪",
-	"langd": "⦑",
-	"langle": "⟨",
-	"lap": "⪅",
-	"Laplacetrf": "ℒ",
-	"laquo": "«",
-	"larrb": "⇤",
-	"larrbfs": "⤟",
-	"larr": "←",
-	"Larr": "↞",
-	"lArr": "⇐",
-	"larrfs": "⤝",
-	"larrhk": "↩",
-	"larrlp": "↫",
-	"larrpl": "⤹",
-	"larrsim": "⥳",
-	"larrtl": "↢",
-	"latail": "⤙",
-	"lAtail": "⤛",
-	"lat": "⪫",
-	"late": "⪭",
-	"lates": "⪭︀",
-	"lbarr": "⤌",
-	"lBarr": "⤎",
-	"lbbrk": "❲",
-	"lbrace": "{",
-	"lbrack": "[",
-	"lbrke": "⦋",
-	"lbrksld": "⦏",
-	"lbrkslu": "⦍",
-	"Lcaron": "Ľ",
-	"lcaron": "ľ",
-	"Lcedil": "Ļ",
-	"lcedil": "ļ",
-	"lceil": "⌈",
-	"lcub": "{",
-	"Lcy": "Л",
-	"lcy": "л",
-	"ldca": "⤶",
-	"ldquo": "“",
-	"ldquor": "„",
-	"ldrdhar": "⥧",
-	"ldrushar": "⥋",
-	"ldsh": "↲",
-	"le": "≤",
-	"lE": "≦",
-	"LeftAngleBracket": "⟨",
-	"LeftArrowBar": "⇤",
-	"leftarrow": "←",
-	"LeftArrow": "←",
-	"Leftarrow": "⇐",
-	"LeftArrowRightArrow": "⇆",
-	"leftarrowtail": "↢",
-	"LeftCeiling": "⌈",
-	"LeftDoubleBracket": "⟦",
-	"LeftDownTeeVector": "⥡",
-	"LeftDownVectorBar": "⥙",
-	"LeftDownVector": "⇃",
-	"LeftFloor": "⌊",
-	"leftharpoondown": "↽",
-	"leftharpoonup": "↼",
-	"leftleftarrows": "⇇",
-	"leftrightarrow": "↔",
-	"LeftRightArrow": "↔",
-	"Leftrightarrow": "⇔",
-	"leftrightarrows": "⇆",
-	"leftrightharpoons": "⇋",
-	"leftrightsquigarrow": "↭",
-	"LeftRightVector": "⥎",
-	"LeftTeeArrow": "↤",
-	"LeftTee": "⊣",
-	"LeftTeeVector": "⥚",
-	"leftthreetimes": "⋋",
-	"LeftTriangleBar": "⧏",
-	"LeftTriangle": "⊲",
-	"LeftTriangleEqual": "⊴",
-	"LeftUpDownVector": "⥑",
-	"LeftUpTeeVector": "⥠",
-	"LeftUpVectorBar": "⥘",
-	"LeftUpVector": "↿",
-	"LeftVectorBar": "⥒",
-	"LeftVector": "↼",
-	"lEg": "⪋",
-	"leg": "⋚",
-	"leq": "≤",
-	"leqq": "≦",
-	"leqslant": "⩽",
-	"lescc": "⪨",
-	"les": "⩽",
-	"lesdot": "⩿",
-	"lesdoto": "⪁",
-	"lesdotor": "⪃",
-	"lesg": "⋚︀",
-	"lesges": "⪓",
-	"lessapprox": "⪅",
-	"lessdot": "⋖",
-	"lesseqgtr": "⋚",
-	"lesseqqgtr": "⪋",
-	"LessEqualGreater": "⋚",
-	"LessFullEqual": "≦",
-	"LessGreater": "≶",
-	"lessgtr": "≶",
-	"LessLess": "⪡",
-	"lesssim": "≲",
-	"LessSlantEqual": "⩽",
-	"LessTilde": "≲",
-	"lfisht": "⥼",
-	"lfloor": "⌊",
-	"Lfr": "𝔏",
-	"lfr": "𝔩",
-	"lg": "≶",
-	"lgE": "⪑",
-	"lHar": "⥢",
-	"lhard": "↽",
-	"lharu": "↼",
-	"lharul": "⥪",
-	"lhblk": "▄",
-	"LJcy": "Љ",
-	"ljcy": "љ",
-	"llarr": "⇇",
-	"ll": "≪",
-	"Ll": "⋘",
-	"llcorner": "⌞",
-	"Lleftarrow": "⇚",
-	"llhard": "⥫",
-	"lltri": "◺",
-	"Lmidot": "Ŀ",
-	"lmidot": "ŀ",
-	"lmoustache": "⎰",
-	"lmoust": "⎰",
-	"lnap": "⪉",
-	"lnapprox": "⪉",
-	"lne": "⪇",
-	"lnE": "≨",
-	"lneq": "⪇",
-	"lneqq": "≨",
-	"lnsim": "⋦",
-	"loang": "⟬",
-	"loarr": "⇽",
-	"lobrk": "⟦",
-	"longleftarrow": "⟵",
-	"LongLeftArrow": "⟵",
-	"Longleftarrow": "⟸",
-	"longleftrightarrow": "⟷",
-	"LongLeftRightArrow": "⟷",
-	"Longleftrightarrow": "⟺",
-	"longmapsto": "⟼",
-	"longrightarrow": "⟶",
-	"LongRightArrow": "⟶",
-	"Longrightarrow": "⟹",
-	"looparrowleft": "↫",
-	"looparrowright": "↬",
-	"lopar": "⦅",
-	"Lopf": "𝕃",
-	"lopf": "𝕝",
-	"loplus": "⨭",
-	"lotimes": "⨴",
-	"lowast": "∗",
-	"lowbar": "_",
-	"LowerLeftArrow": "↙",
-	"LowerRightArrow": "↘",
-	"loz": "◊",
-	"lozenge": "◊",
-	"lozf": "⧫",
-	"lpar": "(",
-	"lparlt": "⦓",
-	"lrarr": "⇆",
-	"lrcorner": "⌟",
-	"lrhar": "⇋",
-	"lrhard": "⥭",
-	"lrm": "‎",
-	"lrtri": "⊿",
-	"lsaquo": "‹",
-	"lscr": "𝓁",
-	"Lscr": "ℒ",
-	"lsh": "↰",
-	"Lsh": "↰",
-	"lsim": "≲",
-	"lsime": "⪍",
-	"lsimg": "⪏",
-	"lsqb": "[",
-	"lsquo": "‘",
-	"lsquor": "‚",
-	"Lstrok": "Ł",
-	"lstrok": "ł",
-	"ltcc": "⪦",
-	"ltcir": "⩹",
-	"lt": "<",
-	"LT": "<",
-	"Lt": "≪",
-	"ltdot": "⋖",
-	"lthree": "⋋",
-	"ltimes": "⋉",
-	"ltlarr": "⥶",
-	"ltquest": "⩻",
-	"ltri": "◃",
-	"ltrie": "⊴",
-	"ltrif": "◂",
-	"ltrPar": "⦖",
-	"lurdshar": "⥊",
-	"luruhar": "⥦",
-	"lvertneqq": "≨︀",
-	"lvnE": "≨︀",
-	"macr": "¯",
-	"male": "♂",
-	"malt": "✠",
-	"maltese": "✠",
-	"Map": "⤅",
-	"map": "↦",
-	"mapsto": "↦",
-	"mapstodown": "↧",
-	"mapstoleft": "↤",
-	"mapstoup": "↥",
-	"marker": "▮",
-	"mcomma": "⨩",
-	"Mcy": "М",
-	"mcy": "м",
-	"mdash": "—",
-	"mDDot": "∺",
-	"measuredangle": "∡",
-	"MediumSpace": " ",
-	"Mellintrf": "ℳ",
-	"Mfr": "𝔐",
-	"mfr": "𝔪",
-	"mho": "℧",
-	"micro": "µ",
-	"midast": "*",
-	"midcir": "⫰",
-	"mid": "∣",
-	"middot": "·",
-	"minusb": "⊟",
-	"minus": "−",
-	"minusd": "∸",
-	"minusdu": "⨪",
-	"MinusPlus": "∓",
-	"mlcp": "⫛",
-	"mldr": "…",
-	"mnplus": "∓",
-	"models": "⊧",
-	"Mopf": "𝕄",
-	"mopf": "𝕞",
-	"mp": "∓",
-	"mscr": "𝓂",
-	"Mscr": "ℳ",
-	"mstpos": "∾",
-	"Mu": "Μ",
-	"mu": "μ",
-	"multimap": "⊸",
-	"mumap": "⊸",
-	"nabla": "∇",
-	"Nacute": "Ń",
-	"nacute": "ń",
-	"nang": "∠⃒",
-	"nap": "≉",
-	"napE": "⩰̸",
-	"napid": "≋̸",
-	"napos": "ŉ",
-	"napprox": "≉",
-	"natural": "♮",
-	"naturals": "ℕ",
-	"natur": "♮",
-	"nbsp": " ",
-	"nbump": "≎̸",
-	"nbumpe": "≏̸",
-	"ncap": "⩃",
-	"Ncaron": "Ň",
-	"ncaron": "ň",
-	"Ncedil": "Ņ",
-	"ncedil": "ņ",
-	"ncong": "≇",
-	"ncongdot": "⩭̸",
-	"ncup": "⩂",
-	"Ncy": "Н",
-	"ncy": "н",
-	"ndash": "–",
-	"nearhk": "⤤",
-	"nearr": "↗",
-	"neArr": "⇗",
-	"nearrow": "↗",
-	"ne": "≠",
-	"nedot": "≐̸",
-	"NegativeMediumSpace": "​",
-	"NegativeThickSpace": "​",
-	"NegativeThinSpace": "​",
-	"NegativeVeryThinSpace": "​",
-	"nequiv": "≢",
-	"nesear": "⤨",
-	"nesim": "≂̸",
-	"NestedGreaterGreater": "≫",
-	"NestedLessLess": "≪",
-	"NewLine": "\n",
-	"nexist": "∄",
-	"nexists": "∄",
-	"Nfr": "𝔑",
-	"nfr": "𝔫",
-	"ngE": "≧̸",
-	"nge": "≱",
-	"ngeq": "≱",
-	"ngeqq": "≧̸",
-	"ngeqslant": "⩾̸",
-	"nges": "⩾̸",
-	"nGg": "⋙̸",
-	"ngsim": "≵",
-	"nGt": "≫⃒",
-	"ngt": "≯",
-	"ngtr": "≯",
-	"nGtv": "≫̸",
-	"nharr": "↮",
-	"nhArr": "⇎",
-	"nhpar": "⫲",
-	"ni": "∋",
-	"nis": "⋼",
-	"nisd": "⋺",
-	"niv": "∋",
-	"NJcy": "Њ",
-	"njcy": "њ",
-	"nlarr": "↚",
-	"nlArr": "⇍",
-	"nldr": "‥",
-	"nlE": "≦̸",
-	"nle": "≰",
-	"nleftarrow": "↚",
-	"nLeftarrow": "⇍",
-	"nleftrightarrow": "↮",
-	"nLeftrightarrow": "⇎",
-	"nleq": "≰",
-	"nleqq": "≦̸",
-	"nleqslant": "⩽̸",
-	"nles": "⩽̸",
-	"nless": "≮",
-	"nLl": "⋘̸",
-	"nlsim": "≴",
-	"nLt": "≪⃒",
-	"nlt": "≮",
-	"nltri": "⋪",
-	"nltrie": "⋬",
-	"nLtv": "≪̸",
-	"nmid": "∤",
-	"NoBreak": "⁠",
-	"NonBreakingSpace": " ",
-	"nopf": "𝕟",
-	"Nopf": "ℕ",
-	"Not": "⫬",
-	"not": "¬",
-	"NotCongruent": "≢",
-	"NotCupCap": "≭",
-	"NotDoubleVerticalBar": "∦",
-	"NotElement": "∉",
-	"NotEqual": "≠",
-	"NotEqualTilde": "≂̸",
-	"NotExists": "∄",
-	"NotGreater": "≯",
-	"NotGreaterEqual": "≱",
-	"NotGreaterFullEqual": "≧̸",
-	"NotGreaterGreater": "≫̸",
-	"NotGreaterLess": "≹",
-	"NotGreaterSlantEqual": "⩾̸",
-	"NotGreaterTilde": "≵",
-	"NotHumpDownHump": "≎̸",
-	"NotHumpEqual": "≏̸",
-	"notin": "∉",
-	"notindot": "⋵̸",
-	"notinE": "⋹̸",
-	"notinva": "∉",
-	"notinvb": "⋷",
-	"notinvc": "⋶",
-	"NotLeftTriangleBar": "⧏̸",
-	"NotLeftTriangle": "⋪",
-	"NotLeftTriangleEqual": "⋬",
-	"NotLess": "≮",
-	"NotLessEqual": "≰",
-	"NotLessGreater": "≸",
-	"NotLessLess": "≪̸",
-	"NotLessSlantEqual": "⩽̸",
-	"NotLessTilde": "≴",
-	"NotNestedGreaterGreater": "⪢̸",
-	"NotNestedLessLess": "⪡̸",
-	"notni": "∌",
-	"notniva": "∌",
-	"notnivb": "⋾",
-	"notnivc": "⋽",
-	"NotPrecedes": "⊀",
-	"NotPrecedesEqual": "⪯̸",
-	"NotPrecedesSlantEqual": "⋠",
-	"NotReverseElement": "∌",
-	"NotRightTriangleBar": "⧐̸",
-	"NotRightTriangle": "⋫",
-	"NotRightTriangleEqual": "⋭",
-	"NotSquareSubset": "⊏̸",
-	"NotSquareSubsetEqual": "⋢",
-	"NotSquareSuperset": "⊐̸",
-	"NotSquareSupersetEqual": "⋣",
-	"NotSubset": "⊂⃒",
-	"NotSubsetEqual": "⊈",
-	"NotSucceeds": "⊁",
-	"NotSucceedsEqual": "⪰̸",
-	"NotSucceedsSlantEqual": "⋡",
-	"NotSucceedsTilde": "≿̸",
-	"NotSuperset": "⊃⃒",
-	"NotSupersetEqual": "⊉",
-	"NotTilde": "≁",
-	"NotTildeEqual": "≄",
-	"NotTildeFullEqual": "≇",
-	"NotTildeTilde": "≉",
-	"NotVerticalBar": "∤",
-	"nparallel": "∦",
-	"npar": "∦",
-	"nparsl": "⫽⃥",
-	"npart": "∂̸",
-	"npolint": "⨔",
-	"npr": "⊀",
-	"nprcue": "⋠",
-	"nprec": "⊀",
-	"npreceq": "⪯̸",
-	"npre": "⪯̸",
-	"nrarrc": "⤳̸",
-	"nrarr": "↛",
-	"nrArr": "⇏",
-	"nrarrw": "↝̸",
-	"nrightarrow": "↛",
-	"nRightarrow": "⇏",
-	"nrtri": "⋫",
-	"nrtrie": "⋭",
-	"nsc": "⊁",
-	"nsccue": "⋡",
-	"nsce": "⪰̸",
-	"Nscr": "𝒩",
-	"nscr": "𝓃",
-	"nshortmid": "∤",
-	"nshortparallel": "∦",
-	"nsim": "≁",
-	"nsime": "≄",
-	"nsimeq": "≄",
-	"nsmid": "∤",
-	"nspar": "∦",
-	"nsqsube": "⋢",
-	"nsqsupe": "⋣",
-	"nsub": "⊄",
-	"nsubE": "⫅̸",
-	"nsube": "⊈",
-	"nsubset": "⊂⃒",
-	"nsubseteq": "⊈",
-	"nsubseteqq": "⫅̸",
-	"nsucc": "⊁",
-	"nsucceq": "⪰̸",
-	"nsup": "⊅",
-	"nsupE": "⫆̸",
-	"nsupe": "⊉",
-	"nsupset": "⊃⃒",
-	"nsupseteq": "⊉",
-	"nsupseteqq": "⫆̸",
-	"ntgl": "≹",
-	"Ntilde": "Ñ",
-	"ntilde": "ñ",
-	"ntlg": "≸",
-	"ntriangleleft": "⋪",
-	"ntrianglelefteq": "⋬",
-	"ntriangleright": "⋫",
-	"ntrianglerighteq": "⋭",
-	"Nu": "Ν",
-	"nu": "ν",
-	"num": "#",
-	"numero": "№",
-	"numsp": " ",
-	"nvap": "≍⃒",
-	"nvdash": "⊬",
-	"nvDash": "⊭",
-	"nVdash": "⊮",
-	"nVDash": "⊯",
-	"nvge": "≥⃒",
-	"nvgt": ">⃒",
-	"nvHarr": "⤄",
-	"nvinfin": "⧞",
-	"nvlArr": "⤂",
-	"nvle": "≤⃒",
-	"nvlt": "<⃒",
-	"nvltrie": "⊴⃒",
-	"nvrArr": "⤃",
-	"nvrtrie": "⊵⃒",
-	"nvsim": "∼⃒",
-	"nwarhk": "⤣",
-	"nwarr": "↖",
-	"nwArr": "⇖",
-	"nwarrow": "↖",
-	"nwnear": "⤧",
-	"Oacute": "Ó",
-	"oacute": "ó",
-	"oast": "⊛",
-	"Ocirc": "Ô",
-	"ocirc": "ô",
-	"ocir": "⊚",
-	"Ocy": "О",
-	"ocy": "о",
-	"odash": "⊝",
-	"Odblac": "Ő",
-	"odblac": "ő",
-	"odiv": "⨸",
-	"odot": "⊙",
-	"odsold": "⦼",
-	"OElig": "Œ",
-	"oelig": "œ",
-	"ofcir": "⦿",
-	"Ofr": "𝔒",
-	"ofr": "𝔬",
-	"ogon": "˛",
-	"Ograve": "Ò",
-	"ograve": "ò",
-	"ogt": "⧁",
-	"ohbar": "⦵",
-	"ohm": "Ω",
-	"oint": "∮",
-	"olarr": "↺",
-	"olcir": "⦾",
-	"olcross": "⦻",
-	"oline": "‾",
-	"olt": "⧀",
-	"Omacr": "Ō",
-	"omacr": "ō",
-	"Omega": "Ω",
-	"omega": "ω",
-	"Omicron": "Ο",
-	"omicron": "ο",
-	"omid": "⦶",
-	"ominus": "⊖",
-	"Oopf": "𝕆",
-	"oopf": "𝕠",
-	"opar": "⦷",
-	"OpenCurlyDoubleQuote": "“",
-	"OpenCurlyQuote": "‘",
-	"operp": "⦹",
-	"oplus": "⊕",
-	"orarr": "↻",
-	"Or": "⩔",
-	"or": "∨",
-	"ord": "⩝",
-	"order": "ℴ",
-	"orderof": "ℴ",
-	"ordf": "ª",
-	"ordm": "º",
-	"origof": "⊶",
-	"oror": "⩖",
-	"orslope": "⩗",
-	"orv": "⩛",
-	"oS": "Ⓢ",
-	"Oscr": "𝒪",
-	"oscr": "ℴ",
-	"Oslash": "Ø",
-	"oslash": "ø",
-	"osol": "⊘",
-	"Otilde": "Õ",
-	"otilde": "õ",
-	"otimesas": "⨶",
-	"Otimes": "⨷",
-	"otimes": "⊗",
-	"Ouml": "Ö",
-	"ouml": "ö",
-	"ovbar": "⌽",
-	"OverBar": "‾",
-	"OverBrace": "⏞",
-	"OverBracket": "⎴",
-	"OverParenthesis": "⏜",
-	"para": "¶",
-	"parallel": "∥",
-	"par": "∥",
-	"parsim": "⫳",
-	"parsl": "⫽",
-	"part": "∂",
-	"PartialD": "∂",
-	"Pcy": "П",
-	"pcy": "п",
-	"percnt": "%",
-	"period": ".",
-	"permil": "‰",
-	"perp": "⊥",
-	"pertenk": "‱",
-	"Pfr": "𝔓",
-	"pfr": "𝔭",
-	"Phi": "Φ",
-	"phi": "φ",
-	"phiv": "ϕ",
-	"phmmat": "ℳ",
-	"phone": "☎",
-	"Pi": "Π",
-	"pi": "π",
-	"pitchfork": "⋔",
-	"piv": "ϖ",
-	"planck": "ℏ",
-	"planckh": "ℎ",
-	"plankv": "ℏ",
-	"plusacir": "⨣",
-	"plusb": "⊞",
-	"pluscir": "⨢",
-	"plus": "+",
-	"plusdo": "∔",
-	"plusdu": "⨥",
-	"pluse": "⩲",
-	"PlusMinus": "±",
-	"plusmn": "±",
-	"plussim": "⨦",
-	"plustwo": "⨧",
-	"pm": "±",
-	"Poincareplane": "ℌ",
-	"pointint": "⨕",
-	"popf": "𝕡",
-	"Popf": "ℙ",
-	"pound": "£",
-	"prap": "⪷",
-	"Pr": "⪻",
-	"pr": "≺",
-	"prcue": "≼",
-	"precapprox": "⪷",
-	"prec": "≺",
-	"preccurlyeq": "≼",
-	"Precedes": "≺",
-	"PrecedesEqual": "⪯",
-	"PrecedesSlantEqual": "≼",
-	"PrecedesTilde": "≾",
-	"preceq": "⪯",
-	"precnapprox": "⪹",
-	"precneqq": "⪵",
-	"precnsim": "⋨",
-	"pre": "⪯",
-	"prE": "⪳",
-	"precsim": "≾",
-	"prime": "′",
-	"Prime": "″",
-	"primes": "ℙ",
-	"prnap": "⪹",
-	"prnE": "⪵",
-	"prnsim": "⋨",
-	"prod": "∏",
-	"Product": "∏",
-	"profalar": "⌮",
-	"profline": "⌒",
-	"profsurf": "⌓",
-	"prop": "∝",
-	"Proportional": "∝",
-	"Proportion": "∷",
-	"propto": "∝",
-	"prsim": "≾",
-	"prurel": "⊰",
-	"Pscr": "𝒫",
-	"pscr": "𝓅",
-	"Psi": "Ψ",
-	"psi": "ψ",
-	"puncsp": " ",
-	"Qfr": "𝔔",
-	"qfr": "𝔮",
-	"qint": "⨌",
-	"qopf": "𝕢",
-	"Qopf": "ℚ",
-	"qprime": "⁗",
-	"Qscr": "𝒬",
-	"qscr": "𝓆",
-	"quaternions": "ℍ",
-	"quatint": "⨖",
-	"quest": "?",
-	"questeq": "≟",
-	"quot": "\"",
-	"QUOT": "\"",
-	"rAarr": "⇛",
-	"race": "∽̱",
-	"Racute": "Ŕ",
-	"racute": "ŕ",
-	"radic": "√",
-	"raemptyv": "⦳",
-	"rang": "⟩",
-	"Rang": "⟫",
-	"rangd": "⦒",
-	"range": "⦥",
-	"rangle": "⟩",
-	"raquo": "»",
-	"rarrap": "⥵",
-	"rarrb": "⇥",
-	"rarrbfs": "⤠",
-	"rarrc": "⤳",
-	"rarr": "→",
-	"Rarr": "↠",
-	"rArr": "⇒",
-	"rarrfs": "⤞",
-	"rarrhk": "↪",
-	"rarrlp": "↬",
-	"rarrpl": "⥅",
-	"rarrsim": "⥴",
-	"Rarrtl": "⤖",
-	"rarrtl": "↣",
-	"rarrw": "↝",
-	"ratail": "⤚",
-	"rAtail": "⤜",
-	"ratio": "∶",
-	"rationals": "ℚ",
-	"rbarr": "⤍",
-	"rBarr": "⤏",
-	"RBarr": "⤐",
-	"rbbrk": "❳",
-	"rbrace": "}",
-	"rbrack": "]",
-	"rbrke": "⦌",
-	"rbrksld": "⦎",
-	"rbrkslu": "⦐",
-	"Rcaron": "Ř",
-	"rcaron": "ř",
-	"Rcedil": "Ŗ",
-	"rcedil": "ŗ",
-	"rceil": "⌉",
-	"rcub": "}",
-	"Rcy": "Р",
-	"rcy": "р",
-	"rdca": "⤷",
-	"rdldhar": "⥩",
-	"rdquo": "”",
-	"rdquor": "”",
-	"rdsh": "↳",
-	"real": "ℜ",
-	"realine": "ℛ",
-	"realpart": "ℜ",
-	"reals": "ℝ",
-	"Re": "ℜ",
-	"rect": "▭",
-	"reg": "®",
-	"REG": "®",
-	"ReverseElement": "∋",
-	"ReverseEquilibrium": "⇋",
-	"ReverseUpEquilibrium": "⥯",
-	"rfisht": "⥽",
-	"rfloor": "⌋",
-	"rfr": "𝔯",
-	"Rfr": "ℜ",
-	"rHar": "⥤",
-	"rhard": "⇁",
-	"rharu": "⇀",
-	"rharul": "⥬",
-	"Rho": "Ρ",
-	"rho": "ρ",
-	"rhov": "ϱ",
-	"RightAngleBracket": "⟩",
-	"RightArrowBar": "⇥",
-	"rightarrow": "→",
-	"RightArrow": "→",
-	"Rightarrow": "⇒",
-	"RightArrowLeftArrow": "⇄",
-	"rightarrowtail": "↣",
-	"RightCeiling": "⌉",
-	"RightDoubleBracket": "⟧",
-	"RightDownTeeVector": "⥝",
-	"RightDownVectorBar": "⥕",
-	"RightDownVector": "⇂",
-	"RightFloor": "⌋",
-	"rightharpoondown": "⇁",
-	"rightharpoonup": "⇀",
-	"rightleftarrows": "⇄",
-	"rightleftharpoons": "⇌",
-	"rightrightarrows": "⇉",
-	"rightsquigarrow": "↝",
-	"RightTeeArrow": "↦",
-	"RightTee": "⊢",
-	"RightTeeVector": "⥛",
-	"rightthreetimes": "⋌",
-	"RightTriangleBar": "⧐",
-	"RightTriangle": "⊳",
-	"RightTriangleEqual": "⊵",
-	"RightUpDownVector": "⥏",
-	"RightUpTeeVector": "⥜",
-	"RightUpVectorBar": "⥔",
-	"RightUpVector": "↾",
-	"RightVectorBar": "⥓",
-	"RightVector": "⇀",
-	"ring": "˚",
-	"risingdotseq": "≓",
-	"rlarr": "⇄",
-	"rlhar": "⇌",
-	"rlm": "‏",
-	"rmoustache": "⎱",
-	"rmoust": "⎱",
-	"rnmid": "⫮",
-	"roang": "⟭",
-	"roarr": "⇾",
-	"robrk": "⟧",
-	"ropar": "⦆",
-	"ropf": "𝕣",
-	"Ropf": "ℝ",
-	"roplus": "⨮",
-	"rotimes": "⨵",
-	"RoundImplies": "⥰",
-	"rpar": ")",
-	"rpargt": "⦔",
-	"rppolint": "⨒",
-	"rrarr": "⇉",
-	"Rrightarrow": "⇛",
-	"rsaquo": "›",
-	"rscr": "𝓇",
-	"Rscr": "ℛ",
-	"rsh": "↱",
-	"Rsh": "↱",
-	"rsqb": "]",
-	"rsquo": "’",
-	"rsquor": "’",
-	"rthree": "⋌",
-	"rtimes": "⋊",
-	"rtri": "▹",
-	"rtrie": "⊵",
-	"rtrif": "▸",
-	"rtriltri": "⧎",
-	"RuleDelayed": "⧴",
-	"ruluhar": "⥨",
-	"rx": "℞",
-	"Sacute": "Ś",
-	"sacute": "ś",
-	"sbquo": "‚",
-	"scap": "⪸",
-	"Scaron": "Š",
-	"scaron": "š",
-	"Sc": "⪼",
-	"sc": "≻",
-	"sccue": "≽",
-	"sce": "⪰",
-	"scE": "⪴",
-	"Scedil": "Ş",
-	"scedil": "ş",
-	"Scirc": "Ŝ",
-	"scirc": "ŝ",
-	"scnap": "⪺",
-	"scnE": "⪶",
-	"scnsim": "⋩",
-	"scpolint": "⨓",
-	"scsim": "≿",
-	"Scy": "С",
-	"scy": "с",
-	"sdotb": "⊡",
-	"sdot": "⋅",
-	"sdote": "⩦",
-	"searhk": "⤥",
-	"searr": "↘",
-	"seArr": "⇘",
-	"searrow": "↘",
-	"sect": "§",
-	"semi": ";",
-	"seswar": "⤩",
-	"setminus": "∖",
-	"setmn": "∖",
-	"sext": "✶",
-	"Sfr": "𝔖",
-	"sfr": "𝔰",
-	"sfrown": "⌢",
-	"sharp": "♯",
-	"SHCHcy": "Щ",
-	"shchcy": "щ",
-	"SHcy": "Ш",
-	"shcy": "ш",
-	"ShortDownArrow": "↓",
-	"ShortLeftArrow": "←",
-	"shortmid": "∣",
-	"shortparallel": "∥",
-	"ShortRightArrow": "→",
-	"ShortUpArrow": "↑",
-	"shy": "­",
-	"Sigma": "Σ",
-	"sigma": "σ",
-	"sigmaf": "ς",
-	"sigmav": "ς",
-	"sim": "∼",
-	"simdot": "⩪",
-	"sime": "≃",
-	"simeq": "≃",
-	"simg": "⪞",
-	"simgE": "⪠",
-	"siml": "⪝",
-	"simlE": "⪟",
-	"simne": "≆",
-	"simplus": "⨤",
-	"simrarr": "⥲",
-	"slarr": "←",
-	"SmallCircle": "∘",
-	"smallsetminus": "∖",
-	"smashp": "⨳",
-	"smeparsl": "⧤",
-	"smid": "∣",
-	"smile": "⌣",
-	"smt": "⪪",
-	"smte": "⪬",
-	"smtes": "⪬︀",
-	"SOFTcy": "Ь",
-	"softcy": "ь",
-	"solbar": "⌿",
-	"solb": "⧄",
-	"sol": "/",
-	"Sopf": "𝕊",
-	"sopf": "𝕤",
-	"spades": "♠",
-	"spadesuit": "♠",
-	"spar": "∥",
-	"sqcap": "⊓",
-	"sqcaps": "⊓︀",
-	"sqcup": "⊔",
-	"sqcups": "⊔︀",
-	"Sqrt": "√",
-	"sqsub": "⊏",
-	"sqsube": "⊑",
-	"sqsubset": "⊏",
-	"sqsubseteq": "⊑",
-	"sqsup": "⊐",
-	"sqsupe": "⊒",
-	"sqsupset": "⊐",
-	"sqsupseteq": "⊒",
-	"square": "□",
-	"Square": "□",
-	"SquareIntersection": "⊓",
-	"SquareSubset": "⊏",
-	"SquareSubsetEqual": "⊑",
-	"SquareSuperset": "⊐",
-	"SquareSupersetEqual": "⊒",
-	"SquareUnion": "⊔",
-	"squarf": "▪",
-	"squ": "□",
-	"squf": "▪",
-	"srarr": "→",
-	"Sscr": "𝒮",
-	"sscr": "𝓈",
-	"ssetmn": "∖",
-	"ssmile": "⌣",
-	"sstarf": "⋆",
-	"Star": "⋆",
-	"star": "☆",
-	"starf": "★",
-	"straightepsilon": "ϵ",
-	"straightphi": "ϕ",
-	"strns": "¯",
-	"sub": "⊂",
-	"Sub": "⋐",
-	"subdot": "⪽",
-	"subE": "⫅",
-	"sube": "⊆",
-	"subedot": "⫃",
-	"submult": "⫁",
-	"subnE": "⫋",
-	"subne": "⊊",
-	"subplus": "⪿",
-	"subrarr": "⥹",
-	"subset": "⊂",
-	"Subset": "⋐",
-	"subseteq": "⊆",
-	"subseteqq": "⫅",
-	"SubsetEqual": "⊆",
-	"subsetneq": "⊊",
-	"subsetneqq": "⫋",
-	"subsim": "⫇",
-	"subsub": "⫕",
-	"subsup": "⫓",
-	"succapprox": "⪸",
-	"succ": "≻",
-	"succcurlyeq": "≽",
-	"Succeeds": "≻",
-	"SucceedsEqual": "⪰",
-	"SucceedsSlantEqual": "≽",
-	"SucceedsTilde": "≿",
-	"succeq": "⪰",
-	"succnapprox": "⪺",
-	"succneqq": "⪶",
-	"succnsim": "⋩",
-	"succsim": "≿",
-	"SuchThat": "∋",
-	"sum": "∑",
-	"Sum": "∑",
-	"sung": "♪",
-	"sup1": "¹",
-	"sup2": "²",
-	"sup3": "³",
-	"sup": "⊃",
-	"Sup": "⋑",
-	"supdot": "⪾",
-	"supdsub": "⫘",
-	"supE": "⫆",
-	"supe": "⊇",
-	"supedot": "⫄",
-	"Superset": "⊃",
-	"SupersetEqual": "⊇",
-	"suphsol": "⟉",
-	"suphsub": "⫗",
-	"suplarr": "⥻",
-	"supmult": "⫂",
-	"supnE": "⫌",
-	"supne": "⊋",
-	"supplus": "⫀",
-	"supset": "⊃",
-	"Supset": "⋑",
-	"supseteq": "⊇",
-	"supseteqq": "⫆",
-	"supsetneq": "⊋",
-	"supsetneqq": "⫌",
-	"supsim": "⫈",
-	"supsub": "⫔",
-	"supsup": "⫖",
-	"swarhk": "⤦",
-	"swarr": "↙",
-	"swArr": "⇙",
-	"swarrow": "↙",
-	"swnwar": "⤪",
-	"szlig": "ß",
-	"Tab": "\t",
-	"target": "⌖",
-	"Tau": "Τ",
-	"tau": "τ",
-	"tbrk": "⎴",
-	"Tcaron": "Ť",
-	"tcaron": "ť",
-	"Tcedil": "Ţ",
-	"tcedil": "ţ",
-	"Tcy": "Т",
-	"tcy": "т",
-	"tdot": "⃛",
-	"telrec": "⌕",
-	"Tfr": "𝔗",
-	"tfr": "𝔱",
-	"there4": "∴",
-	"therefore": "∴",
-	"Therefore": "∴",
-	"Theta": "Θ",
-	"theta": "θ",
-	"thetasym": "ϑ",
-	"thetav": "ϑ",
-	"thickapprox": "≈",
-	"thicksim": "∼",
-	"ThickSpace": "  ",
-	"ThinSpace": " ",
-	"thinsp": " ",
-	"thkap": "≈",
-	"thksim": "∼",
-	"THORN": "Þ",
-	"thorn": "þ",
-	"tilde": "˜",
-	"Tilde": "∼",
-	"TildeEqual": "≃",
-	"TildeFullEqual": "≅",
-	"TildeTilde": "≈",
-	"timesbar": "⨱",
-	"timesb": "⊠",
-	"times": "×",
-	"timesd": "⨰",
-	"tint": "∭",
-	"toea": "⤨",
-	"topbot": "⌶",
-	"topcir": "⫱",
-	"top": "⊤",
-	"Topf": "𝕋",
-	"topf": "𝕥",
-	"topfork": "⫚",
-	"tosa": "⤩",
-	"tprime": "‴",
-	"trade": "™",
-	"TRADE": "™",
-	"triangle": "▵",
-	"triangledown": "▿",
-	"triangleleft": "◃",
-	"trianglelefteq": "⊴",
-	"triangleq": "≜",
-	"triangleright": "▹",
-	"trianglerighteq": "⊵",
-	"tridot": "◬",
-	"trie": "≜",
-	"triminus": "⨺",
-	"TripleDot": "⃛",
-	"triplus": "⨹",
-	"trisb": "⧍",
-	"tritime": "⨻",
-	"trpezium": "⏢",
-	"Tscr": "𝒯",
-	"tscr": "𝓉",
-	"TScy": "Ц",
-	"tscy": "ц",
-	"TSHcy": "Ћ",
-	"tshcy": "ћ",
-	"Tstrok": "Ŧ",
-	"tstrok": "ŧ",
-	"twixt": "≬",
-	"twoheadleftarrow": "↞",
-	"twoheadrightarrow": "↠",
-	"Uacute": "Ú",
-	"uacute": "ú",
-	"uarr": "↑",
-	"Uarr": "↟",
-	"uArr": "⇑",
-	"Uarrocir": "⥉",
-	"Ubrcy": "Ў",
-	"ubrcy": "ў",
-	"Ubreve": "Ŭ",
-	"ubreve": "ŭ",
-	"Ucirc": "Û",
-	"ucirc": "û",
-	"Ucy": "У",
-	"ucy": "у",
-	"udarr": "⇅",
-	"Udblac": "Ű",
-	"udblac": "ű",
-	"udhar": "⥮",
-	"ufisht": "⥾",
-	"Ufr": "𝔘",
-	"ufr": "𝔲",
-	"Ugrave": "Ù",
-	"ugrave": "ù",
-	"uHar": "⥣",
-	"uharl": "↿",
-	"uharr": "↾",
-	"uhblk": "▀",
-	"ulcorn": "⌜",
-	"ulcorner": "⌜",
-	"ulcrop": "⌏",
-	"ultri": "◸",
-	"Umacr": "Ū",
-	"umacr": "ū",
-	"uml": "¨",
-	"UnderBar": "_",
-	"UnderBrace": "⏟",
-	"UnderBracket": "⎵",
-	"UnderParenthesis": "⏝",
-	"Union": "⋃",
-	"UnionPlus": "⊎",
-	"Uogon": "Ų",
-	"uogon": "ų",
-	"Uopf": "𝕌",
-	"uopf": "𝕦",
-	"UpArrowBar": "⤒",
-	"uparrow": "↑",
-	"UpArrow": "↑",
-	"Uparrow": "⇑",
-	"UpArrowDownArrow": "⇅",
-	"updownarrow": "↕",
-	"UpDownArrow": "↕",
-	"Updownarrow": "⇕",
-	"UpEquilibrium": "⥮",
-	"upharpoonleft": "↿",
-	"upharpoonright": "↾",
-	"uplus": "⊎",
-	"UpperLeftArrow": "↖",
-	"UpperRightArrow": "↗",
-	"upsi": "υ",
-	"Upsi": "ϒ",
-	"upsih": "ϒ",
-	"Upsilon": "Υ",
-	"upsilon": "υ",
-	"UpTeeArrow": "↥",
-	"UpTee": "⊥",
-	"upuparrows": "⇈",
-	"urcorn": "⌝",
-	"urcorner": "⌝",
-	"urcrop": "⌎",
-	"Uring": "Ů",
-	"uring": "ů",
-	"urtri": "◹",
-	"Uscr": "𝒰",
-	"uscr": "𝓊",
-	"utdot": "⋰",
-	"Utilde": "Ũ",
-	"utilde": "ũ",
-	"utri": "▵",
-	"utrif": "▴",
-	"uuarr": "⇈",
-	"Uuml": "Ü",
-	"uuml": "ü",
-	"uwangle": "⦧",
-	"vangrt": "⦜",
-	"varepsilon": "ϵ",
-	"varkappa": "ϰ",
-	"varnothing": "∅",
-	"varphi": "ϕ",
-	"varpi": "ϖ",
-	"varpropto": "∝",
-	"varr": "↕",
-	"vArr": "⇕",
-	"varrho": "ϱ",
-	"varsigma": "ς",
-	"varsubsetneq": "⊊︀",
-	"varsubsetneqq": "⫋︀",
-	"varsupsetneq": "⊋︀",
-	"varsupsetneqq": "⫌︀",
-	"vartheta": "ϑ",
-	"vartriangleleft": "⊲",
-	"vartriangleright": "⊳",
-	"vBar": "⫨",
-	"Vbar": "⫫",
-	"vBarv": "⫩",
-	"Vcy": "В",
-	"vcy": "в",
-	"vdash": "⊢",
-	"vDash": "⊨",
-	"Vdash": "⊩",
-	"VDash": "⊫",
-	"Vdashl": "⫦",
-	"veebar": "⊻",
-	"vee": "∨",
-	"Vee": "⋁",
-	"veeeq": "≚",
-	"vellip": "⋮",
-	"verbar": "|",
-	"Verbar": "‖",
-	"vert": "|",
-	"Vert": "‖",
-	"VerticalBar": "∣",
-	"VerticalLine": "|",
-	"VerticalSeparator": "❘",
-	"VerticalTilde": "≀",
-	"VeryThinSpace": " ",
-	"Vfr": "𝔙",
-	"vfr": "𝔳",
-	"vltri": "⊲",
-	"vnsub": "⊂⃒",
-	"vnsup": "⊃⃒",
-	"Vopf": "𝕍",
-	"vopf": "𝕧",
-	"vprop": "∝",
-	"vrtri": "⊳",
-	"Vscr": "𝒱",
-	"vscr": "𝓋",
-	"vsubnE": "⫋︀",
-	"vsubne": "⊊︀",
-	"vsupnE": "⫌︀",
-	"vsupne": "⊋︀",
-	"Vvdash": "⊪",
-	"vzigzag": "⦚",
-	"Wcirc": "Ŵ",
-	"wcirc": "ŵ",
-	"wedbar": "⩟",
-	"wedge": "∧",
-	"Wedge": "⋀",
-	"wedgeq": "≙",
-	"weierp": "℘",
-	"Wfr": "𝔚",
-	"wfr": "𝔴",
-	"Wopf": "𝕎",
-	"wopf": "𝕨",
-	"wp": "℘",
-	"wr": "≀",
-	"wreath": "≀",
-	"Wscr": "𝒲",
-	"wscr": "𝓌",
-	"xcap": "⋂",
-	"xcirc": "◯",
-	"xcup": "⋃",
-	"xdtri": "▽",
-	"Xfr": "𝔛",
-	"xfr": "𝔵",
-	"xharr": "⟷",
-	"xhArr": "⟺",
-	"Xi": "Ξ",
-	"xi": "ξ",
-	"xlarr": "⟵",
-	"xlArr": "⟸",
-	"xmap": "⟼",
-	"xnis": "⋻",
-	"xodot": "⨀",
-	"Xopf": "𝕏",
-	"xopf": "𝕩",
-	"xoplus": "⨁",
-	"xotime": "⨂",
-	"xrarr": "⟶",
-	"xrArr": "⟹",
-	"Xscr": "𝒳",
-	"xscr": "𝓍",
-	"xsqcup": "⨆",
-	"xuplus": "⨄",
-	"xutri": "△",
-	"xvee": "⋁",
-	"xwedge": "⋀",
-	"Yacute": "Ý",
-	"yacute": "ý",
-	"YAcy": "Я",
-	"yacy": "я",
-	"Ycirc": "Ŷ",
-	"ycirc": "ŷ",
-	"Ycy": "Ы",
-	"ycy": "ы",
-	"yen": "¥",
-	"Yfr": "𝔜",
-	"yfr": "𝔶",
-	"YIcy": "Ї",
-	"yicy": "ї",
-	"Yopf": "𝕐",
-	"yopf": "𝕪",
-	"Yscr": "𝒴",
-	"yscr": "𝓎",
-	"YUcy": "Ю",
-	"yucy": "ю",
-	"yuml": "ÿ",
-	"Yuml": "Ÿ",
-	"Zacute": "Ź",
-	"zacute": "ź",
-	"Zcaron": "Ž",
-	"zcaron": "ž",
-	"Zcy": "З",
-	"zcy": "з",
-	"Zdot": "Ż",
-	"zdot": "ż",
-	"zeetrf": "ℨ",
-	"ZeroWidthSpace": "​",
-	"Zeta": "Ζ",
-	"zeta": "ζ",
-	"zfr": "𝔷",
-	"Zfr": "ℨ",
-	"ZHcy": "Ж",
-	"zhcy": "ж",
-	"zigrarr": "⇝",
-	"zopf": "𝕫",
-	"Zopf": "ℤ",
-	"Zscr": "𝒵",
-	"zscr": "𝓏",
-	"zwj": "‍",
-	"zwnj": "‌"
-};
-
-/***/ }),
-
-/***/ 82:
-/***/ (function(module, exports) {
-
-module.exports = {
-	"amp": "&",
-	"apos": "'",
-	"gt": ">",
-	"lt": "<",
-	"quot": "\""
-};
-
 /***/ })
 
-},[433]);
+},[596]);

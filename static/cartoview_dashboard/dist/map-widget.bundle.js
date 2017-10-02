@@ -1,6 +1,6 @@
 webpackJsonp([3],{
 
-/***/ 10:
+/***/ 13:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8,13 +8,13 @@ webpackJsonp([3],{
 
 exports.__esModule = true;
 
-var _events = __webpack_require__(18);
+var _events = __webpack_require__(20);
 
 exports.default = new _events.EventEmitter();
 
 /***/ }),
 
-/***/ 18:
+/***/ 20:
 /***/ (function(module, exports) {
 
 // Copyright Joyent, Inc. and other Node contributors.
@@ -323,7 +323,144 @@ function isUndefined(arg) {
 
 /***/ }),
 
-/***/ 227:
+/***/ 27:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _openlayers = __webpack_require__(11);
+
+var _openlayers2 = _interopRequireDefault(_openlayers);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+  getProxiedUrl: function getProxiedUrl(url, opt_proxy) {
+    if (opt_proxy) {
+      return opt_proxy + encodeURIComponent(url);
+    } else {
+      return url;
+    }
+  },
+  getResolutionForScale: function getResolutionForScale(scale, units) {
+    var dpi = 25.4 / 0.28;
+    var mpu = _openlayers2.default.proj.METERS_PER_UNIT[units];
+    var inchesPerMeter = 39.37;
+    return parseFloat(scale) / (mpu * inchesPerMeter * dpi);
+  },
+  getTimeInfo: function getTimeInfo(layer) {
+    if (layer.Dimension) {
+      for (var i = 0, ii = layer.Dimension.length; i < ii; ++i) {
+        var dimension = layer.Dimension[i];
+        if (dimension.name === 'time') {
+          return dimension.values;
+        }
+      }
+    }
+  },
+  rgbToHex: function rgbToHex(rgb) {
+    rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
+    return rgb && rgb.length === 4 ? '#' + ('0' + parseInt(rgb[1], 10).toString(16)).slice(-2) + ('0' + parseInt(rgb[2], 10).toString(16)).slice(-2) + ('0' + parseInt(rgb[3], 10).toString(16)).slice(-2) : '';
+  },
+  hexToRgb: function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : null;
+  },
+  transformColor: function transformColor(color) {
+    var colorObj = color.rgb ? color.rgb : color;
+    return [colorObj.r, colorObj.g, colorObj.b, colorObj.a];
+  },
+  doJSONP: function doJSONP(url, success, failure, scope) {
+    function getRandomInt(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min)) + min;
+    }
+    var cbname = 'fn' + Date.now() + getRandomInt(1, 10000);
+    var script = document.createElement('script');
+    script.onerror = function () {
+      if (failure) {
+        failure.call(scope);
+      }
+    };
+    script.src = url.replace('__cbname__', cbname);
+    window[cbname] = function (jsonData) {
+      success.call(scope, jsonData);
+      delete window[cbname];
+    };
+    document.head.appendChild(script);
+  },
+  doGET: function doGET(url, success, failure, scope, opt_requestHeaders) {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+      if (xmlhttp.readyState === 4) {
+        if (xmlhttp.status === 200) {
+          if (success) {
+            success.call(scope, xmlhttp);
+          }
+        } else if (failure) {
+          failure.call(scope, xmlhttp);
+        }
+      }
+    };
+    xmlhttp.open('GET', url, true);
+    if (opt_requestHeaders) {
+      for (var key in opt_requestHeaders) {
+        if (opt_requestHeaders.hasOwnProperty(key)) {
+          xmlhttp.setRequestHeader(key, opt_requestHeaders[key]);
+        }
+      }
+    }
+    xmlhttp.send();
+    return xmlhttp;
+  },
+  doPOST: function doPOST(url, data, success, failure, scope, contentType, put, opt_requestHeaders) {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open(put ? 'PUT' : 'POST', url, true);
+    xmlhttp.setRequestHeader('Content-Type', contentType ? contentType : 'text/xml');
+    xmlhttp.onreadystatechange = function () {
+      if (xmlhttp.readyState === 4) {
+        if (xmlhttp.status === 200 || xmlhttp.status === 201) {
+          success.call(scope, xmlhttp);
+        } else {
+          failure.call(scope, xmlhttp);
+        }
+      }
+    };
+    if (opt_requestHeaders) {
+      for (var key in opt_requestHeaders) {
+        if (opt_requestHeaders.hasOwnProperty(key)) {
+          xmlhttp.setRequestHeader(key, opt_requestHeaders[key]);
+        }
+      }
+    }
+    xmlhttp.send(data);
+    return xmlhttp;
+  }
+}; /*
+    * Copyright 2015-present Boundless Spatial Inc., http://boundlessgeo.com
+    * Licensed under the Apache License, Version 2.0 (the "License").
+    * You may not use this file except in compliance with the License.
+    * You may obtain a copy of the License at
+    * http://www.apache.org/licenses/LICENSE-2.0
+    * Unless required by applicable law or agreed to in writing, software
+    * distributed under the License is distributed on an "AS IS" BASIS,
+    * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    * See the License for the specific language governing permissions and limitations under the License.
+    */
+
+/***/ }),
+
+/***/ 283:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -345,19 +482,19 @@ var _createClass = function () { function defineProperties(target, props) { for 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * See the License for the specific language governing permissions and limitations under the License.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
 
-var _openlayers = __webpack_require__(9);
+var _openlayers = __webpack_require__(11);
 
 var _openlayers2 = _interopRequireDefault(_openlayers);
 
-var _util = __webpack_require__(25);
+var _util = __webpack_require__(27);
 
 var _util2 = _interopRequireDefault(_util);
 
-var _LayerIdService = __webpack_require__(245);
+var _LayerIdService = __webpack_require__(301);
 
 var _LayerIdService2 = _interopRequireDefault(_LayerIdService);
 
-var _WFSService = __webpack_require__(247);
+var _WFSService = __webpack_require__(303);
 
 var _WFSService2 = _interopRequireDefault(_WFSService);
 
@@ -634,7 +771,7 @@ exports.default = new MapConfigService();
 
 /***/ }),
 
-/***/ 228:
+/***/ 284:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -656,7 +793,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * See the License for the specific language governing permissions and limitations under the License.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
 
-var _openlayers = __webpack_require__(9);
+var _openlayers = __webpack_require__(11);
 
 var _openlayers2 = _interopRequireDefault(_openlayers);
 
@@ -1052,374 +1189,7 @@ exports.default = new MapConfigTransformService();
 
 /***/ }),
 
-/***/ 24:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var required = __webpack_require__(39)
-  , lolcation = __webpack_require__(41)
-  , qs = __webpack_require__(33)
-  , protocolre = /^([a-z][a-z0-9.+-]*:)?(\/\/)?([\S\s]*)/i;
-
-/**
- * These are the parse rules for the URL parser, it informs the parser
- * about:
- *
- * 0. The char it Needs to parse, if it's a string it should be done using
- *    indexOf, RegExp using exec and NaN means set as current value.
- * 1. The property we should set when parsing this value.
- * 2. Indication if it's backwards or forward parsing, when set as number it's
- *    the value of extra chars that should be split off.
- * 3. Inherit from location if non existing in the parser.
- * 4. `toLowerCase` the resulting value.
- */
-var rules = [
-  ['#', 'hash'],                        // Extract from the back.
-  ['?', 'query'],                       // Extract from the back.
-  ['/', 'pathname'],                    // Extract from the back.
-  ['@', 'auth', 1],                     // Extract from the front.
-  [NaN, 'host', undefined, 1, 1],       // Set left over value.
-  [/:(\d+)$/, 'port', undefined, 1],    // RegExp the back.
-  [NaN, 'hostname', undefined, 1, 1]    // Set left over.
-];
-
-/**
- * @typedef ProtocolExtract
- * @type Object
- * @property {String} protocol Protocol matched in the URL, in lowercase.
- * @property {Boolean} slashes `true` if protocol is followed by "//", else `false`.
- * @property {String} rest Rest of the URL that is not part of the protocol.
- */
-
-/**
- * Extract protocol information from a URL with/without double slash ("//").
- *
- * @param {String} address URL we want to extract from.
- * @return {ProtocolExtract} Extracted information.
- * @api private
- */
-function extractProtocol(address) {
-  var match = protocolre.exec(address);
-
-  return {
-    protocol: match[1] ? match[1].toLowerCase() : '',
-    slashes: !!match[2],
-    rest: match[3]
-  };
-}
-
-/**
- * Resolve a relative URL pathname against a base URL pathname.
- *
- * @param {String} relative Pathname of the relative URL.
- * @param {String} base Pathname of the base URL.
- * @return {String} Resolved pathname.
- * @api private
- */
-function resolve(relative, base) {
-  var path = (base || '/').split('/').slice(0, -1).concat(relative.split('/'))
-    , i = path.length
-    , last = path[i - 1]
-    , unshift = false
-    , up = 0;
-
-  while (i--) {
-    if (path[i] === '.') {
-      path.splice(i, 1);
-    } else if (path[i] === '..') {
-      path.splice(i, 1);
-      up++;
-    } else if (up) {
-      if (i === 0) unshift = true;
-      path.splice(i, 1);
-      up--;
-    }
-  }
-
-  if (unshift) path.unshift('');
-  if (last === '.' || last === '..') path.push('');
-
-  return path.join('/');
-}
-
-/**
- * The actual URL instance. Instead of returning an object we've opted-in to
- * create an actual constructor as it's much more memory efficient and
- * faster and it pleases my OCD.
- *
- * @constructor
- * @param {String} address URL we want to parse.
- * @param {Object|String} location Location defaults for relative paths.
- * @param {Boolean|Function} parser Parser for the query string.
- * @api public
- */
-function URL(address, location, parser) {
-  if (!(this instanceof URL)) {
-    return new URL(address, location, parser);
-  }
-
-  var relative, extracted, parse, instruction, index, key
-    , instructions = rules.slice()
-    , type = typeof location
-    , url = this
-    , i = 0;
-
-  //
-  // The following if statements allows this module two have compatibility with
-  // 2 different API:
-  //
-  // 1. Node.js's `url.parse` api which accepts a URL, boolean as arguments
-  //    where the boolean indicates that the query string should also be parsed.
-  //
-  // 2. The `URL` interface of the browser which accepts a URL, object as
-  //    arguments. The supplied object will be used as default values / fall-back
-  //    for relative paths.
-  //
-  if ('object' !== type && 'string' !== type) {
-    parser = location;
-    location = null;
-  }
-
-  if (parser && 'function' !== typeof parser) parser = qs.parse;
-
-  location = lolcation(location);
-
-  //
-  // Extract protocol information before running the instructions.
-  //
-  extracted = extractProtocol(address || '');
-  relative = !extracted.protocol && !extracted.slashes;
-  url.slashes = extracted.slashes || relative && location.slashes;
-  url.protocol = extracted.protocol || location.protocol || '';
-  address = extracted.rest;
-
-  //
-  // When the authority component is absent the URL starts with a path
-  // component.
-  //
-  if (!extracted.slashes) instructions[2] = [/(.*)/, 'pathname'];
-
-  for (; i < instructions.length; i++) {
-    instruction = instructions[i];
-    parse = instruction[0];
-    key = instruction[1];
-
-    if (parse !== parse) {
-      url[key] = address;
-    } else if ('string' === typeof parse) {
-      if (~(index = address.indexOf(parse))) {
-        if ('number' === typeof instruction[2]) {
-          url[key] = address.slice(0, index);
-          address = address.slice(index + instruction[2]);
-        } else {
-          url[key] = address.slice(index);
-          address = address.slice(0, index);
-        }
-      }
-    } else if ((index = parse.exec(address))) {
-      url[key] = index[1];
-      address = address.slice(0, index.index);
-    }
-
-    url[key] = url[key] || (
-      relative && instruction[3] ? location[key] || '' : ''
-    );
-
-    //
-    // Hostname, host and protocol should be lowercased so they can be used to
-    // create a proper `origin`.
-    //
-    if (instruction[4]) url[key] = url[key].toLowerCase();
-  }
-
-  //
-  // Also parse the supplied query string in to an object. If we're supplied
-  // with a custom parser as function use that instead of the default build-in
-  // parser.
-  //
-  if (parser) url.query = parser(url.query);
-
-  //
-  // If the URL is relative, resolve the pathname against the base URL.
-  //
-  if (
-      relative
-    && location.slashes
-    && url.pathname.charAt(0) !== '/'
-    && (url.pathname !== '' || location.pathname !== '')
-  ) {
-    url.pathname = resolve(url.pathname, location.pathname);
-  }
-
-  //
-  // We should not add port numbers if they are already the default port number
-  // for a given protocol. As the host also contains the port number we're going
-  // override it with the hostname which contains no port number.
-  //
-  if (!required(url.port, url.protocol)) {
-    url.host = url.hostname;
-    url.port = '';
-  }
-
-  //
-  // Parse down the `auth` for the username and password.
-  //
-  url.username = url.password = '';
-  if (url.auth) {
-    instruction = url.auth.split(':');
-    url.username = instruction[0] || '';
-    url.password = instruction[1] || '';
-  }
-
-  url.origin = url.protocol && url.host && url.protocol !== 'file:'
-    ? url.protocol +'//'+ url.host
-    : 'null';
-
-  //
-  // The href is just the compiled result.
-  //
-  url.href = url.toString();
-}
-
-/**
- * This is convenience method for changing properties in the URL instance to
- * insure that they all propagate correctly.
- *
- * @param {String} part          Property we need to adjust.
- * @param {Mixed} value          The newly assigned value.
- * @param {Boolean|Function} fn  When setting the query, it will be the function
- *                               used to parse the query.
- *                               When setting the protocol, double slash will be
- *                               removed from the final url if it is true.
- * @returns {URL}
- * @api public
- */
-function set(part, value, fn) {
-  var url = this;
-
-  switch (part) {
-    case 'query':
-      if ('string' === typeof value && value.length) {
-        value = (fn || qs.parse)(value);
-      }
-
-      url[part] = value;
-      break;
-
-    case 'port':
-      url[part] = value;
-
-      if (!required(value, url.protocol)) {
-        url.host = url.hostname;
-        url[part] = '';
-      } else if (value) {
-        url.host = url.hostname +':'+ value;
-      }
-
-      break;
-
-    case 'hostname':
-      url[part] = value;
-
-      if (url.port) value += ':'+ url.port;
-      url.host = value;
-      break;
-
-    case 'host':
-      url[part] = value;
-
-      if (/:\d+$/.test(value)) {
-        value = value.split(':');
-        url.port = value.pop();
-        url.hostname = value.join(':');
-      } else {
-        url.hostname = value;
-        url.port = '';
-      }
-
-      break;
-
-    case 'protocol':
-      url.protocol = value.toLowerCase();
-      url.slashes = !fn;
-      break;
-
-    case 'pathname':
-      url.pathname = value.length && value.charAt(0) !== '/' ? '/' + value : value;
-
-      break;
-
-    default:
-      url[part] = value;
-  }
-
-  for (var i = 0; i < rules.length; i++) {
-    var ins = rules[i];
-
-    if (ins[4]) url[ins[1]] = url[ins[1]].toLowerCase();
-  }
-
-  url.origin = url.protocol && url.host && url.protocol !== 'file:'
-    ? url.protocol +'//'+ url.host
-    : 'null';
-
-  url.href = url.toString();
-
-  return url;
-};
-
-/**
- * Transform the properties back in to a valid and full URL string.
- *
- * @param {Function} stringify Optional query stringify function.
- * @returns {String}
- * @api public
- */
-function toString(stringify) {
-  if (!stringify || 'function' !== typeof stringify) stringify = qs.stringify;
-
-  var query
-    , url = this
-    , protocol = url.protocol;
-
-  if (protocol && protocol.charAt(protocol.length - 1) !== ':') protocol += ':';
-
-  var result = protocol + (url.slashes ? '//' : '');
-
-  if (url.username) {
-    result += url.username;
-    if (url.password) result += ':'+ url.password;
-    result += '@';
-  }
-
-  result += url.host + url.pathname;
-
-  query = 'object' === typeof url.query ? stringify(url.query) : url.query;
-  if (query) result += '?' !== query.charAt(0) ? '?'+ query : query;
-
-  if (url.hash) result += url.hash;
-
-  return result;
-}
-
-URL.prototype = { set: set, toString: toString };
-
-//
-// Expose the URL parser and some additional properties that might be useful for
-// others or testing.
-//
-URL.extractProtocol = extractProtocol;
-URL.location = lolcation;
-URL.qs = qs;
-
-module.exports = URL;
-
-
-/***/ }),
-
-/***/ 245:
+/***/ 301:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1467,7 +1237,7 @@ exports.default = new LayerIdService();
 
 /***/ }),
 
-/***/ 247:
+/***/ 303:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1489,35 +1259,35 @@ var _createClass = function () { function defineProperties(target, props) { for 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * See the License for the specific language governing permissions and limitations under the License.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
 
-var _openlayers = __webpack_require__(9);
+var _openlayers = __webpack_require__(11);
 
 var _openlayers2 = _interopRequireDefault(_openlayers);
 
-var _util = __webpack_require__(25);
+var _util = __webpack_require__(27);
 
 var _util2 = _interopRequireDefault(_util);
 
-var _jsonix = __webpack_require__(54);
+var _jsonix = __webpack_require__(73);
 
-var _urlParse = __webpack_require__(24);
+var _urlParse = __webpack_require__(51);
 
 var _urlParse2 = _interopRequireDefault(_urlParse);
 
-var _XSD_1_ = __webpack_require__(425);
+var _XSD_1_ = __webpack_require__(588);
 
-var _XLink_1_ = __webpack_require__(78);
+var _XLink_1_ = __webpack_require__(97);
 
-var _OWS_1_0_ = __webpack_require__(341);
+var _OWS_1_0_ = __webpack_require__(472);
 
-var _Filter_1_1_ = __webpack_require__(338);
+var _Filter_1_1_ = __webpack_require__(469);
 
-var _SMIL_2_ = __webpack_require__(343);
+var _SMIL_2_ = __webpack_require__(474);
 
-var _SMIL_2_0_Language = __webpack_require__(344);
+var _SMIL_2_0_Language = __webpack_require__(475);
 
-var _GML_3_1_ = __webpack_require__(340);
+var _GML_3_1_ = __webpack_require__(471);
 
-var _WFS_1_1_ = __webpack_require__(345);
+var _WFS_1_1_ = __webpack_require__(476);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1630,7 +1400,6 @@ var WFSService = function () {
     key: 'describeFeatureType',
     value: function describeFeatureType(url, layerName, onSuccess, onFailure, scope, opt_proxy, opt_requestHeaders) {
       var dftUrl = new _urlParse2.default(url);
-      dftUrl.set('pathname', dftUrl.pathname.replace('wms', 'wfs'));
       dftUrl.set('query', {
         service: 'WFS',
         request: 'DescribeFeatureType',
@@ -1638,7 +1407,7 @@ var WFSService = function () {
         typename: layerName
       });
       _util2.default.doGET(_util2.default.getProxiedUrl(dftUrl.toString(), opt_proxy), function (xmlhttp) {
-        if (xmlhttp.responseText.indexOf('ServiceExceptionReport') === -1) {
+        if (xmlhttp.responseText.indexOf('<?xml') !== -1 && xmlhttp.responseText.indexOf('ServiceExceptionReport') === -1) {
           var schema = xsdUnmarshaller.unmarshalString(xmlhttp.responseText).value;
           var element = schema.complexType[0].complexContent.extension.sequence.element;
           var geometryType, geometryName;
@@ -1664,7 +1433,7 @@ var WFSService = function () {
             geometryType: geometryType,
             geometryName: geometryName,
             attributes: attributes,
-            url: url.replace('wms', 'wfs')
+            url: url
           });
         } else {
           onFailure.call(scope || this, xmlhttp);
@@ -1908,154 +1677,28 @@ var WFSService = function () {
 }();
 
 exports.default = new WFSService();
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
 
 /***/ }),
 
-/***/ 25:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _openlayers = __webpack_require__(9);
-
-var _openlayers2 = _interopRequireDefault(_openlayers);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = {
-  getProxiedUrl: function getProxiedUrl(url, opt_proxy) {
-    if (opt_proxy) {
-      return opt_proxy + encodeURIComponent(url);
-    } else {
-      return url;
-    }
-  },
-  getResolutionForScale: function getResolutionForScale(scale, units) {
-    var dpi = 25.4 / 0.28;
-    var mpu = _openlayers2.default.proj.METERS_PER_UNIT[units];
-    var inchesPerMeter = 39.37;
-    return parseFloat(scale) / (mpu * inchesPerMeter * dpi);
-  },
-  getTimeInfo: function getTimeInfo(layer) {
-    if (layer.Dimension) {
-      for (var i = 0, ii = layer.Dimension.length; i < ii; ++i) {
-        var dimension = layer.Dimension[i];
-        if (dimension.name === 'time') {
-          return dimension.values;
-        }
-      }
-    }
-  },
-  rgbToHex: function rgbToHex(rgb) {
-    rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
-    return rgb && rgb.length === 4 ? '#' + ('0' + parseInt(rgb[1], 10).toString(16)).slice(-2) + ('0' + parseInt(rgb[2], 10).toString(16)).slice(-2) + ('0' + parseInt(rgb[3], 10).toString(16)).slice(-2) : '';
-  },
-  hexToRgb: function hexToRgb(hex) {
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result ? {
-      r: parseInt(result[1], 16),
-      g: parseInt(result[2], 16),
-      b: parseInt(result[3], 16)
-    } : null;
-  },
-  transformColor: function transformColor(color) {
-    var colorObj = color.rgb ? color.rgb : color;
-    return [colorObj.r, colorObj.g, colorObj.b, colorObj.a];
-  },
-  doJSONP: function doJSONP(url, success, failure, scope) {
-    function getRandomInt(min, max) {
-      min = Math.ceil(min);
-      max = Math.floor(max);
-      return Math.floor(Math.random() * (max - min)) + min;
-    }
-    var cbname = 'fn' + Date.now() + getRandomInt(1, 10000);
-    var script = document.createElement('script');
-    script.onerror = function () {
-      if (failure) {
-        failure.call(scope);
-      }
-    };
-    script.src = url.replace('__cbname__', cbname);
-    window[cbname] = function (jsonData) {
-      success.call(scope, jsonData);
-      delete window[cbname];
-    };
-    document.head.appendChild(script);
-  },
-  doGET: function doGET(url, success, failure, scope, opt_requestHeaders) {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function () {
-      if (xmlhttp.readyState === 4) {
-        if (xmlhttp.status === 200) {
-          if (success) {
-            success.call(scope, xmlhttp);
-          }
-        } else if (failure) {
-          failure.call(scope, xmlhttp);
-        }
-      }
-    };
-    xmlhttp.open('GET', url, true);
-    if (opt_requestHeaders) {
-      for (var key in opt_requestHeaders) {
-        if (opt_requestHeaders.hasOwnProperty(key)) {
-          xmlhttp.setRequestHeader(key, opt_requestHeaders[key]);
-        }
-      }
-    }
-    xmlhttp.send();
-    return xmlhttp;
-  },
-  doPOST: function doPOST(url, data, success, failure, scope, contentType, put, opt_requestHeaders) {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open(put ? 'PUT' : 'POST', url, true);
-    xmlhttp.setRequestHeader('Content-Type', contentType ? contentType : 'text/xml');
-    xmlhttp.onreadystatechange = function () {
-      if (xmlhttp.readyState === 4) {
-        if (xmlhttp.status === 200 || xmlhttp.status === 201) {
-          success.call(scope, xmlhttp);
-        } else {
-          failure.call(scope, xmlhttp);
-        }
-      }
-    };
-    if (opt_requestHeaders) {
-      for (var key in opt_requestHeaders) {
-        if (opt_requestHeaders.hasOwnProperty(key)) {
-          xmlhttp.setRequestHeader(key, opt_requestHeaders[key]);
-        }
-      }
-    }
-    xmlhttp.send(data);
-    return xmlhttp;
-  }
-}; /*
-    * Copyright 2015-present Boundless Spatial Inc., http://boundlessgeo.com
-    * Licensed under the Apache License, Version 2.0 (the "License").
-    * You may not use this file except in compliance with the License.
-    * You may obtain a copy of the License at
-    * http://www.apache.org/licenses/LICENSE-2.0
-    * Unless required by applicable law or agreed to in writing, software
-    * distributed under the License is distributed on an "AS IS" BASIS,
-    * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    * See the License for the specific language governing permissions and limitations under the License.
-    */
-
-/***/ }),
-
-/***/ 33:
+/***/ 44:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var has = Object.prototype.hasOwnProperty;
+
+/**
+ * Decode a URI encoded string.
+ *
+ * @param {String} input The URI encoded string.
+ * @returns {String} The decoded string.
+ * @api private
+ */
+function decode(input) {
+  return decodeURIComponent(input.replace(/\+/g, ' '));
+}
 
 /**
  * Simple query string parser.
@@ -2076,7 +1719,7 @@ function querystring(query) {
   //
   for (;
     part = parser.exec(query);
-    result[decodeURIComponent(part[1])] = decodeURIComponent(part[2])
+    result[decode(part[1])] = decode(part[2])
   );
 
   return result;
@@ -2118,7 +1761,7 @@ exports.parse = querystring;
 
 /***/ }),
 
-/***/ 338:
+/***/ 469:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var Filter_1_1_0_Module_Factory = function () {
@@ -2889,7 +2532,7 @@ else {
 
 /***/ }),
 
-/***/ 340:
+/***/ 471:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var GML_3_1_1_Module_Factory = function () {
@@ -12684,7 +12327,7 @@ else {
 
 /***/ }),
 
-/***/ 341:
+/***/ 472:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var OWS_1_0_0_Module_Factory = function () {
@@ -13357,7 +13000,7 @@ else {
 
 /***/ }),
 
-/***/ 343:
+/***/ 474:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var SMIL_2_0_Module_Factory = function () {
@@ -13617,7 +13260,7 @@ else {
 
 /***/ }),
 
-/***/ 344:
+/***/ 475:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var SMIL_2_0_Language_Module_Factory = function () {
@@ -14312,7 +13955,7 @@ else {
 
 /***/ }),
 
-/***/ 345:
+/***/ 476:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var WFS_1_1_0_Module_Factory = function () {
@@ -15227,7 +14870,7 @@ else {
 
 /***/ }),
 
-/***/ 39:
+/***/ 49:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15273,13 +14916,38 @@ module.exports = function required(port, protocol) {
 
 /***/ }),
 
-/***/ 41:
+/***/ 51:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 
-var slashes = /^[A-Za-z][A-Za-z0-9+-.]*:\/\//;
+var required = __webpack_require__(49)
+  , qs = __webpack_require__(44)
+  , protocolre = /^([a-z][a-z0-9.+-]*:)?(\/\/)?([\S\s]*)/i
+  , slashes = /^[A-Za-z][A-Za-z0-9+-.]*:\/\//;
+
+/**
+ * These are the parse rules for the URL parser, it informs the parser
+ * about:
+ *
+ * 0. The char it Needs to parse, if it's a string it should be done using
+ *    indexOf, RegExp using exec and NaN means set as current value.
+ * 1. The property we should set when parsing this value.
+ * 2. Indication if it's backwards or forward parsing, when set as number it's
+ *    the value of extra chars that should be split off.
+ * 3. Inherit from location if non existing in the parser.
+ * 4. `toLowerCase` the resulting value.
+ */
+var rules = [
+  ['#', 'hash'],                        // Extract from the back.
+  ['?', 'query'],                       // Extract from the back.
+  ['/', 'pathname'],                    // Extract from the back.
+  ['@', 'auth', 1],                     // Extract from the front.
+  [NaN, 'host', undefined, 1, 1],       // Set left over value.
+  [/:(\d+)$/, 'port', undefined, 1],    // RegExp the back.
+  [NaN, 'hostname', undefined, 1, 1]    // Set left over.
+];
 
 /**
  * These properties should not be copied or inherited from. This is only needed
@@ -15289,8 +14957,7 @@ var slashes = /^[A-Za-z][A-Za-z0-9+-.]*:\/\//;
  * @type {Object}
  * @private
  */
-var ignore = { hash: 1, query: 1 }
-  , URL;
+var ignore = { hash: 1, query: 1 };
 
 /**
  * The location object differs when your code is loaded through a normal page,
@@ -15304,9 +14971,8 @@ var ignore = { hash: 1, query: 1 }
  * @returns {Object} lolcation object.
  * @api public
  */
-module.exports = function lolcation(loc) {
+function lolcation(loc) {
   loc = loc || global.location || {};
-  URL = URL || __webpack_require__(24);
 
   var finaldestination = {}
     , type = typeof loc
@@ -15329,13 +14995,344 @@ module.exports = function lolcation(loc) {
   }
 
   return finaldestination;
-};
+}
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)))
+/**
+ * @typedef ProtocolExtract
+ * @type Object
+ * @property {String} protocol Protocol matched in the URL, in lowercase.
+ * @property {Boolean} slashes `true` if protocol is followed by "//", else `false`.
+ * @property {String} rest Rest of the URL that is not part of the protocol.
+ */
+
+/**
+ * Extract protocol information from a URL with/without double slash ("//").
+ *
+ * @param {String} address URL we want to extract from.
+ * @return {ProtocolExtract} Extracted information.
+ * @api private
+ */
+function extractProtocol(address) {
+  var match = protocolre.exec(address);
+
+  return {
+    protocol: match[1] ? match[1].toLowerCase() : '',
+    slashes: !!match[2],
+    rest: match[3]
+  };
+}
+
+/**
+ * Resolve a relative URL pathname against a base URL pathname.
+ *
+ * @param {String} relative Pathname of the relative URL.
+ * @param {String} base Pathname of the base URL.
+ * @return {String} Resolved pathname.
+ * @api private
+ */
+function resolve(relative, base) {
+  var path = (base || '/').split('/').slice(0, -1).concat(relative.split('/'))
+    , i = path.length
+    , last = path[i - 1]
+    , unshift = false
+    , up = 0;
+
+  while (i--) {
+    if (path[i] === '.') {
+      path.splice(i, 1);
+    } else if (path[i] === '..') {
+      path.splice(i, 1);
+      up++;
+    } else if (up) {
+      if (i === 0) unshift = true;
+      path.splice(i, 1);
+      up--;
+    }
+  }
+
+  if (unshift) path.unshift('');
+  if (last === '.' || last === '..') path.push('');
+
+  return path.join('/');
+}
+
+/**
+ * The actual URL instance. Instead of returning an object we've opted-in to
+ * create an actual constructor as it's much more memory efficient and
+ * faster and it pleases my OCD.
+ *
+ * @constructor
+ * @param {String} address URL we want to parse.
+ * @param {Object|String} location Location defaults for relative paths.
+ * @param {Boolean|Function} parser Parser for the query string.
+ * @api public
+ */
+function URL(address, location, parser) {
+  if (!(this instanceof URL)) {
+    return new URL(address, location, parser);
+  }
+
+  var relative, extracted, parse, instruction, index, key
+    , instructions = rules.slice()
+    , type = typeof location
+    , url = this
+    , i = 0;
+
+  //
+  // The following if statements allows this module two have compatibility with
+  // 2 different API:
+  //
+  // 1. Node.js's `url.parse` api which accepts a URL, boolean as arguments
+  //    where the boolean indicates that the query string should also be parsed.
+  //
+  // 2. The `URL` interface of the browser which accepts a URL, object as
+  //    arguments. The supplied object will be used as default values / fall-back
+  //    for relative paths.
+  //
+  if ('object' !== type && 'string' !== type) {
+    parser = location;
+    location = null;
+  }
+
+  if (parser && 'function' !== typeof parser) parser = qs.parse;
+
+  location = lolcation(location);
+
+  //
+  // Extract protocol information before running the instructions.
+  //
+  extracted = extractProtocol(address || '');
+  relative = !extracted.protocol && !extracted.slashes;
+  url.slashes = extracted.slashes || relative && location.slashes;
+  url.protocol = extracted.protocol || location.protocol || '';
+  address = extracted.rest;
+
+  //
+  // When the authority component is absent the URL starts with a path
+  // component.
+  //
+  if (!extracted.slashes) instructions[2] = [/(.*)/, 'pathname'];
+
+  for (; i < instructions.length; i++) {
+    instruction = instructions[i];
+    parse = instruction[0];
+    key = instruction[1];
+
+    if (parse !== parse) {
+      url[key] = address;
+    } else if ('string' === typeof parse) {
+      if (~(index = address.indexOf(parse))) {
+        if ('number' === typeof instruction[2]) {
+          url[key] = address.slice(0, index);
+          address = address.slice(index + instruction[2]);
+        } else {
+          url[key] = address.slice(index);
+          address = address.slice(0, index);
+        }
+      }
+    } else if ((index = parse.exec(address))) {
+      url[key] = index[1];
+      address = address.slice(0, index.index);
+    }
+
+    url[key] = url[key] || (
+      relative && instruction[3] ? location[key] || '' : ''
+    );
+
+    //
+    // Hostname, host and protocol should be lowercased so they can be used to
+    // create a proper `origin`.
+    //
+    if (instruction[4]) url[key] = url[key].toLowerCase();
+  }
+
+  //
+  // Also parse the supplied query string in to an object. If we're supplied
+  // with a custom parser as function use that instead of the default build-in
+  // parser.
+  //
+  if (parser) url.query = parser(url.query);
+
+  //
+  // If the URL is relative, resolve the pathname against the base URL.
+  //
+  if (
+      relative
+    && location.slashes
+    && url.pathname.charAt(0) !== '/'
+    && (url.pathname !== '' || location.pathname !== '')
+  ) {
+    url.pathname = resolve(url.pathname, location.pathname);
+  }
+
+  //
+  // We should not add port numbers if they are already the default port number
+  // for a given protocol. As the host also contains the port number we're going
+  // override it with the hostname which contains no port number.
+  //
+  if (!required(url.port, url.protocol)) {
+    url.host = url.hostname;
+    url.port = '';
+  }
+
+  //
+  // Parse down the `auth` for the username and password.
+  //
+  url.username = url.password = '';
+  if (url.auth) {
+    instruction = url.auth.split(':');
+    url.username = instruction[0] || '';
+    url.password = instruction[1] || '';
+  }
+
+  url.origin = url.protocol && url.host && url.protocol !== 'file:'
+    ? url.protocol +'//'+ url.host
+    : 'null';
+
+  //
+  // The href is just the compiled result.
+  //
+  url.href = url.toString();
+}
+
+/**
+ * This is convenience method for changing properties in the URL instance to
+ * insure that they all propagate correctly.
+ *
+ * @param {String} part          Property we need to adjust.
+ * @param {Mixed} value          The newly assigned value.
+ * @param {Boolean|Function} fn  When setting the query, it will be the function
+ *                               used to parse the query.
+ *                               When setting the protocol, double slash will be
+ *                               removed from the final url if it is true.
+ * @returns {URL}
+ * @api public
+ */
+function set(part, value, fn) {
+  var url = this;
+
+  switch (part) {
+    case 'query':
+      if ('string' === typeof value && value.length) {
+        value = (fn || qs.parse)(value);
+      }
+
+      url[part] = value;
+      break;
+
+    case 'port':
+      url[part] = value;
+
+      if (!required(value, url.protocol)) {
+        url.host = url.hostname;
+        url[part] = '';
+      } else if (value) {
+        url.host = url.hostname +':'+ value;
+      }
+
+      break;
+
+    case 'hostname':
+      url[part] = value;
+
+      if (url.port) value += ':'+ url.port;
+      url.host = value;
+      break;
+
+    case 'host':
+      url[part] = value;
+
+      if (/:\d+$/.test(value)) {
+        value = value.split(':');
+        url.port = value.pop();
+        url.hostname = value.join(':');
+      } else {
+        url.hostname = value;
+        url.port = '';
+      }
+
+      break;
+
+    case 'protocol':
+      url.protocol = value.toLowerCase();
+      url.slashes = !fn;
+      break;
+
+    case 'pathname':
+      url.pathname = value.length && value.charAt(0) !== '/' ? '/' + value : value;
+
+      break;
+
+    default:
+      url[part] = value;
+  }
+
+  for (var i = 0; i < rules.length; i++) {
+    var ins = rules[i];
+
+    if (ins[4]) url[ins[1]] = url[ins[1]].toLowerCase();
+  }
+
+  url.origin = url.protocol && url.host && url.protocol !== 'file:'
+    ? url.protocol +'//'+ url.host
+    : 'null';
+
+  url.href = url.toString();
+
+  return url;
+}
+
+/**
+ * Transform the properties back in to a valid and full URL string.
+ *
+ * @param {Function} stringify Optional query stringify function.
+ * @returns {String}
+ * @api public
+ */
+function toString(stringify) {
+  if (!stringify || 'function' !== typeof stringify) stringify = qs.stringify;
+
+  var query
+    , url = this
+    , protocol = url.protocol;
+
+  if (protocol && protocol.charAt(protocol.length - 1) !== ':') protocol += ':';
+
+  var result = protocol + (url.slashes ? '//' : '');
+
+  if (url.username) {
+    result += url.username;
+    if (url.password) result += ':'+ url.password;
+    result += '@';
+  }
+
+  result += url.host + url.pathname;
+
+  query = 'object' === typeof url.query ? stringify(url.query) : url.query;
+  if (query) result += '?' !== query.charAt(0) ? '?'+ query : query;
+
+  if (url.hash) result += url.hash;
+
+  return result;
+}
+
+URL.prototype = { set: set, toString: toString };
+
+//
+// Expose the URL parser and some additional properties that might be useful for
+// others or testing.
+//
+URL.extractProtocol = extractProtocol;
+URL.location = lolcation;
+URL.qs = qs;
+
+module.exports = URL;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
 
 /***/ }),
 
-/***/ 425:
+/***/ 588:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var XSD_1_0_Module_Factory = function () {
@@ -16755,7 +16752,7 @@ else {
 
 /***/ }),
 
-/***/ 432:
+/***/ 595:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16765,31 +16762,31 @@ exports.__esModule = true;
 
 var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
-var _react = __webpack_require__(3);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(16);
+var _reactDom = __webpack_require__(19);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _MapConfigTransformService = __webpack_require__(228);
+var _MapConfigTransformService = __webpack_require__(284);
 
 var _MapConfigTransformService2 = _interopRequireDefault(_MapConfigTransformService);
 
-var _MapConfigService = __webpack_require__(227);
+var _MapConfigService = __webpack_require__(283);
 
 var _MapConfigService2 = _interopRequireDefault(_MapConfigService);
 
-var _FieldSet2 = __webpack_require__(7);
+var _FieldSet2 = __webpack_require__(9);
 
 var _FieldSet3 = _interopRequireDefault(_FieldSet2);
 
-var _Events = __webpack_require__(10);
+var _Events = __webpack_require__(13);
 
 var _Events2 = _interopRequireDefault(_Events);
 
-var _openlayers = __webpack_require__(9);
+var _openlayers = __webpack_require__(11);
 
 var _openlayers2 = _interopRequireDefault(_openlayers);
 
@@ -16921,7 +16918,7 @@ exports.default = MapWidget;
 
 /***/ }),
 
-/***/ 54:
+/***/ 73:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _jsonix_factory = function(_jsonix_xmldom, _jsonix_xmlhttprequest, _jsonix_fs)
@@ -23060,7 +23057,7 @@ else
 
 /***/ }),
 
-/***/ 7:
+/***/ 9:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23074,7 +23071,7 @@ var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" &
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _react = __webpack_require__(3);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -23224,7 +23221,7 @@ exports.default = FieldSet;
 
 /***/ }),
 
-/***/ 78:
+/***/ 97:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var XLink_1_0_Module_Factory = function () {
@@ -23458,4 +23455,4 @@ else {
 
 /***/ })
 
-},[432]);
+},[595]);

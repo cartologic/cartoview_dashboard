@@ -4,7 +4,7 @@
   "description": "Dashboard client scripts for cartoview_dashboard django app",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack -p",
     "dev": "webpack --watch --config webpack-dev.config.js",
     "lint": "jshint .",
     "validate": "npm ls"
@@ -80,13 +80,11 @@
     "react-transform-hmr": "^1.0.2",
     "style-loader": "^0.13.0",
     "valiquire": "^0.3.0",
-    "webpack": "^2.2.1",
-    "webpack-dev-server": "^2.3.0"
+    "webpack": "2.2.1",
+    "webpack-dev-server": "2.3.0"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },
-  "pre-commit": [
-    
-  ]
+  "pre-commit": []
 }
