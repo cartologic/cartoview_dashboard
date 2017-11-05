@@ -1,10 +1,9 @@
+import Events from './events/Events.jsx';
+import FieldSet from './components/FieldSet.jsx';
+import MapConfigService from 'boundless-sdk/services/MapConfigService';
+import MapConfigTransformService from 'boundless-sdk/services/MapConfigTransformService';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MapConfigTransformService from 'boundless-sdk/services/MapConfigTransformService';
-import MapConfigService from 'boundless-sdk/services/MapConfigService';
-import FieldSet from './components/FieldSet.jsx';
-import Events from './events/Events.jsx';
-
 import ol from 'openlayers';
 
 class MapWidget extends BaseWidget {
@@ -44,7 +43,7 @@ class MapWidget extends BaseWidget {
                 }
             }).then((config) => {
                 if(config) {
-                    MapConfigService.load(MapConfigTransformService.transform(config), this.map);
+                    MapConfigService.load(MapConfigTransformService.transform(config), this.map,URLS.proxy);
                     this.ready = true;
                     Events.emit('mapReady', this.map, this);
                 }

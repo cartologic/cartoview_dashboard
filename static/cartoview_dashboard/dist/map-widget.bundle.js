@@ -490,11 +490,11 @@ var _util = __webpack_require__(27);
 
 var _util2 = _interopRequireDefault(_util);
 
-var _LayerIdService = __webpack_require__(301);
+var _LayerIdService = __webpack_require__(300);
 
 var _LayerIdService2 = _interopRequireDefault(_LayerIdService);
 
-var _WFSService = __webpack_require__(303);
+var _WFSService = __webpack_require__(302);
 
 var _WFSService2 = _interopRequireDefault(_WFSService);
 
@@ -1189,7 +1189,7 @@ exports.default = new MapConfigTransformService();
 
 /***/ }),
 
-/***/ 301:
+/***/ 300:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1237,7 +1237,7 @@ exports.default = new LayerIdService();
 
 /***/ }),
 
-/***/ 303:
+/***/ 302:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1273,7 +1273,7 @@ var _urlParse = __webpack_require__(51);
 
 var _urlParse2 = _interopRequireDefault(_urlParse);
 
-var _XSD_1_ = __webpack_require__(588);
+var _XSD_1_ = __webpack_require__(589);
 
 var _XLink_1_ = __webpack_require__(97);
 
@@ -1681,7 +1681,7 @@ exports.default = new WFSService();
 
 /***/ }),
 
-/***/ 44:
+/***/ 45:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14870,7 +14870,7 @@ else {
 
 /***/ }),
 
-/***/ 49:
+/***/ 50:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14922,8 +14922,8 @@ module.exports = function required(port, protocol) {
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 
-var required = __webpack_require__(49)
-  , qs = __webpack_require__(44)
+var required = __webpack_require__(50)
+  , qs = __webpack_require__(45)
   , protocolre = /^([a-z][a-z0-9.+-]*:)?(\/\/)?([\S\s]*)/i
   , slashes = /^[A-Za-z][A-Za-z0-9+-.]*:\/\//;
 
@@ -15332,7 +15332,7 @@ module.exports = URL;
 
 /***/ }),
 
-/***/ 588:
+/***/ 589:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var XSD_1_0_Module_Factory = function () {
@@ -16752,7 +16752,7 @@ else {
 
 /***/ }),
 
-/***/ 595:
+/***/ 596:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16762,6 +16762,22 @@ exports.__esModule = true;
 
 var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
+var _Events = __webpack_require__(13);
+
+var _Events2 = _interopRequireDefault(_Events);
+
+var _FieldSet2 = __webpack_require__(9);
+
+var _FieldSet3 = _interopRequireDefault(_FieldSet2);
+
+var _MapConfigService = __webpack_require__(283);
+
+var _MapConfigService2 = _interopRequireDefault(_MapConfigService);
+
+var _MapConfigTransformService = __webpack_require__(284);
+
+var _MapConfigTransformService2 = _interopRequireDefault(_MapConfigTransformService);
+
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
@@ -16769,22 +16785,6 @@ var _react2 = _interopRequireDefault(_react);
 var _reactDom = __webpack_require__(19);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
-
-var _MapConfigTransformService = __webpack_require__(284);
-
-var _MapConfigTransformService2 = _interopRequireDefault(_MapConfigTransformService);
-
-var _MapConfigService = __webpack_require__(283);
-
-var _MapConfigService2 = _interopRequireDefault(_MapConfigService);
-
-var _FieldSet2 = __webpack_require__(9);
-
-var _FieldSet3 = _interopRequireDefault(_FieldSet2);
-
-var _Events = __webpack_require__(13);
-
-var _Events2 = _interopRequireDefault(_Events);
 
 var _openlayers = __webpack_require__(11);
 
@@ -16842,7 +16842,7 @@ var MapWidget = function (_BaseWidget) {
                 }
             }).then(function (config) {
                 if (config) {
-                    _MapConfigService2.default.load(_MapConfigTransformService2.default.transform(config), _this2.map);
+                    _MapConfigService2.default.load(_MapConfigTransformService2.default.transform(config), _this2.map, URLS.proxy);
                     _this2.ready = true;
                     _Events2.default.emit('mapReady', _this2.map, _this2);
                 }
@@ -23455,4 +23455,4 @@ else {
 
 /***/ })
 
-},[595]);
+},[596]);

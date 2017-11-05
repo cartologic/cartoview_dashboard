@@ -87,13 +87,15 @@
     console.debug(props)
     var dash = React.createElement(Dashboard, props);
     ReactDOM.render(dash, document.getElementById("dash"));
-
+    {% if PROXY_URL %}
+        const PROXY_URL='{{PROXY_URL}}'
+    {% else %}
+        const PROXY_URL=null
+    {% endif %}
 
     var URLS = {
       geoserver: "{{ GEOSERVER_BASE_URL }}",
-      //{% if PROXY_URL %}
-      proxy: "{{ PROXY_URL }}",
-      //{% endif %}
+      proxy: PROXY_URL,
       static: "{{ STATIC_URL }}",
       media: "{{ MEDIA_URL }}",
       rest: "{% url 'app_manager_base_url' %}rest/app_manager/",
