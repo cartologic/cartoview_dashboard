@@ -1,33 +1,38 @@
+import { default as URLHelper } from './helpers/URLS.jsx'
+import { getCRSFToken } from './helpers/helpers.jsx'
 
 const xmlTpls = {
-    aggregate: require( './wps-xml/aggregate/aggregate.xml'),
-    groupBy: require( './wps-xml/aggregate/group-by.xml'),
-    filters: require( './wps-xml/aggregate/filters.xml')
+    aggregate: require('./wps-xml/aggregate/aggregate.xml'),
+    groupBy: require('./wps-xml/aggregate/group-by.xml'),
+    filters: require('./wps-xml/aggregate/filters.xml')
 }
 class WpsClient {
     constructor(config) {
-        this.config = config;
-        this.url = config.geoserverUrl + "/wps/"
+        this.config = config
+        this.urls = new URLHelper(URLS)
+        this.url = URLS.geoserver + "wps/"
     }
-    aggregate(params){
-        return fetch(this.url, {
-          method: 'POST',
-          body: this.getXml(xmlTpls.aggregate, params),
-          headers: new Headers({
-            'Content-Type': 'text/xml',
-          }),
-        }).then(response => response.json());
+    aggregate=(params)=> {
+        const proxiedURL = this.urls.getProxiedURL(this.url)
+        return fetch(proxiedURL, {
+            method: 'POST',
+            credentials: 'include',
+            body: this.getXml(xmlTpls.aggregate, params),
+            headers:new Headers({
+                'Content-Type': 'text/xml',
+                "X-CSRFToken": getCRSFToken()
+            }),
+        }).then(response => response.json())
     }
-    getXml(tpl, params){
-        let output = tpl;
+    getXml(tpl, params) {
+        let output = tpl
         Object.keys(params).map(key => {
-            let val = xmlTpls[key] ? this.getXml(xmlTpls[key], params[key]) : params[key]
-            output = output.replace("__" + key + "__", val);
-        });
-        //remove template vars that has no value
-        output = output.replace(/_{2}\w+_{2}/g, "");
-        return output.trim();
+            let val = xmlTpls[key] ? this.getXml(xmlTpls[key],
+                params[key]) : params[key]
+            output = output.replace("__" + key + "__", val)
+        })
+        output = output.replace(/_{2}\w+_{2}/g, "")
+        return output.trim()
     }
 }
-
-global.WpsClient = WpsClient;
+global.WpsClient = WpsClient

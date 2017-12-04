@@ -1,6 +1,6 @@
-webpackJsonp([4],{
+webpackJsonp([5],{
 
-/***/ 13:
+/***/ 10:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8,13 +8,177 @@ webpackJsonp([4],{
 
 exports.__esModule = true;
 
-var _events = __webpack_require__(20);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = __webpack_require__(3);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var JSONField = function (_Component) {
+  _inherits(JSONField, _Component);
+
+  function JSONField(props) {
+    _classCallCheck(this, JSONField);
+
+    var _this = _possibleConstructorReturn(this, _Component.call(this, props));
+
+    Object.defineProperty(_this, 'value', {
+      get: function get() {
+        return JSON.parse(_this.refs.textarea.value);
+      },
+      set: function set(newValue) {
+        _this.refs.textarea.value = JSON.stringify(newValue || {});
+      },
+      enumerable: true,
+      configurable: true
+    });
+    return _this;
+  }
+
+  JSONField.prototype.render = function render() {
+    var props = _objectWithoutProperties(this.props, []);
+
+    delete props.ref;
+    return _react2.default.createElement('textarea', _extends({}, props, { ref: 'textarea' }));
+  };
+
+  return JSONField;
+}(_react.Component);
+
+var FieldSet = function (_Component2) {
+  _inherits(FieldSet, _Component2);
+
+  function FieldSet(props) {
+    _classCallCheck(this, FieldSet);
+
+    var _this2 = _possibleConstructorReturn(this, _Component2.call(this, props));
+
+    _this2.state = {
+      schema: props.schema || _this2.getSchema(props),
+      data: props.data || _this2.getInitialData(props)
+    };
+    _this2.fields = {};
+    return _this2;
+  }
+
+  FieldSet.prototype.getSchema = function getSchema() {
+    return {};
+  };
+
+  FieldSet.prototype.getInitialData = function getInitialData() {
+    return {};
+  };
+
+  FieldSet.prototype.render = function render() {
+    var _this3 = this;
+
+    var _state = this.state,
+        schema = _state.schema,
+        data = _state.data;
+
+    return _jsx('div', {}, void 0, Object.keys(schema).map(function (key) {
+      return _this3.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null);
+    }));
+  };
+
+  FieldSet.prototype.field = function field(name, schema, value) {
+    var _this4 = this;
+
+    var _schema$props = schema.props,
+        props = _schema$props === undefined ? {} : _schema$props;
+
+    props.className = "form-control";
+    props.ref = function (f) {
+      if (f) {
+        f.value = value;
+        _this4.fields[name] = f;
+        f.fieldSet = _this4;
+      }
+    };
+    var field = null;
+
+    if (['text', 'number', 'url', 'email'].indexOf(schema.type) != -1) {
+      props.type = schema.type;
+      field = _react2.default.createElement('input', props);
+    } else if (schema.type == "textarea") {
+      field = _react2.default.createElement('textarea', props);
+    } else if (schema.type == "json") {
+      field = _react2.default.createElement(JSONField, props);
+    } else if (schema.type == 'select') {
+      field = _react2.default.createElement(
+        'select',
+        props,
+        this.getSelectOptions(name, schema, value)
+      );
+    }
+    var label = schema.label || name.charAt(0).toUpperCase() + name.slice(1);
+    return _jsx('div', {
+      className: 'form-group'
+    }, void 0, _jsx('label', {}, void 0, label), field);
+  };
+
+  FieldSet.prototype.getSelectOptions = function getSelectOptions(name, schema, value) {
+    var options = schema.options;
+
+    if (!options) return null;
+    if ((typeof options === 'undefined' ? 'undefined' : _typeof(options)) == "object") {
+      return Object.keys(options).map(function (key) {
+        return _jsx('option', {
+          value: key
+        }, void 0, options[key]);
+      });
+    } else if (typeof options == 'function') {
+      return options(this, this.state.data);
+    }
+    return null;
+  };
+
+  FieldSet.prototype.getData = function getData() {
+    var _this5 = this;
+
+    var data = {};
+    Object.keys(this.fields).map(function (key) {
+      data[key] = _this5.fields[key].value;
+    });
+    return data;
+  };
+
+  return FieldSet;
+}(_react.Component);
+
+exports.default = FieldSet;
+
+/***/ }),
+
+/***/ 14:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _events = __webpack_require__(21);
 
 exports.default = new _events.EventEmitter();
 
 /***/ }),
 
-/***/ 20:
+/***/ 21:
 /***/ (function(module, exports) {
 
 // Copyright Joyent, Inc. and other Node contributors.
@@ -460,7 +624,7 @@ exports.default = {
 
 /***/ }),
 
-/***/ 281:
+/***/ 276:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -470,27 +634,27 @@ exports.__esModule = true;
 
 var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
-var _react = __webpack_require__(1);
+__webpack_require__(583);
+
+var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _FieldSet = __webpack_require__(9);
+var _Events = __webpack_require__(14);
+
+var _Events2 = _interopRequireDefault(_Events);
+
+var _FieldSet = __webpack_require__(10);
 
 var _FieldSet2 = _interopRequireDefault(_FieldSet);
+
+var _WMSService = __webpack_require__(300);
+
+var _WMSService2 = _interopRequireDefault(_WMSService);
 
 var _openlayers = __webpack_require__(11);
 
 var _openlayers2 = _interopRequireDefault(_openlayers);
-
-var _WMSService = __webpack_require__(303);
-
-var _WMSService2 = _interopRequireDefault(_WMSService);
-
-var _Events = __webpack_require__(13);
-
-var _Events2 = _interopRequireDefault(_Events);
-
-__webpack_require__(587);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -502,167 +666,166 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 //application/json
 var IdentifyWidget = function (_BaseWidget) {
-  _inherits(IdentifyWidget, _BaseWidget);
+    _inherits(IdentifyWidget, _BaseWidget);
 
-  function IdentifyWidget(props) {
-    _classCallCheck(this, IdentifyWidget);
+    function IdentifyWidget(props) {
+        _classCallCheck(this, IdentifyWidget);
 
-    var _this = _possibleConstructorReturn(this, _BaseWidget.call(this, props));
+        var _this = _possibleConstructorReturn(this, _BaseWidget.call(this, props));
 
-    _this.state = {
-      ready: false,
-      busy: false,
-      features: [],
-      activeFeature: 0
-    };
-    return _this;
-  }
-
-  IdentifyWidget.prototype.render = function render() {
-    var _this2 = this;
-
-    var _state = this.state,
-        ready = _state.ready,
-        busy = _state.busy,
-        features = _state.features,
-        activeFeature = _state.activeFeature;
-
-    var prev = function prev(e) {
-      if (activeFeature == 0) return;
-      activeFeature--;
-      _this2.setState({ activeFeature: activeFeature });
-    };
-    var next = function next(e) {
-      if (activeFeature == features.length - 1) return;
-      activeFeature++;
-      _this2.setState({ activeFeature: activeFeature });
-    };
-
-    return _jsx('div', {}, void 0, busy && _jsx('div', {
-      className: 'loading'
-    }), !busy && features.length == 0 && _jsx('div', {
-      className: 'identify-no-results'
-    }, void 0, 'No Results, Click the map to identify features.'), !busy && features.length > 0 && _jsx('div', {}, void 0, _jsx('div', {
-      className: 'pull-right identify-navigate'
-    }, void 0, _jsx('button', {
-      className: 'btn btn-link btn-xs',
-      onClick: function onClick(e) {
-        return prev(e);
-      },
-      disabled: activeFeature == 0
-    }, void 0, _jsx('i', {
-      className: 'glyphicon glyphicon-chevron-left'
-    })), activeFeature + 1, ' / ', features.length, _jsx('button', {
-      className: 'btn btn-link btn-xs',
-      onClick: function onClick(e) {
-        return next(e);
-      },
-      disabled: activeFeature == features.length - 1
-    }, void 0, _jsx('i', {
-      className: 'glyphicon glyphicon-chevron-right'
-    }))), this.resultItem(features[activeFeature])));
-  };
-
-  IdentifyWidget.prototype.resultItem = function resultItem(f) {
-    var keys = f.getKeys();
-    var geom = f.getGeometryName();
-    return _jsx('div', {}, void 0, _jsx('h4', {
-      className: 'identify-result-layer-title'
-    }, void 0, f.get('_layerTitle')), _jsx('div', {
-      className: 'identify-result-ct'
-    }, void 0, _jsx('table', {
-      className: 'table'
-    }, f.getId(), _jsx('tbody', {}, void 0, keys.map(function (key) {
-      if (key == geom || key == "_layerTitle") return null;
-      return _jsx('tr', {}, void 0, _jsx('th', {}, void 0, key), _jsx('td', {}, void 0, f.get(key)));
-    })))));
-  };
-
-  IdentifyWidget.prototype.componentDidMount = function componentDidMount() {
-    var _this3 = this;
-
-    var mapWidget = this.context.configManager.getMapWidget();
-    if (mapWidget.ready) {
-      this.init(mapWidget.map);
-    } else {
-      _Events2.default.on('mapReady', function (map) {
-        _this3.init(map);
-      });
+        _this.state = {
+            ready: false,
+            busy: false,
+            features: [],
+            activeFeature: 0
+        };
+        return _this;
     }
-  };
 
-  IdentifyWidget.prototype.init = function init(map) {
-    var _this4 = this;
+    IdentifyWidget.prototype.render = function render() {
+        var _this2 = this;
 
-    this.setState({ ready: true });
-    map.on('singleclick', function (e) {
-      _this4.getLayers(map.getLayers().getArray()).forEach(function (layer) {
-        _this4.setState({ busy: true, features: [], activeFeature: 0 });
-        _WMSService2.default.getFeatureInfo(layer, e.coordinate, map, 'application/json', function (result) {
-          _this4.state.features = _this4.state.features.concat(result.features);
-          result.features.forEach(function (f) {
-            return f.set("_layerTitle", result.layer.get('title'));
-          });
-          _this4.setState({
-            features: _this4.state.features,
-            busy: false
-          });
+        var _state = this.state,
+            ready = _state.ready,
+            busy = _state.busy,
+            features = _state.features,
+            activeFeature = _state.activeFeature;
+
+        var prev = function prev(e) {
+            if (activeFeature == 0) return;
+            activeFeature--;
+            _this2.setState({ activeFeature: activeFeature });
+        };
+        var next = function next(e) {
+            if (activeFeature == features.length - 1) return;
+            activeFeature++;
+            _this2.setState({ activeFeature: activeFeature });
+        };
+        return _jsx('div', {}, void 0, busy && _jsx('div', {
+            className: 'loading'
+        }), !busy && features.length == 0 && _jsx('div', {
+            className: 'identify-no-results'
+        }, void 0, 'No Results, Click the map to identify features.'), !busy && features.length > 0 && _jsx('div', {}, void 0, _jsx('div', {
+            className: 'pull-right identify-navigate'
+        }, void 0, _jsx('button', {
+            className: 'btn btn-link btn-xs',
+            onClick: function onClick(e) {
+                return prev(e);
+            },
+            disabled: activeFeature == 0
+        }, void 0, _jsx('i', {
+            className: 'glyphicon glyphicon-chevron-left'
+        })), activeFeature + 1, ' / ', features.length, _jsx('button', {
+            className: 'btn btn-link btn-xs',
+            onClick: function onClick(e) {
+                return next(e);
+            },
+            disabled: activeFeature == features.length - 1
+        }, void 0, _jsx('i', {
+            className: 'glyphicon glyphicon-chevron-right'
+        }))), this.resultItem(features[activeFeature])));
+    };
+
+    IdentifyWidget.prototype.resultItem = function resultItem(f) {
+        var keys = f.getKeys();
+        var geom = f.getGeometryName();
+        return _jsx('div', {}, void 0, _jsx('h4', {
+            className: 'identify-result-layer-title'
+        }, void 0, f.get('_layerTitle')), _jsx('div', {
+            className: 'identify-result-ct'
+        }, void 0, _jsx('table', {
+            className: 'table'
+        }, f.getId(), _jsx('tbody', {}, void 0, keys.map(function (key) {
+            if (key == geom || key == "_layerTitle") return null;
+            return _jsx('tr', {}, void 0, _jsx('th', {}, void 0, key), _jsx('td', {}, void 0, f.get(key)));
+        })))));
+    };
+
+    IdentifyWidget.prototype.componentDidMount = function componentDidMount() {
+        var _this3 = this;
+
+        var mapWidget = this.context.configManager.getMapWidget();
+        if (mapWidget.ready) {
+            this.init(mapWidget.map);
+        } else {
+            _Events2.default.on('mapReady', function (map) {
+                _this3.init(map);
+            });
+        }
+    };
+
+    IdentifyWidget.prototype.init = function init(map) {
+        var _this4 = this;
+
+        this.setState({ ready: true });
+        map.on('singleclick', function (e) {
+            _this4.getLayers(map.getLayers().getArray()).forEach(function (layer) {
+                _this4.setState({ busy: true, features: [],
+                    activeFeature: 0 });
+                _WMSService2.default.getFeatureInfo(layer, e.coordinate, map, 'application/json', function (result) {
+                    _this4.state.features = _this4.state.features.concat(result.features);
+                    result.features.forEach(function (f) {
+                        return f.set("_layerTitle", result.layer.get('title'));
+                    });
+                    _this4.setState({
+                        features: _this4.state.features,
+                        busy: false
+                    });
+                });
+            });
         });
-      });
-    });
-  };
+    };
 
-  IdentifyWidget.prototype.isWMS = function isWMS(layer) {
-    return layer.getSource() instanceof _openlayers2.default.source.TileWMS || layer.getSource() instanceof _openlayers2.default.source.ImageWMS;
-  };
+    IdentifyWidget.prototype.isWMS = function isWMS(layer) {
+        return layer.getSource() instanceof _openlayers2.default.source.TileWMS || layer.getSource() instanceof _openlayers2.default.source.ImageWMS;
+    };
 
-  IdentifyWidget.prototype.getLayers = function getLayers(layers) {
-    var _this5 = this;
+    IdentifyWidget.prototype.getLayers = function getLayers(layers) {
+        var _this5 = this;
 
-    var children = [];
-    layers.forEach(function (layer) {
-      if (layer instanceof _openlayers2.default.layer.Group) {
-        children = children.concat(_this5.getLayers(layer.getLayers()));
-      } else if (layer.getVisible() && _this5.isWMS(layer)) {
-        children.push(layer);
-      }
-    });
-    return children;
-  };
+        var children = [];
+        layers.forEach(function (layer) {
+            if (layer instanceof _openlayers2.default.layer.Group) {
+                children = children.concat(_this5.getLayers(layer.getLayers()));
+            } else if (layer.getVisible() && _this5.isWMS(layer)) {
+                children.push(layer);
+            }
+        });
+        return children;
+    };
 
-  return IdentifyWidget;
+    return IdentifyWidget;
 }(BaseWidget);
 
 IdentifyWidget.displayName = "Identify";
 
 var ConfigForm = function (_React$Component) {
-  _inherits(ConfigForm, _React$Component);
+    _inherits(ConfigForm, _React$Component);
 
-  function ConfigForm() {
-    _classCallCheck(this, ConfigForm);
+    function ConfigForm() {
+        _classCallCheck(this, ConfigForm);
 
-    return _possibleConstructorReturn(this, _React$Component.apply(this, arguments));
-  }
+        return _possibleConstructorReturn(this, _React$Component.apply(this, arguments));
+    }
 
-  ConfigForm.prototype.render = function render() {
-    return null;
-  };
+    ConfigForm.prototype.render = function render() {
+        return null;
+    };
 
-  ConfigForm.prototype.getData = function getData() {
-    return {};
-  };
+    ConfigForm.prototype.getData = function getData() {
+        return {};
+    };
 
-  return ConfigForm;
+    return ConfigForm;
 }(_react2.default.Component);
 
 IdentifyWidget.ConfigForm = ConfigForm;
-
 Dashboard.registerWidget(IdentifyWidget);
 exports.default = IdentifyWidget;
 
 /***/ }),
 
-/***/ 301:
+/***/ 298:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -684,15 +847,15 @@ var _createClass = function () { function defineProperties(target, props) { for 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * See the License for the specific language governing permissions and limitations under the License.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
 
-var _jsonix = __webpack_require__(73);
+var _jsonix = __webpack_require__(74);
 
 var _XLink_1_ = __webpack_require__(97);
 
-var _Filter_1_0_ = __webpack_require__(468);
+var _Filter_1_0_ = __webpack_require__(476);
 
-var _GML_2_1_ = __webpack_require__(470);
+var _GML_2_1_ = __webpack_require__(478);
 
-var _SLD_1_0_0_GeoServer = __webpack_require__(473);
+var _SLD_1_0_0_GeoServer = __webpack_require__(481);
 
 var _util = __webpack_require__(27);
 
@@ -1478,7 +1641,7 @@ exports.default = new SLDService();
 
 /***/ }),
 
-/***/ 303:
+/***/ 300:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1504,7 +1667,7 @@ var _util = __webpack_require__(27);
 
 var _util2 = _interopRequireDefault(_util);
 
-var _urlParse = __webpack_require__(51);
+var _urlParse = __webpack_require__(49);
 
 var _urlParse2 = _interopRequireDefault(_urlParse);
 
@@ -1512,7 +1675,7 @@ var _openlayers = __webpack_require__(11);
 
 var _openlayers2 = _interopRequireDefault(_openlayers);
 
-var _SLDService = __webpack_require__(301);
+var _SLDService = __webpack_require__(298);
 
 var _SLDService2 = _interopRequireDefault(_SLDService);
 
@@ -1738,7 +1901,7 @@ module.exports = function() {
 
 /***/ }),
 
-/***/ 373:
+/***/ 367:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(31)();
@@ -1753,7 +1916,7 @@ exports.push([module.i, ".identify-no-results{\n  padding: 10px;\n}\n.identify-n
 
 /***/ }),
 
-/***/ 39:
+/***/ 37:
 /***/ (function(module, exports) {
 
 /*
@@ -2006,7 +2169,7 @@ function updateLink(linkElement, obj) {
 
 /***/ }),
 
-/***/ 45:
+/***/ 43:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2086,7 +2249,7 @@ exports.parse = querystring;
 
 /***/ }),
 
-/***/ 468:
+/***/ 476:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var Filter_1_0_0_Module_Factory = function () {
@@ -2617,7 +2780,7 @@ else {
 
 /***/ }),
 
-/***/ 470:
+/***/ 478:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var GML_2_1_2_Module_Factory = function () {
@@ -3179,7 +3342,53 @@ else {
 
 /***/ }),
 
-/***/ 473:
+/***/ 48:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Check if we're required to add a port number.
+ *
+ * @see https://url.spec.whatwg.org/#default-port
+ * @param {Number|String} port Port number we need to check
+ * @param {String} protocol Protocol we need to check against.
+ * @returns {Boolean} Is it a default port for the given protocol
+ * @api private
+ */
+module.exports = function required(port, protocol) {
+  protocol = protocol.split(':')[0];
+  port = +port;
+
+  if (!port) return false;
+
+  switch (protocol) {
+    case 'http':
+    case 'ws':
+    return port !== 80;
+
+    case 'https':
+    case 'wss':
+    return port !== 443;
+
+    case 'ftp':
+    return port !== 21;
+
+    case 'gopher':
+    return port !== 70;
+
+    case 'file':
+    return false;
+  }
+
+  return port !== 0;
+};
+
+
+/***/ }),
+
+/***/ 481:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var SLD_1_0_0_GeoServer_Module_Factory = function () {
@@ -4369,60 +4578,14 @@ else {
 
 /***/ }),
 
-/***/ 50:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Check if we're required to add a port number.
- *
- * @see https://url.spec.whatwg.org/#default-port
- * @param {Number|String} port Port number we need to check
- * @param {String} protocol Protocol we need to check against.
- * @returns {Boolean} Is it a default port for the given protocol
- * @api private
- */
-module.exports = function required(port, protocol) {
-  protocol = protocol.split(':')[0];
-  port = +port;
-
-  if (!port) return false;
-
-  switch (protocol) {
-    case 'http':
-    case 'ws':
-    return port !== 80;
-
-    case 'https':
-    case 'wss':
-    return port !== 443;
-
-    case 'ftp':
-    return port !== 21;
-
-    case 'gopher':
-    return port !== 70;
-
-    case 'file':
-    return false;
-  }
-
-  return port !== 0;
-};
-
-
-/***/ }),
-
-/***/ 51:
+/***/ 49:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 
-var required = __webpack_require__(50)
-  , qs = __webpack_require__(45)
+var required = __webpack_require__(48)
+  , qs = __webpack_require__(43)
   , protocolre = /^([a-z][a-z0-9.+-]*:)?(\/\/)?([\S\s]*)/i
   , slashes = /^[A-Za-z][A-Za-z0-9+-.]*:\/\//;
 
@@ -4758,8 +4921,13 @@ function set(part, value, fn) {
       break;
 
     case 'pathname':
-      url.pathname = value.length && value.charAt(0) !== '/' ? '/' + value : value;
-
+    case 'hash':
+      if (value) {
+        var char = part === 'pathname' ? '/' : '#';
+        url[part] = value.charAt(0) !== char ? char + value : value;
+      } else {
+        url[part] = value;
+      }
       break;
 
     default:
@@ -4827,20 +4995,20 @@ URL.qs = qs;
 
 module.exports = URL;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ }),
 
-/***/ 587:
+/***/ 583:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(373);
+var content = __webpack_require__(367);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(39)(content, {});
+var update = __webpack_require__(37)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -4858,13 +5026,13 @@ if(false) {
 
 /***/ }),
 
-/***/ 594:
+/***/ 600:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _IdentifyWidget = __webpack_require__(281);
+var _IdentifyWidget = __webpack_require__(276);
 
 var _IdentifyWidget2 = _interopRequireDefault(_IdentifyWidget);
 
@@ -4872,7 +5040,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /***/ }),
 
-/***/ 73:
+/***/ 74:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _jsonix_factory = function(_jsonix_xmldom, _jsonix_xmlhttprequest, _jsonix_fs)
@@ -11011,170 +11179,6 @@ else
 
 /***/ }),
 
-/***/ 9:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var JSONField = function (_Component) {
-  _inherits(JSONField, _Component);
-
-  function JSONField(props) {
-    _classCallCheck(this, JSONField);
-
-    var _this = _possibleConstructorReturn(this, _Component.call(this, props));
-
-    Object.defineProperty(_this, 'value', {
-      get: function get() {
-        return JSON.parse(_this.refs.textarea.value);
-      },
-      set: function set(newValue) {
-        _this.refs.textarea.value = JSON.stringify(newValue || {});
-      },
-      enumerable: true,
-      configurable: true
-    });
-    return _this;
-  }
-
-  JSONField.prototype.render = function render() {
-    var props = _objectWithoutProperties(this.props, []);
-
-    delete props.ref;
-    return _react2.default.createElement('textarea', _extends({}, props, { ref: 'textarea' }));
-  };
-
-  return JSONField;
-}(_react.Component);
-
-var FieldSet = function (_Component2) {
-  _inherits(FieldSet, _Component2);
-
-  function FieldSet(props) {
-    _classCallCheck(this, FieldSet);
-
-    var _this2 = _possibleConstructorReturn(this, _Component2.call(this, props));
-
-    _this2.state = {
-      schema: props.schema || _this2.getSchema(props),
-      data: props.data || _this2.getInitialData(props)
-    };
-    _this2.fields = {};
-    return _this2;
-  }
-
-  FieldSet.prototype.getSchema = function getSchema() {
-    return {};
-  };
-
-  FieldSet.prototype.getInitialData = function getInitialData() {
-    return {};
-  };
-
-  FieldSet.prototype.render = function render() {
-    var _this3 = this;
-
-    var _state = this.state,
-        schema = _state.schema,
-        data = _state.data;
-
-    return _jsx('div', {}, void 0, Object.keys(schema).map(function (key) {
-      return _this3.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null);
-    }));
-  };
-
-  FieldSet.prototype.field = function field(name, schema, value) {
-    var _this4 = this;
-
-    var _schema$props = schema.props,
-        props = _schema$props === undefined ? {} : _schema$props;
-
-    props.className = "form-control";
-    props.ref = function (f) {
-      if (f) {
-        f.value = value;
-        _this4.fields[name] = f;
-        f.fieldSet = _this4;
-      }
-    };
-    var field = null;
-
-    if (['text', 'number', 'url', 'email'].indexOf(schema.type) != -1) {
-      props.type = schema.type;
-      field = _react2.default.createElement('input', props);
-    } else if (schema.type == "textarea") {
-      field = _react2.default.createElement('textarea', props);
-    } else if (schema.type == "json") {
-      field = _react2.default.createElement(JSONField, props);
-    } else if (schema.type == 'select') {
-      field = _react2.default.createElement(
-        'select',
-        props,
-        this.getSelectOptions(name, schema, value)
-      );
-    }
-    var label = schema.label || name.charAt(0).toUpperCase() + name.slice(1);
-    return _jsx('div', {
-      className: 'form-group'
-    }, void 0, _jsx('label', {}, void 0, label), field);
-  };
-
-  FieldSet.prototype.getSelectOptions = function getSelectOptions(name, schema, value) {
-    var options = schema.options;
-
-    if (!options) return null;
-    if ((typeof options === 'undefined' ? 'undefined' : _typeof(options)) == "object") {
-      return Object.keys(options).map(function (key) {
-        return _jsx('option', {
-          value: key
-        }, void 0, options[key]);
-      });
-    } else if (typeof options == 'function') {
-      return options(this, this.state.data);
-    }
-    return null;
-  };
-
-  FieldSet.prototype.getData = function getData() {
-    var _this5 = this;
-
-    var data = {};
-    Object.keys(this.fields).map(function (key) {
-      data[key] = _this5.fields[key].value;
-    });
-    return data;
-  };
-
-  return FieldSet;
-}(_react.Component);
-
-exports.default = FieldSet;
-
-/***/ }),
-
 /***/ 97:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11409,4 +11413,4 @@ else {
 
 /***/ })
 
-},[594]);
+},[600]);

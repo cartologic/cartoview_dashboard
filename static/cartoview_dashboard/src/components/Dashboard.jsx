@@ -13,6 +13,7 @@ import CustomFrame from './CustomFrame.jsx'
 import Header from './Header.jsx'
 import Toolbar from './DashboardToolbar.jsx'
 import WidgetConfigDialog from './WidgetConfigDialog.jsx'
+
 // Our styles
 //import '../styles/custom.css'
 var widgetId = 0
@@ -46,7 +47,6 @@ class Dashboard extends Component {
             addWidgetDialogOpen: false,
             addWidgetOptions: null,
         }
-        console.log( this.state )
         this.configManager = new ConfigManager( this )
         this.widgets = {}
     }
@@ -166,7 +166,6 @@ class Dashboard extends Component {
      */
     handleWidgetSelection = ( widgetType ) => {
         var id = this.getNewId( )
-        console.debug( id )
         const ref = ( w ) => {
             if ( w ) {
                 this.widgets[ id ] = w

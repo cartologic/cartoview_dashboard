@@ -85,8 +85,7 @@
     };
     props.isNew = isNew;
     console.debug(props)
-    var dash = React.createElement(Dashboard, props);
-    ReactDOM.render(dash, document.getElementById("dash"));
+
     {% if PROXY_URL %}
         const PROXY_URL='{{PROXY_URL}}'
     {% else %}
@@ -128,15 +127,6 @@
         Object.keys(config).forEach(function(key){
           formData.append(key, config[key]);
         });
-        // console.debug(config);
-
-        // var state = window.mainDashbord.state;
-        // formData.append("title", state.title);
-        // if(!title || title.trim() == ""){
-        //
-        // }
-        // formData.append("abstract", state.title);
-        // formData.append("config", JSON.stringify({widgets: window.mainDashbord.getWidgetsConfig() }));
         fetch("", {
           credentials: 'include',
           method: 'POST',
@@ -151,12 +141,9 @@
           }
         });
     }
+    var dash = React.createElement(Dashboard, props);
+    ReactDOM.render(dash, document.getElementById("dash"));
     </script>
-
-
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
-    <script type="text/babel">
-    </script> -->
 
 </body>
 </html>

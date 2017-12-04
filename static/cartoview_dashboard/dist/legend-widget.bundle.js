@@ -1,6 +1,6 @@
-webpackJsonp([5],{
+webpackJsonp([6],{
 
-/***/ 13:
+/***/ 14:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8,13 +8,13 @@ webpackJsonp([5],{
 
 exports.__esModule = true;
 
-var _events = __webpack_require__(20);
+var _events = __webpack_require__(21);
 
 exports.default = new _events.EventEmitter();
 
 /***/ }),
 
-/***/ 20:
+/***/ 21:
 /***/ (function(module, exports) {
 
 // Copyright Joyent, Inc. and other Node contributors.
@@ -460,7 +460,7 @@ exports.default = {
 
 /***/ }),
 
-/***/ 282:
+/***/ 279:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -490,7 +490,7 @@ var _openlayers = __webpack_require__(11);
 
 var _openlayers2 = _interopRequireDefault(_openlayers);
 
-var _urlParse = __webpack_require__(51);
+var _urlParse = __webpack_require__(49);
 
 var _urlParse2 = _interopRequireDefault(_urlParse);
 
@@ -684,7 +684,7 @@ exports.default = new ArcGISRestService();
 
 /***/ }),
 
-/***/ 45:
+/***/ 43:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -764,7 +764,7 @@ exports.parse = querystring;
 
 /***/ }),
 
-/***/ 50:
+/***/ 48:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -810,14 +810,14 @@ module.exports = function required(port, protocol) {
 
 /***/ }),
 
-/***/ 51:
+/***/ 49:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 
-var required = __webpack_require__(50)
-  , qs = __webpack_require__(45)
+var required = __webpack_require__(48)
+  , qs = __webpack_require__(43)
   , protocolre = /^([a-z][a-z0-9.+-]*:)?(\/\/)?([\S\s]*)/i
   , slashes = /^[A-Za-z][A-Za-z0-9+-.]*:\/\//;
 
@@ -1153,8 +1153,13 @@ function set(part, value, fn) {
       break;
 
     case 'pathname':
-      url.pathname = value.length && value.charAt(0) !== '/' ? '/' + value : value;
-
+    case 'hash':
+      if (value) {
+        var char = part === 'pathname' ? '/' : '#';
+        url[part] = value.charAt(0) !== char ? char + value : value;
+      } else {
+        url[part] = value;
+      }
       break;
 
     default:
@@ -1222,11 +1227,11 @@ URL.qs = qs;
 
 module.exports = URL;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ }),
 
-/***/ 595:
+/***/ 601:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1236,25 +1241,21 @@ exports.__esModule = true;
 
 var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
-var _react = __webpack_require__(1);
+var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _FieldSet = __webpack_require__(9);
+var _ArcGISRestService = __webpack_require__(279);
 
-var _FieldSet2 = _interopRequireDefault(_FieldSet);
+var _ArcGISRestService2 = _interopRequireDefault(_ArcGISRestService);
+
+var _Events = __webpack_require__(14);
+
+var _Events2 = _interopRequireDefault(_Events);
 
 var _openlayers = __webpack_require__(11);
 
 var _openlayers2 = _interopRequireDefault(_openlayers);
-
-var _ArcGISRestService = __webpack_require__(282);
-
-var _ArcGISRestService2 = _interopRequireDefault(_ArcGISRestService);
-
-var _Events = __webpack_require__(13);
-
-var _Events2 = _interopRequireDefault(_Events);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1265,327 +1266,163 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var ArcGISLegend = function (_Component) {
-  _inherits(ArcGISLegend, _Component);
+    _inherits(ArcGISLegend, _Component);
 
-  function ArcGISLegend() {
-    _classCallCheck(this, ArcGISLegend);
+    function ArcGISLegend() {
+        _classCallCheck(this, ArcGISLegend);
 
-    return _possibleConstructorReturn(this, _Component.apply(this, arguments));
-  }
-
-  ArcGISLegend.prototype.render = function render() {
-    if (this.state && this.state.legendInfo) {
-      var layers = this.state.legendInfo.layers;
-      var style = { width: 'auto', height: 'auto' };
-      return _jsx('div', {}, void 0, layers.map(function (l) {
-        return l.legend.map(function (legend) {
-          return _jsx('div', {}, void 0, _jsx('img', {
-            style: style,
-            src: 'data:' + legend.contentType + ';base64,' + legend.imageData
-          }), _jsx('span', {}, void 0, legend.label));
-        });
-      }));
+        return _possibleConstructorReturn(this, _Component.apply(this, arguments));
     }
-    return null;
-  };
 
-  ArcGISLegend.prototype.componentDidMount = function componentDidMount() {
-    var _this2 = this;
+    ArcGISLegend.prototype.render = function render() {
+        if (this.state && this.state.legendInfo) {
+            var layers = this.state.legendInfo.layers;
+            var style = { width: 'auto', height: 'auto' };
+            return _jsx('div', {}, void 0, layers.map(function (l) {
+                return l.legend.map(function (legend) {
+                    return _jsx('div', {}, void 0, _jsx('img', {
+                        style: style,
+                        src: 'data:' + legend.contentType + ';base64,' + legend.imageData
+                    }), _jsx('span', {}, void 0, legend.label));
+                });
+            }));
+        }
+        return null;
+    };
 
-    var layer = this.props.layer;
-    var source = layer.getSource();
-    var url = source.getUrls()[0];
-    _ArcGISRestService2.default.getLegend(url, function (legendInfo) {
-      _this2.setState({ legendInfo: legendInfo });
-    });
-  };
+    ArcGISLegend.prototype.componentDidMount = function componentDidMount() {
+        var _this2 = this;
 
-  return ArcGISLegend;
+        var layer = this.props.layer;
+        var source = layer.getSource();
+        var url = source.getUrls()[0];
+        _ArcGISRestService2.default.getLegend(url, function (legendInfo) {
+            _this2.setState({ legendInfo: legendInfo });
+        });
+    };
+
+    return ArcGISLegend;
 }(_react.Component);
 
 var Legend = function (_Component2) {
-  _inherits(Legend, _Component2);
+    _inherits(Legend, _Component2);
 
-  function Legend() {
-    _classCallCheck(this, Legend);
+    function Legend() {
+        _classCallCheck(this, Legend);
 
-    return _possibleConstructorReturn(this, _Component2.apply(this, arguments));
-  }
+        return _possibleConstructorReturn(this, _Component2.apply(this, arguments));
+    }
 
-  Legend.prototype.render = function render() {
-    var map = this.props.map;
+    Legend.prototype.render = function render() {
+        var map = this.props.map;
 
-    var legends = this.getLegends(map.getLayers().getArray());
-    return _jsx('div', {}, void 0, legends);
-  };
+        var legends = this.getLegends(map.getLayers().getArray());
+        return _jsx('div', {}, void 0, legends);
+    };
 
-  Legend.prototype.getLegends = function getLegends(layers) {
-    var _this4 = this;
+    Legend.prototype.getLegends = function getLegends(layers) {
+        var _this4 = this;
 
-    var legends = [];
-    layers.forEach(function (layer) {
-      if (layer instanceof _openlayers2.default.layer.Group) {
-        legends = legends.concat(_this4.getLegends(layer.getLayers()));
-      } else if (layer.getVisible() && _this4.hasLegend(layer)) {
-        if (_this4.isWMS(layer)) {
-          var s = layer.getSource(),
-              p = s.getParams();
-          var url = s.getUrls()[0];
-          url += url.indexOf("?") == -1 ? "?" : "&";
-          url += "layer=" + p.LAYERS;
-          url += "&request=GetLegendGraphic&format=image%2Fpng&transparent=true&legend_options=fontAntiAliasing:true;fontSize:14;&width=30&height=30";
-          url += "&style=" + (p.STYLES || '');
-          legends.push(_jsx('div', {}, void 0, _jsx('h4', {}, void 0, layer.get('title')), _jsx('img', {
-            src: url
-          })));
-        } else if (layer.getSource() instanceof _openlayers2.default.source.TileArcGISRest) {
-          legends.push(_jsx('div', {}, void 0, ' ', _jsx('h4', {}, void 0, layer.get('title')), ' ', _jsx(ArcGISLegend, {
-            layer: layer
-          })));
-        }
-      }
-    });
-    return legends;
-  };
+        var legends = [];
+        layers.forEach(function (layer) {
+            if (layer instanceof _openlayers2.default.layer.Group) {
+                legends = legends.concat(_this4.getLegends(layer.getLayers()));
+            } else if (layer.getVisible() && _this4.hasLegend(layer)) {
+                if (_this4.isWMS(layer)) {
+                    var s = layer.getSource(),
+                        p = s.getParams();
+                    var url = s.getUrls()[0];
+                    url += url.indexOf("?") == -1 ? "?" : "&";
+                    url += "layer=" + p.LAYERS;
+                    url += "&request=GetLegendGraphic&format=image%2Fpng&transparent=true&legend_options=fontAntiAliasing:true;fontSize:14;&width=30&height=30";
+                    url += "&style=" + (p.STYLES || '');
+                    legends.push(_jsx('div', {}, void 0, _jsx('h4', {}, void 0, layer.get('title')), _jsx('img', {
+                        src: url
+                    })));
+                } else if (layer.getSource() instanceof _openlayers2.default.source.TileArcGISRest) {
+                    legends.push(_jsx('div', {}, void 0, ' ', _jsx('h4', {}, void 0, layer.get('title')), ' ', _jsx(ArcGISLegend, {
+                        layer: layer
+                    })));
+                }
+            }
+        });
+        return legends;
+    };
 
-  Legend.prototype.hasLegend = function hasLegend(layer) {
-    return layer instanceof _openlayers2.default.layer.Tile && layer.getSource() instanceof _openlayers2.default.source.TileWMS || layer instanceof _openlayers2.default.layer.Image && layer.getSource() instanceof _openlayers2.default.source.ImageWMS || layer instanceof _openlayers2.default.layer.Tile && layer.getSource() instanceof _openlayers2.default.source.TileArcGISRest;
-  };
+    Legend.prototype.hasLegend = function hasLegend(layer) {
+        return layer instanceof _openlayers2.default.layer.Tile && layer.getSource() instanceof _openlayers2.default.source.TileWMS || layer instanceof _openlayers2.default.layer.Image && layer.getSource() instanceof _openlayers2.default.source.ImageWMS || layer instanceof _openlayers2.default.layer.Tile && layer.getSource() instanceof _openlayers2.default.source.TileArcGISRest;
+    };
 
-  Legend.prototype.isWMS = function isWMS(layer) {
-    return layer.getSource() instanceof _openlayers2.default.source.TileWMS || layer.getSource() instanceof _openlayers2.default.source.ImageWMS;
-  };
+    Legend.prototype.isWMS = function isWMS(layer) {
+        return layer.getSource() instanceof _openlayers2.default.source.TileWMS || layer.getSource() instanceof _openlayers2.default.source.ImageWMS;
+    };
 
-  return Legend;
+    return Legend;
 }(_react.Component);
 
 var LegendWidget = function (_BaseWidget) {
-  _inherits(LegendWidget, _BaseWidget);
+    _inherits(LegendWidget, _BaseWidget);
 
-  function LegendWidget() {
-    _classCallCheck(this, LegendWidget);
+    function LegendWidget() {
+        _classCallCheck(this, LegendWidget);
 
-    return _possibleConstructorReturn(this, _BaseWidget.apply(this, arguments));
-  }
-
-  LegendWidget.prototype.render = function render() {
-    var style = {
-      padding: "10px 20px"
-    };
-    return _jsx('div', {
-      style: style
-    }, void 0, this.state && this.state.ready ? _jsx(Legend, {
-      map: this.state.map
-    }) : _jsx('span', {}, void 0, 'You have to add a map to this dashboard to show the legend.'));
-  };
-
-  LegendWidget.prototype.componentDidMount = function componentDidMount() {
-    var _this6 = this;
-
-    var mapWidget = this.context.configManager.getMapWidget();
-    if (mapWidget.ready) {
-      this.setState({ ready: true, map: mapWidget.map });
-    } else {
-      _Events2.default.on('mapReady', function (map) {
-        _this6.setState({ ready: true, map: map });
-      });
+        return _possibleConstructorReturn(this, _BaseWidget.apply(this, arguments));
     }
-  };
 
-  return LegendWidget;
+    LegendWidget.prototype.render = function render() {
+        var style = {
+            padding: "10px 20px"
+        };
+        return _jsx('div', {
+            style: style
+        }, void 0, this.state && this.state.ready ? _jsx(Legend, {
+            map: this.state.map
+        }) : _jsx('span', {}, void 0, 'You have to add a map to this dashboard to show the legend.'));
+    };
+
+    LegendWidget.prototype.componentDidMount = function componentDidMount() {
+        var _this6 = this;
+
+        var mapWidget = this.context.configManager.getMapWidget();
+        if (mapWidget.ready) {
+            this.setState({ ready: true, map: mapWidget.map });
+        } else {
+            _Events2.default.on('mapReady', function (map) {
+                _this6.setState({ ready: true,
+                    map: map });
+            });
+        }
+    };
+
+    return LegendWidget;
 }(BaseWidget);
 
 LegendWidget.displayName = "Legend";
 
 var ConfigForm = function (_React$Component) {
-  _inherits(ConfigForm, _React$Component);
+    _inherits(ConfigForm, _React$Component);
 
-  function ConfigForm() {
-    _classCallCheck(this, ConfigForm);
+    function ConfigForm() {
+        _classCallCheck(this, ConfigForm);
 
-    return _possibleConstructorReturn(this, _React$Component.apply(this, arguments));
-  }
+        return _possibleConstructorReturn(this, _React$Component.apply(this, arguments));
+    }
 
-  ConfigForm.prototype.render = function render() {
-    return null;
-  };
+    ConfigForm.prototype.render = function render() {
+        return null;
+    };
 
-  ConfigForm.prototype.getData = function getData() {
-    return {};
-  };
+    ConfigForm.prototype.getData = function getData() {
+        return {};
+    };
 
-  return ConfigForm;
+    return ConfigForm;
 }(_react2.default.Component);
 
 LegendWidget.ConfigForm = ConfigForm;
-
 Dashboard.registerWidget(LegendWidget);
 exports.default = LegendWidget;
 
-/***/ }),
-
-/***/ 9:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var JSONField = function (_Component) {
-  _inherits(JSONField, _Component);
-
-  function JSONField(props) {
-    _classCallCheck(this, JSONField);
-
-    var _this = _possibleConstructorReturn(this, _Component.call(this, props));
-
-    Object.defineProperty(_this, 'value', {
-      get: function get() {
-        return JSON.parse(_this.refs.textarea.value);
-      },
-      set: function set(newValue) {
-        _this.refs.textarea.value = JSON.stringify(newValue || {});
-      },
-      enumerable: true,
-      configurable: true
-    });
-    return _this;
-  }
-
-  JSONField.prototype.render = function render() {
-    var props = _objectWithoutProperties(this.props, []);
-
-    delete props.ref;
-    return _react2.default.createElement('textarea', _extends({}, props, { ref: 'textarea' }));
-  };
-
-  return JSONField;
-}(_react.Component);
-
-var FieldSet = function (_Component2) {
-  _inherits(FieldSet, _Component2);
-
-  function FieldSet(props) {
-    _classCallCheck(this, FieldSet);
-
-    var _this2 = _possibleConstructorReturn(this, _Component2.call(this, props));
-
-    _this2.state = {
-      schema: props.schema || _this2.getSchema(props),
-      data: props.data || _this2.getInitialData(props)
-    };
-    _this2.fields = {};
-    return _this2;
-  }
-
-  FieldSet.prototype.getSchema = function getSchema() {
-    return {};
-  };
-
-  FieldSet.prototype.getInitialData = function getInitialData() {
-    return {};
-  };
-
-  FieldSet.prototype.render = function render() {
-    var _this3 = this;
-
-    var _state = this.state,
-        schema = _state.schema,
-        data = _state.data;
-
-    return _jsx('div', {}, void 0, Object.keys(schema).map(function (key) {
-      return _this3.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null);
-    }));
-  };
-
-  FieldSet.prototype.field = function field(name, schema, value) {
-    var _this4 = this;
-
-    var _schema$props = schema.props,
-        props = _schema$props === undefined ? {} : _schema$props;
-
-    props.className = "form-control";
-    props.ref = function (f) {
-      if (f) {
-        f.value = value;
-        _this4.fields[name] = f;
-        f.fieldSet = _this4;
-      }
-    };
-    var field = null;
-
-    if (['text', 'number', 'url', 'email'].indexOf(schema.type) != -1) {
-      props.type = schema.type;
-      field = _react2.default.createElement('input', props);
-    } else if (schema.type == "textarea") {
-      field = _react2.default.createElement('textarea', props);
-    } else if (schema.type == "json") {
-      field = _react2.default.createElement(JSONField, props);
-    } else if (schema.type == 'select') {
-      field = _react2.default.createElement(
-        'select',
-        props,
-        this.getSelectOptions(name, schema, value)
-      );
-    }
-    var label = schema.label || name.charAt(0).toUpperCase() + name.slice(1);
-    return _jsx('div', {
-      className: 'form-group'
-    }, void 0, _jsx('label', {}, void 0, label), field);
-  };
-
-  FieldSet.prototype.getSelectOptions = function getSelectOptions(name, schema, value) {
-    var options = schema.options;
-
-    if (!options) return null;
-    if ((typeof options === 'undefined' ? 'undefined' : _typeof(options)) == "object") {
-      return Object.keys(options).map(function (key) {
-        return _jsx('option', {
-          value: key
-        }, void 0, options[key]);
-      });
-    } else if (typeof options == 'function') {
-      return options(this, this.state.data);
-    }
-    return null;
-  };
-
-  FieldSet.prototype.getData = function getData() {
-    var _this5 = this;
-
-    var data = {};
-    Object.keys(this.fields).map(function (key) {
-      data[key] = _this5.fields[key].value;
-    });
-    return data;
-  };
-
-  return FieldSet;
-}(_react.Component);
-
-exports.default = FieldSet;
-
 /***/ })
 
-},[595]);
+},[601]);
