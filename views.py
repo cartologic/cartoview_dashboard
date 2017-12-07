@@ -7,7 +7,7 @@ import json
 from django.http import HttpResponse
 from geonode.maps.models import Map
 from cartoview.app_manager.models import AppInstance, App
-from cartoview_map_viewer import views as viewer_views
+from cartoview.app_manager.views import _resolve_appinstance
 from django.utils.decorators import method_decorator
 
 
@@ -84,7 +84,7 @@ class Dashboard(StandardAppViews):
                                            * args, **kwargs)
 
     def view_app(self, request, instance_id, template=None, context={}):
-        instance = viewer_views._resolve_appinstance(
+        instance = _resolve_appinstance(
             request, instance_id, 'base.view_resourcebase',
             _PERMISSION_MSG_VIEW)
         context = {
