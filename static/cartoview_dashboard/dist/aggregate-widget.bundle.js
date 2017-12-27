@@ -487,7 +487,7 @@ function isUndefined(arg) {
 
 /***/ }),
 
-/***/ 597:
+/***/ 598:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -685,4 +685,4 @@ exports.default = AggregateWidget;
 
 /***/ })
 
-},[597]);
+},[598]);

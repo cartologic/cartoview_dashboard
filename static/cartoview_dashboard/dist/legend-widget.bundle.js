@@ -1231,7 +1231,7 @@ module.exports = URL;
 
 /***/ }),
 
-/***/ 601:
+/***/ 602:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1425,4 +1425,4 @@ exports.default = LegendWidget;
 
 /***/ })
 
-},[601]);
+},[602]);

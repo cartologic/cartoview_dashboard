@@ -129,22 +129,22 @@ class Dashboard extends Component {
         } = this.state
         return (
             <Container>
-      <AddWidgetDialog widgets={widgets} isOpen={addWidgetDialogOpen} onRequestClose={this.onRequestClose} onWidgetSelect={this.handleWidgetSelection}/>
-      <WidgetConfigDialog isOpen={widgetConfigDialogOpen} widgetId={configWidgetId} />
-      <Header editable={editable} title={title} abstract={abstract} ref="header"/>
-      <Toolbar isNew={isNew} editable={editable} isOwner={isOwner}/>
-      <DazzleDashboard
-        frameComponent={CustomFrame}
-        onRemove={this.onRemove}
-        layout={layout}
-        widgets={widgets}
-        editable={editable}
-        onAdd={this.onAdd}
-        onMove={this.onMove}
-        addWidgetComponentText="Add New Widget"
+        <AddWidgetDialog widgets={widgets} isOpen={addWidgetDialogOpen} onRequestClose={this.onRequestClose} onWidgetSelect={this.handleWidgetSelection} />
+        <WidgetConfigDialog isOpen={widgetConfigDialogOpen} widgetId={configWidgetId} />
+        <Header editable={editable} title={title} abstract={abstract} ref="header" />
+        <Toolbar isNew={isNew} editable={editable} isOwner={isOwner} />
+        <DazzleDashboard
+          frameComponent={CustomFrame}
+          onRemove={this.onRemove}
+          layout={layout}
+          widgets={widgets}
+          editable={editable}
+          onAdd={this.onAdd}
+          onMove={this.onMove}
+          addWidgetComponentText="Add New Widget"
         />
 
-    </Container>
+      </Container>
         )
     }
     /**
