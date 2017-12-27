@@ -12,6 +12,11 @@ from django.utils.decorators import method_decorator
 
 
 class DashBoardThumbnail(AppsThumbnail):
+    def map_thumbnail(self, mapId):
+        if mapId is not None:
+            map_obj = Map.objects.get(id=mapId)
+            self.instance.thumbnail_url = map_obj.get_thumbnail_url()
+            self.instance.save()
 
     def create_thumbnail(self):
         instance = self.instance
@@ -20,10 +25,9 @@ class DashBoardThumbnail(AppsThumbnail):
             if isinstance(v, dict):
                 type = v.get('type', "")
                 if type == "MapWidget":
-                    id = int(v.get('config', {}).get("mapId", None))
-                    map_obj = Map.objects.get(id=id)
-                    instance.thumbnail_url = map_obj.get_thumbnail_url()
-                    instance.save()
+                    id = v.get('config', {}).get("mapId", None)
+                    self.map_thumbnail(id)
+                    break
 
 
 class Dashboard(StandardAppViews):
