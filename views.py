@@ -83,7 +83,7 @@ class Dashboard(StandardAppViews):
             "editable": True,
             "dbv": __version__
         }
-        return super(Dashboard, self).edit(request, instance_id,
+        return super(Dashboard, self).edit(request, instance_id=instance_id,
                                            template=None, context=context,
                                            * args, **kwargs)
 
