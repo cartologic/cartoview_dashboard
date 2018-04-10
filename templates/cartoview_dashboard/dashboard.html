@@ -150,7 +150,7 @@
       return getRestData(URLS.geonodeRest + "maps/");
     }
     function getLayersData(){
-      return getRestData(URLS.rest + "geonodelayer/");
+      return getRestData( '{% url 'api_dispatch_list' api_name='api' resource_name='layers' %}');
     }
     function getAttributesData(typename){
       return getRestData(URLS.rest + "geonodelayerattribute/?layer__typename=" + typename);
