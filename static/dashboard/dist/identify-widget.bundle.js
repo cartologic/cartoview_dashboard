@@ -14,7 +14,7 @@ var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" &
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _react = __webpack_require__(1);
+var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -164,240 +164,6 @@ exports.default = FieldSet;
 
 /***/ }),
 
-/***/ 102:
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var XLink_1_0_Module_Factory = function () {
-  var XLink_1_0 = {
-    n: 'XLink_1_0',
-    dens: 'http:\/\/www.w3.org\/1999\/xlink',
-    dans: 'http:\/\/www.w3.org\/1999\/xlink',
-    tis: [{
-        ln: 'ResourceType',
-        tn: 'resourceType',
-        ps: [{
-            n: 'content',
-            col: true,
-            t: 'ae'
-          }, {
-            n: 'type',
-            rq: true,
-            ti: 'Token',
-            t: 'a'
-          }, {
-            n: 'role',
-            t: 'a'
-          }, {
-            n: 'title',
-            t: 'a'
-          }, {
-            n: 'label',
-            ti: 'NCName',
-            t: 'a'
-          }]
-      }, {
-        ln: 'LocatorType',
-        tn: 'locatorType',
-        ps: [{
-            n: 'locatorTitle',
-            mno: 0,
-            col: true,
-            en: 'title',
-            ti: '.TitleEltType'
-          }, {
-            n: 'type',
-            rq: true,
-            ti: 'Token',
-            t: 'a'
-          }, {
-            n: 'href',
-            rq: true,
-            t: 'a'
-          }, {
-            n: 'role',
-            t: 'a'
-          }, {
-            n: 'title',
-            t: 'a'
-          }, {
-            n: 'label',
-            ti: 'NCName',
-            t: 'a'
-          }]
-      }, {
-        ln: 'Extended',
-        tn: 'extended',
-        ps: [{
-            n: 'extendedModel',
-            mno: 0,
-            col: true,
-            etis: [{
-                en: 'title',
-                ti: '.TitleEltType'
-              }, {
-                en: 'resource',
-                ti: '.ResourceType'
-              }, {
-                en: 'locator',
-                ti: '.LocatorType'
-              }, {
-                en: 'arc',
-                ti: '.ArcType'
-              }],
-            t: 'es'
-          }, {
-            n: 'type',
-            rq: true,
-            ti: 'Token',
-            t: 'a'
-          }, {
-            n: 'role',
-            t: 'a'
-          }, {
-            n: 'title',
-            t: 'a'
-          }]
-      }, {
-        ln: 'Simple',
-        tn: 'simple',
-        ps: [{
-            n: 'content',
-            col: true,
-            t: 'ae'
-          }, {
-            n: 'type',
-            ti: 'Token',
-            t: 'a'
-          }, {
-            n: 'href',
-            t: 'a'
-          }, {
-            n: 'role',
-            t: 'a'
-          }, {
-            n: 'arcrole',
-            t: 'a'
-          }, {
-            n: 'title',
-            t: 'a'
-          }, {
-            n: 'show',
-            ti: 'Token',
-            t: 'a'
-          }, {
-            n: 'actuate',
-            ti: 'Token',
-            t: 'a'
-          }]
-      }, {
-        ln: 'TitleEltType',
-        tn: 'titleEltType',
-        ps: [{
-            n: 'content',
-            col: true,
-            t: 'ae'
-          }, {
-            n: 'type',
-            rq: true,
-            ti: 'Token',
-            t: 'a'
-          }, {
-            n: 'lang',
-            an: {
-              lp: 'lang',
-              ns: 'http:\/\/www.w3.org\/XML\/1998\/namespace'
-            },
-            t: 'a'
-          }]
-      }, {
-        ln: 'ArcType',
-        tn: 'arcType',
-        ps: [{
-            n: 'locatorTitle',
-            mno: 0,
-            col: true,
-            en: 'title',
-            ti: '.TitleEltType'
-          }, {
-            n: 'type',
-            rq: true,
-            ti: 'Token',
-            t: 'a'
-          }, {
-            n: 'arcrole',
-            t: 'a'
-          }, {
-            n: 'title',
-            t: 'a'
-          }, {
-            n: 'show',
-            ti: 'Token',
-            t: 'a'
-          }, {
-            n: 'actuate',
-            ti: 'Token',
-            t: 'a'
-          }, {
-            n: 'from',
-            ti: 'NCName',
-            t: 'a'
-          }, {
-            n: 'to',
-            ti: 'NCName',
-            t: 'a'
-          }]
-      }, {
-        t: 'enum',
-        ln: 'TypeType',
-        bti: 'Token',
-        vs: ['simple', 'extended', 'title', 'resource', 'locator', 'arc']
-      }, {
-        t: 'enum',
-        ln: 'ShowType',
-        bti: 'Token',
-        vs: ['new', 'replace', 'embed', 'other', 'none']
-      }, {
-        t: 'enum',
-        ln: 'ActuateType',
-        bti: 'Token',
-        vs: ['onLoad', 'onRequest', 'other', 'none']
-      }],
-    eis: [{
-        en: 'arc',
-        ti: '.ArcType'
-      }, {
-        en: 'resource',
-        ti: '.ResourceType'
-      }, {
-        en: 'locator',
-        ti: '.LocatorType'
-      }, {
-        en: 'title',
-        ti: '.TitleEltType'
-      }]
-  };
-  return {
-    XLink_1_0: XLink_1_0
-  };
-};
-if (true) {
-  !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (XLink_1_0_Module_Factory),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-}
-else {
-  var XLink_1_0_Module = XLink_1_0_Module_Factory();
-  if (typeof module !== 'undefined' && module.exports) {
-    module.exports.XLink_1_0 = XLink_1_0_Module.XLink_1_0;
-  }
-  else {
-    var XLink_1_0 = XLink_1_0_Module.XLink_1_0;
-  }
-}
-
-/***/ }),
-
 /***/ 14:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -406,13 +172,13 @@ else {
 
 exports.__esModule = true;
 
-var _events = __webpack_require__(20);
+var _events = __webpack_require__(21);
 
 exports.default = new _events.EventEmitter();
 
 /***/ }),
 
-/***/ 20:
+/***/ 21:
 /***/ (function(module, exports) {
 
 // Copyright Joyent, Inc. and other Node contributors.
@@ -858,7 +624,7 @@ exports.default = {
 
 /***/ }),
 
-/***/ 292:
+/***/ 276:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -868,9 +634,9 @@ exports.__esModule = true;
 
 var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
-__webpack_require__(615);
+__webpack_require__(584);
 
-var _react = __webpack_require__(1);
+var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -882,7 +648,7 @@ var _FieldSet = __webpack_require__(10);
 
 var _FieldSet2 = _interopRequireDefault(_FieldSet);
 
-var _WMSService = __webpack_require__(317);
+var _WMSService = __webpack_require__(301);
 
 var _WMSService2 = _interopRequireDefault(_WMSService);
 
@@ -1059,7 +825,7 @@ exports.default = IdentifyWidget;
 
 /***/ }),
 
-/***/ 315:
+/***/ 299:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1081,15 +847,15 @@ var _createClass = function () { function defineProperties(target, props) { for 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * See the License for the specific language governing permissions and limitations under the License.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
 
-var _jsonix = __webpack_require__(76);
+var _jsonix = __webpack_require__(74);
 
-var _XLink_1_ = __webpack_require__(102);
+var _XLink_1_ = __webpack_require__(98);
 
-var _Filter_1_0_ = __webpack_require__(492);
+var _Filter_1_0_ = __webpack_require__(477);
 
-var _GML_2_1_ = __webpack_require__(494);
+var _GML_2_1_ = __webpack_require__(479);
 
-var _SLD_1_0_0_GeoServer = __webpack_require__(497);
+var _SLD_1_0_0_GeoServer = __webpack_require__(482);
 
 var _util = __webpack_require__(27);
 
@@ -1875,7 +1641,7 @@ exports.default = new SLDService();
 
 /***/ }),
 
-/***/ 317:
+/***/ 301:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1901,7 +1667,7 @@ var _util = __webpack_require__(27);
 
 var _util2 = _interopRequireDefault(_util);
 
-var _urlParse = __webpack_require__(52);
+var _urlParse = __webpack_require__(49);
 
 var _urlParse2 = _interopRequireDefault(_urlParse);
 
@@ -1909,7 +1675,7 @@ var _openlayers = __webpack_require__(11);
 
 var _openlayers2 = _interopRequireDefault(_openlayers);
 
-var _SLDService = __webpack_require__(315);
+var _SLDService = __webpack_require__(299);
 
 var _SLDService2 = _interopRequireDefault(_SLDService);
 
@@ -2078,7 +1844,7 @@ exports.default = new WMSService();
 
 /***/ }),
 
-/***/ 33:
+/***/ 32:
 /***/ (function(module, exports) {
 
 /*
@@ -2135,22 +1901,22 @@ module.exports = function() {
 
 /***/ }),
 
-/***/ 386:
+/***/ 368:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(33)();
+exports = module.exports = __webpack_require__(32)();
 // imports
 
 
 // module
-exports.push([module.i, ".identify-no-results{\n  padding: 10px;\n}\n.identify-navigate{\n  padding: 0 5px;\n}\n.identify-result-ct{\n  overflow: auto;\n  min-height: 100px;\n  max-height: 300px;\n}\n.identify-result-layer-title{\n  margin-left: 10px;\n}\n", ""]);
+exports.push([module.i, ".identify-no-results{\r\n  padding: 10px;\r\n}\r\n.identify-navigate{\r\n  padding: 0 5px;\r\n}\r\n.identify-result-ct{\r\n  overflow: auto;\r\n  min-height: 100px;\r\n  max-height: 300px;\r\n}\r\n.identify-result-layer-title{\r\n  margin-left: 10px;\r\n}\r\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ 40:
+/***/ 38:
 /***/ (function(module, exports) {
 
 /*
@@ -2403,7 +2169,7 @@ function updateLink(linkElement, obj) {
 
 /***/ }),
 
-/***/ 46:
+/***/ 43:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2483,7 +2249,7 @@ exports.parse = querystring;
 
 /***/ }),
 
-/***/ 492:
+/***/ 477:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var Filter_1_0_0_Module_Factory = function () {
@@ -3014,7 +2780,7 @@ else {
 
 /***/ }),
 
-/***/ 494:
+/***/ 479:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var GML_2_1_2_Module_Factory = function () {
@@ -3576,7 +3342,53 @@ else {
 
 /***/ }),
 
-/***/ 497:
+/***/ 48:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Check if we're required to add a port number.
+ *
+ * @see https://url.spec.whatwg.org/#default-port
+ * @param {Number|String} port Port number we need to check
+ * @param {String} protocol Protocol we need to check against.
+ * @returns {Boolean} Is it a default port for the given protocol
+ * @api private
+ */
+module.exports = function required(port, protocol) {
+  protocol = protocol.split(':')[0];
+  port = +port;
+
+  if (!port) return false;
+
+  switch (protocol) {
+    case 'http':
+    case 'ws':
+    return port !== 80;
+
+    case 'https':
+    case 'wss':
+    return port !== 443;
+
+    case 'ftp':
+    return port !== 21;
+
+    case 'gopher':
+    return port !== 70;
+
+    case 'file':
+    return false;
+  }
+
+  return port !== 0;
+};
+
+
+/***/ }),
+
+/***/ 482:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var SLD_1_0_0_GeoServer_Module_Factory = function () {
@@ -4766,60 +4578,14 @@ else {
 
 /***/ }),
 
-/***/ 51:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Check if we're required to add a port number.
- *
- * @see https://url.spec.whatwg.org/#default-port
- * @param {Number|String} port Port number we need to check
- * @param {String} protocol Protocol we need to check against.
- * @returns {Boolean} Is it a default port for the given protocol
- * @api private
- */
-module.exports = function required(port, protocol) {
-  protocol = protocol.split(':')[0];
-  port = +port;
-
-  if (!port) return false;
-
-  switch (protocol) {
-    case 'http':
-    case 'ws':
-    return port !== 80;
-
-    case 'https':
-    case 'wss':
-    return port !== 443;
-
-    case 'ftp':
-    return port !== 21;
-
-    case 'gopher':
-    return port !== 70;
-
-    case 'file':
-    return false;
-  }
-
-  return port !== 0;
-};
-
-
-/***/ }),
-
-/***/ 52:
+/***/ 49:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 
-var required = __webpack_require__(51)
-  , qs = __webpack_require__(46)
+var required = __webpack_require__(48)
+  , qs = __webpack_require__(43)
   , protocolre = /^([a-z][a-z0-9.+-]*:)?(\/\/)?([\S\s]*)/i
   , slashes = /^[A-Za-z][A-Za-z0-9+-.]*:\/\//;
 
@@ -5233,16 +4999,16 @@ module.exports = URL;
 
 /***/ }),
 
-/***/ 615:
+/***/ 584:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(386);
+var content = __webpack_require__(368);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(40)(content, {});
+var update = __webpack_require__(38)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -5260,13 +5026,13 @@ if(false) {
 
 /***/ }),
 
-/***/ 632:
+/***/ 601:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _IdentifyWidget = __webpack_require__(292);
+var _IdentifyWidget = __webpack_require__(276);
 
 var _IdentifyWidget2 = _interopRequireDefault(_IdentifyWidget);
 
@@ -5274,7 +5040,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /***/ }),
 
-/***/ 76:
+/***/ 74:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _jsonix_factory = function(_jsonix_xmldom, _jsonix_xmlhttprequest, _jsonix_fs)
@@ -11411,6 +11177,240 @@ else
 }
 
 
+/***/ }),
+
+/***/ 98:
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var XLink_1_0_Module_Factory = function () {
+  var XLink_1_0 = {
+    n: 'XLink_1_0',
+    dens: 'http:\/\/www.w3.org\/1999\/xlink',
+    dans: 'http:\/\/www.w3.org\/1999\/xlink',
+    tis: [{
+        ln: 'ResourceType',
+        tn: 'resourceType',
+        ps: [{
+            n: 'content',
+            col: true,
+            t: 'ae'
+          }, {
+            n: 'type',
+            rq: true,
+            ti: 'Token',
+            t: 'a'
+          }, {
+            n: 'role',
+            t: 'a'
+          }, {
+            n: 'title',
+            t: 'a'
+          }, {
+            n: 'label',
+            ti: 'NCName',
+            t: 'a'
+          }]
+      }, {
+        ln: 'LocatorType',
+        tn: 'locatorType',
+        ps: [{
+            n: 'locatorTitle',
+            mno: 0,
+            col: true,
+            en: 'title',
+            ti: '.TitleEltType'
+          }, {
+            n: 'type',
+            rq: true,
+            ti: 'Token',
+            t: 'a'
+          }, {
+            n: 'href',
+            rq: true,
+            t: 'a'
+          }, {
+            n: 'role',
+            t: 'a'
+          }, {
+            n: 'title',
+            t: 'a'
+          }, {
+            n: 'label',
+            ti: 'NCName',
+            t: 'a'
+          }]
+      }, {
+        ln: 'Extended',
+        tn: 'extended',
+        ps: [{
+            n: 'extendedModel',
+            mno: 0,
+            col: true,
+            etis: [{
+                en: 'title',
+                ti: '.TitleEltType'
+              }, {
+                en: 'resource',
+                ti: '.ResourceType'
+              }, {
+                en: 'locator',
+                ti: '.LocatorType'
+              }, {
+                en: 'arc',
+                ti: '.ArcType'
+              }],
+            t: 'es'
+          }, {
+            n: 'type',
+            rq: true,
+            ti: 'Token',
+            t: 'a'
+          }, {
+            n: 'role',
+            t: 'a'
+          }, {
+            n: 'title',
+            t: 'a'
+          }]
+      }, {
+        ln: 'Simple',
+        tn: 'simple',
+        ps: [{
+            n: 'content',
+            col: true,
+            t: 'ae'
+          }, {
+            n: 'type',
+            ti: 'Token',
+            t: 'a'
+          }, {
+            n: 'href',
+            t: 'a'
+          }, {
+            n: 'role',
+            t: 'a'
+          }, {
+            n: 'arcrole',
+            t: 'a'
+          }, {
+            n: 'title',
+            t: 'a'
+          }, {
+            n: 'show',
+            ti: 'Token',
+            t: 'a'
+          }, {
+            n: 'actuate',
+            ti: 'Token',
+            t: 'a'
+          }]
+      }, {
+        ln: 'TitleEltType',
+        tn: 'titleEltType',
+        ps: [{
+            n: 'content',
+            col: true,
+            t: 'ae'
+          }, {
+            n: 'type',
+            rq: true,
+            ti: 'Token',
+            t: 'a'
+          }, {
+            n: 'lang',
+            an: {
+              lp: 'lang',
+              ns: 'http:\/\/www.w3.org\/XML\/1998\/namespace'
+            },
+            t: 'a'
+          }]
+      }, {
+        ln: 'ArcType',
+        tn: 'arcType',
+        ps: [{
+            n: 'locatorTitle',
+            mno: 0,
+            col: true,
+            en: 'title',
+            ti: '.TitleEltType'
+          }, {
+            n: 'type',
+            rq: true,
+            ti: 'Token',
+            t: 'a'
+          }, {
+            n: 'arcrole',
+            t: 'a'
+          }, {
+            n: 'title',
+            t: 'a'
+          }, {
+            n: 'show',
+            ti: 'Token',
+            t: 'a'
+          }, {
+            n: 'actuate',
+            ti: 'Token',
+            t: 'a'
+          }, {
+            n: 'from',
+            ti: 'NCName',
+            t: 'a'
+          }, {
+            n: 'to',
+            ti: 'NCName',
+            t: 'a'
+          }]
+      }, {
+        t: 'enum',
+        ln: 'TypeType',
+        bti: 'Token',
+        vs: ['simple', 'extended', 'title', 'resource', 'locator', 'arc']
+      }, {
+        t: 'enum',
+        ln: 'ShowType',
+        bti: 'Token',
+        vs: ['new', 'replace', 'embed', 'other', 'none']
+      }, {
+        t: 'enum',
+        ln: 'ActuateType',
+        bti: 'Token',
+        vs: ['onLoad', 'onRequest', 'other', 'none']
+      }],
+    eis: [{
+        en: 'arc',
+        ti: '.ArcType'
+      }, {
+        en: 'resource',
+        ti: '.ResourceType'
+      }, {
+        en: 'locator',
+        ti: '.LocatorType'
+      }, {
+        en: 'title',
+        ti: '.TitleEltType'
+      }]
+  };
+  return {
+    XLink_1_0: XLink_1_0
+  };
+};
+if (true) {
+  !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (XLink_1_0_Module_Factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+}
+else {
+  var XLink_1_0_Module = XLink_1_0_Module_Factory();
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports.XLink_1_0 = XLink_1_0_Module.XLink_1_0;
+  }
+  else {
+    var XLink_1_0 = XLink_1_0_Module.XLink_1_0;
+  }
+}
+
 /***/ })
 
-},[632]);
+},[601]);
