@@ -1909,7 +1909,7 @@ exports = module.exports = __webpack_require__(32)();
 
 
 // module
-exports.push([module.i, ".identify-no-results{\n  padding: 10px;\n}\n.identify-navigate{\n  padding: 0 5px;\n}\n.identify-result-ct{\n  overflow: auto;\n  min-height: 100px;\n  max-height: 300px;\n}\n.identify-result-layer-title{\n  margin-left: 10px;\n}\n", ""]);
+exports.push([module.i, ".identify-no-results{\r\n  padding: 10px;\r\n}\r\n.identify-navigate{\r\n  padding: 0 5px;\r\n}\r\n.identify-result-ct{\r\n  overflow: auto;\r\n  min-height: 100px;\r\n  max-height: 300px;\r\n}\r\n.identify-result-layer-title{\r\n  margin-left: 10px;\r\n}\r\n", ""]);
 
 // exports
 
