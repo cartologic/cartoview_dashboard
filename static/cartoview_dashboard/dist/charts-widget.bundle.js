@@ -35683,6 +35683,7 @@ var BaseChartWidget = function (_BaseWidget) {
     }
 
     BaseChartWidget.prototype.getConfigFormOptions = function getConfigFormOptions() {
+
         if (!this.state.config.aggregationAttribute) {
             configFormOptions.aggregationAttribute.options = {};
         }
@@ -35691,9 +35692,11 @@ var BaseChartWidget = function (_BaseWidget) {
         }
         return configFormOptions;
     };
-    // componentDidMount()  {
-    //   this.update(this.state.config);
-    // }
+
+    BaseChartWidget.prototype.setConfig = function setConfig(config) {
+        _BaseWidget.prototype.setConfig.call(this, config);
+        this.attachToMapWidget(config.mapWidget);
+    };
     // shouldComponentUpdate(nextProps, nextState){
     //   if(this.state.config != nextState.config ){
     //     this.update(nextState.config);
@@ -35710,12 +35713,20 @@ var BaseChartWidget = function (_BaseWidget) {
 
 
     BaseChartWidget.prototype.componentDidMount = function componentDidMount() {
+        if (this.state.config.mapWidget) {
+            this.attachToMapWidget(this.state.config.mapWidget);
+        }
+        this.update(this.state.config);
+    };
+
+    BaseChartWidget.prototype.attachToMapWidget = function attachToMapWidget(mapWidgetId) {
         var _this2 = this;
 
-        _Events2.default.on('mapExtentChanged', function (map, extent) {
+        var eventName = 'mapExtentChanged' + '_' + mapWidgetId;
+        console.log(eventName);
+        _Events2.default.on(eventName, function (map, extent) {
             _this2.update(_this2.state.config, extent);
         });
-        this.update(this.state.config);
     };
 
     BaseChartWidget.prototype.update = function update(config, extent) {
@@ -35725,6 +35736,7 @@ var BaseChartWidget = function (_BaseWidget) {
             config = Object.assign({}, config);
             if (extent) {
                 config.filters = {
+                    geom: this.state.geoAttribute,
                     minx: extent[0],
                     miny: extent[1],
                     maxx: extent[2],
@@ -35760,6 +35772,22 @@ var BaseChartWidget = function (_BaseWidget) {
 }(BaseWidget);
 
 var configFormOptions = {
+    mapWidget: {
+        type: 'select',
+        label: "Map",
+        options: {},
+        props: {
+            onChange: function onChange(e) {
+                // console.log(e.target.fieldSet)
+                var event = e;
+                event.persist();
+                getMapLayersData(dash.props.widgets[e.target.fieldSet.fields.mapWidget.value].props.config.mapId).then(function (res) {
+                    e.target.fieldSet.setState({ data: e.target.fieldSet.getData() });
+                    e.target.fieldSet.setState({ layers: res.objects });
+                });
+            }
+        }
+    },
     typeName: {
         type: 'select',
         label: "Layer",
@@ -35805,6 +35833,7 @@ var ConfigFieldSet = function (_FieldSet) {
     };
 
     ConfigFieldSet.prototype.getInitialData = function getInitialData(props) {
+        debugger;
         return props.widget.getConfig();
     };
 
@@ -35819,11 +35848,19 @@ var ConfigFieldSet = function (_FieldSet) {
     }
 
     ConfigFieldSet.prototype.getSelectOptions = function getSelectOptions(name, config, value) {
-        if (name == "typeName") {
+        if (name == "mapWidget") {
+            return Object.keys(dash.props.widgets).filter(function (widgetId) {
+                return dash.props.widgets[widgetId].type.name == "MapWidget";
+            }).map(function (widgetId) {
+                return _jsx('option', {
+                    value: widgetId
+                }, void 0, dash.props.widgets[widgetId].title);
+            });
+        } else if (name == "typeName") {
             return this.state.layers.map(function (m) {
                 return _jsx('option', {
-                    value: m.typename
-                }, void 0, m.title);
+                    value: m.name
+                }, void 0, m.layer_params.title);
             });
         } else if (name == "aggregationAttribute") {
             var isNumber = function isNumber(a) {
@@ -35855,17 +35892,21 @@ var ConfigFieldSet = function (_FieldSet) {
         var _this5 = this;
 
         this.setState({ data: data || this.getData() });
+
         getAttributesData(this.fields.typeName.value).then(function (res) {
-            return _this5.setState({ attributes: res.objects });
+            _this5.setState({ attributes: res.objects });
+            // this.setState({ geoAttribute:res.objects.filter(a => a.attribute_type.indexOf('gml:') == 0)[0].attribute })
         });
     };
 
     ConfigFieldSet.prototype.componentDidMount = function componentDidMount() {
         var _this6 = this;
 
-        getLayersData().then(function (res) {
+        if (this.fields.mapWidget.value) getMapLayersData(dash.props.widgets[this.fields.mapWidget.value].props.config.mapId).then(function (res) {
             _this6.setLayers(res);
+            // debugger;
             if (_this6.state.data.typeName) {
+                // console.log(this.state.data.typeName)
                 _this6.updateAttributes(_this6.state.data);
             }
         });

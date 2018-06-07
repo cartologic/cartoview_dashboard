@@ -250,7 +250,7 @@ module.exports = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><wps:Execute version
 /***/ 284:
 /***/ (function(module, exports) {
 
-module.exports = "<ogc:Filter>\r\n\r\n  <ogc:BBOX>\r\n    <ogc:PropertyName>the_geom</ogc:PropertyName>\r\n    <gml:Envelope srsName=\"http://www.opengis.net/gml/srs/epsg.xml#3857\">\r\n      <gml:upperCorner>__minx__ __miny__</gml:upperCorner>\r\n      <gml:lowerCorner>__maxx__ __maxy__</gml:lowerCorner>\r\n    </gml:Envelope>\r\n  </ogc:BBOX>\r\n\r\n</ogc:Filter>\r\n"
+module.exports = "<ogc:Filter>\r\n\r\n  <ogc:BBOX>\r\n    <ogc:PropertyName></ogc:PropertyName>\r\n    <gml:Envelope srsName=\"http://www.opengis.net/gml/srs/epsg.xml#3857\">\r\n      <gml:upperCorner>__minx__ __miny__</gml:upperCorner>\r\n      <gml:lowerCorner>__maxx__ __maxy__</gml:lowerCorner>\r\n    </gml:Envelope>\r\n  </ogc:BBOX>\r\n\r\n</ogc:Filter>\r\n"
 
 /***/ }),
 

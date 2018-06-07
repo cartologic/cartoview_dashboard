@@ -533,13 +533,26 @@ var AggregateWidget = function (_BaseWidget) {
     return _this;
   }
 
+  AggregateWidget.prototype.setConfig = function setConfig(config) {
+    _BaseWidget.prototype.setConfig.call(this, config);
+    this.attachToMapWidget(config.mapWidget);
+  };
+
   AggregateWidget.prototype.componentDidMount = function componentDidMount() {
+    if (this.state.config.mapWidget) {
+      this.attachToMapWidget(this.state.config.mapWidget);
+    }
+    this.update(this.state.config);
+  };
+
+  AggregateWidget.prototype.attachToMapWidget = function attachToMapWidget(mapWidgetId) {
     var _this2 = this;
 
-    _Events2.default.on('mapExtentChanged', function (map, extent) {
+    var eventName = 'mapExtentChanged' + '_' + mapWidgetId;
+    console.log(eventName);
+    _Events2.default.on(eventName, function (map, extent) {
       _this2.update(_this2.state.config, extent);
     });
-    this.update(this.state.config);
   };
 
   AggregateWidget.prototype.update = function update(config, extent) {
@@ -586,8 +599,10 @@ var ConfigFieldSet = function (_FieldSet) {
 
     var _this4 = _possibleConstructorReturn(this, _FieldSet.call(this, props));
 
+    console.log(props);
     _this4.state.layers = [];
     _this4.state.attributes = [];
+    _this4.state.map = null;
     return _this4;
   }
 
@@ -596,7 +611,22 @@ var ConfigFieldSet = function (_FieldSet) {
   };
 
   ConfigFieldSet.prototype.getSchema = function getSchema() {
+    var _this5 = this;
+
     return {
+      mapWidget: {
+        type: 'select',
+        label: "Map",
+        options: {},
+        props: {
+          onChange: function onChange(e) {
+            getMapLayersData(dash.props.widgets[_this5.fields.mapWidget.value].props.config.mapId).then(function (res) {
+              _this5.setState({ data: _this5.getData() });
+              _this5.setState({ layers: res.objects });
+            });
+          }
+        }
+      },
       typeName: {
         type: 'select',
         label: "Layer",
@@ -629,11 +659,19 @@ var ConfigFieldSet = function (_FieldSet) {
   };
 
   ConfigFieldSet.prototype.getSelectOptions = function getSelectOptions(name, config, value) {
-    if (name == "typeName") {
+    if (name == "mapWidget") {
+      return Object.keys(dash.props.widgets).filter(function (widgetId) {
+        return dash.props.widgets[widgetId].type.name == "MapWidget";
+      }).map(function (widgetId) {
+        return _jsx('option', {
+          value: widgetId
+        }, void 0, dash.props.widgets[widgetId].title);
+      });
+    } else if (name == "typeName") {
       return this.state.layers.map(function (m) {
         return _jsx('option', {
-          value: m.typename
-        }, void 0, m.title);
+          value: m.name
+        }, void 0, m.layer_params.title);
       });
     } else if (name == "aggregationAttribute") {
       var isNumber = function isNumber(a) {
@@ -651,22 +689,24 @@ var ConfigFieldSet = function (_FieldSet) {
   };
 
   ConfigFieldSet.prototype.updateAttributes = function updateAttributes(data) {
-    var _this5 = this;
+    var _this6 = this;
 
     //this.state.data.typeName = this.fields.typeName.value;
     this.setState({ data: data || this.getData() });
     getAttributesData(this.fields.typeName.value).then(function (res) {
-      return _this5.setState({ attributes: res.objects });
+      return _this6.setState({ attributes: res.objects });
     });
   };
 
   ConfigFieldSet.prototype.componentDidMount = function componentDidMount() {
-    var _this6 = this;
+    var _this7 = this;
 
-    getLayersData().then(function (res) {
-      _this6.setLayers(res);
-      if (_this6.state.data.typeName) {
-        _this6.updateAttributes(_this6.state.data);
+    if (this.fields.mapWidget.value) getMapLayersData(dash.props.widgets[this.fields.mapWidget.value].props.config.mapId).then(function (res) {
+      _this7.setLayers(res);
+      // debugger;
+      if (_this7.state.data.typeName) {
+        // console.log(this.state.data.typeName)
+        _this7.updateAttributes(_this7.state.data);
       }
     });
   };
@@ -675,6 +715,14 @@ var ConfigFieldSet = function (_FieldSet) {
     this.setState({ layers: res.objects });
     //res.objects.map(l => this.layersHash[l.typename] = l);
   };
+  // getData( ) {
+  //   debugger;
+  //   const data = super.getData( )
+  //   data.groupBy = {
+  //       attributes: data.groupBy
+  //   };
+  //   return data;
+  // }
 
   return ConfigFieldSet;
 }(_FieldSet3.default);

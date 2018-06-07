@@ -12,6 +12,7 @@ class BaseChartWidget extends BaseWidget {
         this.configFieldSetClass = ConfigFieldSet;
     }
     getConfigFormOptions( ) {
+
         if ( !this.state.config.aggregationAttribute ) {
             configFormOptions.aggregationAttribute.options = {};
         }
@@ -20,9 +21,10 @@ class BaseChartWidget extends BaseWidget {
         }
         return configFormOptions;
     }
-    // componentDidMount()  {
-    //   this.update(this.state.config);
-    // }
+    setConfig(config){
+        super.setConfig(config);
+        this.attachToMapWidget(config.mapWidget)
+    }
     // shouldComponentUpdate(nextProps, nextState){
     //   if(this.state.config != nextState.config ){
     //     this.update(nextState.config);
@@ -37,16 +39,25 @@ class BaseChartWidget extends BaseWidget {
     //   }
     // }
     componentDidMount( ) {
-        Events.on( 'mapExtentChanged', ( map, extent ) => {
-            this.update( this.state.config, extent );
-        } );
+        if(this.state.config.mapWidget) {
+            this.attachToMapWidget(this.state.config.mapWidget)
+        }
         this.update( this.state.config );
+    }
+
+    attachToMapWidget(mapWidgetId) {
+        var eventName = 'mapExtentChanged' + '_' + mapWidgetId;
+        console.log(eventName);
+        Events.on(eventName, (map, extent) => {
+            this.update(this.state.config, extent);
+        });
     }
     update( config, extent ) {
         if ( config.typeName ) {
             config = Object.assign( {}, config )
             if ( extent ) {
                 config.filters = {
+                    geom: this.state.geoAttribute,
                     minx: extent[ 0 ],
                     miny: extent[ 1 ],
                     maxx: extent[ 2 ],
@@ -74,6 +85,22 @@ class BaseChartWidget extends BaseWidget {
     }
 }
 const configFormOptions = {
+     mapWidget: {
+        type: 'select',
+        label: "Map",
+        options: {},
+        props: {
+            onChange: ( e ) => {
+                // console.log(e.target.fieldSet)
+                var event = e;
+                event.persist()
+               getMapLayersData(dash.props.widgets[e.target.fieldSet.fields.mapWidget.value].props.config.mapId).then(res => {
+                   e.target.fieldSet.setState( { data:e.target.fieldSet.getData( )});
+                   e.target.fieldSet.setState({layers: res.objects});
+                });
+            }
+        }
+    },
     typeName: {
         type: 'select',
         label: "Layer",
@@ -114,6 +141,7 @@ class ConfigFieldSet extends FieldSet {
         return configFormOptions;
     }
     getInitialData( props ) {
+        debugger;
         return props.widget.getConfig( );
     }
     constructor( props ) {
@@ -122,9 +150,12 @@ class ConfigFieldSet extends FieldSet {
         this.state.attributes = [ ];
     }
     getSelectOptions( name, config, value ) {
-        if ( name == "typeName" ) {
-            return this.state.layers.map( m =>
-                <option value={m.typename}>{m.title}</option> );
+         if ( name == "mapWidget" ) {
+              return Object.keys(dash.props.widgets).filter(widgetId => dash.props.widgets[widgetId].type.name == "MapWidget").
+                map(widgetId => <option value={widgetId}>{dash.props.widgets[widgetId].title}</option>);
+         }
+        else if ( name == "typeName" ) {
+            return this.state.layers.map(m => <option value={m.name}>{m.layer_params.title}</option>);
         } else if ( name == "aggregationAttribute" ) {
             var isNumber = a => [ 'xsd:int', 'xsd:long', 'xsd:double' ].indexOf(
                 a.attribute_type ) != -1;
@@ -144,16 +175,22 @@ class ConfigFieldSet extends FieldSet {
     }
     updateAttributes( data ) {
         this.setState( { data: data || this.getData( ) } );
-        getAttributesData( this.fields.typeName.value ).then( res => this.setState( { attributes: res
-                .objects } ) );
+
+        getAttributesData( this.fields.typeName.value ).then( res => {
+            this.setState( { attributes: res.objects } )
+            // this.setState({ geoAttribute:res.objects.filter(a => a.attribute_type.indexOf('gml:') == 0)[0].attribute })
+        });
     }
     componentDidMount( ) {
-        getLayersData( ).then( res => {
-            this.setLayers( res );
-            if ( this.state.data.typeName ) {
-                this.updateAttributes( this.state.data );
-            }
-        } );
+        if(this.fields.mapWidget.value)
+            getMapLayersData(dash.props.widgets[this.fields.mapWidget.value].props.config.mapId).then( res => {
+                this.setLayers( res );
+                // debugger;
+                if ( this.state.data.typeName ) {
+                    // console.log(this.state.data.typeName)
+                    this.updateAttributes( this.state.data );
+                }
+            } );
     }
     setLayers( res ) {
         this.setState( { layers: res.objects } );

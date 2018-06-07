@@ -16983,7 +16983,8 @@ var MapWidget = function (_BaseWidget) {
         });
         _this.map.on('moveend', function () {
             var extent = _this.map.getView().calculateExtent(_this.map.getSize());
-            _Events2.default.emit('mapExtentChanged', _this.map, extent, _this);
+            var eventName = 'mapExtentChanged' + '_' + _this.props.id;
+            _Events2.default.emit(eventName, _this.map, extent, _this);
         });
 
         return _this;
