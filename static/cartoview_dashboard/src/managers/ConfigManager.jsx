@@ -21,8 +21,6 @@ class ConfigManager {
     // TODO: remove, it is deprecated , dashboard is not single map.
     getMapWidget( ) {
         var { widgets } = this.dashboard.state
-        console.log('--------- widgets---------');
-        console.log(widgets);
         var mapWidget = null
         Object.keys( widgets ).forEach( ( id ) => {
             if ( widgets[ id ].type.name == "MapWidget" ) {
@@ -33,9 +31,7 @@ class ConfigManager {
         return mapWidget
     }
     getWidget(widgetId ) {
-        var { widgets } = this.dashboard.state
-        console.log(' map widget id ------', widgetId);
-        console.log(widgets[widgetId]);
+        var { widgets } = this.dashboard.state;
         return widgets[widgetId];
     }
     save = ( ) => {
