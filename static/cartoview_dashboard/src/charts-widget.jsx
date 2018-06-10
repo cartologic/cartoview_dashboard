@@ -141,7 +141,6 @@ class ConfigFieldSet extends FieldSet {
         return configFormOptions;
     }
     getInitialData( props ) {
-        debugger;
         return props.widget.getConfig( );
     }
     constructor( props ) {

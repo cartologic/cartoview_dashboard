@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import ArcGISRestService from 'boundless-sdk/services/ArcGISRestService';
 import Events from './events/Events.jsx';
 import ol from 'openlayers';
+import FieldSet from './components/FieldSet.jsx';
 
 class ArcGISLegend extends Component {
     render( ) {
@@ -98,22 +99,49 @@ class LegendWidget extends BaseWidget {
     </div>;
     }
     componentDidMount( ) {
-        var mapWidget = this.context.configManager.getMapWidget( );
-        if ( mapWidget.ready ) {
-            this.setState( { ready: true, map: mapWidget.map } )
+        if(! this.state.config.mapWidget )
+            return;
+        this.attachToMapWidget(this.state.config.mapWidget);
+    }
+
+    attachToMapWidget(mapWidgetId) {
+        var mapWidget = this.context.configManager.getWidget(mapWidgetId);
+        if (mapWidget.ready) {
+            this.setState({ready: true, map: mapWidget.map})
         } else {
-            Events.on( 'mapReady', ( map ) => { this.setState( { ready: true,
-                    map } ) } );
+            Events.on('mapReady' + '_' + mapWidgetId, (map) => { this.setState({ready: true, map }) });
         }
     }
 }
-class ConfigForm extends React.Component {
-    render( ) {
-        return null
+class ConfigForm extends FieldSet {
+    constructor(props) {
+        super(props)
+        this.state.maps = [];
     }
-    getData( ) {
-        return {}
+
+    getSchema(props) {
+        return {
+            mapWidget: {
+                type: 'select',
+                lable: 'Map',
+                options: {},
+                props:{}
+            }
+        };
     }
+
+    getInitialData(props) {
+        return props.widget.getConfig();
+    }
+
+    getSelectOptions(name, config, value) {
+        return Object.keys(dash.props.widgets).filter(widgetId => dash.props.widgets[widgetId].type.name == "MapWidget").
+                map(widgetId => <option value={widgetId}>{dash.props.widgets[widgetId].title}</option>);
+    }
+
+    // componentWillMount() {
+    //     getMapsData().then(res => this.setState({maps: res.objects}));
+    // }
 }
 LegendWidget.ConfigForm = ConfigForm;
 Dashboard.registerWidget( LegendWidget );
