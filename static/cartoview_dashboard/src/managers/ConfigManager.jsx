@@ -17,6 +17,8 @@ class ConfigManager {
     endEditWidgetConfig = ( widget, config ) => {
         this.dashboard.updateWidget( widget, config )
     }
+
+    // TODO: remove, it is deprecated , dashboard is not single map.
     getMapWidget( ) {
         var { widgets } = this.dashboard.state
         var mapWidget = null
@@ -27,6 +29,10 @@ class ConfigManager {
             }
         } )
         return mapWidget
+    }
+    getWidget(widgetId ) {
+        var { widgets } = this.dashboard.state;
+        return widgets[widgetId];
     }
     save = ( ) => {
         var { widgets, layout } = this.dashboard.state

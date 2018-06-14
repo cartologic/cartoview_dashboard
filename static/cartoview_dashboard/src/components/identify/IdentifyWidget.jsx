@@ -11,12 +11,12 @@ class IdentifyWidget extends BaseWidget {
     static displayName = "Identify";
     constructor( props ) {
         super( props )
-        this.state = {
+        this.state = Object.assign( this.state, {
             ready: false,
             busy: false,
             features: [ ],
             activeFeature: 0
-        }
+        } ) ;
     }
     render( ) {
         var { ready, busy, features, activeFeature } = this.state;
@@ -71,11 +71,13 @@ class IdentifyWidget extends BaseWidget {
     </div>;
     }
     componentDidMount( ) {
-        var mapWidget = this.context.configManager.getMapWidget( );
+        if(! this.state.config.mapWidget )
+            return;
+        var mapWidget = this.context.configManager.getWidget( this.state.config.mapWidget );
         if ( mapWidget.ready ) {
             this.init( mapWidget.map );
         } else {
-            Events.on( 'mapReady', ( map ) => {
+            Events.on( 'mapReady'+ '_' + this.state.config.mapWidget, ( map ) => {
                 this.init( map );
             } );
         }
@@ -89,17 +91,9 @@ class IdentifyWidget extends BaseWidget {
                         activeFeature: 0 } )
                     WMSService.getFeatureInfo( layer, e.coordinate,
                         map, 'application/json', ( result ) => {
-                            this.state.features = this.state
-                                .features.concat( result.features );
-                            result.features.forEach( f =>
-                                f.set( "_layerTitle",
-                                    result.layer.get(
-                                        'title' ) ) )
-                            this.setState( {
-                                features: this.state
-                                    .features,
-                                busy: false
-                            } );
+                            this.state.features = this.state.features.concat( result.features );
+                            result.features.forEach( f => f.set( "_layerTitle", result.layer.get('title' ) ) )
+                            this.setState( { features: this.state.features, busy: false } );
                         } );
                 } )
         } );
@@ -120,13 +114,35 @@ class IdentifyWidget extends BaseWidget {
         return children;
     }
 }
-class ConfigForm extends React.Component {
-    render( ) {
-        return null
+class ConfigForm extends FieldSet {
+    constructor(props) {
+        super(props)
+        this.state.maps = [];
     }
-    getData( ) {
-        return {}
+
+    getSchema(props) {
+        return {
+            mapWidget: {
+                type: 'select',
+                lable: 'Map',
+                options: {},
+                props:{}
+            }
+        };
     }
+
+    getInitialData(props) {
+        return props.widget.getConfig();
+    }
+
+    getSelectOptions(name, config, value) {
+        return Object.keys(dash.props.widgets).filter(widgetId => dash.props.widgets[widgetId].type.name == "MapWidget").
+                map(widgetId => <option value={widgetId}>{dash.props.widgets[widgetId].title}</option>);
+    }
+
+    // componentWillMount() {
+    //     getMapsData().then(res => this.setState({maps: res.objects}));
+    // }
 }
 IdentifyWidget.ConfigForm = ConfigForm;
 Dashboard.registerWidget( IdentifyWidget );

@@ -12,11 +12,24 @@ class AggregateWidget extends BaseWidget {
     this.configFieldSetClass = ConfigFieldSet;
   }
 
+  setConfig(config){
+    super.setConfig(config);
+    this.attachToMapWidget(config.mapWidget)
+  }
+
   componentDidMount()  {
-    Events.on('mapExtentChanged', (map, extent) => {
-      this.update(this.state.config, extent);
-    })
-    this.update(this.state.config);
+    if(this.state.config.mapWidget) {
+        this.attachToMapWidget(this.state.config.mapWidget)
+    }
+    this.update(this.state.config, );
+  }
+
+  attachToMapWidget(mapWidgetId) {
+    var eventName = 'mapExtentChanged' + '_' + mapWidgetId;
+    console.log(eventName);
+    Events.on(eventName, (map, extent) => {
+        this.update(this.state.config, extent);
+    });
   }
 
   update(config, extent){
@@ -52,14 +65,29 @@ class AggregateWidget extends BaseWidget {
 class ConfigFieldSet extends FieldSet {
   constructor(props){
     super(props);
+    console.log(props);
     this.state.layers = [];
     this.state.attributes = [];
+    this.state.map = null;
   }
   getInitialData(props){
     return props.widget.getConfig();
   }
   getSchema(){
     return {
+       mapWidget: {
+        type: 'select',
+        label: "Map",
+        options: {},
+        props:{
+          onChange: (e) => {
+            getMapLayersData(dash.props.widgets[this.fields.mapWidget.value].props.config.mapId).then(res => {
+               this.setState( { data:this.getData( )});
+               this.setState({layers: res.objects});
+            });
+          }
+        }
+      },
       typeName: {
         type: 'select',
         label: "Layer",
@@ -91,8 +119,12 @@ class ConfigFieldSet extends FieldSet {
     }
   }
   getSelectOptions(name, config, value){
-    if(name == "typeName"){
-      return this.state.layers.map(m => <option value={m.typename}>{m.title}</option>);
+    if (name == "mapWidget") {
+        return Object.keys(dash.props.widgets).filter(widgetId => dash.props.widgets[widgetId].type.name == "MapWidget").map(widgetId =>
+            <option value={widgetId}>{dash.props.widgets[widgetId].title}</option>);
+    }
+    else if (name == "typeName") {
+        return this.state.layers.map(m => <option value={m.name}>{m.layer_params.title}</option>);
     }
     else if(name=="aggregationAttribute"){
       var isNumber = a => ['xsd:int', 'xsd:long', 'xsd:double'].indexOf(a.attribute_type) != -1;
@@ -106,18 +138,30 @@ class ConfigFieldSet extends FieldSet {
     this.setState({data: data || this.getData()});
     getAttributesData(this.fields.typeName.value).then(res => this.setState({attributes:res.objects}));
   }
-  componentDidMount(){
-    getLayersData().then(res => {
-      this.setLayers(res);
-      if(this.state.data.typeName){
-        this.updateAttributes(this.state.data);
-      }
-    });
+
+  componentDidMount() {
+    if (this.fields.mapWidget.value)
+        getMapLayersData(dash.props.widgets[this.fields.mapWidget.value].props.config.mapId).then(res => {
+            this.setLayers(res);
+            // debugger;
+            if (this.state.data.typeName) {
+                // console.log(this.state.data.typeName)
+                this.updateAttributes(this.state.data);
+            }
+        });
   }
   setLayers(res){
     this.setState({layers: res.objects});
     //res.objects.map(l => this.layersHash[l.typename] = l);
   }
+  // getData( ) {
+  //   debugger;
+  //   const data = super.getData( )
+  //   data.groupBy = {
+  //       attributes: data.groupBy
+  //   };
+  //   return data;
+  // }
 
 }
 AggregateWidget.ConfigForm = ConfigFieldSet;

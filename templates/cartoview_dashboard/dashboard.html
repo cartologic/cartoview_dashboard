@@ -150,6 +150,9 @@
     function getLayersData(){
       return getRestData( '{% url 'api_dispatch_list' api_name='api' resource_name='layers' %}');
     }
+    function getMapLayersData(map_id){
+      return getRestData( '{% url 'api_dispatch_list' api_name='api' resource_name='maplayers' %}?fixed=false&map=' + map_id);
+    }
     function getAttributesData(typename){
       return getRestData('{% url 'api_dispatch_list' api_name='api' resource_name='attributes' %}?layer__typename=' + typename);
     }

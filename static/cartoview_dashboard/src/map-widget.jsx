@@ -19,7 +19,8 @@ class MapWidget extends BaseWidget {
         });
         this.map.on('moveend', () => {
             var extent = this.map.getView().calculateExtent( this.map.getSize() );
-            Events.emit('mapExtentChanged', this.map, extent, this);
+            var eventName = 'mapExtentChanged' + '_' + this.props.id;
+            Events.emit(eventName, this.map, extent, this);
         });
 
     }
@@ -45,7 +46,7 @@ class MapWidget extends BaseWidget {
                 if(config) {
                     MapConfigService.load(MapConfigTransformService.transform(config), this.map,URLS.proxy);
                     this.ready = true;
-                    Events.emit('mapReady', this.map, this);
+                    Events.emit('mapReady' + '_' + this.props.id, this.map, this);
                 }
             });
 
