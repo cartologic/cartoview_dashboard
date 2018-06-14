@@ -13,6 +13,9 @@ class WpsClient {
         this.url = URLS.geoserver + "wps/"
     }
     aggregate=(params)=> {
+        // TODO : revise the below workaround for implemented for exchange
+        if(params['typeName'].indexOf(':') == -1)
+            params['typeName'] = 'geonode:' + params['typeName']
         const proxiedURL = this.urls.getProxiedURL(this.url)
         return fetch(proxiedURL, {
             method: 'POST',

@@ -2411,6 +2411,8 @@ var WpsClient = function () {
         _classCallCheck(this, WpsClient);
 
         this.aggregate = function (params) {
+            // TODO : revise the below workaround for implemented for exchange
+            if (params['typeName'].indexOf(':') == -1) params['typeName'] = 'geonode:' + params['typeName'];
             var proxiedURL = _this.urls.getProxiedURL(_this.url);
             return fetch(proxiedURL, {
                 method: 'POST',
