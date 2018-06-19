@@ -22,13 +22,23 @@ class Header extends React.Component {
                 title: {
                     type: "text",
                     props: {
-                        placeholder: "Dashboard Title"
+                        placeholder: "Dashboard Title",
+                        onChange: (e) => {
+                            let data = {...e.target.fieldSet.state.data};
+                            data.title = e.target.value;
+                            e.target.fieldSet.setState({data: data});
+                        },
                     }
                 },
                 abstract: {
                     type: "textarea",
                     props: {
-                        placeholder: "About this dashboard..."
+                        placeholder: "About this dashboard...",
+                        onChange: (e) => {
+                            let data = {...e.target.fieldSet.state.data};
+                            data.abstract = e.target.value;
+                            e.target.fieldSet.setState({data: data});
+                        },
                     }
                 }
             }
