@@ -30,6 +30,24 @@ class ConfigManager {
         } )
         return mapWidget
     }
+
+     getMapWidgets( ) {
+        // get widgets form dashboard.state.layout as dashboard.state.widgets is not updated when a widget removed.
+        var { layout, widgets } = this.dashboard.state;
+        var mapWidgets = {};
+        layout.rows.forEach((row, rowIndex) => {
+            row.columns.forEach((col, colIndex) => {
+                col.widgets.forEach((wId, wIndex) =>  {
+                    if(widgets[wId.key].type.name == "MapWidget")
+                    {
+                        mapWidgets[wId.key] = widgets[wId.key];
+                    }
+                });
+            });
+        });
+        return mapWidgets;
+    }
+
     getWidget(widgetId ) {
         var { widgets } = this.dashboard.state;
         return widgets[widgetId];

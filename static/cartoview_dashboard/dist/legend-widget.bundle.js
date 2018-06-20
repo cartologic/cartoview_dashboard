@@ -1435,12 +1435,13 @@ var ConfigForm = function (_FieldSet) {
     };
 
     ConfigForm.prototype.getSelectOptions = function getSelectOptions(name, config, value) {
-        return Object.keys(dash.props.widgets).filter(function (widgetId) {
+        var mapWidgets = this.props.widget.context.configManager.getMapWidgets();
+        return Object.keys(mapWidgets).filter(function (widgetId) {
             return dash.props.widgets[widgetId].type.name == "MapWidget";
         }).map(function (widgetId) {
             return _jsx('option', {
                 value: widgetId
-            }, void 0, dash.props.widgets[widgetId].title);
+            }, void 0, mapWidgets[widgetId].title);
         });
     };
 

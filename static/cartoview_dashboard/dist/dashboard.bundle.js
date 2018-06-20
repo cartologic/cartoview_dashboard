@@ -1893,6 +1893,24 @@ var ConfigManager = function () {
         return mapWidget;
     };
 
+    ConfigManager.prototype.getMapWidgets = function getMapWidgets() {
+        var _dashboard$state2 = this.dashboard.state,
+            layout = _dashboard$state2.layout,
+            widgets = _dashboard$state2.widgets;
+
+        var mapWidgets = {};
+        layout.rows.forEach(function (row, rowIndex) {
+            row.columns.forEach(function (col, colIndex) {
+                col.widgets.forEach(function (wId, wIndex) {
+                    if (widgets[wId.key].type.name == "MapWidget") {
+                        mapWidgets[wId.key] = widgets[wId.key];
+                    }
+                });
+            });
+        });
+        return mapWidgets;
+    };
+
     ConfigManager.prototype.getWidget = function getWidget(widgetId) {
         var widgets = this.dashboard.state.widgets;
 
