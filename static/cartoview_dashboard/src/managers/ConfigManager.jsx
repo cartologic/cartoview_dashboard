@@ -49,8 +49,9 @@ class ConfigManager {
     }
 
     getWidget(widgetId ) {
-        var { widgets } = this.dashboard.state;
-        return widgets[widgetId];
+        // get widgets form dashboard.widget instead of dashboard.state.widgets
+        // as it has whole widget object not only configuration
+        return this.dashboard.widgets[widgetId];
     }
     save = ( ) => {
         var { widgets, layout } = this.dashboard.state

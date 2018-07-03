@@ -8,13 +8,13 @@ webpackJsonp([5],{
 
 exports.__esModule = true;
 
-var _events = __webpack_require__(21);
+var _events = __webpack_require__(20);
 
 exports.default = new _events.EventEmitter();
 
 /***/ }),
 
-/***/ 21:
+/***/ 20:
 /***/ (function(module, exports) {
 
 // Copyright Joyent, Inc. and other Node contributors.
@@ -460,7 +460,7 @@ exports.default = {
 
 /***/ }),
 
-/***/ 276:
+/***/ 283:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -470,9 +470,9 @@ exports.__esModule = true;
 
 var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
-__webpack_require__(584);
+__webpack_require__(596);
 
-var _react = __webpack_require__(2);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -484,7 +484,7 @@ var _FieldSet2 = __webpack_require__(9);
 
 var _FieldSet3 = _interopRequireDefault(_FieldSet2);
 
-var _WMSService = __webpack_require__(301);
+var _WMSService = __webpack_require__(308);
 
 var _WMSService2 = _interopRequireDefault(_WMSService);
 
@@ -685,7 +685,7 @@ exports.default = IdentifyWidget;
 
 /***/ }),
 
-/***/ 299:
+/***/ 306:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -709,13 +709,13 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _jsonix = __webpack_require__(74);
 
-var _XLink_1_ = __webpack_require__(98);
+var _XLink_1_ = __webpack_require__(99);
 
-var _Filter_1_0_ = __webpack_require__(477);
+var _Filter_1_0_ = __webpack_require__(473);
 
-var _GML_2_1_ = __webpack_require__(479);
+var _GML_2_1_ = __webpack_require__(475);
 
-var _SLD_1_0_0_GeoServer = __webpack_require__(482);
+var _SLD_1_0_0_GeoServer = __webpack_require__(478);
 
 var _util = __webpack_require__(27);
 
@@ -1501,7 +1501,7 @@ exports.default = new SLDService();
 
 /***/ }),
 
-/***/ 301:
+/***/ 308:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1527,7 +1527,7 @@ var _util = __webpack_require__(27);
 
 var _util2 = _interopRequireDefault(_util);
 
-var _urlParse = __webpack_require__(49);
+var _urlParse = __webpack_require__(51);
 
 var _urlParse2 = _interopRequireDefault(_urlParse);
 
@@ -1535,7 +1535,7 @@ var _openlayers = __webpack_require__(11);
 
 var _openlayers2 = _interopRequireDefault(_openlayers);
 
-var _SLDService = __webpack_require__(299);
+var _SLDService = __webpack_require__(306);
 
 var _SLDService2 = _interopRequireDefault(_SLDService);
 
@@ -1761,7 +1761,7 @@ module.exports = function() {
 
 /***/ }),
 
-/***/ 368:
+/***/ 378:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(32)();
@@ -1776,7 +1776,7 @@ exports.push([module.i, ".identify-no-results{\r\n  padding: 10px;\r\n}\r\n.iden
 
 /***/ }),
 
-/***/ 38:
+/***/ 40:
 /***/ (function(module, exports) {
 
 /*
@@ -2029,7 +2029,7 @@ function updateLink(linkElement, obj) {
 
 /***/ }),
 
-/***/ 43:
+/***/ 45:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2109,7 +2109,7 @@ exports.parse = querystring;
 
 /***/ }),
 
-/***/ 477:
+/***/ 473:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var Filter_1_0_0_Module_Factory = function () {
@@ -2640,7 +2640,7 @@ else {
 
 /***/ }),
 
-/***/ 479:
+/***/ 475:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var GML_2_1_2_Module_Factory = function () {
@@ -3202,53 +3202,7 @@ else {
 
 /***/ }),
 
-/***/ 48:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Check if we're required to add a port number.
- *
- * @see https://url.spec.whatwg.org/#default-port
- * @param {Number|String} port Port number we need to check
- * @param {String} protocol Protocol we need to check against.
- * @returns {Boolean} Is it a default port for the given protocol
- * @api private
- */
-module.exports = function required(port, protocol) {
-  protocol = protocol.split(':')[0];
-  port = +port;
-
-  if (!port) return false;
-
-  switch (protocol) {
-    case 'http':
-    case 'ws':
-    return port !== 80;
-
-    case 'https':
-    case 'wss':
-    return port !== 443;
-
-    case 'ftp':
-    return port !== 21;
-
-    case 'gopher':
-    return port !== 70;
-
-    case 'file':
-    return false;
-  }
-
-  return port !== 0;
-};
-
-
-/***/ }),
-
-/***/ 482:
+/***/ 478:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var SLD_1_0_0_GeoServer_Module_Factory = function () {
@@ -4438,14 +4392,60 @@ else {
 
 /***/ }),
 
-/***/ 49:
+/***/ 50:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Check if we're required to add a port number.
+ *
+ * @see https://url.spec.whatwg.org/#default-port
+ * @param {Number|String} port Port number we need to check
+ * @param {String} protocol Protocol we need to check against.
+ * @returns {Boolean} Is it a default port for the given protocol
+ * @api private
+ */
+module.exports = function required(port, protocol) {
+  protocol = protocol.split(':')[0];
+  port = +port;
+
+  if (!port) return false;
+
+  switch (protocol) {
+    case 'http':
+    case 'ws':
+    return port !== 80;
+
+    case 'https':
+    case 'wss':
+    return port !== 443;
+
+    case 'ftp':
+    return port !== 21;
+
+    case 'gopher':
+    return port !== 70;
+
+    case 'file':
+    return false;
+  }
+
+  return port !== 0;
+};
+
+
+/***/ }),
+
+/***/ 51:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 
-var required = __webpack_require__(48)
-  , qs = __webpack_require__(43)
+var required = __webpack_require__(50)
+  , qs = __webpack_require__(45)
   , protocolre = /^([a-z][a-z0-9.+-]*:)?(\/\/)?([\S\s]*)/i
   , slashes = /^[A-Za-z][A-Za-z0-9+-.]*:\/\//;
 
@@ -4781,13 +4781,8 @@ function set(part, value, fn) {
       break;
 
     case 'pathname':
-    case 'hash':
-      if (value) {
-        var char = part === 'pathname' ? '/' : '#';
-        url[part] = value.charAt(0) !== char ? char + value : value;
-      } else {
-        url[part] = value;
-      }
+      url.pathname = value.length && value.charAt(0) !== '/' ? '/' + value : value;
+
       break;
 
     default:
@@ -4859,16 +4854,16 @@ module.exports = URL;
 
 /***/ }),
 
-/***/ 584:
+/***/ 596:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(368);
+var content = __webpack_require__(378);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(38)(content, {});
+var update = __webpack_require__(40)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -4886,13 +4881,13 @@ if(false) {
 
 /***/ }),
 
-/***/ 601:
+/***/ 612:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _IdentifyWidget = __webpack_require__(276);
+var _IdentifyWidget = __webpack_require__(283);
 
 var _IdentifyWidget2 = _interopRequireDefault(_IdentifyWidget);
 
@@ -11053,7 +11048,7 @@ var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" &
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _react = __webpack_require__(2);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -11203,7 +11198,7 @@ exports.default = FieldSet;
 
 /***/ }),
 
-/***/ 98:
+/***/ 99:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var XLink_1_0_Module_Factory = function () {
@@ -11437,4 +11432,4 @@ else {
 
 /***/ })
 
-},[601]);
+},[612]);

@@ -23,7 +23,7 @@ class BaseChartWidget extends BaseWidget {
     }
     setConfig(config){
         super.setConfig(config);
-        this.attachToMapWidget(config.mapWidget)
+        this.attachToMapWidget(config)
     }
     // shouldComponentUpdate(nextProps, nextState){
     //   if(this.state.config != nextState.config ){
@@ -40,14 +40,17 @@ class BaseChartWidget extends BaseWidget {
     // }
     componentDidMount( ) {
         if(this.state.config.mapWidget) {
-            this.attachToMapWidget(this.state.config.mapWidget)
+            this.attachToMapWidget(this.state.config)
         }
         this.update( this.state.config );
     }
 
-    attachToMapWidget(mapWidgetId) {
-        var eventName = 'mapExtentChanged' + '_' + mapWidgetId;
-        console.log(eventName);
+    attachToMapWidget(config) {
+        var mapWidget = this.context.configManager.getWidget(config.mapWidget);
+         if (mapWidget && mapWidget.ready)
+             // update widget once attached to a map, otherwise it will wait to next map change.
+             this.update(config, mapWidget.map.getView().calculateExtent())
+        var eventName = 'mapExtentChanged' + '_' + config.mapWidget;
         Events.on(eventName, (map, extent) => {
             this.update(this.state.config, extent);
         });
