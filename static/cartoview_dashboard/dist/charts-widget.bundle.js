@@ -35594,20 +35594,6 @@ var BaseChartWidget = function (_BaseWidget) {
         _BaseWidget.prototype.setConfig.call(this, config);
         this.attachToMapWidget(config);
     };
-    // shouldComponentUpdate(nextProps, nextState){
-    //   if(this.state.config != nextState.config ){
-    //     this.update(nextState.config);
-    //   }
-    //   return true;
-    // }
-    // update(config){
-    //   if(config.typeName){
-    //     this.wpsClient.aggregate(config).then((data) => {
-    //       this.setData(data);
-    //     });
-    //   }
-    // }
-
 
     BaseChartWidget.prototype.componentDidMount = function componentDidMount() {
         if (this.state.config.mapWidget) {
@@ -35868,6 +35854,7 @@ var BarChartWidget = function (_BaseChartWidget) {
     return BarChartWidget;
 }(BaseChartWidget);
 
+BarChartWidget.displayName = "Bar Chart";
 ;
 
 var LineChartWidget = function (_BaseChartWidget2) {
@@ -35917,6 +35904,8 @@ var LineChartWidget = function (_BaseChartWidget2) {
 
     return LineChartWidget;
 }(BaseChartWidget);
+
+LineChartWidget.displayName = "Line Chart";
 
 var DoughnutChartWidget = function (_BaseChartWidget3) {
     _inherits(DoughnutChartWidget, _BaseChartWidget3);
@@ -35979,6 +35968,8 @@ var DoughnutChartWidget = function (_BaseChartWidget3) {
 
     return DoughnutChartWidget;
 }(BaseChartWidget);
+
+DoughnutChartWidget.displayName = "Doughnut Chart";
 
 Dashboard.registerWidget(LineChartWidget);
 Dashboard.registerWidget(DoughnutChartWidget);

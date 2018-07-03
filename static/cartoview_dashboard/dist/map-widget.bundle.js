@@ -16868,6 +16868,9 @@ var MapWidget = function (_BaseWidget) {
 
 MapWidget.displayName = "Map";
 
+
+MapWidget.displayName = "Map";
+
 var MapWidgetConfigForm = function (_FieldSet) {
     _inherits(MapWidgetConfigForm, _FieldSet);
 

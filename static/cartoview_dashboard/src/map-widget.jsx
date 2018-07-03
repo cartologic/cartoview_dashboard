@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom';
 import ol from 'openlayers';
 
 class MapWidget extends BaseWidget {
+    static displayName = "Bar Chart";
     constructor(props) {
         super(props);
         this.loaded = false;

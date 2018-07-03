@@ -11,6 +11,7 @@ class BaseChartWidget extends BaseWidget {
         } );
         this.configFieldSetClass = ConfigFieldSet;
     }
+
     getConfigFormOptions( ) {
 
         if ( !this.state.config.aggregationAttribute ) {
@@ -21,23 +22,12 @@ class BaseChartWidget extends BaseWidget {
         }
         return configFormOptions;
     }
+
     setConfig(config){
         super.setConfig(config);
         this.attachToMapWidget(config)
     }
-    // shouldComponentUpdate(nextProps, nextState){
-    //   if(this.state.config != nextState.config ){
-    //     this.update(nextState.config);
-    //   }
-    //   return true;
-    // }
-    // update(config){
-    //   if(config.typeName){
-    //     this.wpsClient.aggregate(config).then((data) => {
-    //       this.setData(data);
-    //     });
-    //   }
-    // }
+
     componentDidMount( ) {
         if(this.state.config.mapWidget) {
             this.attachToMapWidget(this.state.config)
@@ -139,6 +129,7 @@ const configFormOptions = {
         options: {}
     }
 };
+
 class ConfigFieldSet extends FieldSet {
     getSchema( ) {
         return configFormOptions;
@@ -209,6 +200,7 @@ class ConfigFieldSet extends FieldSet {
 }
 BaseChartWidget.ConfigForm = ConfigFieldSet;
 class BarChartWidget extends BaseChartWidget {
+    static displayName = "Bar Chart";
     constructor( props ) {
         super( props );
         this.state.data = {
@@ -232,6 +224,7 @@ class BarChartWidget extends BaseChartWidget {
     }
 };
 class LineChartWidget extends BaseChartWidget {
+    static displayName = "Line Chart";
     constructor( props ) {
         super( props );
         this.state.data = {
@@ -267,6 +260,7 @@ class LineChartWidget extends BaseChartWidget {
     }
 }
 class DoughnutChartWidget extends BaseChartWidget {
+    static displayName = "Doughnut Chart";
     constructor( props ) {
         super( props );
         this.state.data = {

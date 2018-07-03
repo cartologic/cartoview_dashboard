@@ -1339,7 +1339,7 @@ var Legend = function (_Component2) {
                         src: url
                     })));
                 } else if (layer.getSource() instanceof _openlayers2.default.source.TileArcGISRest) {
-                    legends.push(_jsx('div', {}, void 0, ' ', _jsx('h4', {}, void 0, layer.get('title')), ' ', _jsx(ArcGISLegend, {
+                    legends.push(_jsx('div', {}, void 0, _jsx('h4', {}, void 0, layer.get('title')), ' ', _jsx(ArcGISLegend, {
                         layer: layer
                     })));
                 }
