@@ -371,21 +371,24 @@ var AggregateWidget = function (_BaseWidget) {
 
   AggregateWidget.prototype.setConfig = function setConfig(config) {
     _BaseWidget.prototype.setConfig.call(this, config);
-    this.attachToMapWidget(config.mapWidget);
+    this.attachToMapWidget(config);
   };
 
   AggregateWidget.prototype.componentDidMount = function componentDidMount() {
     if (this.state.config.mapWidget) {
-      this.attachToMapWidget(this.state.config.mapWidget);
+      this.attachToMapWidget(this.state.config);
     }
     this.update(this.state.config);
   };
 
-  AggregateWidget.prototype.attachToMapWidget = function attachToMapWidget(mapWidgetId) {
+  AggregateWidget.prototype.attachToMapWidget = function attachToMapWidget(config) {
     var _this2 = this;
 
-    var eventName = 'mapExtentChanged' + '_' + mapWidgetId;
-    console.log(eventName);
+    var mapWidget = this.context.configManager.getWidget(config.mapWidget);
+    if (mapWidget && mapWidget.ready)
+      // update widget once attached to a map, otherwise it will wait to next map change.
+      this.update(config, mapWidget.map.getView().calculateExtent());
+    var eventName = 'mapExtentChanged' + '_' + config.mapWidget;
     _Events2.default.on(eventName, function (map, extent) {
       _this2.update(_this2.state.config, extent);
     });
