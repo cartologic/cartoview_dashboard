@@ -98,6 +98,12 @@ class LegendWidget extends BaseWidget {
       }
     </div>;
     }
+
+    setConfig(config){
+        super.setConfig(config);
+        this.attachToMapWidget(config.mapWidget)
+    }
+
     componentDidMount( ) {
         if(! this.state.config.mapWidget )
             return;
@@ -106,7 +112,7 @@ class LegendWidget extends BaseWidget {
 
     attachToMapWidget(mapWidgetId) {
         var mapWidget = this.context.configManager.getWidget(mapWidgetId);
-        if (mapWidget.ready) {
+        if (mapWidget && mapWidget.ready) {
             this.setState({ready: true, map: mapWidget.map})
         } else {
             Events.on('mapReady' + '_' + mapWidgetId, (map) => { this.setState({ready: true, map }) });

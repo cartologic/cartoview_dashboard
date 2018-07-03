@@ -1379,6 +1379,11 @@ var LegendWidget = function (_BaseWidget) {
         }) : _jsx('span', {}, void 0, 'You have to add a map to this dashboard to show the legend.'));
     };
 
+    LegendWidget.prototype.setConfig = function setConfig(config) {
+        _BaseWidget.prototype.setConfig.call(this, config);
+        this.attachToMapWidget(config.mapWidget);
+    };
+
     LegendWidget.prototype.componentDidMount = function componentDidMount() {
         if (!this.state.config.mapWidget) return;
         this.attachToMapWidget(this.state.config.mapWidget);
@@ -1388,7 +1393,7 @@ var LegendWidget = function (_BaseWidget) {
         var _this6 = this;
 
         var mapWidget = this.context.configManager.getWidget(mapWidgetId);
-        if (mapWidget.ready) {
+        if (mapWidget && mapWidget.ready) {
             this.setState({ ready: true, map: mapWidget.map });
         } else {
             _Events2.default.on('mapReady' + '_' + mapWidgetId, function (map) {
