@@ -49,7 +49,7 @@ class Header extends React.Component {
                       <h3 className="header-title title-wrap">{title}</h3>
                     </div>
                     <div className="flex-element">
-                      <button onClick={this.onRequestClose} className="btn btn-primary">{"?"}</button>
+                        <button onClick={this.onRequestClose} className="btn btn-primary"><i className="fa fa-info-circle" style={{fontSize:20}}></i></button>
                     </div>
                     <InfoModal onRequestClose={this.onRequestClose} open={open} title="About" >
                         <p>{abstract}</p>
