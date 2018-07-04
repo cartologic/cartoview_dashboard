@@ -101,7 +101,8 @@ class LegendWidget extends BaseWidget {
         return <div style={style}>
             {
                 this.state && this.state.ready ? <Legend map={this.state.map}/> :
-                    <span>You have to add a map to this dashboard to show the legend.</span>
+                    <span>The map for this Legend widget must be configured.  Click <i
+                        className="glyphicon glyphicon-cog" style={{color:'#337ab7'}}></i> icon and select a map within this dashboard.</span>
             }
         </div>;
     }

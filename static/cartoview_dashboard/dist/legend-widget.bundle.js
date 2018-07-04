@@ -1540,7 +1540,10 @@ var LegendWidget = function (_BaseWidget) {
             style: style
         }, void 0, this.state && this.state.ready ? _jsx(Legend, {
             map: this.state.map
-        }) : _jsx('span', {}, void 0, 'You have to add a map to this dashboard to show the legend.'));
+        }) : _jsx('span', {}, void 0, 'The map for this Legend widget must be configured.  Click ', _jsx('i', {
+            className: 'glyphicon glyphicon-cog',
+            style: { color: '#337ab7' }
+        }), ' icon and select a map within this dashboard.'));
     };
 
     LegendWidget.prototype.setConfig = function setConfig(config) {
