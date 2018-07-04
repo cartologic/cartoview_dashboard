@@ -138,7 +138,7 @@ class ConfigForm extends FieldSet {
     getSelectOptions(name, config, value) {
          var mapWidgets = this.props.widget.context.configManager.getMapWidgets();
          return Object.keys(mapWidgets).filter(widgetId => dash.props.widgets[widgetId].type.name == "MapWidget").
-                map(widgetId => <option value={widgetId}>{mapWidgets[widgetId].title}</option>);
+                map(widgetId => <option value={widgetId}>{mapWidgets[widgetId].title} - {widgetId}</option>);
     }
 
     // componentWillMount() {

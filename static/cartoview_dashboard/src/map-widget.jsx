@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom';
 import ol from 'openlayers';
 
 class MapWidget extends BaseWidget {
-    static displayName = "Bar Chart";
+    static displayName = "Map";
     constructor(props) {
         super(props);
         this.loaded = false;
@@ -64,7 +64,6 @@ class MapWidget extends BaseWidget {
     }
 }
 
-MapWidget.displayName = "Map"
 class MapWidgetConfigForm extends FieldSet {
   constructor(props){
     super(props)

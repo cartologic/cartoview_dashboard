@@ -35740,7 +35740,7 @@ var ConfigFieldSet = function (_FieldSet) {
             }).map(function (widgetId) {
                 return _jsx('option', {
                     value: widgetId
-                }, void 0, mapWidgets[widgetId].title);
+                }, void 0, mapWidgets[widgetId].title, ' - ', widgetId);
             });
         } else if (name == "typeName") {
             return this.state.layers.map(function (m) {

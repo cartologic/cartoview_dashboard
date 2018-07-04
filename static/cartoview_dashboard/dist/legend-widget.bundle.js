@@ -1605,7 +1605,7 @@ var ConfigForm = function (_FieldSet) {
         }).map(function (widgetId) {
             return _jsx('option', {
                 value: widgetId
-            }, void 0, mapWidgets[widgetId].title);
+            }, void 0, mapWidgets[widgetId].title, ' - ', widgetId);
         });
     };
 

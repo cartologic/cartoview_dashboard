@@ -132,7 +132,7 @@ class ConfigFieldSet extends FieldSet {
         if (name == "mapWidget") {
             var mapWidgets = this.props.widget.context.configManager.getMapWidgets();
             return Object.keys(mapWidgets).filter(widgetId => dash.props.widgets[widgetId].type.name == "MapWidget").map(widgetId =>
-                <option value={widgetId}>{mapWidgets[widgetId].title}</option>);
+                <option value={widgetId}>{mapWidgets[widgetId].title} - {widgetId}</option>);
         }
         else if (name == "typeName") {
             return this.state.layers.map(m => <option value={m.name}>{m.layer_params.title}</option>);

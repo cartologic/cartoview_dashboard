@@ -1134,7 +1134,7 @@ var CustomFrame = function (_React$Component) {
         if (editable) {
             header = _jsx('div', {
                 className: 'panel-heading'
-            }, void 0, title, _jsx('div', {
+            }, void 0, title, ' - ', children.props.id, _jsx('div', {
                 className: 'btn-group pull-right'
             }, void 0, _jsx('a', {
                 onClick: function onClick(e) {

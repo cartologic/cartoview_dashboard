@@ -17030,9 +17030,6 @@ var MapWidget = function (_BaseWidget) {
     return MapWidget;
 }(BaseWidget);
 
-MapWidget.displayName = "Bar Chart";
-
-
 MapWidget.displayName = "Map";
 
 var MapWidgetConfigForm = function (_FieldSet) {
