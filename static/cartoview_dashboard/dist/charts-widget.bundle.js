@@ -35934,10 +35934,12 @@ var DoughnutChartWidget = function (_BaseChartWidget3) {
     DoughnutChartWidget.prototype.setData = function setData(data) {
         var _this10 = this;
 
-        var colors = data.AggregationResults.map(function (item) {
-            return _this10.dynamicColor();
-        });
-        this.state.data.datasets[0].backgroundColor = colors;
+        if (!this.state.data.datasets[0].backgroundColor) {
+            var colors = data.AggregationResults.map(function (item) {
+                return _this10.dynamicColor();
+            });
+            this.state.data.datasets[0].backgroundColor = colors;
+        }
         _BaseChartWidget3.prototype.setData.call(this, data);
     };
     // setData(data){

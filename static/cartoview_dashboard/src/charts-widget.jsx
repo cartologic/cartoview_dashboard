@@ -277,8 +277,10 @@ class DoughnutChartWidget extends BaseChartWidget {
         return "rgb(" + r + "," + g + "," + b + ")";
     }
     setData( data ) {
-        var colors = data.AggregationResults.map( ( item ) => this.dynamicColor( ) );
-        this.state.data.datasets[ 0 ].backgroundColor = colors;
+        if(!this.state.data.datasets[0].backgroundColor) {
+            var colors = data.AggregationResults.map((item) => this.dynamicColor());
+            this.state.data.datasets[0].backgroundColor = colors;
+        }
         super.setData( data );
     }
     // setData(data){
