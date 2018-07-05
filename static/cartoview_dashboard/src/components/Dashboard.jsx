@@ -20,8 +20,7 @@ var widgetId = 0
 class Dashboard extends Component {
     constructor( props ) {
         super( props )
-        var { widgets, layout, editable, isNew, isOwner, title, abstract } =
-        props
+        var { widgets, layout, editable, isNew, isOwner, title, abstract } = props
         Object.keys( widgets ).map( ( id ) => {
             const ref = ( w ) => {
                 if ( w ) {
@@ -42,6 +41,7 @@ class Dashboard extends Component {
             editable,
             isOwner,
             isNew,
+            saved: !isNew,
             title,
             abstract,
             addWidgetDialogOpen: false,
@@ -61,6 +61,7 @@ class Dashboard extends Component {
     onRemove = ( layout ) => {
         this.setState( {
             layout: layout,
+            saved: false,
         } )
     }
     /**
@@ -71,6 +72,7 @@ class Dashboard extends Component {
         // Also preserve the details such as the layout, rowIndex, and columnIndex  in 'addWidgetOptions'.
         //  This will be used later when user picks a widget to add.
         this.setState( {
+            saved: false,
             addWidgetDialogOpen: true,
             addWidgetOptions: {
                 layout,
@@ -84,6 +86,7 @@ class Dashboard extends Component {
      */
     onMove = ( layout ) => {
         this.setState( {
+            saved: false,
             layout: layout,
         } )
     }
@@ -112,7 +115,10 @@ class Dashboard extends Component {
             widgets[ widget.id ].title = config.title
             widgets[ widget.id ].props.config = config.widgetConfig
         }
-        this.setState( { widgets, widgetConfigDialogOpen: false } )
+        this.setState( {saved: false, widgets, widgetConfigDialogOpen: false } )
+    }
+    onHeaderChanged = () => {
+        this.setState({saved: false})
     }
     render( ) {
         let {
@@ -124,6 +130,7 @@ class Dashboard extends Component {
             title,
             abstract,
             isNew,
+            saved,
             isOwner,
             layout
         } = this.state
@@ -131,8 +138,8 @@ class Dashboard extends Component {
             <Container>
         <AddWidgetDialog widgets={widgets} isOpen={addWidgetDialogOpen} onRequestClose={this.onRequestClose} onWidgetSelect={this.handleWidgetSelection} />
         <WidgetConfigDialog isOpen={widgetConfigDialogOpen} widgetId={configWidgetId} />
-        <Header editable={editable} title={title} abstract={abstract} ref="header" />
-        <Toolbar isNew={isNew} editable={editable} isOwner={isOwner} />
+        <Header editable={editable} title={title} abstract={abstract} ref="header" onChange={this.onHeaderChanged}/>
+        <Toolbar isNew={isNew} editable={editable} saved={saved} isOwner={isOwner} />
         <DazzleDashboard
           frameComponent={CustomFrame}
           onRemove={this.onRemove}
@@ -146,6 +153,10 @@ class Dashboard extends Component {
 
       </Container>
         )
+    }
+
+    save =( ) => {
+        this.setState({saved: true})
     }
     /**
      * Toggeles edit mode in dashboard.

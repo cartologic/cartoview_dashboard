@@ -735,6 +735,7 @@ var Dashboard = function (_Component) {
             editable: editable,
             isOwner: isOwner,
             isNew: isNew,
+            saved: !isNew,
             title: title,
             abstract: abstract,
             addWidgetDialogOpen: false,
@@ -777,6 +778,7 @@ var Dashboard = function (_Component) {
             title = _state.title,
             abstract = _state.abstract,
             isNew = _state.isNew,
+            saved = _state.saved,
             isOwner = _state.isOwner,
             layout = _state.layout;
 
@@ -788,9 +790,10 @@ var Dashboard = function (_Component) {
         }), _jsx(_WidgetConfigDialog2.default, {
             isOpen: widgetConfigDialogOpen,
             widgetId: configWidgetId
-        }), _react2.default.createElement(_Header2.default, { editable: editable, title: title, abstract: abstract, ref: 'header' }), _jsx(_DashboardToolbar2.default, {
+        }), _react2.default.createElement(_Header2.default, { editable: editable, title: title, abstract: abstract, ref: 'header', onChange: this.onHeaderChanged }), _jsx(_DashboardToolbar2.default, {
             isNew: isNew,
             editable: editable,
+            saved: saved,
             isOwner: isOwner
         }), _jsx(_reactDazzle2.default, {
             frameComponent: _CustomFrame2.default,
@@ -827,7 +830,8 @@ var _initialiseProps = function _initialiseProps() {
 
     this.onRemove = function (layout) {
         _this2.setState({
-            layout: layout
+            layout: layout,
+            saved: false
         });
     };
 
@@ -836,6 +840,7 @@ var _initialiseProps = function _initialiseProps() {
         // Also preserve the details such as the layout, rowIndex, and columnIndex  in 'addWidgetOptions'.
         //  This will be used later when user picks a widget to add.
         _this2.setState({
+            saved: false,
             addWidgetDialogOpen: true,
             addWidgetOptions: {
                 layout: layout,
@@ -847,6 +852,7 @@ var _initialiseProps = function _initialiseProps() {
 
     this.onMove = function (layout) {
         _this2.setState({
+            saved: false,
             layout: layout
         });
     };
@@ -876,7 +882,15 @@ var _initialiseProps = function _initialiseProps() {
             widgets[widget.id].title = config.title;
             widgets[widget.id].props.config = config.widgetConfig;
         }
-        _this2.setState({ widgets: widgets, widgetConfigDialogOpen: false });
+        _this2.setState({ saved: false, widgets: widgets, widgetConfigDialogOpen: false });
+    };
+
+    this.onHeaderChanged = function () {
+        _this2.setState({ saved: false });
+    };
+
+    this.save = function () {
+        _this2.setState({ saved: true });
     };
 
     this.toggleEdit = function () {
@@ -1218,28 +1232,29 @@ var DashboardToolbar = function (_React$Component) {
         _this.saveAll = function (e) {
             e.preventDefault();
             var configManager = _this.context.configManager;
-            var saving = _this.state.saving;
+            configManager.save();
+        };
 
-            if (!saving) {
-                _this.setState({ saving: true });
-                configManager.save();
+        _this.preview = function (e) {
+            var saved = _this.props.saved;
+
+            if (!saved && confirm('You have unsaved changes, click yes to save current state and preview or click cancel to discard')) {
+                _this.saveAll(e);
             }
+            window.location.href = '../view/';
         };
 
-        _this.state = {
-            saving: false
-        };
         return _this;
     }
 
     DashboardToolbar.prototype.render = function render() {
         var _this2 = this;
 
-        var saving = this.state.saving;
         var _props = this.props,
             editable = _props.editable,
             isOwner = _props.isOwner,
-            isNew = _props.isNew;
+            isNew = _props.isNew,
+            saved = _props.saved;
 
         if (!editable && !isOwner) return null;
         var editBtn = _jsx('a', {
@@ -1249,7 +1264,7 @@ var DashboardToolbar = function (_React$Component) {
         }, void 0, _jsx('i', {
             className: 'glyphicon glyphicon-pencil'
         }));
-        var saveBtn = !saving ? _jsx('button', {
+        var saveBtn = !saved ? _jsx('button', {
             className: 'btn btn-danger btn-lg btn-save-db',
             title: 'Save Dashboard',
             onClick: function onClick(e) {
@@ -1267,10 +1282,12 @@ var DashboardToolbar = function (_React$Component) {
         }, void 0, _jsx('i', {
             className: 'glyphicon glyphicon-floppy-disk'
         }));
-        var viewBtn = _jsx('a', {
+        var viewBtn = _jsx('button', {
             className: 'btn btn-warning btn-lg btn-tb btn-view-db',
-            href: '../view/',
-            title: 'View Dashboard'
+            title: 'View Dashboard',
+            onClick: function onClick(e) {
+                return _this2.preview(e);
+            }
         }, void 0, _jsx('i', {
             className: 'glyphicon glyphicon-eye-open'
         }));
@@ -1348,7 +1365,8 @@ var Header = function (_React$Component) {
         var _props = this.props,
             editable = _props.editable,
             title = _props.title,
-            abstract = _props.abstract;
+            abstract = _props.abstract,
+            _onChange = _props.onChange;
 
         if (editable) {
             var data = { title: title, abstract: abstract };
@@ -1361,6 +1379,7 @@ var Header = function (_React$Component) {
                             var data = _extends({}, e.target.fieldSet.state.data);
                             data.title = e.target.value;
                             e.target.fieldSet.setState({ data: data });
+                            _onChange();
                         }
                     }
                 },
@@ -1372,6 +1391,7 @@ var Header = function (_React$Component) {
                             var data = _extends({}, e.target.fieldSet.state.data);
                             data.abstract = e.target.value;
                             e.target.fieldSet.setState({ data: data });
+                            _onChange();
                         }
                     }
                 }
@@ -2033,7 +2053,9 @@ var ConfigManager = function () {
                 abstract = _dashboard$refs$heade.abstract;
 
             var config = { title: title, abstract: abstract, config: JSON.stringify({ widgets: widgetsConfig,
-                    layout: layout }) };
+                    layout: layout })
+                // TODO: handle saving errors, check saving succuess before setting dashboard state.
+            };_this.dashboard.save();
             saveDashboard(config);
         };
 
