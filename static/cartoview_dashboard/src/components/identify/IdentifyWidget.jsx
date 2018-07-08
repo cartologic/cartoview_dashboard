@@ -1,11 +1,12 @@
 import "./style.css"
 
-import React, { Component } from 'react';
+import React from 'react';
 
 import Events from '../../events/Events.jsx';
 import FieldSet from '../FieldSet.jsx';
 import WMSService from 'boundless-sdk/services/WMSService';
 import ol from 'openlayers';
+
 //application/json
 class IdentifyWidget extends BaseWidget {
     static displayName = "Identify";
@@ -70,17 +71,19 @@ class IdentifyWidget extends BaseWidget {
       </div>
     </div>;
     }
-    componentDidMount( ) {
-        if(! this.state.config.mapWidget )
-            return;
-        var mapWidget = this.context.configManager.getWidget( this.state.config.mapWidget );
-        if ( mapWidget.ready ) {
-            this.init( mapWidget.map );
-        } else {
-            Events.on( 'mapReady'+ '_' + this.state.config.mapWidget, ( map ) => {
-                this.init( map );
-            } );
+
+    componentDidMount() {
+        if (this.state.config.mapWidget) {
+            var mapWidget = this.context.configManager.getWidget(this.state.config.mapWidget);
+            if (mapWidget && mapWidget.ready) {
+                this.init(mapWidget.map);
+            } else {
+                Events.on('mapReady' + '_' + this.state.config.mapWidget, (map) => {
+                    this.init(map);
+                });
+            }
         }
+        super.componentDidMount()
     }
     init( map ) {
         this.setState( { ready: true } )

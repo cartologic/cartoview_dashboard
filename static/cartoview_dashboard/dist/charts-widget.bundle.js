@@ -35600,6 +35600,7 @@ var BaseChartWidget = function (_BaseWidget) {
             this.attachToMapWidget(this.state.config);
         }
         this.update(this.state.config);
+        _BaseWidget.prototype.componentDidMount.call(this);
     };
 
     BaseChartWidget.prototype.attachToMapWidget = function attachToMapWidget(config) {

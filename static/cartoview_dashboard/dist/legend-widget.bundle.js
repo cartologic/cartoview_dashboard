@@ -1552,8 +1552,8 @@ var LegendWidget = function (_BaseWidget) {
     };
 
     LegendWidget.prototype.componentDidMount = function componentDidMount() {
-        if (!this.state.config.mapWidget) return;
-        this.attachToMapWidget(this.state.config.mapWidget);
+        if (this.state.config.mapWidget) this.attachToMapWidget(this.state.config.mapWidget);
+        _BaseWidget.prototype.componentDidMount.call(this);
     };
 
     LegendWidget.prototype.attachToMapWidget = function attachToMapWidget(mapWidgetId) {

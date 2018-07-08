@@ -186,7 +186,7 @@ class Dashboard extends Component {
         this.state.widgets[ id ] = {
             title: widgetType.displayName || widgetType.name,
             type: widgetType,
-            props: { id, ref, config: {} }
+            props: { id, ref, config: {}, isNew: true }
         }
         this.setState( {
             widgets: this.state.widgets
@@ -197,9 +197,10 @@ class Dashboard extends Component {
          */
         this.setState( {
             layout: addWidget( layout, rowIndex, columnIndex, id ),
-        } )
+            addWidgetDialogOpen: false,
+        } , /*this.configManager.editWidgetConfig(id)*/)
         // Close the dialogbox
-        this.onRequestClose( )
+        // this.onRequestClose( )
     }
 }
 Dashboard.childContextTypes = {

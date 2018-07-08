@@ -24,6 +24,7 @@ class AggregateWidget extends BaseWidget {
             this.attachToMapWidget(this.state.config)
         }
         this.update(this.state.config,);
+        super.componentDidMount()
     }
 
     attachToMapWidget(config) {

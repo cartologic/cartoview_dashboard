@@ -58,6 +58,7 @@ class MapWidget extends BaseWidget {
     }
     componentDidMount(){
       this.map.setTarget(ReactDOM.findDOMNode(this.refs.map));
+      super.componentDidMount()
     }
     render() {
         return (<div ref="map" className='map-ct'></div>);

@@ -17021,6 +17021,7 @@ var MapWidget = function (_BaseWidget) {
 
     MapWidget.prototype.componentDidMount = function componentDidMount() {
         this.map.setTarget(_reactDom2.default.findDOMNode(this.refs.map));
+        _BaseWidget.prototype.componentDidMount.call(this);
     };
 
     MapWidget.prototype.render = function render() {

@@ -744,15 +744,17 @@ var IdentifyWidget = function (_BaseWidget) {
     IdentifyWidget.prototype.componentDidMount = function componentDidMount() {
         var _this3 = this;
 
-        if (!this.state.config.mapWidget) return;
-        var mapWidget = this.context.configManager.getWidget(this.state.config.mapWidget);
-        if (mapWidget.ready) {
-            this.init(mapWidget.map);
-        } else {
-            _Events2.default.on('mapReady' + '_' + this.state.config.mapWidget, function (map) {
-                _this3.init(map);
-            });
+        if (this.state.config.mapWidget) {
+            var mapWidget = this.context.configManager.getWidget(this.state.config.mapWidget);
+            if (mapWidget && mapWidget.ready) {
+                this.init(mapWidget.map);
+            } else {
+                _Events2.default.on('mapReady' + '_' + this.state.config.mapWidget, function (map) {
+                    _this3.init(map);
+                });
+            }
         }
+        _BaseWidget.prototype.componentDidMount.call(this);
     };
 
     IdentifyWidget.prototype.init = function init(map) {

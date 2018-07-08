@@ -543,6 +543,7 @@ var AggregateWidget = function (_BaseWidget) {
             this.attachToMapWidget(this.state.config);
         }
         this.update(this.state.config);
+        _BaseWidget.prototype.componentDidMount.call(this);
     };
 
     AggregateWidget.prototype.attachToMapWidget = function attachToMapWidget(config) {

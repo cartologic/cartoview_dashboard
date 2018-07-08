@@ -567,67 +567,71 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var BaseWidget = function (_React$Component) {
-  _inherits(BaseWidget, _React$Component);
+    _inherits(BaseWidget, _React$Component);
 
-  function BaseWidget(props) {
-    _classCallCheck(this, BaseWidget);
+    function BaseWidget(props) {
+        _classCallCheck(this, BaseWidget);
 
-    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
+        var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
 
-    _this.state = {
-      config: props.config || {}
-    };
-    return _this;
-  }
-
-  BaseWidget.prototype.getConfig = function getConfig() {
-    return this.state.config;
-  };
-
-  BaseWidget.prototype.setConfig = function setConfig(config) {
-    this.setState({ config: config });
-  };
-
-  BaseWidget.prototype.componentWillReceiveProps = function componentWillReceiveProps(props) {
-    if (props.config) {
-      this.setConfig(props.config);
+        _this.state = {
+            config: props.config || {}
+        };
+        return _this;
     }
-  };
 
-  return BaseWidget;
+    BaseWidget.prototype.componentDidMount = function componentDidMount() {
+        if (this.props.isNew) this.context.configManager.editWidgetConfig(this.props.id);
+    };
+
+    BaseWidget.prototype.getConfig = function getConfig() {
+        return this.state.config;
+    };
+
+    BaseWidget.prototype.setConfig = function setConfig(config) {
+        this.setState({ config: config });
+    };
+
+    BaseWidget.prototype.componentWillReceiveProps = function componentWillReceiveProps(props) {
+        if (props.config) {
+            this.setConfig(props.config);
+        }
+    };
+
+    return BaseWidget;
 }(_react2.default.Component);
 
 var JSONConfigFieldSet = function (_FieldSet) {
-  _inherits(JSONConfigFieldSet, _FieldSet);
+    _inherits(JSONConfigFieldSet, _FieldSet);
 
-  function JSONConfigFieldSet() {
-    _classCallCheck(this, JSONConfigFieldSet);
+    function JSONConfigFieldSet() {
+        _classCallCheck(this, JSONConfigFieldSet);
 
-    return _possibleConstructorReturn(this, _FieldSet.apply(this, arguments));
-  }
+        return _possibleConstructorReturn(this, _FieldSet.apply(this, arguments));
+    }
 
-  JSONConfigFieldSet.prototype.getSchema = function getSchema(props) {
-    return {
-      config: { type: 'json' }
+    JSONConfigFieldSet.prototype.getSchema = function getSchema(props) {
+        return {
+            config: { type: 'json' }
+        };
     };
-  };
 
-  JSONConfigFieldSet.prototype.getInitialData = function getInitialData(props) {
-    return {
-      config: props.widget.getConfig()
+    JSONConfigFieldSet.prototype.getInitialData = function getInitialData(props) {
+        return {
+            config: props.widget.getConfig()
+        };
     };
-  };
 
-  JSONConfigFieldSet.prototype.getData = function getData() {
-    return _FieldSet.prototype.getData.call(this).config;
-  };
+    JSONConfigFieldSet.prototype.getData = function getData() {
+        return _FieldSet.prototype.getData.call(this).config;
+    };
 
-  return JSONConfigFieldSet;
+    return JSONConfigFieldSet;
 }(_FieldSet3.default);
 
 BaseWidget.ConfigForm = JSONConfigFieldSet;
 BaseWidget.contextTypes = {
-  configManager: _react.PropTypes.instanceOf(_ConfigManager2.default)
+    configManager: _react.PropTypes.instanceOf(_ConfigManager2.default)
 };
 exports.default = BaseWidget;
 
@@ -910,7 +914,7 @@ var _initialiseProps = function _initialiseProps() {
         _this2.state.widgets[id] = {
             title: widgetType.displayName || widgetType.name,
             type: widgetType,
-            props: { id: id, ref: ref, config: {} }
+            props: { id: id, ref: ref, config: {}, isNew: true }
         };
         _this2.setState({
             widgets: _this2.state.widgets
@@ -924,10 +928,9 @@ var _initialiseProps = function _initialiseProps() {
          */
 
         _this2.setState({
-            layout: (0, _reactDazzle.addWidget)(layout, rowIndex, columnIndex, id)
+            layout: (0, _reactDazzle.addWidget)(layout, rowIndex, columnIndex, id),
+            addWidgetDialogOpen: false
         });
-        // Close the dialogbox
-        _this2.onRequestClose();
     };
 };
 
@@ -1379,6 +1382,7 @@ var Header = function (_React$Component) {
                             var data = _extends({}, e.target.fieldSet.state.data);
                             data.title = e.target.value;
                             e.target.fieldSet.setState({ data: data });
+                            // notify dashboard to changed "saved" state
                             _onChange();
                         }
                     }
@@ -1391,6 +1395,7 @@ var Header = function (_React$Component) {
                             var data = _extends({}, e.target.fieldSet.state.data);
                             data.abstract = e.target.value;
                             e.target.fieldSet.setState({ data: data });
+                            // notify dashboard to changed "saved" state
                             _onChange();
                         }
                     }

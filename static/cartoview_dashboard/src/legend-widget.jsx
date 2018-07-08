@@ -113,9 +113,9 @@ class LegendWidget extends BaseWidget {
     }
 
     componentDidMount() {
-        if (!this.state.config.mapWidget)
-            return;
-        this.attachToMapWidget(this.state.config.mapWidget);
+        if (this.state.config.mapWidget)
+            this.attachToMapWidget(this.state.config.mapWidget);
+        super.componentDidMount()
     }
 
     attachToMapWidget(mapWidgetId) {
