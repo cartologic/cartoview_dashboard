@@ -19,6 +19,12 @@ class IdentifyWidget extends BaseWidget {
             activeFeature: 0
         } ) ;
     }
+
+    setConfig(config){
+        super.setConfig(config);
+        this.attachToMapWidget(config)
+    }
+
     render( ) {
         var { ready, busy, features, activeFeature } = this.state;
         const prev = ( e ) => {
@@ -74,17 +80,22 @@ class IdentifyWidget extends BaseWidget {
 
     componentDidMount() {
         if (this.state.config.mapWidget) {
-            var mapWidget = this.context.configManager.getWidget(this.state.config.mapWidget);
-            if (mapWidget && mapWidget.ready) {
-                this.init(mapWidget.map);
-            } else {
-                Events.on('mapReady' + '_' + this.state.config.mapWidget, (map) => {
-                    this.init(map);
-                });
-            }
+            this.attachToMapWidget(this.state.config);
         }
         super.componentDidMount()
     }
+
+    attachToMapWidget(config) {
+        var mapWidget = this.context.configManager.getWidget(config.mapWidget);
+        if (mapWidget && mapWidget.ready) {
+            this.init(mapWidget.map);
+        } else {
+            Events.on('mapReady' + '_' + config.mapWidget, (map) => {
+                this.init(map);
+            });
+        }
+    }
+
     init( map ) {
         this.setState( { ready: true } )
         map.on( 'singleclick', ( e ) => {

@@ -682,6 +682,11 @@ var IdentifyWidget = function (_BaseWidget) {
         return _this;
     }
 
+    IdentifyWidget.prototype.setConfig = function setConfig(config) {
+        _BaseWidget.prototype.setConfig.call(this, config);
+        this.attachToMapWidget(config);
+    };
+
     IdentifyWidget.prototype.render = function render() {
         var _this2 = this;
 
@@ -742,19 +747,23 @@ var IdentifyWidget = function (_BaseWidget) {
     };
 
     IdentifyWidget.prototype.componentDidMount = function componentDidMount() {
-        var _this3 = this;
-
         if (this.state.config.mapWidget) {
-            var mapWidget = this.context.configManager.getWidget(this.state.config.mapWidget);
-            if (mapWidget && mapWidget.ready) {
-                this.init(mapWidget.map);
-            } else {
-                _Events2.default.on('mapReady' + '_' + this.state.config.mapWidget, function (map) {
-                    _this3.init(map);
-                });
-            }
+            this.attachToMapWidget(this.state.config);
         }
         _BaseWidget.prototype.componentDidMount.call(this);
+    };
+
+    IdentifyWidget.prototype.attachToMapWidget = function attachToMapWidget(config) {
+        var _this3 = this;
+
+        var mapWidget = this.context.configManager.getWidget(config.mapWidget);
+        if (mapWidget && mapWidget.ready) {
+            this.init(mapWidget.map);
+        } else {
+            _Events2.default.on('mapReady' + '_' + config.mapWidget, function (map) {
+                _this3.init(map);
+            });
+        }
     };
 
     IdentifyWidget.prototype.init = function init(map) {
