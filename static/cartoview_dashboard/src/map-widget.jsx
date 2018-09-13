@@ -127,7 +127,7 @@ class MapWidget extends BaseWidget {
     }
     componentDidMount(){
       this.map.setTarget(ReactDOM.findDOMNode(this.refs.map));
-      super.componentDidMount()
+    //   super.componentDidMount()
     }
     getPopupProps = () => {
         const { showPopup, activeFeature, features } = this.state

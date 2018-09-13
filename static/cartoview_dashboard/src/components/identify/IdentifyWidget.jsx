@@ -1,7 +1,5 @@
 import "./style.css"
 
-import React from 'react';
-
 import Events from '../../events/Events.jsx';
 import FieldSet from '../FieldSet.jsx';
 import React from 'react';

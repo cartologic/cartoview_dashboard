@@ -1,8 +1,7 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import Dashboard from './components/Dashboard.jsx';
 import BaseWidget from './components/BaseWidget.jsx';
-
+import Dashboard from './components/Dashboard.jsx';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 global.Dashboard  = Dashboard;
 global.BaseWidget = BaseWidget;

@@ -32,9 +32,6 @@
   <form id="csrf-form">
     {% csrf_token %}
   </form>
-    <!-- <script src="{{ STATIC_URL }}cartoview_dashboard/node_modules/react/dist/react.js"></script>
-    <script src="{{ STATIC_URL }}cartoview_dashboard/node_modules/react-dom/dist/react-dom.js"></script> -->
-    <!-- <script src="https://boundlessgeo.github.io/sdk/dist/js/full.js"></script> -->
     <script src="{{ STATIC_URL }}cartoview_dashboard/dist/commons.js?v={{dbv}}"></script>
     <script src="{{ STATIC_URL }}cartoview_dashboard/dist/dashboard.bundle.js?v={{dbv}}"></script>
     <script src="{{ STATIC_URL }}cartoview_dashboard/dist/wps-client.bundle.js?v={{dbv}}"></script>

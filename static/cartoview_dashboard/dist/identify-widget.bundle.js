@@ -14,11 +14,7 @@ var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" &
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-<<<<<<< Updated upstream
-var _react = __webpack_require__(1);
-=======
 var _react = __webpack_require__(3);
->>>>>>> Stashed changes
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -176,13 +172,150 @@ exports.default = FieldSet;
 
 exports.__esModule = true;
 
-var _events = __webpack_require__(20);
+var _events = __webpack_require__(23);
 
 exports.default = new _events.EventEmitter();
 
 /***/ }),
 
-/***/ 20:
+/***/ 22:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _openlayers = __webpack_require__(11);
+
+var _openlayers2 = _interopRequireDefault(_openlayers);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+  getProxiedUrl: function getProxiedUrl(url, opt_proxy) {
+    if (opt_proxy) {
+      return opt_proxy + encodeURIComponent(url);
+    } else {
+      return url;
+    }
+  },
+  getResolutionForScale: function getResolutionForScale(scale, units) {
+    var dpi = 25.4 / 0.28;
+    var mpu = _openlayers2.default.proj.METERS_PER_UNIT[units];
+    var inchesPerMeter = 39.37;
+    return parseFloat(scale) / (mpu * inchesPerMeter * dpi);
+  },
+  getTimeInfo: function getTimeInfo(layer) {
+    if (layer.Dimension) {
+      for (var i = 0, ii = layer.Dimension.length; i < ii; ++i) {
+        var dimension = layer.Dimension[i];
+        if (dimension.name === 'time') {
+          return dimension.values;
+        }
+      }
+    }
+  },
+  rgbToHex: function rgbToHex(rgb) {
+    rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
+    return rgb && rgb.length === 4 ? '#' + ('0' + parseInt(rgb[1], 10).toString(16)).slice(-2) + ('0' + parseInt(rgb[2], 10).toString(16)).slice(-2) + ('0' + parseInt(rgb[3], 10).toString(16)).slice(-2) : '';
+  },
+  hexToRgb: function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : null;
+  },
+  transformColor: function transformColor(color) {
+    var colorObj = color.rgb ? color.rgb : color;
+    return [colorObj.r, colorObj.g, colorObj.b, colorObj.a];
+  },
+  doJSONP: function doJSONP(url, success, failure, scope) {
+    function getRandomInt(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min)) + min;
+    }
+    var cbname = 'fn' + Date.now() + getRandomInt(1, 10000);
+    var script = document.createElement('script');
+    script.onerror = function () {
+      if (failure) {
+        failure.call(scope);
+      }
+    };
+    script.src = url.replace('__cbname__', cbname);
+    window[cbname] = function (jsonData) {
+      success.call(scope, jsonData);
+      delete window[cbname];
+    };
+    document.head.appendChild(script);
+  },
+  doGET: function doGET(url, success, failure, scope, opt_requestHeaders) {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+      if (xmlhttp.readyState === 4) {
+        if (xmlhttp.status === 200) {
+          if (success) {
+            success.call(scope, xmlhttp);
+          }
+        } else if (failure) {
+          failure.call(scope, xmlhttp);
+        }
+      }
+    };
+    xmlhttp.open('GET', url, true);
+    if (opt_requestHeaders) {
+      for (var key in opt_requestHeaders) {
+        if (opt_requestHeaders.hasOwnProperty(key)) {
+          xmlhttp.setRequestHeader(key, opt_requestHeaders[key]);
+        }
+      }
+    }
+    xmlhttp.send();
+    return xmlhttp;
+  },
+  doPOST: function doPOST(url, data, success, failure, scope, contentType, put, opt_requestHeaders) {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open(put ? 'PUT' : 'POST', url, true);
+    xmlhttp.setRequestHeader('Content-Type', contentType ? contentType : 'text/xml');
+    xmlhttp.onreadystatechange = function () {
+      if (xmlhttp.readyState === 4) {
+        if (xmlhttp.status === 200 || xmlhttp.status === 201) {
+          success.call(scope, xmlhttp);
+        } else {
+          failure.call(scope, xmlhttp);
+        }
+      }
+    };
+    if (opt_requestHeaders) {
+      for (var key in opt_requestHeaders) {
+        if (opt_requestHeaders.hasOwnProperty(key)) {
+          xmlhttp.setRequestHeader(key, opt_requestHeaders[key]);
+        }
+      }
+    }
+    xmlhttp.send(data);
+    return xmlhttp;
+  }
+}; /*
+    * Copyright 2015-present Boundless Spatial Inc., http://boundlessgeo.com
+    * Licensed under the Apache License, Version 2.0 (the "License").
+    * You may not use this file except in compliance with the License.
+    * You may obtain a copy of the License at
+    * http://www.apache.org/licenses/LICENSE-2.0
+    * Unless required by applicable law or agreed to in writing, software
+    * distributed under the License is distributed on an "AS IS" BASIS,
+    * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    * See the License for the specific language governing permissions and limitations under the License.
+    */
+
+/***/ }),
+
+/***/ 23:
 /***/ (function(module, exports) {
 
 // Copyright Joyent, Inc. and other Node contributors.
@@ -491,144 +624,7 @@ function isUndefined(arg) {
 
 /***/ }),
 
-/***/ 27:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _openlayers = __webpack_require__(11);
-
-var _openlayers2 = _interopRequireDefault(_openlayers);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = {
-  getProxiedUrl: function getProxiedUrl(url, opt_proxy) {
-    if (opt_proxy) {
-      return opt_proxy + encodeURIComponent(url);
-    } else {
-      return url;
-    }
-  },
-  getResolutionForScale: function getResolutionForScale(scale, units) {
-    var dpi = 25.4 / 0.28;
-    var mpu = _openlayers2.default.proj.METERS_PER_UNIT[units];
-    var inchesPerMeter = 39.37;
-    return parseFloat(scale) / (mpu * inchesPerMeter * dpi);
-  },
-  getTimeInfo: function getTimeInfo(layer) {
-    if (layer.Dimension) {
-      for (var i = 0, ii = layer.Dimension.length; i < ii; ++i) {
-        var dimension = layer.Dimension[i];
-        if (dimension.name === 'time') {
-          return dimension.values;
-        }
-      }
-    }
-  },
-  rgbToHex: function rgbToHex(rgb) {
-    rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
-    return rgb && rgb.length === 4 ? '#' + ('0' + parseInt(rgb[1], 10).toString(16)).slice(-2) + ('0' + parseInt(rgb[2], 10).toString(16)).slice(-2) + ('0' + parseInt(rgb[3], 10).toString(16)).slice(-2) : '';
-  },
-  hexToRgb: function hexToRgb(hex) {
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result ? {
-      r: parseInt(result[1], 16),
-      g: parseInt(result[2], 16),
-      b: parseInt(result[3], 16)
-    } : null;
-  },
-  transformColor: function transformColor(color) {
-    var colorObj = color.rgb ? color.rgb : color;
-    return [colorObj.r, colorObj.g, colorObj.b, colorObj.a];
-  },
-  doJSONP: function doJSONP(url, success, failure, scope) {
-    function getRandomInt(min, max) {
-      min = Math.ceil(min);
-      max = Math.floor(max);
-      return Math.floor(Math.random() * (max - min)) + min;
-    }
-    var cbname = 'fn' + Date.now() + getRandomInt(1, 10000);
-    var script = document.createElement('script');
-    script.onerror = function () {
-      if (failure) {
-        failure.call(scope);
-      }
-    };
-    script.src = url.replace('__cbname__', cbname);
-    window[cbname] = function (jsonData) {
-      success.call(scope, jsonData);
-      delete window[cbname];
-    };
-    document.head.appendChild(script);
-  },
-  doGET: function doGET(url, success, failure, scope, opt_requestHeaders) {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function () {
-      if (xmlhttp.readyState === 4) {
-        if (xmlhttp.status === 200) {
-          if (success) {
-            success.call(scope, xmlhttp);
-          }
-        } else if (failure) {
-          failure.call(scope, xmlhttp);
-        }
-      }
-    };
-    xmlhttp.open('GET', url, true);
-    if (opt_requestHeaders) {
-      for (var key in opt_requestHeaders) {
-        if (opt_requestHeaders.hasOwnProperty(key)) {
-          xmlhttp.setRequestHeader(key, opt_requestHeaders[key]);
-        }
-      }
-    }
-    xmlhttp.send();
-    return xmlhttp;
-  },
-  doPOST: function doPOST(url, data, success, failure, scope, contentType, put, opt_requestHeaders) {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open(put ? 'PUT' : 'POST', url, true);
-    xmlhttp.setRequestHeader('Content-Type', contentType ? contentType : 'text/xml');
-    xmlhttp.onreadystatechange = function () {
-      if (xmlhttp.readyState === 4) {
-        if (xmlhttp.status === 200 || xmlhttp.status === 201) {
-          success.call(scope, xmlhttp);
-        } else {
-          failure.call(scope, xmlhttp);
-        }
-      }
-    };
-    if (opt_requestHeaders) {
-      for (var key in opt_requestHeaders) {
-        if (opt_requestHeaders.hasOwnProperty(key)) {
-          xmlhttp.setRequestHeader(key, opt_requestHeaders[key]);
-        }
-      }
-    }
-    xmlhttp.send(data);
-    return xmlhttp;
-  }
-}; /*
-    * Copyright 2015-present Boundless Spatial Inc., http://boundlessgeo.com
-    * Licensed under the Apache License, Version 2.0 (the "License").
-    * You may not use this file except in compliance with the License.
-    * You may obtain a copy of the License at
-    * http://www.apache.org/licenses/LICENSE-2.0
-    * Unless required by applicable law or agreed to in writing, software
-    * distributed under the License is distributed on an "AS IS" BASIS,
-    * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    * See the License for the specific language governing permissions and limitations under the License.
-    */
-
-/***/ }),
-
-/***/ 283:
+/***/ 292:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -638,15 +634,8 @@ exports.__esModule = true;
 
 var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
-__webpack_require__(596);
+__webpack_require__(604);
 
-<<<<<<< Updated upstream
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-=======
->>>>>>> Stashed changes
 var _Events = __webpack_require__(14);
 
 var _Events2 = _interopRequireDefault(_Events);
@@ -655,15 +644,11 @@ var _FieldSet2 = __webpack_require__(10);
 
 var _FieldSet3 = _interopRequireDefault(_FieldSet2);
 
-<<<<<<< Updated upstream
-var _WMSService = __webpack_require__(308);
-=======
 var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _WMSService = __webpack_require__(301);
->>>>>>> Stashed changes
+var _WMSService = __webpack_require__(76);
 
 var _WMSService2 = _interopRequireDefault(_WMSService);
 
@@ -747,21 +732,6 @@ var IdentifyWidget = function (_BaseWidget) {
         }))), this.resultItem(features[activeFeature])));
     };
 
-    IdentifyWidget.prototype.resultItem = function resultItem(f) {
-        var keys = f.getKeys();
-        var geom = f.getGeometryName();
-        return _jsx('div', {}, void 0, _jsx('h4', {
-            className: 'identify-result-layer-title'
-        }, void 0, f.get('_layerTitle')), _jsx('div', {
-            className: 'identify-result-ct'
-        }, void 0, _jsx('table', {
-            className: 'table'
-        }, f.getId(), _jsx('tbody', {}, void 0, keys.map(function (key) {
-            if (key == geom || key == "_layerTitle") return null;
-            return _jsx('tr', {}, void 0, _jsx('th', {}, void 0, key), _jsx('td', {}, void 0, f.get(key)));
-        })))));
-    };
-
     IdentifyWidget.prototype.componentDidMount = function componentDidMount() {
         if (this.state.config.mapWidget) {
             this.attachToMapWidget(this.state.config);
@@ -788,10 +758,8 @@ var IdentifyWidget = function (_BaseWidget) {
         this.setState({ ready: true });
         map.on('singleclick', function (e) {
             _this4.getLayers(map.getLayers().getArray()).forEach(function (layer) {
-                _this4.setState({
-                    busy: true, features: [],
-                    activeFeature: 0
-                });
+                _this4.setState({ busy: true, features: [],
+                    activeFeature: 0 });
                 _WMSService2.default.getFeatureInfo(layer, e.coordinate, map, 'application/json', function (result) {
                     _this4.state.features = _this4.state.features.concat(result.features);
                     result.features.forEach(function (f) {
@@ -878,1026 +846,7 @@ exports.default = IdentifyWidget;
 
 /***/ }),
 
-/***/ 306:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /*
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Copyright 2015-present Boundless Spatial Inc., http://boundlessgeo.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Licensed under the Apache License, Version 2.0 (the "License").
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * You may not use this file except in compliance with the License.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * You may obtain a copy of the License at
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * http://www.apache.org/licenses/LICENSE-2.0
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Unless required by applicable law or agreed to in writing, software
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * distributed under the License is distributed on an "AS IS" BASIS,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * See the License for the specific language governing permissions and limitations under the License.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
-
-var _jsonix = __webpack_require__(74);
-
-var _XLink_1_ = __webpack_require__(99);
-
-var _Filter_1_0_ = __webpack_require__(473);
-
-var _GML_2_1_ = __webpack_require__(475);
-
-var _SLD_1_0_0_GeoServer = __webpack_require__(478);
-
-var _util = __webpack_require__(27);
-
-var _util2 = _interopRequireDefault(_util);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var sldNamespace = 'http://www.opengis.net/sld';
-var ogcNamespace = 'http://www.opengis.net/ogc';
-
-var context = new _jsonix.Jsonix.Context([_XLink_1_.XLink_1_0, _Filter_1_0_.Filter_1_0_0, _GML_2_1_.GML_2_1_2, _SLD_1_0_0_GeoServer.SLD_1_0_0], {
-  namespacePrefixes: {
-    'http://www.w3.org/1999/xlink': 'xlink',
-    'http://www.opengis.net/sld': 'sld',
-    'http://www.opengis.net/ogc': 'ogc'
-  }
-});
-var marshaller = context.createMarshaller();
-var unmarshaller = context.createUnmarshaller();
-
-var graphicFormats = {
-  'image/jpeg': /\.jpe?g$/i,
-  'image/gif': /\.gif$/i,
-  'image/png': /\.png$/i
-};
-
-// make sure <= is on top of < etc.
-var comparisonOps = {
-  '!=': 'PropertyIsNotEqualTo',
-  '==': 'PropertyIsEqualTo',
-  '>=': 'PropertyIsGreaterThanOrEqualTo',
-  '<=': 'PropertyIsLessThanOrEqualTo',
-  '>': 'PropertyIsGreaterThan',
-  '<': 'PropertyIsLessThan'
-};
-
-var SLDService = function () {
-  function SLDService() {
-    _classCallCheck(this, SLDService);
-  }
-
-  _createClass(SLDService, [{
-    key: 'parse',
-    value: function parse(sld) {
-      var result = {};
-      var info = unmarshaller.unmarshalString(sld).value;
-      var layer = info.namedLayerOrUserLayer[0];
-      result.layerName = layer.name;
-      var namedStyleOrUserStyle = layer.namedStyleOrUserStyle[0];
-      result.styleName = namedStyleOrUserStyle.name;
-      result.styleTitle = namedStyleOrUserStyle.title;
-      result.featureTypeStyles = [];
-      for (var i = 0, ii = namedStyleOrUserStyle.featureTypeStyle.length; i < ii; ++i) {
-        var featureTypeStyle = namedStyleOrUserStyle.featureTypeStyle[i];
-        var fts = {
-          rules: [],
-          featureTypeStyleName: featureTypeStyle.name
-        };
-        for (var j = 0, jj = featureTypeStyle.rule.length; j < jj; ++j) {
-          fts.rules.push(this.parseRule(featureTypeStyle.rule[j]));
-        }
-        result.featureTypeStyles.push(fts);
-      }
-      return result;
-    }
-  }, {
-    key: 'parseRule',
-    value: function parseRule(ruleObj) {
-      var rule = {};
-      rule.name = ruleObj.name;
-      rule.title = ruleObj.title;
-      rule.minScaleDenominator = ruleObj.minScaleDenominator;
-      rule.maxScaleDenominator = ruleObj.maxScaleDenominator;
-      rule.symbolizers = [];
-      for (var i = 0, ii = ruleObj.symbolizer.length; i < ii; ++i) {
-        rule.symbolizers.push(this.parseSymbolizer(ruleObj.symbolizer[i]));
-      }
-      if (ruleObj.filter) {
-        rule.expression = this.filterToExpression(ruleObj.filter);
-      }
-      return rule;
-    }
-  }, {
-    key: 'parseComparisonOps',
-    value: function parseComparisonOps(op) {
-      var name, value, operator;
-      for (var key in comparisonOps) {
-        if (comparisonOps[key] === op.name.localPart) {
-          operator = key;
-          break;
-        }
-      }
-      for (var i = 0, ii = op.value.expression.length; i < ii; ++i) {
-        var expr = op.value.expression[i];
-        if (expr.name.localPart === 'PropertyName') {
-          name = expr.value.content[0];
-        }
-        if (expr.name.localPart === 'Literal') {
-          value = expr.value.content[0];
-        }
-      }
-      if (op.name.localPart === 'PropertyIsBetween') {
-        name = op.value.expression.value.content[0];
-        var lower = op.value.lowerBoundary.expression.value.content[0];
-        var upper = op.value.upperBoundary.expression.value.content[0];
-        return ['all', ['>=', name, lower], ['<=', name, upper]];
-      } else {
-        return [operator, name, value];
-      }
-    }
-  }, {
-    key: 'parseLogicOps',
-    value: function parseLogicOps(logicOps) {
-      var expressions = [];
-      if (logicOps.name.localPart === 'And') {
-        expressions.push('all');
-      } else if (logicOps.name.localPart === 'Or') {
-        expressions.push('any');
-      }
-      for (var i = 0, ii = logicOps.value.ops.length; i < ii; ++i) {
-        var op = logicOps.value.ops[i];
-        var subExpressions = this.parseComparisonOps(op);
-        if (subExpressions[0] === 'all') {
-          return subExpressions;
-        } else {
-          expressions.push(subExpressions);
-        }
-      }
-      return expressions;
-    }
-  }, {
-    key: 'filterToExpression',
-    value: function filterToExpression(filter) {
-      if (filter.comparisonOps) {
-        return this.parseComparisonOps(filter.comparisonOps);
-      } else if (filter.logicOps) {
-        return this.parseLogicOps(filter.logicOps);
-      }
-    }
-  }, {
-    key: 'parseSymbolizer',
-    value: function parseSymbolizer(symbolizerObj) {
-      if (symbolizerObj.name.localPart === 'PolygonSymbolizer') {
-        return this.parsePolygonSymbolizer(symbolizerObj.value);
-      } else if (symbolizerObj.name.localPart === 'LineSymbolizer') {
-        return this.parseLineSymbolizer(symbolizerObj.value);
-      } else if (symbolizerObj.name.localPart === 'PointSymbolizer') {
-        return this.parsePointSymbolizer(symbolizerObj.value);
-      } else if (symbolizerObj.name.localPart === 'TextSymbolizer') {
-        return this.parseTextSymbolizer(symbolizerObj.value);
-      }
-    }
-  }, {
-    key: 'parseTextSymbolizer',
-    value: function parseTextSymbolizer(textObj) {
-      var result = {};
-      var labelInfo = textObj.label.content[0].value;
-      if (labelInfo.TYPE_NAME === 'Filter_1_0_0.PropertyNameType') {
-        result.labelAttribute = labelInfo.content[0];
-      }
-      if (textObj.vendorOption) {
-        result.vendorOption = textObj.vendorOption;
-      }
-      if (textObj.labelPlacement) {
-        if (textObj.labelPlacement.pointPlacement) {
-          var anchorPoint = textObj.labelPlacement.pointPlacement.anchorPoint;
-          var displacement = textObj.labelPlacement.pointPlacement.displacement;
-          result.labelPlacement = {
-            type: 'POINT'
-          };
-          if (anchorPoint) {
-            result.labelPlacement.anchorPoint = [anchorPoint.anchorPointX.content[0], anchorPoint.anchorPointY.content[0]];
-          }
-          if (displacement) {
-            result.labelPlacement.displacement = [displacement.displacementX.content[0], displacement.displacementY.content[0]];
-          }
-          if (textObj.labelPlacement.pointPlacement.rotation !== undefined) {
-            result.labelPlacement.rotation = textObj.labelPlacement.pointPlacement.rotation.content[0];
-          }
-        } else if (textObj.labelPlacement.linePlacement) {
-          result.labelPlacement = {
-            type: 'LINE'
-          };
-        }
-      }
-      if (textObj.font && textObj.font.cssParameter) {
-        for (var i = 0, ii = textObj.font.cssParameter.length; i < ii; ++i) {
-          var param = textObj.font.cssParameter[i];
-          if (param.name === 'font-size') {
-            result.fontSize = param.content[0];
-          } else if (param.name === 'font-family') {
-            result.fontFamily = param.content[0];
-          } else if (param.name === 'font-style') {
-            result.fontStyle = param.content[0];
-          } else if (param.name === 'font-weight') {
-            result.fontWeight = param.content[0];
-          }
-        }
-      }
-      if (textObj.fill) {
-        result.fontColor = this.parseFill(textObj.fill).fillColor;
-      }
-      if (textObj.halo) {
-        result.halo = {
-          fill: this.parseFill(textObj.halo.fill).fillColor,
-          radius: textObj.halo.radius.content[0]
-        };
-      }
-      return result;
-    }
-  }, {
-    key: '_parseGraphic',
-    value: function _parseGraphic(graphic) {
-      var result = {};
-      if (graphic.opacity) {
-        result.opacity = parseFloat(graphic.opacity.content[0]);
-      }
-      if (graphic.rotation) {
-        result.rotation = graphic.rotation.content[0];
-      }
-      if (graphic.size) {
-        result.symbolSize = graphic.size.content[0];
-      }
-      var externalGraphicOrMark = graphic.externalGraphicOrMark[0];
-      if (externalGraphicOrMark.TYPE_NAME === 'SLD_1_0_0.ExternalGraphic') {
-        result.externalGraphic = externalGraphicOrMark.onlineResource.href;
-      } else {
-        if (externalGraphicOrMark.wellKnownName) {
-          result.symbolType = externalGraphicOrMark.wellKnownName.content[0];
-        }
-        var fill = externalGraphicOrMark.fill;
-        if (fill) {
-          result.fillColor = this.parseFill(fill).fillColor;
-        } else {
-          result.hasFill = false;
-        }
-        var stroke = externalGraphicOrMark.stroke;
-        if (stroke) {
-          Object.assign(result, this.parseStroke(stroke));
-        } else {
-          result.hasStroke = false;
-        }
-      }
-      return result;
-    }
-  }, {
-    key: 'parsePointSymbolizer',
-    value: function parsePointSymbolizer(pointObj) {
-      var result = this._parseGraphic(pointObj.graphic);
-      result.type = 'Point';
-      return result;
-    }
-  }, {
-    key: 'parseLineSymbolizer',
-    value: function parseLineSymbolizer(lineObj) {
-      var result = this.parseStroke(lineObj.stroke);
-      result.type = 'LineString';
-      return result;
-    }
-  }, {
-    key: 'parsePolygonSymbolizer',
-    value: function parsePolygonSymbolizer(polyObj) {
-      var result = {
-        type: 'Polygon'
-      };
-      if (polyObj.fill) {
-        var fill = this.parseFill(polyObj.fill);
-        if (fill.fillColor) {
-          result.fillColor = fill.fillColor;
-        } else if (fill.graphicFill) {
-          result.graphicFill = fill.graphicFill;
-        }
-      } else {
-        result.hasFill = false;
-      }
-      if (polyObj.stroke) {
-        Object.assign(result, this.parseStroke(polyObj.stroke));
-      } else {
-        result.hasStroke = false;
-      }
-      return result;
-    }
-  }, {
-    key: 'parseFill',
-    value: function parseFill(fillObj) {
-      if (fillObj.graphicFill) {
-        return {
-          graphicFill: this._parseGraphic(fillObj.graphicFill.graphic)
-        };
-      } else {
-        var fillColor = {};
-        for (var i = 0, ii = fillObj.cssParameter.length; i < ii; ++i) {
-          if (fillObj.cssParameter[i].name === 'fill') {
-            fillColor.hex = fillObj.cssParameter[i].content[0];
-            fillColor.rgb = _util2.default.hexToRgb(fillColor.hex);
-          } else if (fillObj.cssParameter[i].name === 'fill-opacity') {
-            fillColor.rgb = Object.assign(fillColor.rgb, { a: parseFloat(fillObj.cssParameter[i].content[0]) });
-          }
-        }
-        return {
-          fillColor: fillColor
-        };
-      }
-    }
-  }, {
-    key: 'parseStroke',
-    value: function parseStroke(strokeObj) {
-      var stroke = {};
-      if (strokeObj.cssParameter) {
-        for (var i = 0, ii = strokeObj.cssParameter.length; i < ii; ++i) {
-          if (strokeObj.cssParameter[i].name === 'stroke') {
-            stroke.strokeColor = {
-              hex: strokeObj.cssParameter[i].content[0],
-              rgb: _util2.default.hexToRgb(strokeObj.cssParameter[i].content[0])
-            };
-          } else if (strokeObj.cssParameter[i].name === 'stroke-opacity') {
-            stroke.strokeColor.rgb = Object.assign(stroke.strokeColor.rgb, { a: parseFloat(strokeObj.cssParameter[i].content[0]) });
-          } else if (strokeObj.cssParameter[i].name === 'stroke-width') {
-            stroke.strokeWidth = parseFloat(strokeObj.cssParameter[i].content[0]);
-          } else if (strokeObj.cssParameter[i].name === 'stroke-dasharray') {
-            stroke.strokeDashArray = strokeObj.cssParameter[i].content[0];
-          } else if (strokeObj.cssParameter[i].name === 'stroke-dashoffset') {
-            stroke.strokeDashOffset = strokeObj.cssParameter[i].content[0];
-          } else if (strokeObj.cssParameter[i].name === 'stroke-linecap') {
-            stroke.strokeLineCap = strokeObj.cssParameter[i].content[0];
-          }
-        }
-      }
-      if (strokeObj.graphicStroke) {
-        stroke.graphic = this._parseGraphic(strokeObj.graphicStroke.graphic);
-      }
-      return stroke;
-    }
-  }, {
-    key: 'createFill',
-    value: function createFill(styleState) {
-      if (styleState.graphicFill) {
-        return {
-          graphicFill: {
-            graphic: this._createGraphic(styleState.graphicFill)
-          }
-        };
-      } else {
-        var cssParameter = [{
-          name: 'fill',
-          content: [styleState.fillColor.hex]
-        }];
-        if (styleState.fillColor.rgb.a !== undefined) {
-          cssParameter.push({
-            name: 'fill-opacity',
-            content: [String(styleState.fillColor.rgb.a)]
-          });
-        }
-        return {
-          cssParameter: cssParameter
-        };
-      }
-    }
-  }, {
-    key: 'createStroke',
-    value: function createStroke(styleState) {
-      var graphic;
-      if (styleState.graphic) {
-        graphic = this._createGraphic(styleState.graphic);
-      }
-      var cssParameters = [];
-      if (styleState.strokeColor) {
-        cssParameters.push({
-          name: 'stroke',
-          content: [styleState.strokeColor.hex]
-        });
-        if (styleState.strokeColor.rgb.a !== undefined) {
-          cssParameters.push({
-            name: 'stroke-opacity',
-            content: [String(styleState.strokeColor.rgb.a)]
-          });
-        }
-      }
-      if (styleState.strokeWidth !== undefined) {
-        cssParameters.push({
-          name: 'stroke-width',
-          content: [String(styleState.strokeWidth)]
-        });
-      }
-      if (styleState.strokeDashArray !== undefined) {
-        cssParameters.push({
-          name: 'stroke-dasharray',
-          content: [styleState.strokeDashArray]
-        });
-      }
-      if (styleState.strokeDashOffset !== undefined) {
-        cssParameters.push({
-          name: 'stroke-dashoffset',
-          content: [styleState.strokeDashOffset]
-        });
-      }
-      if (styleState.strokeLineCap !== undefined) {
-        cssParameters.push({
-          name: 'stroke-linecap',
-          content: [styleState.strokeLineCap]
-        });
-      }
-      var result;
-      if (cssParameters.length > 0 || graphic) {
-        result = {};
-        if (cssParameters.length > 0) {
-          result.cssParameter = cssParameters;
-        }
-        if (graphic) {
-          result.graphicStroke = {
-            graphic: graphic
-          };
-        }
-      }
-      return result;
-    }
-  }, {
-    key: 'createPolygonSymbolizer',
-    value: function createPolygonSymbolizer(styleState) {
-      var result = {
-        name: {
-          localPart: 'PolygonSymbolizer',
-          namespaceURI: sldNamespace
-        },
-        value: {
-          fill: (styleState.fillColor || styleState.graphicFill) && styleState.hasFill !== false ? this.createFill(styleState) : undefined,
-          stroke: styleState.hasStroke !== false ? this.createStroke(styleState) : undefined
-        }
-      };
-      if (result.value.fill || result.value.stroke) {
-        return result;
-      } else {
-        return undefined;
-      }
-    }
-  }, {
-    key: 'createLineSymbolizer',
-    value: function createLineSymbolizer(styleState) {
-      var stroke = this.createStroke(styleState);
-      if (stroke) {
-        return {
-          name: {
-            localPart: 'LineSymbolizer',
-            namespaceURI: sldNamespace
-          },
-          value: {
-            stroke: stroke
-          }
-        };
-      } else {
-        return undefined;
-      }
-    }
-  }, {
-    key: '_getGraphicFormat',
-    value: function _getGraphicFormat(href) {
-      var format;
-      for (var key in graphicFormats) {
-        if (graphicFormats[key].test(href)) {
-          format = key;
-          break;
-        }
-      }
-      return format || 'image/png';
-    }
-  }, {
-    key: '_createGraphic',
-    value: function _createGraphic(styleState) {
-      var graphicOrMark;
-      if (styleState.externalGraphic) {
-        graphicOrMark = [{
-          TYPE_NAME: 'SLD_1_0_0.ExternalGraphic',
-          onlineResource: { href: styleState.externalGraphic },
-          format: this._getGraphicFormat(styleState.externalGraphic)
-        }];
-      } else if (styleState.symbolType) {
-        graphicOrMark = [{
-          TYPE_NAME: 'SLD_1_0_0.Mark',
-          fill: styleState.hasFill !== false && styleState.fillColor ? this.createFill(styleState) : undefined,
-          stroke: styleState.hasStroke !== false ? this.createStroke(styleState) : undefined,
-          wellKnownName: [styleState.symbolType]
-        }];
-      } else {
-        return undefined;
-      }
-      var result = {
-        externalGraphicOrMark: graphicOrMark,
-        size: {
-          content: [styleState.symbolSize]
-        }
-      };
-      if (styleState.rotation !== undefined) {
-        result.rotation = [styleState.rotation];
-      }
-      if (styleState.externalGraphic && styleState.opacity !== undefined) {
-        result.opacity = {
-          content: ['' + styleState.opacity]
-        };
-      }
-      return result;
-    }
-  }, {
-    key: 'createPointSymbolizer',
-    value: function createPointSymbolizer(styleState) {
-      var graphic = this._createGraphic(styleState);
-      if (graphic) {
-        return {
-          name: {
-            localPart: 'PointSymbolizer',
-            namespaceURI: sldNamespace
-          },
-          value: {
-            graphic: graphic
-          }
-        };
-      } else {
-        return undefined;
-      }
-    }
-  }, {
-    key: 'createTextSymbolizer',
-    value: function createTextSymbolizer(styleState) {
-      var cssParameter = [];
-      if (styleState.fontFamily) {
-        cssParameter.push({
-          name: 'font-family',
-          content: [styleState.fontFamily]
-        });
-      }
-      if (styleState.fontSize) {
-        cssParameter.push({
-          name: 'font-size',
-          content: [String(styleState.fontSize)]
-        });
-      }
-      if (styleState.fontStyle) {
-        cssParameter.push({
-          name: 'font-style',
-          content: [styleState.fontStyle]
-        });
-      }
-      if (styleState.fontWeight) {
-        cssParameter.push({
-          name: 'font-weight',
-          content: [styleState.fontWeight]
-        });
-      }
-      var result = {
-        name: {
-          localPart: 'TextSymbolizer',
-          namespaceURI: sldNamespace
-        },
-        value: {
-          fill: styleState.fontColor ? {
-            cssParameter: [{
-              name: 'fill',
-              content: [styleState.fontColor.hex]
-            }]
-          } : undefined,
-          font: cssParameter.length > 0 ? {
-            cssParameter: cssParameter
-          } : undefined,
-          label: {
-            content: [{
-              name: {
-                localPart: 'PropertyName',
-                namespaceURI: ogcNamespace
-              },
-              value: {
-                content: [styleState.labelAttribute]
-              }
-            }]
-          },
-          vendorOption: styleState.vendorOption
-        }
-      };
-      if (styleState.halo) {
-        result.value.halo = {
-          fill: {
-            cssParameter: [{
-              name: 'fill',
-              content: [styleState.halo.fill.hex]
-            }]
-          },
-          radius: {
-            content: [styleState.halo.radius]
-          }
-        };
-      }
-      if (styleState.labelPlacement) {
-        if (styleState.labelPlacement.type === 'POINT') {
-          result.value.labelPlacement = {
-            pointPlacement: {
-              anchorPoint: {
-                anchorPointX: {
-                  content: [String(styleState.labelPlacement.anchorPoint[0])]
-                },
-                anchorPointY: {
-                  content: [String(styleState.labelPlacement.anchorPoint[1])]
-                }
-              }
-            }
-          };
-          if (styleState.labelPlacement.displacement) {
-            result.value.labelPlacement.pointPlacement.displacement = {
-              displacementX: {
-                content: [String(styleState.labelPlacement.displacement[0])]
-              },
-              displacementY: {
-                content: [String(styleState.labelPlacement.displacement[1])]
-              }
-            };
-          }
-          if (styleState.labelPlacement.rotation !== undefined) {
-            result.value.labelPlacement.pointPlacement.rotation = {
-              content: [String(styleState.labelPlacement.rotation)]
-            };
-          }
-        } else if (styleState.labelPlacement.type === 'LINE') {
-          result.value.labelPlacement = {
-            linePlacement: {}
-          };
-        }
-      }
-      return result;
-    }
-  }, {
-    key: 'expressionToFilter',
-    value: function expressionToFilter(expression) {
-      if (expression[0] === 'all' || expression[0] === 'any') {
-        var result = {
-          logicOps: {
-            name: {
-              namespaceURI: ogcNamespace,
-              localPart: expression[0] === 'all' ? 'And' : 'Or'
-            },
-            value: {
-              ops: []
-            }
-          }
-        };
-        for (var i = 1, ii = expression.length; i < ii; ++i) {
-          result.logicOps.value.ops.push(this.expressionToComparisonOp(expression[i]).comparisonOps);
-        }
-        return result;
-      } else {
-        return this.expressionToComparisonOp(expression);
-      }
-    }
-  }, {
-    key: 'expressionToComparisonOp',
-    value: function expressionToComparisonOp(expression) {
-      var operator, property, value;
-      operator = comparisonOps[expression[0]];
-      property = expression[1];
-      value = expression[2];
-      if (operator) {
-        var result = {
-          comparisonOps: {
-            name: {
-              namespaceURI: ogcNamespace,
-              localPart: operator
-            }
-          }
-        };
-        // TODO add back PropertyIsBetween
-        result.comparisonOps.value = {
-          expression: [{
-            name: {
-              namespaceURI: ogcNamespace,
-              localPart: 'PropertyName'
-            },
-            value: {
-              content: [property]
-            }
-          }, {
-            name: {
-              namespaceURI: ogcNamespace,
-              localPart: 'Literal'
-            },
-            value: {
-              content: [String(value)]
-            }
-          }]
-        };
-        return result;
-      }
-    }
-  }, {
-    key: 'createRule',
-    value: function createRule(name, title, geometryType, styleState) {
-      var filter;
-      if (styleState.expression) {
-        filter = this.expressionToFilter(styleState.expression);
-      }
-      var symbolizer = [],
-          i,
-          ii,
-          sym;
-      var functionByGeomType = {
-        'Point': this.createPointSymbolizer,
-        'LineString': this.createLineSymbolizer,
-        'Polygon': this.createPolygonSymbolizer
-      };
-      if (geometryType !== undefined) {
-        for (i = 0, ii = styleState.symbolizers.length; i < ii; ++i) {
-          sym = functionByGeomType[geometryType].call(this, styleState.symbolizers[i]);
-          if (sym) {
-            symbolizer.push(sym);
-          }
-        }
-      } else {
-        for (i = 0, ii = styleState.symbolizers.length; i < ii; ++i) {
-          var symbol = styleState.symbolizers[i];
-          if (symbol.type) {
-            sym = functionByGeomType[symbol.type].call(this, styleState.symbolizers[i]);
-            if (sym) {
-              symbolizer.push(sym);
-            }
-          }
-        }
-      }
-      for (i = 0, ii = styleState.symbolizers.length; i < ii; ++i) {
-        if (styleState.symbolizers[i].labelAttribute) {
-          symbolizer.push(this.createTextSymbolizer(styleState.symbolizers[i]));
-        }
-      }
-      return {
-        name: name,
-        title: title,
-        symbolizer: symbolizer,
-        minScaleDenominator: styleState.minScaleDenominator,
-        maxScaleDenominator: styleState.maxScaleDenominator,
-        filter: filter
-      };
-    }
-  }, {
-    key: 'createSLD',
-    value: function createSLD(layer, geometryType, featureTypeStyles) {
-      var layerName = layer.get('name');
-      var styleInfo = layer.get('styleInfo');
-      var result = {
-        name: {
-          namespaceURI: sldNamespace,
-          localPart: 'StyledLayerDescriptor'
-        }
-      };
-      result.value = {
-        version: '1.0.0',
-        namedLayerOrUserLayer: [{
-          TYPE_NAME: 'SLD_1_0_0.NamedLayer',
-          name: layerName,
-          namedStyleOrUserStyle: [{
-            TYPE_NAME: 'SLD_1_0_0.UserStyle',
-            name: styleInfo ? styleInfo.styleName : undefined,
-            title: styleInfo ? styleInfo.styleTitle : undefined,
-            featureTypeStyle: []
-          }]
-        }]
-      };
-      for (var i = 0, ii = featureTypeStyles.length; i < ii; ++i) {
-        var ruleContainer = [];
-        result.value.namedLayerOrUserLayer[0].namedStyleOrUserStyle[0].featureTypeStyle.push({
-          name: featureTypeStyles[i].featureTypeStyleName,
-          rule: ruleContainer
-        });
-        for (var j = 0, jj = featureTypeStyles[i].rules.length; j < jj; ++j) {
-          var rule = featureTypeStyles[i].rules[j].name;
-          var style = featureTypeStyles[i].rules[j];
-          ruleContainer.push(this.createRule(rule, style.title, geometryType, style));
-        }
-      }
-      return marshaller.marshalString(result);
-    }
-  }]);
-
-  return SLDService;
-}();
-
-exports.default = new SLDService();
-
-/***/ }),
-
-/***/ 308:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /*
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Copyright 2015-present Boundless Spatial Inc., http://boundlessgeo.com
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Licensed under the Apache License, Version 2.0 (the "License").
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * You may not use this file except in compliance with the License.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * You may obtain a copy of the License at
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * http://www.apache.org/licenses/LICENSE-2.0
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Unless required by applicable law or agreed to in writing, software
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * distributed under the License is distributed on an "AS IS" BASIS,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * See the License for the specific language governing permissions and limitations under the License.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
-
-var _util = __webpack_require__(27);
-
-var _util2 = _interopRequireDefault(_util);
-
-var _urlParse = __webpack_require__(51);
-
-var _urlParse2 = _interopRequireDefault(_urlParse);
-
-var _openlayers = __webpack_require__(11);
-
-var _openlayers2 = _interopRequireDefault(_openlayers);
-
-var _SLDService = __webpack_require__(306);
-
-var _SLDService2 = _interopRequireDefault(_SLDService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var wmsCapsFormat = new _openlayers2.default.format.WMSCapabilities();
-var wmsGetFeatureInfoFormats = {
-  'application/json': new _openlayers2.default.format.GeoJSON(),
-  'application/vnd.ogc.gml': new _openlayers2.default.format.WMSGetFeatureInfo()
-};
-
-var WMSService = function () {
-  function WMSService() {
-    _classCallCheck(this, WMSService);
-  }
-
-  _createClass(WMSService, [{
-    key: 'getCapabilitiesUrl',
-    value: function getCapabilitiesUrl(url, opt_proxy) {
-      var urlObj = new _urlParse2.default(url, true);
-      urlObj.set('query', Object.assign(urlObj.query, {
-        service: 'WMS',
-        request: 'GetCapabilities',
-        version: '1.3.0'
-      }));
-      return _util2.default.getProxiedUrl(urlObj.toString(), opt_proxy);
-    }
-  }, {
-    key: '_getGetMapUrl',
-    value: function _getGetMapUrl(info) {
-      var dcp = info.Capability.Request.GetMap.DCPType;
-      for (var i = 0, ii = dcp.length; i < ii; ++i) {
-        if (dcp[i].HTTP && dcp[i].HTTP.Get) {
-          return dcp[i].HTTP.Get.OnlineResource;
-        }
-      }
-    }
-  }, {
-    key: 'getCapabilities',
-    value: function getCapabilities(url, onSuccess, onFailure, opt_proxy, opt_requestHeaders) {
-      return _util2.default.doGET(this.getCapabilitiesUrl(url, opt_proxy), function (xmlhttp) {
-        var info = wmsCapsFormat.read(xmlhttp.responseText);
-        onSuccess.call(this, info.Capability.Layer, this._getGetMapUrl(info));
-      }, function (xmlhttp) {
-        onFailure.call(this, xmlhttp);
-      }, this, opt_requestHeaders);
-    }
-  }, {
-    key: 'createLayerFromGetCaps',
-    value: function createLayerFromGetCaps(url, layerName, projection, callback, opt_proxy) {
-      this.getCapabilities(url, function (layerInfo, getMapUrl) {
-        for (var i = 0, ii = layerInfo.Layer.length; i < ii; ++i) {
-          if (layerInfo.Layer[i].Name === layerName) {
-            return callback.call(this, this.createLayer(layerInfo.Layer[i], getMapUrl || url, { title: layerInfo.Layer[i].Title }, projection, opt_proxy));
-          }
-        }
-      }, function () {}, opt_proxy);
-    }
-  }, {
-    key: 'createLayer',
-    value: function createLayer(layer, url, titleObj, projection, opt_proxy) {
-      var getLegendUrl = function getLegendUrl(layer) {
-        if (layer.Style && layer.Style.length === 1) {
-          if (layer.Style[0].LegendURL && layer.Style[0].LegendURL.length >= 1) {
-            return layer.Style[0].LegendURL[0].OnlineResource;
-          }
-        }
-      };
-      var units = projection.getUnits();
-      var source = new _openlayers2.default.source.TileWMS({
-        url: url,
-        wrapX: layer.Layer ? true : false,
-        crossOrigin: 'anonymous',
-        params: {
-          LAYERS: layer.Name,
-          TILED: true
-        }
-      });
-      if (opt_proxy) {
-        source.once('tileloaderror', function () {
-          source.setTileLoadFunction(function () {
-            var tileLoadFn = source.getTileLoadFunction();
-            return function (tile, src) {
-              tileLoadFn(tile, _util2.default.getProxiedUrl(src, opt_proxy));
-            };
-          }());
-        });
-      }
-      return new _openlayers2.default.layer.Tile({
-        title: titleObj.title,
-        emptyTitle: titleObj.empty,
-        id: layer.Name,
-        name: layer.Name,
-        legendUrl: getLegendUrl(layer),
-        minResolution: layer.MinScaleDenominator > 0 ? _util2.default.getResolutionForScale(layer.MinScaleDenominator, units) : undefined,
-        maxResolution: layer.MaxScaleDenominator > 0 ? _util2.default.getResolutionForScale(layer.MaxScaleDenominator, units) : undefined,
-        isRemovable: true,
-        isSelectable: true,
-        isWFST: true,
-        timeInfo: _util2.default.getTimeInfo(layer),
-        type: layer.Layer ? 'base' : undefined,
-        EX_GeographicBoundingBox: layer.EX_GeographicBoundingBox,
-        popupInfo: '#AllAttributes',
-        source: source
-      });
-    }
-  }, {
-    key: 'getStylesUrl',
-    value: function getStylesUrl(url, layer, opt_proxy) {
-      var urlObj = new _urlParse2.default(url);
-      urlObj.set('query', {
-        service: 'WMS',
-        request: 'GetStyles',
-        layers: layer.get('name'),
-        version: '1.1.1'
-      });
-      return _util2.default.getProxiedUrl(urlObj.toString(), opt_proxy);
-    }
-  }, {
-    key: 'getStyles',
-    value: function getStyles(url, layer, onSuccess, onFailure, opt_proxy, opt_requestHeaders) {
-      return _util2.default.doGET(this.getStylesUrl(url, layer, opt_proxy), function (xmlhttp) {
-        var info = _SLDService2.default.parse(xmlhttp.responseText);
-        onSuccess.call(this, info);
-      }, function (xmlhttp) {
-        onFailure.call(this, xmlhttp);
-      }, this, opt_requestHeaders);
-    }
-  }, {
-    key: 'getFeatureInfoUrl',
-    value: function getFeatureInfoUrl(layer, coordinate, view, infoFormat, opt_proxy) {
-      var resolution = view.getResolution(),
-          projection = view.getProjection();
-      var url = layer.getSource().getGetFeatureInfoUrl(coordinate, resolution, projection, {
-        'INFO_FORMAT': infoFormat
-      });
-      return _util2.default.getProxiedUrl(url, opt_proxy);
-    }
-  }, {
-    key: 'getFeatureInfo',
-    value: function getFeatureInfo(layer, coordinate, map, infoFormat, onSuccess, onFailure, opt_proxy, opt_requestHeaders) {
-      var view = map.getView();
-      _util2.default.doGET(this.getFeatureInfoUrl(layer, coordinate, view, infoFormat, opt_proxy), function (response) {
-        var result = {};
-        if (infoFormat === 'text/plain' || infoFormat === 'text/html') {
-          if (response.responseText.trim() !== 'no features were found') {
-            result.text = response.responseText;
-          } else {
-            result = false;
-          }
-        } else {
-          result.features = wmsGetFeatureInfoFormats[infoFormat].readFeatures(response.responseText);
-        }
-        result.layer = layer;
-        onSuccess.call(this, result);
-      }, onFailure, this, opt_requestHeaders);
-    }
-  }]);
-
-  return WMSService;
-}();
-
-exports.default = new WMSService();
-
-/***/ }),
-
-/***/ 32:
+/***/ 33:
 /***/ (function(module, exports) {
 
 /*
@@ -1954,10 +903,10 @@ module.exports = function() {
 
 /***/ }),
 
-/***/ 378:
+/***/ 379:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(32)();
+exports = module.exports = __webpack_require__(33)();
 // imports
 
 
@@ -1969,7 +918,7 @@ exports.push([module.i, ".identify-no-results{\n  padding: 10px;\n}\n.identify-n
 
 /***/ }),
 
-/***/ 40:
+/***/ 38:
 /***/ (function(module, exports) {
 
 /*
@@ -2222,2423 +1171,14 @@ function updateLink(linkElement, obj) {
 
 /***/ }),
 
-/***/ 45:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var has = Object.prototype.hasOwnProperty;
-
-/**
- * Decode a URI encoded string.
- *
- * @param {String} input The URI encoded string.
- * @returns {String} The decoded string.
- * @api private
- */
-function decode(input) {
-  return decodeURIComponent(input.replace(/\+/g, ' '));
-}
-
-/**
- * Simple query string parser.
- *
- * @param {String} query The query string that needs to be parsed.
- * @returns {Object}
- * @api public
- */
-function querystring(query) {
-  var parser = /([^=?&]+)=?([^&]*)/g
-    , result = {}
-    , part;
-
-  //
-  // Little nifty parsing hack, leverage the fact that RegExp.exec increments
-  // the lastIndex property so we can continue executing this loop until we've
-  // parsed all results.
-  //
-  for (;
-    part = parser.exec(query);
-    result[decode(part[1])] = decode(part[2])
-  );
-
-  return result;
-}
-
-/**
- * Transform a query string to an object.
- *
- * @param {Object} obj Object that should be transformed.
- * @param {String} prefix Optional prefix.
- * @returns {String}
- * @api public
- */
-function querystringify(obj, prefix) {
-  prefix = prefix || '';
-
-  var pairs = [];
-
-  //
-  // Optionally prefix with a '?' if needed
-  //
-  if ('string' !== typeof prefix) prefix = '?';
-
-  for (var key in obj) {
-    if (has.call(obj, key)) {
-      pairs.push(encodeURIComponent(key) +'='+ encodeURIComponent(obj[key]));
-    }
-  }
-
-  return pairs.length ? prefix + pairs.join('&') : '';
-}
-
-//
-// Expose the module.
-//
-exports.stringify = querystringify;
-exports.parse = querystring;
-
-
-/***/ }),
-
-/***/ 473:
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var Filter_1_0_0_Module_Factory = function () {
-  var Filter_1_0_0 = {
-    n: 'Filter_1_0_0',
-    dens: 'http:\/\/www.opengis.net\/ogc',
-    deps: ['GML_2_1_2'],
-    tis: [{
-        ln: 'PropertyNameType',
-        bti: '.ExpressionType',
-        ps: [{
-            n: 'content',
-            col: true,
-            dom: false,
-            t: 'ae'
-          }]
-      }, {
-        ln: 'DistanceType',
-        ps: [{
-            n: 'content',
-            t: 'v'
-          }, {
-            n: 'units',
-            rq: true,
-            an: {
-              lp: 'units'
-            },
-            t: 'a'
-          }]
-      }, {
-        ln: 'LiteralType',
-        bti: '.ExpressionType',
-        ps: [{
-            n: 'content',
-            col: true,
-            dom: false,
-            t: 'ae'
-          }]
-      }, {
-        ln: 'ExpressionType'
-      }, {
-        ln: 'LowerBoundaryType',
-        ps: [{
-            n: 'expression',
-            rq: true,
-            mx: false,
-            dom: false,
-            ti: '.ExpressionType',
-            t: 'er'
-          }]
-      }, {
-        ln: 'SortByType',
-        ps: [{
-            n: 'sortProperty',
-            rq: true,
-            col: true,
-            en: 'SortProperty',
-            ti: '.SortPropertyType'
-          }]
-      }, {
-        ln: 'PropertyIsNullType',
-        bti: '.ComparisonOpsType',
-        ps: [{
-            n: 'propertyName',
-            rq: true,
-            en: 'PropertyName',
-            ti: '.PropertyNameType'
-          }, {
-            n: 'literal',
-            rq: true,
-            en: 'Literal',
-            ti: '.LiteralType'
-          }]
-      }, {
-        ln: 'FilterType',
-        ps: [{
-            n: 'spatialOps',
-            rq: true,
-            mx: false,
-            dom: false,
-            ti: '.SpatialOpsType',
-            t: 'er'
-          }, {
-            n: 'comparisonOps',
-            rq: true,
-            mx: false,
-            dom: false,
-            ti: '.ComparisonOpsType',
-            t: 'er'
-          }, {
-            n: 'logicOps',
-            rq: true,
-            mx: false,
-            dom: false,
-            ti: '.LogicOpsType',
-            t: 'er'
-          }, {
-            n: 'featureId',
-            rq: true,
-            col: true,
-            en: 'FeatureId',
-            ti: '.FeatureIdType'
-          }]
-      }, {
-        ln: 'UpperBoundaryType',
-        ps: [{
-            n: 'expression',
-            rq: true,
-            mx: false,
-            dom: false,
-            ti: '.ExpressionType',
-            t: 'er'
-          }]
-      }, {
-        ln: 'FunctionType',
-        bti: '.ExpressionType',
-        ps: [{
-            n: 'expression',
-            mno: 0,
-            col: true,
-            mx: false,
-            dom: false,
-            ti: '.ExpressionType',
-            t: 'er'
-          }, {
-            n: 'name',
-            rq: true,
-            an: {
-              lp: 'name'
-            },
-            t: 'a'
-          }]
-      }, {
-        ln: 'PropertyIsBetweenType',
-        bti: '.ComparisonOpsType',
-        ps: [{
-            n: 'expression',
-            rq: true,
-            mx: false,
-            dom: false,
-            ti: '.ExpressionType',
-            t: 'er'
-          }, {
-            n: 'lowerBoundary',
-            rq: true,
-            en: 'LowerBoundary',
-            ti: '.LowerBoundaryType'
-          }, {
-            n: 'upperBoundary',
-            rq: true,
-            en: 'UpperBoundary',
-            ti: '.UpperBoundaryType'
-          }]
-      }, {
-        ln: 'SortPropertyType',
-        ps: [{
-            n: 'propertyName',
-            rq: true,
-            en: 'PropertyName',
-            ti: '.PropertyNameType'
-          }, {
-            n: 'sortOrder',
-            en: 'SortOrder'
-          }]
-      }, {
-        ln: 'BinaryLogicOpType',
-        bti: '.LogicOpsType',
-        ps: [{
-            n: 'ops',
-            rq: true,
-            mno: 2,
-            col: true,
-            mx: false,
-            dom: false,
-            etis: [{
-                en: 'spatialOps',
-                ti: '.SpatialOpsType'
-              }, {
-                en: 'comparisonOps',
-                ti: '.ComparisonOpsType'
-              }, {
-                en: 'logicOps',
-                ti: '.LogicOpsType'
-              }],
-            t: 'ers'
-          }]
-      }, {
-        ln: 'FeatureIdType',
-        ps: [{
-            n: 'fid',
-            rq: true,
-            an: {
-              lp: 'fid'
-            },
-            t: 'a'
-          }]
-      }, {
-        ln: 'ComparisonOpsType'
-      }, {
-        ln: 'LogicOpsType'
-      }, {
-        ln: 'BinarySpatialOpType',
-        bti: '.SpatialOpsType',
-        ps: [{
-            n: 'propertyName',
-            rq: true,
-            en: 'PropertyName',
-            ti: '.PropertyNameType'
-          }, {
-            n: 'geometry',
-            rq: true,
-            mx: false,
-            dom: false,
-            en: {
-              lp: '_Geometry',
-              ns: 'http:\/\/www.opengis.net\/gml'
-            },
-            ti: 'GML_2_1_2.AbstractGeometryType',
-            t: 'er'
-          }, {
-            n: 'box',
-            rq: true,
-            en: {
-              lp: 'Box',
-              ns: 'http:\/\/www.opengis.net\/gml'
-            },
-            ti: 'GML_2_1_2.BoxType'
-          }]
-      }, {
-        ln: 'PropertyIsLikeType',
-        bti: '.ComparisonOpsType',
-        ps: [{
-            n: 'propertyName',
-            rq: true,
-            en: 'PropertyName',
-            ti: '.PropertyNameType'
-          }, {
-            n: 'literal',
-            rq: true,
-            en: 'Literal',
-            ti: '.LiteralType'
-          }, {
-            n: 'wildCard',
-            rq: true,
-            an: {
-              lp: 'wildCard'
-            },
-            t: 'a'
-          }, {
-            n: 'singleChar',
-            rq: true,
-            an: {
-              lp: 'singleChar'
-            },
-            t: 'a'
-          }, {
-            n: 'escape',
-            rq: true,
-            an: {
-              lp: 'escape'
-            },
-            t: 'a'
-          }]
-      }, {
-        ln: 'BinaryOperatorType',
-        bti: '.ExpressionType',
-        ps: [{
-            n: 'expression',
-            rq: true,
-            mno: 2,
-            mxo: 2,
-            col: true,
-            mx: false,
-            dom: false,
-            ti: '.ExpressionType',
-            t: 'er'
-          }]
-      }, {
-        ln: 'DistanceBufferType',
-        bti: '.SpatialOpsType',
-        ps: [{
-            n: 'propertyName',
-            rq: true,
-            en: 'PropertyName',
-            ti: '.PropertyNameType'
-          }, {
-            n: 'geometry',
-            rq: true,
-            mx: false,
-            dom: false,
-            en: {
-              lp: '_Geometry',
-              ns: 'http:\/\/www.opengis.net\/gml'
-            },
-            ti: 'GML_2_1_2.AbstractGeometryType',
-            t: 'er'
-          }, {
-            n: 'distance',
-            rq: true,
-            en: 'Distance',
-            ti: '.DistanceType'
-          }]
-      }, {
-        ln: 'SpatialOpsType'
-      }, {
-        ln: 'BBOXType',
-        bti: '.SpatialOpsType',
-        ps: [{
-            n: 'propertyName',
-            rq: true,
-            en: 'PropertyName',
-            ti: '.PropertyNameType'
-          }, {
-            n: 'box',
-            rq: true,
-            en: {
-              lp: 'Box',
-              ns: 'http:\/\/www.opengis.net\/gml'
-            },
-            ti: 'GML_2_1_2.BoxType'
-          }]
-      }, {
-        ln: 'UnaryLogicOpType',
-        bti: '.LogicOpsType',
-        ps: [{
-            n: 'comparisonOps',
-            rq: true,
-            mx: false,
-            dom: false,
-            ti: '.ComparisonOpsType',
-            t: 'er'
-          }, {
-            n: 'spatialOps',
-            rq: true,
-            mx: false,
-            dom: false,
-            ti: '.SpatialOpsType',
-            t: 'er'
-          }, {
-            n: 'logicOps',
-            rq: true,
-            mx: false,
-            dom: false,
-            ti: '.LogicOpsType',
-            t: 'er'
-          }]
-      }, {
-        ln: 'BinaryComparisonOpType',
-        bti: '.ComparisonOpsType',
-        ps: [{
-            n: 'expression',
-            rq: true,
-            mno: 2,
-            mxo: 2,
-            col: true,
-            mx: false,
-            dom: false,
-            ti: '.ExpressionType',
-            t: 'er'
-          }]
-      }, {
-        t: 'enum',
-        ln: 'SortOrderType',
-        vs: ['DESC', 'ASC']
-      }],
-    eis: [{
-        en: 'SortBy',
-        ti: '.SortByType'
-      }, {
-        en: 'PropertyIsNull',
-        ti: '.PropertyIsNullType',
-        sh: 'comparisonOps'
-      }, {
-        en: 'Not',
-        ti: '.UnaryLogicOpType',
-        sh: 'logicOps'
-      }, {
-        en: 'PropertyIsLessThan',
-        ti: '.BinaryComparisonOpType',
-        sh: 'comparisonOps'
-      }, {
-        en: 'Div',
-        ti: '.BinaryOperatorType',
-        sh: 'expression'
-      }, {
-        en: 'DWithin',
-        ti: '.DistanceBufferType',
-        sh: 'spatialOps'
-      }, {
-        en: 'PropertyIsEqualTo',
-        ti: '.BinaryComparisonOpType',
-        sh: 'comparisonOps'
-      }, {
-        en: 'Filter',
-        ti: '.FilterType'
-      }, {
-        en: 'BBOX',
-        ti: '.BBOXType',
-        sh: 'spatialOps'
-      }, {
-        en: 'Add',
-        ti: '.BinaryOperatorType',
-        sh: 'expression'
-      }, {
-        en: 'PropertyIsGreaterThanOrEqualTo',
-        ti: '.BinaryComparisonOpType',
-        sh: 'comparisonOps'
-      }, {
-        en: 'Literal',
-        ti: '.LiteralType',
-        sh: 'expression'
-      }, {
-        en: 'Equals',
-        ti: '.BinarySpatialOpType',
-        sh: 'spatialOps'
-      }, {
-        en: 'PropertyIsNotEqualTo',
-        ti: '.BinaryComparisonOpType',
-        sh: 'comparisonOps'
-      }, {
-        en: 'PropertyIsLessThanOrEqualTo',
-        ti: '.BinaryComparisonOpType',
-        sh: 'comparisonOps'
-      }, {
-        en: 'FeatureId',
-        ti: '.FeatureIdType'
-      }, {
-        en: 'Within',
-        ti: '.BinarySpatialOpType',
-        sh: 'spatialOps'
-      }, {
-        en: 'Touches',
-        ti: '.BinarySpatialOpType',
-        sh: 'spatialOps'
-      }, {
-        en: 'PropertyIsGreaterThan',
-        ti: '.BinaryComparisonOpType',
-        sh: 'comparisonOps'
-      }, {
-        en: 'Contains',
-        ti: '.BinarySpatialOpType',
-        sh: 'spatialOps'
-      }, {
-        en: 'Function',
-        ti: '.FunctionType',
-        sh: 'expression'
-      }, {
-        en: 'logicOps',
-        ti: '.LogicOpsType'
-      }, {
-        en: 'spatialOps',
-        ti: '.SpatialOpsType'
-      }, {
-        en: 'Sub',
-        ti: '.BinaryOperatorType',
-        sh: 'expression'
-      }, {
-        en: 'expression',
-        ti: '.ExpressionType'
-      }, {
-        en: 'PropertyIsBetween',
-        ti: '.PropertyIsBetweenType',
-        sh: 'comparisonOps'
-      }, {
-        en: 'Intersects',
-        ti: '.BinarySpatialOpType',
-        sh: 'spatialOps'
-      }, {
-        en: 'Beyond',
-        ti: '.DistanceBufferType',
-        sh: 'spatialOps'
-      }, {
-        en: 'comparisonOps',
-        ti: '.ComparisonOpsType'
-      }, {
-        en: 'Crosses',
-        ti: '.BinarySpatialOpType',
-        sh: 'spatialOps'
-      }, {
-        en: 'Mul',
-        ti: '.BinaryOperatorType',
-        sh: 'expression'
-      }, {
-        en: 'Or',
-        ti: '.BinaryLogicOpType',
-        sh: 'logicOps'
-      }, {
-        en: 'PropertyName',
-        ti: '.PropertyNameType',
-        sh: 'expression'
-      }, {
-        en: 'Disjoint',
-        ti: '.BinarySpatialOpType',
-        sh: 'spatialOps'
-      }, {
-        en: 'And',
-        ti: '.BinaryLogicOpType',
-        sh: 'logicOps'
-      }, {
-        en: 'Overlaps',
-        ti: '.BinarySpatialOpType',
-        sh: 'spatialOps'
-      }, {
-        en: 'PropertyIsLike',
-        ti: '.PropertyIsLikeType',
-        sh: 'comparisonOps'
-      }]
-  };
-  return {
-    Filter_1_0_0: Filter_1_0_0
-  };
-};
-if (true) {
-  !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (Filter_1_0_0_Module_Factory),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-}
-else {
-  var Filter_1_0_0_Module = Filter_1_0_0_Module_Factory();
-  if (typeof module !== 'undefined' && module.exports) {
-    module.exports.Filter_1_0_0 = Filter_1_0_0_Module.Filter_1_0_0;
-  }
-  else {
-    var Filter_1_0_0 = Filter_1_0_0_Module.Filter_1_0_0;
-  }
-}
-
-/***/ }),
-
-/***/ 475:
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var GML_2_1_2_Module_Factory = function () {
-  var GML_2_1_2 = {
-    n: 'GML_2_1_2',
-    dens: 'http:\/\/www.opengis.net\/gml',
-    dans: 'http:\/\/www.w3.org\/1999\/xlink',
-    deps: ['XLink_1_0'],
-    tis: [{
-        ln: 'PointMemberType',
-        bti: '.GeometryAssociationType'
-      }, {
-        ln: 'LineStringPropertyType',
-        bti: '.GeometryAssociationType'
-      }, {
-        ln: 'MultiPolygonType',
-        bti: '.GeometryCollectionType'
-      }, {
-        ln: 'PolygonType',
-        bti: '.AbstractGeometryType',
-        ps: [{
-            n: 'outerBoundaryIs',
-            rq: true,
-            ti: '.LinearRingMemberType'
-          }, {
-            n: 'innerBoundaryIs',
-            mno: 0,
-            col: true,
-            ti: '.LinearRingMemberType'
-          }]
-      }, {
-        ln: 'BoxType',
-        bti: '.AbstractGeometryType',
-        ps: [{
-            n: 'coord',
-            rq: true,
-            mno: 2,
-            mxo: 2,
-            col: true,
-            ti: '.CoordType'
-          }, {
-            n: 'coordinates',
-            rq: true,
-            ti: '.CoordinatesType'
-          }]
-      }, {
-        ln: 'CoordinatesType',
-        ps: [{
-            n: 'value',
-            t: 'v'
-          }, {
-            n: 'decimal',
-            an: {
-              lp: 'decimal'
-            },
-            t: 'a'
-          }, {
-            n: 'cs',
-            an: {
-              lp: 'cs'
-            },
-            t: 'a'
-          }, {
-            n: 'ts',
-            an: {
-              lp: 'ts'
-            },
-            t: 'a'
-          }]
-      }, {
-        ln: 'MultiLineStringPropertyType',
-        bti: '.GeometryAssociationType'
-      }, {
-        ln: 'LinearRingType',
-        bti: '.AbstractGeometryType',
-        ps: [{
-            n: 'coord',
-            rq: true,
-            mno: 4,
-            col: true,
-            ti: '.CoordType'
-          }, {
-            n: 'coordinates',
-            rq: true,
-            ti: '.CoordinatesType'
-          }]
-      }, {
-        ln: 'AbstractFeatureType',
-        ps: [{
-            n: 'description'
-          }, {
-            n: 'name'
-          }, {
-            n: 'boundedBy',
-            ti: '.BoundingShapeType'
-          }, {
-            n: 'fid',
-            ti: 'ID',
-            an: {
-              lp: 'fid'
-            },
-            t: 'a'
-          }]
-      }, {
-        ln: 'GeometryAssociationType',
-        ps: [{
-            n: 'geometry',
-            rq: true,
-            mx: false,
-            dom: false,
-            en: '_Geometry',
-            ti: '.AbstractGeometryType',
-            t: 'er'
-          }, {
-            n: 'remoteSchema',
-            an: {
-              lp: 'remoteSchema',
-              ns: 'http:\/\/www.opengis.net\/gml'
-            },
-            t: 'a'
-          }, {
-            n: 'type',
-            ti: 'XLink_1_0.TypeType',
-            t: 'a'
-          }, {
-            n: 'href',
-            t: 'a'
-          }, {
-            n: 'role',
-            t: 'a'
-          }, {
-            n: 'arcrole',
-            t: 'a'
-          }, {
-            n: 'title',
-            t: 'a'
-          }, {
-            n: 'show',
-            ti: 'XLink_1_0.ShowType',
-            t: 'a'
-          }, {
-            n: 'actuate',
-            ti: 'XLink_1_0.ActuateType',
-            t: 'a'
-          }]
-      }, {
-        ln: 'MultiLineStringType',
-        bti: '.GeometryCollectionType'
-      }, {
-        ln: 'BoundingShapeType',
-        ps: [{
-            n: 'box',
-            rq: true,
-            en: 'Box',
-            ti: '.BoxType'
-          }, {
-            n: '_null',
-            rq: true,
-            en: 'null'
-          }]
-      }, {
-        ln: 'MultiPolygonPropertyType',
-        bti: '.GeometryAssociationType'
-      }, {
-        ln: 'MultiPointPropertyType',
-        bti: '.GeometryAssociationType'
-      }, {
-        ln: 'PolygonMemberType',
-        bti: '.GeometryAssociationType'
-      }, {
-        ln: 'AbstractGeometryType',
-        ps: [{
-            n: 'gid',
-            ti: 'ID',
-            an: {
-              lp: 'gid'
-            },
-            t: 'a'
-          }, {
-            n: 'srsName',
-            an: {
-              lp: 'srsName'
-            },
-            t: 'a'
-          }]
-      }, {
-        ln: 'MultiPointType',
-        bti: '.GeometryCollectionType'
-      }, {
-        ln: 'FeatureAssociationType',
-        ps: [{
-            n: 'feature',
-            rq: true,
-            mx: false,
-            dom: false,
-            en: '_Feature',
-            ti: '.AbstractFeatureType',
-            t: 'er'
-          }, {
-            n: 'remoteSchema',
-            an: {
-              lp: 'remoteSchema',
-              ns: 'http:\/\/www.opengis.net\/gml'
-            },
-            t: 'a'
-          }, {
-            n: 'type',
-            ti: 'XLink_1_0.TypeType',
-            t: 'a'
-          }, {
-            n: 'href',
-            t: 'a'
-          }, {
-            n: 'role',
-            t: 'a'
-          }, {
-            n: 'arcrole',
-            t: 'a'
-          }, {
-            n: 'title',
-            t: 'a'
-          }, {
-            n: 'show',
-            ti: 'XLink_1_0.ShowType',
-            t: 'a'
-          }, {
-            n: 'actuate',
-            ti: 'XLink_1_0.ActuateType',
-            t: 'a'
-          }]
-      }, {
-        ln: 'GeometryPropertyType',
-        ps: [{
-            n: 'geometry',
-            rq: true,
-            mx: false,
-            dom: false,
-            en: '_Geometry',
-            ti: '.AbstractGeometryType',
-            t: 'er'
-          }, {
-            n: 'remoteSchema',
-            an: {
-              lp: 'remoteSchema',
-              ns: 'http:\/\/www.opengis.net\/gml'
-            },
-            t: 'a'
-          }, {
-            n: 'type',
-            ti: 'XLink_1_0.TypeType',
-            t: 'a'
-          }, {
-            n: 'href',
-            t: 'a'
-          }, {
-            n: 'role',
-            t: 'a'
-          }, {
-            n: 'arcrole',
-            t: 'a'
-          }, {
-            n: 'title',
-            t: 'a'
-          }, {
-            n: 'show',
-            ti: 'XLink_1_0.ShowType',
-            t: 'a'
-          }, {
-            n: 'actuate',
-            ti: 'XLink_1_0.ActuateType',
-            t: 'a'
-          }]
-      }, {
-        ln: 'LineStringType',
-        bti: '.AbstractGeometryType',
-        ps: [{
-            n: 'coord',
-            rq: true,
-            mno: 2,
-            col: true,
-            ti: '.CoordType'
-          }, {
-            n: 'coordinates',
-            rq: true,
-            ti: '.CoordinatesType'
-          }]
-      }, {
-        ln: 'LineStringMemberType',
-        bti: '.GeometryAssociationType'
-      }, {
-        ln: 'AbstractGeometryCollectionBaseType',
-        bti: '.AbstractGeometryType'
-      }, {
-        ln: 'AbstractFeatureCollectionType',
-        bti: '.AbstractFeatureCollectionBaseType',
-        ps: [{
-            n: 'featureMember',
-            mno: 0,
-            col: true,
-            ti: '.FeatureAssociationType'
-          }]
-      }, {
-        ln: 'CoordType',
-        ps: [{
-            n: 'x',
-            rq: true,
-            en: 'X',
-            ti: 'Decimal'
-          }, {
-            n: 'y',
-            en: 'Y',
-            ti: 'Decimal'
-          }, {
-            n: 'z',
-            en: 'Z',
-            ti: 'Decimal'
-          }]
-      }, {
-        ln: 'MultiGeometryPropertyType',
-        bti: '.GeometryAssociationType'
-      }, {
-        ln: 'PointPropertyType',
-        bti: '.GeometryAssociationType'
-      }, {
-        ln: 'AbstractFeatureCollectionBaseType',
-        bti: '.AbstractFeatureType'
-      }, {
-        ln: 'GeometryCollectionType',
-        bti: '.AbstractGeometryCollectionBaseType',
-        ps: [{
-            n: 'geometryMember',
-            rq: true,
-            col: true,
-            mx: false,
-            dom: false,
-            ti: '.GeometryAssociationType',
-            t: 'er'
-          }]
-      }, {
-        ln: 'LinearRingMemberType',
-        bti: '.GeometryAssociationType'
-      }, {
-        ln: 'PolygonPropertyType',
-        bti: '.GeometryAssociationType'
-      }, {
-        ln: 'PointType',
-        bti: '.AbstractGeometryType',
-        ps: [{
-            n: 'coord',
-            rq: true,
-            ti: '.CoordType'
-          }, {
-            n: 'coordinates',
-            rq: true,
-            ti: '.CoordinatesType'
-          }]
-      }, {
-        t: 'enum',
-        ln: 'NullType',
-        vs: ['inapplicable', 'unknown', 'unavailable', 'missing']
-      }],
-    eis: [{
-        en: 'multiEdgeOf',
-        ti: '.MultiLineStringPropertyType',
-        sh: 'multiLineStringProperty'
-      }, {
-        en: 'lineStringMember',
-        ti: '.LineStringMemberType',
-        sh: 'geometryMember'
-      }, {
-        en: 'multiLineStringProperty',
-        ti: '.MultiLineStringPropertyType',
-        sh: '_geometryProperty'
-      }, {
-        en: '_Geometry',
-        ti: '.AbstractGeometryType'
-      }, {
-        en: 'coverage',
-        ti: '.PolygonPropertyType',
-        sh: 'polygonProperty'
-      }, {
-        en: 'MultiLineString',
-        ti: '.MultiLineStringType',
-        sh: '_Geometry'
-      }, {
-        en: 'polygonMember',
-        ti: '.PolygonMemberType',
-        sh: 'geometryMember'
-      }, {
-        en: 'Box',
-        ti: '.BoxType'
-      }, {
-        en: 'MultiPoint',
-        ti: '.MultiPointType',
-        sh: '_Geometry'
-      }, {
-        en: 'description'
-      }, {
-        en: 'lineStringProperty',
-        ti: '.LineStringPropertyType',
-        sh: '_geometryProperty'
-      }, {
-        en: 'MultiGeometry',
-        ti: '.GeometryCollectionType',
-        sh: '_Geometry'
-      }, {
-        en: 'polygonProperty',
-        ti: '.PolygonPropertyType',
-        sh: '_geometryProperty'
-      }, {
-        en: 'LinearRing',
-        ti: '.LinearRingType',
-        sh: '_Geometry'
-      }, {
-        en: 'pointProperty',
-        ti: '.PointPropertyType',
-        sh: '_geometryProperty'
-      }, {
-        en: 'centerOf',
-        ti: '.PointPropertyType',
-        sh: 'pointProperty'
-      }, {
-        en: '_FeatureCollection',
-        ti: '.AbstractFeatureCollectionType',
-        sh: '_Feature'
-      }, {
-        en: 'geometryMember',
-        ti: '.GeometryAssociationType'
-      }, {
-        en: 'coord',
-        ti: '.CoordType'
-      }, {
-        en: '_Feature',
-        ti: '.AbstractFeatureType'
-      }, {
-        en: 'innerBoundaryIs',
-        ti: '.LinearRingMemberType'
-      }, {
-        en: 'geometryProperty',
-        ti: '.GeometryAssociationType'
-      }, {
-        en: '_geometryProperty',
-        ti: '.GeometryAssociationType'
-      }, {
-        en: 'multiCenterLineOf',
-        ti: '.MultiLineStringPropertyType',
-        sh: 'multiLineStringProperty'
-      }, {
-        en: 'Polygon',
-        ti: '.PolygonType',
-        sh: '_Geometry'
-      }, {
-        en: 'outerBoundaryIs',
-        ti: '.LinearRingMemberType'
-      }, {
-        en: 'multiExtentOf',
-        ti: '.MultiPolygonPropertyType',
-        sh: 'multiPolygonProperty'
-      }, {
-        en: 'LineString',
-        ti: '.LineStringType',
-        sh: '_Geometry'
-      }, {
-        en: 'multiGeometryProperty',
-        ti: '.MultiGeometryPropertyType',
-        sh: '_geometryProperty'
-      }, {
-        en: 'multiPosition',
-        ti: '.MultiPointPropertyType',
-        sh: 'multiPointProperty'
-      }, {
-        en: 'multiLocation',
-        ti: '.MultiPointPropertyType',
-        sh: 'multiPointProperty'
-      }, {
-        en: 'edgeOf',
-        ti: '.LineStringPropertyType',
-        sh: 'lineStringProperty'
-      }, {
-        en: '_GeometryCollection',
-        ti: '.GeometryCollectionType',
-        sh: '_Geometry'
-      }, {
-        en: 'coordinates',
-        ti: '.CoordinatesType'
-      }, {
-        en: 'extentOf',
-        ti: '.PolygonPropertyType',
-        sh: 'polygonProperty'
-      }, {
-        en: 'MultiPolygon',
-        ti: '.MultiPolygonType',
-        sh: '_Geometry'
-      }, {
-        en: 'Point',
-        ti: '.PointType',
-        sh: '_Geometry'
-      }, {
-        en: 'multiPointProperty',
-        ti: '.MultiPointPropertyType',
-        sh: '_geometryProperty'
-      }, {
-        en: 'multiPolygonProperty',
-        ti: '.MultiPolygonPropertyType',
-        sh: '_geometryProperty'
-      }, {
-        en: 'name'
-      }, {
-        en: 'location',
-        ti: '.PointPropertyType',
-        sh: 'pointProperty'
-      }, {
-        en: 'pointMember',
-        ti: '.PointMemberType',
-        sh: 'geometryMember'
-      }, {
-        en: 'boundedBy',
-        ti: '.BoundingShapeType'
-      }, {
-        en: 'featureMember',
-        ti: '.FeatureAssociationType'
-      }, {
-        en: 'multiCoverage',
-        ti: '.MultiPolygonPropertyType',
-        sh: 'multiPolygonProperty'
-      }, {
-        en: 'multiCenterOf',
-        ti: '.MultiPointPropertyType',
-        sh: 'multiPointProperty'
-      }, {
-        en: 'position',
-        ti: '.PointPropertyType',
-        sh: 'pointProperty'
-      }, {
-        en: 'centerLineOf',
-        ti: '.LineStringPropertyType',
-        sh: 'lineStringProperty'
-      }]
-  };
-  return {
-    GML_2_1_2: GML_2_1_2
-  };
-};
-if (true) {
-  !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (GML_2_1_2_Module_Factory),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-}
-else {
-  var GML_2_1_2_Module = GML_2_1_2_Module_Factory();
-  if (typeof module !== 'undefined' && module.exports) {
-    module.exports.GML_2_1_2 = GML_2_1_2_Module.GML_2_1_2;
-  }
-  else {
-    var GML_2_1_2 = GML_2_1_2_Module.GML_2_1_2;
-  }
-}
-
-/***/ }),
-
-/***/ 478:
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var SLD_1_0_0_GeoServer_Module_Factory = function () {
-  var SLD_1_0_0 = {
-    n: 'SLD_1_0_0',
-    dens: 'http:\/\/www.opengis.net\/sld',
-    deps: ['Filter_1_0_0', 'XLink_1_0'],
-    tis: [{
-        ln: 'AVERAGE',
-        tn: null
-      }, {
-        ln: 'LabelPlacement',
-        tn: null,
-        ps: [{
-            n: 'pointPlacement',
-            rq: true,
-            en: 'PointPlacement',
-            ti: '.PointPlacement'
-          }, {
-            n: 'linePlacement',
-            rq: true,
-            en: 'LinePlacement',
-            ti: '.LinePlacement'
-          }]
-      }, {
-        ln: 'RANDOM',
-        tn: null
-      }, {
-        ln: 'PointPlacement',
-        tn: null,
-        ps: [{
-            n: 'anchorPoint',
-            en: 'AnchorPoint',
-            ti: '.AnchorPoint'
-          }, {
-            n: 'displacement',
-            en: 'Displacement',
-            ti: '.Displacement'
-          }, {
-            n: 'rotation',
-            en: 'Rotation',
-            ti: '.ParameterValueType'
-          }]
-      }, {
-        ln: 'Normalize',
-        tn: null
-      }, {
-        ln: 'NamedStyle',
-        tn: null,
-        ps: [{
-            n: 'name',
-            rq: true,
-            en: 'Name'
-          }]
-      }, {
-        ln: 'OnlineResource',
-        tn: null,
-        ps: [{
-            n: 'type',
-            ti: 'XLink_1_0.TypeType',
-            an: {
-              lp: 'type',
-              ns: 'http:\/\/www.w3.org\/1999\/xlink'
-            },
-            t: 'a'
-          }, {
-            n: 'href',
-            an: {
-              lp: 'href',
-              ns: 'http:\/\/www.w3.org\/1999\/xlink'
-            },
-            t: 'a'
-          }, {
-            n: 'role',
-            an: {
-              lp: 'role',
-              ns: 'http:\/\/www.w3.org\/1999\/xlink'
-            },
-            t: 'a'
-          }, {
-            n: 'arcrole',
-            an: {
-              lp: 'arcrole',
-              ns: 'http:\/\/www.w3.org\/1999\/xlink'
-            },
-            t: 'a'
-          }, {
-            n: 'title',
-            an: {
-              lp: 'title',
-              ns: 'http:\/\/www.w3.org\/1999\/xlink'
-            },
-            t: 'a'
-          }, {
-            n: 'show',
-            ti: 'XLink_1_0.ShowType',
-            an: {
-              lp: 'show',
-              ns: 'http:\/\/www.w3.org\/1999\/xlink'
-            },
-            t: 'a'
-          }, {
-            n: 'actuate',
-            ti: 'XLink_1_0.ActuateType',
-            an: {
-              lp: 'actuate',
-              ns: 'http:\/\/www.w3.org\/1999\/xlink'
-            },
-            t: 'a'
-          }]
-      }, {
-        ln: 'LineSymbolizer',
-        tn: null,
-        bti: '.SymbolizerType',
-        ps: [{
-            n: 'geometry',
-            en: 'Geometry',
-            ti: '.Geometry'
-          }, {
-            n: 'stroke',
-            en: 'Stroke',
-            ti: '.Stroke'
-          }]
-      }, {
-        ln: 'FeatureTypeConstraint',
-        tn: null,
-        ps: [{
-            n: 'featureTypeName',
-            en: 'FeatureTypeName'
-          }, {
-            n: 'filter',
-            en: {
-              lp: 'Filter',
-              ns: 'http:\/\/www.opengis.net\/ogc'
-            },
-            ti: 'Filter_1_0_0.FilterType'
-          }, {
-            n: 'extent',
-            mno: 0,
-            col: true,
-            en: 'Extent',
-            ti: '.Extent'
-          }]
-      }, {
-        ln: 'Transformation',
-        tn: null,
-        ps: [{
-            n: 'function',
-            rq: true,
-            en: {
-              lp: 'Function',
-              ns: 'http:\/\/www.opengis.net\/ogc'
-            },
-            ti: 'Filter_1_0_0.FunctionType'
-          }]
-      }, {
-        ln: 'TextSymbolizer',
-        tn: null,
-        bti: '.SymbolizerType',
-        ps: [{
-            n: 'geometry',
-            en: 'Geometry',
-            ti: '.Geometry'
-          }, {
-            n: 'label',
-            en: 'Label',
-            ti: '.ParameterValueType'
-          }, {
-            n: 'font',
-            en: 'Font',
-            ti: '.Font'
-          }, {
-            n: 'labelPlacement',
-            en: 'LabelPlacement',
-            ti: '.LabelPlacement'
-          }, {
-            n: 'halo',
-            en: 'Halo',
-            ti: '.Halo'
-          }, {
-            n: 'fill',
-            en: 'Fill',
-            ti: '.Fill'
-          }, {
-            n: 'graphic',
-            en: 'Graphic',
-            ti: '.Graphic'
-          }, {
-            n: 'priority',
-            en: 'Priority',
-            ti: '.ParameterValueType'
-          }, {
-            n: 'vendorOption',
-            mno: 0,
-            col: true,
-            en: 'VendorOption',
-            ti: '.VendorOption'
-          }]
-      }, {
-        ln: 'Halo',
-        tn: null,
-        ps: [{
-            n: 'radius',
-            en: 'Radius',
-            ti: '.ParameterValueType'
-          }, {
-            n: 'fill',
-            en: 'Fill',
-            ti: '.Fill'
-          }]
-      }, {
-        ln: 'ElseFilter',
-        tn: null
-      }, {
-        ln: 'FeatureTypeStyle',
-        tn: null,
-        ps: [{
-            n: 'name',
-            en: 'Name'
-          }, {
-            n: 'title',
-            en: 'Title'
-          }, {
-            n: '_abstract',
-            en: 'Abstract'
-          }, {
-            n: 'featureTypeName',
-            en: 'FeatureTypeName'
-          }, {
-            n: 'semanticTypeIdentifier',
-            mno: 0,
-            col: true,
-            en: 'SemanticTypeIdentifier'
-          }, {
-            n: 'transformation',
-            en: 'Transformation',
-            ti: '.Transformation'
-          }, {
-            n: 'rule',
-            rq: true,
-            col: true,
-            en: 'Rule',
-            ti: '.Rule'
-          }, {
-            n: 'vendorOption',
-            mno: 0,
-            col: true,
-            en: 'VendorOption',
-            ti: '.VendorOption'
-          }]
-      }, {
-        ln: 'PolygonSymbolizer',
-        tn: null,
-        bti: '.SymbolizerType',
-        ps: [{
-            n: 'geometry',
-            en: 'Geometry',
-            ti: '.Geometry'
-          }, {
-            n: 'fill',
-            en: 'Fill',
-            ti: '.Fill'
-          }, {
-            n: 'stroke',
-            en: 'Stroke',
-            ti: '.Stroke'
-          }]
-      }, {
-        ln: 'EARLIESTONTOP',
-        tn: null
-      }, {
-        ln: 'ParameterValueType',
-        ps: [{
-            n: 'content',
-            col: true,
-            dom: false,
-            en: {
-              lp: 'expression',
-              ns: 'http:\/\/www.opengis.net\/ogc'
-            },
-            ti: 'Filter_1_0_0.ExpressionType',
-            t: 'er'
-          }]
-      }, {
-        ln: 'RasterSymbolizer',
-        tn: null,
-        bti: '.SymbolizerType',
-        ps: [{
-            n: 'geometry',
-            en: 'Geometry',
-            ti: '.Geometry'
-          }, {
-            n: 'opacity',
-            en: 'Opacity',
-            ti: '.ParameterValueType'
-          }, {
-            n: 'channelSelection',
-            en: 'ChannelSelection',
-            ti: '.ChannelSelection'
-          }, {
-            n: 'overlapBehavior',
-            en: 'OverlapBehavior',
-            ti: '.OverlapBehavior'
-          }, {
-            n: 'colorMap',
-            en: 'ColorMap',
-            ti: '.ColorMap'
-          }, {
-            n: 'contrastEnhancement',
-            en: 'ContrastEnhancement',
-            ti: '.ContrastEnhancement'
-          }, {
-            n: 'shadedRelief',
-            en: 'ShadedRelief',
-            ti: '.ShadedRelief'
-          }, {
-            n: 'imageOutline',
-            en: 'ImageOutline',
-            ti: '.ImageOutline'
-          }]
-      }, {
-        ln: 'UserLayer',
-        tn: null,
-        ps: [{
-            n: 'name',
-            en: 'Name'
-          }, {
-            n: 'inlineFeature',
-            rq: true,
-            en: 'InlineFeature',
-            ti: '.InlineFeature'
-          }, {
-            n: 'remoteOWS',
-            en: 'RemoteOWS',
-            ti: '.RemoteOWS'
-          }, {
-            n: 'layerFeatureConstraints',
-            rq: true,
-            en: 'LayerFeatureConstraints',
-            ti: '.LayerFeatureConstraints'
-          }, {
-            n: 'userStyle',
-            rq: true,
-            col: true,
-            en: 'UserStyle',
-            ti: '.UserStyle'
-          }]
-      }, {
-        ln: 'SelectedChannelType',
-        ps: [{
-            n: 'sourceChannelName',
-            rq: true,
-            en: 'SourceChannelName'
-          }, {
-            n: 'contrastEnhancement',
-            en: 'ContrastEnhancement',
-            ti: '.ContrastEnhancement'
-          }]
-      }, {
-        ln: 'VendorOption',
-        tn: null,
-        ps: [{
-            n: 'value',
-            t: 'v'
-          }, {
-            n: 'name',
-            an: {
-              lp: 'name'
-            },
-            t: 'a'
-          }]
-      }, {
-        ln: 'OverlapBehavior',
-        tn: null,
-        ps: [{
-            n: 'latestontop',
-            rq: true,
-            en: 'LATEST_ON_TOP',
-            ti: '.LATESTONTOP'
-          }, {
-            n: 'earliestontop',
-            rq: true,
-            en: 'EARLIEST_ON_TOP',
-            ti: '.EARLIESTONTOP'
-          }, {
-            n: 'average',
-            rq: true,
-            en: 'AVERAGE',
-            ti: '.AVERAGE'
-          }, {
-            n: 'random',
-            rq: true,
-            en: 'RANDOM',
-            ti: '.RANDOM'
-          }]
-      }, {
-        ln: 'Graphic',
-        tn: null,
-        ps: [{
-            n: 'externalGraphicOrMark',
-            mno: 0,
-            col: true,
-            etis: [{
-                en: 'ExternalGraphic',
-                ti: '.ExternalGraphic'
-              }, {
-                en: 'Mark',
-                ti: '.Mark'
-              }],
-            t: 'es'
-          }, {
-            n: 'opacity',
-            en: 'Opacity',
-            ti: '.ParameterValueType'
-          }, {
-            n: 'size',
-            en: 'Size',
-            ti: '.ParameterValueType'
-          }, {
-            n: 'rotation',
-            en: 'Rotation',
-            ti: '.ParameterValueType'
-          }]
-      }, {
-        ln: 'UserStyle',
-        tn: null,
-        ps: [{
-            n: 'name',
-            en: 'Name'
-          }, {
-            n: 'title',
-            en: 'Title'
-          }, {
-            n: '_abstract',
-            en: 'Abstract'
-          }, {
-            n: 'isDefault',
-            en: 'IsDefault'
-          }, {
-            n: 'featureTypeStyle',
-            rq: true,
-            col: true,
-            en: 'FeatureTypeStyle',
-            ti: '.FeatureTypeStyle'
-          }]
-      }, {
-        ln: 'InlineFeature',
-        tn: null,
-        ps: [{
-            n: 'any',
-            mno: 0,
-            col: true,
-            mx: false,
-            t: 'ae'
-          }]
-      }, {
-        ln: 'Mark',
-        tn: null,
-        ps: [{
-            n: 'wellKnownName',
-            en: 'WellKnownName',
-            ti: '.WellKnownName'
-          }, {
-            n: 'fill',
-            en: 'Fill',
-            ti: '.Fill'
-          }, {
-            n: 'stroke',
-            en: 'Stroke',
-            ti: '.Stroke'
-          }]
-      }, {
-        ln: 'ContrastEnhancement',
-        tn: null,
-        ps: [{
-            n: 'normalize',
-            rq: true,
-            en: 'Normalize',
-            ti: '.Normalize'
-          }, {
-            n: 'histogram',
-            rq: true,
-            en: 'Histogram',
-            ti: '.Histogram'
-          }, {
-            n: 'gammaValue',
-            en: 'GammaValue',
-            ti: 'Double'
-          }]
-      }, {
-        ln: 'ExternalGraphic',
-        tn: null,
-        ps: [{
-            n: 'onlineResource',
-            rq: true,
-            en: 'OnlineResource',
-            ti: '.OnlineResource'
-          }, {
-            n: 'format',
-            rq: true,
-            en: 'Format'
-          }]
-      }, {
-        ln: 'Histogram',
-        tn: null
-      }, {
-        ln: 'ColorMapEntry',
-        tn: null,
-        ps: [{
-            n: 'color',
-            rq: true,
-            an: {
-              lp: 'color'
-            },
-            t: 'a'
-          }, {
-            n: 'opacity',
-            ti: 'Double',
-            an: {
-              lp: 'opacity'
-            },
-            t: 'a'
-          }, {
-            n: 'quantity',
-            ti: 'Double',
-            an: {
-              lp: 'quantity'
-            },
-            t: 'a'
-          }, {
-            n: 'label',
-            an: {
-              lp: 'label'
-            },
-            t: 'a'
-          }]
-      }, {
-        ln: 'PointSymbolizer',
-        tn: null,
-        bti: '.SymbolizerType',
-        ps: [{
-            n: 'geometry',
-            en: 'Geometry',
-            ti: '.Geometry'
-          }, {
-            n: 'graphic',
-            en: 'Graphic',
-            ti: '.Graphic'
-          }]
-      }, {
-        ln: 'Font',
-        tn: null,
-        ps: [{
-            n: 'cssParameter',
-            mno: 0,
-            col: true,
-            en: 'CssParameter',
-            ti: '.CssParameter'
-          }]
-      }, {
-        ln: 'LegendGraphic',
-        tn: null,
-        ps: [{
-            n: 'graphic',
-            rq: true,
-            en: 'Graphic',
-            ti: '.Graphic'
-          }]
-      }, {
-        ln: 'Stroke',
-        tn: null,
-        ps: [{
-            n: 'graphicFill',
-            rq: true,
-            en: 'GraphicFill',
-            ti: '.GraphicFill'
-          }, {
-            n: 'graphicStroke',
-            rq: true,
-            en: 'GraphicStroke',
-            ti: '.GraphicStroke'
-          }, {
-            n: 'cssParameter',
-            mno: 0,
-            col: true,
-            en: 'CssParameter',
-            ti: '.CssParameter'
-          }]
-      }, {
-        ln: 'ImageOutline',
-        tn: null,
-        ps: [{
-            n: 'lineSymbolizer',
-            rq: true,
-            en: 'LineSymbolizer',
-            ti: '.LineSymbolizer'
-          }, {
-            n: 'polygonSymbolizer',
-            rq: true,
-            en: 'PolygonSymbolizer',
-            ti: '.PolygonSymbolizer'
-          }]
-      }, {
-        ln: 'GraphicFill',
-        tn: null,
-        ps: [{
-            n: 'graphic',
-            rq: true,
-            en: 'Graphic',
-            ti: '.Graphic'
-          }]
-      }, {
-        ln: 'Rule',
-        tn: null,
-        ps: [{
-            n: 'name',
-            en: 'Name'
-          }, {
-            n: 'title',
-            en: 'Title'
-          }, {
-            n: '_abstract',
-            en: 'Abstract'
-          }, {
-            n: 'legendGraphic',
-            en: 'LegendGraphic',
-            ti: '.LegendGraphic'
-          }, {
-            n: 'filter',
-            rq: true,
-            en: {
-              lp: 'Filter',
-              ns: 'http:\/\/www.opengis.net\/ogc'
-            },
-            ti: 'Filter_1_0_0.FilterType'
-          }, {
-            n: 'elseFilter',
-            rq: true,
-            en: 'ElseFilter',
-            ti: '.ElseFilter'
-          }, {
-            n: 'minScaleDenominator',
-            en: 'MinScaleDenominator',
-            ti: 'Double'
-          }, {
-            n: 'maxScaleDenominator',
-            en: 'MaxScaleDenominator',
-            ti: 'Double'
-          }, {
-            n: 'symbolizer',
-            rq: true,
-            col: true,
-            mx: false,
-            dom: false,
-            en: 'Symbolizer',
-            ti: '.SymbolizerType',
-            t: 'er'
-          }]
-      }, {
-        ln: 'AnchorPoint',
-        tn: null,
-        ps: [{
-            n: 'anchorPointX',
-            rq: true,
-            en: 'AnchorPointX',
-            ti: '.ParameterValueType'
-          }, {
-            n: 'anchorPointY',
-            rq: true,
-            en: 'AnchorPointY',
-            ti: '.ParameterValueType'
-          }]
-      }, {
-        ln: 'ColorMap',
-        tn: null,
-        ps: [{
-            n: 'colorMapEntry',
-            mno: 0,
-            col: true,
-            en: 'ColorMapEntry',
-            ti: '.ColorMapEntry'
-          }, {
-            n: 'type',
-            an: {
-              lp: 'type'
-            },
-            t: 'a'
-          }, {
-            n: 'extended',
-            ti: 'Boolean',
-            an: {
-              lp: 'extended'
-            },
-            t: 'a'
-          }]
-      }, {
-        ln: 'LATESTONTOP',
-        tn: null
-      }, {
-        ln: 'SymbolizerType',
-        ps: [{
-            n: 'uom',
-            an: {
-              lp: 'uom'
-            },
-            t: 'a'
-          }]
-      }, {
-        ln: 'RemoteOWS',
-        tn: null,
-        ps: [{
-            n: 'service',
-            rq: true,
-            en: 'Service'
-          }, {
-            n: 'onlineResource',
-            rq: true,
-            en: 'OnlineResource',
-            ti: '.OnlineResource'
-          }]
-      }, {
-        ln: 'WellKnownName',
-        tn: null,
-        ps: [{
-            n: 'content',
-            col: true,
-            dom: false,
-            en: {
-              lp: 'expression',
-              ns: 'http:\/\/www.opengis.net\/ogc'
-            },
-            ti: 'Filter_1_0_0.ExpressionType',
-            t: 'er'
-          }]
-      }, {
-        ln: 'ChannelSelection',
-        tn: null,
-        ps: [{
-            n: 'redChannel',
-            rq: true,
-            en: 'RedChannel',
-            ti: '.SelectedChannelType'
-          }, {
-            n: 'greenChannel',
-            rq: true,
-            en: 'GreenChannel',
-            ti: '.SelectedChannelType'
-          }, {
-            n: 'blueChannel',
-            rq: true,
-            en: 'BlueChannel',
-            ti: '.SelectedChannelType'
-          }, {
-            n: 'grayChannel',
-            rq: true,
-            en: 'GrayChannel',
-            ti: '.SelectedChannelType'
-          }]
-      }, {
-        ln: 'CssParameter',
-        tn: null,
-        bti: '.ParameterValueType',
-        ps: [{
-            n: 'name',
-            rq: true,
-            an: {
-              lp: 'name'
-            },
-            t: 'a'
-          }]
-      }, {
-        ln: 'LinePlacement',
-        tn: null,
-        ps: [{
-            n: 'perpendicularOffset',
-            en: 'PerpendicularOffset',
-            ti: '.ParameterValueType'
-          }]
-      }, {
-        ln: 'GraphicStroke',
-        tn: null,
-        ps: [{
-            n: 'graphic',
-            rq: true,
-            en: 'Graphic',
-            ti: '.Graphic'
-          }]
-      }, {
-        ln: 'StyledLayerDescriptor',
-        tn: null,
-        ps: [{
-            n: 'name',
-            en: 'Name'
-          }, {
-            n: 'title',
-            en: 'Title'
-          }, {
-            n: '_abstract',
-            en: 'Abstract'
-          }, {
-            n: 'namedLayerOrUserLayer',
-            mno: 0,
-            col: true,
-            etis: [{
-                en: 'NamedLayer',
-                ti: '.NamedLayer'
-              }, {
-                en: 'UserLayer',
-                ti: '.UserLayer'
-              }],
-            t: 'es'
-          }, {
-            n: 'version',
-            rq: true,
-            an: {
-              lp: 'version'
-            },
-            t: 'a'
-          }]
-      }, {
-        ln: 'Extent',
-        tn: null,
-        ps: [{
-            n: 'name',
-            rq: true,
-            en: 'Name'
-          }, {
-            n: 'value',
-            rq: true,
-            en: 'Value'
-          }]
-      }, {
-        ln: 'NamedLayer',
-        tn: null,
-        ps: [{
-            n: 'name',
-            rq: true,
-            en: 'Name'
-          }, {
-            n: 'layerFeatureConstraints',
-            en: 'LayerFeatureConstraints',
-            ti: '.LayerFeatureConstraints'
-          }, {
-            n: 'namedStyleOrUserStyle',
-            mno: 0,
-            col: true,
-            etis: [{
-                en: 'NamedStyle',
-                ti: '.NamedStyle'
-              }, {
-                en: 'UserStyle',
-                ti: '.UserStyle'
-              }],
-            t: 'es'
-          }]
-      }, {
-        ln: 'Displacement',
-        tn: null,
-        ps: [{
-            n: 'displacementX',
-            rq: true,
-            en: 'DisplacementX',
-            ti: '.ParameterValueType'
-          }, {
-            n: 'displacementY',
-            rq: true,
-            en: 'DisplacementY',
-            ti: '.ParameterValueType'
-          }]
-      }, {
-        ln: 'LayerFeatureConstraints',
-        tn: null,
-        ps: [{
-            n: 'featureTypeConstraint',
-            rq: true,
-            col: true,
-            en: 'FeatureTypeConstraint',
-            ti: '.FeatureTypeConstraint'
-          }]
-      }, {
-        ln: 'Geometry',
-        tn: null,
-        ps: [{
-            n: 'expression',
-            rq: true,
-            mx: false,
-            dom: false,
-            en: {
-              lp: 'expression',
-              ns: 'http:\/\/www.opengis.net\/ogc'
-            },
-            ti: 'Filter_1_0_0.ExpressionType',
-            t: 'er'
-          }]
-      }, {
-        ln: 'Fill',
-        tn: null,
-        ps: [{
-            n: 'graphicFill',
-            en: 'GraphicFill',
-            ti: '.GraphicFill'
-          }, {
-            n: 'cssParameter',
-            mno: 0,
-            col: true,
-            en: 'CssParameter',
-            ti: '.CssParameter'
-          }]
-      }, {
-        ln: 'ShadedRelief',
-        tn: null,
-        ps: [{
-            n: 'brightnessOnly',
-            en: 'BrightnessOnly',
-            ti: 'Boolean'
-          }, {
-            n: 'reliefFactor',
-            en: 'ReliefFactor',
-            ti: 'Double'
-          }]
-      }],
-    eis: [{
-        en: 'Fill',
-        ti: '.Fill'
-      }, {
-        en: 'LabelPlacement',
-        ti: '.LabelPlacement'
-      }, {
-        en: 'CssParameter',
-        ti: '.CssParameter'
-      }, {
-        en: 'Displacement',
-        ti: '.Displacement'
-      }, {
-        en: 'WellKnownName',
-        ti: '.WellKnownName'
-      }, {
-        en: 'StyledLayerDescriptor',
-        ti: '.StyledLayerDescriptor'
-      }, {
-        en: 'UserLayer',
-        ti: '.UserLayer'
-      }, {
-        en: 'FeatureTypeConstraint',
-        ti: '.FeatureTypeConstraint'
-      }, {
-        en: 'GraphicStroke',
-        ti: '.GraphicStroke'
-      }, {
-        en: 'Size',
-        ti: '.ParameterValueType'
-      }, {
-        en: 'Rule',
-        ti: '.Rule'
-      }, {
-        en: 'BrightnessOnly',
-        ti: 'Boolean'
-      }, {
-        en: 'ColorMap',
-        ti: '.ColorMap'
-      }, {
-        en: 'PointPlacement',
-        ti: '.PointPlacement'
-      }, {
-        en: 'SourceChannelName'
-      }, {
-        en: 'Graphic',
-        ti: '.Graphic'
-      }, {
-        en: 'FeatureTypeName'
-      }, {
-        en: 'DisplacementY',
-        ti: '.ParameterValueType'
-      }, {
-        en: 'RedChannel',
-        ti: '.SelectedChannelType'
-      }, {
-        en: 'RasterSymbolizer',
-        ti: '.RasterSymbolizer',
-        sh: 'Symbolizer'
-      }, {
-        en: 'Radius',
-        ti: '.ParameterValueType'
-      }, {
-        en: 'Label',
-        ti: '.ParameterValueType'
-      }, {
-        en: 'BlueChannel',
-        ti: '.SelectedChannelType'
-      }, {
-        en: 'AnchorPoint',
-        ti: '.AnchorPoint'
-      }, {
-        en: 'ImageOutline',
-        ti: '.ImageOutline'
-      }, {
-        en: 'GammaValue',
-        ti: 'Double'
-      }, {
-        en: 'DisplacementX',
-        ti: '.ParameterValueType'
-      }, {
-        en: 'Format'
-      }, {
-        en: 'UserStyle',
-        ti: '.UserStyle'
-      }, {
-        en: 'Geometry',
-        ti: '.Geometry'
-      }, {
-        en: 'Abstract'
-      }, {
-        en: 'OverlapBehavior',
-        ti: '.OverlapBehavior'
-      }, {
-        en: 'TextSymbolizer',
-        ti: '.TextSymbolizer',
-        sh: 'Symbolizer'
-      }, {
-        en: 'LinePlacement',
-        ti: '.LinePlacement'
-      }, {
-        en: 'ReliefFactor',
-        ti: 'Double'
-      }, {
-        en: 'InlineFeature',
-        ti: '.InlineFeature'
-      }, {
-        en: 'GreenChannel',
-        ti: '.SelectedChannelType'
-      }, {
-        en: 'Rotation',
-        ti: '.ParameterValueType'
-      }, {
-        en: 'MaxScaleDenominator',
-        ti: 'Double'
-      }, {
-        en: 'Value'
-      }, {
-        en: 'FeatureTypeStyle',
-        ti: '.FeatureTypeStyle'
-      }, {
-        en: 'Symbolizer',
-        ti: '.SymbolizerType'
-      }, {
-        en: 'ColorMapEntry',
-        ti: '.ColorMapEntry'
-      }, {
-        en: 'PointSymbolizer',
-        ti: '.PointSymbolizer',
-        sh: 'Symbolizer'
-      }, {
-        en: 'Extent',
-        ti: '.Extent'
-      }, {
-        en: 'GraphicFill',
-        ti: '.GraphicFill'
-      }, {
-        en: 'LineSymbolizer',
-        ti: '.LineSymbolizer',
-        sh: 'Symbolizer'
-      }, {
-        en: 'AnchorPointX',
-        ti: '.ParameterValueType'
-      }, {
-        en: 'LegendGraphic',
-        ti: '.LegendGraphic'
-      }, {
-        en: 'Font',
-        ti: '.Font'
-      }, {
-        en: 'Opacity',
-        ti: '.ParameterValueType'
-      }, {
-        en: 'NamedStyle',
-        ti: '.NamedStyle'
-      }, {
-        en: 'Transformation',
-        ti: '.Transformation'
-      }, {
-        en: 'VendorOption',
-        ti: '.VendorOption'
-      }, {
-        en: 'LayerFeatureConstraints',
-        ti: '.LayerFeatureConstraints'
-      }, {
-        en: 'EARLIEST_ON_TOP',
-        ti: '.EARLIESTONTOP'
-      }, {
-        en: 'ShadedRelief',
-        ti: '.ShadedRelief'
-      }, {
-        en: 'Histogram',
-        ti: '.Histogram'
-      }, {
-        en: 'Title'
-      }, {
-        en: 'NamedLayer',
-        ti: '.NamedLayer'
-      }, {
-        en: 'Halo',
-        ti: '.Halo'
-      }, {
-        en: 'ChannelSelection',
-        ti: '.ChannelSelection'
-      }, {
-        en: 'RANDOM',
-        ti: '.RANDOM'
-      }, {
-        en: 'OnlineResource',
-        ti: '.OnlineResource'
-      }, {
-        en: 'MinScaleDenominator',
-        ti: 'Double'
-      }, {
-        en: 'Mark',
-        ti: '.Mark'
-      }, {
-        en: 'ContrastEnhancement',
-        ti: '.ContrastEnhancement'
-      }, {
-        en: 'Normalize',
-        ti: '.Normalize'
-      }, {
-        en: 'ExternalGraphic',
-        ti: '.ExternalGraphic'
-      }, {
-        en: 'PerpendicularOffset',
-        ti: '.ParameterValueType'
-      }, {
-        en: 'Name'
-      }, {
-        en: 'AnchorPointY',
-        ti: '.ParameterValueType'
-      }, {
-        en: 'AVERAGE',
-        ti: '.AVERAGE'
-      }, {
-        en: 'Priority',
-        ti: '.ParameterValueType'
-      }, {
-        en: 'ElseFilter',
-        ti: '.ElseFilter'
-      }, {
-        en: 'SemanticTypeIdentifier'
-      }, {
-        en: 'PolygonSymbolizer',
-        ti: '.PolygonSymbolizer',
-        sh: 'Symbolizer'
-      }, {
-        en: 'IsDefault'
-      }, {
-        en: 'GrayChannel',
-        ti: '.SelectedChannelType'
-      }, {
-        en: 'Service'
-      }, {
-        en: 'RemoteOWS',
-        ti: '.RemoteOWS'
-      }, {
-        en: 'LATEST_ON_TOP',
-        ti: '.LATESTONTOP'
-      }, {
-        en: 'Stroke',
-        ti: '.Stroke'
-      }]
-  };
-  return {
-    SLD_1_0_0: SLD_1_0_0
-  };
-};
-if (true) {
-  !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (SLD_1_0_0_GeoServer_Module_Factory),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-}
-else {
-  var SLD_1_0_0_GeoServer_Module = SLD_1_0_0_GeoServer_Module_Factory();
-  if (typeof module !== 'undefined' && module.exports) {
-    module.exports.SLD_1_0_0 = SLD_1_0_0_GeoServer_Module.SLD_1_0_0;
-  }
-  else {
-    var SLD_1_0_0 = SLD_1_0_0_GeoServer_Module.SLD_1_0_0;
-  }
-}
-
-/***/ }),
-
-/***/ 50:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Check if we're required to add a port number.
- *
- * @see https://url.spec.whatwg.org/#default-port
- * @param {Number|String} port Port number we need to check
- * @param {String} protocol Protocol we need to check against.
- * @returns {Boolean} Is it a default port for the given protocol
- * @api private
- */
-module.exports = function required(port, protocol) {
-  protocol = protocol.split(':')[0];
-  port = +port;
-
-  if (!port) return false;
-
-  switch (protocol) {
-    case 'http':
-    case 'ws':
-    return port !== 80;
-
-    case 'https':
-    case 'wss':
-    return port !== 443;
-
-    case 'ftp':
-    return port !== 21;
-
-    case 'gopher':
-    return port !== 70;
-
-    case 'file':
-    return false;
-  }
-
-  return port !== 0;
-};
-
-
-/***/ }),
-
-/***/ 51:
+/***/ 39:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 
-var required = __webpack_require__(50)
-  , qs = __webpack_require__(45)
+var required = __webpack_require__(52)
+  , qs = __webpack_require__(47)
   , protocolre = /^([a-z][a-z0-9.+-]*:)?(\/\/)?([\S\s]*)/i
   , slashes = /^[A-Za-z][A-Za-z0-9+-.]*:\/\//;
 
@@ -4974,8 +1514,13 @@ function set(part, value, fn) {
       break;
 
     case 'pathname':
-      url.pathname = value.length && value.charAt(0) !== '/' ? '/' + value : value;
-
+    case 'hash':
+      if (value) {
+        var char = part === 'pathname' ? '/' : '#';
+        url[part] = value.charAt(0) !== char ? char + value : value;
+      } else {
+        url[part] = value;
+      }
       break;
 
     default:
@@ -5047,48 +1592,133 @@ module.exports = URL;
 
 /***/ }),
 
-/***/ 596:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(378);
-if(typeof content === 'string') content = [[module.i, content, '']];
-// add the styles to the DOM
-var update = __webpack_require__(40)(content, {});
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../../../node_modules/css-loader/index.js!./style.css", function() {
-			var newContent = require("!!../../../node_modules/css-loader/index.js!./style.css");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-
-/***/ 612:
+/***/ 47:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _IdentifyWidget = __webpack_require__(283);
+var has = Object.prototype.hasOwnProperty;
 
-var _IdentifyWidget2 = _interopRequireDefault(_IdentifyWidget);
+/**
+ * Decode a URI encoded string.
+ *
+ * @param {String} input The URI encoded string.
+ * @returns {String} The decoded string.
+ * @api private
+ */
+function decode(input) {
+  return decodeURIComponent(input.replace(/\+/g, ' '));
+}
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+/**
+ * Simple query string parser.
+ *
+ * @param {String} query The query string that needs to be parsed.
+ * @returns {Object}
+ * @api public
+ */
+function querystring(query) {
+  var parser = /([^=?&]+)=?([^&]*)/g
+    , result = {}
+    , part;
+
+  //
+  // Little nifty parsing hack, leverage the fact that RegExp.exec increments
+  // the lastIndex property so we can continue executing this loop until we've
+  // parsed all results.
+  //
+  for (;
+    part = parser.exec(query);
+    result[decode(part[1])] = decode(part[2])
+  );
+
+  return result;
+}
+
+/**
+ * Transform a query string to an object.
+ *
+ * @param {Object} obj Object that should be transformed.
+ * @param {String} prefix Optional prefix.
+ * @returns {String}
+ * @api public
+ */
+function querystringify(obj, prefix) {
+  prefix = prefix || '';
+
+  var pairs = [];
+
+  //
+  // Optionally prefix with a '?' if needed
+  //
+  if ('string' !== typeof prefix) prefix = '?';
+
+  for (var key in obj) {
+    if (has.call(obj, key)) {
+      pairs.push(encodeURIComponent(key) +'='+ encodeURIComponent(obj[key]));
+    }
+  }
+
+  return pairs.length ? prefix + pairs.join('&') : '';
+}
+
+//
+// Expose the module.
+//
+exports.stringify = querystringify;
+exports.parse = querystring;
+
 
 /***/ }),
 
-/***/ 74:
+/***/ 52:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Check if we're required to add a port number.
+ *
+ * @see https://url.spec.whatwg.org/#default-port
+ * @param {Number|String} port Port number we need to check
+ * @param {String} protocol Protocol we need to check against.
+ * @returns {Boolean} Is it a default port for the given protocol
+ * @api private
+ */
+module.exports = function required(port, protocol) {
+  protocol = protocol.split(':')[0];
+  port = +port;
+
+  if (!port) return false;
+
+  switch (protocol) {
+    case 'http':
+    case 'ws':
+    return port !== 80;
+
+    case 'https':
+    case 'wss':
+    return port !== 443;
+
+    case 'ftp':
+    return port !== 21;
+
+    case 'gopher':
+    return port !== 70;
+
+    case 'file':
+    return false;
+  }
+
+  return port !== 0;
+};
+
+
+/***/ }),
+
+/***/ 57:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _jsonix_factory = function(_jsonix_xmldom, _jsonix_xmlhttprequest, _jsonix_fs)
@@ -11227,11 +7857,48 @@ else
 
 /***/ }),
 
-<<<<<<< Updated upstream
-/***/ 99:
-=======
-/***/ 98:
->>>>>>> Stashed changes
+/***/ 604:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(379);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// add the styles to the DOM
+var update = __webpack_require__(38)(content, {});
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../../node_modules/css-loader/index.js!./style.css", function() {
+			var newContent = require("!!../../../node_modules/css-loader/index.js!./style.css");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ 621:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _IdentifyWidget = __webpack_require__(292);
+
+var _IdentifyWidget2 = _interopRequireDefault(_IdentifyWidget);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+
+/***/ 75:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var XLink_1_0_Module_Factory = function () {
@@ -11463,6 +8130,3308 @@ else {
   }
 }
 
+/***/ }),
+
+/***/ 76:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Copyright 2015-present Boundless Spatial Inc., http://boundlessgeo.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Licensed under the Apache License, Version 2.0 (the "License").
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * You may not use this file except in compliance with the License.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * You may obtain a copy of the License at
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * http://www.apache.org/licenses/LICENSE-2.0
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Unless required by applicable law or agreed to in writing, software
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * distributed under the License is distributed on an "AS IS" BASIS,
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * See the License for the specific language governing permissions and limitations under the License.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
+
+var _util = __webpack_require__(22);
+
+var _util2 = _interopRequireDefault(_util);
+
+var _urlParse = __webpack_require__(39);
+
+var _urlParse2 = _interopRequireDefault(_urlParse);
+
+var _openlayers = __webpack_require__(11);
+
+var _openlayers2 = _interopRequireDefault(_openlayers);
+
+var _SLDService = __webpack_require__(78);
+
+var _SLDService2 = _interopRequireDefault(_SLDService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var wmsCapsFormat = new _openlayers2.default.format.WMSCapabilities();
+var wmsGetFeatureInfoFormats = {
+  'application/json': new _openlayers2.default.format.GeoJSON(),
+  'application/vnd.ogc.gml': new _openlayers2.default.format.WMSGetFeatureInfo()
+};
+
+var WMSService = function () {
+  function WMSService() {
+    _classCallCheck(this, WMSService);
+  }
+
+  _createClass(WMSService, [{
+    key: 'getCapabilitiesUrl',
+    value: function getCapabilitiesUrl(url, opt_proxy) {
+      var urlObj = new _urlParse2.default(url, true);
+      urlObj.set('query', Object.assign(urlObj.query, {
+        service: 'WMS',
+        request: 'GetCapabilities',
+        version: '1.3.0'
+      }));
+      return _util2.default.getProxiedUrl(urlObj.toString(), opt_proxy);
+    }
+  }, {
+    key: '_getGetMapUrl',
+    value: function _getGetMapUrl(info) {
+      var dcp = info.Capability.Request.GetMap.DCPType;
+      for (var i = 0, ii = dcp.length; i < ii; ++i) {
+        if (dcp[i].HTTP && dcp[i].HTTP.Get) {
+          return dcp[i].HTTP.Get.OnlineResource;
+        }
+      }
+    }
+  }, {
+    key: 'getCapabilities',
+    value: function getCapabilities(url, onSuccess, onFailure, opt_proxy, opt_requestHeaders) {
+      return _util2.default.doGET(this.getCapabilitiesUrl(url, opt_proxy), function (xmlhttp) {
+        var info = wmsCapsFormat.read(xmlhttp.responseText);
+        onSuccess.call(this, info.Capability.Layer, this._getGetMapUrl(info));
+      }, function (xmlhttp) {
+        onFailure.call(this, xmlhttp);
+      }, this, opt_requestHeaders);
+    }
+  }, {
+    key: 'createLayerFromGetCaps',
+    value: function createLayerFromGetCaps(url, layerName, projection, callback, opt_proxy) {
+      this.getCapabilities(url, function (layerInfo, getMapUrl) {
+        for (var i = 0, ii = layerInfo.Layer.length; i < ii; ++i) {
+          if (layerInfo.Layer[i].Name === layerName) {
+            return callback.call(this, this.createLayer(layerInfo.Layer[i], getMapUrl || url, { title: layerInfo.Layer[i].Title }, projection, opt_proxy));
+          }
+        }
+      }, function () {}, opt_proxy);
+    }
+  }, {
+    key: 'createLayer',
+    value: function createLayer(layer, url, titleObj, projection, opt_proxy) {
+      var getLegendUrl = function getLegendUrl(layer) {
+        if (layer.Style && layer.Style.length === 1) {
+          if (layer.Style[0].LegendURL && layer.Style[0].LegendURL.length >= 1) {
+            return layer.Style[0].LegendURL[0].OnlineResource;
+          }
+        }
+      };
+      var units = projection.getUnits();
+      var source = new _openlayers2.default.source.TileWMS({
+        url: url,
+        wrapX: layer.Layer ? true : false,
+        crossOrigin: 'anonymous',
+        params: {
+          LAYERS: layer.Name,
+          TILED: true
+        }
+      });
+      if (opt_proxy) {
+        source.once('tileloaderror', function () {
+          source.setTileLoadFunction(function () {
+            var tileLoadFn = source.getTileLoadFunction();
+            return function (tile, src) {
+              tileLoadFn(tile, _util2.default.getProxiedUrl(src, opt_proxy));
+            };
+          }());
+        });
+      }
+      return new _openlayers2.default.layer.Tile({
+        title: titleObj.title,
+        emptyTitle: titleObj.empty,
+        id: layer.Name,
+        name: layer.Name,
+        legendUrl: getLegendUrl(layer),
+        minResolution: layer.MinScaleDenominator > 0 ? _util2.default.getResolutionForScale(layer.MinScaleDenominator, units) : undefined,
+        maxResolution: layer.MaxScaleDenominator > 0 ? _util2.default.getResolutionForScale(layer.MaxScaleDenominator, units) : undefined,
+        isRemovable: true,
+        isSelectable: true,
+        isWFST: true,
+        timeInfo: _util2.default.getTimeInfo(layer),
+        type: layer.Layer ? 'base' : undefined,
+        EX_GeographicBoundingBox: layer.EX_GeographicBoundingBox,
+        popupInfo: '#AllAttributes',
+        source: source
+      });
+    }
+  }, {
+    key: 'getStylesUrl',
+    value: function getStylesUrl(url, layer, opt_proxy) {
+      var urlObj = new _urlParse2.default(url);
+      urlObj.set('query', {
+        service: 'WMS',
+        request: 'GetStyles',
+        layers: layer.get('name'),
+        version: '1.1.1'
+      });
+      return _util2.default.getProxiedUrl(urlObj.toString(), opt_proxy);
+    }
+  }, {
+    key: 'getStyles',
+    value: function getStyles(url, layer, onSuccess, onFailure, opt_proxy, opt_requestHeaders) {
+      return _util2.default.doGET(this.getStylesUrl(url, layer, opt_proxy), function (xmlhttp) {
+        var info = _SLDService2.default.parse(xmlhttp.responseText);
+        onSuccess.call(this, info);
+      }, function (xmlhttp) {
+        onFailure.call(this, xmlhttp);
+      }, this, opt_requestHeaders);
+    }
+  }, {
+    key: 'getFeatureInfoUrl',
+    value: function getFeatureInfoUrl(layer, coordinate, view, infoFormat, opt_proxy) {
+      var resolution = view.getResolution(),
+          projection = view.getProjection();
+      var url = layer.getSource().getGetFeatureInfoUrl(coordinate, resolution, projection, {
+        'INFO_FORMAT': infoFormat
+      });
+      return _util2.default.getProxiedUrl(url, opt_proxy);
+    }
+  }, {
+    key: 'getFeatureInfo',
+    value: function getFeatureInfo(layer, coordinate, map, infoFormat, onSuccess, onFailure, opt_proxy, opt_requestHeaders) {
+      var view = map.getView();
+      _util2.default.doGET(this.getFeatureInfoUrl(layer, coordinate, view, infoFormat, opt_proxy), function (response) {
+        var result = {};
+        if (infoFormat === 'text/plain' || infoFormat === 'text/html') {
+          if (response.responseText.trim() !== 'no features were found') {
+            result.text = response.responseText;
+          } else {
+            result = false;
+          }
+        } else {
+          result.features = wmsGetFeatureInfoFormats[infoFormat].readFeatures(response.responseText);
+        }
+        result.layer = layer;
+        onSuccess.call(this, result);
+      }, onFailure, this, opt_requestHeaders);
+    }
+  }]);
+
+  return WMSService;
+}();
+
+exports.default = new WMSService();
+
+/***/ }),
+
+/***/ 78:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Copyright 2015-present Boundless Spatial Inc., http://boundlessgeo.com
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Licensed under the Apache License, Version 2.0 (the "License").
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * You may not use this file except in compliance with the License.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * You may obtain a copy of the License at
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * http://www.apache.org/licenses/LICENSE-2.0
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Unless required by applicable law or agreed to in writing, software
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * distributed under the License is distributed on an "AS IS" BASIS,
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * See the License for the specific language governing permissions and limitations under the License.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
+
+var _jsonix = __webpack_require__(57);
+
+var _XLink_1_ = __webpack_require__(75);
+
+var _Filter_1_0_ = __webpack_require__(88);
+
+var _GML_2_1_ = __webpack_require__(89);
+
+var _SLD_1_0_0_GeoServer = __webpack_require__(90);
+
+var _util = __webpack_require__(22);
+
+var _util2 = _interopRequireDefault(_util);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var sldNamespace = 'http://www.opengis.net/sld';
+var ogcNamespace = 'http://www.opengis.net/ogc';
+
+var context = new _jsonix.Jsonix.Context([_XLink_1_.XLink_1_0, _Filter_1_0_.Filter_1_0_0, _GML_2_1_.GML_2_1_2, _SLD_1_0_0_GeoServer.SLD_1_0_0], {
+  namespacePrefixes: {
+    'http://www.w3.org/1999/xlink': 'xlink',
+    'http://www.opengis.net/sld': 'sld',
+    'http://www.opengis.net/ogc': 'ogc'
+  }
+});
+var marshaller = context.createMarshaller();
+var unmarshaller = context.createUnmarshaller();
+
+var graphicFormats = {
+  'image/jpeg': /\.jpe?g$/i,
+  'image/gif': /\.gif$/i,
+  'image/png': /\.png$/i
+};
+
+// make sure <= is on top of < etc.
+var comparisonOps = {
+  '!=': 'PropertyIsNotEqualTo',
+  '==': 'PropertyIsEqualTo',
+  '>=': 'PropertyIsGreaterThanOrEqualTo',
+  '<=': 'PropertyIsLessThanOrEqualTo',
+  '>': 'PropertyIsGreaterThan',
+  '<': 'PropertyIsLessThan'
+};
+
+var SLDService = function () {
+  function SLDService() {
+    _classCallCheck(this, SLDService);
+  }
+
+  _createClass(SLDService, [{
+    key: 'parse',
+    value: function parse(sld) {
+      var result = {};
+      var info = unmarshaller.unmarshalString(sld).value;
+      var layer = info.namedLayerOrUserLayer[0];
+      result.layerName = layer.name;
+      var namedStyleOrUserStyle = layer.namedStyleOrUserStyle[0];
+      result.styleName = namedStyleOrUserStyle.name;
+      result.styleTitle = namedStyleOrUserStyle.title;
+      result.featureTypeStyles = [];
+      for (var i = 0, ii = namedStyleOrUserStyle.featureTypeStyle.length; i < ii; ++i) {
+        var featureTypeStyle = namedStyleOrUserStyle.featureTypeStyle[i];
+        var fts = {
+          rules: [],
+          featureTypeStyleName: featureTypeStyle.name
+        };
+        for (var j = 0, jj = featureTypeStyle.rule.length; j < jj; ++j) {
+          fts.rules.push(this.parseRule(featureTypeStyle.rule[j]));
+        }
+        result.featureTypeStyles.push(fts);
+      }
+      return result;
+    }
+  }, {
+    key: 'parseRule',
+    value: function parseRule(ruleObj) {
+      var rule = {};
+      rule.name = ruleObj.name;
+      rule.title = ruleObj.title;
+      rule.minScaleDenominator = ruleObj.minScaleDenominator;
+      rule.maxScaleDenominator = ruleObj.maxScaleDenominator;
+      rule.symbolizers = [];
+      for (var i = 0, ii = ruleObj.symbolizer.length; i < ii; ++i) {
+        rule.symbolizers.push(this.parseSymbolizer(ruleObj.symbolizer[i]));
+      }
+      if (ruleObj.filter) {
+        rule.expression = this.filterToExpression(ruleObj.filter);
+      }
+      return rule;
+    }
+  }, {
+    key: 'parseComparisonOps',
+    value: function parseComparisonOps(op) {
+      var name, value, operator;
+      for (var key in comparisonOps) {
+        if (comparisonOps[key] === op.name.localPart) {
+          operator = key;
+          break;
+        }
+      }
+      for (var i = 0, ii = op.value.expression.length; i < ii; ++i) {
+        var expr = op.value.expression[i];
+        if (expr.name.localPart === 'PropertyName') {
+          name = expr.value.content[0];
+        }
+        if (expr.name.localPart === 'Literal') {
+          value = expr.value.content[0];
+        }
+      }
+      if (op.name.localPart === 'PropertyIsBetween') {
+        name = op.value.expression.value.content[0];
+        var lower = op.value.lowerBoundary.expression.value.content[0];
+        var upper = op.value.upperBoundary.expression.value.content[0];
+        return ['all', ['>=', name, lower], ['<=', name, upper]];
+      } else {
+        return [operator, name, value];
+      }
+    }
+  }, {
+    key: 'parseLogicOps',
+    value: function parseLogicOps(logicOps) {
+      var expressions = [];
+      if (logicOps.name.localPart === 'And') {
+        expressions.push('all');
+      } else if (logicOps.name.localPart === 'Or') {
+        expressions.push('any');
+      }
+      for (var i = 0, ii = logicOps.value.ops.length; i < ii; ++i) {
+        var op = logicOps.value.ops[i];
+        var subExpressions = this.parseComparisonOps(op);
+        if (subExpressions[0] === 'all') {
+          return subExpressions;
+        } else {
+          expressions.push(subExpressions);
+        }
+      }
+      return expressions;
+    }
+  }, {
+    key: 'filterToExpression',
+    value: function filterToExpression(filter) {
+      if (filter.comparisonOps) {
+        return this.parseComparisonOps(filter.comparisonOps);
+      } else if (filter.logicOps) {
+        return this.parseLogicOps(filter.logicOps);
+      }
+    }
+  }, {
+    key: 'parseSymbolizer',
+    value: function parseSymbolizer(symbolizerObj) {
+      if (symbolizerObj.name.localPart === 'PolygonSymbolizer') {
+        return this.parsePolygonSymbolizer(symbolizerObj.value);
+      } else if (symbolizerObj.name.localPart === 'LineSymbolizer') {
+        return this.parseLineSymbolizer(symbolizerObj.value);
+      } else if (symbolizerObj.name.localPart === 'PointSymbolizer') {
+        return this.parsePointSymbolizer(symbolizerObj.value);
+      } else if (symbolizerObj.name.localPart === 'TextSymbolizer') {
+        return this.parseTextSymbolizer(symbolizerObj.value);
+      }
+    }
+  }, {
+    key: 'parseTextSymbolizer',
+    value: function parseTextSymbolizer(textObj) {
+      var result = {};
+      var labelInfo = textObj.label.content[0].value;
+      if (labelInfo.TYPE_NAME === 'Filter_1_0_0.PropertyNameType') {
+        result.labelAttribute = labelInfo.content[0];
+      }
+      if (textObj.vendorOption) {
+        result.vendorOption = textObj.vendorOption;
+      }
+      if (textObj.labelPlacement) {
+        if (textObj.labelPlacement.pointPlacement) {
+          var anchorPoint = textObj.labelPlacement.pointPlacement.anchorPoint;
+          var displacement = textObj.labelPlacement.pointPlacement.displacement;
+          result.labelPlacement = {
+            type: 'POINT'
+          };
+          if (anchorPoint) {
+            result.labelPlacement.anchorPoint = [anchorPoint.anchorPointX.content[0], anchorPoint.anchorPointY.content[0]];
+          }
+          if (displacement) {
+            result.labelPlacement.displacement = [displacement.displacementX.content[0], displacement.displacementY.content[0]];
+          }
+          if (textObj.labelPlacement.pointPlacement.rotation !== undefined) {
+            result.labelPlacement.rotation = textObj.labelPlacement.pointPlacement.rotation.content[0];
+          }
+        } else if (textObj.labelPlacement.linePlacement) {
+          result.labelPlacement = {
+            type: 'LINE'
+          };
+        }
+      }
+      if (textObj.font && textObj.font.cssParameter) {
+        for (var i = 0, ii = textObj.font.cssParameter.length; i < ii; ++i) {
+          var param = textObj.font.cssParameter[i];
+          if (param.name === 'font-size') {
+            result.fontSize = param.content[0];
+          } else if (param.name === 'font-family') {
+            result.fontFamily = param.content[0];
+          } else if (param.name === 'font-style') {
+            result.fontStyle = param.content[0];
+          } else if (param.name === 'font-weight') {
+            result.fontWeight = param.content[0];
+          }
+        }
+      }
+      if (textObj.fill) {
+        result.fontColor = this.parseFill(textObj.fill).fillColor;
+      }
+      if (textObj.halo) {
+        result.halo = {
+          fill: this.parseFill(textObj.halo.fill).fillColor,
+          radius: textObj.halo.radius.content[0]
+        };
+      }
+      return result;
+    }
+  }, {
+    key: '_parseGraphic',
+    value: function _parseGraphic(graphic) {
+      var result = {};
+      if (graphic.opacity) {
+        result.opacity = parseFloat(graphic.opacity.content[0]);
+      }
+      if (graphic.rotation) {
+        result.rotation = graphic.rotation.content[0];
+      }
+      if (graphic.size) {
+        result.symbolSize = graphic.size.content[0];
+      }
+      var externalGraphicOrMark = graphic.externalGraphicOrMark[0];
+      if (externalGraphicOrMark.TYPE_NAME === 'SLD_1_0_0.ExternalGraphic') {
+        result.externalGraphic = externalGraphicOrMark.onlineResource.href;
+      } else {
+        if (externalGraphicOrMark.wellKnownName) {
+          result.symbolType = externalGraphicOrMark.wellKnownName.content[0];
+        }
+        var fill = externalGraphicOrMark.fill;
+        if (fill) {
+          result.fillColor = this.parseFill(fill).fillColor;
+        } else {
+          result.hasFill = false;
+        }
+        var stroke = externalGraphicOrMark.stroke;
+        if (stroke) {
+          Object.assign(result, this.parseStroke(stroke));
+        } else {
+          result.hasStroke = false;
+        }
+      }
+      return result;
+    }
+  }, {
+    key: 'parsePointSymbolizer',
+    value: function parsePointSymbolizer(pointObj) {
+      var result = this._parseGraphic(pointObj.graphic);
+      result.type = 'Point';
+      return result;
+    }
+  }, {
+    key: 'parseLineSymbolizer',
+    value: function parseLineSymbolizer(lineObj) {
+      var result = this.parseStroke(lineObj.stroke);
+      result.type = 'LineString';
+      return result;
+    }
+  }, {
+    key: 'parsePolygonSymbolizer',
+    value: function parsePolygonSymbolizer(polyObj) {
+      var result = {
+        type: 'Polygon'
+      };
+      if (polyObj.fill) {
+        var fill = this.parseFill(polyObj.fill);
+        if (fill.fillColor) {
+          result.fillColor = fill.fillColor;
+        } else if (fill.graphicFill) {
+          result.graphicFill = fill.graphicFill;
+        }
+      } else {
+        result.hasFill = false;
+      }
+      if (polyObj.stroke) {
+        Object.assign(result, this.parseStroke(polyObj.stroke));
+      } else {
+        result.hasStroke = false;
+      }
+      return result;
+    }
+  }, {
+    key: 'parseFill',
+    value: function parseFill(fillObj) {
+      if (fillObj.graphicFill) {
+        return {
+          graphicFill: this._parseGraphic(fillObj.graphicFill.graphic)
+        };
+      } else {
+        var fillColor = {};
+        for (var i = 0, ii = fillObj.cssParameter.length; i < ii; ++i) {
+          if (fillObj.cssParameter[i].name === 'fill') {
+            fillColor.hex = fillObj.cssParameter[i].content[0];
+            fillColor.rgb = _util2.default.hexToRgb(fillColor.hex);
+          } else if (fillObj.cssParameter[i].name === 'fill-opacity') {
+            fillColor.rgb = Object.assign(fillColor.rgb, { a: parseFloat(fillObj.cssParameter[i].content[0]) });
+          }
+        }
+        return {
+          fillColor: fillColor
+        };
+      }
+    }
+  }, {
+    key: 'parseStroke',
+    value: function parseStroke(strokeObj) {
+      var stroke = {};
+      if (strokeObj.cssParameter) {
+        for (var i = 0, ii = strokeObj.cssParameter.length; i < ii; ++i) {
+          if (strokeObj.cssParameter[i].name === 'stroke') {
+            stroke.strokeColor = {
+              hex: strokeObj.cssParameter[i].content[0],
+              rgb: _util2.default.hexToRgb(strokeObj.cssParameter[i].content[0])
+            };
+          } else if (strokeObj.cssParameter[i].name === 'stroke-opacity') {
+            stroke.strokeColor.rgb = Object.assign(stroke.strokeColor.rgb, { a: parseFloat(strokeObj.cssParameter[i].content[0]) });
+          } else if (strokeObj.cssParameter[i].name === 'stroke-width') {
+            stroke.strokeWidth = parseFloat(strokeObj.cssParameter[i].content[0]);
+          } else if (strokeObj.cssParameter[i].name === 'stroke-dasharray') {
+            stroke.strokeDashArray = strokeObj.cssParameter[i].content[0];
+          } else if (strokeObj.cssParameter[i].name === 'stroke-dashoffset') {
+            stroke.strokeDashOffset = strokeObj.cssParameter[i].content[0];
+          } else if (strokeObj.cssParameter[i].name === 'stroke-linecap') {
+            stroke.strokeLineCap = strokeObj.cssParameter[i].content[0];
+          }
+        }
+      }
+      if (strokeObj.graphicStroke) {
+        stroke.graphic = this._parseGraphic(strokeObj.graphicStroke.graphic);
+      }
+      return stroke;
+    }
+  }, {
+    key: 'createFill',
+    value: function createFill(styleState) {
+      if (styleState.graphicFill) {
+        return {
+          graphicFill: {
+            graphic: this._createGraphic(styleState.graphicFill)
+          }
+        };
+      } else {
+        var cssParameter = [{
+          name: 'fill',
+          content: [styleState.fillColor.hex]
+        }];
+        if (styleState.fillColor.rgb.a !== undefined) {
+          cssParameter.push({
+            name: 'fill-opacity',
+            content: [String(styleState.fillColor.rgb.a)]
+          });
+        }
+        return {
+          cssParameter: cssParameter
+        };
+      }
+    }
+  }, {
+    key: 'createStroke',
+    value: function createStroke(styleState) {
+      var graphic;
+      if (styleState.graphic) {
+        graphic = this._createGraphic(styleState.graphic);
+      }
+      var cssParameters = [];
+      if (styleState.strokeColor) {
+        cssParameters.push({
+          name: 'stroke',
+          content: [styleState.strokeColor.hex]
+        });
+        if (styleState.strokeColor.rgb.a !== undefined) {
+          cssParameters.push({
+            name: 'stroke-opacity',
+            content: [String(styleState.strokeColor.rgb.a)]
+          });
+        }
+      }
+      if (styleState.strokeWidth !== undefined) {
+        cssParameters.push({
+          name: 'stroke-width',
+          content: [String(styleState.strokeWidth)]
+        });
+      }
+      if (styleState.strokeDashArray !== undefined) {
+        cssParameters.push({
+          name: 'stroke-dasharray',
+          content: [styleState.strokeDashArray]
+        });
+      }
+      if (styleState.strokeDashOffset !== undefined) {
+        cssParameters.push({
+          name: 'stroke-dashoffset',
+          content: [styleState.strokeDashOffset]
+        });
+      }
+      if (styleState.strokeLineCap !== undefined) {
+        cssParameters.push({
+          name: 'stroke-linecap',
+          content: [styleState.strokeLineCap]
+        });
+      }
+      var result;
+      if (cssParameters.length > 0 || graphic) {
+        result = {};
+        if (cssParameters.length > 0) {
+          result.cssParameter = cssParameters;
+        }
+        if (graphic) {
+          result.graphicStroke = {
+            graphic: graphic
+          };
+        }
+      }
+      return result;
+    }
+  }, {
+    key: 'createPolygonSymbolizer',
+    value: function createPolygonSymbolizer(styleState) {
+      var result = {
+        name: {
+          localPart: 'PolygonSymbolizer',
+          namespaceURI: sldNamespace
+        },
+        value: {
+          fill: (styleState.fillColor || styleState.graphicFill) && styleState.hasFill !== false ? this.createFill(styleState) : undefined,
+          stroke: styleState.hasStroke !== false ? this.createStroke(styleState) : undefined
+        }
+      };
+      if (result.value.fill || result.value.stroke) {
+        return result;
+      } else {
+        return undefined;
+      }
+    }
+  }, {
+    key: 'createLineSymbolizer',
+    value: function createLineSymbolizer(styleState) {
+      var stroke = this.createStroke(styleState);
+      if (stroke) {
+        return {
+          name: {
+            localPart: 'LineSymbolizer',
+            namespaceURI: sldNamespace
+          },
+          value: {
+            stroke: stroke
+          }
+        };
+      } else {
+        return undefined;
+      }
+    }
+  }, {
+    key: '_getGraphicFormat',
+    value: function _getGraphicFormat(href) {
+      var format;
+      for (var key in graphicFormats) {
+        if (graphicFormats[key].test(href)) {
+          format = key;
+          break;
+        }
+      }
+      return format || 'image/png';
+    }
+  }, {
+    key: '_createGraphic',
+    value: function _createGraphic(styleState) {
+      var graphicOrMark;
+      if (styleState.externalGraphic) {
+        graphicOrMark = [{
+          TYPE_NAME: 'SLD_1_0_0.ExternalGraphic',
+          onlineResource: { href: styleState.externalGraphic },
+          format: this._getGraphicFormat(styleState.externalGraphic)
+        }];
+      } else if (styleState.symbolType) {
+        graphicOrMark = [{
+          TYPE_NAME: 'SLD_1_0_0.Mark',
+          fill: styleState.hasFill !== false && styleState.fillColor ? this.createFill(styleState) : undefined,
+          stroke: styleState.hasStroke !== false ? this.createStroke(styleState) : undefined,
+          wellKnownName: [styleState.symbolType]
+        }];
+      } else {
+        return undefined;
+      }
+      var result = {
+        externalGraphicOrMark: graphicOrMark,
+        size: {
+          content: [styleState.symbolSize]
+        }
+      };
+      if (styleState.rotation !== undefined) {
+        result.rotation = [styleState.rotation];
+      }
+      if (styleState.externalGraphic && styleState.opacity !== undefined) {
+        result.opacity = {
+          content: ['' + styleState.opacity]
+        };
+      }
+      return result;
+    }
+  }, {
+    key: 'createPointSymbolizer',
+    value: function createPointSymbolizer(styleState) {
+      var graphic = this._createGraphic(styleState);
+      if (graphic) {
+        return {
+          name: {
+            localPart: 'PointSymbolizer',
+            namespaceURI: sldNamespace
+          },
+          value: {
+            graphic: graphic
+          }
+        };
+      } else {
+        return undefined;
+      }
+    }
+  }, {
+    key: 'createTextSymbolizer',
+    value: function createTextSymbolizer(styleState) {
+      var cssParameter = [];
+      if (styleState.fontFamily) {
+        cssParameter.push({
+          name: 'font-family',
+          content: [styleState.fontFamily]
+        });
+      }
+      if (styleState.fontSize) {
+        cssParameter.push({
+          name: 'font-size',
+          content: [String(styleState.fontSize)]
+        });
+      }
+      if (styleState.fontStyle) {
+        cssParameter.push({
+          name: 'font-style',
+          content: [styleState.fontStyle]
+        });
+      }
+      if (styleState.fontWeight) {
+        cssParameter.push({
+          name: 'font-weight',
+          content: [styleState.fontWeight]
+        });
+      }
+      var result = {
+        name: {
+          localPart: 'TextSymbolizer',
+          namespaceURI: sldNamespace
+        },
+        value: {
+          fill: styleState.fontColor ? {
+            cssParameter: [{
+              name: 'fill',
+              content: [styleState.fontColor.hex]
+            }]
+          } : undefined,
+          font: cssParameter.length > 0 ? {
+            cssParameter: cssParameter
+          } : undefined,
+          label: {
+            content: [{
+              name: {
+                localPart: 'PropertyName',
+                namespaceURI: ogcNamespace
+              },
+              value: {
+                content: [styleState.labelAttribute]
+              }
+            }]
+          },
+          vendorOption: styleState.vendorOption
+        }
+      };
+      if (styleState.halo) {
+        result.value.halo = {
+          fill: {
+            cssParameter: [{
+              name: 'fill',
+              content: [styleState.halo.fill.hex]
+            }]
+          },
+          radius: {
+            content: [styleState.halo.radius]
+          }
+        };
+      }
+      if (styleState.labelPlacement) {
+        if (styleState.labelPlacement.type === 'POINT') {
+          result.value.labelPlacement = {
+            pointPlacement: {
+              anchorPoint: {
+                anchorPointX: {
+                  content: [String(styleState.labelPlacement.anchorPoint[0])]
+                },
+                anchorPointY: {
+                  content: [String(styleState.labelPlacement.anchorPoint[1])]
+                }
+              }
+            }
+          };
+          if (styleState.labelPlacement.displacement) {
+            result.value.labelPlacement.pointPlacement.displacement = {
+              displacementX: {
+                content: [String(styleState.labelPlacement.displacement[0])]
+              },
+              displacementY: {
+                content: [String(styleState.labelPlacement.displacement[1])]
+              }
+            };
+          }
+          if (styleState.labelPlacement.rotation !== undefined) {
+            result.value.labelPlacement.pointPlacement.rotation = {
+              content: [String(styleState.labelPlacement.rotation)]
+            };
+          }
+        } else if (styleState.labelPlacement.type === 'LINE') {
+          result.value.labelPlacement = {
+            linePlacement: {}
+          };
+        }
+      }
+      return result;
+    }
+  }, {
+    key: 'expressionToFilter',
+    value: function expressionToFilter(expression) {
+      if (expression[0] === 'all' || expression[0] === 'any') {
+        var result = {
+          logicOps: {
+            name: {
+              namespaceURI: ogcNamespace,
+              localPart: expression[0] === 'all' ? 'And' : 'Or'
+            },
+            value: {
+              ops: []
+            }
+          }
+        };
+        for (var i = 1, ii = expression.length; i < ii; ++i) {
+          result.logicOps.value.ops.push(this.expressionToComparisonOp(expression[i]).comparisonOps);
+        }
+        return result;
+      } else {
+        return this.expressionToComparisonOp(expression);
+      }
+    }
+  }, {
+    key: 'expressionToComparisonOp',
+    value: function expressionToComparisonOp(expression) {
+      var operator, property, value;
+      operator = comparisonOps[expression[0]];
+      property = expression[1];
+      value = expression[2];
+      if (operator) {
+        var result = {
+          comparisonOps: {
+            name: {
+              namespaceURI: ogcNamespace,
+              localPart: operator
+            }
+          }
+        };
+        // TODO add back PropertyIsBetween
+        result.comparisonOps.value = {
+          expression: [{
+            name: {
+              namespaceURI: ogcNamespace,
+              localPart: 'PropertyName'
+            },
+            value: {
+              content: [property]
+            }
+          }, {
+            name: {
+              namespaceURI: ogcNamespace,
+              localPart: 'Literal'
+            },
+            value: {
+              content: [String(value)]
+            }
+          }]
+        };
+        return result;
+      }
+    }
+  }, {
+    key: 'createRule',
+    value: function createRule(name, title, geometryType, styleState) {
+      var filter;
+      if (styleState.expression) {
+        filter = this.expressionToFilter(styleState.expression);
+      }
+      var symbolizer = [],
+          i,
+          ii,
+          sym;
+      var functionByGeomType = {
+        'Point': this.createPointSymbolizer,
+        'LineString': this.createLineSymbolizer,
+        'Polygon': this.createPolygonSymbolizer
+      };
+      if (geometryType !== undefined) {
+        for (i = 0, ii = styleState.symbolizers.length; i < ii; ++i) {
+          sym = functionByGeomType[geometryType].call(this, styleState.symbolizers[i]);
+          if (sym) {
+            symbolizer.push(sym);
+          }
+        }
+      } else {
+        for (i = 0, ii = styleState.symbolizers.length; i < ii; ++i) {
+          var symbol = styleState.symbolizers[i];
+          if (symbol.type) {
+            sym = functionByGeomType[symbol.type].call(this, styleState.symbolizers[i]);
+            if (sym) {
+              symbolizer.push(sym);
+            }
+          }
+        }
+      }
+      for (i = 0, ii = styleState.symbolizers.length; i < ii; ++i) {
+        if (styleState.symbolizers[i].labelAttribute) {
+          symbolizer.push(this.createTextSymbolizer(styleState.symbolizers[i]));
+        }
+      }
+      return {
+        name: name,
+        title: title,
+        symbolizer: symbolizer,
+        minScaleDenominator: styleState.minScaleDenominator,
+        maxScaleDenominator: styleState.maxScaleDenominator,
+        filter: filter
+      };
+    }
+  }, {
+    key: 'createSLD',
+    value: function createSLD(layer, geometryType, featureTypeStyles) {
+      var layerName = layer.get('name');
+      var styleInfo = layer.get('styleInfo');
+      var result = {
+        name: {
+          namespaceURI: sldNamespace,
+          localPart: 'StyledLayerDescriptor'
+        }
+      };
+      result.value = {
+        version: '1.0.0',
+        namedLayerOrUserLayer: [{
+          TYPE_NAME: 'SLD_1_0_0.NamedLayer',
+          name: layerName,
+          namedStyleOrUserStyle: [{
+            TYPE_NAME: 'SLD_1_0_0.UserStyle',
+            name: styleInfo ? styleInfo.styleName : undefined,
+            title: styleInfo ? styleInfo.styleTitle : undefined,
+            featureTypeStyle: []
+          }]
+        }]
+      };
+      for (var i = 0, ii = featureTypeStyles.length; i < ii; ++i) {
+        var ruleContainer = [];
+        result.value.namedLayerOrUserLayer[0].namedStyleOrUserStyle[0].featureTypeStyle.push({
+          name: featureTypeStyles[i].featureTypeStyleName,
+          rule: ruleContainer
+        });
+        for (var j = 0, jj = featureTypeStyles[i].rules.length; j < jj; ++j) {
+          var rule = featureTypeStyles[i].rules[j].name;
+          var style = featureTypeStyles[i].rules[j];
+          ruleContainer.push(this.createRule(rule, style.title, geometryType, style));
+        }
+      }
+      return marshaller.marshalString(result);
+    }
+  }]);
+
+  return SLDService;
+}();
+
+exports.default = new SLDService();
+
+/***/ }),
+
+/***/ 88:
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var Filter_1_0_0_Module_Factory = function () {
+  var Filter_1_0_0 = {
+    n: 'Filter_1_0_0',
+    dens: 'http:\/\/www.opengis.net\/ogc',
+    deps: ['GML_2_1_2'],
+    tis: [{
+        ln: 'PropertyNameType',
+        bti: '.ExpressionType',
+        ps: [{
+            n: 'content',
+            col: true,
+            dom: false,
+            t: 'ae'
+          }]
+      }, {
+        ln: 'DistanceType',
+        ps: [{
+            n: 'content',
+            t: 'v'
+          }, {
+            n: 'units',
+            rq: true,
+            an: {
+              lp: 'units'
+            },
+            t: 'a'
+          }]
+      }, {
+        ln: 'LiteralType',
+        bti: '.ExpressionType',
+        ps: [{
+            n: 'content',
+            col: true,
+            dom: false,
+            t: 'ae'
+          }]
+      }, {
+        ln: 'ExpressionType'
+      }, {
+        ln: 'LowerBoundaryType',
+        ps: [{
+            n: 'expression',
+            rq: true,
+            mx: false,
+            dom: false,
+            ti: '.ExpressionType',
+            t: 'er'
+          }]
+      }, {
+        ln: 'SortByType',
+        ps: [{
+            n: 'sortProperty',
+            rq: true,
+            col: true,
+            en: 'SortProperty',
+            ti: '.SortPropertyType'
+          }]
+      }, {
+        ln: 'PropertyIsNullType',
+        bti: '.ComparisonOpsType',
+        ps: [{
+            n: 'propertyName',
+            rq: true,
+            en: 'PropertyName',
+            ti: '.PropertyNameType'
+          }, {
+            n: 'literal',
+            rq: true,
+            en: 'Literal',
+            ti: '.LiteralType'
+          }]
+      }, {
+        ln: 'FilterType',
+        ps: [{
+            n: 'spatialOps',
+            rq: true,
+            mx: false,
+            dom: false,
+            ti: '.SpatialOpsType',
+            t: 'er'
+          }, {
+            n: 'comparisonOps',
+            rq: true,
+            mx: false,
+            dom: false,
+            ti: '.ComparisonOpsType',
+            t: 'er'
+          }, {
+            n: 'logicOps',
+            rq: true,
+            mx: false,
+            dom: false,
+            ti: '.LogicOpsType',
+            t: 'er'
+          }, {
+            n: 'featureId',
+            rq: true,
+            col: true,
+            en: 'FeatureId',
+            ti: '.FeatureIdType'
+          }]
+      }, {
+        ln: 'UpperBoundaryType',
+        ps: [{
+            n: 'expression',
+            rq: true,
+            mx: false,
+            dom: false,
+            ti: '.ExpressionType',
+            t: 'er'
+          }]
+      }, {
+        ln: 'FunctionType',
+        bti: '.ExpressionType',
+        ps: [{
+            n: 'expression',
+            mno: 0,
+            col: true,
+            mx: false,
+            dom: false,
+            ti: '.ExpressionType',
+            t: 'er'
+          }, {
+            n: 'name',
+            rq: true,
+            an: {
+              lp: 'name'
+            },
+            t: 'a'
+          }]
+      }, {
+        ln: 'PropertyIsBetweenType',
+        bti: '.ComparisonOpsType',
+        ps: [{
+            n: 'expression',
+            rq: true,
+            mx: false,
+            dom: false,
+            ti: '.ExpressionType',
+            t: 'er'
+          }, {
+            n: 'lowerBoundary',
+            rq: true,
+            en: 'LowerBoundary',
+            ti: '.LowerBoundaryType'
+          }, {
+            n: 'upperBoundary',
+            rq: true,
+            en: 'UpperBoundary',
+            ti: '.UpperBoundaryType'
+          }]
+      }, {
+        ln: 'SortPropertyType',
+        ps: [{
+            n: 'propertyName',
+            rq: true,
+            en: 'PropertyName',
+            ti: '.PropertyNameType'
+          }, {
+            n: 'sortOrder',
+            en: 'SortOrder'
+          }]
+      }, {
+        ln: 'BinaryLogicOpType',
+        bti: '.LogicOpsType',
+        ps: [{
+            n: 'ops',
+            rq: true,
+            mno: 2,
+            col: true,
+            mx: false,
+            dom: false,
+            etis: [{
+                en: 'spatialOps',
+                ti: '.SpatialOpsType'
+              }, {
+                en: 'comparisonOps',
+                ti: '.ComparisonOpsType'
+              }, {
+                en: 'logicOps',
+                ti: '.LogicOpsType'
+              }],
+            t: 'ers'
+          }]
+      }, {
+        ln: 'FeatureIdType',
+        ps: [{
+            n: 'fid',
+            rq: true,
+            an: {
+              lp: 'fid'
+            },
+            t: 'a'
+          }]
+      }, {
+        ln: 'ComparisonOpsType'
+      }, {
+        ln: 'LogicOpsType'
+      }, {
+        ln: 'BinarySpatialOpType',
+        bti: '.SpatialOpsType',
+        ps: [{
+            n: 'propertyName',
+            rq: true,
+            en: 'PropertyName',
+            ti: '.PropertyNameType'
+          }, {
+            n: 'geometry',
+            rq: true,
+            mx: false,
+            dom: false,
+            en: {
+              lp: '_Geometry',
+              ns: 'http:\/\/www.opengis.net\/gml'
+            },
+            ti: 'GML_2_1_2.AbstractGeometryType',
+            t: 'er'
+          }, {
+            n: 'box',
+            rq: true,
+            en: {
+              lp: 'Box',
+              ns: 'http:\/\/www.opengis.net\/gml'
+            },
+            ti: 'GML_2_1_2.BoxType'
+          }]
+      }, {
+        ln: 'PropertyIsLikeType',
+        bti: '.ComparisonOpsType',
+        ps: [{
+            n: 'propertyName',
+            rq: true,
+            en: 'PropertyName',
+            ti: '.PropertyNameType'
+          }, {
+            n: 'literal',
+            rq: true,
+            en: 'Literal',
+            ti: '.LiteralType'
+          }, {
+            n: 'wildCard',
+            rq: true,
+            an: {
+              lp: 'wildCard'
+            },
+            t: 'a'
+          }, {
+            n: 'singleChar',
+            rq: true,
+            an: {
+              lp: 'singleChar'
+            },
+            t: 'a'
+          }, {
+            n: 'escape',
+            rq: true,
+            an: {
+              lp: 'escape'
+            },
+            t: 'a'
+          }]
+      }, {
+        ln: 'BinaryOperatorType',
+        bti: '.ExpressionType',
+        ps: [{
+            n: 'expression',
+            rq: true,
+            mno: 2,
+            mxo: 2,
+            col: true,
+            mx: false,
+            dom: false,
+            ti: '.ExpressionType',
+            t: 'er'
+          }]
+      }, {
+        ln: 'DistanceBufferType',
+        bti: '.SpatialOpsType',
+        ps: [{
+            n: 'propertyName',
+            rq: true,
+            en: 'PropertyName',
+            ti: '.PropertyNameType'
+          }, {
+            n: 'geometry',
+            rq: true,
+            mx: false,
+            dom: false,
+            en: {
+              lp: '_Geometry',
+              ns: 'http:\/\/www.opengis.net\/gml'
+            },
+            ti: 'GML_2_1_2.AbstractGeometryType',
+            t: 'er'
+          }, {
+            n: 'distance',
+            rq: true,
+            en: 'Distance',
+            ti: '.DistanceType'
+          }]
+      }, {
+        ln: 'SpatialOpsType'
+      }, {
+        ln: 'BBOXType',
+        bti: '.SpatialOpsType',
+        ps: [{
+            n: 'propertyName',
+            rq: true,
+            en: 'PropertyName',
+            ti: '.PropertyNameType'
+          }, {
+            n: 'box',
+            rq: true,
+            en: {
+              lp: 'Box',
+              ns: 'http:\/\/www.opengis.net\/gml'
+            },
+            ti: 'GML_2_1_2.BoxType'
+          }]
+      }, {
+        ln: 'UnaryLogicOpType',
+        bti: '.LogicOpsType',
+        ps: [{
+            n: 'comparisonOps',
+            rq: true,
+            mx: false,
+            dom: false,
+            ti: '.ComparisonOpsType',
+            t: 'er'
+          }, {
+            n: 'spatialOps',
+            rq: true,
+            mx: false,
+            dom: false,
+            ti: '.SpatialOpsType',
+            t: 'er'
+          }, {
+            n: 'logicOps',
+            rq: true,
+            mx: false,
+            dom: false,
+            ti: '.LogicOpsType',
+            t: 'er'
+          }]
+      }, {
+        ln: 'BinaryComparisonOpType',
+        bti: '.ComparisonOpsType',
+        ps: [{
+            n: 'expression',
+            rq: true,
+            mno: 2,
+            mxo: 2,
+            col: true,
+            mx: false,
+            dom: false,
+            ti: '.ExpressionType',
+            t: 'er'
+          }]
+      }, {
+        t: 'enum',
+        ln: 'SortOrderType',
+        vs: ['DESC', 'ASC']
+      }],
+    eis: [{
+        en: 'SortBy',
+        ti: '.SortByType'
+      }, {
+        en: 'PropertyIsNull',
+        ti: '.PropertyIsNullType',
+        sh: 'comparisonOps'
+      }, {
+        en: 'Not',
+        ti: '.UnaryLogicOpType',
+        sh: 'logicOps'
+      }, {
+        en: 'PropertyIsLessThan',
+        ti: '.BinaryComparisonOpType',
+        sh: 'comparisonOps'
+      }, {
+        en: 'Div',
+        ti: '.BinaryOperatorType',
+        sh: 'expression'
+      }, {
+        en: 'DWithin',
+        ti: '.DistanceBufferType',
+        sh: 'spatialOps'
+      }, {
+        en: 'PropertyIsEqualTo',
+        ti: '.BinaryComparisonOpType',
+        sh: 'comparisonOps'
+      }, {
+        en: 'Filter',
+        ti: '.FilterType'
+      }, {
+        en: 'BBOX',
+        ti: '.BBOXType',
+        sh: 'spatialOps'
+      }, {
+        en: 'Add',
+        ti: '.BinaryOperatorType',
+        sh: 'expression'
+      }, {
+        en: 'PropertyIsGreaterThanOrEqualTo',
+        ti: '.BinaryComparisonOpType',
+        sh: 'comparisonOps'
+      }, {
+        en: 'Literal',
+        ti: '.LiteralType',
+        sh: 'expression'
+      }, {
+        en: 'Equals',
+        ti: '.BinarySpatialOpType',
+        sh: 'spatialOps'
+      }, {
+        en: 'PropertyIsNotEqualTo',
+        ti: '.BinaryComparisonOpType',
+        sh: 'comparisonOps'
+      }, {
+        en: 'PropertyIsLessThanOrEqualTo',
+        ti: '.BinaryComparisonOpType',
+        sh: 'comparisonOps'
+      }, {
+        en: 'FeatureId',
+        ti: '.FeatureIdType'
+      }, {
+        en: 'Within',
+        ti: '.BinarySpatialOpType',
+        sh: 'spatialOps'
+      }, {
+        en: 'Touches',
+        ti: '.BinarySpatialOpType',
+        sh: 'spatialOps'
+      }, {
+        en: 'PropertyIsGreaterThan',
+        ti: '.BinaryComparisonOpType',
+        sh: 'comparisonOps'
+      }, {
+        en: 'Contains',
+        ti: '.BinarySpatialOpType',
+        sh: 'spatialOps'
+      }, {
+        en: 'Function',
+        ti: '.FunctionType',
+        sh: 'expression'
+      }, {
+        en: 'logicOps',
+        ti: '.LogicOpsType'
+      }, {
+        en: 'spatialOps',
+        ti: '.SpatialOpsType'
+      }, {
+        en: 'Sub',
+        ti: '.BinaryOperatorType',
+        sh: 'expression'
+      }, {
+        en: 'expression',
+        ti: '.ExpressionType'
+      }, {
+        en: 'PropertyIsBetween',
+        ti: '.PropertyIsBetweenType',
+        sh: 'comparisonOps'
+      }, {
+        en: 'Intersects',
+        ti: '.BinarySpatialOpType',
+        sh: 'spatialOps'
+      }, {
+        en: 'Beyond',
+        ti: '.DistanceBufferType',
+        sh: 'spatialOps'
+      }, {
+        en: 'comparisonOps',
+        ti: '.ComparisonOpsType'
+      }, {
+        en: 'Crosses',
+        ti: '.BinarySpatialOpType',
+        sh: 'spatialOps'
+      }, {
+        en: 'Mul',
+        ti: '.BinaryOperatorType',
+        sh: 'expression'
+      }, {
+        en: 'Or',
+        ti: '.BinaryLogicOpType',
+        sh: 'logicOps'
+      }, {
+        en: 'PropertyName',
+        ti: '.PropertyNameType',
+        sh: 'expression'
+      }, {
+        en: 'Disjoint',
+        ti: '.BinarySpatialOpType',
+        sh: 'spatialOps'
+      }, {
+        en: 'And',
+        ti: '.BinaryLogicOpType',
+        sh: 'logicOps'
+      }, {
+        en: 'Overlaps',
+        ti: '.BinarySpatialOpType',
+        sh: 'spatialOps'
+      }, {
+        en: 'PropertyIsLike',
+        ti: '.PropertyIsLikeType',
+        sh: 'comparisonOps'
+      }]
+  };
+  return {
+    Filter_1_0_0: Filter_1_0_0
+  };
+};
+if (true) {
+  !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (Filter_1_0_0_Module_Factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+}
+else {
+  var Filter_1_0_0_Module = Filter_1_0_0_Module_Factory();
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports.Filter_1_0_0 = Filter_1_0_0_Module.Filter_1_0_0;
+  }
+  else {
+    var Filter_1_0_0 = Filter_1_0_0_Module.Filter_1_0_0;
+  }
+}
+
+/***/ }),
+
+/***/ 89:
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var GML_2_1_2_Module_Factory = function () {
+  var GML_2_1_2 = {
+    n: 'GML_2_1_2',
+    dens: 'http:\/\/www.opengis.net\/gml',
+    dans: 'http:\/\/www.w3.org\/1999\/xlink',
+    deps: ['XLink_1_0'],
+    tis: [{
+        ln: 'PointMemberType',
+        bti: '.GeometryAssociationType'
+      }, {
+        ln: 'LineStringPropertyType',
+        bti: '.GeometryAssociationType'
+      }, {
+        ln: 'MultiPolygonType',
+        bti: '.GeometryCollectionType'
+      }, {
+        ln: 'PolygonType',
+        bti: '.AbstractGeometryType',
+        ps: [{
+            n: 'outerBoundaryIs',
+            rq: true,
+            ti: '.LinearRingMemberType'
+          }, {
+            n: 'innerBoundaryIs',
+            mno: 0,
+            col: true,
+            ti: '.LinearRingMemberType'
+          }]
+      }, {
+        ln: 'BoxType',
+        bti: '.AbstractGeometryType',
+        ps: [{
+            n: 'coord',
+            rq: true,
+            mno: 2,
+            mxo: 2,
+            col: true,
+            ti: '.CoordType'
+          }, {
+            n: 'coordinates',
+            rq: true,
+            ti: '.CoordinatesType'
+          }]
+      }, {
+        ln: 'CoordinatesType',
+        ps: [{
+            n: 'value',
+            t: 'v'
+          }, {
+            n: 'decimal',
+            an: {
+              lp: 'decimal'
+            },
+            t: 'a'
+          }, {
+            n: 'cs',
+            an: {
+              lp: 'cs'
+            },
+            t: 'a'
+          }, {
+            n: 'ts',
+            an: {
+              lp: 'ts'
+            },
+            t: 'a'
+          }]
+      }, {
+        ln: 'MultiLineStringPropertyType',
+        bti: '.GeometryAssociationType'
+      }, {
+        ln: 'LinearRingType',
+        bti: '.AbstractGeometryType',
+        ps: [{
+            n: 'coord',
+            rq: true,
+            mno: 4,
+            col: true,
+            ti: '.CoordType'
+          }, {
+            n: 'coordinates',
+            rq: true,
+            ti: '.CoordinatesType'
+          }]
+      }, {
+        ln: 'AbstractFeatureType',
+        ps: [{
+            n: 'description'
+          }, {
+            n: 'name'
+          }, {
+            n: 'boundedBy',
+            ti: '.BoundingShapeType'
+          }, {
+            n: 'fid',
+            ti: 'ID',
+            an: {
+              lp: 'fid'
+            },
+            t: 'a'
+          }]
+      }, {
+        ln: 'GeometryAssociationType',
+        ps: [{
+            n: 'geometry',
+            rq: true,
+            mx: false,
+            dom: false,
+            en: '_Geometry',
+            ti: '.AbstractGeometryType',
+            t: 'er'
+          }, {
+            n: 'remoteSchema',
+            an: {
+              lp: 'remoteSchema',
+              ns: 'http:\/\/www.opengis.net\/gml'
+            },
+            t: 'a'
+          }, {
+            n: 'type',
+            ti: 'XLink_1_0.TypeType',
+            t: 'a'
+          }, {
+            n: 'href',
+            t: 'a'
+          }, {
+            n: 'role',
+            t: 'a'
+          }, {
+            n: 'arcrole',
+            t: 'a'
+          }, {
+            n: 'title',
+            t: 'a'
+          }, {
+            n: 'show',
+            ti: 'XLink_1_0.ShowType',
+            t: 'a'
+          }, {
+            n: 'actuate',
+            ti: 'XLink_1_0.ActuateType',
+            t: 'a'
+          }]
+      }, {
+        ln: 'MultiLineStringType',
+        bti: '.GeometryCollectionType'
+      }, {
+        ln: 'BoundingShapeType',
+        ps: [{
+            n: 'box',
+            rq: true,
+            en: 'Box',
+            ti: '.BoxType'
+          }, {
+            n: '_null',
+            rq: true,
+            en: 'null'
+          }]
+      }, {
+        ln: 'MultiPolygonPropertyType',
+        bti: '.GeometryAssociationType'
+      }, {
+        ln: 'MultiPointPropertyType',
+        bti: '.GeometryAssociationType'
+      }, {
+        ln: 'PolygonMemberType',
+        bti: '.GeometryAssociationType'
+      }, {
+        ln: 'AbstractGeometryType',
+        ps: [{
+            n: 'gid',
+            ti: 'ID',
+            an: {
+              lp: 'gid'
+            },
+            t: 'a'
+          }, {
+            n: 'srsName',
+            an: {
+              lp: 'srsName'
+            },
+            t: 'a'
+          }]
+      }, {
+        ln: 'MultiPointType',
+        bti: '.GeometryCollectionType'
+      }, {
+        ln: 'FeatureAssociationType',
+        ps: [{
+            n: 'feature',
+            rq: true,
+            mx: false,
+            dom: false,
+            en: '_Feature',
+            ti: '.AbstractFeatureType',
+            t: 'er'
+          }, {
+            n: 'remoteSchema',
+            an: {
+              lp: 'remoteSchema',
+              ns: 'http:\/\/www.opengis.net\/gml'
+            },
+            t: 'a'
+          }, {
+            n: 'type',
+            ti: 'XLink_1_0.TypeType',
+            t: 'a'
+          }, {
+            n: 'href',
+            t: 'a'
+          }, {
+            n: 'role',
+            t: 'a'
+          }, {
+            n: 'arcrole',
+            t: 'a'
+          }, {
+            n: 'title',
+            t: 'a'
+          }, {
+            n: 'show',
+            ti: 'XLink_1_0.ShowType',
+            t: 'a'
+          }, {
+            n: 'actuate',
+            ti: 'XLink_1_0.ActuateType',
+            t: 'a'
+          }]
+      }, {
+        ln: 'GeometryPropertyType',
+        ps: [{
+            n: 'geometry',
+            rq: true,
+            mx: false,
+            dom: false,
+            en: '_Geometry',
+            ti: '.AbstractGeometryType',
+            t: 'er'
+          }, {
+            n: 'remoteSchema',
+            an: {
+              lp: 'remoteSchema',
+              ns: 'http:\/\/www.opengis.net\/gml'
+            },
+            t: 'a'
+          }, {
+            n: 'type',
+            ti: 'XLink_1_0.TypeType',
+            t: 'a'
+          }, {
+            n: 'href',
+            t: 'a'
+          }, {
+            n: 'role',
+            t: 'a'
+          }, {
+            n: 'arcrole',
+            t: 'a'
+          }, {
+            n: 'title',
+            t: 'a'
+          }, {
+            n: 'show',
+            ti: 'XLink_1_0.ShowType',
+            t: 'a'
+          }, {
+            n: 'actuate',
+            ti: 'XLink_1_0.ActuateType',
+            t: 'a'
+          }]
+      }, {
+        ln: 'LineStringType',
+        bti: '.AbstractGeometryType',
+        ps: [{
+            n: 'coord',
+            rq: true,
+            mno: 2,
+            col: true,
+            ti: '.CoordType'
+          }, {
+            n: 'coordinates',
+            rq: true,
+            ti: '.CoordinatesType'
+          }]
+      }, {
+        ln: 'LineStringMemberType',
+        bti: '.GeometryAssociationType'
+      }, {
+        ln: 'AbstractGeometryCollectionBaseType',
+        bti: '.AbstractGeometryType'
+      }, {
+        ln: 'AbstractFeatureCollectionType',
+        bti: '.AbstractFeatureCollectionBaseType',
+        ps: [{
+            n: 'featureMember',
+            mno: 0,
+            col: true,
+            ti: '.FeatureAssociationType'
+          }]
+      }, {
+        ln: 'CoordType',
+        ps: [{
+            n: 'x',
+            rq: true,
+            en: 'X',
+            ti: 'Decimal'
+          }, {
+            n: 'y',
+            en: 'Y',
+            ti: 'Decimal'
+          }, {
+            n: 'z',
+            en: 'Z',
+            ti: 'Decimal'
+          }]
+      }, {
+        ln: 'MultiGeometryPropertyType',
+        bti: '.GeometryAssociationType'
+      }, {
+        ln: 'PointPropertyType',
+        bti: '.GeometryAssociationType'
+      }, {
+        ln: 'AbstractFeatureCollectionBaseType',
+        bti: '.AbstractFeatureType'
+      }, {
+        ln: 'GeometryCollectionType',
+        bti: '.AbstractGeometryCollectionBaseType',
+        ps: [{
+            n: 'geometryMember',
+            rq: true,
+            col: true,
+            mx: false,
+            dom: false,
+            ti: '.GeometryAssociationType',
+            t: 'er'
+          }]
+      }, {
+        ln: 'LinearRingMemberType',
+        bti: '.GeometryAssociationType'
+      }, {
+        ln: 'PolygonPropertyType',
+        bti: '.GeometryAssociationType'
+      }, {
+        ln: 'PointType',
+        bti: '.AbstractGeometryType',
+        ps: [{
+            n: 'coord',
+            rq: true,
+            ti: '.CoordType'
+          }, {
+            n: 'coordinates',
+            rq: true,
+            ti: '.CoordinatesType'
+          }]
+      }, {
+        t: 'enum',
+        ln: 'NullType',
+        vs: ['inapplicable', 'unknown', 'unavailable', 'missing']
+      }],
+    eis: [{
+        en: 'multiEdgeOf',
+        ti: '.MultiLineStringPropertyType',
+        sh: 'multiLineStringProperty'
+      }, {
+        en: 'lineStringMember',
+        ti: '.LineStringMemberType',
+        sh: 'geometryMember'
+      }, {
+        en: 'multiLineStringProperty',
+        ti: '.MultiLineStringPropertyType',
+        sh: '_geometryProperty'
+      }, {
+        en: '_Geometry',
+        ti: '.AbstractGeometryType'
+      }, {
+        en: 'coverage',
+        ti: '.PolygonPropertyType',
+        sh: 'polygonProperty'
+      }, {
+        en: 'MultiLineString',
+        ti: '.MultiLineStringType',
+        sh: '_Geometry'
+      }, {
+        en: 'polygonMember',
+        ti: '.PolygonMemberType',
+        sh: 'geometryMember'
+      }, {
+        en: 'Box',
+        ti: '.BoxType'
+      }, {
+        en: 'MultiPoint',
+        ti: '.MultiPointType',
+        sh: '_Geometry'
+      }, {
+        en: 'description'
+      }, {
+        en: 'lineStringProperty',
+        ti: '.LineStringPropertyType',
+        sh: '_geometryProperty'
+      }, {
+        en: 'MultiGeometry',
+        ti: '.GeometryCollectionType',
+        sh: '_Geometry'
+      }, {
+        en: 'polygonProperty',
+        ti: '.PolygonPropertyType',
+        sh: '_geometryProperty'
+      }, {
+        en: 'LinearRing',
+        ti: '.LinearRingType',
+        sh: '_Geometry'
+      }, {
+        en: 'pointProperty',
+        ti: '.PointPropertyType',
+        sh: '_geometryProperty'
+      }, {
+        en: 'centerOf',
+        ti: '.PointPropertyType',
+        sh: 'pointProperty'
+      }, {
+        en: '_FeatureCollection',
+        ti: '.AbstractFeatureCollectionType',
+        sh: '_Feature'
+      }, {
+        en: 'geometryMember',
+        ti: '.GeometryAssociationType'
+      }, {
+        en: 'coord',
+        ti: '.CoordType'
+      }, {
+        en: '_Feature',
+        ti: '.AbstractFeatureType'
+      }, {
+        en: 'innerBoundaryIs',
+        ti: '.LinearRingMemberType'
+      }, {
+        en: 'geometryProperty',
+        ti: '.GeometryAssociationType'
+      }, {
+        en: '_geometryProperty',
+        ti: '.GeometryAssociationType'
+      }, {
+        en: 'multiCenterLineOf',
+        ti: '.MultiLineStringPropertyType',
+        sh: 'multiLineStringProperty'
+      }, {
+        en: 'Polygon',
+        ti: '.PolygonType',
+        sh: '_Geometry'
+      }, {
+        en: 'outerBoundaryIs',
+        ti: '.LinearRingMemberType'
+      }, {
+        en: 'multiExtentOf',
+        ti: '.MultiPolygonPropertyType',
+        sh: 'multiPolygonProperty'
+      }, {
+        en: 'LineString',
+        ti: '.LineStringType',
+        sh: '_Geometry'
+      }, {
+        en: 'multiGeometryProperty',
+        ti: '.MultiGeometryPropertyType',
+        sh: '_geometryProperty'
+      }, {
+        en: 'multiPosition',
+        ti: '.MultiPointPropertyType',
+        sh: 'multiPointProperty'
+      }, {
+        en: 'multiLocation',
+        ti: '.MultiPointPropertyType',
+        sh: 'multiPointProperty'
+      }, {
+        en: 'edgeOf',
+        ti: '.LineStringPropertyType',
+        sh: 'lineStringProperty'
+      }, {
+        en: '_GeometryCollection',
+        ti: '.GeometryCollectionType',
+        sh: '_Geometry'
+      }, {
+        en: 'coordinates',
+        ti: '.CoordinatesType'
+      }, {
+        en: 'extentOf',
+        ti: '.PolygonPropertyType',
+        sh: 'polygonProperty'
+      }, {
+        en: 'MultiPolygon',
+        ti: '.MultiPolygonType',
+        sh: '_Geometry'
+      }, {
+        en: 'Point',
+        ti: '.PointType',
+        sh: '_Geometry'
+      }, {
+        en: 'multiPointProperty',
+        ti: '.MultiPointPropertyType',
+        sh: '_geometryProperty'
+      }, {
+        en: 'multiPolygonProperty',
+        ti: '.MultiPolygonPropertyType',
+        sh: '_geometryProperty'
+      }, {
+        en: 'name'
+      }, {
+        en: 'location',
+        ti: '.PointPropertyType',
+        sh: 'pointProperty'
+      }, {
+        en: 'pointMember',
+        ti: '.PointMemberType',
+        sh: 'geometryMember'
+      }, {
+        en: 'boundedBy',
+        ti: '.BoundingShapeType'
+      }, {
+        en: 'featureMember',
+        ti: '.FeatureAssociationType'
+      }, {
+        en: 'multiCoverage',
+        ti: '.MultiPolygonPropertyType',
+        sh: 'multiPolygonProperty'
+      }, {
+        en: 'multiCenterOf',
+        ti: '.MultiPointPropertyType',
+        sh: 'multiPointProperty'
+      }, {
+        en: 'position',
+        ti: '.PointPropertyType',
+        sh: 'pointProperty'
+      }, {
+        en: 'centerLineOf',
+        ti: '.LineStringPropertyType',
+        sh: 'lineStringProperty'
+      }]
+  };
+  return {
+    GML_2_1_2: GML_2_1_2
+  };
+};
+if (true) {
+  !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (GML_2_1_2_Module_Factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+}
+else {
+  var GML_2_1_2_Module = GML_2_1_2_Module_Factory();
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports.GML_2_1_2 = GML_2_1_2_Module.GML_2_1_2;
+  }
+  else {
+    var GML_2_1_2 = GML_2_1_2_Module.GML_2_1_2;
+  }
+}
+
+/***/ }),
+
+/***/ 90:
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var SLD_1_0_0_GeoServer_Module_Factory = function () {
+  var SLD_1_0_0 = {
+    n: 'SLD_1_0_0',
+    dens: 'http:\/\/www.opengis.net\/sld',
+    deps: ['Filter_1_0_0', 'XLink_1_0'],
+    tis: [{
+        ln: 'AVERAGE',
+        tn: null
+      }, {
+        ln: 'LabelPlacement',
+        tn: null,
+        ps: [{
+            n: 'pointPlacement',
+            rq: true,
+            en: 'PointPlacement',
+            ti: '.PointPlacement'
+          }, {
+            n: 'linePlacement',
+            rq: true,
+            en: 'LinePlacement',
+            ti: '.LinePlacement'
+          }]
+      }, {
+        ln: 'RANDOM',
+        tn: null
+      }, {
+        ln: 'PointPlacement',
+        tn: null,
+        ps: [{
+            n: 'anchorPoint',
+            en: 'AnchorPoint',
+            ti: '.AnchorPoint'
+          }, {
+            n: 'displacement',
+            en: 'Displacement',
+            ti: '.Displacement'
+          }, {
+            n: 'rotation',
+            en: 'Rotation',
+            ti: '.ParameterValueType'
+          }]
+      }, {
+        ln: 'Normalize',
+        tn: null
+      }, {
+        ln: 'NamedStyle',
+        tn: null,
+        ps: [{
+            n: 'name',
+            rq: true,
+            en: 'Name'
+          }]
+      }, {
+        ln: 'OnlineResource',
+        tn: null,
+        ps: [{
+            n: 'type',
+            ti: 'XLink_1_0.TypeType',
+            an: {
+              lp: 'type',
+              ns: 'http:\/\/www.w3.org\/1999\/xlink'
+            },
+            t: 'a'
+          }, {
+            n: 'href',
+            an: {
+              lp: 'href',
+              ns: 'http:\/\/www.w3.org\/1999\/xlink'
+            },
+            t: 'a'
+          }, {
+            n: 'role',
+            an: {
+              lp: 'role',
+              ns: 'http:\/\/www.w3.org\/1999\/xlink'
+            },
+            t: 'a'
+          }, {
+            n: 'arcrole',
+            an: {
+              lp: 'arcrole',
+              ns: 'http:\/\/www.w3.org\/1999\/xlink'
+            },
+            t: 'a'
+          }, {
+            n: 'title',
+            an: {
+              lp: 'title',
+              ns: 'http:\/\/www.w3.org\/1999\/xlink'
+            },
+            t: 'a'
+          }, {
+            n: 'show',
+            ti: 'XLink_1_0.ShowType',
+            an: {
+              lp: 'show',
+              ns: 'http:\/\/www.w3.org\/1999\/xlink'
+            },
+            t: 'a'
+          }, {
+            n: 'actuate',
+            ti: 'XLink_1_0.ActuateType',
+            an: {
+              lp: 'actuate',
+              ns: 'http:\/\/www.w3.org\/1999\/xlink'
+            },
+            t: 'a'
+          }]
+      }, {
+        ln: 'LineSymbolizer',
+        tn: null,
+        bti: '.SymbolizerType',
+        ps: [{
+            n: 'geometry',
+            en: 'Geometry',
+            ti: '.Geometry'
+          }, {
+            n: 'stroke',
+            en: 'Stroke',
+            ti: '.Stroke'
+          }]
+      }, {
+        ln: 'FeatureTypeConstraint',
+        tn: null,
+        ps: [{
+            n: 'featureTypeName',
+            en: 'FeatureTypeName'
+          }, {
+            n: 'filter',
+            en: {
+              lp: 'Filter',
+              ns: 'http:\/\/www.opengis.net\/ogc'
+            },
+            ti: 'Filter_1_0_0.FilterType'
+          }, {
+            n: 'extent',
+            mno: 0,
+            col: true,
+            en: 'Extent',
+            ti: '.Extent'
+          }]
+      }, {
+        ln: 'Transformation',
+        tn: null,
+        ps: [{
+            n: 'function',
+            rq: true,
+            en: {
+              lp: 'Function',
+              ns: 'http:\/\/www.opengis.net\/ogc'
+            },
+            ti: 'Filter_1_0_0.FunctionType'
+          }]
+      }, {
+        ln: 'TextSymbolizer',
+        tn: null,
+        bti: '.SymbolizerType',
+        ps: [{
+            n: 'geometry',
+            en: 'Geometry',
+            ti: '.Geometry'
+          }, {
+            n: 'label',
+            en: 'Label',
+            ti: '.ParameterValueType'
+          }, {
+            n: 'font',
+            en: 'Font',
+            ti: '.Font'
+          }, {
+            n: 'labelPlacement',
+            en: 'LabelPlacement',
+            ti: '.LabelPlacement'
+          }, {
+            n: 'halo',
+            en: 'Halo',
+            ti: '.Halo'
+          }, {
+            n: 'fill',
+            en: 'Fill',
+            ti: '.Fill'
+          }, {
+            n: 'graphic',
+            en: 'Graphic',
+            ti: '.Graphic'
+          }, {
+            n: 'priority',
+            en: 'Priority',
+            ti: '.ParameterValueType'
+          }, {
+            n: 'vendorOption',
+            mno: 0,
+            col: true,
+            en: 'VendorOption',
+            ti: '.VendorOption'
+          }]
+      }, {
+        ln: 'Halo',
+        tn: null,
+        ps: [{
+            n: 'radius',
+            en: 'Radius',
+            ti: '.ParameterValueType'
+          }, {
+            n: 'fill',
+            en: 'Fill',
+            ti: '.Fill'
+          }]
+      }, {
+        ln: 'ElseFilter',
+        tn: null
+      }, {
+        ln: 'FeatureTypeStyle',
+        tn: null,
+        ps: [{
+            n: 'name',
+            en: 'Name'
+          }, {
+            n: 'title',
+            en: 'Title'
+          }, {
+            n: '_abstract',
+            en: 'Abstract'
+          }, {
+            n: 'featureTypeName',
+            en: 'FeatureTypeName'
+          }, {
+            n: 'semanticTypeIdentifier',
+            mno: 0,
+            col: true,
+            en: 'SemanticTypeIdentifier'
+          }, {
+            n: 'transformation',
+            en: 'Transformation',
+            ti: '.Transformation'
+          }, {
+            n: 'rule',
+            rq: true,
+            col: true,
+            en: 'Rule',
+            ti: '.Rule'
+          }, {
+            n: 'vendorOption',
+            mno: 0,
+            col: true,
+            en: 'VendorOption',
+            ti: '.VendorOption'
+          }]
+      }, {
+        ln: 'PolygonSymbolizer',
+        tn: null,
+        bti: '.SymbolizerType',
+        ps: [{
+            n: 'geometry',
+            en: 'Geometry',
+            ti: '.Geometry'
+          }, {
+            n: 'fill',
+            en: 'Fill',
+            ti: '.Fill'
+          }, {
+            n: 'stroke',
+            en: 'Stroke',
+            ti: '.Stroke'
+          }]
+      }, {
+        ln: 'EARLIESTONTOP',
+        tn: null
+      }, {
+        ln: 'ParameterValueType',
+        ps: [{
+            n: 'content',
+            col: true,
+            dom: false,
+            en: {
+              lp: 'expression',
+              ns: 'http:\/\/www.opengis.net\/ogc'
+            },
+            ti: 'Filter_1_0_0.ExpressionType',
+            t: 'er'
+          }]
+      }, {
+        ln: 'RasterSymbolizer',
+        tn: null,
+        bti: '.SymbolizerType',
+        ps: [{
+            n: 'geometry',
+            en: 'Geometry',
+            ti: '.Geometry'
+          }, {
+            n: 'opacity',
+            en: 'Opacity',
+            ti: '.ParameterValueType'
+          }, {
+            n: 'channelSelection',
+            en: 'ChannelSelection',
+            ti: '.ChannelSelection'
+          }, {
+            n: 'overlapBehavior',
+            en: 'OverlapBehavior',
+            ti: '.OverlapBehavior'
+          }, {
+            n: 'colorMap',
+            en: 'ColorMap',
+            ti: '.ColorMap'
+          }, {
+            n: 'contrastEnhancement',
+            en: 'ContrastEnhancement',
+            ti: '.ContrastEnhancement'
+          }, {
+            n: 'shadedRelief',
+            en: 'ShadedRelief',
+            ti: '.ShadedRelief'
+          }, {
+            n: 'imageOutline',
+            en: 'ImageOutline',
+            ti: '.ImageOutline'
+          }]
+      }, {
+        ln: 'UserLayer',
+        tn: null,
+        ps: [{
+            n: 'name',
+            en: 'Name'
+          }, {
+            n: 'inlineFeature',
+            rq: true,
+            en: 'InlineFeature',
+            ti: '.InlineFeature'
+          }, {
+            n: 'remoteOWS',
+            en: 'RemoteOWS',
+            ti: '.RemoteOWS'
+          }, {
+            n: 'layerFeatureConstraints',
+            rq: true,
+            en: 'LayerFeatureConstraints',
+            ti: '.LayerFeatureConstraints'
+          }, {
+            n: 'userStyle',
+            rq: true,
+            col: true,
+            en: 'UserStyle',
+            ti: '.UserStyle'
+          }]
+      }, {
+        ln: 'SelectedChannelType',
+        ps: [{
+            n: 'sourceChannelName',
+            rq: true,
+            en: 'SourceChannelName'
+          }, {
+            n: 'contrastEnhancement',
+            en: 'ContrastEnhancement',
+            ti: '.ContrastEnhancement'
+          }]
+      }, {
+        ln: 'VendorOption',
+        tn: null,
+        ps: [{
+            n: 'value',
+            t: 'v'
+          }, {
+            n: 'name',
+            an: {
+              lp: 'name'
+            },
+            t: 'a'
+          }]
+      }, {
+        ln: 'OverlapBehavior',
+        tn: null,
+        ps: [{
+            n: 'latestontop',
+            rq: true,
+            en: 'LATEST_ON_TOP',
+            ti: '.LATESTONTOP'
+          }, {
+            n: 'earliestontop',
+            rq: true,
+            en: 'EARLIEST_ON_TOP',
+            ti: '.EARLIESTONTOP'
+          }, {
+            n: 'average',
+            rq: true,
+            en: 'AVERAGE',
+            ti: '.AVERAGE'
+          }, {
+            n: 'random',
+            rq: true,
+            en: 'RANDOM',
+            ti: '.RANDOM'
+          }]
+      }, {
+        ln: 'Graphic',
+        tn: null,
+        ps: [{
+            n: 'externalGraphicOrMark',
+            mno: 0,
+            col: true,
+            etis: [{
+                en: 'ExternalGraphic',
+                ti: '.ExternalGraphic'
+              }, {
+                en: 'Mark',
+                ti: '.Mark'
+              }],
+            t: 'es'
+          }, {
+            n: 'opacity',
+            en: 'Opacity',
+            ti: '.ParameterValueType'
+          }, {
+            n: 'size',
+            en: 'Size',
+            ti: '.ParameterValueType'
+          }, {
+            n: 'rotation',
+            en: 'Rotation',
+            ti: '.ParameterValueType'
+          }]
+      }, {
+        ln: 'UserStyle',
+        tn: null,
+        ps: [{
+            n: 'name',
+            en: 'Name'
+          }, {
+            n: 'title',
+            en: 'Title'
+          }, {
+            n: '_abstract',
+            en: 'Abstract'
+          }, {
+            n: 'isDefault',
+            en: 'IsDefault'
+          }, {
+            n: 'featureTypeStyle',
+            rq: true,
+            col: true,
+            en: 'FeatureTypeStyle',
+            ti: '.FeatureTypeStyle'
+          }]
+      }, {
+        ln: 'InlineFeature',
+        tn: null,
+        ps: [{
+            n: 'any',
+            mno: 0,
+            col: true,
+            mx: false,
+            t: 'ae'
+          }]
+      }, {
+        ln: 'Mark',
+        tn: null,
+        ps: [{
+            n: 'wellKnownName',
+            en: 'WellKnownName',
+            ti: '.WellKnownName'
+          }, {
+            n: 'fill',
+            en: 'Fill',
+            ti: '.Fill'
+          }, {
+            n: 'stroke',
+            en: 'Stroke',
+            ti: '.Stroke'
+          }]
+      }, {
+        ln: 'ContrastEnhancement',
+        tn: null,
+        ps: [{
+            n: 'normalize',
+            rq: true,
+            en: 'Normalize',
+            ti: '.Normalize'
+          }, {
+            n: 'histogram',
+            rq: true,
+            en: 'Histogram',
+            ti: '.Histogram'
+          }, {
+            n: 'gammaValue',
+            en: 'GammaValue',
+            ti: 'Double'
+          }]
+      }, {
+        ln: 'ExternalGraphic',
+        tn: null,
+        ps: [{
+            n: 'onlineResource',
+            rq: true,
+            en: 'OnlineResource',
+            ti: '.OnlineResource'
+          }, {
+            n: 'format',
+            rq: true,
+            en: 'Format'
+          }]
+      }, {
+        ln: 'Histogram',
+        tn: null
+      }, {
+        ln: 'ColorMapEntry',
+        tn: null,
+        ps: [{
+            n: 'color',
+            rq: true,
+            an: {
+              lp: 'color'
+            },
+            t: 'a'
+          }, {
+            n: 'opacity',
+            ti: 'Double',
+            an: {
+              lp: 'opacity'
+            },
+            t: 'a'
+          }, {
+            n: 'quantity',
+            ti: 'Double',
+            an: {
+              lp: 'quantity'
+            },
+            t: 'a'
+          }, {
+            n: 'label',
+            an: {
+              lp: 'label'
+            },
+            t: 'a'
+          }]
+      }, {
+        ln: 'PointSymbolizer',
+        tn: null,
+        bti: '.SymbolizerType',
+        ps: [{
+            n: 'geometry',
+            en: 'Geometry',
+            ti: '.Geometry'
+          }, {
+            n: 'graphic',
+            en: 'Graphic',
+            ti: '.Graphic'
+          }]
+      }, {
+        ln: 'Font',
+        tn: null,
+        ps: [{
+            n: 'cssParameter',
+            mno: 0,
+            col: true,
+            en: 'CssParameter',
+            ti: '.CssParameter'
+          }]
+      }, {
+        ln: 'LegendGraphic',
+        tn: null,
+        ps: [{
+            n: 'graphic',
+            rq: true,
+            en: 'Graphic',
+            ti: '.Graphic'
+          }]
+      }, {
+        ln: 'Stroke',
+        tn: null,
+        ps: [{
+            n: 'graphicFill',
+            rq: true,
+            en: 'GraphicFill',
+            ti: '.GraphicFill'
+          }, {
+            n: 'graphicStroke',
+            rq: true,
+            en: 'GraphicStroke',
+            ti: '.GraphicStroke'
+          }, {
+            n: 'cssParameter',
+            mno: 0,
+            col: true,
+            en: 'CssParameter',
+            ti: '.CssParameter'
+          }]
+      }, {
+        ln: 'ImageOutline',
+        tn: null,
+        ps: [{
+            n: 'lineSymbolizer',
+            rq: true,
+            en: 'LineSymbolizer',
+            ti: '.LineSymbolizer'
+          }, {
+            n: 'polygonSymbolizer',
+            rq: true,
+            en: 'PolygonSymbolizer',
+            ti: '.PolygonSymbolizer'
+          }]
+      }, {
+        ln: 'GraphicFill',
+        tn: null,
+        ps: [{
+            n: 'graphic',
+            rq: true,
+            en: 'Graphic',
+            ti: '.Graphic'
+          }]
+      }, {
+        ln: 'Rule',
+        tn: null,
+        ps: [{
+            n: 'name',
+            en: 'Name'
+          }, {
+            n: 'title',
+            en: 'Title'
+          }, {
+            n: '_abstract',
+            en: 'Abstract'
+          }, {
+            n: 'legendGraphic',
+            en: 'LegendGraphic',
+            ti: '.LegendGraphic'
+          }, {
+            n: 'filter',
+            rq: true,
+            en: {
+              lp: 'Filter',
+              ns: 'http:\/\/www.opengis.net\/ogc'
+            },
+            ti: 'Filter_1_0_0.FilterType'
+          }, {
+            n: 'elseFilter',
+            rq: true,
+            en: 'ElseFilter',
+            ti: '.ElseFilter'
+          }, {
+            n: 'minScaleDenominator',
+            en: 'MinScaleDenominator',
+            ti: 'Double'
+          }, {
+            n: 'maxScaleDenominator',
+            en: 'MaxScaleDenominator',
+            ti: 'Double'
+          }, {
+            n: 'symbolizer',
+            rq: true,
+            col: true,
+            mx: false,
+            dom: false,
+            en: 'Symbolizer',
+            ti: '.SymbolizerType',
+            t: 'er'
+          }]
+      }, {
+        ln: 'AnchorPoint',
+        tn: null,
+        ps: [{
+            n: 'anchorPointX',
+            rq: true,
+            en: 'AnchorPointX',
+            ti: '.ParameterValueType'
+          }, {
+            n: 'anchorPointY',
+            rq: true,
+            en: 'AnchorPointY',
+            ti: '.ParameterValueType'
+          }]
+      }, {
+        ln: 'ColorMap',
+        tn: null,
+        ps: [{
+            n: 'colorMapEntry',
+            mno: 0,
+            col: true,
+            en: 'ColorMapEntry',
+            ti: '.ColorMapEntry'
+          }, {
+            n: 'type',
+            an: {
+              lp: 'type'
+            },
+            t: 'a'
+          }, {
+            n: 'extended',
+            ti: 'Boolean',
+            an: {
+              lp: 'extended'
+            },
+            t: 'a'
+          }]
+      }, {
+        ln: 'LATESTONTOP',
+        tn: null
+      }, {
+        ln: 'SymbolizerType',
+        ps: [{
+            n: 'uom',
+            an: {
+              lp: 'uom'
+            },
+            t: 'a'
+          }]
+      }, {
+        ln: 'RemoteOWS',
+        tn: null,
+        ps: [{
+            n: 'service',
+            rq: true,
+            en: 'Service'
+          }, {
+            n: 'onlineResource',
+            rq: true,
+            en: 'OnlineResource',
+            ti: '.OnlineResource'
+          }]
+      }, {
+        ln: 'WellKnownName',
+        tn: null,
+        ps: [{
+            n: 'content',
+            col: true,
+            dom: false,
+            en: {
+              lp: 'expression',
+              ns: 'http:\/\/www.opengis.net\/ogc'
+            },
+            ti: 'Filter_1_0_0.ExpressionType',
+            t: 'er'
+          }]
+      }, {
+        ln: 'ChannelSelection',
+        tn: null,
+        ps: [{
+            n: 'redChannel',
+            rq: true,
+            en: 'RedChannel',
+            ti: '.SelectedChannelType'
+          }, {
+            n: 'greenChannel',
+            rq: true,
+            en: 'GreenChannel',
+            ti: '.SelectedChannelType'
+          }, {
+            n: 'blueChannel',
+            rq: true,
+            en: 'BlueChannel',
+            ti: '.SelectedChannelType'
+          }, {
+            n: 'grayChannel',
+            rq: true,
+            en: 'GrayChannel',
+            ti: '.SelectedChannelType'
+          }]
+      }, {
+        ln: 'CssParameter',
+        tn: null,
+        bti: '.ParameterValueType',
+        ps: [{
+            n: 'name',
+            rq: true,
+            an: {
+              lp: 'name'
+            },
+            t: 'a'
+          }]
+      }, {
+        ln: 'LinePlacement',
+        tn: null,
+        ps: [{
+            n: 'perpendicularOffset',
+            en: 'PerpendicularOffset',
+            ti: '.ParameterValueType'
+          }]
+      }, {
+        ln: 'GraphicStroke',
+        tn: null,
+        ps: [{
+            n: 'graphic',
+            rq: true,
+            en: 'Graphic',
+            ti: '.Graphic'
+          }]
+      }, {
+        ln: 'StyledLayerDescriptor',
+        tn: null,
+        ps: [{
+            n: 'name',
+            en: 'Name'
+          }, {
+            n: 'title',
+            en: 'Title'
+          }, {
+            n: '_abstract',
+            en: 'Abstract'
+          }, {
+            n: 'namedLayerOrUserLayer',
+            mno: 0,
+            col: true,
+            etis: [{
+                en: 'NamedLayer',
+                ti: '.NamedLayer'
+              }, {
+                en: 'UserLayer',
+                ti: '.UserLayer'
+              }],
+            t: 'es'
+          }, {
+            n: 'version',
+            rq: true,
+            an: {
+              lp: 'version'
+            },
+            t: 'a'
+          }]
+      }, {
+        ln: 'Extent',
+        tn: null,
+        ps: [{
+            n: 'name',
+            rq: true,
+            en: 'Name'
+          }, {
+            n: 'value',
+            rq: true,
+            en: 'Value'
+          }]
+      }, {
+        ln: 'NamedLayer',
+        tn: null,
+        ps: [{
+            n: 'name',
+            rq: true,
+            en: 'Name'
+          }, {
+            n: 'layerFeatureConstraints',
+            en: 'LayerFeatureConstraints',
+            ti: '.LayerFeatureConstraints'
+          }, {
+            n: 'namedStyleOrUserStyle',
+            mno: 0,
+            col: true,
+            etis: [{
+                en: 'NamedStyle',
+                ti: '.NamedStyle'
+              }, {
+                en: 'UserStyle',
+                ti: '.UserStyle'
+              }],
+            t: 'es'
+          }]
+      }, {
+        ln: 'Displacement',
+        tn: null,
+        ps: [{
+            n: 'displacementX',
+            rq: true,
+            en: 'DisplacementX',
+            ti: '.ParameterValueType'
+          }, {
+            n: 'displacementY',
+            rq: true,
+            en: 'DisplacementY',
+            ti: '.ParameterValueType'
+          }]
+      }, {
+        ln: 'LayerFeatureConstraints',
+        tn: null,
+        ps: [{
+            n: 'featureTypeConstraint',
+            rq: true,
+            col: true,
+            en: 'FeatureTypeConstraint',
+            ti: '.FeatureTypeConstraint'
+          }]
+      }, {
+        ln: 'Geometry',
+        tn: null,
+        ps: [{
+            n: 'expression',
+            rq: true,
+            mx: false,
+            dom: false,
+            en: {
+              lp: 'expression',
+              ns: 'http:\/\/www.opengis.net\/ogc'
+            },
+            ti: 'Filter_1_0_0.ExpressionType',
+            t: 'er'
+          }]
+      }, {
+        ln: 'Fill',
+        tn: null,
+        ps: [{
+            n: 'graphicFill',
+            en: 'GraphicFill',
+            ti: '.GraphicFill'
+          }, {
+            n: 'cssParameter',
+            mno: 0,
+            col: true,
+            en: 'CssParameter',
+            ti: '.CssParameter'
+          }]
+      }, {
+        ln: 'ShadedRelief',
+        tn: null,
+        ps: [{
+            n: 'brightnessOnly',
+            en: 'BrightnessOnly',
+            ti: 'Boolean'
+          }, {
+            n: 'reliefFactor',
+            en: 'ReliefFactor',
+            ti: 'Double'
+          }]
+      }],
+    eis: [{
+        en: 'Fill',
+        ti: '.Fill'
+      }, {
+        en: 'LabelPlacement',
+        ti: '.LabelPlacement'
+      }, {
+        en: 'CssParameter',
+        ti: '.CssParameter'
+      }, {
+        en: 'Displacement',
+        ti: '.Displacement'
+      }, {
+        en: 'WellKnownName',
+        ti: '.WellKnownName'
+      }, {
+        en: 'StyledLayerDescriptor',
+        ti: '.StyledLayerDescriptor'
+      }, {
+        en: 'UserLayer',
+        ti: '.UserLayer'
+      }, {
+        en: 'FeatureTypeConstraint',
+        ti: '.FeatureTypeConstraint'
+      }, {
+        en: 'GraphicStroke',
+        ti: '.GraphicStroke'
+      }, {
+        en: 'Size',
+        ti: '.ParameterValueType'
+      }, {
+        en: 'Rule',
+        ti: '.Rule'
+      }, {
+        en: 'BrightnessOnly',
+        ti: 'Boolean'
+      }, {
+        en: 'ColorMap',
+        ti: '.ColorMap'
+      }, {
+        en: 'PointPlacement',
+        ti: '.PointPlacement'
+      }, {
+        en: 'SourceChannelName'
+      }, {
+        en: 'Graphic',
+        ti: '.Graphic'
+      }, {
+        en: 'FeatureTypeName'
+      }, {
+        en: 'DisplacementY',
+        ti: '.ParameterValueType'
+      }, {
+        en: 'RedChannel',
+        ti: '.SelectedChannelType'
+      }, {
+        en: 'RasterSymbolizer',
+        ti: '.RasterSymbolizer',
+        sh: 'Symbolizer'
+      }, {
+        en: 'Radius',
+        ti: '.ParameterValueType'
+      }, {
+        en: 'Label',
+        ti: '.ParameterValueType'
+      }, {
+        en: 'BlueChannel',
+        ti: '.SelectedChannelType'
+      }, {
+        en: 'AnchorPoint',
+        ti: '.AnchorPoint'
+      }, {
+        en: 'ImageOutline',
+        ti: '.ImageOutline'
+      }, {
+        en: 'GammaValue',
+        ti: 'Double'
+      }, {
+        en: 'DisplacementX',
+        ti: '.ParameterValueType'
+      }, {
+        en: 'Format'
+      }, {
+        en: 'UserStyle',
+        ti: '.UserStyle'
+      }, {
+        en: 'Geometry',
+        ti: '.Geometry'
+      }, {
+        en: 'Abstract'
+      }, {
+        en: 'OverlapBehavior',
+        ti: '.OverlapBehavior'
+      }, {
+        en: 'TextSymbolizer',
+        ti: '.TextSymbolizer',
+        sh: 'Symbolizer'
+      }, {
+        en: 'LinePlacement',
+        ti: '.LinePlacement'
+      }, {
+        en: 'ReliefFactor',
+        ti: 'Double'
+      }, {
+        en: 'InlineFeature',
+        ti: '.InlineFeature'
+      }, {
+        en: 'GreenChannel',
+        ti: '.SelectedChannelType'
+      }, {
+        en: 'Rotation',
+        ti: '.ParameterValueType'
+      }, {
+        en: 'MaxScaleDenominator',
+        ti: 'Double'
+      }, {
+        en: 'Value'
+      }, {
+        en: 'FeatureTypeStyle',
+        ti: '.FeatureTypeStyle'
+      }, {
+        en: 'Symbolizer',
+        ti: '.SymbolizerType'
+      }, {
+        en: 'ColorMapEntry',
+        ti: '.ColorMapEntry'
+      }, {
+        en: 'PointSymbolizer',
+        ti: '.PointSymbolizer',
+        sh: 'Symbolizer'
+      }, {
+        en: 'Extent',
+        ti: '.Extent'
+      }, {
+        en: 'GraphicFill',
+        ti: '.GraphicFill'
+      }, {
+        en: 'LineSymbolizer',
+        ti: '.LineSymbolizer',
+        sh: 'Symbolizer'
+      }, {
+        en: 'AnchorPointX',
+        ti: '.ParameterValueType'
+      }, {
+        en: 'LegendGraphic',
+        ti: '.LegendGraphic'
+      }, {
+        en: 'Font',
+        ti: '.Font'
+      }, {
+        en: 'Opacity',
+        ti: '.ParameterValueType'
+      }, {
+        en: 'NamedStyle',
+        ti: '.NamedStyle'
+      }, {
+        en: 'Transformation',
+        ti: '.Transformation'
+      }, {
+        en: 'VendorOption',
+        ti: '.VendorOption'
+      }, {
+        en: 'LayerFeatureConstraints',
+        ti: '.LayerFeatureConstraints'
+      }, {
+        en: 'EARLIEST_ON_TOP',
+        ti: '.EARLIESTONTOP'
+      }, {
+        en: 'ShadedRelief',
+        ti: '.ShadedRelief'
+      }, {
+        en: 'Histogram',
+        ti: '.Histogram'
+      }, {
+        en: 'Title'
+      }, {
+        en: 'NamedLayer',
+        ti: '.NamedLayer'
+      }, {
+        en: 'Halo',
+        ti: '.Halo'
+      }, {
+        en: 'ChannelSelection',
+        ti: '.ChannelSelection'
+      }, {
+        en: 'RANDOM',
+        ti: '.RANDOM'
+      }, {
+        en: 'OnlineResource',
+        ti: '.OnlineResource'
+      }, {
+        en: 'MinScaleDenominator',
+        ti: 'Double'
+      }, {
+        en: 'Mark',
+        ti: '.Mark'
+      }, {
+        en: 'ContrastEnhancement',
+        ti: '.ContrastEnhancement'
+      }, {
+        en: 'Normalize',
+        ti: '.Normalize'
+      }, {
+        en: 'ExternalGraphic',
+        ti: '.ExternalGraphic'
+      }, {
+        en: 'PerpendicularOffset',
+        ti: '.ParameterValueType'
+      }, {
+        en: 'Name'
+      }, {
+        en: 'AnchorPointY',
+        ti: '.ParameterValueType'
+      }, {
+        en: 'AVERAGE',
+        ti: '.AVERAGE'
+      }, {
+        en: 'Priority',
+        ti: '.ParameterValueType'
+      }, {
+        en: 'ElseFilter',
+        ti: '.ElseFilter'
+      }, {
+        en: 'SemanticTypeIdentifier'
+      }, {
+        en: 'PolygonSymbolizer',
+        ti: '.PolygonSymbolizer',
+        sh: 'Symbolizer'
+      }, {
+        en: 'IsDefault'
+      }, {
+        en: 'GrayChannel',
+        ti: '.SelectedChannelType'
+      }, {
+        en: 'Service'
+      }, {
+        en: 'RemoteOWS',
+        ti: '.RemoteOWS'
+      }, {
+        en: 'LATEST_ON_TOP',
+        ti: '.LATESTONTOP'
+      }, {
+        en: 'Stroke',
+        ti: '.Stroke'
+      }]
+  };
+  return {
+    SLD_1_0_0: SLD_1_0_0
+  };
+};
+if (true) {
+  !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (SLD_1_0_0_GeoServer_Module_Factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+}
+else {
+  var SLD_1_0_0_GeoServer_Module = SLD_1_0_0_GeoServer_Module_Factory();
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports.SLD_1_0_0 = SLD_1_0_0_GeoServer_Module.SLD_1_0_0;
+  }
+  else {
+    var SLD_1_0_0 = SLD_1_0_0_GeoServer_Module.SLD_1_0_0;
+  }
+}
+
 /***/ })
 
-},[612]);
+},[621]);

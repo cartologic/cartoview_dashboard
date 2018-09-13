@@ -14,11 +14,7 @@ var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" &
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-<<<<<<< Updated upstream
-var _react = __webpack_require__(1);
-=======
 var _react = __webpack_require__(3);
->>>>>>> Stashed changes
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -176,13 +172,150 @@ exports.default = FieldSet;
 
 exports.__esModule = true;
 
-var _events = __webpack_require__(20);
+var _events = __webpack_require__(23);
 
 exports.default = new _events.EventEmitter();
 
 /***/ }),
 
-/***/ 20:
+/***/ 22:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _openlayers = __webpack_require__(11);
+
+var _openlayers2 = _interopRequireDefault(_openlayers);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+  getProxiedUrl: function getProxiedUrl(url, opt_proxy) {
+    if (opt_proxy) {
+      return opt_proxy + encodeURIComponent(url);
+    } else {
+      return url;
+    }
+  },
+  getResolutionForScale: function getResolutionForScale(scale, units) {
+    var dpi = 25.4 / 0.28;
+    var mpu = _openlayers2.default.proj.METERS_PER_UNIT[units];
+    var inchesPerMeter = 39.37;
+    return parseFloat(scale) / (mpu * inchesPerMeter * dpi);
+  },
+  getTimeInfo: function getTimeInfo(layer) {
+    if (layer.Dimension) {
+      for (var i = 0, ii = layer.Dimension.length; i < ii; ++i) {
+        var dimension = layer.Dimension[i];
+        if (dimension.name === 'time') {
+          return dimension.values;
+        }
+      }
+    }
+  },
+  rgbToHex: function rgbToHex(rgb) {
+    rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
+    return rgb && rgb.length === 4 ? '#' + ('0' + parseInt(rgb[1], 10).toString(16)).slice(-2) + ('0' + parseInt(rgb[2], 10).toString(16)).slice(-2) + ('0' + parseInt(rgb[3], 10).toString(16)).slice(-2) : '';
+  },
+  hexToRgb: function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : null;
+  },
+  transformColor: function transformColor(color) {
+    var colorObj = color.rgb ? color.rgb : color;
+    return [colorObj.r, colorObj.g, colorObj.b, colorObj.a];
+  },
+  doJSONP: function doJSONP(url, success, failure, scope) {
+    function getRandomInt(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min)) + min;
+    }
+    var cbname = 'fn' + Date.now() + getRandomInt(1, 10000);
+    var script = document.createElement('script');
+    script.onerror = function () {
+      if (failure) {
+        failure.call(scope);
+      }
+    };
+    script.src = url.replace('__cbname__', cbname);
+    window[cbname] = function (jsonData) {
+      success.call(scope, jsonData);
+      delete window[cbname];
+    };
+    document.head.appendChild(script);
+  },
+  doGET: function doGET(url, success, failure, scope, opt_requestHeaders) {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+      if (xmlhttp.readyState === 4) {
+        if (xmlhttp.status === 200) {
+          if (success) {
+            success.call(scope, xmlhttp);
+          }
+        } else if (failure) {
+          failure.call(scope, xmlhttp);
+        }
+      }
+    };
+    xmlhttp.open('GET', url, true);
+    if (opt_requestHeaders) {
+      for (var key in opt_requestHeaders) {
+        if (opt_requestHeaders.hasOwnProperty(key)) {
+          xmlhttp.setRequestHeader(key, opt_requestHeaders[key]);
+        }
+      }
+    }
+    xmlhttp.send();
+    return xmlhttp;
+  },
+  doPOST: function doPOST(url, data, success, failure, scope, contentType, put, opt_requestHeaders) {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open(put ? 'PUT' : 'POST', url, true);
+    xmlhttp.setRequestHeader('Content-Type', contentType ? contentType : 'text/xml');
+    xmlhttp.onreadystatechange = function () {
+      if (xmlhttp.readyState === 4) {
+        if (xmlhttp.status === 200 || xmlhttp.status === 201) {
+          success.call(scope, xmlhttp);
+        } else {
+          failure.call(scope, xmlhttp);
+        }
+      }
+    };
+    if (opt_requestHeaders) {
+      for (var key in opt_requestHeaders) {
+        if (opt_requestHeaders.hasOwnProperty(key)) {
+          xmlhttp.setRequestHeader(key, opt_requestHeaders[key]);
+        }
+      }
+    }
+    xmlhttp.send(data);
+    return xmlhttp;
+  }
+}; /*
+    * Copyright 2015-present Boundless Spatial Inc., http://boundlessgeo.com
+    * Licensed under the Apache License, Version 2.0 (the "License").
+    * You may not use this file except in compliance with the License.
+    * You may obtain a copy of the License at
+    * http://www.apache.org/licenses/LICENSE-2.0
+    * Unless required by applicable law or agreed to in writing, software
+    * distributed under the License is distributed on an "AS IS" BASIS,
+    * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    * See the License for the specific language governing permissions and limitations under the License.
+    */
+
+/***/ }),
+
+/***/ 23:
 /***/ (function(module, exports) {
 
 // Copyright Joyent, Inc. and other Node contributors.
@@ -491,144 +624,7 @@ function isUndefined(arg) {
 
 /***/ }),
 
-/***/ 27:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _openlayers = __webpack_require__(11);
-
-var _openlayers2 = _interopRequireDefault(_openlayers);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = {
-  getProxiedUrl: function getProxiedUrl(url, opt_proxy) {
-    if (opt_proxy) {
-      return opt_proxy + encodeURIComponent(url);
-    } else {
-      return url;
-    }
-  },
-  getResolutionForScale: function getResolutionForScale(scale, units) {
-    var dpi = 25.4 / 0.28;
-    var mpu = _openlayers2.default.proj.METERS_PER_UNIT[units];
-    var inchesPerMeter = 39.37;
-    return parseFloat(scale) / (mpu * inchesPerMeter * dpi);
-  },
-  getTimeInfo: function getTimeInfo(layer) {
-    if (layer.Dimension) {
-      for (var i = 0, ii = layer.Dimension.length; i < ii; ++i) {
-        var dimension = layer.Dimension[i];
-        if (dimension.name === 'time') {
-          return dimension.values;
-        }
-      }
-    }
-  },
-  rgbToHex: function rgbToHex(rgb) {
-    rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
-    return rgb && rgb.length === 4 ? '#' + ('0' + parseInt(rgb[1], 10).toString(16)).slice(-2) + ('0' + parseInt(rgb[2], 10).toString(16)).slice(-2) + ('0' + parseInt(rgb[3], 10).toString(16)).slice(-2) : '';
-  },
-  hexToRgb: function hexToRgb(hex) {
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result ? {
-      r: parseInt(result[1], 16),
-      g: parseInt(result[2], 16),
-      b: parseInt(result[3], 16)
-    } : null;
-  },
-  transformColor: function transformColor(color) {
-    var colorObj = color.rgb ? color.rgb : color;
-    return [colorObj.r, colorObj.g, colorObj.b, colorObj.a];
-  },
-  doJSONP: function doJSONP(url, success, failure, scope) {
-    function getRandomInt(min, max) {
-      min = Math.ceil(min);
-      max = Math.floor(max);
-      return Math.floor(Math.random() * (max - min)) + min;
-    }
-    var cbname = 'fn' + Date.now() + getRandomInt(1, 10000);
-    var script = document.createElement('script');
-    script.onerror = function () {
-      if (failure) {
-        failure.call(scope);
-      }
-    };
-    script.src = url.replace('__cbname__', cbname);
-    window[cbname] = function (jsonData) {
-      success.call(scope, jsonData);
-      delete window[cbname];
-    };
-    document.head.appendChild(script);
-  },
-  doGET: function doGET(url, success, failure, scope, opt_requestHeaders) {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function () {
-      if (xmlhttp.readyState === 4) {
-        if (xmlhttp.status === 200) {
-          if (success) {
-            success.call(scope, xmlhttp);
-          }
-        } else if (failure) {
-          failure.call(scope, xmlhttp);
-        }
-      }
-    };
-    xmlhttp.open('GET', url, true);
-    if (opt_requestHeaders) {
-      for (var key in opt_requestHeaders) {
-        if (opt_requestHeaders.hasOwnProperty(key)) {
-          xmlhttp.setRequestHeader(key, opt_requestHeaders[key]);
-        }
-      }
-    }
-    xmlhttp.send();
-    return xmlhttp;
-  },
-  doPOST: function doPOST(url, data, success, failure, scope, contentType, put, opt_requestHeaders) {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open(put ? 'PUT' : 'POST', url, true);
-    xmlhttp.setRequestHeader('Content-Type', contentType ? contentType : 'text/xml');
-    xmlhttp.onreadystatechange = function () {
-      if (xmlhttp.readyState === 4) {
-        if (xmlhttp.status === 200 || xmlhttp.status === 201) {
-          success.call(scope, xmlhttp);
-        } else {
-          failure.call(scope, xmlhttp);
-        }
-      }
-    };
-    if (opt_requestHeaders) {
-      for (var key in opt_requestHeaders) {
-        if (opt_requestHeaders.hasOwnProperty(key)) {
-          xmlhttp.setRequestHeader(key, opt_requestHeaders[key]);
-        }
-      }
-    }
-    xmlhttp.send(data);
-    return xmlhttp;
-  }
-}; /*
-    * Copyright 2015-present Boundless Spatial Inc., http://boundlessgeo.com
-    * Licensed under the Apache License, Version 2.0 (the "License").
-    * You may not use this file except in compliance with the License.
-    * You may obtain a copy of the License at
-    * http://www.apache.org/licenses/LICENSE-2.0
-    * Unless required by applicable law or agreed to in writing, software
-    * distributed under the License is distributed on an "AS IS" BASIS,
-    * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    * See the License for the specific language governing permissions and limitations under the License.
-    */
-
-/***/ }),
-
-/***/ 286:
+/***/ 295:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -650,7 +646,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * See the License for the specific language governing permissions and limitations under the License.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
 
-var _util = __webpack_require__(27);
+var _util = __webpack_require__(22);
 
 var _util2 = _interopRequireDefault(_util);
 
@@ -658,7 +654,7 @@ var _openlayers = __webpack_require__(11);
 
 var _openlayers2 = _interopRequireDefault(_openlayers);
 
-var _urlParse = __webpack_require__(51);
+var _urlParse = __webpack_require__(39);
 
 var _urlParse2 = _interopRequireDefault(_urlParse);
 
@@ -852,140 +848,14 @@ exports.default = new ArcGISRestService();
 
 /***/ }),
 
-/***/ 45:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var has = Object.prototype.hasOwnProperty;
-
-/**
- * Decode a URI encoded string.
- *
- * @param {String} input The URI encoded string.
- * @returns {String} The decoded string.
- * @api private
- */
-function decode(input) {
-  return decodeURIComponent(input.replace(/\+/g, ' '));
-}
-
-/**
- * Simple query string parser.
- *
- * @param {String} query The query string that needs to be parsed.
- * @returns {Object}
- * @api public
- */
-function querystring(query) {
-  var parser = /([^=?&]+)=?([^&]*)/g
-    , result = {}
-    , part;
-
-  //
-  // Little nifty parsing hack, leverage the fact that RegExp.exec increments
-  // the lastIndex property so we can continue executing this loop until we've
-  // parsed all results.
-  //
-  for (;
-    part = parser.exec(query);
-    result[decode(part[1])] = decode(part[2])
-  );
-
-  return result;
-}
-
-/**
- * Transform a query string to an object.
- *
- * @param {Object} obj Object that should be transformed.
- * @param {String} prefix Optional prefix.
- * @returns {String}
- * @api public
- */
-function querystringify(obj, prefix) {
-  prefix = prefix || '';
-
-  var pairs = [];
-
-  //
-  // Optionally prefix with a '?' if needed
-  //
-  if ('string' !== typeof prefix) prefix = '?';
-
-  for (var key in obj) {
-    if (has.call(obj, key)) {
-      pairs.push(encodeURIComponent(key) +'='+ encodeURIComponent(obj[key]));
-    }
-  }
-
-  return pairs.length ? prefix + pairs.join('&') : '';
-}
-
-//
-// Expose the module.
-//
-exports.stringify = querystringify;
-exports.parse = querystring;
-
-
-/***/ }),
-
-/***/ 50:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Check if we're required to add a port number.
- *
- * @see https://url.spec.whatwg.org/#default-port
- * @param {Number|String} port Port number we need to check
- * @param {String} protocol Protocol we need to check against.
- * @returns {Boolean} Is it a default port for the given protocol
- * @api private
- */
-module.exports = function required(port, protocol) {
-  protocol = protocol.split(':')[0];
-  port = +port;
-
-  if (!port) return false;
-
-  switch (protocol) {
-    case 'http':
-    case 'ws':
-    return port !== 80;
-
-    case 'https':
-    case 'wss':
-    return port !== 443;
-
-    case 'ftp':
-    return port !== 21;
-
-    case 'gopher':
-    return port !== 70;
-
-    case 'file':
-    return false;
-  }
-
-  return port !== 0;
-};
-
-
-/***/ }),
-
-/***/ 51:
+/***/ 39:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 
-var required = __webpack_require__(50)
-  , qs = __webpack_require__(45)
+var required = __webpack_require__(52)
+  , qs = __webpack_require__(47)
   , protocolre = /^([a-z][a-z0-9.+-]*:)?(\/\/)?([\S\s]*)/i
   , slashes = /^[A-Za-z][A-Za-z0-9+-.]*:\/\//;
 
@@ -1321,8 +1191,13 @@ function set(part, value, fn) {
       break;
 
     case 'pathname':
-      url.pathname = value.length && value.charAt(0) !== '/' ? '/' + value : value;
-
+    case 'hash':
+      if (value) {
+        var char = part === 'pathname' ? '/' : '#';
+        url[part] = value.charAt(0) !== char ? char + value : value;
+      } else {
+        url[part] = value;
+      }
       break;
 
     default:
@@ -1394,7 +1269,133 @@ module.exports = URL;
 
 /***/ }),
 
-/***/ 613:
+/***/ 47:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var has = Object.prototype.hasOwnProperty;
+
+/**
+ * Decode a URI encoded string.
+ *
+ * @param {String} input The URI encoded string.
+ * @returns {String} The decoded string.
+ * @api private
+ */
+function decode(input) {
+  return decodeURIComponent(input.replace(/\+/g, ' '));
+}
+
+/**
+ * Simple query string parser.
+ *
+ * @param {String} query The query string that needs to be parsed.
+ * @returns {Object}
+ * @api public
+ */
+function querystring(query) {
+  var parser = /([^=?&]+)=?([^&]*)/g
+    , result = {}
+    , part;
+
+  //
+  // Little nifty parsing hack, leverage the fact that RegExp.exec increments
+  // the lastIndex property so we can continue executing this loop until we've
+  // parsed all results.
+  //
+  for (;
+    part = parser.exec(query);
+    result[decode(part[1])] = decode(part[2])
+  );
+
+  return result;
+}
+
+/**
+ * Transform a query string to an object.
+ *
+ * @param {Object} obj Object that should be transformed.
+ * @param {String} prefix Optional prefix.
+ * @returns {String}
+ * @api public
+ */
+function querystringify(obj, prefix) {
+  prefix = prefix || '';
+
+  var pairs = [];
+
+  //
+  // Optionally prefix with a '?' if needed
+  //
+  if ('string' !== typeof prefix) prefix = '?';
+
+  for (var key in obj) {
+    if (has.call(obj, key)) {
+      pairs.push(encodeURIComponent(key) +'='+ encodeURIComponent(obj[key]));
+    }
+  }
+
+  return pairs.length ? prefix + pairs.join('&') : '';
+}
+
+//
+// Expose the module.
+//
+exports.stringify = querystringify;
+exports.parse = querystring;
+
+
+/***/ }),
+
+/***/ 52:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Check if we're required to add a port number.
+ *
+ * @see https://url.spec.whatwg.org/#default-port
+ * @param {Number|String} port Port number we need to check
+ * @param {String} protocol Protocol we need to check against.
+ * @returns {Boolean} Is it a default port for the given protocol
+ * @api private
+ */
+module.exports = function required(port, protocol) {
+  protocol = protocol.split(':')[0];
+  port = +port;
+
+  if (!port) return false;
+
+  switch (protocol) {
+    case 'http':
+    case 'ws':
+    return port !== 80;
+
+    case 'https':
+    case 'wss':
+    return port !== 443;
+
+    case 'ftp':
+    return port !== 21;
+
+    case 'gopher':
+    return port !== 70;
+
+    case 'file':
+    return false;
+  }
+
+  return port !== 0;
+};
+
+
+/***/ }),
+
+/***/ 622:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1404,15 +1405,11 @@ exports.__esModule = true;
 
 var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
-<<<<<<< Updated upstream
-var _react = __webpack_require__(1);
-=======
 var _react = __webpack_require__(3);
->>>>>>> Stashed changes
 
 var _react2 = _interopRequireDefault(_react);
 
-var _ArcGISRestService = __webpack_require__(286);
+var _ArcGISRestService = __webpack_require__(295);
 
 var _ArcGISRestService2 = _interopRequireDefault(_ArcGISRestService);
 
@@ -1424,11 +1421,7 @@ var _FieldSet2 = __webpack_require__(10);
 
 var _FieldSet3 = _interopRequireDefault(_FieldSet2);
 
-<<<<<<< Updated upstream
-var _FieldSet2 = __webpack_require__(10);
-=======
 var _openlayers = __webpack_require__(11);
->>>>>>> Stashed changes
 
 var _openlayers2 = _interopRequireDefault(_openlayers);
 
@@ -1638,4 +1631,4 @@ exports.default = LegendWidget;
 
 /***/ })
 
-},[613]);
+},[622]);
