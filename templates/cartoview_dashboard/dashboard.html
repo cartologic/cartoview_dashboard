@@ -21,8 +21,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" >
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
     <!-- <link rel="stylesheet" href="{{STATIC_URL}}bootstrap/css/bootstrap.min.css" > -->
-
     <link rel="stylesheet" href="{{STATIC_URL}}cartoview_dashboard/css/dashboard.css?v={{dbv}}" >
+    <link href="{{STATIC_URL}}cartoview_dashboard/dist/dashboard.css" rel="stylesheet">
+    <link href="{{STATIC_URL}}cartoview_dashboard/dist/identify-widget.css" rel="stylesheet">
+    <link href="{{STATIC_URL}}cartoview_dashboard/dist/map-widget.css" rel="stylesheet">
+    <link href="{{STATIC_URL}}cartoview_dashboard/dist/markdown-widget.css" rel="stylesheet">
 
 </head>
 <body>
@@ -32,15 +35,18 @@
   <form id="csrf-form">
     {% csrf_token %}
   </form>
-    <script src="{{ STATIC_URL }}cartoview_dashboard/dist/commons.js?v={{dbv}}"></script>
-    <script src="{{ STATIC_URL }}cartoview_dashboard/dist/dashboard.bundle.js?v={{dbv}}"></script>
-    <script src="{{ STATIC_URL }}cartoview_dashboard/dist/wps-client.bundle.js?v={{dbv}}"></script>
-    <script src="{{ STATIC_URL }}cartoview_dashboard/dist/map-widget.bundle.js?v={{dbv}}"></script>
-    <script src="{{ STATIC_URL }}cartoview_dashboard/dist/aggregate-widget.bundle.js?v={{dbv}}"></script>
-    <script src="{{ STATIC_URL }}cartoview_dashboard/dist/charts-widget.bundle.js?v={{dbv}}"></script>
-    <script src="{{ STATIC_URL }}cartoview_dashboard/dist/markdown-widget.bundle.js?v={{dbv}}"></script>
-    <script src="{{ STATIC_URL }}cartoview_dashboard/dist/legend-widget.bundle.js?v={{dbv}}"></script>
-    <script src="{{ STATIC_URL }}cartoview_dashboard/dist/identify-widget.bundle.js?v={{dbv}}"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}cartoview_dashboard/dist/commons.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}cartoview_dashboard/dist/vendors~dashboard~markdown-widget.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}cartoview_dashboard/dist/dashboard.bundle.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}cartoview_dashboard/dist/vendors~aggregate-widget~charts-widget~identify-widget~legend-widget~map-widget.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}cartoview_dashboard/dist/aggregate-widget.bundle.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}cartoview_dashboard/dist/charts-widget.bundle.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}cartoview_dashboard/dist/identify-widget.bundle.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}cartoview_dashboard/dist/legend-widget.bundle.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}cartoview_dashboard/dist/map-widget.bundle.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}cartoview_dashboard/dist/markdown-widget.bundle.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}cartoview_dashboard/dist/default~wps-client.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}cartoview_dashboard/dist/wps-client.bundle.js"></script>
     <script type="text/javascript">
     var props = {};
     //{% if instance %}
@@ -136,6 +142,11 @@
       proxy: PROXY_URL,
       static: "{{ STATIC_URL }}",
       media: "{{ MEDIA_URL }}",
+      {% if 'access_token' in request.session %}
+      token: "{{request.session.access_token}}",
+      {% else %}
+      token: "",
+      {% endif %}
     };
 
     function getMapConfigUrl(id){

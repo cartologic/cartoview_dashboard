@@ -1,38 +1,12 @@
 import React, {Component} from 'react';
 
-import ArcGISRestService from 'boundless-sdk/services/ArcGISRestService'
 import Events from './events/Events.jsx'
 import FieldSet from './components/FieldSet.jsx'
-import ol from 'openlayers'
-
-class ArcGISLegend extends Component {
-    render() {
-        if (this.state && this.state.legendInfo) {
-            var layers = this.state.legendInfo.layers;
-            const style = {width: 'auto', height: 'auto'};
-            return <div>
-                {
-                    layers.map(l => {
-                        return l.legend.map(legend => <div>
-                            <img style={style} src={'data:' + legend.contentType + ';base64,' + legend.imageData}/>
-                            <span>{legend.label}</span>
-                        </div>)
-                    })
-                }
-            </div>
-        }
-        return null
-    }
-
-    componentDidMount() {
-        var layer = this.props.layer;
-        var source = layer.getSource();
-        var url = source.getUrls()[0];
-        ArcGISRestService.getLegend(url, (legendInfo) => {
-            this.setState({legendInfo});
-        });
-    }
-}
+import Group from 'ol/layer/Group'
+import Image from 'ol/layer/Image'
+import ImageWMS from 'ol/source/ImageWMS'
+import Tile from 'ol/layer/Tile'
+import TileWMS from 'ol/source/TileWMS'
 
 class Legend extends Component {
     render() {
@@ -46,7 +20,7 @@ class Legend extends Component {
     getLegends(layers) {
         var legends = [];
         layers.forEach((layer) => {
-            if (layer instanceof ol.layer.Group) {
+            if (layer instanceof Group) {
                 legends = legends.concat(this.getLegends(layer.getLayers()))
             } else if (layer.getVisible() && this.hasLegend(
                 layer)) {
@@ -66,11 +40,6 @@ class Legend extends Component {
                             <img src={url}/>
                         </div>
                     );
-                } else if (layer.getSource() instanceof ol.source
-                    .TileArcGISRest) {
-                    legends.push(
-                        <div><h4>{layer.get('title')}</h4> <ArcGISLegend layer={layer}/></div>
-                    );
                 }
             }
         });
@@ -78,16 +47,15 @@ class Legend extends Component {
     }
 
     hasLegend(layer) {
-        return (layer instanceof ol.layer.Tile && layer.getSource() instanceof ol
-            .source.TileWMS) || (layer instanceof ol.layer.Image &&
-            layer.getSource() instanceof ol.source.ImageWMS) || (
-            layer instanceof ol.layer.Tile && layer.getSource() instanceof ol
+        return (layer instanceof Tile && layer.getSource() instanceof ol
+            .source.TileWMS) || (layer instanceof Image &&
+            layer.getSource() instanceof ImageWMS) || (
+            layer instanceof Tile && layer.getSource() instanceof ol
                 .source.TileArcGISRest);
     }
 
     isWMS(layer) {
-        return layer.getSource() instanceof ol.source.TileWMS || layer.getSource() instanceof ol
-            .source.ImageWMS;
+        return layer.getSource() instanceof TileWMS || layer.getSource() instanceof ImageWMS;
     }
 }
 

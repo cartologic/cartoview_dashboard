@@ -1,13 +1,18 @@
+import "ol-layerswitcher/src/ol-layerswitcher.css"
+
+import BasicViewerHelper from 'cartoview-sdk/helpers/BasicViewerHelper'
 import Events from './events/Events.jsx'
 import FieldSet from './components/FieldSet.jsx'
-import MapConfigService from 'boundless-sdk/services/MapConfigService'
-import MapConfigTransformService from 'boundless-sdk/services/MapConfigTransformService'
+import ImageWMS from 'ol/source/ImageWMS'
+import LayerSwitcher from 'ol-layerswitcher/src/ol-layerswitcher';
+import LayersHelper from 'cartoview-sdk/helpers/LayersHelper'
+import Overlay from 'ol/Overlay'
 import PropTypes from 'prop-types'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import WMSService from 'boundless-sdk/services/WMSService'
+import TileWMS from 'ol/source/TileWMS'
+import WMSService from 'cartoview-sdk/services/WMSService'
 import classNames from 'classnames'
-import ol from 'openlayers'
 
 class MapWidget extends BaseWidget {
     static displayName = "Map";
@@ -20,19 +25,15 @@ class MapWidget extends BaseWidget {
             mouseCoordinates: [0, 0],
             showPopup: false
         }
-        this.map = new ol.Map({
-            //controls: [new ol.control.Attribution({collapsible: false}), new ol.control.ScaleLine()],
-            layers: [
-                new ol.layer.Tile({ title: 'OpenStreetMap', source: new ol.source.OSM() })
-            ],
-            view: new ol.View({ center: [0, 0], zoom: 3 })
-        })
+        this.map = BasicViewerHelper.getMap()
+        let layerSwitcher = new LayerSwitcher()
+        layerSwitcher.setMap(this.map)
         this.map.on('moveend', () => {
             var extent = this.map.getView().calculateExtent(this.map.getSize())
             var eventName = 'mapExtentChanged' + '_' + this.props.id
             Events.emit(eventName, this.map, extent, this)
         })
-        this.overlay = new ol.Overlay({
+        this.overlay = new Overlay({
             autoPan: true,
             autoPanAnimation: {
                 duration: 250
@@ -43,24 +44,12 @@ class MapWidget extends BaseWidget {
 
     }
     isWMS(layer) {
-        return layer.getSource() instanceof ol.source.TileWMS || layer.getSource() instanceof ol
-            .source.ImageWMS
-    }
-    getLayers(layers) {
-        var children = []
-        layers.forEach((layer) => {
-            if (layer instanceof ol.layer.Group) {
-                children = children.concat(this.getLayers(layer.getLayers()))
-            } else if (layer.getVisible() && this.isWMS(layer)) {
-                children.push(layer)
-            }
-        })
-        return children
+        return layer.getSource() instanceof TileWMS || layer.getSource() instanceof ImageWMS
     }
     identify = () => {
         let that = this
         that.map.on('singleclick', (e) => {
-            that.getLayers(that.map.getLayers().getArray()).forEach(
+            LayersHelper.getLayers(that.map.getLayers().getArray()).forEach(
                 (layer) => {
                     that.setState({
                         features: [],
@@ -85,22 +74,11 @@ class MapWidget extends BaseWidget {
     update = (config) => {
         if (config && config.mapId) {
             var url = getMapConfigUrl(config.mapId)
-            fetch(url, {
-                method: "GET",
-                credentials: 'include'
-            }).then((response) => {
-                if (response.status == 200) {
-                    return response.json()
-                }
-            }).then((config) => {
-                if (config) {
-                    MapConfigService.load(MapConfigTransformService.transform(config), this.map, URLS.proxy)
-                    this.ready = true
-                    Events.emit('mapReady' + '_' + this.props.id, this.map, this)
-                    this.identify()
-                }
+            BasicViewerHelper.mapInit(url, this.map, URLS.proxy, URLS.token, ()=>{
+                this.ready = true
+                Events.emit('mapReady' + '_' + this.props.id, this.map, this)
+                this.identify()
             })
-
         }
     }
     changeShowPopup = () => {
@@ -126,7 +104,7 @@ class MapWidget extends BaseWidget {
         this.update(this.props.config)
     }
     componentDidMount(){
-        this.map.setTarget(ReactDOM.findDOMNode(this.refs.map))
+        this.map.setTarget(ReactDOM.findDOMNode(this.mapDiv))
     }
     getPopupProps = () => {
         const { showPopup, activeFeature, features } = this.state
@@ -147,7 +125,7 @@ class MapWidget extends BaseWidget {
     }
     render() {
         const {config}=this.props
-        return (<div ref="map" className='map-ct'>
+        return (<div ref={(node)=>this.mapDiv=node} className='map-ct'>
             {config && config.IdentifyPopup && this.parseStrBool(config.IdentifyPopup) &&<Popup {...this.getPopupProps()} /> }
         </div>)
     }

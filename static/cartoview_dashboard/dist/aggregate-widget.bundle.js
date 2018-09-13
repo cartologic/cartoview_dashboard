@@ -1,20 +1,1178 @@
-webpackJsonp([7],{
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// install a JSONP callback for chunk loading
+/******/ 	function webpackJsonpCallback(data) {
+/******/ 		var chunkIds = data[0];
+/******/ 		var moreModules = data[1];
+/******/ 		var executeModules = data[2];
+/******/
+/******/ 		// add "moreModules" to the modules object,
+/******/ 		// then flag all "chunkIds" as loaded and fire callback
+/******/ 		var moduleId, chunkId, i = 0, resolves = [];
+/******/ 		for(;i < chunkIds.length; i++) {
+/******/ 			chunkId = chunkIds[i];
+/******/ 			if(installedChunks[chunkId]) {
+/******/ 				resolves.push(installedChunks[chunkId][0]);
+/******/ 			}
+/******/ 			installedChunks[chunkId] = 0;
+/******/ 		}
+/******/ 		for(moduleId in moreModules) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+/******/ 				modules[moduleId] = moreModules[moduleId];
+/******/ 			}
+/******/ 		}
+/******/ 		if(parentJsonpFunction) parentJsonpFunction(data);
+/******/
+/******/ 		while(resolves.length) {
+/******/ 			resolves.shift()();
+/******/ 		}
+/******/
+/******/ 		// add entry modules from loaded chunk to deferred list
+/******/ 		deferredModules.push.apply(deferredModules, executeModules || []);
+/******/
+/******/ 		// run deferred modules when all chunks ready
+/******/ 		return checkDeferredModules();
+/******/ 	};
+/******/ 	function checkDeferredModules() {
+/******/ 		var result;
+/******/ 		for(var i = 0; i < deferredModules.length; i++) {
+/******/ 			var deferredModule = deferredModules[i];
+/******/ 			var fulfilled = true;
+/******/ 			for(var j = 1; j < deferredModule.length; j++) {
+/******/ 				var depId = deferredModule[j];
+/******/ 				if(installedChunks[depId] !== 0) fulfilled = false;
+/******/ 			}
+/******/ 			if(fulfilled) {
+/******/ 				deferredModules.splice(i--, 1);
+/******/ 				result = __webpack_require__(__webpack_require__.s = deferredModule[0]);
+/******/ 			}
+/******/ 		}
+/******/ 		return result;
+/******/ 	}
+/******/ 	function hotDisposeChunk(chunkId) {
+/******/ 		delete installedChunks[chunkId];
+/******/ 	}
+/******/ 	var parentHotUpdateCallback = window["webpackHotUpdate"];
+/******/ 	window["webpackHotUpdate"] = // eslint-disable-next-line no-unused-vars
+/******/ 	function webpackHotUpdateCallback(chunkId, moreModules) {
+/******/ 		hotAddUpdateChunk(chunkId, moreModules);
+/******/ 		if (parentHotUpdateCallback) parentHotUpdateCallback(chunkId, moreModules);
+/******/ 	} ;
+/******/
+/******/ 	// eslint-disable-next-line no-unused-vars
+/******/ 	function hotDownloadUpdateChunk(chunkId) {
+/******/ 		var head = document.getElementsByTagName("head")[0];
+/******/ 		var script = document.createElement("script");
+/******/ 		script.charset = "utf-8";
+/******/ 		script.src = __webpack_require__.p + "" + chunkId + "." + hotCurrentHash + ".hot-update.js";
+/******/ 		;
+/******/ 		head.appendChild(script);
+/******/ 	}
+/******/
+/******/ 	// eslint-disable-next-line no-unused-vars
+/******/ 	function hotDownloadManifest(requestTimeout) {
+/******/ 		requestTimeout = requestTimeout || 10000;
+/******/ 		return new Promise(function(resolve, reject) {
+/******/ 			if (typeof XMLHttpRequest === "undefined") {
+/******/ 				return reject(new Error("No browser support"));
+/******/ 			}
+/******/ 			try {
+/******/ 				var request = new XMLHttpRequest();
+/******/ 				var requestPath = __webpack_require__.p + "" + hotCurrentHash + ".hot-update.json";
+/******/ 				request.open("GET", requestPath, true);
+/******/ 				request.timeout = requestTimeout;
+/******/ 				request.send(null);
+/******/ 			} catch (err) {
+/******/ 				return reject(err);
+/******/ 			}
+/******/ 			request.onreadystatechange = function() {
+/******/ 				if (request.readyState !== 4) return;
+/******/ 				if (request.status === 0) {
+/******/ 					// timeout
+/******/ 					reject(
+/******/ 						new Error("Manifest request to " + requestPath + " timed out.")
+/******/ 					);
+/******/ 				} else if (request.status === 404) {
+/******/ 					// no update available
+/******/ 					resolve();
+/******/ 				} else if (request.status !== 200 && request.status !== 304) {
+/******/ 					// other failure
+/******/ 					reject(new Error("Manifest request to " + requestPath + " failed."));
+/******/ 				} else {
+/******/ 					// success
+/******/ 					try {
+/******/ 						var update = JSON.parse(request.responseText);
+/******/ 					} catch (e) {
+/******/ 						reject(e);
+/******/ 						return;
+/******/ 					}
+/******/ 					resolve(update);
+/******/ 				}
+/******/ 			};
+/******/ 		});
+/******/ 	}
+/******/
+/******/ 	var hotApplyOnUpdate = true;
+/******/ 	// eslint-disable-next-line no-unused-vars
+/******/ 	var hotCurrentHash = "ec10e15a3d7e37d50543";
+/******/ 	var hotRequestTimeout = 10000;
+/******/ 	var hotCurrentModuleData = {};
+/******/ 	var hotCurrentChildModule;
+/******/ 	// eslint-disable-next-line no-unused-vars
+/******/ 	var hotCurrentParents = [];
+/******/ 	// eslint-disable-next-line no-unused-vars
+/******/ 	var hotCurrentParentsTemp = [];
+/******/
+/******/ 	// eslint-disable-next-line no-unused-vars
+/******/ 	function hotCreateRequire(moduleId) {
+/******/ 		var me = installedModules[moduleId];
+/******/ 		if (!me) return __webpack_require__;
+/******/ 		var fn = function(request) {
+/******/ 			if (me.hot.active) {
+/******/ 				if (installedModules[request]) {
+/******/ 					if (installedModules[request].parents.indexOf(moduleId) === -1) {
+/******/ 						installedModules[request].parents.push(moduleId);
+/******/ 					}
+/******/ 				} else {
+/******/ 					hotCurrentParents = [moduleId];
+/******/ 					hotCurrentChildModule = request;
+/******/ 				}
+/******/ 				if (me.children.indexOf(request) === -1) {
+/******/ 					me.children.push(request);
+/******/ 				}
+/******/ 			} else {
+/******/ 				console.warn(
+/******/ 					"[HMR] unexpected require(" +
+/******/ 						request +
+/******/ 						") from disposed module " +
+/******/ 						moduleId
+/******/ 				);
+/******/ 				hotCurrentParents = [];
+/******/ 			}
+/******/ 			return __webpack_require__(request);
+/******/ 		};
+/******/ 		var ObjectFactory = function ObjectFactory(name) {
+/******/ 			return {
+/******/ 				configurable: true,
+/******/ 				enumerable: true,
+/******/ 				get: function() {
+/******/ 					return __webpack_require__[name];
+/******/ 				},
+/******/ 				set: function(value) {
+/******/ 					__webpack_require__[name] = value;
+/******/ 				}
+/******/ 			};
+/******/ 		};
+/******/ 		for (var name in __webpack_require__) {
+/******/ 			if (
+/******/ 				Object.prototype.hasOwnProperty.call(__webpack_require__, name) &&
+/******/ 				name !== "e" &&
+/******/ 				name !== "t"
+/******/ 			) {
+/******/ 				Object.defineProperty(fn, name, ObjectFactory(name));
+/******/ 			}
+/******/ 		}
+/******/ 		fn.e = function(chunkId) {
+/******/ 			if (hotStatus === "ready") hotSetStatus("prepare");
+/******/ 			hotChunksLoading++;
+/******/ 			return __webpack_require__.e(chunkId).then(finishChunkLoading, function(err) {
+/******/ 				finishChunkLoading();
+/******/ 				throw err;
+/******/ 			});
+/******/
+/******/ 			function finishChunkLoading() {
+/******/ 				hotChunksLoading--;
+/******/ 				if (hotStatus === "prepare") {
+/******/ 					if (!hotWaitingFilesMap[chunkId]) {
+/******/ 						hotEnsureUpdateChunk(chunkId);
+/******/ 					}
+/******/ 					if (hotChunksLoading === 0 && hotWaitingFiles === 0) {
+/******/ 						hotUpdateDownloaded();
+/******/ 					}
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 		fn.t = function(value, mode) {
+/******/ 			if (mode & 1) value = fn(value);
+/******/ 			return __webpack_require__.t(value, mode & ~1);
+/******/ 		};
+/******/ 		return fn;
+/******/ 	}
+/******/
+/******/ 	// eslint-disable-next-line no-unused-vars
+/******/ 	function hotCreateModule(moduleId) {
+/******/ 		var hot = {
+/******/ 			// private stuff
+/******/ 			_acceptedDependencies: {},
+/******/ 			_declinedDependencies: {},
+/******/ 			_selfAccepted: false,
+/******/ 			_selfDeclined: false,
+/******/ 			_disposeHandlers: [],
+/******/ 			_main: hotCurrentChildModule !== moduleId,
+/******/
+/******/ 			// Module API
+/******/ 			active: true,
+/******/ 			accept: function(dep, callback) {
+/******/ 				if (dep === undefined) hot._selfAccepted = true;
+/******/ 				else if (typeof dep === "function") hot._selfAccepted = dep;
+/******/ 				else if (typeof dep === "object")
+/******/ 					for (var i = 0; i < dep.length; i++)
+/******/ 						hot._acceptedDependencies[dep[i]] = callback || function() {};
+/******/ 				else hot._acceptedDependencies[dep] = callback || function() {};
+/******/ 			},
+/******/ 			decline: function(dep) {
+/******/ 				if (dep === undefined) hot._selfDeclined = true;
+/******/ 				else if (typeof dep === "object")
+/******/ 					for (var i = 0; i < dep.length; i++)
+/******/ 						hot._declinedDependencies[dep[i]] = true;
+/******/ 				else hot._declinedDependencies[dep] = true;
+/******/ 			},
+/******/ 			dispose: function(callback) {
+/******/ 				hot._disposeHandlers.push(callback);
+/******/ 			},
+/******/ 			addDisposeHandler: function(callback) {
+/******/ 				hot._disposeHandlers.push(callback);
+/******/ 			},
+/******/ 			removeDisposeHandler: function(callback) {
+/******/ 				var idx = hot._disposeHandlers.indexOf(callback);
+/******/ 				if (idx >= 0) hot._disposeHandlers.splice(idx, 1);
+/******/ 			},
+/******/
+/******/ 			// Management API
+/******/ 			check: hotCheck,
+/******/ 			apply: hotApply,
+/******/ 			status: function(l) {
+/******/ 				if (!l) return hotStatus;
+/******/ 				hotStatusHandlers.push(l);
+/******/ 			},
+/******/ 			addStatusHandler: function(l) {
+/******/ 				hotStatusHandlers.push(l);
+/******/ 			},
+/******/ 			removeStatusHandler: function(l) {
+/******/ 				var idx = hotStatusHandlers.indexOf(l);
+/******/ 				if (idx >= 0) hotStatusHandlers.splice(idx, 1);
+/******/ 			},
+/******/
+/******/ 			//inherit from previous dispose call
+/******/ 			data: hotCurrentModuleData[moduleId]
+/******/ 		};
+/******/ 		hotCurrentChildModule = undefined;
+/******/ 		return hot;
+/******/ 	}
+/******/
+/******/ 	var hotStatusHandlers = [];
+/******/ 	var hotStatus = "idle";
+/******/
+/******/ 	function hotSetStatus(newStatus) {
+/******/ 		hotStatus = newStatus;
+/******/ 		for (var i = 0; i < hotStatusHandlers.length; i++)
+/******/ 			hotStatusHandlers[i].call(null, newStatus);
+/******/ 	}
+/******/
+/******/ 	// while downloading
+/******/ 	var hotWaitingFiles = 0;
+/******/ 	var hotChunksLoading = 0;
+/******/ 	var hotWaitingFilesMap = {};
+/******/ 	var hotRequestedFilesMap = {};
+/******/ 	var hotAvailableFilesMap = {};
+/******/ 	var hotDeferred;
+/******/
+/******/ 	// The update info
+/******/ 	var hotUpdate, hotUpdateNewHash;
+/******/
+/******/ 	function toModuleId(id) {
+/******/ 		var isNumber = +id + "" === id;
+/******/ 		return isNumber ? +id : id;
+/******/ 	}
+/******/
+/******/ 	function hotCheck(apply) {
+/******/ 		if (hotStatus !== "idle") {
+/******/ 			throw new Error("check() is only allowed in idle status");
+/******/ 		}
+/******/ 		hotApplyOnUpdate = apply;
+/******/ 		hotSetStatus("check");
+/******/ 		return hotDownloadManifest(hotRequestTimeout).then(function(update) {
+/******/ 			if (!update) {
+/******/ 				hotSetStatus("idle");
+/******/ 				return null;
+/******/ 			}
+/******/ 			hotRequestedFilesMap = {};
+/******/ 			hotWaitingFilesMap = {};
+/******/ 			hotAvailableFilesMap = update.c;
+/******/ 			hotUpdateNewHash = update.h;
+/******/
+/******/ 			hotSetStatus("prepare");
+/******/ 			var promise = new Promise(function(resolve, reject) {
+/******/ 				hotDeferred = {
+/******/ 					resolve: resolve,
+/******/ 					reject: reject
+/******/ 				};
+/******/ 			});
+/******/ 			hotUpdate = {};
+/******/ 			for(var chunkId in installedChunks)
+/******/ 			// eslint-disable-next-line no-lone-blocks
+/******/ 			{
+/******/ 				/*globals chunkId */
+/******/ 				hotEnsureUpdateChunk(chunkId);
+/******/ 			}
+/******/ 			if (
+/******/ 				hotStatus === "prepare" &&
+/******/ 				hotChunksLoading === 0 &&
+/******/ 				hotWaitingFiles === 0
+/******/ 			) {
+/******/ 				hotUpdateDownloaded();
+/******/ 			}
+/******/ 			return promise;
+/******/ 		});
+/******/ 	}
+/******/
+/******/ 	// eslint-disable-next-line no-unused-vars
+/******/ 	function hotAddUpdateChunk(chunkId, moreModules) {
+/******/ 		if (!hotAvailableFilesMap[chunkId] || !hotRequestedFilesMap[chunkId])
+/******/ 			return;
+/******/ 		hotRequestedFilesMap[chunkId] = false;
+/******/ 		for (var moduleId in moreModules) {
+/******/ 			if (Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+/******/ 				hotUpdate[moduleId] = moreModules[moduleId];
+/******/ 			}
+/******/ 		}
+/******/ 		if (--hotWaitingFiles === 0 && hotChunksLoading === 0) {
+/******/ 			hotUpdateDownloaded();
+/******/ 		}
+/******/ 	}
+/******/
+/******/ 	function hotEnsureUpdateChunk(chunkId) {
+/******/ 		if (!hotAvailableFilesMap[chunkId]) {
+/******/ 			hotWaitingFilesMap[chunkId] = true;
+/******/ 		} else {
+/******/ 			hotRequestedFilesMap[chunkId] = true;
+/******/ 			hotWaitingFiles++;
+/******/ 			hotDownloadUpdateChunk(chunkId);
+/******/ 		}
+/******/ 	}
+/******/
+/******/ 	function hotUpdateDownloaded() {
+/******/ 		hotSetStatus("ready");
+/******/ 		var deferred = hotDeferred;
+/******/ 		hotDeferred = null;
+/******/ 		if (!deferred) return;
+/******/ 		if (hotApplyOnUpdate) {
+/******/ 			// Wrap deferred object in Promise to mark it as a well-handled Promise to
+/******/ 			// avoid triggering uncaught exception warning in Chrome.
+/******/ 			// See https://bugs.chromium.org/p/chromium/issues/detail?id=465666
+/******/ 			Promise.resolve()
+/******/ 				.then(function() {
+/******/ 					return hotApply(hotApplyOnUpdate);
+/******/ 				})
+/******/ 				.then(
+/******/ 					function(result) {
+/******/ 						deferred.resolve(result);
+/******/ 					},
+/******/ 					function(err) {
+/******/ 						deferred.reject(err);
+/******/ 					}
+/******/ 				);
+/******/ 		} else {
+/******/ 			var outdatedModules = [];
+/******/ 			for (var id in hotUpdate) {
+/******/ 				if (Object.prototype.hasOwnProperty.call(hotUpdate, id)) {
+/******/ 					outdatedModules.push(toModuleId(id));
+/******/ 				}
+/******/ 			}
+/******/ 			deferred.resolve(outdatedModules);
+/******/ 		}
+/******/ 	}
+/******/
+/******/ 	function hotApply(options) {
+/******/ 		if (hotStatus !== "ready")
+/******/ 			throw new Error("apply() is only allowed in ready status");
+/******/ 		options = options || {};
+/******/
+/******/ 		var cb;
+/******/ 		var i;
+/******/ 		var j;
+/******/ 		var module;
+/******/ 		var moduleId;
+/******/
+/******/ 		function getAffectedStuff(updateModuleId) {
+/******/ 			var outdatedModules = [updateModuleId];
+/******/ 			var outdatedDependencies = {};
+/******/
+/******/ 			var queue = outdatedModules.slice().map(function(id) {
+/******/ 				return {
+/******/ 					chain: [id],
+/******/ 					id: id
+/******/ 				};
+/******/ 			});
+/******/ 			while (queue.length > 0) {
+/******/ 				var queueItem = queue.pop();
+/******/ 				var moduleId = queueItem.id;
+/******/ 				var chain = queueItem.chain;
+/******/ 				module = installedModules[moduleId];
+/******/ 				if (!module || module.hot._selfAccepted) continue;
+/******/ 				if (module.hot._selfDeclined) {
+/******/ 					return {
+/******/ 						type: "self-declined",
+/******/ 						chain: chain,
+/******/ 						moduleId: moduleId
+/******/ 					};
+/******/ 				}
+/******/ 				if (module.hot._main) {
+/******/ 					return {
+/******/ 						type: "unaccepted",
+/******/ 						chain: chain,
+/******/ 						moduleId: moduleId
+/******/ 					};
+/******/ 				}
+/******/ 				for (var i = 0; i < module.parents.length; i++) {
+/******/ 					var parentId = module.parents[i];
+/******/ 					var parent = installedModules[parentId];
+/******/ 					if (!parent) continue;
+/******/ 					if (parent.hot._declinedDependencies[moduleId]) {
+/******/ 						return {
+/******/ 							type: "declined",
+/******/ 							chain: chain.concat([parentId]),
+/******/ 							moduleId: moduleId,
+/******/ 							parentId: parentId
+/******/ 						};
+/******/ 					}
+/******/ 					if (outdatedModules.indexOf(parentId) !== -1) continue;
+/******/ 					if (parent.hot._acceptedDependencies[moduleId]) {
+/******/ 						if (!outdatedDependencies[parentId])
+/******/ 							outdatedDependencies[parentId] = [];
+/******/ 						addAllToSet(outdatedDependencies[parentId], [moduleId]);
+/******/ 						continue;
+/******/ 					}
+/******/ 					delete outdatedDependencies[parentId];
+/******/ 					outdatedModules.push(parentId);
+/******/ 					queue.push({
+/******/ 						chain: chain.concat([parentId]),
+/******/ 						id: parentId
+/******/ 					});
+/******/ 				}
+/******/ 			}
+/******/
+/******/ 			return {
+/******/ 				type: "accepted",
+/******/ 				moduleId: updateModuleId,
+/******/ 				outdatedModules: outdatedModules,
+/******/ 				outdatedDependencies: outdatedDependencies
+/******/ 			};
+/******/ 		}
+/******/
+/******/ 		function addAllToSet(a, b) {
+/******/ 			for (var i = 0; i < b.length; i++) {
+/******/ 				var item = b[i];
+/******/ 				if (a.indexOf(item) === -1) a.push(item);
+/******/ 			}
+/******/ 		}
+/******/
+/******/ 		// at begin all updates modules are outdated
+/******/ 		// the "outdated" status can propagate to parents if they don't accept the children
+/******/ 		var outdatedDependencies = {};
+/******/ 		var outdatedModules = [];
+/******/ 		var appliedUpdate = {};
+/******/
+/******/ 		var warnUnexpectedRequire = function warnUnexpectedRequire() {
+/******/ 			console.warn(
+/******/ 				"[HMR] unexpected require(" + result.moduleId + ") to disposed module"
+/******/ 			);
+/******/ 		};
+/******/
+/******/ 		for (var id in hotUpdate) {
+/******/ 			if (Object.prototype.hasOwnProperty.call(hotUpdate, id)) {
+/******/ 				moduleId = toModuleId(id);
+/******/ 				/** @type {TODO} */
+/******/ 				var result;
+/******/ 				if (hotUpdate[id]) {
+/******/ 					result = getAffectedStuff(moduleId);
+/******/ 				} else {
+/******/ 					result = {
+/******/ 						type: "disposed",
+/******/ 						moduleId: id
+/******/ 					};
+/******/ 				}
+/******/ 				/** @type {Error|false} */
+/******/ 				var abortError = false;
+/******/ 				var doApply = false;
+/******/ 				var doDispose = false;
+/******/ 				var chainInfo = "";
+/******/ 				if (result.chain) {
+/******/ 					chainInfo = "\nUpdate propagation: " + result.chain.join(" -> ");
+/******/ 				}
+/******/ 				switch (result.type) {
+/******/ 					case "self-declined":
+/******/ 						if (options.onDeclined) options.onDeclined(result);
+/******/ 						if (!options.ignoreDeclined)
+/******/ 							abortError = new Error(
+/******/ 								"Aborted because of self decline: " +
+/******/ 									result.moduleId +
+/******/ 									chainInfo
+/******/ 							);
+/******/ 						break;
+/******/ 					case "declined":
+/******/ 						if (options.onDeclined) options.onDeclined(result);
+/******/ 						if (!options.ignoreDeclined)
+/******/ 							abortError = new Error(
+/******/ 								"Aborted because of declined dependency: " +
+/******/ 									result.moduleId +
+/******/ 									" in " +
+/******/ 									result.parentId +
+/******/ 									chainInfo
+/******/ 							);
+/******/ 						break;
+/******/ 					case "unaccepted":
+/******/ 						if (options.onUnaccepted) options.onUnaccepted(result);
+/******/ 						if (!options.ignoreUnaccepted)
+/******/ 							abortError = new Error(
+/******/ 								"Aborted because " + moduleId + " is not accepted" + chainInfo
+/******/ 							);
+/******/ 						break;
+/******/ 					case "accepted":
+/******/ 						if (options.onAccepted) options.onAccepted(result);
+/******/ 						doApply = true;
+/******/ 						break;
+/******/ 					case "disposed":
+/******/ 						if (options.onDisposed) options.onDisposed(result);
+/******/ 						doDispose = true;
+/******/ 						break;
+/******/ 					default:
+/******/ 						throw new Error("Unexception type " + result.type);
+/******/ 				}
+/******/ 				if (abortError) {
+/******/ 					hotSetStatus("abort");
+/******/ 					return Promise.reject(abortError);
+/******/ 				}
+/******/ 				if (doApply) {
+/******/ 					appliedUpdate[moduleId] = hotUpdate[moduleId];
+/******/ 					addAllToSet(outdatedModules, result.outdatedModules);
+/******/ 					for (moduleId in result.outdatedDependencies) {
+/******/ 						if (
+/******/ 							Object.prototype.hasOwnProperty.call(
+/******/ 								result.outdatedDependencies,
+/******/ 								moduleId
+/******/ 							)
+/******/ 						) {
+/******/ 							if (!outdatedDependencies[moduleId])
+/******/ 								outdatedDependencies[moduleId] = [];
+/******/ 							addAllToSet(
+/******/ 								outdatedDependencies[moduleId],
+/******/ 								result.outdatedDependencies[moduleId]
+/******/ 							);
+/******/ 						}
+/******/ 					}
+/******/ 				}
+/******/ 				if (doDispose) {
+/******/ 					addAllToSet(outdatedModules, [result.moduleId]);
+/******/ 					appliedUpdate[moduleId] = warnUnexpectedRequire;
+/******/ 				}
+/******/ 			}
+/******/ 		}
+/******/
+/******/ 		// Store self accepted outdated modules to require them later by the module system
+/******/ 		var outdatedSelfAcceptedModules = [];
+/******/ 		for (i = 0; i < outdatedModules.length; i++) {
+/******/ 			moduleId = outdatedModules[i];
+/******/ 			if (
+/******/ 				installedModules[moduleId] &&
+/******/ 				installedModules[moduleId].hot._selfAccepted
+/******/ 			)
+/******/ 				outdatedSelfAcceptedModules.push({
+/******/ 					module: moduleId,
+/******/ 					errorHandler: installedModules[moduleId].hot._selfAccepted
+/******/ 				});
+/******/ 		}
+/******/
+/******/ 		// Now in "dispose" phase
+/******/ 		hotSetStatus("dispose");
+/******/ 		Object.keys(hotAvailableFilesMap).forEach(function(chunkId) {
+/******/ 			if (hotAvailableFilesMap[chunkId] === false) {
+/******/ 				hotDisposeChunk(chunkId);
+/******/ 			}
+/******/ 		});
+/******/
+/******/ 		var idx;
+/******/ 		var queue = outdatedModules.slice();
+/******/ 		while (queue.length > 0) {
+/******/ 			moduleId = queue.pop();
+/******/ 			module = installedModules[moduleId];
+/******/ 			if (!module) continue;
+/******/
+/******/ 			var data = {};
+/******/
+/******/ 			// Call dispose handlers
+/******/ 			var disposeHandlers = module.hot._disposeHandlers;
+/******/ 			for (j = 0; j < disposeHandlers.length; j++) {
+/******/ 				cb = disposeHandlers[j];
+/******/ 				cb(data);
+/******/ 			}
+/******/ 			hotCurrentModuleData[moduleId] = data;
+/******/
+/******/ 			// disable module (this disables requires from this module)
+/******/ 			module.hot.active = false;
+/******/
+/******/ 			// remove module from cache
+/******/ 			delete installedModules[moduleId];
+/******/
+/******/ 			// when disposing there is no need to call dispose handler
+/******/ 			delete outdatedDependencies[moduleId];
+/******/
+/******/ 			// remove "parents" references from all children
+/******/ 			for (j = 0; j < module.children.length; j++) {
+/******/ 				var child = installedModules[module.children[j]];
+/******/ 				if (!child) continue;
+/******/ 				idx = child.parents.indexOf(moduleId);
+/******/ 				if (idx >= 0) {
+/******/ 					child.parents.splice(idx, 1);
+/******/ 				}
+/******/ 			}
+/******/ 		}
+/******/
+/******/ 		// remove outdated dependency from module children
+/******/ 		var dependency;
+/******/ 		var moduleOutdatedDependencies;
+/******/ 		for (moduleId in outdatedDependencies) {
+/******/ 			if (
+/******/ 				Object.prototype.hasOwnProperty.call(outdatedDependencies, moduleId)
+/******/ 			) {
+/******/ 				module = installedModules[moduleId];
+/******/ 				if (module) {
+/******/ 					moduleOutdatedDependencies = outdatedDependencies[moduleId];
+/******/ 					for (j = 0; j < moduleOutdatedDependencies.length; j++) {
+/******/ 						dependency = moduleOutdatedDependencies[j];
+/******/ 						idx = module.children.indexOf(dependency);
+/******/ 						if (idx >= 0) module.children.splice(idx, 1);
+/******/ 					}
+/******/ 				}
+/******/ 			}
+/******/ 		}
+/******/
+/******/ 		// Not in "apply" phase
+/******/ 		hotSetStatus("apply");
+/******/
+/******/ 		hotCurrentHash = hotUpdateNewHash;
+/******/
+/******/ 		// insert new code
+/******/ 		for (moduleId in appliedUpdate) {
+/******/ 			if (Object.prototype.hasOwnProperty.call(appliedUpdate, moduleId)) {
+/******/ 				modules[moduleId] = appliedUpdate[moduleId];
+/******/ 			}
+/******/ 		}
+/******/
+/******/ 		// call accept handlers
+/******/ 		var error = null;
+/******/ 		for (moduleId in outdatedDependencies) {
+/******/ 			if (
+/******/ 				Object.prototype.hasOwnProperty.call(outdatedDependencies, moduleId)
+/******/ 			) {
+/******/ 				module = installedModules[moduleId];
+/******/ 				if (module) {
+/******/ 					moduleOutdatedDependencies = outdatedDependencies[moduleId];
+/******/ 					var callbacks = [];
+/******/ 					for (i = 0; i < moduleOutdatedDependencies.length; i++) {
+/******/ 						dependency = moduleOutdatedDependencies[i];
+/******/ 						cb = module.hot._acceptedDependencies[dependency];
+/******/ 						if (cb) {
+/******/ 							if (callbacks.indexOf(cb) !== -1) continue;
+/******/ 							callbacks.push(cb);
+/******/ 						}
+/******/ 					}
+/******/ 					for (i = 0; i < callbacks.length; i++) {
+/******/ 						cb = callbacks[i];
+/******/ 						try {
+/******/ 							cb(moduleOutdatedDependencies);
+/******/ 						} catch (err) {
+/******/ 							if (options.onErrored) {
+/******/ 								options.onErrored({
+/******/ 									type: "accept-errored",
+/******/ 									moduleId: moduleId,
+/******/ 									dependencyId: moduleOutdatedDependencies[i],
+/******/ 									error: err
+/******/ 								});
+/******/ 							}
+/******/ 							if (!options.ignoreErrored) {
+/******/ 								if (!error) error = err;
+/******/ 							}
+/******/ 						}
+/******/ 					}
+/******/ 				}
+/******/ 			}
+/******/ 		}
+/******/
+/******/ 		// Load self accepted modules
+/******/ 		for (i = 0; i < outdatedSelfAcceptedModules.length; i++) {
+/******/ 			var item = outdatedSelfAcceptedModules[i];
+/******/ 			moduleId = item.module;
+/******/ 			hotCurrentParents = [moduleId];
+/******/ 			try {
+/******/ 				__webpack_require__(moduleId);
+/******/ 			} catch (err) {
+/******/ 				if (typeof item.errorHandler === "function") {
+/******/ 					try {
+/******/ 						item.errorHandler(err);
+/******/ 					} catch (err2) {
+/******/ 						if (options.onErrored) {
+/******/ 							options.onErrored({
+/******/ 								type: "self-accept-error-handler-errored",
+/******/ 								moduleId: moduleId,
+/******/ 								error: err2,
+/******/ 								originalError: err
+/******/ 							});
+/******/ 						}
+/******/ 						if (!options.ignoreErrored) {
+/******/ 							if (!error) error = err2;
+/******/ 						}
+/******/ 						if (!error) error = err;
+/******/ 					}
+/******/ 				} else {
+/******/ 					if (options.onErrored) {
+/******/ 						options.onErrored({
+/******/ 							type: "self-accept-errored",
+/******/ 							moduleId: moduleId,
+/******/ 							error: err
+/******/ 						});
+/******/ 					}
+/******/ 					if (!options.ignoreErrored) {
+/******/ 						if (!error) error = err;
+/******/ 					}
+/******/ 				}
+/******/ 			}
+/******/ 		}
+/******/
+/******/ 		// handle errors in accept handlers and self accepted module load
+/******/ 		if (error) {
+/******/ 			hotSetStatus("fail");
+/******/ 			return Promise.reject(error);
+/******/ 		}
+/******/
+/******/ 		hotSetStatus("idle");
+/******/ 		return new Promise(function(resolve) {
+/******/ 			resolve(outdatedModules);
+/******/ 		});
+/******/ 	}
+/******/
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// object to store loaded and loading chunks
+/******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 	// Promise = chunk loading, 0 = chunk loaded
+/******/ 	var installedChunks = {
+/******/ 		"aggregate-widget": 0
+/******/ 	};
+/******/
+/******/ 	var deferredModules = [];
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {},
+/******/ 			hot: hotCreateModule(moduleId),
+/******/ 			parents: (hotCurrentParentsTemp = hotCurrentParents, hotCurrentParents = [], hotCurrentParentsTemp),
+/******/ 			children: []
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, hotCreateRequire(moduleId));
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "/dist/";
+/******/
+/******/ 	// __webpack_hash__
+/******/ 	__webpack_require__.h = function() { return hotCurrentHash; };
+/******/
+/******/ 	var jsonpArray = window["webpackJsonp"] = window["webpackJsonp"] || [];
+/******/ 	var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
+/******/ 	jsonpArray.push = webpackJsonpCallback;
+/******/ 	jsonpArray = jsonpArray.slice();
+/******/ 	for(var i = 0; i < jsonpArray.length; i++) webpackJsonpCallback(jsonpArray[i]);
+/******/ 	var parentJsonpFunction = oldJsonpFunction;
+/******/
+/******/
+/******/ 	// add entry module to deferred list
+/******/ 	deferredModules.push(["./src/aggregate-widget.jsx","commons","vendors~aggregate-widget~charts-widget~identify-widget~legend-widget~map-widget"]);
+/******/ 	// run deferred modules when ready
+/******/ 	return checkDeferredModules();
+/******/ })
+/************************************************************************/
+/******/ ({
 
-/***/ 10:
+/***/ "./src/aggregate-widget.jsx":
+/*!**********************************!*\
+  !*** ./src/aggregate-widget.jsx ***!
+  \**********************************/
+/*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+var _Events = __webpack_require__(/*! ./events/Events.jsx */ "./src/events/Events.jsx");
+
+var _Events2 = _interopRequireDefault(_Events);
+
+var _FieldSet2 = __webpack_require__(/*! ./components/FieldSet.jsx */ "./src/components/FieldSet.jsx");
+
+var _FieldSet3 = _interopRequireDefault(_FieldSet2);
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AggregateWidget = function (_BaseWidget) {
+    _inherits(AggregateWidget, _BaseWidget);
+
+    function AggregateWidget(props) {
+        _classCallCheck(this, AggregateWidget);
+
+        var _this = _possibleConstructorReturn(this, (AggregateWidget.__proto__ || Object.getPrototypeOf(AggregateWidget)).call(this, props));
+
+        _this.wpsClient = new WpsClient({
+            geoserverUrl: "/geoserver"
+        });
+        _this.state.aggregateResult = "NaN";
+        _this.configFieldSetClass = ConfigFieldSet;
+        return _this;
+    }
+
+    _createClass(AggregateWidget, [{
+        key: 'setConfig',
+        value: function setConfig(config) {
+            _get(AggregateWidget.prototype.__proto__ || Object.getPrototypeOf(AggregateWidget.prototype), 'setConfig', this).call(this, config);
+            this.attachToMapWidget(config);
+        }
+    }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            if (this.state.config.mapWidget) {
+                this.attachToMapWidget(this.state.config);
+            }
+            this.update(this.state.config);
+            _get(AggregateWidget.prototype.__proto__ || Object.getPrototypeOf(AggregateWidget.prototype), 'componentDidMount', this).call(this);
+        }
+    }, {
+        key: 'attachToMapWidget',
+        value: function attachToMapWidget(config) {
+            var _this2 = this;
+
+            var mapWidget = this.context.configManager.getWidget(config.mapWidget);
+            if (mapWidget && mapWidget.ready)
+                // update widget once attached to a map, otherwise it will wait to next map change.
+                this.update(config, mapWidget.map.getView().calculateExtent());
+            var eventName = 'mapExtentChanged' + '_' + config.mapWidget;
+            _Events2.default.on(eventName, function (map, extent) {
+                _this2.update(_this2.state.config, extent);
+            });
+        }
+    }, {
+        key: 'update',
+        value: function update(config, extent) {
+            var _this3 = this;
+
+            if (config.typeName) {
+                config = Object.assign({}, config);
+                if (extent) {
+                    config.filters = {
+                        minx: extent[0],
+                        miny: extent[1],
+                        maxx: extent[2],
+                        maxy: extent[3]
+                    };
+                }
+                this.wpsClient.aggregate(config).then(function (data) {
+                    _this3.setData(data);
+                });
+            }
+        }
+    }, {
+        key: 'setData',
+        value: function setData(data) {
+            this.setState({
+                aggregateResult: data.AggregationResults[0][0]
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                { className: 'aggregate-widget' },
+                _react2.default.createElement(
+                    'h1',
+                    { className: 'text-center' },
+                    this.state.aggregateResult
+                )
+            );
+        }
+    }]);
+
+    return AggregateWidget;
+}(BaseWidget);
+
+AggregateWidget.displayName = "Aggregate Widget";
+
+var ConfigFieldSet = function (_FieldSet) {
+    _inherits(ConfigFieldSet, _FieldSet);
+
+    function ConfigFieldSet(props) {
+        _classCallCheck(this, ConfigFieldSet);
+
+        var _this4 = _possibleConstructorReturn(this, (ConfigFieldSet.__proto__ || Object.getPrototypeOf(ConfigFieldSet)).call(this, props));
+
+        console.log(props);
+        _this4.state.layers = [];
+        _this4.state.attributes = [];
+        _this4.state.map = null;
+        return _this4;
+    }
+
+    _createClass(ConfigFieldSet, [{
+        key: 'getInitialData',
+        value: function getInitialData(props) {
+            return props.widget.getConfig();
+        }
+    }, {
+        key: 'getSchema',
+        value: function getSchema() {
+            var _this5 = this;
+
+            return {
+                mapWidget: {
+                    type: 'select',
+                    label: "Map",
+                    options: {},
+                    props: {
+                        onChange: function onChange(e) {
+                            getMapLayersData(dash.props.widgets[_this5.fields.mapWidget.value].props.config.mapId).then(function (res) {
+                                _this5.setState({ data: _this5.getData() });
+                                _this5.setState({ layers: res.objects });
+                            });
+                        }
+                    }
+                },
+                typeName: {
+                    type: 'select',
+                    label: "Layer",
+                    options: {},
+                    props: {
+                        onChange: function onChange(e) {
+                            e.target.fieldSet.updateAttributes();
+                        }
+                    }
+                },
+                aggregationAttribute: {
+                    type: 'select',
+                    label: "Aggregation Attribute",
+                    options: {}
+                },
+                aggregationFunction: {
+                    type: 'select',
+                    label: "Aggregation Function",
+                    defaultValue: "Sum",
+                    options: {
+                        "Sum": "Sum",
+                        "Count": "Count",
+                        "Average": "Average",
+                        "Max": "Max",
+                        "Min": "Min",
+                        "Median": "Median"
+                    }
+                }
+            };
+        }
+    }, {
+        key: 'getSelectOptions',
+        value: function getSelectOptions(name, config, value) {
+            if (name == "mapWidget") {
+                var mapWidgets = this.props.widget.context.configManager.getMapWidgets();
+                return Object.keys(mapWidgets).filter(function (widgetId) {
+                    return dash.props.widgets[widgetId].type.name == "MapWidget";
+                }).map(function (widgetId) {
+                    return _react2.default.createElement(
+                        'option',
+                        { value: widgetId },
+                        mapWidgets[widgetId].title,
+                        ' - ',
+                        widgetId
+                    );
+                });
+            } else if (name == "typeName") {
+                return this.state.layers.map(function (m) {
+                    return _react2.default.createElement(
+                        'option',
+                        { value: m.name },
+                        m.layer_params.title
+                    );
+                });
+            } else if (name == "aggregationAttribute") {
+                var isNumber = function isNumber(a) {
+                    return ['xsd:int', 'xsd:long', 'xsd:double'].indexOf(a.attribute_type) != -1;
+                };
+                return this.state.attributes.filter(function (a) {
+                    return isNumber(a);
+                }).map(function (a) {
+                    return _react2.default.createElement(
+                        'option',
+                        { value: a.attribute },
+                        a.attribute_label || a.attribute
+                    );
+                });
+            }
+            return _get(ConfigFieldSet.prototype.__proto__ || Object.getPrototypeOf(ConfigFieldSet.prototype), 'getSelectOptions', this).call(this, name, config, value);
+        }
+    }, {
+        key: 'updateAttributes',
+        value: function updateAttributes(data) {
+            var _this6 = this;
+
+            //this.state.data.typeName = this.fields.typeName.value;
+            this.setState({ data: data || this.getData() });
+            getAttributesData(this.fields.typeName.value).then(function (res) {
+                return _this6.setState({ attributes: res.objects });
+            });
+        }
+    }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this7 = this;
+
+            if (this.fields.mapWidget.value) getMapLayersData(dash.props.widgets[this.fields.mapWidget.value].props.config.mapId).then(function (res) {
+                _this7.setLayers(res);
+                // debugger;
+                if (_this7.state.data.typeName) {
+                    // console.log(this.state.data.typeName)
+                    _this7.updateAttributes(_this7.state.data);
+                }
+            });
+        }
+    }, {
+        key: 'setLayers',
+        value: function setLayers(res) {
+            this.setState({ layers: res.objects });
+            //res.objects.map(l => this.layersHash[l.typename] = l);
+        }
+
+        // getData( ) {
+        //   debugger;
+        //   const data = super.getData( )
+        //   data.groupBy = {
+        //       attributes: data.groupBy
+        //   };
+        //   return data;
+        // }
+
+    }]);
+
+    return ConfigFieldSet;
+}(_FieldSet3.default);
+
+AggregateWidget.ConfigForm = ConfigFieldSet;
+Dashboard.registerWidget(AggregateWidget);
+exports.default = AggregateWidget;
+
+/***/ }),
+
+/***/ "./src/components/FieldSet.jsx":
+/*!*************************************!*\
+  !*** ./src/components/FieldSet.jsx ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _react = __webpack_require__(3);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -34,14 +1192,14 @@ var JSONField = function (_Component) {
     function JSONField(props) {
         _classCallCheck(this, JSONField);
 
-        var _this = _possibleConstructorReturn(this, _Component.call(this, props));
+        var _this = _possibleConstructorReturn(this, (JSONField.__proto__ || Object.getPrototypeOf(JSONField)).call(this, props));
 
         Object.defineProperty(_this, 'value', {
             get: function get() {
-                return JSON.parse(_this.refs.textarea.value);
+                return JSON.parse(_this.textarea.value);
             },
             set: function set(newValue) {
-                _this.refs.textarea.value = JSON.stringify(newValue || {});
+                _this.textarea.value = JSON.stringify(newValue || {});
             },
             enumerable: true,
             configurable: true
@@ -49,12 +1207,19 @@ var JSONField = function (_Component) {
         return _this;
     }
 
-    JSONField.prototype.render = function render() {
-        var props = _objectWithoutProperties(this.props, []);
+    _createClass(JSONField, [{
+        key: 'render',
+        value: function render() {
+            var _this2 = this;
 
-        delete props.ref;
-        return _react2.default.createElement('textarea', _extends({}, props, { ref: 'textarea' }));
-    };
+            var props = _objectWithoutProperties(this.props, []);
+
+            delete props.ref;
+            return _react2.default.createElement('textarea', _extends({}, props, { ref: function ref(node) {
+                    return _this2.textarea = node;
+                } }));
+        }
+    }]);
 
     return JSONField;
 }(_react.Component);
@@ -65,39 +1230,84 @@ var FieldSet = function (_Component2) {
     function FieldSet(props) {
         _classCallCheck(this, FieldSet);
 
-        var _this2 = _possibleConstructorReturn(this, _Component2.call(this, props));
+        var _this3 = _possibleConstructorReturn(this, (FieldSet.__proto__ || Object.getPrototypeOf(FieldSet)).call(this, props));
 
-        _this2.state = {
-            schema: props.schema || _this2.getSchema(props),
-            data: props.data || _this2.getInitialData(props)
+        _initialiseProps.call(_this3);
+
+        _this3.state = {
+            schema: props.schema || _this3.getSchema(props),
+            data: props.data || _this3.getInitialData(props)
         };
-        _this2.fields = {};
-        return _this2;
+        _this3.fields = {};
+        return _this3;
     }
 
-    FieldSet.prototype.getSchema = function getSchema() {
-        return {};
-    };
+    _createClass(FieldSet, [{
+        key: 'getSchema',
+        value: function getSchema() {
+            return {};
+        }
+    }, {
+        key: 'getInitialData',
+        value: function getInitialData() {
+            return {};
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this4 = this;
 
-    FieldSet.prototype.getInitialData = function getInitialData() {
-        return {};
-    };
+            var _state = this.state,
+                schema = _state.schema,
+                data = _state.data;
 
-    FieldSet.prototype.render = function render() {
-        var _this3 = this;
+            return _react2.default.createElement(
+                'div',
+                null,
+                Object.keys(schema).map(function (key, index) {
+                    return _this4.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null, index);
+                })
+            );
+        }
+    }, {
+        key: 'getSelectOptions',
+        value: function getSelectOptions(name, schema, value) {
+            var options = schema.options;
 
-        var _state = this.state,
-            schema = _state.schema,
-            data = _state.data;
+            if (!options) return null;
+            if ((typeof options === 'undefined' ? 'undefined' : _typeof(options)) == "object") {
+                return Object.keys(options).map(function (key, index) {
+                    return _react2.default.createElement(
+                        'option',
+                        { key: index, value: key },
+                        options[key]
+                    );
+                });
+            } else if (typeof options == 'function') {
+                return options(this, this.state.data);
+            }
+            return null;
+        }
+    }, {
+        key: 'getData',
+        value: function getData() {
+            var _this5 = this;
 
-        return _jsx('div', {}, void 0, Object.keys(schema).map(function (key) {
-            return _this3.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null);
-        }));
-    };
+            var data = {};
+            Object.keys(this.fields).map(function (key) {
+                data[key] = _this5.fields[key].value;
+            });
+            return data;
+        }
+    }]);
 
-    FieldSet.prototype.field = function field(name, schema, value) {
-        var _this4 = this;
+    return FieldSet;
+}(_react.Component);
 
+var _initialiseProps = function _initialiseProps() {
+    var _this6 = this;
+
+    this.field = function (name, schema, value, index) {
         var _schema$props = schema.props,
             props = _schema$props === undefined ? {} : _schema$props;
 
@@ -105,8 +1315,8 @@ var FieldSet = function (_Component2) {
         props.ref = function (f) {
             if (f) {
                 f.value = value;
-                _this4.fields[name] = f;
-                f.fieldSet = _this4;
+                _this6.fields[name] = f;
+                f.fieldSet = _this6;
             }
         };
         var field = null;
@@ -122,623 +1332,46 @@ var FieldSet = function (_Component2) {
             field = _react2.default.createElement(
                 'select',
                 props,
-                this.getSelectOptions(name, schema, value)
+                _this6.getSelectOptions(name, schema, value)
             );
         }
         var label = schema.label || name.charAt(0).toUpperCase() + name.slice(1);
-        return _jsx('div', {
-            className: 'form-group'
-        }, void 0, _jsx('label', {}, void 0, label), field);
+        return _react2.default.createElement(
+            'div',
+            { key: index, className: 'form-group' },
+            _react2.default.createElement(
+                'label',
+                null,
+                label
+            ),
+            field
+        );
     };
-
-    FieldSet.prototype.getSelectOptions = function getSelectOptions(name, schema, value) {
-        var options = schema.options;
-
-        if (!options) return null;
-        if ((typeof options === 'undefined' ? 'undefined' : _typeof(options)) == "object") {
-            return Object.keys(options).map(function (key) {
-                return _jsx('option', {
-                    value: key
-                }, void 0, options[key]);
-            });
-        } else if (typeof options == 'function') {
-            return options(this, this.state.data);
-        }
-        return null;
-    };
-
-    FieldSet.prototype.getData = function getData() {
-        var _this5 = this;
-
-        var data = {};
-        Object.keys(this.fields).map(function (key) {
-            data[key] = _this5.fields[key].value;
-        });
-        return data;
-    };
-
-    return FieldSet;
-}(_react.Component);
+};
 
 exports.default = FieldSet;
 
 /***/ }),
 
-/***/ 14:
+/***/ "./src/events/Events.jsx":
+/*!*******************************!*\
+  !*** ./src/events/Events.jsx ***!
+  \*******************************/
+/*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-var _events = __webpack_require__(23);
+var _events = __webpack_require__(/*! events */ "./node_modules/events/events.js");
 
 exports.default = new _events.EventEmitter();
 
-/***/ }),
-
-/***/ 23:
-/***/ (function(module, exports) {
-
-// Copyright Joyent, Inc. and other Node contributors.
-//
-// Permission is hereby granted, free of charge, to any person obtaining a
-// copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to permit
-// persons to whom the Software is furnished to do so, subject to the
-// following conditions:
-//
-// The above copyright notice and this permission notice shall be included
-// in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-function EventEmitter() {
-  this._events = this._events || {};
-  this._maxListeners = this._maxListeners || undefined;
-}
-module.exports = EventEmitter;
-
-// Backwards-compat with node 0.10.x
-EventEmitter.EventEmitter = EventEmitter;
-
-EventEmitter.prototype._events = undefined;
-EventEmitter.prototype._maxListeners = undefined;
-
-// By default EventEmitters will print a warning if more than 10 listeners are
-// added to it. This is a useful default which helps finding memory leaks.
-EventEmitter.defaultMaxListeners = 10;
-
-// Obviously not all Emitters should be limited to 10. This function allows
-// that to be increased. Set to zero for unlimited.
-EventEmitter.prototype.setMaxListeners = function(n) {
-  if (!isNumber(n) || n < 0 || isNaN(n))
-    throw TypeError('n must be a positive number');
-  this._maxListeners = n;
-  return this;
-};
-
-EventEmitter.prototype.emit = function(type) {
-  var er, handler, len, args, i, listeners;
-
-  if (!this._events)
-    this._events = {};
-
-  // If there is no 'error' event listener then throw.
-  if (type === 'error') {
-    if (!this._events.error ||
-        (isObject(this._events.error) && !this._events.error.length)) {
-      er = arguments[1];
-      if (er instanceof Error) {
-        throw er; // Unhandled 'error' event
-      } else {
-        // At least give some kind of context to the user
-        var err = new Error('Uncaught, unspecified "error" event. (' + er + ')');
-        err.context = er;
-        throw err;
-      }
-    }
-  }
-
-  handler = this._events[type];
-
-  if (isUndefined(handler))
-    return false;
-
-  if (isFunction(handler)) {
-    switch (arguments.length) {
-      // fast cases
-      case 1:
-        handler.call(this);
-        break;
-      case 2:
-        handler.call(this, arguments[1]);
-        break;
-      case 3:
-        handler.call(this, arguments[1], arguments[2]);
-        break;
-      // slower
-      default:
-        args = Array.prototype.slice.call(arguments, 1);
-        handler.apply(this, args);
-    }
-  } else if (isObject(handler)) {
-    args = Array.prototype.slice.call(arguments, 1);
-    listeners = handler.slice();
-    len = listeners.length;
-    for (i = 0; i < len; i++)
-      listeners[i].apply(this, args);
-  }
-
-  return true;
-};
-
-EventEmitter.prototype.addListener = function(type, listener) {
-  var m;
-
-  if (!isFunction(listener))
-    throw TypeError('listener must be a function');
-
-  if (!this._events)
-    this._events = {};
-
-  // To avoid recursion in the case that type === "newListener"! Before
-  // adding it to the listeners, first emit "newListener".
-  if (this._events.newListener)
-    this.emit('newListener', type,
-              isFunction(listener.listener) ?
-              listener.listener : listener);
-
-  if (!this._events[type])
-    // Optimize the case of one listener. Don't need the extra array object.
-    this._events[type] = listener;
-  else if (isObject(this._events[type]))
-    // If we've already got an array, just append.
-    this._events[type].push(listener);
-  else
-    // Adding the second element, need to change to array.
-    this._events[type] = [this._events[type], listener];
-
-  // Check for listener leak
-  if (isObject(this._events[type]) && !this._events[type].warned) {
-    if (!isUndefined(this._maxListeners)) {
-      m = this._maxListeners;
-    } else {
-      m = EventEmitter.defaultMaxListeners;
-    }
-
-    if (m && m > 0 && this._events[type].length > m) {
-      this._events[type].warned = true;
-      console.error('(node) warning: possible EventEmitter memory ' +
-                    'leak detected. %d listeners added. ' +
-                    'Use emitter.setMaxListeners() to increase limit.',
-                    this._events[type].length);
-      if (typeof console.trace === 'function') {
-        // not supported in IE 10
-        console.trace();
-      }
-    }
-  }
-
-  return this;
-};
-
-EventEmitter.prototype.on = EventEmitter.prototype.addListener;
-
-EventEmitter.prototype.once = function(type, listener) {
-  if (!isFunction(listener))
-    throw TypeError('listener must be a function');
-
-  var fired = false;
-
-  function g() {
-    this.removeListener(type, g);
-
-    if (!fired) {
-      fired = true;
-      listener.apply(this, arguments);
-    }
-  }
-
-  g.listener = listener;
-  this.on(type, g);
-
-  return this;
-};
-
-// emits a 'removeListener' event iff the listener was removed
-EventEmitter.prototype.removeListener = function(type, listener) {
-  var list, position, length, i;
-
-  if (!isFunction(listener))
-    throw TypeError('listener must be a function');
-
-  if (!this._events || !this._events[type])
-    return this;
-
-  list = this._events[type];
-  length = list.length;
-  position = -1;
-
-  if (list === listener ||
-      (isFunction(list.listener) && list.listener === listener)) {
-    delete this._events[type];
-    if (this._events.removeListener)
-      this.emit('removeListener', type, listener);
-
-  } else if (isObject(list)) {
-    for (i = length; i-- > 0;) {
-      if (list[i] === listener ||
-          (list[i].listener && list[i].listener === listener)) {
-        position = i;
-        break;
-      }
-    }
-
-    if (position < 0)
-      return this;
-
-    if (list.length === 1) {
-      list.length = 0;
-      delete this._events[type];
-    } else {
-      list.splice(position, 1);
-    }
-
-    if (this._events.removeListener)
-      this.emit('removeListener', type, listener);
-  }
-
-  return this;
-};
-
-EventEmitter.prototype.removeAllListeners = function(type) {
-  var key, listeners;
-
-  if (!this._events)
-    return this;
-
-  // not listening for removeListener, no need to emit
-  if (!this._events.removeListener) {
-    if (arguments.length === 0)
-      this._events = {};
-    else if (this._events[type])
-      delete this._events[type];
-    return this;
-  }
-
-  // emit removeListener for all listeners on all events
-  if (arguments.length === 0) {
-    for (key in this._events) {
-      if (key === 'removeListener') continue;
-      this.removeAllListeners(key);
-    }
-    this.removeAllListeners('removeListener');
-    this._events = {};
-    return this;
-  }
-
-  listeners = this._events[type];
-
-  if (isFunction(listeners)) {
-    this.removeListener(type, listeners);
-  } else if (listeners) {
-    // LIFO order
-    while (listeners.length)
-      this.removeListener(type, listeners[listeners.length - 1]);
-  }
-  delete this._events[type];
-
-  return this;
-};
-
-EventEmitter.prototype.listeners = function(type) {
-  var ret;
-  if (!this._events || !this._events[type])
-    ret = [];
-  else if (isFunction(this._events[type]))
-    ret = [this._events[type]];
-  else
-    ret = this._events[type].slice();
-  return ret;
-};
-
-EventEmitter.prototype.listenerCount = function(type) {
-  if (this._events) {
-    var evlistener = this._events[type];
-
-    if (isFunction(evlistener))
-      return 1;
-    else if (evlistener)
-      return evlistener.length;
-  }
-  return 0;
-};
-
-EventEmitter.listenerCount = function(emitter, type) {
-  return emitter.listenerCount(type);
-};
-
-function isFunction(arg) {
-  return typeof arg === 'function';
-}
-
-function isNumber(arg) {
-  return typeof arg === 'number';
-}
-
-function isObject(arg) {
-  return typeof arg === 'object' && arg !== null;
-}
-
-function isUndefined(arg) {
-  return arg === void 0;
-}
-
-
-/***/ }),
-
-/***/ 618:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
-var _Events = __webpack_require__(14);
-
-var _Events2 = _interopRequireDefault(_Events);
-
-var _FieldSet2 = __webpack_require__(10);
-
-var _FieldSet3 = _interopRequireDefault(_FieldSet2);
-
-var _react = __webpack_require__(3);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var AggregateWidget = function (_BaseWidget) {
-    _inherits(AggregateWidget, _BaseWidget);
-
-    function AggregateWidget(props) {
-        _classCallCheck(this, AggregateWidget);
-
-        var _this = _possibleConstructorReturn(this, _BaseWidget.call(this, props));
-
-        _this.wpsClient = new WpsClient({
-            geoserverUrl: "/geoserver"
-        });
-        _this.state.aggregateResult = "NaN";
-        _this.configFieldSetClass = ConfigFieldSet;
-        return _this;
-    }
-
-    AggregateWidget.prototype.setConfig = function setConfig(config) {
-        _BaseWidget.prototype.setConfig.call(this, config);
-        this.attachToMapWidget(config);
-    };
-
-    AggregateWidget.prototype.componentDidMount = function componentDidMount() {
-        if (this.state.config.mapWidget) {
-            this.attachToMapWidget(this.state.config);
-        }
-        this.update(this.state.config);
-        _BaseWidget.prototype.componentDidMount.call(this);
-    };
-
-    AggregateWidget.prototype.attachToMapWidget = function attachToMapWidget(config) {
-        var _this2 = this;
-
-        var mapWidget = this.context.configManager.getWidget(config.mapWidget);
-        if (mapWidget && mapWidget.ready)
-            // update widget once attached to a map, otherwise it will wait to next map change.
-            this.update(config, mapWidget.map.getView().calculateExtent());
-        var eventName = 'mapExtentChanged' + '_' + config.mapWidget;
-        _Events2.default.on(eventName, function (map, extent) {
-            _this2.update(_this2.state.config, extent);
-        });
-    };
-
-    AggregateWidget.prototype.update = function update(config, extent) {
-        var _this3 = this;
-
-        if (config.typeName) {
-            config = Object.assign({}, config);
-            if (extent) {
-                config.filters = {
-                    minx: extent[0],
-                    miny: extent[1],
-                    maxx: extent[2],
-                    maxy: extent[3]
-                };
-            }
-            this.wpsClient.aggregate(config).then(function (data) {
-                _this3.setData(data);
-            });
-        }
-    };
-
-    AggregateWidget.prototype.setData = function setData(data) {
-        this.setState({
-            aggregateResult: data.AggregationResults[0][0]
-        });
-    };
-
-    AggregateWidget.prototype.render = function render() {
-        return _jsx('div', {
-            className: 'aggregate-widget'
-        }, void 0, _jsx('h1', {
-            className: 'text-center'
-        }, void 0, this.state.aggregateResult));
-    };
-
-    return AggregateWidget;
-}(BaseWidget);
-
-AggregateWidget.displayName = "Aggregate Widget";
-
-var ConfigFieldSet = function (_FieldSet) {
-    _inherits(ConfigFieldSet, _FieldSet);
-
-    function ConfigFieldSet(props) {
-        _classCallCheck(this, ConfigFieldSet);
-
-        var _this4 = _possibleConstructorReturn(this, _FieldSet.call(this, props));
-
-        console.log(props);
-        _this4.state.layers = [];
-        _this4.state.attributes = [];
-        _this4.state.map = null;
-        return _this4;
-    }
-
-    ConfigFieldSet.prototype.getInitialData = function getInitialData(props) {
-        return props.widget.getConfig();
-    };
-
-    ConfigFieldSet.prototype.getSchema = function getSchema() {
-        var _this5 = this;
-
-        return {
-            mapWidget: {
-                type: 'select',
-                label: "Map",
-                options: {},
-                props: {
-                    onChange: function onChange(e) {
-                        getMapLayersData(dash.props.widgets[_this5.fields.mapWidget.value].props.config.mapId).then(function (res) {
-                            _this5.setState({ data: _this5.getData() });
-                            _this5.setState({ layers: res.objects });
-                        });
-                    }
-                }
-            },
-            typeName: {
-                type: 'select',
-                label: "Layer",
-                options: {},
-                props: {
-                    onChange: function onChange(e) {
-                        e.target.fieldSet.updateAttributes();
-                    }
-                }
-            },
-            aggregationAttribute: {
-                type: 'select',
-                label: "Aggregation Attribute",
-                options: {}
-            },
-            aggregationFunction: {
-                type: 'select',
-                label: "Aggregation Function",
-                defaultValue: "Sum",
-                options: {
-                    "Sum": "Sum",
-                    "Count": "Count",
-                    "Average": "Average",
-                    "Max": "Max",
-                    "Min": "Min",
-                    "Median": "Median"
-                }
-            }
-        };
-    };
-
-    ConfigFieldSet.prototype.getSelectOptions = function getSelectOptions(name, config, value) {
-        if (name == "mapWidget") {
-            var mapWidgets = this.props.widget.context.configManager.getMapWidgets();
-            return Object.keys(mapWidgets).filter(function (widgetId) {
-                return dash.props.widgets[widgetId].type.name == "MapWidget";
-            }).map(function (widgetId) {
-                return _jsx('option', {
-                    value: widgetId
-                }, void 0, mapWidgets[widgetId].title, ' - ', widgetId);
-            });
-        } else if (name == "typeName") {
-            return this.state.layers.map(function (m) {
-                return _jsx('option', {
-                    value: m.name
-                }, void 0, m.layer_params.title);
-            });
-        } else if (name == "aggregationAttribute") {
-            var isNumber = function isNumber(a) {
-                return ['xsd:int', 'xsd:long', 'xsd:double'].indexOf(a.attribute_type) != -1;
-            };
-            return this.state.attributes.filter(function (a) {
-                return isNumber(a);
-            }).map(function (a) {
-                return _jsx('option', {
-                    value: a.attribute
-                }, void 0, a.attribute_label || a.attribute);
-            });
-        }
-        return _FieldSet.prototype.getSelectOptions.call(this, name, config, value);
-    };
-
-    ConfigFieldSet.prototype.updateAttributes = function updateAttributes(data) {
-        var _this6 = this;
-
-        //this.state.data.typeName = this.fields.typeName.value;
-        this.setState({ data: data || this.getData() });
-        getAttributesData(this.fields.typeName.value).then(function (res) {
-            return _this6.setState({ attributes: res.objects });
-        });
-    };
-
-    ConfigFieldSet.prototype.componentDidMount = function componentDidMount() {
-        var _this7 = this;
-
-        if (this.fields.mapWidget.value) getMapLayersData(dash.props.widgets[this.fields.mapWidget.value].props.config.mapId).then(function (res) {
-            _this7.setLayers(res);
-            // debugger;
-            if (_this7.state.data.typeName) {
-                // console.log(this.state.data.typeName)
-                _this7.updateAttributes(_this7.state.data);
-            }
-        });
-    };
-
-    ConfigFieldSet.prototype.setLayers = function setLayers(res) {
-        this.setState({ layers: res.objects });
-        //res.objects.map(l => this.layersHash[l.typename] = l);
-    };
-
-    // getData( ) {
-    //   debugger;
-    //   const data = super.getData( )
-    //   data.groupBy = {
-    //       attributes: data.groupBy
-    //   };
-    //   return data;
-    // }
-
-    return ConfigFieldSet;
-}(_FieldSet3.default);
-
-AggregateWidget.ConfigForm = ConfigFieldSet;
-Dashboard.registerWidget(AggregateWidget);
-exports.default = AggregateWidget;
-
 /***/ })
 
-},[618]);
+/******/ });
+//# sourceMappingURL=aggregate-widget.bundle.js.map

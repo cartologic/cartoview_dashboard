@@ -1,3 +1,5 @@
+import "@babel/polyfill/noConflict";
+
 import BaseWidget from './components/BaseWidget.jsx';
 import Dashboard from './components/Dashboard.jsx';
 import React from 'react';

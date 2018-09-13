@@ -144,7 +144,7 @@ class Dashboard extends Component {
             <Container>
         <AddWidgetDialog widgets={widgets} isOpen={addWidgetDialogOpen} onRequestClose={this.onRequestClose} onWidgetSelect={this.handleWidgetSelection} />
         <WidgetConfigDialog isOpen={widgetConfigDialogOpen} widgetId={configWidgetId} />
-        <Header editable={editable} title={title} abstract={abstract} ref="header" onChange={this.onHeaderChanged}/>
+        <Header editable={editable} title={title} abstract={abstract} ref={(node)=>this.header=node} onChange={this.onHeaderChanged}/>
         <Toolbar isNew={isNew} editable={editable} saved={saved} isOwner={isOwner} />
         <DazzleDashboard
           frameComponent={CustomFrame}

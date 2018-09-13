@@ -5,20 +5,22 @@ import React from 'react'
 import {WidgetContainerConfigSchema} from  '../constants/Constants.jsx'
 
 class WidgetConfigDialog extends React.Component{
+    comRef=(node)=>this.widgetConfigForm=node
     render(){
         const {isOpen, widgetId} = this.props
         if(!isOpen) return null
         const {configManager} = this.context
         const {widget, containerConfig, widgetType} = configManager.getWidgetInfo(widgetId)
+        this.widgetConfigForm=null
         const props = {
-            ref: "widgetConfigForm",
+            ref: this.comRef,
             widget
         }
 
         const widgetConfigForm = React.createElement(widgetType.ConfigForm, props)
 
         return  <Modal isOpen={isOpen} close={() => configManager.endEditWidgetConfig()} title="Config Widget">
-      <FieldSet ref="containerConfigForm" data={containerConfig} schema={WidgetContainerConfigSchema}/>
+      <FieldSet ref={(node=>this.containerConfigForm=node)} data={containerConfig} schema={WidgetContainerConfigSchema}/>
       {widgetConfigForm}
       <div className="pull-right">
         <a className="btn btn-primary"
@@ -32,8 +34,8 @@ class WidgetConfigDialog extends React.Component{
     </Modal>
     }
     getConfig(){
-        var config = this.refs.containerConfigForm.getData()
-        config.widgetConfig = this.refs.widgetConfigForm.getData()
+        var config = this.containerConfigForm.getData()
+        config.widgetConfig = this.widgetConfigForm.getData()
         return config
     }
 }

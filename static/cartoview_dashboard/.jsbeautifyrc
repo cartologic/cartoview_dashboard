@@ -8,7 +8,7 @@
     "preserve_newlines": false,
     "max_preserve_newlines": 10,
     "space_in_paren": true,
-    "space_in_empty_paren": true,
+    "space_in_empty_paren": false,
     "jslint_happy": true,
     "space_after_anon_function": true,
     "brace_style": "collapse,preserve-inline",

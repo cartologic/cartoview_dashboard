@@ -4,8 +4,8 @@ class JSONField extends Component{
     constructor(props){
         super(props)
         Object.defineProperty(this, 'value', {
-            get: () => { return JSON.parse(this.refs.textarea.value) },
-            set: (newValue) => { this.refs.textarea.value = JSON.stringify(newValue || {}) },
+            get: () => { return JSON.parse(this.textarea.value) },
+            set: (newValue) => { this.textarea.value = JSON.stringify(newValue || {}) },
             enumerable: true,
             configurable: true
         })
@@ -13,7 +13,7 @@ class JSONField extends Component{
     render(){
         const {...props} = this.props
         delete props.ref
-        return <textarea {...props} ref="textarea" />
+        return <textarea {...props} ref={(node)=>this.textarea=node} />
     }
 }
 class FieldSet extends Component{
@@ -34,11 +34,14 @@ class FieldSet extends Component{
     render(){
         const {schema, data} = this.state
         return <div>
-      {Object.keys(schema).map(key => this.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null))}
+      {Object.keys(schema).map((key,index) => this.field(key,
+        schema[key], 
+        schema[key].getValue ? schema[key].getValue(data) : data[key] || null,
+        index))}
     </div>
     }
 
-    field(name, schema, value){
+    field=(name, schema, value,index)=>{
         var {props={}} = schema
         props.className = "form-control"
         props.ref = (f) => {
@@ -66,7 +69,7 @@ class FieldSet extends Component{
       </select>
         }
         var label = schema.label || (name.charAt(0).toUpperCase() + name.slice(1))
-        return <div className="form-group">
+        return <div key={index} className="form-group">
       <label>{label}</label>
       {field}
     </div>
@@ -75,7 +78,7 @@ class FieldSet extends Component{
         var {options} = schema
         if(!options) return null
         if(typeof options == "object"){
-            return Object.keys(options).map(key => <option value={key}>{options[key]}</option>)
+            return Object.keys(options).map((key,index) => <option key={index}  value={key}>{options[key]}</option>)
         }
         else if(typeof options == 'function' ){
             return options(this, this.state.data)

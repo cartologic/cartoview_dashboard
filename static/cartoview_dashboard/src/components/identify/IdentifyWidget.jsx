@@ -2,9 +2,9 @@ import "./style.css"
 
 import Events from '../../events/Events.jsx';
 import FieldSet from '../FieldSet.jsx';
+import LayersHelper from 'cartoview-sdk/helpers/LayersHelper'
 import React from 'react';
-import WMSService from 'boundless-sdk/services/WMSService';
-import ol from 'openlayers';
+import WMSService from 'cartoview-sdk/services/WMSService';
 
 //application/json
 class IdentifyWidget extends BaseWidget {
@@ -80,33 +80,17 @@ class IdentifyWidget extends BaseWidget {
     init( map ) {
         this.setState( { ready: true } )
         map.on( 'singleclick', ( e ) => {
-            this.getLayers( map.getLayers( ).getArray( ) ).forEach(
+            LayersHelper.getLayers( map.getLayers( ).getArray( ) ).forEach(
                 ( layer ) => {
                     this.setState( { busy: true, features: [ ],
                         activeFeature: 0 } )
                     WMSService.getFeatureInfo( layer, e.coordinate,
                         map, 'application/json', ( result ) => {
-                            this.state.features = this.state.features.concat( result.features );
                             result.features.forEach( f => f.set( "_layerTitle", result.layer.get('title' ) ) )
-                            this.setState( { features: this.state.features, busy: false } );
+                            this.setState( { features: [...this.state.features,...result.features], busy: false } );
                         } );
                 } )
         } );
-    }
-    isWMS(layer) {
-        return layer.getSource() instanceof ol.source.TileWMS || layer.getSource() instanceof ol
-            .source.ImageWMS;
-    }
-    getLayers(layers) {
-        var children = [];
-        layers.forEach((layer) => {
-            if (layer instanceof ol.layer.Group) {
-                children = children.concat(this.getLayers(layer.getLayers()));
-            } else if (layer.getVisible() && this.isWMS(layer)) {
-                children.push(layer);
-            }
-        });
-        return children;
     }
 }
 class ConfigForm extends FieldSet {

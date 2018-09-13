@@ -64,7 +64,7 @@ class ConfigManager {
                 config: widgets[ id ].props.config
             }
         } )
-        const { title, abstract } = this.dashboard.refs.header.getData( )
+        const { title, abstract } = this.dashboard.header.getData( )
         const config = { title, abstract, config: JSON.stringify( { widgets: widgetsConfig,
                 layout } ) }
         // TODO: handle saving errors, check saving succuess before setting dashboard state.

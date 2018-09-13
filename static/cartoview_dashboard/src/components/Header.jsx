@@ -46,7 +46,7 @@ class Header extends React.Component {
                     }
                 }
             }
-            return <FieldSet data={data} schema={schema} ref="headerForm"/>
+            return <FieldSet data={data} schema={schema} ref={(node)=>this.headerForm=node}/>
         }
         return <div className="dashboard-header">
                     <div className="flex-element fill-empty title-wrap">
@@ -61,7 +61,7 @@ class Header extends React.Component {
                 </div>
     }
     getData( ) {
-        return this.refs.headerForm.getData( )
+        return this.headerForm.getData( )
     }
 }
 Header.propTypes = {
