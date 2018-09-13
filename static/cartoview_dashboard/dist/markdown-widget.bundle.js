@@ -961,8 +961,13 @@ CodeMirror.defineMIME("text/x-markdown", "markdown");
 "use strict";
 
 
+<<<<<<< Updated upstream
 var React = __webpack_require__(1);
 var ReactDOM = __webpack_require__(19);
+=======
+var React = __webpack_require__(3);
+var ReactDOM = __webpack_require__(20);
+>>>>>>> Stashed changes
 var findDOMNode = ReactDOM.findDOMNode;
 var className = __webpack_require__(353);
 var debounce = __webpack_require__(381);
@@ -1079,9 +1084,15 @@ module.exports = CodeMirror;
 "use strict";
 
 
+<<<<<<< Updated upstream
 var React = __webpack_require__(1);
 var Parser = __webpack_require__(363).Parser;
 var ReactRenderer = __webpack_require__(359);
+=======
+var React = __webpack_require__(3);
+var Parser = __webpack_require__(357).Parser;
+var ReactRenderer = __webpack_require__(353);
+>>>>>>> Stashed changes
 var propTypes = __webpack_require__(28);
 
 function ReactMarkdown(props) {
@@ -2035,11 +2046,19 @@ if (!CodeMirror.mimeModes.hasOwnProperty("text/html"))
 "use strict";
 
 
+<<<<<<< Updated upstream
 var React = __webpack_require__(1);
 var assign = __webpack_require__(55);
 var isPlainObject = __webpack_require__(382);
 var xssFilters = __webpack_require__(608);
 var pascalCase = __webpack_require__(482);
+=======
+var React = __webpack_require__(3);
+var assign = __webpack_require__(54);
+var isPlainObject = __webpack_require__(387);
+var xssFilters = __webpack_require__(597);
+var pascalCase = __webpack_require__(486);
+>>>>>>> Stashed changes
 
 var typeAliases = {
     blockquote: 'block_quote',
@@ -17610,21 +17629,35 @@ exports.__esModule = true;
 
 var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
+<<<<<<< Updated upstream
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
 var _reactMarkdown = __webpack_require__(295);
+=======
+__webpack_require__(289);
+>>>>>>> Stashed changes
 
-var _reactMarkdown2 = _interopRequireDefault(_reactMarkdown);
+__webpack_require__(282);
 
 var _reactCodemirror = __webpack_require__(294);
 
 var _reactCodemirror2 = _interopRequireDefault(_reactCodemirror);
 
+<<<<<<< Updated upstream
 __webpack_require__(296);
 
 __webpack_require__(289);
+=======
+var _react = __webpack_require__(3);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactMarkdown = __webpack_require__(288);
+
+var _reactMarkdown2 = _interopRequireDefault(_reactMarkdown);
+>>>>>>> Stashed changes
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

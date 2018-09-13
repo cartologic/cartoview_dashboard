@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 
-import ArcGISRestService from 'boundless-sdk/services/ArcGISRestService';
-import Events from './events/Events.jsx';
-import ol from 'openlayers';
-import FieldSet from './components/FieldSet.jsx';
+import ArcGISRestService from 'boundless-sdk/services/ArcGISRestService'
+import Events from './events/Events.jsx'
+import FieldSet from './components/FieldSet.jsx'
+import ol from 'openlayers'
 
 class ArcGISLegend extends Component {
     render() {
@@ -133,7 +133,7 @@ class LegendWidget extends BaseWidget {
 class ConfigForm extends FieldSet {
     constructor(props) {
         super(props)
-        this.state.maps = [];
+        this.state.maps = []
     }
 
     getSchema(props) {
@@ -144,11 +144,11 @@ class ConfigForm extends FieldSet {
                 options: {},
                 props: {}
             }
-        };
+        }
     }
 
     getInitialData(props) {
-        return props.widget.getConfig();
+        return props.widget.getConfig()
     }
 
     getSelectOptions(name, config, value) {

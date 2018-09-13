@@ -14,7 +14,11 @@ var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" &
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+<<<<<<< Updated upstream
 var _react = __webpack_require__(1);
+=======
+var _react = __webpack_require__(3);
+>>>>>>> Stashed changes
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -497,6 +501,7 @@ exports.__esModule = true;
 
 var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
+<<<<<<< Updated upstream
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
@@ -505,9 +510,19 @@ var _FieldSet2 = __webpack_require__(10);
 
 var _FieldSet3 = _interopRequireDefault(_FieldSet2);
 
+=======
+var _react = __webpack_require__(3);
+
+var _react2 = _interopRequireDefault(_react);
+
+>>>>>>> Stashed changes
 var _Events = __webpack_require__(14);
 
 var _Events2 = _interopRequireDefault(_Events);
+
+var _FieldSet2 = __webpack_require__(10);
+
+var _FieldSet3 = _interopRequireDefault(_FieldSet2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -535,11 +550,16 @@ var AggregateWidget = function (_BaseWidget) {
 
     AggregateWidget.prototype.setConfig = function setConfig(config) {
         _BaseWidget.prototype.setConfig.call(this, config);
+<<<<<<< Updated upstream
         this.attachToMapWidget(config);
+=======
+        this.attachToMapWidget(config.mapWidget);
+>>>>>>> Stashed changes
     };
 
     AggregateWidget.prototype.componentDidMount = function componentDidMount() {
         if (this.state.config.mapWidget) {
+<<<<<<< Updated upstream
             this.attachToMapWidget(this.state.config);
         }
         this.update(this.state.config);
@@ -584,6 +604,47 @@ var AggregateWidget = function (_BaseWidget) {
         });
     };
 
+=======
+            this.attachToMapWidget(this.state.config.mapWidget);
+        }
+        this.update(this.state.config);
+    };
+
+    AggregateWidget.prototype.attachToMapWidget = function attachToMapWidget(mapWidgetId) {
+        var _this2 = this;
+
+        var eventName = 'mapExtentChanged' + '_' + mapWidgetId;
+        _Events2.default.on(eventName, function (map, extent) {
+            _this2.update(_this2.state.config, extent);
+        });
+    };
+
+    AggregateWidget.prototype.update = function update(config, extent) {
+        var _this3 = this;
+
+        if (config.typeName) {
+            config = Object.assign({}, config);
+            if (extent) {
+                config.filters = {
+                    minx: extent[0],
+                    miny: extent[1],
+                    maxx: extent[2],
+                    maxy: extent[3]
+                };
+            }
+            this.wpsClient.aggregate(config).then(function (data) {
+                _this3.setData(data);
+            });
+        }
+    };
+
+    AggregateWidget.prototype.setData = function setData(data) {
+        this.setState({
+            aggregateResult: data.AggregationResults[0][0]
+        });
+    };
+
+>>>>>>> Stashed changes
     AggregateWidget.prototype.render = function render() {
         return _jsx('div', {
             className: 'aggregate-widget'
@@ -605,7 +666,10 @@ var ConfigFieldSet = function (_FieldSet) {
 
         var _this4 = _possibleConstructorReturn(this, _FieldSet.call(this, props));
 
+<<<<<<< Updated upstream
         console.log(props);
+=======
+>>>>>>> Stashed changes
         _this4.state.layers = [];
         _this4.state.attributes = [];
         _this4.state.map = null;
@@ -666,13 +730,21 @@ var ConfigFieldSet = function (_FieldSet) {
 
     ConfigFieldSet.prototype.getSelectOptions = function getSelectOptions(name, config, value) {
         if (name == "mapWidget") {
+<<<<<<< Updated upstream
             var mapWidgets = this.props.widget.context.configManager.getMapWidgets();
             return Object.keys(mapWidgets).filter(function (widgetId) {
+=======
+            return Object.keys(dash.props.widgets).filter(function (widgetId) {
+>>>>>>> Stashed changes
                 return dash.props.widgets[widgetId].type.name == "MapWidget";
             }).map(function (widgetId) {
                 return _jsx('option', {
                     value: widgetId
+<<<<<<< Updated upstream
                 }, void 0, mapWidgets[widgetId].title, ' - ', widgetId);
+=======
+                }, void 0, dash.props.widgets[widgetId].title);
+>>>>>>> Stashed changes
             });
         } else if (name == "typeName") {
             return this.state.layers.map(function (m) {
@@ -694,6 +766,7 @@ var ConfigFieldSet = function (_FieldSet) {
         }
         return _FieldSet.prototype.getSelectOptions.call(this, name, config, value);
     };
+<<<<<<< Updated upstream
 
     ConfigFieldSet.prototype.updateAttributes = function updateAttributes(data) {
         var _this6 = this;
@@ -732,6 +805,45 @@ var ConfigFieldSet = function (_FieldSet) {
     //   return data;
     // }
 
+=======
+
+    ConfigFieldSet.prototype.updateAttributes = function updateAttributes(data) {
+        var _this6 = this;
+
+        //this.state.data.typeName = this.fields.typeName.value;
+        this.setState({ data: data || this.getData() });
+        getAttributesData(this.fields.typeName.value).then(function (res) {
+            return _this6.setState({ attributes: res.objects });
+        });
+    };
+
+    ConfigFieldSet.prototype.componentDidMount = function componentDidMount() {
+        var _this7 = this;
+
+        if (this.fields.mapWidget.value) getMapLayersData(dash.props.widgets[this.fields.mapWidget.value].props.config.mapId).then(function (res) {
+            _this7.setLayers(res);
+            // debugger;
+            if (_this7.state.data.typeName) {
+                // console.log(this.state.data.typeName)
+                _this7.updateAttributes(_this7.state.data);
+            }
+        });
+    };
+
+    ConfigFieldSet.prototype.setLayers = function setLayers(res) {
+        this.setState({ layers: res.objects });
+        //res.objects.map(l => this.layersHash[l.typename] = l);
+    };
+    // getData( ) {
+    //   debugger;
+    //   const data = super.getData( )
+    //   data.groupBy = {
+    //       attributes: data.groupBy
+    //   };
+    //   return data;
+    // }
+
+>>>>>>> Stashed changes
     return ConfigFieldSet;
 }(_FieldSet3.default);
 

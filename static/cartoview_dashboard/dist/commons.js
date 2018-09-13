@@ -221,6 +221,7 @@ module.exports = invariant;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+<<<<<<< Updated upstream
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -263,6 +264,8 @@ module.exports = reactProdInvariant;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+=======
+>>>>>>> Stashed changes
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
  *
@@ -327,6 +330,62 @@ if (true) {
 module.exports = warning;
 
 /***/ }),
+<<<<<<< Updated upstream
+=======
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = __webpack_require__(36);
+
+
+/***/ }),
+/* 4 */,
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * 
+ */
+
+
+/**
+ * WARNING: DO NOT manually require this module.
+ * This is a replacement for `invariant(...)` used by the error code system
+ * and will _only_ be required by the corresponding babel pass.
+ * It always throws.
+ */
+
+function reactProdInvariant(code) {
+  var argCount = arguments.length - 1;
+
+  var message = 'Minified React error #' + code + '; visit ' + 'http://facebook.github.io/react/docs/error-decoder.html?invariant=' + code;
+
+  for (var argIdx = 0; argIdx < argCount; argIdx++) {
+    message += '&args[]=' + encodeURIComponent(arguments[argIdx + 1]);
+  }
+
+  message += ' for the full message or use the non-minified dev environment' + ' for full errors and additional helpful warnings.';
+
+  var error = new Error(message);
+  error.name = 'Invariant Violation';
+  error.framesToPop = 1; // we don't care about reactProdInvariant's own frame
+
+  throw error;
+}
+
+module.exports = reactProdInvariant;
+
+/***/ }),
+>>>>>>> Stashed changes
 /* 6 */,
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -1696,8 +1755,13 @@ var _prodInvariant = __webpack_require__(37);
 
 var ReactCurrentOwner = __webpack_require__(18);
 
+<<<<<<< Updated upstream
 var invariant = __webpack_require__(38);
 var warning = __webpack_require__(39);
+=======
+var invariant = __webpack_require__(1);
+var warning = __webpack_require__(2);
+>>>>>>> Stashed changes
 
 function isNative(fn) {
   // Based on isNative() from Lodash
@@ -2431,8 +2495,13 @@ var _assign = __webpack_require__(7);
 
 var PooledClass = __webpack_require__(29);
 
+<<<<<<< Updated upstream
 var emptyFunction = __webpack_require__(23);
 var warning = __webpack_require__(5);
+=======
+var emptyFunction = __webpack_require__(17);
+var warning = __webpack_require__(2);
+>>>>>>> Stashed changes
 
 var didWarnForAddedNewProperty = false;
 var isProxySupported = typeof Proxy === 'function';
@@ -3078,8 +3147,13 @@ var _assign = __webpack_require__(7);
 
 var ReactCurrentOwner = __webpack_require__(18);
 
+<<<<<<< Updated upstream
 var warning = __webpack_require__(39);
 var canDefineProperty = __webpack_require__(72);
+=======
+var warning = __webpack_require__(2);
+var canDefineProperty = __webpack_require__(71);
+>>>>>>> Stashed changes
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 
 var REACT_ELEMENT_TYPE = __webpack_require__(274);
@@ -3545,7 +3619,11 @@ module.exports = DOMLazyTree;
 var ReactRef = __webpack_require__(531);
 var ReactInstrumentation = __webpack_require__(15);
 
+<<<<<<< Updated upstream
 var warning = __webpack_require__(5);
+=======
+var warning = __webpack_require__(2);
+>>>>>>> Stashed changes
 
 /**
  * Helper to call ReactRef.attachRefs with this composite component, split out
@@ -4301,9 +4379,15 @@ module.exports = EventPluginHub;
 var EventPluginHub = __webpack_require__(46);
 var EventPluginUtils = __webpack_require__(83);
 
+<<<<<<< Updated upstream
 var accumulateInto = __webpack_require__(259);
 var forEachAccumulated = __webpack_require__(260);
 var warning = __webpack_require__(5);
+=======
+var accumulateInto = __webpack_require__(258);
+var forEachAccumulated = __webpack_require__(259);
+var warning = __webpack_require__(2);
+>>>>>>> Stashed changes
 
 var getListener = EventPluginHub.getListener;
 
@@ -4749,9 +4833,15 @@ process.umask = function() { return 0; };
 
 
 
+<<<<<<< Updated upstream
 var emptyFunction = __webpack_require__(242);
 var invariant = __webpack_require__(243);
 var warning = __webpack_require__(244);
+=======
+var emptyFunction = __webpack_require__(17);
+var invariant = __webpack_require__(1);
+var warning = __webpack_require__(2);
+>>>>>>> Stashed changes
 var assign = __webpack_require__(7);
 
 var ReactPropTypesSecret = __webpack_require__(241);
@@ -6707,8 +6797,13 @@ var _prodInvariant = __webpack_require__(4);
 
 var ReactErrorUtils = __webpack_require__(87);
 
+<<<<<<< Updated upstream
 var invariant = __webpack_require__(3);
 var warning = __webpack_require__(5);
+=======
+var invariant = __webpack_require__(1);
+var warning = __webpack_require__(2);
+>>>>>>> Stashed changes
 
 /**
  * Injected dependencies:
@@ -7002,8 +7097,13 @@ var propTypesFactory = __webpack_require__(240);
 var React = __webpack_require__(36);
 var PropTypes = propTypesFactory(React.isValidElement);
 
+<<<<<<< Updated upstream
 var invariant = __webpack_require__(3);
 var warning = __webpack_require__(5);
+=======
+var invariant = __webpack_require__(1);
+var warning = __webpack_require__(2);
+>>>>>>> Stashed changes
 
 var hasReadOnlyValue = {
   button: true,
@@ -7270,8 +7370,13 @@ var ReactInstanceMap = __webpack_require__(48);
 var ReactInstrumentation = __webpack_require__(15);
 var ReactUpdates = __webpack_require__(17);
 
+<<<<<<< Updated upstream
 var invariant = __webpack_require__(3);
 var warning = __webpack_require__(5);
+=======
+var invariant = __webpack_require__(1);
+var warning = __webpack_require__(2);
+>>>>>>> Stashed changes
 
 function enqueueUpdate(internalInstance) {
   ReactUpdates.enqueueUpdate(internalInstance);
@@ -7782,8 +7887,13 @@ module.exports = shouldUpdateReactComponent;
 
 var _assign = __webpack_require__(7);
 
+<<<<<<< Updated upstream
 var emptyFunction = __webpack_require__(23);
 var warning = __webpack_require__(5);
+=======
+var emptyFunction = __webpack_require__(17);
+var warning = __webpack_require__(2);
+>>>>>>> Stashed changes
 
 var validateDOMNesting = emptyFunction;
 
@@ -8308,7 +8418,11 @@ var emptyObject = __webpack_require__(373);
 var _invariant = __webpack_require__(374);
 
 if (true) {
+<<<<<<< Updated upstream
   var warning = __webpack_require__(375);
+=======
+  var warning = __webpack_require__(2);
+>>>>>>> Stashed changes
 }
 
 var MIXINS_KEY = 'mixins';
@@ -9810,8 +9924,13 @@ var DOMProperty = __webpack_require__(26);
 var ReactDOMComponentTree = __webpack_require__(8);
 var ReactInstrumentation = __webpack_require__(15);
 
+<<<<<<< Updated upstream
 var quoteAttributeValueForBrowser = __webpack_require__(557);
 var warning = __webpack_require__(5);
+=======
+var quoteAttributeValueForBrowser = __webpack_require__(561);
+var warning = __webpack_require__(2);
+>>>>>>> Stashed changes
 
 var VALID_ATTRIBUTE_NAME_REGEX = new RegExp('^[' + DOMProperty.ATTRIBUTE_NAME_START_CHAR + '][' + DOMProperty.ATTRIBUTE_NAME_CHAR + ']*$');
 var illegalAttributeNameCache = {};
@@ -10071,7 +10190,11 @@ var LinkedValueUtils = __webpack_require__(85);
 var ReactDOMComponentTree = __webpack_require__(8);
 var ReactUpdates = __webpack_require__(17);
 
+<<<<<<< Updated upstream
 var warning = __webpack_require__(5);
+=======
+var warning = __webpack_require__(2);
+>>>>>>> Stashed changes
 
 var didWarnValueLink = false;
 var didWarnValueDefaultValue = false;
@@ -10546,7 +10669,11 @@ var instantiateReactComponent = __webpack_require__(264);
 var invariant = __webpack_require__(3);
 var setInnerHTML = __webpack_require__(71);
 var shouldUpdateReactComponent = __webpack_require__(94);
+<<<<<<< Updated upstream
 var warning = __webpack_require__(5);
+=======
+var warning = __webpack_require__(2);
+>>>>>>> Stashed changes
 
 var ATTR_NAME = DOMProperty.ID_ATTRIBUTE_NAME;
 var ROOT_ATTR_NAME = DOMProperty.ROOT_ATTRIBUTE_NAME;
@@ -11452,9 +11579,15 @@ var ReactCompositeComponent = __webpack_require__(501);
 var ReactEmptyComponent = __webpack_require__(251);
 var ReactHostComponent = __webpack_require__(253);
 
+<<<<<<< Updated upstream
 var getNextDebugID = __webpack_require__(590);
 var invariant = __webpack_require__(3);
 var warning = __webpack_require__(5);
+=======
+var getNextDebugID = __webpack_require__(579);
+var invariant = __webpack_require__(1);
+var warning = __webpack_require__(2);
+>>>>>>> Stashed changes
 
 // To avoid a cyclic dependency, we create the final class in this module
 var ReactCompositeComponentWrapper = function (element) {
@@ -11632,8 +11765,13 @@ module.exports = isTextInputElement;
 
 
 var ExecutionEnvironment = __webpack_require__(9);
+<<<<<<< Updated upstream
 var escapeTextContentForBrowser = __webpack_require__(70);
 var setInnerHTML = __webpack_require__(71);
+=======
+var escapeTextContentForBrowser = __webpack_require__(69);
+var setInnerHTML = __webpack_require__(70);
+>>>>>>> Stashed changes
 
 /**
  * Set the textContent property of a node, ensuring that whitespace is preserved
@@ -11694,7 +11832,11 @@ var REACT_ELEMENT_TYPE = __webpack_require__(520);
 var getIteratorFn = __webpack_require__(554);
 var invariant = __webpack_require__(3);
 var KeyEscapeUtils = __webpack_require__(84);
+<<<<<<< Updated upstream
 var warning = __webpack_require__(5);
+=======
+var warning = __webpack_require__(2);
+>>>>>>> Stashed changes
 
 var SEPARATOR = '.';
 var SUBSEPARATOR = ':';
@@ -12223,10 +12365,17 @@ var ReactElement = __webpack_require__(30);
 
 var checkReactTypeSpec = __webpack_require__(588);
 
+<<<<<<< Updated upstream
 var canDefineProperty = __webpack_require__(72);
 var getIteratorFn = __webpack_require__(277);
 var warning = __webpack_require__(39);
 var lowPriorityWarning = __webpack_require__(98);
+=======
+var canDefineProperty = __webpack_require__(71);
+var getIteratorFn = __webpack_require__(272);
+var warning = __webpack_require__(2);
+var lowPriorityWarning = __webpack_require__(97);
+>>>>>>> Stashed changes
 
 function getDeclarationErrorAddendum() {
   if (ReactCurrentOwner.current) {
@@ -12468,7 +12617,11 @@ module.exports = ReactElementValidator;
 
 
 
+<<<<<<< Updated upstream
 var warning = __webpack_require__(39);
+=======
+var warning = __webpack_require__(2);
+>>>>>>> Stashed changes
 
 function warnNoop(publicInstance, callerName) {
   if (true) {
@@ -12868,6 +13021,10 @@ module.exports = invariant;
  */
 
 
+<<<<<<< Updated upstream
+=======
+var ExecutionEnvironment = __webpack_require__(9);
+>>>>>>> Stashed changes
 
 var emptyFunction = __webpack_require__(372);
 
@@ -13041,6 +13198,12 @@ module.exports = warning;
  * LICENSE file in the root directory of this source tree.
  */
 
+<<<<<<< Updated upstream
+=======
+/*eslint-disable fb-www/unsafe-html */
+
+var ExecutionEnvironment = __webpack_require__(9);
+>>>>>>> Stashed changes
 
 
 if (true) {
@@ -13464,12 +13627,16 @@ function getNativeBeforeInputChars(topLevelType, nativeEvent) {
       // Record the characters to be added to the DOM.
       var chars = nativeEvent.data;
 
+<<<<<<< Updated upstream
       // If it's a spacebar character, assume that we have already handled
       // it at the keypress level and bail immediately. Android Chrome
       // doesn't give us keycodes, so we need to blacklist it.
       if (chars === SPACEBAR_CHAR && hasSpaceKeypress) {
         return null;
       }
+=======
+var ExecutionEnvironment = __webpack_require__(9);
+>>>>>>> Stashed changes
 
       return chars;
 
@@ -13606,9 +13773,18 @@ module.exports = BeforeInputEventPlugin;
 
 
 
+<<<<<<< Updated upstream
 var CSSProperty = __webpack_require__(246);
 var ExecutionEnvironment = __webpack_require__(9);
 var ReactInstrumentation = __webpack_require__(15);
+=======
+if (true) {
+  var invariant = __webpack_require__(1);
+  var warning = __webpack_require__(2);
+  var ReactPropTypesSecret = __webpack_require__(243);
+  var loggedTypeFailures = {};
+}
+>>>>>>> Stashed changes
 
 var camelizeStyleName = __webpack_require__(560);
 var dangerousStyleValue = __webpack_require__(550);
@@ -13824,12 +14000,20 @@ module.exports = CSSPropertyOperations;
 
 
 
+<<<<<<< Updated upstream
 var EventPluginHub = __webpack_require__(46);
 var EventPropagators = __webpack_require__(47);
 var ExecutionEnvironment = __webpack_require__(9);
 var ReactDOMComponentTree = __webpack_require__(8);
 var ReactUpdates = __webpack_require__(17);
 var SyntheticEvent = __webpack_require__(22);
+=======
+var EventPropagators = __webpack_require__(45);
+var ExecutionEnvironment = __webpack_require__(9);
+var FallbackCompositionState = __webpack_require__(501);
+var SyntheticCompositionEvent = __webpack_require__(544);
+var SyntheticInputEvent = __webpack_require__(547);
+>>>>>>> Stashed changes
 
 var inputValueTracking = __webpack_require__(263);
 var getEventTarget = __webpack_require__(92);
@@ -14188,6 +14372,7 @@ module.exports = Danger;
 
 
 
+<<<<<<< Updated upstream
 /**
  * Module that is injectable into `EventPluginHub`, that specifies a
  * deterministic ordering of `EventPlugin`s. A convenient way to reason about
@@ -14199,6 +14384,17 @@ module.exports = Danger;
  */
 
 var DefaultEventPluginOrder = ['ResponderEventPlugin', 'SimpleEventPlugin', 'TapEventPlugin', 'EnterLeaveEventPlugin', 'ChangeEventPlugin', 'SelectEventPlugin', 'BeforeInputEventPlugin'];
+=======
+var CSSProperty = __webpack_require__(245);
+var ExecutionEnvironment = __webpack_require__(9);
+var ReactInstrumentation = __webpack_require__(15);
+
+var camelizeStyleName = __webpack_require__(373);
+var dangerousStyleValue = __webpack_require__(554);
+var hyphenateStyleName = __webpack_require__(380);
+var memoizeStringOnly = __webpack_require__(383);
+var warning = __webpack_require__(2);
+>>>>>>> Stashed changes
 
 module.exports = DefaultEventPluginOrder;
 
@@ -14318,7 +14514,16 @@ module.exports = EnterLeaveEventPlugin;
 
 
 
+<<<<<<< Updated upstream
 var _assign = __webpack_require__(7);
+=======
+var EventPluginHub = __webpack_require__(44);
+var EventPropagators = __webpack_require__(45);
+var ExecutionEnvironment = __webpack_require__(9);
+var ReactDOMComponentTree = __webpack_require__(8);
+var ReactUpdates = __webpack_require__(18);
+var SyntheticEvent = __webpack_require__(23);
+>>>>>>> Stashed changes
 
 var PooledClass = __webpack_require__(29);
 
@@ -14722,6 +14927,20 @@ var ReactChildReconciler = {
     return childInstances;
   },
 
+<<<<<<< Updated upstream
+=======
+
+var _prodInvariant = __webpack_require__(5);
+
+var DOMLazyTree = __webpack_require__(34);
+var ExecutionEnvironment = __webpack_require__(9);
+
+var createNodesFromMarkup = __webpack_require__(376);
+var emptyFunction = __webpack_require__(17);
+var invariant = __webpack_require__(1);
+
+var Danger = {
+>>>>>>> Stashed changes
   /**
    * Updates the rendered children and returns a new set of children.
    *
@@ -15157,8 +15376,16 @@ var ReactCompositeComponent = {
       }
       checkpoint = transaction.checkpoint();
 
+<<<<<<< Updated upstream
       this._renderedComponent.unmountComponent(true);
       transaction.rollback(checkpoint);
+=======
+var instantiateReactComponent = __webpack_require__(263);
+var KeyEscapeUtils = __webpack_require__(84);
+var shouldUpdateReactComponent = __webpack_require__(94);
+var traverseAllChildren = __webpack_require__(266);
+var warning = __webpack_require__(2);
+>>>>>>> Stashed changes
 
       // Try again - we've informed the component about the error, so they can render an error message this time.
       // If this throws again, the error will bubble up (and can be caught by a higher error boundary).
@@ -15416,8 +15643,16 @@ var ReactCompositeComponent = {
     var inst = this._instance;
     !(inst != null) ?  true ? invariant(false, 'Attempted to update component `%s` that has already been unmounted (or failed to mount).', this.getName() || 'ReactCompositeComponent') : _prodInvariant('136', this.getName() || 'ReactCompositeComponent') : void 0;
 
+<<<<<<< Updated upstream
     var willReceive = false;
     var nextContext;
+=======
+var emptyObject = __webpack_require__(53);
+var invariant = __webpack_require__(1);
+var shallowEqual = __webpack_require__(73);
+var shouldUpdateReactComponent = __webpack_require__(94);
+var warning = __webpack_require__(2);
+>>>>>>> Stashed changes
 
     // Determine if the context has changed or not
     if (this._context === nextUnmaskedContext) {
@@ -16263,6 +16498,7 @@ ReactDOMComponent.Mixin = {
 
     var props = this._currentElement.props;
 
+<<<<<<< Updated upstream
     switch (this._tag) {
       case 'audio':
       case 'form':
@@ -16299,6 +16535,12 @@ ReactDOMComponent.Mixin = {
         transaction.getReactMountReady().enqueue(trapBubbledEventsLocal, this);
         break;
     }
+=======
+var findDOMNode = __webpack_require__(555);
+var getHostComponentFromComposite = __webpack_require__(260);
+var renderSubtreeIntoContainer = __webpack_require__(562);
+var warning = __webpack_require__(2);
+>>>>>>> Stashed changes
 
     assertValidProps(this, props);
 
@@ -16363,6 +16605,7 @@ ReactDOMComponent.Mixin = {
       } else {
         el = ownerDocument.createElementNS(namespaceURI, this._currentElement.type);
       }
+<<<<<<< Updated upstream
       ReactDOMComponentTree.precacheNode(this, el);
       this._flags |= Flags.hasCachedChildNodes;
       if (!this._hostParent) {
@@ -16379,6 +16622,24 @@ ReactDOMComponent.Mixin = {
         mountImage = tagOpen + '/>';
       } else {
         mountImage = tagOpen + '>' + tagContent + '</' + this._currentElement.type + '>';
+=======
+    },
+    Mount: ReactMount,
+    Reconciler: ReactReconciler
+  });
+}
+
+if (true) {
+  var ExecutionEnvironment = __webpack_require__(9);
+  if (ExecutionEnvironment.canUseDOM && window.top === window.self) {
+    // First check if devtools is not installed
+    if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ === 'undefined') {
+      // If we're in Chrome or Firefox, provide a download link if not installed.
+      if (navigator.userAgent.indexOf('Chrome') > -1 && navigator.userAgent.indexOf('Edge') === -1 || navigator.userAgent.indexOf('Firefox') > -1) {
+        // Firefox does not have the issue with devtools loaded over file://
+        var showFileUrlMessage = window.location.protocol.indexOf('http') === -1 && navigator.userAgent.indexOf('Firefox') === -1;
+        console.debug('Download the React DevTools ' + (showFileUrlMessage ? 'and use an HTTP server (instead of a file: URL) ' : '') + 'for a better development experience: ' + 'https://fb.me/react-devtools');
+>>>>>>> Stashed changes
       }
     }
 
@@ -16413,6 +16674,7 @@ ReactDOMComponent.Mixin = {
     return mountImage;
   },
 
+<<<<<<< Updated upstream
   /**
    * Creates markup for the open tag and all attributes.
    *
@@ -16428,6 +16690,16 @@ ReactDOMComponent.Mixin = {
    */
   _createOpenTagMarkupAndPutListeners: function (transaction, props) {
     var ret = '<' + this._currentElement.type;
+=======
+var emptyFunction = __webpack_require__(17);
+var escapeTextContentForBrowser = __webpack_require__(69);
+var invariant = __webpack_require__(1);
+var isEventSupported = __webpack_require__(93);
+var shallowEqual = __webpack_require__(73);
+var inputValueTracking = __webpack_require__(262);
+var validateDOMNesting = __webpack_require__(95);
+var warning = __webpack_require__(2);
+>>>>>>> Stashed changes
 
     for (var propKey in props) {
       if (!props.hasOwnProperty(propKey)) {
@@ -17592,7 +17864,27 @@ module.exports = ReactDOMOption;
 
 
 
+<<<<<<< Updated upstream
 var ExecutionEnvironment = __webpack_require__(9);
+=======
+var _prodInvariant = __webpack_require__(5),
+    _assign = __webpack_require__(7);
+
+var DOMPropertyOperations = __webpack_require__(247);
+var LinkedValueUtils = __webpack_require__(85);
+var ReactDOMComponentTree = __webpack_require__(8);
+var ReactUpdates = __webpack_require__(18);
+
+var invariant = __webpack_require__(1);
+var warning = __webpack_require__(2);
+
+var didWarnValueLink = false;
+var didWarnCheckedLink = false;
+var didWarnValueDefaultValue = false;
+var didWarnCheckedDefaultChecked = false;
+var didWarnControlledToUncontrolled = false;
+var didWarnUncontrolledToControlled = false;
+>>>>>>> Stashed changes
 
 var getNodeForCharacterOffset = __webpack_require__(555);
 var getTextContentAccessor = __webpack_require__(262);
@@ -17810,9 +18102,13 @@ module.exports = ReactDOMSelection;
 var _prodInvariant = __webpack_require__(4),
     _assign = __webpack_require__(7);
 
+<<<<<<< Updated upstream
 var DOMChildrenOperations = __webpack_require__(81);
 var DOMLazyTree = __webpack_require__(34);
 var ReactDOMComponentTree = __webpack_require__(8);
+=======
+var warning = __webpack_require__(2);
+>>>>>>> Stashed changes
 
 var escapeTextContentForBrowser = __webpack_require__(70);
 var invariant = __webpack_require__(3);
@@ -17975,9 +18271,13 @@ module.exports = ReactDOMTextComponent;
 var _prodInvariant = __webpack_require__(4),
     _assign = __webpack_require__(7);
 
+<<<<<<< Updated upstream
 var LinkedValueUtils = __webpack_require__(85);
 var ReactDOMComponentTree = __webpack_require__(8);
 var ReactUpdates = __webpack_require__(17);
+=======
+var warning = __webpack_require__(2);
+>>>>>>> Stashed changes
 
 var invariant = __webpack_require__(3);
 var warning = __webpack_require__(5);
@@ -18026,7 +18326,45 @@ var ReactDOMTextarea = {
     return hostProps;
   },
 
+<<<<<<< Updated upstream
   mountWrapper: function (inst, props) {
+=======
+var _assign = __webpack_require__(7);
+
+var React = __webpack_require__(36);
+var ReactDOMComponentTree = __webpack_require__(8);
+var ReactDOMSelect = __webpack_require__(249);
+
+var warning = __webpack_require__(2);
+var didWarnInvalidOptionChildren = false;
+
+function flattenChildren(children) {
+  var content = '';
+
+  // Flatten children and warn if they aren't strings or numbers;
+  // invalid types are ignored.
+  React.Children.forEach(children, function (child) {
+    if (child == null) {
+      return;
+    }
+    if (typeof child === 'string' || typeof child === 'number') {
+      content += child;
+    } else if (!didWarnInvalidOptionChildren) {
+      didWarnInvalidOptionChildren = true;
+       true ? warning(false, 'Only strings and numbers are supported as <option> children.') : void 0;
+    }
+  });
+
+  return content;
+}
+
+/**
+ * Implements an <option> host component that warns when `selected` is set.
+ */
+var ReactDOMOption = {
+  mountWrapper: function (inst, props, hostParent) {
+    // TODO (yungsters): Remove support for `selected` in <option>.
+>>>>>>> Stashed changes
     if (true) {
       LinkedValueUtils.checkPropTypes('textarea', props, inst._currentElement._owner);
       if (props.valueLink !== undefined && !didWarnValueLink) {
@@ -18135,7 +18473,11 @@ module.exports = ReactDOMTextarea;
 
 
 
+<<<<<<< Updated upstream
 var _prodInvariant = __webpack_require__(4);
+=======
+var ExecutionEnvironment = __webpack_require__(9);
+>>>>>>> Stashed changes
 
 var invariant = __webpack_require__(3);
 
@@ -18398,8 +18740,13 @@ var ExecutionEnvironment = __webpack_require__(9);
 var performanceNow = __webpack_require__(572);
 var warning = __webpack_require__(5);
 
+<<<<<<< Updated upstream
 var hooks = [];
 var didHookThrowForEvent = {};
+=======
+var invariant = __webpack_require__(1);
+var warning = __webpack_require__(2);
+>>>>>>> Stashed changes
 
 function callHook(event, fn, context, arg1, arg2, arg3, arg4, arg5) {
   try {
@@ -18755,8 +19102,12 @@ module.exports = ReactDebugTool;
 
 var _assign = __webpack_require__(7);
 
+<<<<<<< Updated upstream
 var ReactUpdates = __webpack_require__(17);
 var Transaction = __webpack_require__(69);
+=======
+var warning = __webpack_require__(2);
+>>>>>>> Stashed changes
 
 var emptyFunction = __webpack_require__(23);
 
@@ -18914,10 +19265,20 @@ module.exports = {
 
 
 
+<<<<<<< Updated upstream
 // The Symbol used to tag the ReactElement type. If there is no native Symbol
 // nor polyfill, then a plain number is used for performance.
 
 var REACT_ELEMENT_TYPE = typeof Symbol === 'function' && Symbol['for'] && Symbol['for']('react.element') || 0xeac7;
+=======
+var ReactInvalidSetStateWarningHook = __webpack_require__(529);
+var ReactHostOperationHistoryHook = __webpack_require__(527);
+var ReactComponentTreeHook = __webpack_require__(12);
+var ExecutionEnvironment = __webpack_require__(9);
+
+var performanceNow = __webpack_require__(385);
+var warning = __webpack_require__(2);
+>>>>>>> Stashed changes
 
 module.exports = REACT_ELEMENT_TYPE;
 
@@ -19298,9 +19659,17 @@ module.exports = ReactMarkupChecksum;
 
 var _prodInvariant = __webpack_require__(4);
 
+<<<<<<< Updated upstream
 var ReactComponentEnvironment = __webpack_require__(86);
 var ReactInstanceMap = __webpack_require__(48);
 var ReactInstrumentation = __webpack_require__(15);
+=======
+var EventListener = __webpack_require__(223);
+var ExecutionEnvironment = __webpack_require__(9);
+var PooledClass = __webpack_require__(29);
+var ReactDOMComponentTree = __webpack_require__(8);
+var ReactUpdates = __webpack_require__(18);
+>>>>>>> Stashed changes
 
 var ReactCurrentOwner = __webpack_require__(18);
 var ReactReconciler = __webpack_require__(35);
@@ -19746,7 +20115,11 @@ module.exports = ReactMultiChild;
 
 
 
+<<<<<<< Updated upstream
 var _prodInvariant = __webpack_require__(4);
+=======
+var warning = __webpack_require__(2);
+>>>>>>> Stashed changes
 
 var invariant = __webpack_require__(3);
 
@@ -20240,7 +20613,196 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var ReactUpdateQueue = __webpack_require__(88);
 
+<<<<<<< Updated upstream
 var warning = __webpack_require__(5);
+=======
+function attachRef(ref, component, owner) {
+  if (typeof ref === 'function') {
+    ref(component.getPublicInstance());
+  } else {
+    // Legacy ref
+    ReactOwner.addComponentAsRefTo(component, ref, owner);
+  }
+}
+
+function detachRef(ref, component, owner) {
+  if (typeof ref === 'function') {
+    ref(null);
+  } else {
+    // Legacy ref
+    ReactOwner.removeComponentAsRefFrom(component, ref, owner);
+  }
+}
+
+ReactRef.attachRefs = function (instance, element) {
+  if (element === null || typeof element !== 'object') {
+    return;
+  }
+  var ref = element.ref;
+  if (ref != null) {
+    attachRef(ref, instance, element._owner);
+  }
+};
+
+ReactRef.shouldUpdateRefs = function (prevElement, nextElement) {
+  // If either the owner or a `ref` has changed, make sure the newest owner
+  // has stored a reference to `this`, and the previous owner (if different)
+  // has forgotten the reference to `this`. We use the element instead
+  // of the public this.props because the post processing cannot determine
+  // a ref. The ref conceptually lives on the element.
+
+  // TODO: Should this even be possible? The owner cannot change because
+  // it's forbidden by shouldUpdateReactComponent. The ref can change
+  // if you swap the keys of but not the refs. Reconsider where this check
+  // is made. It probably belongs where the key checking and
+  // instantiateReactComponent is done.
+
+  var prevRef = null;
+  var prevOwner = null;
+  if (prevElement !== null && typeof prevElement === 'object') {
+    prevRef = prevElement.ref;
+    prevOwner = prevElement._owner;
+  }
+
+  var nextRef = null;
+  var nextOwner = null;
+  if (nextElement !== null && typeof nextElement === 'object') {
+    nextRef = nextElement.ref;
+    nextOwner = nextElement._owner;
+  }
+
+  return prevRef !== nextRef ||
+  // If owner changes but we have an unchanged function ref, don't update refs
+  typeof nextRef === 'string' && nextOwner !== prevOwner;
+};
+
+ReactRef.detachRefs = function (instance, element) {
+  if (element === null || typeof element !== 'object') {
+    return;
+  }
+  var ref = element.ref;
+  if (ref != null) {
+    detachRef(ref, instance, element._owner);
+  }
+};
+
+module.exports = ReactRef;
+
+/***/ }),
+/* 536 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Copyright (c) 2014-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+
+
+var _assign = __webpack_require__(7);
+
+var PooledClass = __webpack_require__(29);
+var Transaction = __webpack_require__(68);
+var ReactInstrumentation = __webpack_require__(15);
+var ReactServerUpdateQueue = __webpack_require__(537);
+
+/**
+ * Executed within the scope of the `Transaction` instance. Consider these as
+ * being member methods, but with an implied ordering while being isolated from
+ * each other.
+ */
+var TRANSACTION_WRAPPERS = [];
+
+if (true) {
+  TRANSACTION_WRAPPERS.push({
+    initialize: ReactInstrumentation.debugTool.onBeginFlush,
+    close: ReactInstrumentation.debugTool.onEndFlush
+  });
+}
+
+var noopCallbackQueue = {
+  enqueue: function () {}
+};
+
+/**
+ * @class ReactServerRenderingTransaction
+ * @param {boolean} renderToStaticMarkup
+ */
+function ReactServerRenderingTransaction(renderToStaticMarkup) {
+  this.reinitializeTransaction();
+  this.renderToStaticMarkup = renderToStaticMarkup;
+  this.useCreateElement = false;
+  this.updateQueue = new ReactServerUpdateQueue(this);
+}
+
+var Mixin = {
+  /**
+   * @see Transaction
+   * @abstract
+   * @final
+   * @return {array} Empty list of operation wrap procedures.
+   */
+  getTransactionWrappers: function () {
+    return TRANSACTION_WRAPPERS;
+  },
+
+  /**
+   * @return {object} The queue to collect `onDOMReady` callbacks with.
+   */
+  getReactMountReady: function () {
+    return noopCallbackQueue;
+  },
+
+  /**
+   * @return {object} The queue to collect React async events.
+   */
+  getUpdateQueue: function () {
+    return this.updateQueue;
+  },
+
+  /**
+   * `PooledClass` looks for this, and will invoke this before allowing this
+   * instance to be reused.
+   */
+  destructor: function () {},
+
+  checkpoint: function () {},
+
+  rollback: function () {}
+};
+
+_assign(ReactServerRenderingTransaction.prototype, Transaction, Mixin);
+
+PooledClass.addPoolingTo(ReactServerRenderingTransaction);
+
+module.exports = ReactServerRenderingTransaction;
+
+/***/ }),
+/* 537 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Copyright (c) 2015-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * 
+ */
+
+
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var ReactUpdateQueue = __webpack_require__(88);
+
+var warning = __webpack_require__(2);
+>>>>>>> Stashed changes
 
 function warnNoop(publicInstance, callerName) {
   if (true) {
@@ -21319,7 +21881,15 @@ module.exports = SyntheticFocusEvent;
 
 
 
+<<<<<<< Updated upstream
 var SyntheticEvent = __webpack_require__(22);
+=======
+var EventPropagators = __webpack_require__(45);
+var ExecutionEnvironment = __webpack_require__(9);
+var ReactDOMComponentTree = __webpack_require__(8);
+var ReactInputSelection = __webpack_require__(253);
+var SyntheticEvent = __webpack_require__(23);
+>>>>>>> Stashed changes
 
 /**
  * @interface Event
@@ -22342,7 +22912,32 @@ module.exports = ReactMount.renderSubtreeIntoContainer;
  * @typechecks
  */
 
+<<<<<<< Updated upstream
 var _hyphenPattern = /-(.)/g;
+=======
+
+
+var _prodInvariant = __webpack_require__(5);
+
+var ReactPropTypeLocationNames = __webpack_require__(533);
+var ReactPropTypesSecret = __webpack_require__(256);
+
+var invariant = __webpack_require__(1);
+var warning = __webpack_require__(2);
+
+var ReactComponentTreeHook;
+
+if (typeof process !== 'undefined' && __webpack_require__.i({"NODE_ENV":"development"}) && "development" === 'test') {
+  // Temporary hack.
+  // Inline requires don't work well with Jest:
+  // https://github.com/facebook/react/issues/7240
+  // Remove the inline requires when we don't need them anymore:
+  // https://github.com/facebook/react/pull/7178
+  ReactComponentTreeHook = __webpack_require__(12);
+}
+
+var loggedTypeFailures = {};
+>>>>>>> Stashed changes
 
 /**
  * Camelcases a hyphenated string, for example:
@@ -22377,7 +22972,12 @@ module.exports = camelize;
 
 
 
+<<<<<<< Updated upstream
 var camelize = __webpack_require__(559);
+=======
+var CSSProperty = __webpack_require__(245);
+var warning = __webpack_require__(2);
+>>>>>>> Stashed changes
 
 var msPattern = /^-ms-/;
 
@@ -22453,6 +23053,12 @@ module.exports = containsNode;
 
 "use strict";
 
+<<<<<<< Updated upstream
+=======
+var getHostComponentFromComposite = __webpack_require__(260);
+var invariant = __webpack_require__(1);
+var warning = __webpack_require__(2);
+>>>>>>> Stashed changes
 
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -22597,9 +23203,15 @@ module.exports = createArrayFromMixed;
 
 var ExecutionEnvironment = __webpack_require__(9);
 
+<<<<<<< Updated upstream
 var createArrayFromMixed = __webpack_require__(562);
 var getMarkupWrap = __webpack_require__(564);
 var invariant = __webpack_require__(3);
+=======
+var KeyEscapeUtils = __webpack_require__(84);
+var traverseAllChildren = __webpack_require__(266);
+var warning = __webpack_require__(2);
+>>>>>>> Stashed changes
 
 /**
  * Dummy container used to render all markup.
@@ -22916,6 +23528,10 @@ module.exports = isNode;
 
 "use strict";
 
+<<<<<<< Updated upstream
+=======
+var ExecutionEnvironment = __webpack_require__(9);
+>>>>>>> Stashed changes
 
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -23691,8 +24307,13 @@ var _prodInvariant = __webpack_require__(37);
 var ReactPropTypeLocationNames = __webpack_require__(584);
 var ReactPropTypesSecret = __webpack_require__(586);
 
+<<<<<<< Updated upstream
 var invariant = __webpack_require__(38);
 var warning = __webpack_require__(39);
+=======
+var invariant = __webpack_require__(1);
+var warning = __webpack_require__(2);
+>>>>>>> Stashed changes
 
 var ReactComponentTreeHook;
 
@@ -23873,10 +24494,17 @@ var _prodInvariant = __webpack_require__(37);
 var ReactCurrentOwner = __webpack_require__(18);
 var REACT_ELEMENT_TYPE = __webpack_require__(274);
 
+<<<<<<< Updated upstream
 var getIteratorFn = __webpack_require__(277);
 var invariant = __webpack_require__(38);
 var KeyEscapeUtils = __webpack_require__(580);
 var warning = __webpack_require__(39);
+=======
+var getIteratorFn = __webpack_require__(272);
+var invariant = __webpack_require__(1);
+var KeyEscapeUtils = __webpack_require__(569);
+var warning = __webpack_require__(2);
+>>>>>>> Stashed changes
 
 var SEPARATOR = '.';
 var SUBSEPARATOR = ':';
@@ -24082,8 +24710,13 @@ module.exports = emptyObject;
 /* 617 */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< Updated upstream
 __webpack_require__(1);
 __webpack_require__(19);
+=======
+__webpack_require__(3);
+__webpack_require__(20);
+>>>>>>> Stashed changes
 module.exports = __webpack_require__(11);
 
 

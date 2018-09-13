@@ -14,7 +14,11 @@ var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" &
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+<<<<<<< Updated upstream
 var _react = __webpack_require__(1);
+=======
+var _react = __webpack_require__(3);
+>>>>>>> Stashed changes
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -636,10 +640,13 @@ var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" &
 
 __webpack_require__(596);
 
+<<<<<<< Updated upstream
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
+=======
+>>>>>>> Stashed changes
 var _Events = __webpack_require__(14);
 
 var _Events2 = _interopRequireDefault(_Events);
@@ -648,7 +655,15 @@ var _FieldSet2 = __webpack_require__(10);
 
 var _FieldSet3 = _interopRequireDefault(_FieldSet2);
 
+<<<<<<< Updated upstream
 var _WMSService = __webpack_require__(308);
+=======
+var _react = __webpack_require__(3);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _WMSService = __webpack_require__(301);
+>>>>>>> Stashed changes
 
 var _WMSService2 = _interopRequireDefault(_WMSService);
 
@@ -677,6 +692,7 @@ var IdentifyWidget = function (_BaseWidget) {
             ready: false,
             busy: false,
             features: [],
+            showPopup: false,
             activeFeature: 0
         });
         return _this;
@@ -772,8 +788,10 @@ var IdentifyWidget = function (_BaseWidget) {
         this.setState({ ready: true });
         map.on('singleclick', function (e) {
             _this4.getLayers(map.getLayers().getArray()).forEach(function (layer) {
-                _this4.setState({ busy: true, features: [],
-                    activeFeature: 0 });
+                _this4.setState({
+                    busy: true, features: [],
+                    activeFeature: 0
+                });
                 _WMSService2.default.getFeatureInfo(layer, e.coordinate, map, 'application/json', function (result) {
                     _this4.state.features = _this4.state.features.concat(result.features);
                     result.features.forEach(function (f) {
@@ -1944,7 +1962,7 @@ exports = module.exports = __webpack_require__(32)();
 
 
 // module
-exports.push([module.i, ".identify-no-results{\r\n  padding: 10px;\r\n}\r\n.identify-navigate{\r\n  padding: 0 5px;\r\n}\r\n.identify-result-ct{\r\n  overflow: auto;\r\n  min-height: 100px;\r\n  max-height: 300px;\r\n}\r\n.identify-result-layer-title{\r\n  margin-left: 10px;\r\n}\r\n", ""]);
+exports.push([module.i, ".identify-no-results{\n  padding: 10px;\n}\n.identify-navigate{\n  padding: 0 5px;\n}\n.identify-result-ct{\n  overflow: auto;\n  min-height: 100px;\n  max-height: 300px;\n}\n.identify-result-layer-title{\n  margin-left: 10px;\n}\n", ""]);
 
 // exports
 
@@ -11209,7 +11227,11 @@ else
 
 /***/ }),
 
+<<<<<<< Updated upstream
 /***/ 99:
+=======
+/***/ 98:
+>>>>>>> Stashed changes
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var XLink_1_0_Module_Factory = function () {

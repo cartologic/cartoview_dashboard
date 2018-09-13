@@ -2,6 +2,9 @@ import React from 'react';
 import FieldSet from './components/FieldSet.jsx';
 import Events from './events/Events.jsx';
 
+import Events from './events/Events.jsx'
+import FieldSet from './components/FieldSet.jsx'
+
 class AggregateWidget extends BaseWidget {
     static displayName = "Aggregate Widget";
 

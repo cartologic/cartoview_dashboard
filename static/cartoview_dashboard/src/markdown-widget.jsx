@@ -4,6 +4,10 @@ import CodeMirror from 'react-codemirror';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/mode/markdown/markdown.js';
 
+import CodeMirror from 'react-codemirror';
+import React from 'react';
+import ReactMarkdown from 'react-markdown';
+
 class MarkdownWidget extends BaseWidget {
     static displayName = "Text-to-HTML";
 
