@@ -1,5 +1,169 @@
 webpackJsonp([6],{
 
+/***/ 10:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var JSONField = function (_Component) {
+  _inherits(JSONField, _Component);
+
+  function JSONField(props) {
+    _classCallCheck(this, JSONField);
+
+    var _this = _possibleConstructorReturn(this, _Component.call(this, props));
+
+    Object.defineProperty(_this, 'value', {
+      get: function get() {
+        return JSON.parse(_this.refs.textarea.value);
+      },
+      set: function set(newValue) {
+        _this.refs.textarea.value = JSON.stringify(newValue || {});
+      },
+      enumerable: true,
+      configurable: true
+    });
+    return _this;
+  }
+
+  JSONField.prototype.render = function render() {
+    var props = _objectWithoutProperties(this.props, []);
+
+    delete props.ref;
+    return _react2.default.createElement('textarea', _extends({}, props, { ref: 'textarea' }));
+  };
+
+  return JSONField;
+}(_react.Component);
+
+var FieldSet = function (_Component2) {
+  _inherits(FieldSet, _Component2);
+
+  function FieldSet(props) {
+    _classCallCheck(this, FieldSet);
+
+    var _this2 = _possibleConstructorReturn(this, _Component2.call(this, props));
+
+    _this2.state = {
+      schema: props.schema || _this2.getSchema(props),
+      data: props.data || _this2.getInitialData(props)
+    };
+    _this2.fields = {};
+    return _this2;
+  }
+
+  FieldSet.prototype.getSchema = function getSchema() {
+    return {};
+  };
+
+  FieldSet.prototype.getInitialData = function getInitialData() {
+    return {};
+  };
+
+  FieldSet.prototype.render = function render() {
+    var _this3 = this;
+
+    var _state = this.state,
+        schema = _state.schema,
+        data = _state.data;
+
+    return _jsx('div', {}, void 0, Object.keys(schema).map(function (key) {
+      return _this3.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null);
+    }));
+  };
+
+  FieldSet.prototype.field = function field(name, schema, value) {
+    var _this4 = this;
+
+    var _schema$props = schema.props,
+        props = _schema$props === undefined ? {} : _schema$props;
+
+    props.className = "form-control";
+    props.ref = function (f) {
+      if (f) {
+        f.value = value;
+        _this4.fields[name] = f;
+        f.fieldSet = _this4;
+      }
+    };
+    var field = null;
+
+    if (['text', 'number', 'url', 'email'].indexOf(schema.type) != -1) {
+      props.type = schema.type;
+      field = _react2.default.createElement('input', props);
+    } else if (schema.type == "textarea") {
+      field = _react2.default.createElement('textarea', props);
+    } else if (schema.type == "json") {
+      field = _react2.default.createElement(JSONField, props);
+    } else if (schema.type == 'select') {
+      field = _react2.default.createElement(
+        'select',
+        props,
+        this.getSelectOptions(name, schema, value)
+      );
+    }
+    var label = schema.label || name.charAt(0).toUpperCase() + name.slice(1);
+    return _jsx('div', {
+      className: 'form-group'
+    }, void 0, _jsx('label', {}, void 0, label), field);
+  };
+
+  FieldSet.prototype.getSelectOptions = function getSelectOptions(name, schema, value) {
+    var options = schema.options;
+
+    if (!options) return null;
+    if ((typeof options === 'undefined' ? 'undefined' : _typeof(options)) == "object") {
+      return Object.keys(options).map(function (key) {
+        return _jsx('option', {
+          value: key
+        }, void 0, options[key]);
+      });
+    } else if (typeof options == 'function') {
+      return options(this, this.state.data);
+    }
+    return null;
+  };
+
+  FieldSet.prototype.getData = function getData() {
+    var _this5 = this;
+
+    var data = {};
+    Object.keys(this.fields).map(function (key) {
+      data[key] = _this5.fields[key].value;
+    });
+    return data;
+  };
+
+  return FieldSet;
+}(_react.Component);
+
+exports.default = FieldSet;
+
+/***/ }),
+
 /***/ 14:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8,13 +172,13 @@ webpackJsonp([6],{
 
 exports.__esModule = true;
 
-var _events = __webpack_require__(21);
+var _events = __webpack_require__(20);
 
 exports.default = new _events.EventEmitter();
 
 /***/ }),
 
-/***/ 21:
+/***/ 20:
 /***/ (function(module, exports) {
 
 // Copyright Joyent, Inc. and other Node contributors.
@@ -460,7 +624,7 @@ exports.default = {
 
 /***/ }),
 
-/***/ 279:
+/***/ 286:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -490,7 +654,7 @@ var _openlayers = __webpack_require__(11);
 
 var _openlayers2 = _interopRequireDefault(_openlayers);
 
-var _urlParse = __webpack_require__(49);
+var _urlParse = __webpack_require__(51);
 
 var _urlParse2 = _interopRequireDefault(_urlParse);
 
@@ -684,7 +848,7 @@ exports.default = new ArcGISRestService();
 
 /***/ }),
 
-/***/ 43:
+/***/ 45:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -764,7 +928,7 @@ exports.parse = querystring;
 
 /***/ }),
 
-/***/ 48:
+/***/ 50:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -810,14 +974,14 @@ module.exports = function required(port, protocol) {
 
 /***/ }),
 
-/***/ 49:
+/***/ 51:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 
-var required = __webpack_require__(48)
-  , qs = __webpack_require__(43)
+var required = __webpack_require__(50)
+  , qs = __webpack_require__(45)
   , protocolre = /^([a-z][a-z0-9.+-]*:)?(\/\/)?([\S\s]*)/i
   , slashes = /^[A-Za-z][A-Za-z0-9+-.]*:\/\//;
 
@@ -1153,13 +1317,8 @@ function set(part, value, fn) {
       break;
 
     case 'pathname':
-    case 'hash':
-      if (value) {
-        var char = part === 'pathname' ? '/' : '#';
-        url[part] = value.charAt(0) !== char ? char + value : value;
-      } else {
-        url[part] = value;
-      }
+      url.pathname = value.length && value.charAt(0) !== '/' ? '/' + value : value;
+
       break;
 
     default:
@@ -1231,7 +1390,7 @@ module.exports = URL;
 
 /***/ }),
 
-/***/ 602:
+/***/ 613:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1241,11 +1400,11 @@ exports.__esModule = true;
 
 var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
-var _react = __webpack_require__(2);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _ArcGISRestService = __webpack_require__(279);
+var _ArcGISRestService = __webpack_require__(286);
 
 var _ArcGISRestService2 = _interopRequireDefault(_ArcGISRestService);
 
@@ -1257,7 +1416,7 @@ var _openlayers = __webpack_require__(11);
 
 var _openlayers2 = _interopRequireDefault(_openlayers);
 
-var _FieldSet2 = __webpack_require__(9);
+var _FieldSet2 = __webpack_require__(10);
 
 var _FieldSet3 = _interopRequireDefault(_FieldSet2);
 
@@ -1344,7 +1503,7 @@ var Legend = function (_Component2) {
                         src: url
                     })));
                 } else if (layer.getSource() instanceof _openlayers2.default.source.TileArcGISRest) {
-                    legends.push(_jsx('div', {}, void 0, ' ', _jsx('h4', {}, void 0, layer.get('title')), ' ', _jsx(ArcGISLegend, {
+                    legends.push(_jsx('div', {}, void 0, _jsx('h4', {}, void 0, layer.get('title')), ' ', _jsx(ArcGISLegend, {
                         layer: layer
                     })));
                 }
@@ -1381,19 +1540,27 @@ var LegendWidget = function (_BaseWidget) {
             style: style
         }, void 0, this.state && this.state.ready ? _jsx(Legend, {
             map: this.state.map
-        }) : _jsx('span', {}, void 0, 'You have to add a map to this dashboard to show the legend.'));
+        }) : _jsx('span', {}, void 0, 'The map for this Legend widget must be configured.  Click ', _jsx('i', {
+            className: 'glyphicon glyphicon-cog',
+            style: { color: '#337ab7' }
+        }), ' icon and select a map within this dashboard.'));
+    };
+
+    LegendWidget.prototype.setConfig = function setConfig(config) {
+        _BaseWidget.prototype.setConfig.call(this, config);
+        this.attachToMapWidget(config.mapWidget);
     };
 
     LegendWidget.prototype.componentDidMount = function componentDidMount() {
-        if (!this.state.config.mapWidget) return;
-        this.attachToMapWidget(this.state.config.mapWidget);
+        if (this.state.config.mapWidget) this.attachToMapWidget(this.state.config.mapWidget);
+        _BaseWidget.prototype.componentDidMount.call(this);
     };
 
     LegendWidget.prototype.attachToMapWidget = function attachToMapWidget(mapWidgetId) {
         var _this6 = this;
 
         var mapWidget = this.context.configManager.getWidget(mapWidgetId);
-        if (mapWidget.ready) {
+        if (mapWidget && mapWidget.ready) {
             this.setState({ ready: true, map: mapWidget.map });
         } else {
             _Events2.default.on('mapReady' + '_' + mapWidgetId, function (map) {
@@ -1435,12 +1602,13 @@ var ConfigForm = function (_FieldSet) {
     };
 
     ConfigForm.prototype.getSelectOptions = function getSelectOptions(name, config, value) {
-        return Object.keys(dash.props.widgets).filter(function (widgetId) {
+        var mapWidgets = this.props.widget.context.configManager.getMapWidgets();
+        return Object.keys(mapWidgets).filter(function (widgetId) {
             return dash.props.widgets[widgetId].type.name == "MapWidget";
         }).map(function (widgetId) {
             return _jsx('option', {
                 value: widgetId
-            }, void 0, dash.props.widgets[widgetId].title);
+            }, void 0, mapWidgets[widgetId].title, ' - ', widgetId);
         });
     };
 
@@ -1456,170 +1624,6 @@ LegendWidget.ConfigForm = ConfigForm;
 Dashboard.registerWidget(LegendWidget);
 exports.default = LegendWidget;
 
-/***/ }),
-
-/***/ 9:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _react = __webpack_require__(2);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var JSONField = function (_Component) {
-  _inherits(JSONField, _Component);
-
-  function JSONField(props) {
-    _classCallCheck(this, JSONField);
-
-    var _this = _possibleConstructorReturn(this, _Component.call(this, props));
-
-    Object.defineProperty(_this, 'value', {
-      get: function get() {
-        return JSON.parse(_this.refs.textarea.value);
-      },
-      set: function set(newValue) {
-        _this.refs.textarea.value = JSON.stringify(newValue || {});
-      },
-      enumerable: true,
-      configurable: true
-    });
-    return _this;
-  }
-
-  JSONField.prototype.render = function render() {
-    var props = _objectWithoutProperties(this.props, []);
-
-    delete props.ref;
-    return _react2.default.createElement('textarea', _extends({}, props, { ref: 'textarea' }));
-  };
-
-  return JSONField;
-}(_react.Component);
-
-var FieldSet = function (_Component2) {
-  _inherits(FieldSet, _Component2);
-
-  function FieldSet(props) {
-    _classCallCheck(this, FieldSet);
-
-    var _this2 = _possibleConstructorReturn(this, _Component2.call(this, props));
-
-    _this2.state = {
-      schema: props.schema || _this2.getSchema(props),
-      data: props.data || _this2.getInitialData(props)
-    };
-    _this2.fields = {};
-    return _this2;
-  }
-
-  FieldSet.prototype.getSchema = function getSchema() {
-    return {};
-  };
-
-  FieldSet.prototype.getInitialData = function getInitialData() {
-    return {};
-  };
-
-  FieldSet.prototype.render = function render() {
-    var _this3 = this;
-
-    var _state = this.state,
-        schema = _state.schema,
-        data = _state.data;
-
-    return _jsx('div', {}, void 0, Object.keys(schema).map(function (key) {
-      return _this3.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null);
-    }));
-  };
-
-  FieldSet.prototype.field = function field(name, schema, value) {
-    var _this4 = this;
-
-    var _schema$props = schema.props,
-        props = _schema$props === undefined ? {} : _schema$props;
-
-    props.className = "form-control";
-    props.ref = function (f) {
-      if (f) {
-        f.value = value;
-        _this4.fields[name] = f;
-        f.fieldSet = _this4;
-      }
-    };
-    var field = null;
-
-    if (['text', 'number', 'url', 'email'].indexOf(schema.type) != -1) {
-      props.type = schema.type;
-      field = _react2.default.createElement('input', props);
-    } else if (schema.type == "textarea") {
-      field = _react2.default.createElement('textarea', props);
-    } else if (schema.type == "json") {
-      field = _react2.default.createElement(JSONField, props);
-    } else if (schema.type == 'select') {
-      field = _react2.default.createElement(
-        'select',
-        props,
-        this.getSelectOptions(name, schema, value)
-      );
-    }
-    var label = schema.label || name.charAt(0).toUpperCase() + name.slice(1);
-    return _jsx('div', {
-      className: 'form-group'
-    }, void 0, _jsx('label', {}, void 0, label), field);
-  };
-
-  FieldSet.prototype.getSelectOptions = function getSelectOptions(name, schema, value) {
-    var options = schema.options;
-
-    if (!options) return null;
-    if ((typeof options === 'undefined' ? 'undefined' : _typeof(options)) == "object") {
-      return Object.keys(options).map(function (key) {
-        return _jsx('option', {
-          value: key
-        }, void 0, options[key]);
-      });
-    } else if (typeof options == 'function') {
-      return options(this, this.state.data);
-    }
-    return null;
-  };
-
-  FieldSet.prototype.getData = function getData() {
-    var _this5 = this;
-
-    var data = {};
-    Object.keys(this.fields).map(function (key) {
-      data[key] = _this5.fields[key].value;
-    });
-    return data;
-  };
-
-  return FieldSet;
-}(_react.Component);
-
-exports.default = FieldSet;
-
 /***/ })
 
-},[602]);
+},[613]);

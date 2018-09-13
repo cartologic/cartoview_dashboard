@@ -11,6 +11,7 @@ class BaseChartWidget extends BaseWidget {
         } );
         this.configFieldSetClass = ConfigFieldSet;
     }
+
     getConfigFormOptions( ) {
 
         if ( !this.state.config.aggregationAttribute ) {
@@ -21,33 +22,26 @@ class BaseChartWidget extends BaseWidget {
         }
         return configFormOptions;
     }
+
     setConfig(config){
         super.setConfig(config);
-        this.attachToMapWidget(config.mapWidget)
-    }
-    // shouldComponentUpdate(nextProps, nextState){
-    //   if(this.state.config != nextState.config ){
-    //     this.update(nextState.config);
-    //   }
-    //   return true;
-    // }
-    // update(config){
-    //   if(config.typeName){
-    //     this.wpsClient.aggregate(config).then((data) => {
-    //       this.setData(data);
-    //     });
-    //   }
-    // }
-    componentDidMount( ) {
-        if(this.state.config.mapWidget) {
-            this.attachToMapWidget(this.state.config.mapWidget)
-        }
-        this.update( this.state.config );
+        this.attachToMapWidget(config)
     }
 
-    attachToMapWidget(mapWidgetId) {
-        var eventName = 'mapExtentChanged' + '_' + mapWidgetId;
-        console.log(eventName);
+    componentDidMount( ) {
+        if(this.state.config.mapWidget) {
+            this.attachToMapWidget(this.state.config)
+        }
+        this.update( this.state.config );
+        super.componentDidMount()
+    }
+
+    attachToMapWidget(config) {
+        var mapWidget = this.context.configManager.getWidget(config.mapWidget);
+         if (mapWidget && mapWidget.ready)
+             // update widget once attached to a map, otherwise it will wait to next map change.
+             this.update(config, mapWidget.map.getView().calculateExtent())
+        var eventName = 'mapExtentChanged' + '_' + config.mapWidget;
         Events.on(eventName, (map, extent) => {
             this.update(this.state.config, extent);
         });
@@ -136,6 +130,7 @@ const configFormOptions = {
         options: {}
     }
 };
+
 class ConfigFieldSet extends FieldSet {
     getSchema( ) {
         return configFormOptions;
@@ -150,8 +145,9 @@ class ConfigFieldSet extends FieldSet {
     }
     getSelectOptions( name, config, value ) {
          if ( name == "mapWidget" ) {
-              return Object.keys(dash.props.widgets).filter(widgetId => dash.props.widgets[widgetId].type.name == "MapWidget").
-                map(widgetId => <option value={widgetId}>{dash.props.widgets[widgetId].title}</option>);
+             var mapWidgets = this.props.widget.context.configManager.getMapWidgets();
+             return Object.keys(mapWidgets).filter(widgetId => dash.props.widgets[widgetId].type.name == "MapWidget").
+                    map(widgetId => <option value={widgetId}>{mapWidgets[widgetId].title} - {widgetId}</option>);
          }
         else if ( name == "typeName" ) {
             return this.state.layers.map(m => <option value={m.name}>{m.layer_params.title}</option>);
@@ -205,6 +201,7 @@ class ConfigFieldSet extends FieldSet {
 }
 BaseChartWidget.ConfigForm = ConfigFieldSet;
 class BarChartWidget extends BaseChartWidget {
+    static displayName = "Bar Chart";
     constructor( props ) {
         super( props );
         this.state.data = {
@@ -228,6 +225,7 @@ class BarChartWidget extends BaseChartWidget {
     }
 };
 class LineChartWidget extends BaseChartWidget {
+    static displayName = "Line Chart";
     constructor( props ) {
         super( props );
         this.state.data = {
@@ -263,6 +261,7 @@ class LineChartWidget extends BaseChartWidget {
     }
 }
 class DoughnutChartWidget extends BaseChartWidget {
+    static displayName = "Doughnut Chart";
     constructor( props ) {
         super( props );
         this.state.data = {
@@ -279,8 +278,10 @@ class DoughnutChartWidget extends BaseChartWidget {
         return "rgb(" + r + "," + g + "," + b + ")";
     }
     setData( data ) {
-        var colors = data.AggregationResults.map( ( item ) => this.dynamicColor( ) );
-        this.state.data.datasets[ 0 ].backgroundColor = colors;
+        if(!this.state.data.datasets[0].backgroundColor) {
+            var colors = data.AggregationResults.map((item) => this.dynamicColor());
+            this.state.data.datasets[0].backgroundColor = colors;
+        }
         super.setData( data );
     }
     // setData(data){

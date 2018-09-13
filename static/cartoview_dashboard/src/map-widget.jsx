@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom';
 import ol from 'openlayers';
 
 class MapWidget extends BaseWidget {
+    static displayName = "Map";
     constructor(props) {
         super(props);
         this.loaded = false;
@@ -57,13 +58,13 @@ class MapWidget extends BaseWidget {
     }
     componentDidMount(){
       this.map.setTarget(ReactDOM.findDOMNode(this.refs.map));
+      super.componentDidMount()
     }
     render() {
         return (<div ref="map" className='map-ct'></div>);
     }
 }
 
-MapWidget.displayName = "Map"
 class MapWidgetConfigForm extends FieldSet {
   constructor(props){
     super(props)

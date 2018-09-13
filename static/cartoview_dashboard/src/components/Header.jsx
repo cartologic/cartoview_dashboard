@@ -15,7 +15,7 @@ class Header extends React.Component {
     }
     render( ) {
         let { open } = this.state
-        const { editable, title, abstract } = this.props
+        const { editable, title, abstract , onChange} = this.props
         if ( editable ) {
             const data = { title, abstract }
             const schema = {
@@ -27,6 +27,8 @@ class Header extends React.Component {
                             let data = {...e.target.fieldSet.state.data};
                             data.title = e.target.value;
                             e.target.fieldSet.setState({data: data});
+                            // notify dashboard to changed "saved" state
+                            onChange()
                         },
                     }
                 },
@@ -38,6 +40,8 @@ class Header extends React.Component {
                             let data = {...e.target.fieldSet.state.data};
                             data.abstract = e.target.value;
                             e.target.fieldSet.setState({data: data});
+                            // notify dashboard to changed "saved" state
+                            onChange()
                         },
                     }
                 }
@@ -49,7 +53,7 @@ class Header extends React.Component {
                       <h3 className="header-title title-wrap">{title}</h3>
                     </div>
                     <div className="flex-element">
-                      <button onClick={this.onRequestClose} className="btn btn-primary">{"?"}</button>
+                        <button onClick={this.onRequestClose} className="btn btn-primary"><i className="fa fa-info-circle" style={{fontSize:20}}></i></button>
                     </div>
                     <InfoModal onRequestClose={this.onRequestClose} open={open} title="About" >
                         <p>{abstract}</p>

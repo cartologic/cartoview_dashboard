@@ -1,11 +1,12 @@
 import "./style.css"
 
-import React, { Component } from 'react';
+import React from 'react';
 
 import Events from '../../events/Events.jsx';
 import FieldSet from '../FieldSet.jsx';
 import WMSService from 'boundless-sdk/services/WMSService';
 import ol from 'openlayers';
+
 //application/json
 class IdentifyWidget extends BaseWidget {
     static displayName = "Identify";
@@ -18,6 +19,12 @@ class IdentifyWidget extends BaseWidget {
             activeFeature: 0
         } ) ;
     }
+
+    setConfig(config){
+        super.setConfig(config);
+        this.attachToMapWidget(config)
+    }
+
     render( ) {
         var { ready, busy, features, activeFeature } = this.state;
         const prev = ( e ) => {
@@ -70,18 +77,25 @@ class IdentifyWidget extends BaseWidget {
       </div>
     </div>;
     }
-    componentDidMount( ) {
-        if(! this.state.config.mapWidget )
-            return;
-        var mapWidget = this.context.configManager.getWidget( this.state.config.mapWidget );
-        if ( mapWidget.ready ) {
-            this.init( mapWidget.map );
+
+    componentDidMount() {
+        if (this.state.config.mapWidget) {
+            this.attachToMapWidget(this.state.config);
+        }
+        super.componentDidMount()
+    }
+
+    attachToMapWidget(config) {
+        var mapWidget = this.context.configManager.getWidget(config.mapWidget);
+        if (mapWidget && mapWidget.ready) {
+            this.init(mapWidget.map);
         } else {
-            Events.on( 'mapReady'+ '_' + this.state.config.mapWidget, ( map ) => {
-                this.init( map );
-            } );
+            Events.on('mapReady' + '_' + config.mapWidget, (map) => {
+                this.init(map);
+            });
         }
     }
+
     init( map ) {
         this.setState( { ready: true } )
         map.on( 'singleclick', ( e ) => {
@@ -136,8 +150,9 @@ class ConfigForm extends FieldSet {
     }
 
     getSelectOptions(name, config, value) {
-        return Object.keys(dash.props.widgets).filter(widgetId => dash.props.widgets[widgetId].type.name == "MapWidget").
-                map(widgetId => <option value={widgetId}>{dash.props.widgets[widgetId].title}</option>);
+         var mapWidgets = this.props.widget.context.configManager.getMapWidgets();
+         return Object.keys(mapWidgets).filter(widgetId => dash.props.widgets[widgetId].type.name == "MapWidget").
+                map(widgetId => <option value={widgetId}>{mapWidgets[widgetId].title} - {widgetId}</option>);
     }
 
     // componentWillMount() {

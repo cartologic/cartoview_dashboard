@@ -30,9 +30,28 @@ class ConfigManager {
         } )
         return mapWidget
     }
+
+     getMapWidgets( ) {
+        // get widgets form dashboard.state.layout as dashboard.state.widgets is not updated when a widget removed.
+        var { layout, widgets } = this.dashboard.state;
+        var mapWidgets = {};
+        layout.rows.forEach((row, rowIndex) => {
+            row.columns.forEach((col, colIndex) => {
+                col.widgets.forEach((wId, wIndex) =>  {
+                    if(widgets[wId.key].type.name == "MapWidget")
+                    {
+                        mapWidgets[wId.key] = widgets[wId.key];
+                    }
+                });
+            });
+        });
+        return mapWidgets;
+    }
+
     getWidget(widgetId ) {
-        var { widgets } = this.dashboard.state;
-        return widgets[widgetId];
+        // get widgets form dashboard.widget instead of dashboard.state.widgets
+        // as it has whole widget object not only configuration
+        return this.dashboard.widgets[widgetId];
     }
     save = ( ) => {
         var { widgets, layout } = this.dashboard.state
@@ -48,6 +67,8 @@ class ConfigManager {
         const { title, abstract } = this.dashboard.refs.header.getData( )
         const config = { title, abstract, config: JSON.stringify( { widgets: widgetsConfig,
                 layout } ) }
+        // TODO: handle saving errors, check saving succuess before setting dashboard state.
+        this.dashboard.save()
         saveDashboard( config )
     }
 }
