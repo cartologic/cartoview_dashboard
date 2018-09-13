@@ -29,135 +29,135 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var JSONField = function (_Component) {
-  _inherits(JSONField, _Component);
+    _inherits(JSONField, _Component);
 
-  function JSONField(props) {
-    _classCallCheck(this, JSONField);
+    function JSONField(props) {
+        _classCallCheck(this, JSONField);
 
-    var _this = _possibleConstructorReturn(this, _Component.call(this, props));
+        var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 
-    Object.defineProperty(_this, 'value', {
-      get: function get() {
-        return JSON.parse(_this.refs.textarea.value);
-      },
-      set: function set(newValue) {
-        _this.refs.textarea.value = JSON.stringify(newValue || {});
-      },
-      enumerable: true,
-      configurable: true
-    });
-    return _this;
-  }
+        Object.defineProperty(_this, 'value', {
+            get: function get() {
+                return JSON.parse(_this.refs.textarea.value);
+            },
+            set: function set(newValue) {
+                _this.refs.textarea.value = JSON.stringify(newValue || {});
+            },
+            enumerable: true,
+            configurable: true
+        });
+        return _this;
+    }
 
-  JSONField.prototype.render = function render() {
-    var props = _objectWithoutProperties(this.props, []);
+    JSONField.prototype.render = function render() {
+        var props = _objectWithoutProperties(this.props, []);
 
-    delete props.ref;
-    return _react2.default.createElement('textarea', _extends({}, props, { ref: 'textarea' }));
-  };
+        delete props.ref;
+        return _react2.default.createElement('textarea', _extends({}, props, { ref: 'textarea' }));
+    };
 
-  return JSONField;
+    return JSONField;
 }(_react.Component);
 
 var FieldSet = function (_Component2) {
-  _inherits(FieldSet, _Component2);
+    _inherits(FieldSet, _Component2);
 
-  function FieldSet(props) {
-    _classCallCheck(this, FieldSet);
+    function FieldSet(props) {
+        _classCallCheck(this, FieldSet);
 
-    var _this2 = _possibleConstructorReturn(this, _Component2.call(this, props));
+        var _this2 = _possibleConstructorReturn(this, _Component2.call(this, props));
 
-    _this2.state = {
-      schema: props.schema || _this2.getSchema(props),
-      data: props.data || _this2.getInitialData(props)
-    };
-    _this2.fields = {};
-    return _this2;
-  }
-
-  FieldSet.prototype.getSchema = function getSchema() {
-    return {};
-  };
-
-  FieldSet.prototype.getInitialData = function getInitialData() {
-    return {};
-  };
-
-  FieldSet.prototype.render = function render() {
-    var _this3 = this;
-
-    var _state = this.state,
-        schema = _state.schema,
-        data = _state.data;
-
-    return _jsx('div', {}, void 0, Object.keys(schema).map(function (key) {
-      return _this3.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null);
-    }));
-  };
-
-  FieldSet.prototype.field = function field(name, schema, value) {
-    var _this4 = this;
-
-    var _schema$props = schema.props,
-        props = _schema$props === undefined ? {} : _schema$props;
-
-    props.className = "form-control";
-    props.ref = function (f) {
-      if (f) {
-        f.value = value;
-        _this4.fields[name] = f;
-        f.fieldSet = _this4;
-      }
-    };
-    var field = null;
-
-    if (['text', 'number', 'url', 'email'].indexOf(schema.type) != -1) {
-      props.type = schema.type;
-      field = _react2.default.createElement('input', props);
-    } else if (schema.type == "textarea") {
-      field = _react2.default.createElement('textarea', props);
-    } else if (schema.type == "json") {
-      field = _react2.default.createElement(JSONField, props);
-    } else if (schema.type == 'select') {
-      field = _react2.default.createElement(
-        'select',
-        props,
-        this.getSelectOptions(name, schema, value)
-      );
+        _this2.state = {
+            schema: props.schema || _this2.getSchema(props),
+            data: props.data || _this2.getInitialData(props)
+        };
+        _this2.fields = {};
+        return _this2;
     }
-    var label = schema.label || name.charAt(0).toUpperCase() + name.slice(1);
-    return _jsx('div', {
-      className: 'form-group'
-    }, void 0, _jsx('label', {}, void 0, label), field);
-  };
 
-  FieldSet.prototype.getSelectOptions = function getSelectOptions(name, schema, value) {
-    var options = schema.options;
+    FieldSet.prototype.getSchema = function getSchema() {
+        return {};
+    };
 
-    if (!options) return null;
-    if ((typeof options === 'undefined' ? 'undefined' : _typeof(options)) == "object") {
-      return Object.keys(options).map(function (key) {
-        return _jsx('option', {
-          value: key
-        }, void 0, options[key]);
-      });
-    } else if (typeof options == 'function') {
-      return options(this, this.state.data);
-    }
-    return null;
-  };
+    FieldSet.prototype.getInitialData = function getInitialData() {
+        return {};
+    };
 
-  FieldSet.prototype.getData = function getData() {
-    var _this5 = this;
+    FieldSet.prototype.render = function render() {
+        var _this3 = this;
 
-    var data = {};
-    Object.keys(this.fields).map(function (key) {
-      data[key] = _this5.fields[key].value;
-    });
-    return data;
-  };
+        var _state = this.state,
+            schema = _state.schema,
+            data = _state.data;
 
-  return FieldSet;
+        return _jsx('div', {}, void 0, Object.keys(schema).map(function (key) {
+            return _this3.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null);
+        }));
+    };
+
+    FieldSet.prototype.field = function field(name, schema, value) {
+        var _this4 = this;
+
+        var _schema$props = schema.props,
+            props = _schema$props === undefined ? {} : _schema$props;
+
+        props.className = "form-control";
+        props.ref = function (f) {
+            if (f) {
+                f.value = value;
+                _this4.fields[name] = f;
+                f.fieldSet = _this4;
+            }
+        };
+        var field = null;
+
+        if (['text', 'number', 'url', 'email'].indexOf(schema.type) != -1) {
+            props.type = schema.type;
+            field = _react2.default.createElement('input', props);
+        } else if (schema.type == "textarea") {
+            field = _react2.default.createElement('textarea', props);
+        } else if (schema.type == "json") {
+            field = _react2.default.createElement(JSONField, props);
+        } else if (schema.type == 'select') {
+            field = _react2.default.createElement(
+                'select',
+                props,
+                this.getSelectOptions(name, schema, value)
+            );
+        }
+        var label = schema.label || name.charAt(0).toUpperCase() + name.slice(1);
+        return _jsx('div', {
+            className: 'form-group'
+        }, void 0, _jsx('label', {}, void 0, label), field);
+    };
+
+    FieldSet.prototype.getSelectOptions = function getSelectOptions(name, schema, value) {
+        var options = schema.options;
+
+        if (!options) return null;
+        if ((typeof options === 'undefined' ? 'undefined' : _typeof(options)) == "object") {
+            return Object.keys(options).map(function (key) {
+                return _jsx('option', {
+                    value: key
+                }, void 0, options[key]);
+            });
+        } else if (typeof options == 'function') {
+            return options(this, this.state.data);
+        }
+        return null;
+    };
+
+    FieldSet.prototype.getData = function getData() {
+        var _this5 = this;
+
+        var data = {};
+        Object.keys(this.fields).map(function (key) {
+            data[key] = _this5.fields[key].value;
+        });
+        return data;
+    };
+
+    return FieldSet;
 }(_react.Component);
 
 exports.default = FieldSet;
@@ -23103,6 +23103,8 @@ else {
 
 exports.__esModule = true;
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _Events = __webpack_require__(14);
@@ -23255,6 +23257,10 @@ var MapWidget = function (_BaseWidget) {
             };
         };
 
+        _this.parseStrBool = function (boolStr) {
+            return JSON.parse(boolStr);
+        };
+
         _this.loaded = false;
         _this.state = {
             features: [],
@@ -23308,15 +23314,15 @@ var MapWidget = function (_BaseWidget) {
 
     MapWidget.prototype.componentDidMount = function componentDidMount() {
         this.map.setTarget(_reactDom2.default.findDOMNode(this.refs.map));
-        //   super.componentDidMount()
     };
 
     MapWidget.prototype.render = function render() {
+        var config = this.props.config;
 
         return _react2.default.createElement(
             'div',
             { ref: 'map', className: 'map-ct' },
-            _react2.default.createElement(Popup, this.getPopupProps())
+            config && config.IdentifyPopup && this.parseStrBool(config.IdentifyPopup) && _react2.default.createElement(Popup, this.getPopupProps())
         );
     };
 
@@ -23333,6 +23339,11 @@ var MapWidgetConfigForm = function (_FieldSet) {
 
         var _this3 = _possibleConstructorReturn(this, _FieldSet.call(this, props));
 
+        _this3.getOptionExtraProps = function (option) {
+            var extProps = {};
+            return extProps;
+        };
+
         _this3.state.maps = [];
         return _this3;
     }
@@ -23342,6 +23353,14 @@ var MapWidgetConfigForm = function (_FieldSet) {
             mapId: {
                 type: 'select',
                 options: {}
+            },
+            IdentifyPopup: {
+                type: 'select',
+                options: [{ lable: "Yes", value: true }, { lable: "No", value: false }],
+                props: {
+                    required: "required",
+                    defaultValue: false
+                }
             }
         };
     };
@@ -23351,18 +23370,29 @@ var MapWidgetConfigForm = function (_FieldSet) {
     };
 
     MapWidgetConfigForm.prototype.getSelectOptions = function getSelectOptions(name, config, value) {
-        return this.state.maps.map(function (m) {
-            return _jsx('option', {
-                value: m.id
-            }, void 0, m.title);
+        var _this4 = this;
+
+        if (name === "mapId") {
+            return this.state.maps.map(function (m) {
+                return _jsx('option', {
+                    value: m.id
+                }, void 0, m.title);
+            });
+        }
+        return config.options.map(function (m, index) {
+            return _react2.default.createElement(
+                'option',
+                _extends({ key: index }, _this4.getOptionExtraProps(m), { value: m.value }),
+                m.lable
+            );
         });
     };
 
     MapWidgetConfigForm.prototype.componentWillMount = function componentWillMount() {
-        var _this4 = this;
+        var _this5 = this;
 
         getMapsData().then(function (res) {
-            return _this4.setState({ maps: res.objects });
+            return _this5.setState({ maps: res.objects });
         });
     };
 
@@ -23378,7 +23408,7 @@ var Popup = function (_React$Component) {
     _inherits(Popup, _React$Component);
 
     function Popup() {
-        var _temp, _this5, _ret;
+        var _temp, _this6, _ret;
 
         _classCallCheck(this, Popup);
 
@@ -23386,16 +23416,16 @@ var Popup = function (_React$Component) {
             args[_key] = arguments[_key];
         }
 
-        return _ret = (_temp = (_this5 = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this5), _this5.state = {
+        return _ret = (_temp = (_this6 = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this6), _this6.state = {
             currentFeature: null
-        }, _this5.ensureEvents = function () {
-            var _this5$props = _this5.props,
-                resetFeatureCollection = _this5$props.resetFeatureCollection,
-                nextFeature = _this5$props.nextFeature,
-                previousFeature = _this5$props.previousFeature,
-                features = _this5$props.features;
+        }, _this6.ensureEvents = function () {
+            var _this6$props = _this6.props,
+                resetFeatureCollection = _this6$props.resetFeatureCollection,
+                nextFeature = _this6$props.nextFeature,
+                previousFeature = _this6$props.previousFeature,
+                features = _this6$props.features;
 
-            var self = _this5;
+            var self = _this6;
             var closer = self.popupCloser;
             if (closer.onclick === null) {
                 closer.onclick = function () {
@@ -23417,7 +23447,7 @@ var Popup = function (_React$Component) {
                     };
                 }
             }
-        }, _temp), _possibleConstructorReturn(_this5, _ret);
+        }, _temp), _possibleConstructorReturn(_this6, _ret);
     }
 
     Popup.prototype.resultItem = function resultItem(f) {
@@ -23436,7 +23466,7 @@ var Popup = function (_React$Component) {
     };
 
     Popup.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-        var _this6 = this;
+        var _this7 = this;
 
         var addOverlay = this.props.addOverlay;
         var features = nextProps.features,
@@ -23446,7 +23476,7 @@ var Popup = function (_React$Component) {
             this.node.style.display = 'block';
             var currentFeature = features.length > 0 ? features[activeFeature] : null;
             this.setState({ currentFeature: currentFeature }, function () {
-                return addOverlay(_this6.node);
+                return addOverlay(_this7.node);
             });
             this.ensureEvents();
         } else {
@@ -23455,7 +23485,7 @@ var Popup = function (_React$Component) {
     };
 
     Popup.prototype.render = function render() {
-        var _this7 = this;
+        var _this8 = this;
 
         var _props = this.props,
             features = _props.features,
@@ -23467,7 +23497,7 @@ var Popup = function (_React$Component) {
         return _react2.default.createElement(
             'div',
             { className: (0, _classnames2.default)({ "hidden-popup": !showPopup }), ref: function ref(node) {
-                    return _this7.node = node;
+                    return _this8.node = node;
                 }, id: 'popup' },
             _jsx('div', {
                 className: 'popup-content'
@@ -23476,7 +23506,7 @@ var Popup = function (_React$Component) {
             }, void 0, _react2.default.createElement(
                 'button',
                 { className: 'btn btn-link btn-xs', ref: function ref(node) {
-                        return _this7.popupCloser = node;
+                        return _this8.popupCloser = node;
                     } },
                 _jsx('i', {
                     className: 'glyphicon glyphicon-remove'
@@ -23486,7 +23516,7 @@ var Popup = function (_React$Component) {
             }, void 0, _react2.default.createElement(
                 'button',
                 { className: 'btn btn-link btn-xs', ref: function ref(node) {
-                        return _this7.prevButton = node;
+                        return _this8.prevButton = node;
                     }, disabled: activeFeature == 0 },
                 _jsx('i', {
                     className: 'glyphicon glyphicon-chevron-left'
@@ -23494,7 +23524,7 @@ var Popup = function (_React$Component) {
             ), activeFeature + 1, ' / ', features.length, _react2.default.createElement(
                 'button',
                 { className: 'btn btn-link btn-xs', disabled: activeFeature == features.length - 1, ref: function ref(node) {
-                        return _this7.prevButton = node;
+                        return _this8.prevButton = node;
                     } },
                 _jsx('i', {
                     className: 'glyphicon glyphicon-chevron-right'

@@ -20,7 +20,13 @@ var widgetId = 0
 class Dashboard extends Component {
     constructor( props ) {
         super( props )
-        var { widgets, layout, editable, isNew, isOwner, title, abstract } = props
+        var { widgets,
+            layout,
+            editable,
+            isNew, 
+            isOwner,
+            title,
+            abstract } = props
         Object.keys( widgets ).map( ( id ) => {
             const ref = ( w ) => {
                 if ( w ) {

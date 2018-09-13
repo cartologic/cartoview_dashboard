@@ -5,7 +5,7 @@ import MapConfigTransformService from 'boundless-sdk/services/MapConfigTransform
 import PropTypes from 'prop-types'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import WMSService from 'boundless-sdk/services/WMSService';
+import WMSService from 'boundless-sdk/services/WMSService'
 import classNames from 'classnames'
 import ol from 'openlayers'
 
@@ -44,18 +44,18 @@ class MapWidget extends BaseWidget {
     }
     isWMS(layer) {
         return layer.getSource() instanceof ol.source.TileWMS || layer.getSource() instanceof ol
-            .source.ImageWMS;
+            .source.ImageWMS
     }
     getLayers(layers) {
-        var children = [];
+        var children = []
         layers.forEach((layer) => {
             if (layer instanceof ol.layer.Group) {
-                children = children.concat(this.getLayers(layer.getLayers()));
+                children = children.concat(this.getLayers(layer.getLayers()))
             } else if (layer.getVisible() && this.isWMS(layer)) {
-                children.push(layer);
+                children.push(layer)
             }
-        });
-        return children;
+        })
+        return children
     }
     identify = () => {
         let that = this
@@ -71,7 +71,7 @@ class MapWidget extends BaseWidget {
                     WMSService.getFeatureInfo(layer, e.coordinate,
                         that.map, 'application/json', (result) => {
                             result.features.forEach(f => f.set("_layerTitle", result.layer.get('title')))
-                            that.setState({ features: [...that.state.features, ...result.features], mouseCoordinates: e.coordinate, showPopup: true });
+                            that.setState({ features: [...that.state.features, ...result.features], mouseCoordinates: e.coordinate, showPopup: true })
                         })
                 })
         })
@@ -126,8 +126,7 @@ class MapWidget extends BaseWidget {
         this.update(this.props.config)
     }
     componentDidMount(){
-      this.map.setTarget(ReactDOM.findDOMNode(this.refs.map));
-    //   super.componentDidMount()
+        this.map.setTarget(ReactDOM.findDOMNode(this.refs.map))
     }
     getPopupProps = () => {
         const { showPopup, activeFeature, features } = this.state
@@ -143,10 +142,13 @@ class MapWidget extends BaseWidget {
             changeShowPopup: this.changeShowPopup
         }
     }
+    parseStrBool=(boolStr)=>{
+        return JSON.parse(boolStr)
+    }
     render() {
-
+        const {config}=this.props
         return (<div ref="map" className='map-ct'>
-            <Popup {...this.getPopupProps()} />
+            {config && config.IdentifyPopup && this.parseStrBool(config.IdentifyPopup) &&<Popup {...this.getPopupProps()} /> }
         </div>)
     }
 }
@@ -161,14 +163,33 @@ class MapWidgetConfigForm extends FieldSet {
             mapId: {
                 type: 'select',
                 options: {}
+            },
+            IdentifyPopup: {
+                type: 'select',
+                options: [
+                {lable:"Yes",value:true},
+                {lable:"No",value:false}],
+                props:{
+                    required:"required",
+                    defaultValue:false
+                }
             }
         }
     }
     getInitialData(props) {
         return props.widget.getConfig()
     }
+    getOptionExtraProps=(option)=>{
+        let extProps={
+
+        }
+        return extProps
+    }
     getSelectOptions(name, config, value) {
-        return this.state.maps.map(m => <option value={m.id}>{m.title}</option>)
+        if(name==="mapId"){
+            return this.state.maps.map(m => <option value={m.id}>{m.title}</option>)
+        }
+        return config.options.map((m,index) => <option key={index} {...this.getOptionExtraProps(m)} value={m.value}>{m.lable}</option>)
     }
     componentWillMount() {
         getMapsData().then(res => this.setState({ maps: res.objects }))
@@ -186,8 +207,8 @@ class Popup extends React.Component {
         currentFeature: null
     }
     resultItem(f) {
-        var keys = f.getKeys();
-        var geom = f.getGeometryName();
+        var keys = f.getKeys()
+        var geom = f.getGeometryName()
         return <div>
             <h4 className="identify-result-layer-title text-wrap">{f.get('_layerTitle')}</h4>
             <div className="feature-details-table">
@@ -195,14 +216,14 @@ class Popup extends React.Component {
                     <tbody>
                         {
                             keys.map((key) => {
-                                if (key == geom || key == "_layerTitle") return null;
+                                if (key == geom || key == "_layerTitle") return null
                                 return <tr><th>{key}</th><td>{f.get(key)}</td></tr>
                             })
                         }
                     </tbody>
                 </table>
             </div>
-        </div>;
+        </div>
     }
     ensureEvents = () => {
         const {

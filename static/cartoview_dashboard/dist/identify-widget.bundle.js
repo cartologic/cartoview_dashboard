@@ -29,135 +29,135 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var JSONField = function (_Component) {
-  _inherits(JSONField, _Component);
+    _inherits(JSONField, _Component);
 
-  function JSONField(props) {
-    _classCallCheck(this, JSONField);
+    function JSONField(props) {
+        _classCallCheck(this, JSONField);
 
-    var _this = _possibleConstructorReturn(this, _Component.call(this, props));
+        var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 
-    Object.defineProperty(_this, 'value', {
-      get: function get() {
-        return JSON.parse(_this.refs.textarea.value);
-      },
-      set: function set(newValue) {
-        _this.refs.textarea.value = JSON.stringify(newValue || {});
-      },
-      enumerable: true,
-      configurable: true
-    });
-    return _this;
-  }
+        Object.defineProperty(_this, 'value', {
+            get: function get() {
+                return JSON.parse(_this.refs.textarea.value);
+            },
+            set: function set(newValue) {
+                _this.refs.textarea.value = JSON.stringify(newValue || {});
+            },
+            enumerable: true,
+            configurable: true
+        });
+        return _this;
+    }
 
-  JSONField.prototype.render = function render() {
-    var props = _objectWithoutProperties(this.props, []);
+    JSONField.prototype.render = function render() {
+        var props = _objectWithoutProperties(this.props, []);
 
-    delete props.ref;
-    return _react2.default.createElement('textarea', _extends({}, props, { ref: 'textarea' }));
-  };
+        delete props.ref;
+        return _react2.default.createElement('textarea', _extends({}, props, { ref: 'textarea' }));
+    };
 
-  return JSONField;
+    return JSONField;
 }(_react.Component);
 
 var FieldSet = function (_Component2) {
-  _inherits(FieldSet, _Component2);
+    _inherits(FieldSet, _Component2);
 
-  function FieldSet(props) {
-    _classCallCheck(this, FieldSet);
+    function FieldSet(props) {
+        _classCallCheck(this, FieldSet);
 
-    var _this2 = _possibleConstructorReturn(this, _Component2.call(this, props));
+        var _this2 = _possibleConstructorReturn(this, _Component2.call(this, props));
 
-    _this2.state = {
-      schema: props.schema || _this2.getSchema(props),
-      data: props.data || _this2.getInitialData(props)
-    };
-    _this2.fields = {};
-    return _this2;
-  }
-
-  FieldSet.prototype.getSchema = function getSchema() {
-    return {};
-  };
-
-  FieldSet.prototype.getInitialData = function getInitialData() {
-    return {};
-  };
-
-  FieldSet.prototype.render = function render() {
-    var _this3 = this;
-
-    var _state = this.state,
-        schema = _state.schema,
-        data = _state.data;
-
-    return _jsx('div', {}, void 0, Object.keys(schema).map(function (key) {
-      return _this3.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null);
-    }));
-  };
-
-  FieldSet.prototype.field = function field(name, schema, value) {
-    var _this4 = this;
-
-    var _schema$props = schema.props,
-        props = _schema$props === undefined ? {} : _schema$props;
-
-    props.className = "form-control";
-    props.ref = function (f) {
-      if (f) {
-        f.value = value;
-        _this4.fields[name] = f;
-        f.fieldSet = _this4;
-      }
-    };
-    var field = null;
-
-    if (['text', 'number', 'url', 'email'].indexOf(schema.type) != -1) {
-      props.type = schema.type;
-      field = _react2.default.createElement('input', props);
-    } else if (schema.type == "textarea") {
-      field = _react2.default.createElement('textarea', props);
-    } else if (schema.type == "json") {
-      field = _react2.default.createElement(JSONField, props);
-    } else if (schema.type == 'select') {
-      field = _react2.default.createElement(
-        'select',
-        props,
-        this.getSelectOptions(name, schema, value)
-      );
+        _this2.state = {
+            schema: props.schema || _this2.getSchema(props),
+            data: props.data || _this2.getInitialData(props)
+        };
+        _this2.fields = {};
+        return _this2;
     }
-    var label = schema.label || name.charAt(0).toUpperCase() + name.slice(1);
-    return _jsx('div', {
-      className: 'form-group'
-    }, void 0, _jsx('label', {}, void 0, label), field);
-  };
 
-  FieldSet.prototype.getSelectOptions = function getSelectOptions(name, schema, value) {
-    var options = schema.options;
+    FieldSet.prototype.getSchema = function getSchema() {
+        return {};
+    };
 
-    if (!options) return null;
-    if ((typeof options === 'undefined' ? 'undefined' : _typeof(options)) == "object") {
-      return Object.keys(options).map(function (key) {
-        return _jsx('option', {
-          value: key
-        }, void 0, options[key]);
-      });
-    } else if (typeof options == 'function') {
-      return options(this, this.state.data);
-    }
-    return null;
-  };
+    FieldSet.prototype.getInitialData = function getInitialData() {
+        return {};
+    };
 
-  FieldSet.prototype.getData = function getData() {
-    var _this5 = this;
+    FieldSet.prototype.render = function render() {
+        var _this3 = this;
 
-    var data = {};
-    Object.keys(this.fields).map(function (key) {
-      data[key] = _this5.fields[key].value;
-    });
-    return data;
-  };
+        var _state = this.state,
+            schema = _state.schema,
+            data = _state.data;
 
-  return FieldSet;
+        return _jsx('div', {}, void 0, Object.keys(schema).map(function (key) {
+            return _this3.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null);
+        }));
+    };
+
+    FieldSet.prototype.field = function field(name, schema, value) {
+        var _this4 = this;
+
+        var _schema$props = schema.props,
+            props = _schema$props === undefined ? {} : _schema$props;
+
+        props.className = "form-control";
+        props.ref = function (f) {
+            if (f) {
+                f.value = value;
+                _this4.fields[name] = f;
+                f.fieldSet = _this4;
+            }
+        };
+        var field = null;
+
+        if (['text', 'number', 'url', 'email'].indexOf(schema.type) != -1) {
+            props.type = schema.type;
+            field = _react2.default.createElement('input', props);
+        } else if (schema.type == "textarea") {
+            field = _react2.default.createElement('textarea', props);
+        } else if (schema.type == "json") {
+            field = _react2.default.createElement(JSONField, props);
+        } else if (schema.type == 'select') {
+            field = _react2.default.createElement(
+                'select',
+                props,
+                this.getSelectOptions(name, schema, value)
+            );
+        }
+        var label = schema.label || name.charAt(0).toUpperCase() + name.slice(1);
+        return _jsx('div', {
+            className: 'form-group'
+        }, void 0, _jsx('label', {}, void 0, label), field);
+    };
+
+    FieldSet.prototype.getSelectOptions = function getSelectOptions(name, schema, value) {
+        var options = schema.options;
+
+        if (!options) return null;
+        if ((typeof options === 'undefined' ? 'undefined' : _typeof(options)) == "object") {
+            return Object.keys(options).map(function (key) {
+                return _jsx('option', {
+                    value: key
+                }, void 0, options[key]);
+            });
+        } else if (typeof options == 'function') {
+            return options(this, this.state.data);
+        }
+        return null;
+    };
+
+    FieldSet.prototype.getData = function getData() {
+        var _this5 = this;
+
+        var data = {};
+        Object.keys(this.fields).map(function (key) {
+            data[key] = _this5.fields[key].value;
+        });
+        return data;
+    };
+
+    return FieldSet;
 }(_react.Component);
 
 exports.default = FieldSet;

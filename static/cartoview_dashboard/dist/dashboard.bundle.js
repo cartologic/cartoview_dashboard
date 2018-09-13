@@ -29,135 +29,135 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var JSONField = function (_Component) {
-  _inherits(JSONField, _Component);
+    _inherits(JSONField, _Component);
 
-  function JSONField(props) {
-    _classCallCheck(this, JSONField);
+    function JSONField(props) {
+        _classCallCheck(this, JSONField);
 
-    var _this = _possibleConstructorReturn(this, _Component.call(this, props));
+        var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 
-    Object.defineProperty(_this, 'value', {
-      get: function get() {
-        return JSON.parse(_this.refs.textarea.value);
-      },
-      set: function set(newValue) {
-        _this.refs.textarea.value = JSON.stringify(newValue || {});
-      },
-      enumerable: true,
-      configurable: true
-    });
-    return _this;
-  }
+        Object.defineProperty(_this, 'value', {
+            get: function get() {
+                return JSON.parse(_this.refs.textarea.value);
+            },
+            set: function set(newValue) {
+                _this.refs.textarea.value = JSON.stringify(newValue || {});
+            },
+            enumerable: true,
+            configurable: true
+        });
+        return _this;
+    }
 
-  JSONField.prototype.render = function render() {
-    var props = _objectWithoutProperties(this.props, []);
+    JSONField.prototype.render = function render() {
+        var props = _objectWithoutProperties(this.props, []);
 
-    delete props.ref;
-    return _react2.default.createElement('textarea', _extends({}, props, { ref: 'textarea' }));
-  };
+        delete props.ref;
+        return _react2.default.createElement('textarea', _extends({}, props, { ref: 'textarea' }));
+    };
 
-  return JSONField;
+    return JSONField;
 }(_react.Component);
 
 var FieldSet = function (_Component2) {
-  _inherits(FieldSet, _Component2);
+    _inherits(FieldSet, _Component2);
 
-  function FieldSet(props) {
-    _classCallCheck(this, FieldSet);
+    function FieldSet(props) {
+        _classCallCheck(this, FieldSet);
 
-    var _this2 = _possibleConstructorReturn(this, _Component2.call(this, props));
+        var _this2 = _possibleConstructorReturn(this, _Component2.call(this, props));
 
-    _this2.state = {
-      schema: props.schema || _this2.getSchema(props),
-      data: props.data || _this2.getInitialData(props)
-    };
-    _this2.fields = {};
-    return _this2;
-  }
-
-  FieldSet.prototype.getSchema = function getSchema() {
-    return {};
-  };
-
-  FieldSet.prototype.getInitialData = function getInitialData() {
-    return {};
-  };
-
-  FieldSet.prototype.render = function render() {
-    var _this3 = this;
-
-    var _state = this.state,
-        schema = _state.schema,
-        data = _state.data;
-
-    return _jsx('div', {}, void 0, Object.keys(schema).map(function (key) {
-      return _this3.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null);
-    }));
-  };
-
-  FieldSet.prototype.field = function field(name, schema, value) {
-    var _this4 = this;
-
-    var _schema$props = schema.props,
-        props = _schema$props === undefined ? {} : _schema$props;
-
-    props.className = "form-control";
-    props.ref = function (f) {
-      if (f) {
-        f.value = value;
-        _this4.fields[name] = f;
-        f.fieldSet = _this4;
-      }
-    };
-    var field = null;
-
-    if (['text', 'number', 'url', 'email'].indexOf(schema.type) != -1) {
-      props.type = schema.type;
-      field = _react2.default.createElement('input', props);
-    } else if (schema.type == "textarea") {
-      field = _react2.default.createElement('textarea', props);
-    } else if (schema.type == "json") {
-      field = _react2.default.createElement(JSONField, props);
-    } else if (schema.type == 'select') {
-      field = _react2.default.createElement(
-        'select',
-        props,
-        this.getSelectOptions(name, schema, value)
-      );
+        _this2.state = {
+            schema: props.schema || _this2.getSchema(props),
+            data: props.data || _this2.getInitialData(props)
+        };
+        _this2.fields = {};
+        return _this2;
     }
-    var label = schema.label || name.charAt(0).toUpperCase() + name.slice(1);
-    return _jsx('div', {
-      className: 'form-group'
-    }, void 0, _jsx('label', {}, void 0, label), field);
-  };
 
-  FieldSet.prototype.getSelectOptions = function getSelectOptions(name, schema, value) {
-    var options = schema.options;
+    FieldSet.prototype.getSchema = function getSchema() {
+        return {};
+    };
 
-    if (!options) return null;
-    if ((typeof options === 'undefined' ? 'undefined' : _typeof(options)) == "object") {
-      return Object.keys(options).map(function (key) {
-        return _jsx('option', {
-          value: key
-        }, void 0, options[key]);
-      });
-    } else if (typeof options == 'function') {
-      return options(this, this.state.data);
-    }
-    return null;
-  };
+    FieldSet.prototype.getInitialData = function getInitialData() {
+        return {};
+    };
 
-  FieldSet.prototype.getData = function getData() {
-    var _this5 = this;
+    FieldSet.prototype.render = function render() {
+        var _this3 = this;
 
-    var data = {};
-    Object.keys(this.fields).map(function (key) {
-      data[key] = _this5.fields[key].value;
-    });
-    return data;
-  };
+        var _state = this.state,
+            schema = _state.schema,
+            data = _state.data;
 
-  return FieldSet;
+        return _jsx('div', {}, void 0, Object.keys(schema).map(function (key) {
+            return _this3.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null);
+        }));
+    };
+
+    FieldSet.prototype.field = function field(name, schema, value) {
+        var _this4 = this;
+
+        var _schema$props = schema.props,
+            props = _schema$props === undefined ? {} : _schema$props;
+
+        props.className = "form-control";
+        props.ref = function (f) {
+            if (f) {
+                f.value = value;
+                _this4.fields[name] = f;
+                f.fieldSet = _this4;
+            }
+        };
+        var field = null;
+
+        if (['text', 'number', 'url', 'email'].indexOf(schema.type) != -1) {
+            props.type = schema.type;
+            field = _react2.default.createElement('input', props);
+        } else if (schema.type == "textarea") {
+            field = _react2.default.createElement('textarea', props);
+        } else if (schema.type == "json") {
+            field = _react2.default.createElement(JSONField, props);
+        } else if (schema.type == 'select') {
+            field = _react2.default.createElement(
+                'select',
+                props,
+                this.getSelectOptions(name, schema, value)
+            );
+        }
+        var label = schema.label || name.charAt(0).toUpperCase() + name.slice(1);
+        return _jsx('div', {
+            className: 'form-group'
+        }, void 0, _jsx('label', {}, void 0, label), field);
+    };
+
+    FieldSet.prototype.getSelectOptions = function getSelectOptions(name, schema, value) {
+        var options = schema.options;
+
+        if (!options) return null;
+        if ((typeof options === 'undefined' ? 'undefined' : _typeof(options)) == "object") {
+            return Object.keys(options).map(function (key) {
+                return _jsx('option', {
+                    value: key
+                }, void 0, options[key]);
+            });
+        } else if (typeof options == 'function') {
+            return options(this, this.state.data);
+        }
+        return null;
+    };
+
+    FieldSet.prototype.getData = function getData() {
+        var _this5 = this;
+
+        var data = {};
+        Object.keys(this.fields).map(function (key) {
+            data[key] = _this5.fields[key].value;
+        });
+        return data;
+    };
+
+    return FieldSet;
 }(_react.Component);
 
 exports.default = FieldSet;
@@ -1506,16 +1506,6 @@ exports.__esModule = true;
 
 var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
-var _react = __webpack_require__(3);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Constants = __webpack_require__(108);
-
-var _Modal = __webpack_require__(312);
-
-var _Modal2 = _interopRequireDefault(_Modal);
-
 var _ConfigManager = __webpack_require__(40);
 
 var _ConfigManager2 = _interopRequireDefault(_ConfigManager);
@@ -1523,6 +1513,16 @@ var _ConfigManager2 = _interopRequireDefault(_ConfigManager);
 var _FieldSet = __webpack_require__(10);
 
 var _FieldSet2 = _interopRequireDefault(_FieldSet);
+
+var _Modal = __webpack_require__(312);
+
+var _Modal2 = _interopRequireDefault(_Modal);
+
+var _react = __webpack_require__(3);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Constants = __webpack_require__(108);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1533,72 +1533,72 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var WidgetConfigDialog = function (_React$Component) {
-  _inherits(WidgetConfigDialog, _React$Component);
+    _inherits(WidgetConfigDialog, _React$Component);
 
-  function WidgetConfigDialog() {
-    _classCallCheck(this, WidgetConfigDialog);
+    function WidgetConfigDialog() {
+        _classCallCheck(this, WidgetConfigDialog);
 
-    return _possibleConstructorReturn(this, _React$Component.apply(this, arguments));
-  }
+        return _possibleConstructorReturn(this, _React$Component.apply(this, arguments));
+    }
 
-  WidgetConfigDialog.prototype.render = function render() {
-    var _this2 = this;
+    WidgetConfigDialog.prototype.render = function render() {
+        var _this2 = this;
 
-    var _props = this.props,
-        isOpen = _props.isOpen,
-        widgetId = _props.widgetId;
+        var _props = this.props,
+            isOpen = _props.isOpen,
+            widgetId = _props.widgetId;
 
-    if (!isOpen) return null;
-    var configManager = this.context.configManager;
+        if (!isOpen) return null;
+        var configManager = this.context.configManager;
 
-    var _configManager$getWid = configManager.getWidgetInfo(widgetId),
-        widget = _configManager$getWid.widget,
-        containerConfig = _configManager$getWid.containerConfig,
-        widgetType = _configManager$getWid.widgetType;
+        var _configManager$getWid = configManager.getWidgetInfo(widgetId),
+            widget = _configManager$getWid.widget,
+            containerConfig = _configManager$getWid.containerConfig,
+            widgetType = _configManager$getWid.widgetType;
 
-    var props = {
-      ref: "widgetConfigForm",
-      widget: widget
+        var props = {
+            ref: "widgetConfigForm",
+            widget: widget
+        };
+
+        var widgetConfigForm = _react2.default.createElement(widgetType.ConfigForm, props);
+
+        return _jsx(_Modal2.default, {
+            isOpen: isOpen,
+            close: function close() {
+                return configManager.endEditWidgetConfig();
+            },
+            title: 'Config Widget'
+        }, void 0, _react2.default.createElement(_FieldSet2.default, { ref: 'containerConfigForm', data: containerConfig, schema: _Constants.WidgetContainerConfigSchema }), widgetConfigForm, _jsx('div', {
+            className: 'pull-right'
+        }, void 0, _jsx('a', {
+            className: 'btn btn-primary',
+            onClick: function onClick(e) {
+                e.preventDefault();configManager.endEditWidgetConfig(widget, _this2.getConfig());
+            }
+        }, void 0, _jsx('i', {
+            className: 'glyphicon glyphicon-ok'
+        }), ' Apply'), _jsx('a', {
+            className: 'btn btn-danger',
+            onClick: function onClick(e) {
+                e.preventDefault();configManager.endEditWidgetConfig();
+            }
+        }, void 0, _jsx('i', {
+            className: 'glyphicon glyphicon-remove'
+        }), ' Cancel')));
     };
 
-    var widgetConfigForm = _react2.default.createElement(widgetType.ConfigForm, props);
+    WidgetConfigDialog.prototype.getConfig = function getConfig() {
+        var config = this.refs.containerConfigForm.getData();
+        config.widgetConfig = this.refs.widgetConfigForm.getData();
+        return config;
+    };
 
-    return _jsx(_Modal2.default, {
-      isOpen: isOpen,
-      close: function close() {
-        return configManager.endEditWidgetConfig();
-      },
-      title: 'Config Widget'
-    }, void 0, _react2.default.createElement(_FieldSet2.default, { ref: 'containerConfigForm', data: containerConfig, schema: _Constants.WidgetContainerConfigSchema }), widgetConfigForm, _jsx('div', {
-      className: 'pull-right'
-    }, void 0, _jsx('a', {
-      className: 'btn btn-primary',
-      onClick: function onClick(e) {
-        e.preventDefault();configManager.endEditWidgetConfig(widget, _this2.getConfig());
-      }
-    }, void 0, _jsx('i', {
-      className: 'glyphicon glyphicon-ok'
-    }), ' Apply'), _jsx('a', {
-      className: 'btn btn-danger',
-      onClick: function onClick(e) {
-        e.preventDefault();configManager.endEditWidgetConfig();
-      }
-    }, void 0, _jsx('i', {
-      className: 'glyphicon glyphicon-remove'
-    }), ' Cancel')));
-  };
-
-  WidgetConfigDialog.prototype.getConfig = function getConfig() {
-    var config = this.refs.containerConfigForm.getData();
-    config.widgetConfig = this.refs.widgetConfigForm.getData();
-    return config;
-  };
-
-  return WidgetConfigDialog;
+    return WidgetConfigDialog;
 }(_react2.default.Component);
 
 WidgetConfigDialog.contextTypes = {
-  configManager: _react2.default.PropTypes.instanceOf(_ConfigManager2.default)
+    configManager: _react2.default.PropTypes.instanceOf(_ConfigManager2.default)
 };
 exports.default = WidgetConfigDialog;
 
