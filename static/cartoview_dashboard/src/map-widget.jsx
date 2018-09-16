@@ -103,6 +103,13 @@ class MapWidget extends BaseWidget {
 
         }
     }
+    shouldComponentUpdate(nextProps, nextState) {
+        if (this.state.config != nextState.config) {
+            this.update(nextState.config);
+            return true;
+        }
+        return false;
+    }
     changeShowPopup = () => {
         const { showPopup } = this.state
         this.setState({ showPopup: !showPopup })
@@ -125,8 +132,9 @@ class MapWidget extends BaseWidget {
     componentWillMount() {
         this.update(this.props.config)
     }
-    componentDidMount(){
+    componentDidMount() {
         this.map.setTarget(ReactDOM.findDOMNode(this.refs.map))
+        this.update(this.props.config)
     }
     getPopupProps = () => {
         const { showPopup, activeFeature, features } = this.state
@@ -142,13 +150,13 @@ class MapWidget extends BaseWidget {
             changeShowPopup: this.changeShowPopup
         }
     }
-    parseStrBool=(boolStr)=>{
+    parseStrBool = (boolStr) => {
         return JSON.parse(boolStr)
     }
     render() {
-        const {config}=this.props
+        const { config } = this.props
         return (<div ref="map" className='map-ct'>
-            {config && config.IdentifyPopup && this.parseStrBool(config.IdentifyPopup) &&<Popup {...this.getPopupProps()} /> }
+            {config && config.IdentifyPopup && this.parseStrBool(config.IdentifyPopup) && <Popup {...this.getPopupProps()} />}
         </div>)
     }
 }
@@ -162,16 +170,16 @@ class MapWidgetConfigForm extends FieldSet {
         return {
             mapId: {
                 type: 'select',
-                options: {}
+                options: []
             },
             IdentifyPopup: {
                 type: 'select',
                 options: [
-                {lable:"Yes",value:true},
-                {lable:"No",value:false}],
-                props:{
-                    required:"required",
-                    defaultValue:false
+                    { lable: "Yes", value: true },
+                    { lable: "No", value: false }],
+                props: {
+                    required: "required",
+                    defaultValue: false
                 }
             }
         }
@@ -179,17 +187,17 @@ class MapWidgetConfigForm extends FieldSet {
     getInitialData(props) {
         return props.widget.getConfig()
     }
-    getOptionExtraProps=(option)=>{
-        let extProps={
+    getOptionExtraProps = (option) => {
+        let extProps = {
 
         }
         return extProps
     }
     getSelectOptions(name, config, value) {
-        if(name==="mapId"){
+        if (name === "mapId") {
             return this.state.maps.map(m => <option value={m.id}>{m.title}</option>)
         }
-        return config.options.map((m,index) => <option key={index} {...this.getOptionExtraProps(m)} value={m.value}>{m.lable}</option>)
+        return config.options.map((m, index) => <option key={index} {...this.getOptionExtraProps(m)} value={m.value}>{m.lable}</option>)
     }
     componentWillMount() {
         getMapsData().then(res => this.setState({ maps: res.objects }))
