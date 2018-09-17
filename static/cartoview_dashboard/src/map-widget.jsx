@@ -4,7 +4,7 @@ import BasicViewerHelper from 'cartoview-sdk/helpers/BasicViewerHelper'
 import Events from './events/Events.jsx'
 import FieldSet from './components/FieldSet.jsx'
 import ImageWMS from 'ol/source/ImageWMS'
-import LayerSwitcher from 'ol-layerswitcher/src/ol-layerswitcher';
+import LayerSwitcher from 'ol-layerswitcher/src/ol-layerswitcher'
 import LayersHelper from 'cartoview-sdk/helpers/LayersHelper'
 import Overlay from 'ol/Overlay'
 import PropTypes from 'prop-types'
@@ -46,6 +46,14 @@ class MapWidget extends BaseWidget {
     isWMS(layer) {
         return layer.getSource() instanceof TileWMS || layer.getSource() instanceof ImageWMS
     }
+    getFeatures=(layer,e)=>{
+        let that =this
+        WMSService.getFeatureInfo(layer, e.coordinate,
+            that.map, 'application/json', (result) => {
+                result.features.forEach(f => f.set("_layerTitle", result.layer.get('title')))
+                that.setState({ features: [...that.state.features, ...result.features], mouseCoordinates: e.coordinate, showPopup: true })
+            })
+    }
     identify = () => {
         let that = this
         that.map.on('singleclick', (e) => {
@@ -56,13 +64,7 @@ class MapWidget extends BaseWidget {
                         activeFeature: 0,
                         mouseCoordinates: e.coordinate,
                         showPopup: false
-                    })
-                    WMSService.getFeatureInfo(layer, e.coordinate,
-                        that.map, 'application/json', (result) => {
-                            result.features.forEach(f => f.set("_layerTitle", result.layer.get('title')))
-                            that.setState({ features: [...that.state.features, ...result.features], mouseCoordinates: e.coordinate, showPopup: true })
-                        })
-                })
+                    },this.getFeatures(layer,e))})
         })
     }
     addOverlay = (node) => {
@@ -71,14 +73,24 @@ class MapWidget extends BaseWidget {
         this.overlay.setElement(node)
         this.overlay.setPosition(position)
     }
+    mapReady=()=>{
+        let that=this
+        that.ready = true
+        Events.emit('mapReady' + '_' + that.props.id, that.map, that)
+        if(this.props.config && this.props.config.IdentifyPopup && this.parseStrBool(this.props.config.IdentifyPopup)){
+            this.identify()
+        }
+    }
     update = (config) => {
         if (config && config.mapId) {
             var url = getMapConfigUrl(config.mapId)
-            BasicViewerHelper.mapInit(url, this.map, URLS.proxy, URLS.token, ()=>{
-                this.ready = true
-                Events.emit('mapReady' + '_' + this.props.id, this.map, this)
-                this.identify()
-            })
+            BasicViewerHelper.mapInit(url, this.map, URLS.proxy, URLS.token,this.mapReady)
+        }
+    }
+    componentDidUpdate=(prevProps, prevState, snapshot)=>{
+        const {config}=this.props
+        if(config!==prevProps.config){
+            this.update(config)
         }
     }
     changeShowPopup = () => {
@@ -126,7 +138,7 @@ class MapWidget extends BaseWidget {
     render() {
         const {config}=this.props
         return (<div ref={(node)=>this.mapDiv=node} className='map-ct'>
-            {config && config.IdentifyPopup && this.parseStrBool(config.IdentifyPopup) &&<Popup {...this.getPopupProps()} /> }
+            <Popup {...this.getPopupProps()} />
         </div>)
     }
 }
@@ -195,7 +207,7 @@ class Popup extends React.Component {
                         {
                             keys.map((key) => {
                                 if (key == geom || key == "_layerTitle") return null
-                                return <tr><th>{key}</th><td>{f.get(key)}</td></tr>
+                                return <tr key={key}><th>{key}</th><td>{f.get(key)}</td></tr>
                             })
                         }
                     </tbody>

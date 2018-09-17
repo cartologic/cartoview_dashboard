@@ -113,7 +113,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "ec10e15a3d7e37d50543";
+/******/ 	var hotCurrentHash = "f3f47d544ee13cbaede7";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -56231,6 +56231,43 @@ var IdentifyWidget = function (_BaseWidget) {
 
         var _this = _possibleConstructorReturn(this, (IdentifyWidget.__proto__ || Object.getPrototypeOf(IdentifyWidget)).call(this, props));
 
+        _this.attachToMapWidget = function (config) {
+            var that = _this;
+            var mapWidget = _this.context.configManager.getWidget(config.mapWidget);
+            if (mapWidget && mapWidget.ready) {
+                _this.init(mapWidget.map);
+            } else {
+                _Events2.default.on('mapReady' + '_' + mapWidget.id, function (map) {
+                    that.init(map);
+                });
+            }
+        };
+
+        _this.getFeatures = function (map, layer, e) {
+            var that = _this;
+            _WMSService2.default.getFeatureInfo(layer, e.coordinate, map, 'application/json', function (result) {
+                result.features.forEach(function (f) {
+                    return f.set("_layerTitle", result.layer.get('title'));
+                });
+                that.setState({ features: [].concat(_toConsumableArray(that.state.features), _toConsumableArray(result.features)), busy: false });
+            });
+        };
+
+        _this.init = function (map) {
+            var that = _this;
+            _this.setState({ ready: true }, function () {
+                map.on('singleclick', function (e) {
+                    var layers = map.getLayers().getArray();
+                    _LayersHelper2.default.getLayers(layers).forEach(function (layer) {
+                        that.setState({ busy: true, features: [],
+                            activeFeature: 0 }, function () {
+                            return that.getFeatures(map, layer, e);
+                        });
+                    });
+                });
+            });
+        };
+
         _this.state = Object.assign(_this.state, {
             ready: false,
             busy: false,
@@ -56246,6 +56283,50 @@ var IdentifyWidget = function (_BaseWidget) {
         value: function setConfig(config) {
             _get(IdentifyWidget.prototype.__proto__ || Object.getPrototypeOf(IdentifyWidget.prototype), 'setConfig', this).call(this, config);
             this.attachToMapWidget(config);
+        }
+    }, {
+        key: 'resultItem',
+        value: function resultItem(f) {
+            var keys = f.getKeys();
+            var geom = f.getGeometryName();
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    'h4',
+                    { className: 'identify-result-layer-title text-wrap' },
+                    f.get('_layerTitle')
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'feature-details-table' },
+                    _react2.default.createElement(
+                        'table',
+                        { className: 'table', key: f.getId() },
+                        _react2.default.createElement(
+                            'tbody',
+                            null,
+                            keys.map(function (key) {
+                                if (key == geom || key == "_layerTitle") return null;
+                                return _react2.default.createElement(
+                                    'tr',
+                                    { key: key },
+                                    _react2.default.createElement(
+                                        'th',
+                                        null,
+                                        key
+                                    ),
+                                    _react2.default.createElement(
+                                        'td',
+                                        null,
+                                        f.get(key)
+                                    )
+                                );
+                            })
+                        )
+                    )
+                )
+            );
         }
     }, {
         key: 'render',
@@ -56313,39 +56394,6 @@ var IdentifyWidget = function (_BaseWidget) {
             }
             _get(IdentifyWidget.prototype.__proto__ || Object.getPrototypeOf(IdentifyWidget.prototype), 'componentDidMount', this).call(this);
         }
-    }, {
-        key: 'attachToMapWidget',
-        value: function attachToMapWidget(config) {
-            var _this3 = this;
-
-            var mapWidget = this.context.configManager.getWidget(config.mapWidget);
-            if (mapWidget && mapWidget.ready) {
-                this.init(mapWidget.map);
-            } else {
-                _Events2.default.on('mapReady' + '_' + config.mapWidget, function (map) {
-                    _this3.init(map);
-                });
-            }
-        }
-    }, {
-        key: 'init',
-        value: function init(map) {
-            var _this4 = this;
-
-            this.setState({ ready: true });
-            map.on('singleclick', function (e) {
-                _LayersHelper2.default.getLayers(map.getLayers().getArray()).forEach(function (layer) {
-                    _this4.setState({ busy: true, features: [],
-                        activeFeature: 0 });
-                    _WMSService2.default.getFeatureInfo(layer, e.coordinate, map, 'application/json', function (result) {
-                        result.features.forEach(function (f) {
-                            return f.set("_layerTitle", result.layer.get('title'));
-                        });
-                        _this4.setState({ features: [].concat(_toConsumableArray(_this4.state.features), _toConsumableArray(result.features)), busy: false });
-                    });
-                });
-            });
-        }
     }]);
 
     return IdentifyWidget;
@@ -56359,10 +56407,10 @@ var ConfigForm = function (_FieldSet) {
     function ConfigForm(props) {
         _classCallCheck(this, ConfigForm);
 
-        var _this5 = _possibleConstructorReturn(this, (ConfigForm.__proto__ || Object.getPrototypeOf(ConfigForm)).call(this, props));
+        var _this3 = _possibleConstructorReturn(this, (ConfigForm.__proto__ || Object.getPrototypeOf(ConfigForm)).call(this, props));
 
-        _this5.state.maps = [];
-        return _this5;
+        _this3.state.maps = [];
+        return _this3;
     }
 
     _createClass(ConfigForm, [{

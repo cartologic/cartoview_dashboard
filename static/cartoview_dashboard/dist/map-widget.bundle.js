@@ -113,7 +113,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "ec10e15a3d7e37d50543";
+/******/ 	var hotCurrentHash = "f3f47d544ee13cbaede7";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -84444,6 +84444,16 @@ var MapWidget = function (_BaseWidget) {
 
         var _this = _possibleConstructorReturn(this, (MapWidget.__proto__ || Object.getPrototypeOf(MapWidget)).call(this, props));
 
+        _this.getFeatures = function (layer, e) {
+            var that = _this;
+            _WMSService2.default.getFeatureInfo(layer, e.coordinate, that.map, 'application/json', function (result) {
+                result.features.forEach(function (f) {
+                    return f.set("_layerTitle", result.layer.get('title'));
+                });
+                that.setState({ features: [].concat(_toConsumableArray(that.state.features), _toConsumableArray(result.features)), mouseCoordinates: e.coordinate, showPopup: true });
+            });
+        };
+
         _this.identify = function () {
             var that = _this;
             that.map.on('singleclick', function (e) {
@@ -84453,13 +84463,7 @@ var MapWidget = function (_BaseWidget) {
                         activeFeature: 0,
                         mouseCoordinates: e.coordinate,
                         showPopup: false
-                    });
-                    _WMSService2.default.getFeatureInfo(layer, e.coordinate, that.map, 'application/json', function (result) {
-                        result.features.forEach(function (f) {
-                            return f.set("_layerTitle", result.layer.get('title'));
-                        });
-                        that.setState({ features: [].concat(_toConsumableArray(that.state.features), _toConsumableArray(result.features)), mouseCoordinates: e.coordinate, showPopup: true });
-                    });
+                    }, _this.getFeatures(layer, e));
                 });
             });
         };
@@ -84472,14 +84476,27 @@ var MapWidget = function (_BaseWidget) {
             _this.overlay.setPosition(position);
         };
 
+        _this.mapReady = function () {
+            var that = _this;
+            that.ready = true;
+            _Events2.default.emit('mapReady' + '_' + that.props.id, that.map, that);
+            if (_this.props.config && _this.props.config.IdentifyPopup && _this.parseStrBool(_this.props.config.IdentifyPopup)) {
+                _this.identify();
+            }
+        };
+
         _this.update = function (config) {
             if (config && config.mapId) {
                 var url = getMapConfigUrl(config.mapId);
-                _BasicViewerHelper2.default.mapInit(url, _this.map, URLS.proxy, URLS.token, function () {
-                    _this.ready = true;
-                    _Events2.default.emit('mapReady' + '_' + _this.props.id, _this.map, _this);
-                    _this.identify();
-                });
+                _BasicViewerHelper2.default.mapInit(url, _this.map, URLS.proxy, URLS.token, _this.mapReady);
+            }
+        };
+
+        _this.componentDidUpdate = function (prevProps, prevState, snapshot) {
+            var config = _this.props.config;
+
+            if (config !== prevProps.config) {
+                _this.update(config);
             }
         };
 
@@ -84586,7 +84603,7 @@ var MapWidget = function (_BaseWidget) {
                 { ref: function ref(node) {
                         return _this2.mapDiv = node;
                     }, className: 'map-ct' },
-                config && config.IdentifyPopup && this.parseStrBool(config.IdentifyPopup) && _react2.default.createElement(Popup, this.getPopupProps())
+                _react2.default.createElement(Popup, this.getPopupProps())
             );
         }
     }]);
@@ -84751,7 +84768,7 @@ var Popup = function (_React$Component) {
                                 if (key == geom || key == "_layerTitle") return null;
                                 return _react2.default.createElement(
                                     'tr',
-                                    null,
+                                    { key: key },
                                     _react2.default.createElement(
                                         'th',
                                         null,

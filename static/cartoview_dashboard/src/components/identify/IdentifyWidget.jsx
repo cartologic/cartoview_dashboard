@@ -17,14 +17,31 @@ class IdentifyWidget extends BaseWidget {
             features: [],
             showPopup: false,
             activeFeature: 0
-        });
+        })
     }
-
     setConfig(config){
         super.setConfig(config);
         this.attachToMapWidget(config)
     }
-
+    resultItem(f) {
+        var keys = f.getKeys()
+        var geom = f.getGeometryName()
+        return <div>
+            <h4 className="identify-result-layer-title text-wrap">{f.get('_layerTitle')}</h4>
+            <div className="feature-details-table">
+                <table className="table" key={f.getId()}>
+                    <tbody>
+                        {
+                            keys.map((key) => {
+                                if (key == geom || key == "_layerTitle") return null
+                                return <tr key={key}><th>{key}</th><td>{f.get(key)}</td></tr>
+                            })
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
     render( ) {
         var { ready, busy, features, activeFeature } = this.state;
         const prev = (e) => {
@@ -66,31 +83,38 @@ class IdentifyWidget extends BaseWidget {
         super.componentDidMount()
     }
 
-    attachToMapWidget(config) {
+    attachToMapWidget=(config)=> {
+        let that=this
         var mapWidget = this.context.configManager.getWidget(config.mapWidget);
         if (mapWidget && mapWidget.ready) {
-            this.init(mapWidget.map);
+            this.init(mapWidget.map)
         } else {
-            Events.on('mapReady' + '_' + config.mapWidget, (map) => {
-                this.init(map);
-            });
+            Events.on('mapReady' + '_' + mapWidget.id, (map) => {
+                that.init(map)
+            })
         }
     }
-
-    init( map ) {
-        this.setState( { ready: true } )
-        map.on( 'singleclick', ( e ) => {
-            LayersHelper.getLayers( map.getLayers( ).getArray( ) ).forEach(
-                ( layer ) => {
-                    this.setState( { busy: true, features: [ ],
-                        activeFeature: 0 } )
-                    WMSService.getFeatureInfo( layer, e.coordinate,
-                        map, 'application/json', ( result ) => {
-                            result.features.forEach( f => f.set( "_layerTitle", result.layer.get('title' ) ) )
-                            this.setState( { features: [...this.state.features,...result.features], busy: false } );
-                        } );
-                } )
-        } );
+    getFeatures=(map,layer,e)=>{
+        let that=this
+        WMSService.getFeatureInfo( layer, e.coordinate,
+            map, 'application/json', ( result ) => {
+                result.features.forEach( f => f.set( "_layerTitle", result.layer.get('title' ) ) )
+                that.setState( { features: [...that.state.features,...result.features], busy: false } );
+            })
+    }
+    init=( map )=> {
+        let that=this
+        this.setState( { ready: true } ,()=>{
+            map.on( 'singleclick', ( e ) => {
+                const layers=map.getLayers( ).getArray( )
+                LayersHelper.getLayers( layers ).forEach(
+                    ( layer ) => {
+                        that.setState( { busy: true, features: [ ],
+                            activeFeature: 0 },()=>that.getFeatures(map,layer,e))
+                    } )
+            } )
+        })
+        
     }
 }
 class ConfigForm extends FieldSet {
