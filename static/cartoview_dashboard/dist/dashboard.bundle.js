@@ -10,8 +10,6 @@ exports.__esModule = true;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = __webpack_require__(1);
@@ -90,9 +88,13 @@ var FieldSet = function (_Component2) {
             schema = _state.schema,
             data = _state.data;
 
-        return _jsx('div', {}, void 0, Object.keys(schema).map(function (key) {
-            return _this3.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null);
-        }));
+        return _react2.default.createElement(
+            'div',
+            null,
+            data && Object.keys(schema).map(function (key) {
+                return _this3.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null);
+            })
+        );
     };
 
     FieldSet.prototype.field = function field(name, schema, value) {
@@ -126,9 +128,16 @@ var FieldSet = function (_Component2) {
             );
         }
         var label = schema.label || name.charAt(0).toUpperCase() + name.slice(1);
-        return _jsx('div', {
-            className: 'form-group'
-        }, void 0, _jsx('label', {}, void 0, label), field);
+        return _react2.default.createElement(
+            'div',
+            { className: 'form-group' },
+            _react2.default.createElement(
+                'label',
+                null,
+                label
+            ),
+            field
+        );
     };
 
     FieldSet.prototype.getSelectOptions = function getSelectOptions(name, schema, value) {
@@ -137,9 +146,11 @@ var FieldSet = function (_Component2) {
         if (!options) return null;
         if ((typeof options === 'undefined' ? 'undefined' : _typeof(options)) == "object") {
             return Object.keys(options).map(function (key) {
-                return _jsx('option', {
-                    value: key
-                }, void 0, options[key]);
+                return _react2.default.createElement(
+                    'option',
+                    { value: key },
+                    options[key]
+                );
             });
         } else if (typeof options == 'function') {
             return options(this, this.state.data);
@@ -654,8 +665,6 @@ exports.default = BaseWidget;
 
 exports.__esModule = true;
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 __webpack_require__(615);
 
 var _reactDazzle = __webpack_require__(508);
@@ -795,29 +804,24 @@ var Dashboard = function (_Component) {
             isOwner = _state.isOwner,
             layout = _state.layout;
 
-        return _jsx(_Container2.default, {}, void 0, _jsx(_AddWidgetDialog2.default, {
-            widgets: widgets,
-            isOpen: addWidgetDialogOpen,
-            onRequestClose: this.onRequestClose,
-            onWidgetSelect: this.handleWidgetSelection
-        }), _jsx(_WidgetConfigDialog2.default, {
-            isOpen: widgetConfigDialogOpen,
-            widgetId: configWidgetId
-        }), _react2.default.createElement(_Header2.default, { editable: editable, title: title, abstract: abstract, ref: 'header', onChange: this.onHeaderChanged }), _jsx(_DashboardToolbar2.default, {
-            isNew: isNew,
-            editable: editable,
-            saved: saved,
-            isOwner: isOwner
-        }), _jsx(_reactDazzle2.default, {
-            frameComponent: _CustomFrame2.default,
-            onRemove: this.onRemove,
-            layout: layout,
-            widgets: widgets,
-            editable: editable,
-            onAdd: this.onAdd,
-            onMove: this.onMove,
-            addWidgetComponentText: 'Add New Widget'
-        }));
+        return _react2.default.createElement(
+            _Container2.default,
+            null,
+            _react2.default.createElement(_AddWidgetDialog2.default, { widgets: widgets, isOpen: addWidgetDialogOpen, onRequestClose: this.onRequestClose, onWidgetSelect: this.handleWidgetSelection }),
+            _react2.default.createElement(_WidgetConfigDialog2.default, { isOpen: widgetConfigDialogOpen, widgetId: configWidgetId }),
+            _react2.default.createElement(_Header2.default, { editable: editable, title: title, abstract: abstract, ref: 'header', onChange: this.onHeaderChanged }),
+            _react2.default.createElement(_DashboardToolbar2.default, { isNew: isNew, editable: editable, saved: saved, isOwner: isOwner }),
+            _react2.default.createElement(_reactDazzle2.default, {
+                frameComponent: _CustomFrame2.default,
+                onRemove: this.onRemove,
+                layout: layout,
+                widgets: widgets,
+                editable: editable,
+                onAdd: this.onAdd,
+                onMove: this.onMove,
+                addWidgetComponentText: 'Add New Widget'
+            })
+        );
     };
     /**
      * Toggeles edit mode in dashboard.
@@ -962,8 +966,6 @@ exports.default = Dashboard;
 
 exports.__esModule = true;
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
@@ -981,35 +983,54 @@ var AddWidgetDialog = function AddWidgetDialog(_ref) {
       onWidgetSelect = _ref.onWidgetSelect;
 
   var widgetItems = Object.keys(Dashboard.widgetsClasses).map(function (key) {
-    return _jsx('a', {
-      href: '#',
-      className: 'list-group-item',
-      onClick: function onClick() {
-        return onWidgetSelect(Dashboard.widgetsClasses[key]);
-      }
-    }, void 0, _jsx('h6', {
-      className: 'list-group-item-heading'
-    }, void 0, Dashboard.widgetsClasses[key].displayName || Dashboard.widgetsClasses[key].name));
+    return _react2.default.createElement(
+      'a',
+      { href: '#', className: 'list-group-item', onClick: function onClick() {
+          return onWidgetSelect(Dashboard.widgetsClasses[key]);
+        } },
+      _react2.default.createElement(
+        'h6',
+        { className: 'list-group-item-heading' },
+        Dashboard.widgetsClasses[key].displayName || Dashboard.widgetsClasses[key].name
+      )
+    );
   });
-  return _jsx(_reactModal2.default, {
-    className: 'modal-dialog',
-    isOpen: isOpen
-  }, void 0, _jsx('div', {
-    className: 'panel panel-default'
-  }, void 0, _jsx('div', {
-    className: 'panel-heading'
-  }, void 0, "Add Widget", _jsx('div', {
-    className: 'pull-right'
-  }, void 0, _jsx('a', {
-    className: 'btn btn-link btn-xs',
-    onClick: onRequestClose
-  }, void 0, _jsx('i', {
-    className: 'glyphicon glyphicon-remove'
-  })))), _jsx('div', {
-    className: 'panel-body'
-  }, void 0, _jsx('h5', {}, void 0, 'Pick a widget to add'), _jsx('div', {
-    className: 'list-group'
-  }, void 0, widgetItems))));
+  return _react2.default.createElement(
+    _reactModal2.default,
+    { className: 'modal-dialog', isOpen: isOpen },
+    _react2.default.createElement(
+      'div',
+      { className: 'panel panel-default' },
+      _react2.default.createElement(
+        'div',
+        { className: 'panel-heading' },
+        "Add Widget",
+        _react2.default.createElement(
+          'div',
+          { className: 'pull-right' },
+          _react2.default.createElement(
+            'a',
+            { className: 'btn btn-link btn-xs', onClick: onRequestClose },
+            _react2.default.createElement('i', { className: 'glyphicon glyphicon-remove' })
+          )
+        )
+      ),
+      _react2.default.createElement(
+        'div',
+        { className: 'panel-body' },
+        _react2.default.createElement(
+          'h5',
+          null,
+          'Pick a widget to add'
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'list-group' },
+          widgetItems
+        )
+      )
+    )
+  );
 };
 AddWidgetDialog.propTypes = {
   widgets: _react.PropTypes.object,
@@ -1029,8 +1050,6 @@ exports.default = AddWidgetDialog;
 
 exports.__esModule = true;
 exports.InfoModal = undefined;
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _reactModal = __webpack_require__(107);
 
@@ -1052,17 +1071,24 @@ var InfoModal = exports.InfoModal = function InfoModal(props) {
         title = props.title,
         children = props.children;
 
-    return _jsx(_reactModal2.default, {
-        className: 'modal-dialog',
-        isOpen: open,
-        onRequestClose: onRequestClose
-    }, void 0, _jsx('div', {
-        className: 'panel panel-default'
-    }, void 0, _jsx('div', {
-        className: 'panel-heading'
-    }, void 0, title), _jsx('div', {
-        className: 'panel-body'
-    }, void 0, children)));
+    return _react2.default.createElement(
+        _reactModal2.default,
+        { className: 'modal-dialog', isOpen: open, onRequestClose: onRequestClose },
+        _react2.default.createElement(
+            'div',
+            { className: 'panel panel-default' },
+            _react2.default.createElement(
+                'div',
+                { className: 'panel-heading' },
+                title
+            ),
+            _react2.default.createElement(
+                'div',
+                { className: 'panel-body' },
+                children
+            )
+        )
+    );
 };
 InfoModal.propTypes = {
     open: _propTypes2.default.bool.isRequired,
@@ -1081,8 +1107,6 @@ InfoModal.propTypes = {
 
 exports.__esModule = true;
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
@@ -1092,13 +1116,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Container = function Container(_ref) {
   var children = _ref.children;
 
-  return _jsx("div", {
-    className: "container"
-  }, void 0, _jsx("div", {
-    className: "row"
-  }, void 0, _jsx("div", {
-    className: "col-md-12"
-  }, void 0, children)));
+  return _react2.default.createElement(
+    "div",
+    { className: "container" },
+    _react2.default.createElement(
+      "div",
+      { className: "row" },
+      _react2.default.createElement(
+        "div",
+        { className: "col-md-12" },
+        children
+      )
+    )
+  );
 };
 
 Container.propTypes = {
@@ -1116,8 +1146,6 @@ exports.default = Container;
 
 
 exports.__esModule = true;
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _react = __webpack_require__(1);
 
@@ -1158,35 +1186,48 @@ var CustomFrame = function (_React$Component) {
         var editWidgetConfig = this.context.configManager.editWidgetConfig;
         var header = null;
         if (editable) {
-            header = _jsx('div', {
-                className: 'panel-heading'
-            }, void 0, title, ' - ', children.props.id, _jsx('div', {
-                className: 'btn-group pull-right'
-            }, void 0, _jsx('a', {
-                onClick: function onClick(e) {
-                    e.preventDefault();editWidgetConfig(children.props.id);
-                },
-                className: 'btn btn-link btn-xs'
-            }, void 0, _jsx('i', {
-                className: 'glyphicon glyphicon-cog'
-            })), _jsx('a', {
-                onClick: function onClick(e) {
-                    e.preventDefault();onRemove();
-                },
-                className: 'btn btn-link btn-xs'
-            }, void 0, _jsx('i', {
-                className: 'glyphicon glyphicon-trash'
-            }))));
+            header = _react2.default.createElement(
+                'div',
+                { className: 'panel-heading' },
+                title,
+                ' - ',
+                children.props.id,
+                _react2.default.createElement(
+                    'div',
+                    { className: 'btn-group pull-right' },
+                    _react2.default.createElement(
+                        'a',
+                        { onClick: function onClick(e) {
+                                e.preventDefault();editWidgetConfig(children.props.id);
+                            }, className: 'btn btn-link btn-xs' },
+                        _react2.default.createElement('i', { className: 'glyphicon glyphicon-cog' })
+                    ),
+                    _react2.default.createElement(
+                        'a',
+                        { onClick: function onClick(e) {
+                                e.preventDefault();onRemove();
+                            }, className: 'btn btn-link btn-xs' },
+                        _react2.default.createElement('i', { className: 'glyphicon glyphicon-trash' })
+                    )
+                )
+            );
         } else if (title && title.length) {
-            header = _jsx('div', {
-                className: 'panel-heading'
-            }, void 0, title);
+            header = _react2.default.createElement(
+                'div',
+                { className: 'panel-heading' },
+                title
+            );
         }
-        return _jsx('div', {
-            className: 'panel panel-default'
-        }, void 0, header, _jsx('div', {
-            className: 'panel-body widget'
-        }, void 0, children));
+        return _react2.default.createElement(
+            'div',
+            { className: 'panel panel-default' },
+            header,
+            _react2.default.createElement(
+                'div',
+                { className: 'panel-body widget' },
+                children
+            )
+        );
     };
 
     return CustomFrame;
@@ -1212,8 +1253,6 @@ exports.default = CustomFrame;
 
 
 exports.__esModule = true;
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 __webpack_require__(617);
 
@@ -1269,43 +1308,41 @@ var DashboardToolbar = function (_React$Component) {
             saved = _props.saved;
 
         if (!editable && !isOwner) return null;
-        var editBtn = _jsx('a', {
-            className: 'btn btn-danger btn-lg btn-edit-db',
-            href: '../edit/',
-            title: 'Edit Dashboard'
-        }, void 0, _jsx('i', {
-            className: 'glyphicon glyphicon-pencil'
-        }));
-        var saveBtn = !saved ? _jsx('button', {
-            className: 'btn btn-danger btn-lg btn-save-db',
-            title: 'Save Dashboard',
-            onClick: function onClick(e) {
-                return _this2.saveAll(e);
-            }
-        }, void 0, _jsx('i', {
-            className: 'glyphicon glyphicon-floppy-disk'
-        })) : _jsx('button', {
-            disabled: true,
-            className: 'btn btn-danger btn-lg btn-save-db',
-            title: 'Save Dashboard',
-            onClick: function onClick(e) {
-                return _this2.saveAll(e);
-            }
-        }, void 0, _jsx('i', {
-            className: 'glyphicon glyphicon-floppy-disk'
-        }));
-        var viewBtn = _jsx('button', {
-            className: 'btn btn-warning btn-lg btn-tb btn-view-db',
-            title: 'View Dashboard',
-            onClick: function onClick(e) {
-                return _this2.preview(e);
-            }
-        }, void 0, _jsx('i', {
-            className: 'glyphicon glyphicon-eye-open'
-        }));
-        return _jsx('div', {
-            className: 'db-actions-ct'
-        }, void 0, editable && saveBtn, editable && !isNew && viewBtn, !editable && isOwner && editBtn);
+        var editBtn = _react2.default.createElement(
+            'a',
+            { className: 'btn btn-danger btn-lg btn-edit-db', href: '../edit/', title: 'Edit Dashboard' },
+            _react2.default.createElement('i', { className: 'glyphicon glyphicon-pencil' })
+        );
+        var saveBtn = !saved ? _react2.default.createElement(
+            'button',
+            { className: 'btn btn-danger btn-lg btn-save-db', title: 'Save Dashboard',
+                onClick: function onClick(e) {
+                    return _this2.saveAll(e);
+                } },
+            _react2.default.createElement('i', { className: 'glyphicon glyphicon-floppy-disk' })
+        ) : _react2.default.createElement(
+            'button',
+            { disabled: true, className: 'btn btn-danger btn-lg btn-save-db', title: 'Save Dashboard',
+                onClick: function onClick(e) {
+                    return _this2.saveAll(e);
+                } },
+            _react2.default.createElement('i', { className: 'glyphicon glyphicon-floppy-disk' })
+        );
+        var viewBtn = _react2.default.createElement(
+            'button',
+            { className: 'btn btn-warning btn-lg btn-tb btn-view-db', title: 'View Dashboard',
+                onClick: function onClick(e) {
+                    return _this2.preview(e);
+                } },
+            _react2.default.createElement('i', { className: 'glyphicon glyphicon-eye-open' })
+        );
+        return _react2.default.createElement(
+            'div',
+            { className: 'db-actions-ct' },
+            editable && saveBtn,
+            editable && !isNew && viewBtn,
+            !editable && isOwner && editBtn
+        );
     };
 
     return DashboardToolbar;
@@ -1325,8 +1362,6 @@ exports.default = DashboardToolbar;
 
 
 exports.__esModule = true;
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -1412,25 +1447,37 @@ var Header = function (_React$Component) {
             };
             return _react2.default.createElement(_FieldSet2.default, { data: data, schema: schema, ref: 'headerForm' });
         }
-        return _jsx('div', {
-            className: 'dashboard-header'
-        }, void 0, _jsx('div', {
-            className: 'flex-element fill-empty title-wrap'
-        }, void 0, _jsx('h3', {
-            className: 'header-title title-wrap'
-        }, void 0, title)), _jsx('div', {
-            className: 'flex-element'
-        }, void 0, _jsx('button', {
-            onClick: this.onRequestClose,
-            className: 'btn btn-primary'
-        }, void 0, _jsx('i', {
-            className: 'fa fa-info-circle',
-            style: { fontSize: 20 }
-        }))), _jsx(_CommonComponents.InfoModal, {
-            onRequestClose: this.onRequestClose,
-            open: open,
-            title: 'About'
-        }, void 0, _jsx('p', {}, void 0, abstract)));
+        return _react2.default.createElement(
+            'div',
+            { className: 'dashboard-header' },
+            _react2.default.createElement(
+                'div',
+                { className: 'flex-element fill-empty title-wrap' },
+                _react2.default.createElement(
+                    'h3',
+                    { className: 'header-title title-wrap' },
+                    title
+                )
+            ),
+            _react2.default.createElement(
+                'div',
+                { className: 'flex-element' },
+                _react2.default.createElement(
+                    'button',
+                    { onClick: this.onRequestClose, className: 'btn btn-primary' },
+                    _react2.default.createElement('i', { className: 'fa fa-info-circle', style: { fontSize: 20 } })
+                )
+            ),
+            _react2.default.createElement(
+                _CommonComponents.InfoModal,
+                { onRequestClose: this.onRequestClose, open: open, title: 'About' },
+                _react2.default.createElement(
+                    'p',
+                    null,
+                    abstract
+                )
+            )
+        );
     };
 
     Header.prototype.getData = function getData() {
@@ -1457,31 +1504,40 @@ exports.default = Header;
 
 exports.__esModule = true;
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 exports.default = function (props) {
-  return _jsx(_reactModal2.default, {
-    className: 'modal-dialog',
-    isOpen: props.isOpen,
-    style: _Constants2.default
-  }, void 0, _jsx('div', {
-    className: ''
-  }, void 0, _jsx('div', {
-    className: 'panel panel-default'
-  }, void 0, _jsx('div', {
-    className: 'panel-heading'
-  }, void 0, props.title, _jsx('div', {
-    className: 'pull-right'
-  }, void 0, _jsx('a', {
-    className: 'btn btn-link btn-xs',
-    onClick: function onClick(e) {
-      e.preventDefault();props.close();
-    }
-  }, void 0, _jsx('i', {
-    className: 'glyphicon glyphicon-remove'
-  })))), _jsx('div', {
-    className: 'panel-body'
-  }, void 0, props.children))));
+  return React.createElement(
+    _reactModal2.default,
+    { className: 'modal-dialog', isOpen: props.isOpen, style: _Constants2.default },
+    React.createElement(
+      'div',
+      { className: '' },
+      React.createElement(
+        'div',
+        { className: 'panel panel-default' },
+        React.createElement(
+          'div',
+          { className: 'panel-heading' },
+          props.title,
+          React.createElement(
+            'div',
+            { className: 'pull-right' },
+            React.createElement(
+              'a',
+              { className: 'btn btn-link btn-xs', onClick: function onClick(e) {
+                  e.preventDefault();props.close();
+                } },
+              React.createElement('i', { className: 'glyphicon glyphicon-remove' })
+            )
+          )
+        ),
+        React.createElement(
+          'div',
+          { className: 'panel-body' },
+          props.children
+        )
+      )
+    )
+  );
 };
 
 var _reactModal = __webpack_require__(107);
@@ -1503,8 +1559,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 
 exports.__esModule = true;
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _ConfigManager = __webpack_require__(42);
 
@@ -1563,29 +1617,35 @@ var WidgetConfigDialog = function (_React$Component) {
 
         var widgetConfigForm = _react2.default.createElement(widgetType.ConfigForm, props);
 
-        return _jsx(_Modal2.default, {
-            isOpen: isOpen,
-            close: function close() {
-                return configManager.endEditWidgetConfig();
-            },
-            title: 'Config Widget'
-        }, void 0, _react2.default.createElement(_FieldSet2.default, { ref: 'containerConfigForm', data: containerConfig, schema: _Constants.WidgetContainerConfigSchema }), widgetConfigForm, _jsx('div', {
-            className: 'pull-right'
-        }, void 0, _jsx('a', {
-            className: 'btn btn-primary',
-            onClick: function onClick(e) {
-                e.preventDefault();configManager.endEditWidgetConfig(widget, _this2.getConfig());
-            }
-        }, void 0, _jsx('i', {
-            className: 'glyphicon glyphicon-ok'
-        }), ' Apply'), _jsx('a', {
-            className: 'btn btn-danger',
-            onClick: function onClick(e) {
-                e.preventDefault();configManager.endEditWidgetConfig();
-            }
-        }, void 0, _jsx('i', {
-            className: 'glyphicon glyphicon-remove'
-        }), ' Cancel')));
+        return _react2.default.createElement(
+            _Modal2.default,
+            { isOpen: isOpen, close: function close() {
+                    return configManager.endEditWidgetConfig();
+                }, title: 'Config Widget' },
+            _react2.default.createElement(_FieldSet2.default, { ref: 'containerConfigForm', data: containerConfig, schema: _Constants.WidgetContainerConfigSchema }),
+            widgetConfigForm,
+            _react2.default.createElement(
+                'div',
+                { className: 'pull-right' },
+                _react2.default.createElement(
+                    'a',
+                    { className: 'btn btn-primary',
+                        onClick: function onClick(e) {
+                            e.preventDefault();configManager.endEditWidgetConfig(widget, _this2.getConfig());
+                        } },
+                    _react2.default.createElement('i', { className: 'glyphicon glyphicon-ok' }),
+                    ' Apply'
+                ),
+                _react2.default.createElement(
+                    'a',
+                    { className: 'btn btn-danger', onClick: function onClick(e) {
+                            e.preventDefault();configManager.endEditWidgetConfig();
+                        } },
+                    _react2.default.createElement('i', { className: 'glyphicon glyphicon-remove' }),
+                    ' Cancel'
+                )
+            )
+        );
     };
 
     WidgetConfigDialog.prototype.getConfig = function getConfig() {

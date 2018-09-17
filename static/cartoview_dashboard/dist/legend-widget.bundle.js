@@ -10,8 +10,6 @@ exports.__esModule = true;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = __webpack_require__(1);
@@ -90,9 +88,13 @@ var FieldSet = function (_Component2) {
             schema = _state.schema,
             data = _state.data;
 
-        return _jsx('div', {}, void 0, Object.keys(schema).map(function (key) {
-            return _this3.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null);
-        }));
+        return _react2.default.createElement(
+            'div',
+            null,
+            data && Object.keys(schema).map(function (key) {
+                return _this3.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null);
+            })
+        );
     };
 
     FieldSet.prototype.field = function field(name, schema, value) {
@@ -126,9 +128,16 @@ var FieldSet = function (_Component2) {
             );
         }
         var label = schema.label || name.charAt(0).toUpperCase() + name.slice(1);
-        return _jsx('div', {
-            className: 'form-group'
-        }, void 0, _jsx('label', {}, void 0, label), field);
+        return _react2.default.createElement(
+            'div',
+            { className: 'form-group' },
+            _react2.default.createElement(
+                'label',
+                null,
+                label
+            ),
+            field
+        );
     };
 
     FieldSet.prototype.getSelectOptions = function getSelectOptions(name, schema, value) {
@@ -137,9 +146,11 @@ var FieldSet = function (_Component2) {
         if (!options) return null;
         if ((typeof options === 'undefined' ? 'undefined' : _typeof(options)) == "object") {
             return Object.keys(options).map(function (key) {
-                return _jsx('option', {
-                    value: key
-                }, void 0, options[key]);
+                return _react2.default.createElement(
+                    'option',
+                    { value: key },
+                    options[key]
+                );
             });
         } else if (typeof options == 'function') {
             return options(this, this.state.data);
@@ -1419,8 +1430,6 @@ module.exports = function required(port, protocol) {
 
 exports.__esModule = true;
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
@@ -1462,14 +1471,24 @@ var ArcGISLegend = function (_Component) {
         if (this.state && this.state.legendInfo) {
             var layers = this.state.legendInfo.layers;
             var style = { width: 'auto', height: 'auto' };
-            return _jsx('div', {}, void 0, layers.map(function (l) {
-                return l.legend.map(function (legend) {
-                    return _jsx('div', {}, void 0, _jsx('img', {
-                        style: style,
-                        src: 'data:' + legend.contentType + ';base64,' + legend.imageData
-                    }), _jsx('span', {}, void 0, legend.label));
-                });
-            }));
+            return _react2.default.createElement(
+                'div',
+                null,
+                layers.map(function (l) {
+                    return l.legend.map(function (legend) {
+                        return _react2.default.createElement(
+                            'div',
+                            null,
+                            _react2.default.createElement('img', { style: style, src: 'data:' + legend.contentType + ';base64,' + legend.imageData }),
+                            _react2.default.createElement(
+                                'span',
+                                null,
+                                legend.label
+                            )
+                        );
+                    });
+                })
+            );
         }
         return null;
     };
@@ -1501,7 +1520,11 @@ var Legend = function (_Component2) {
         var map = this.props.map;
 
         var legends = this.getLegends(map.getLayers().getArray());
-        return _jsx('div', {}, void 0, legends);
+        return _react2.default.createElement(
+            'div',
+            null,
+            legends
+        );
     };
 
     Legend.prototype.getLegends = function getLegends(layers) {
@@ -1520,13 +1543,28 @@ var Legend = function (_Component2) {
                     url += "layer=" + p.LAYERS;
                     url += "&request=GetLegendGraphic&format=image%2Fpng&transparent=true&legend_options=fontAntiAliasing:true;fontSize:14;&width=30&height=30";
                     url += "&style=" + (p.STYLES || '');
-                    legends.push(_jsx('div', {}, void 0, _jsx('h4', {}, void 0, layer.get('title')), _jsx('img', {
-                        src: url
-                    })));
+                    legends.push(_react2.default.createElement(
+                        'div',
+                        null,
+                        _react2.default.createElement(
+                            'h4',
+                            null,
+                            layer.get('title')
+                        ),
+                        _react2.default.createElement('img', { src: url })
+                    ));
                 } else if (layer.getSource() instanceof _openlayers2.default.source.TileArcGISRest) {
-                    legends.push(_jsx('div', {}, void 0, _jsx('h4', {}, void 0, layer.get('title')), ' ', _jsx(ArcGISLegend, {
-                        layer: layer
-                    })));
+                    legends.push(_react2.default.createElement(
+                        'div',
+                        null,
+                        _react2.default.createElement(
+                            'h4',
+                            null,
+                            layer.get('title')
+                        ),
+                        ' ',
+                        _react2.default.createElement(ArcGISLegend, { layer: layer })
+                    ));
                 }
             }
         });
@@ -1557,14 +1595,18 @@ var LegendWidget = function (_BaseWidget) {
         var style = {
             padding: "10px 20px"
         };
-        return _jsx('div', {
-            style: style
-        }, void 0, this.state && this.state.ready ? _jsx(Legend, {
-            map: this.state.map
-        }) : _jsx('span', {}, void 0, 'The map for this Legend widget must be configured.  Click ', _jsx('i', {
-            className: 'glyphicon glyphicon-cog',
-            style: { color: '#337ab7' }
-        }), ' icon and select a map within this dashboard.'));
+        return _react2.default.createElement(
+            'div',
+            { style: style },
+            this.state && this.state.ready ? _react2.default.createElement(Legend, { map: this.state.map }) : _react2.default.createElement(
+                'span',
+                null,
+                'The map for this Legend widget must be configured.  Click ',
+                _react2.default.createElement('i', {
+                    className: 'glyphicon glyphicon-cog', style: { color: '#337ab7' } }),
+                ' icon and select a map within this dashboard.'
+            )
+        );
     };
 
     LegendWidget.prototype.setConfig = function setConfig(config) {
@@ -1627,9 +1669,13 @@ var ConfigForm = function (_FieldSet) {
         return Object.keys(mapWidgets).filter(function (widgetId) {
             return dash.props.widgets[widgetId].type.name == "MapWidget";
         }).map(function (widgetId) {
-            return _jsx('option', {
-                value: widgetId
-            }, void 0, mapWidgets[widgetId].title, ' - ', widgetId);
+            return _react2.default.createElement(
+                'option',
+                { value: widgetId },
+                mapWidgets[widgetId].title,
+                ' - ',
+                widgetId
+            );
         });
     };
 

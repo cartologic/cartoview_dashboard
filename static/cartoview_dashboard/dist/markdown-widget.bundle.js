@@ -17653,8 +17653,6 @@ exports.uriFragmentInHTMLComment = exports.uriComponentInHTMLComment;
 
 exports.__esModule = true;
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 __webpack_require__(309);
 
 __webpack_require__(302);
@@ -17692,11 +17690,11 @@ var MarkdownWidget = function (_BaseWidget) {
         var style = {
             padding: "10px 20px"
         };
-        return _jsx('div', {
-            style: style
-        }, void 0, _jsx(_reactMarkdown2.default, {
-            source: this.state.config.markdown
-        }));
+        return _react2.default.createElement(
+            'div',
+            { style: style },
+            _react2.default.createElement(_reactMarkdown2.default, { source: this.state.config.markdown })
+        );
     };
 
     return MarkdownWidget;
@@ -17729,11 +17727,7 @@ var ConfigForm = function (_React$Component) {
         var onChange = function onChange(markdown) {
             _this3.setState({ markdown: markdown });
         };
-        return _jsx(_reactCodemirror2.default, {
-            value: this.state.markdown,
-            onChange: onChange,
-            options: options
-        });
+        return _react2.default.createElement(_reactCodemirror2.default, { value: this.state.markdown, onChange: onChange, options: options });
     };
 
     ConfigForm.prototype.getData = function getData() {

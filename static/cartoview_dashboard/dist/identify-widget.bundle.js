@@ -10,8 +10,6 @@ exports.__esModule = true;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = __webpack_require__(1);
@@ -90,9 +88,13 @@ var FieldSet = function (_Component2) {
             schema = _state.schema,
             data = _state.data;
 
-        return _jsx('div', {}, void 0, Object.keys(schema).map(function (key) {
-            return _this3.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null);
-        }));
+        return _react2.default.createElement(
+            'div',
+            null,
+            data && Object.keys(schema).map(function (key) {
+                return _this3.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null);
+            })
+        );
     };
 
     FieldSet.prototype.field = function field(name, schema, value) {
@@ -126,9 +128,16 @@ var FieldSet = function (_Component2) {
             );
         }
         var label = schema.label || name.charAt(0).toUpperCase() + name.slice(1);
-        return _jsx('div', {
-            className: 'form-group'
-        }, void 0, _jsx('label', {}, void 0, label), field);
+        return _react2.default.createElement(
+            'div',
+            { className: 'form-group' },
+            _react2.default.createElement(
+                'label',
+                null,
+                label
+            ),
+            field
+        );
     };
 
     FieldSet.prototype.getSelectOptions = function getSelectOptions(name, schema, value) {
@@ -137,9 +146,11 @@ var FieldSet = function (_Component2) {
         if (!options) return null;
         if ((typeof options === 'undefined' ? 'undefined' : _typeof(options)) == "object") {
             return Object.keys(options).map(function (key) {
-                return _jsx('option', {
-                    value: key
-                }, void 0, options[key]);
+                return _react2.default.createElement(
+                    'option',
+                    { value: key },
+                    options[key]
+                );
             });
         } else if (typeof options == 'function') {
             return options(this, this.state.data);
@@ -632,8 +643,6 @@ function isUndefined(arg) {
 
 exports.__esModule = true;
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 __webpack_require__(616);
 
 var _Events = __webpack_require__(14);
@@ -683,6 +692,49 @@ var IdentifyWidget = function (_BaseWidget) {
         return _this;
     }
 
+    IdentifyWidget.prototype.resultItem = function resultItem(f) {
+        var keys = f.getKeys();
+        var geom = f.getGeometryName();
+        return _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(
+                'h4',
+                { className: 'identify-result-layer-title text-wrap' },
+                f.get('_layerTitle')
+            ),
+            _react2.default.createElement(
+                'div',
+                { className: 'feature-details-table' },
+                _react2.default.createElement(
+                    'table',
+                    { className: 'table', key: f.getId() },
+                    _react2.default.createElement(
+                        'tbody',
+                        null,
+                        keys.map(function (key, index) {
+                            if (key == geom || key == "_layerTitle") return null;
+                            return _react2.default.createElement(
+                                'tr',
+                                { key: index },
+                                _react2.default.createElement(
+                                    'th',
+                                    null,
+                                    key
+                                ),
+                                _react2.default.createElement(
+                                    'td',
+                                    null,
+                                    f.get(key)
+                                )
+                            );
+                        })
+                    )
+                )
+            )
+        );
+    };
+
     IdentifyWidget.prototype.setConfig = function setConfig(config) {
         _BaseWidget.prototype.setConfig.call(this, config);
         this.attachToMapWidget(config);
@@ -707,29 +759,42 @@ var IdentifyWidget = function (_BaseWidget) {
             activeFeature++;
             _this2.setState({ activeFeature: activeFeature });
         };
-        return _jsx('div', {}, void 0, busy && _jsx('div', {
-            className: 'loading'
-        }), !busy && features.length == 0 && _jsx('div', {
-            className: 'identify-no-results'
-        }, void 0, 'No Results, Click the map to identify features.'), !busy && features.length > 0 && _jsx('div', {}, void 0, _jsx('div', {
-            className: 'pull-right identify-navigate'
-        }, void 0, _jsx('button', {
-            className: 'btn btn-link btn-xs',
-            onClick: function onClick(e) {
-                return prev(e);
-            },
-            disabled: activeFeature == 0
-        }, void 0, _jsx('i', {
-            className: 'glyphicon glyphicon-chevron-left'
-        })), activeFeature + 1, ' / ', features.length, _jsx('button', {
-            className: 'btn btn-link btn-xs',
-            onClick: function onClick(e) {
-                return next(e);
-            },
-            disabled: activeFeature == features.length - 1
-        }, void 0, _jsx('i', {
-            className: 'glyphicon glyphicon-chevron-right'
-        }))), this.resultItem(features[activeFeature])));
+        return _react2.default.createElement(
+            'div',
+            null,
+            busy && _react2.default.createElement('div', { className: 'loading' }),
+            !busy && features.length == 0 && _react2.default.createElement(
+                'div',
+                { className: 'identify-no-results' },
+                'No Results, Click the map to identify features.'
+            ),
+            !busy && features.length > 0 && _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    'div',
+                    { className: 'pull-right identify-navigate' },
+                    _react2.default.createElement(
+                        'button',
+                        { className: 'btn btn-link btn-xs', onClick: function onClick(e) {
+                                return prev(e);
+                            }, disabled: activeFeature == 0 },
+                        _react2.default.createElement('i', { className: 'glyphicon glyphicon-chevron-left' })
+                    ),
+                    activeFeature + 1,
+                    ' / ',
+                    features.length,
+                    _react2.default.createElement(
+                        'button',
+                        { className: 'btn btn-link btn-xs', onClick: function onClick(e) {
+                                return next(e);
+                            }, disabled: activeFeature == features.length - 1 },
+                        _react2.default.createElement('i', { className: 'glyphicon glyphicon-chevron-right' })
+                    )
+                ),
+                this.resultItem(features[activeFeature])
+            )
+        );
     };
 
     IdentifyWidget.prototype.componentDidMount = function componentDidMount() {
@@ -758,8 +823,10 @@ var IdentifyWidget = function (_BaseWidget) {
         this.setState({ ready: true });
         map.on('singleclick', function (e) {
             _this4.getLayers(map.getLayers().getArray()).forEach(function (layer) {
-                _this4.setState({ busy: true, features: [],
-                    activeFeature: 0 });
+                _this4.setState({
+                    busy: true, features: [],
+                    activeFeature: 0
+                });
                 _WMSService2.default.getFeatureInfo(layer, e.coordinate, map, 'application/json', function (result) {
                     _this4.state.features = _this4.state.features.concat(result.features);
                     result.features.forEach(function (f) {
@@ -826,9 +893,13 @@ var ConfigForm = function (_FieldSet) {
         return Object.keys(mapWidgets).filter(function (widgetId) {
             return dash.props.widgets[widgetId].type.name == "MapWidget";
         }).map(function (widgetId) {
-            return _jsx('option', {
-                value: widgetId
-            }, void 0, mapWidgets[widgetId].title, ' - ', widgetId);
+            return _react2.default.createElement(
+                'option',
+                { value: widgetId },
+                mapWidgets[widgetId].title,
+                ' - ',
+                widgetId
+            );
         });
     };
 

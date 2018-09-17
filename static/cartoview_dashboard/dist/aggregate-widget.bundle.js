@@ -10,8 +10,6 @@ exports.__esModule = true;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = __webpack_require__(1);
@@ -90,9 +88,13 @@ var FieldSet = function (_Component2) {
             schema = _state.schema,
             data = _state.data;
 
-        return _jsx('div', {}, void 0, Object.keys(schema).map(function (key) {
-            return _this3.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null);
-        }));
+        return _react2.default.createElement(
+            'div',
+            null,
+            data && Object.keys(schema).map(function (key) {
+                return _this3.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null);
+            })
+        );
     };
 
     FieldSet.prototype.field = function field(name, schema, value) {
@@ -126,9 +128,16 @@ var FieldSet = function (_Component2) {
             );
         }
         var label = schema.label || name.charAt(0).toUpperCase() + name.slice(1);
-        return _jsx('div', {
-            className: 'form-group'
-        }, void 0, _jsx('label', {}, void 0, label), field);
+        return _react2.default.createElement(
+            'div',
+            { className: 'form-group' },
+            _react2.default.createElement(
+                'label',
+                null,
+                label
+            ),
+            field
+        );
     };
 
     FieldSet.prototype.getSelectOptions = function getSelectOptions(name, schema, value) {
@@ -137,9 +146,11 @@ var FieldSet = function (_Component2) {
         if (!options) return null;
         if ((typeof options === 'undefined' ? 'undefined' : _typeof(options)) == "object") {
             return Object.keys(options).map(function (key) {
-                return _jsx('option', {
-                    value: key
-                }, void 0, options[key]);
+                return _react2.default.createElement(
+                    'option',
+                    { value: key },
+                    options[key]
+                );
             });
         } else if (typeof options == 'function') {
             return options(this, this.state.data);
@@ -495,8 +506,6 @@ function isUndefined(arg) {
 
 exports.__esModule = true;
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _Events = __webpack_require__(14);
 
 var _Events2 = _interopRequireDefault(_Events);
@@ -585,11 +594,15 @@ var AggregateWidget = function (_BaseWidget) {
     };
 
     AggregateWidget.prototype.render = function render() {
-        return _jsx('div', {
-            className: 'aggregate-widget'
-        }, void 0, _jsx('h1', {
-            className: 'text-center'
-        }, void 0, this.state.aggregateResult));
+        return _react2.default.createElement(
+            'div',
+            { className: 'aggregate-widget' },
+            _react2.default.createElement(
+                'h1',
+                { className: 'text-center' },
+                this.state.aggregateResult
+            )
+        );
     };
 
     return AggregateWidget;
@@ -670,15 +683,21 @@ var ConfigFieldSet = function (_FieldSet) {
             return Object.keys(mapWidgets).filter(function (widgetId) {
                 return dash.props.widgets[widgetId].type.name == "MapWidget";
             }).map(function (widgetId) {
-                return _jsx('option', {
-                    value: widgetId
-                }, void 0, mapWidgets[widgetId].title, ' - ', widgetId);
+                return _react2.default.createElement(
+                    'option',
+                    { value: widgetId },
+                    mapWidgets[widgetId].title,
+                    ' - ',
+                    widgetId
+                );
             });
         } else if (name == "typeName") {
             return this.state.layers.map(function (m) {
-                return _jsx('option', {
-                    value: m.name
-                }, void 0, m.layer_params.title);
+                return _react2.default.createElement(
+                    'option',
+                    { value: m.name },
+                    m.layer_params.title
+                );
             });
         } else if (name == "aggregationAttribute") {
             var isNumber = function isNumber(a) {
@@ -687,9 +706,11 @@ var ConfigFieldSet = function (_FieldSet) {
             return this.state.attributes.filter(function (a) {
                 return isNumber(a);
             }).map(function (a) {
-                return _jsx('option', {
-                    value: a.attribute
-                }, void 0, a.attribute_label || a.attribute);
+                return _react2.default.createElement(
+                    'option',
+                    { value: a.attribute },
+                    a.attribute_label || a.attribute
+                );
             });
         }
         return _FieldSet.prototype.getSelectOptions.call(this, name, config, value);

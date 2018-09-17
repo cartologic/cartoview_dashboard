@@ -19,13 +19,32 @@ class IdentifyWidget extends BaseWidget {
             activeFeature: 0
         });
     }
+    resultItem(f) {
+        var keys = f.getKeys()
+        var geom = f.getGeometryName()
+        return <div>
+            <h4 className="identify-result-layer-title text-wrap">{f.get('_layerTitle')}</h4>
+            <div className="feature-details-table">
+                <table className="table" key={f.getId()}>
+                    <tbody>
+                        {
+                            keys.map((key, index) => {
+                                if (key == geom || key == "_layerTitle") return null
+                                return <tr key={index}><th>{key}</th><td>{f.get(key)}</td></tr>
+                            })
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
 
-    setConfig(config){
+    setConfig(config) {
         super.setConfig(config);
         this.attachToMapWidget(config)
     }
 
-    render( ) {
+    render() {
         var { ready, busy, features, activeFeature } = this.state;
         const prev = (e) => {
             if (activeFeature == 0) return;
@@ -77,21 +96,23 @@ class IdentifyWidget extends BaseWidget {
         }
     }
 
-    init( map ) {
-        this.setState( { ready: true } )
-        map.on( 'singleclick', ( e ) => {
-            this.getLayers( map.getLayers( ).getArray( ) ).forEach(
-                ( layer ) => {
-                    this.setState( { busy: true, features: [ ],
-                        activeFeature: 0 } )
-                    WMSService.getFeatureInfo( layer, e.coordinate,
-                        map, 'application/json', ( result ) => {
-                            this.state.features = this.state.features.concat( result.features );
-                            result.features.forEach( f => f.set( "_layerTitle", result.layer.get('title' ) ) )
-                            this.setState( { features: this.state.features, busy: false } );
-                        } );
-                } )
-        } );
+    init(map) {
+        this.setState({ ready: true })
+        map.on('singleclick', (e) => {
+            this.getLayers(map.getLayers().getArray()).forEach(
+                (layer) => {
+                    this.setState({
+                        busy: true, features: [],
+                        activeFeature: 0
+                    })
+                    WMSService.getFeatureInfo(layer, e.coordinate,
+                        map, 'application/json', (result) => {
+                            this.state.features = this.state.features.concat(result.features);
+                            result.features.forEach(f => f.set("_layerTitle", result.layer.get('title')))
+                            this.setState({ features: this.state.features, busy: false });
+                        });
+                })
+        });
     }
     isWMS(layer) {
         return layer.getSource() instanceof ol.source.TileWMS || layer.getSource() instanceof ol
@@ -131,9 +152,9 @@ class ConfigForm extends FieldSet {
     }
 
     getSelectOptions(name, config, value) {
-         var mapWidgets = this.props.widget.context.configManager.getMapWidgets();
-         return Object.keys(mapWidgets).filter(widgetId => dash.props.widgets[widgetId].type.name == "MapWidget").
-                map(widgetId => <option value={widgetId}>{mapWidgets[widgetId].title} - {widgetId}</option>);
+        var mapWidgets = this.props.widget.context.configManager.getMapWidgets();
+        return Object.keys(mapWidgets).filter(widgetId => dash.props.widgets[widgetId].type.name == "MapWidget").
+            map(widgetId => <option value={widgetId}>{mapWidgets[widgetId].title} - {widgetId}</option>);
     }
 
     // componentWillMount() {

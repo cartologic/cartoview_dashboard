@@ -57,6 +57,17 @@ class MapWidget extends BaseWidget {
         })
         return children
     }
+    getFeatures = (layer, e) => {
+        let that = this
+        WMSService.getFeatureInfo(layer, e.coordinate,
+            that.map, 'application/json', (result) => {
+                let newFeatures = result.features.map(f => {
+                    f.set("_layerTitle", result.layer.get('title'))
+                    return f
+                })
+                that.setState({ features: [...that.state.features, ...newFeatures], mouseCoordinates: e.coordinate, showPopup: true })
+            })
+    }
     identify = () => {
         let that = this
         that.map.on('singleclick', (e) => {
@@ -67,12 +78,8 @@ class MapWidget extends BaseWidget {
                         activeFeature: 0,
                         mouseCoordinates: e.coordinate,
                         showPopup: false
-                    })
-                    WMSService.getFeatureInfo(layer, e.coordinate,
-                        that.map, 'application/json', (result) => {
-                            result.features.forEach(f => f.set("_layerTitle", result.layer.get('title')))
-                            that.setState({ features: [...that.state.features, ...result.features], mouseCoordinates: e.coordinate, showPopup: true })
-                        })
+                    }, () => that.getFeatures(layer, e))
+
                 })
         })
     }
@@ -97,18 +104,13 @@ class MapWidget extends BaseWidget {
                     MapConfigService.load(MapConfigTransformService.transform(config), this.map, URLS.proxy)
                     this.ready = true
                     Events.emit('mapReady' + '_' + this.props.id, this.map, this)
-                    this.identify()
+                    if (this.props.config && this.props.config.IdentifyPopup && this.parseStrBool(this.props.config.IdentifyPopup)) {
+                        this.identify()
+                    }
                 }
             })
 
         }
-    }
-    shouldComponentUpdate(nextProps, nextState) {
-        if (this.state.config != nextState.config) {
-            this.update(nextState.config);
-            return true;
-        }
-        return false;
     }
     changeShowPopup = () => {
         const { showPopup } = this.state
@@ -129,19 +131,21 @@ class MapWidget extends BaseWidget {
             this.overlay.setElement(undefined)
         })
     }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        const { config } = this.props
+        if (config !== prevProps.config) {
+            this.update(config)
+        }
+    }
     componentWillMount() {
         this.update(this.props.config)
     }
     componentDidMount() {
         this.map.setTarget(ReactDOM.findDOMNode(this.refs.map))
-        this.update(this.props.config)
     }
     getPopupProps = () => {
-        const { showPopup, activeFeature, features } = this.state
-        return {
-            showPopup,
-            activeFeature,
-            features,
+        let props = {
+            ...this.state,
             resetFeatureCollection: this.resetFeatureCollection,
             nextFeature: this.nextFeature,
             previousFeature: this.previousFeature,
@@ -149,14 +153,14 @@ class MapWidget extends BaseWidget {
             addOverlay: this.addOverlay,
             changeShowPopup: this.changeShowPopup
         }
+        return props
     }
     parseStrBool = (boolStr) => {
         return JSON.parse(boolStr)
     }
     render() {
-        const { config } = this.props
         return (<div ref="map" className='map-ct'>
-            {config && config.IdentifyPopup && this.parseStrBool(config.IdentifyPopup) && <Popup {...this.getPopupProps()} />}
+            <Popup {...this.getPopupProps()} />
         </div>)
     }
 }
@@ -223,9 +227,9 @@ class Popup extends React.Component {
                 <table className="table" key={f.getId()}>
                     <tbody>
                         {
-                            keys.map((key) => {
+                            keys.map((key, index) => {
                                 if (key == geom || key == "_layerTitle") return null
-                                return <tr><th>{key}</th><td>{f.get(key)}</td></tr>
+                                return <tr key={index}><th>{key}</th><td>{f.get(key)}</td></tr>
                             })
                         }
                     </tbody>

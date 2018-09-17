@@ -10,8 +10,6 @@ exports.__esModule = true;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = __webpack_require__(1);
@@ -90,9 +88,13 @@ var FieldSet = function (_Component2) {
             schema = _state.schema,
             data = _state.data;
 
-        return _jsx('div', {}, void 0, Object.keys(schema).map(function (key) {
-            return _this3.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null);
-        }));
+        return _react2.default.createElement(
+            'div',
+            null,
+            data && Object.keys(schema).map(function (key) {
+                return _this3.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null);
+            })
+        );
     };
 
     FieldSet.prototype.field = function field(name, schema, value) {
@@ -126,9 +128,16 @@ var FieldSet = function (_Component2) {
             );
         }
         var label = schema.label || name.charAt(0).toUpperCase() + name.slice(1);
-        return _jsx('div', {
-            className: 'form-group'
-        }, void 0, _jsx('label', {}, void 0, label), field);
+        return _react2.default.createElement(
+            'div',
+            { className: 'form-group' },
+            _react2.default.createElement(
+                'label',
+                null,
+                label
+            ),
+            field
+        );
     };
 
     FieldSet.prototype.getSelectOptions = function getSelectOptions(name, schema, value) {
@@ -137,9 +146,11 @@ var FieldSet = function (_Component2) {
         if (!options) return null;
         if ((typeof options === 'undefined' ? 'undefined' : _typeof(options)) == "object") {
             return Object.keys(options).map(function (key) {
-                return _jsx('option', {
-                    value: key
-                }, void 0, options[key]);
+                return _react2.default.createElement(
+                    'option',
+                    { value: key },
+                    options[key]
+                );
             });
         } else if (typeof options == 'function') {
             return options(this, this.state.data);
@@ -23121,8 +23132,6 @@ exports.__esModule = true;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _Events = __webpack_require__(14);
 
 var _Events2 = _interopRequireDefault(_Events);
@@ -23179,103 +23188,7 @@ var MapWidget = function (_BaseWidget) {
 
         var _this = _possibleConstructorReturn(this, _BaseWidget.call(this, props));
 
-        _this.identify = function () {
-            var that = _this;
-            that.map.on('singleclick', function (e) {
-                that.getLayers(that.map.getLayers().getArray()).forEach(function (layer) {
-                    that.setState({
-                        features: [],
-                        activeFeature: 0,
-                        mouseCoordinates: e.coordinate,
-                        showPopup: false
-                    });
-                    _WMSService2.default.getFeatureInfo(layer, e.coordinate, that.map, 'application/json', function (result) {
-                        result.features.forEach(function (f) {
-                            return f.set("_layerTitle", result.layer.get('title'));
-                        });
-                        that.setState({ features: [].concat(that.state.features, result.features), mouseCoordinates: e.coordinate, showPopup: true });
-                    });
-                });
-            });
-        };
-
-        _this.addOverlay = function (node) {
-            var mouseCoordinates = _this.state.mouseCoordinates;
-
-            var position = mouseCoordinates;
-            _this.overlay.setElement(node);
-            _this.overlay.setPosition(position);
-        };
-
-        _this.update = function (config) {
-            if (config && config.mapId) {
-                var url = getMapConfigUrl(config.mapId);
-                fetch(url, {
-                    method: "GET",
-                    credentials: 'include'
-                }).then(function (response) {
-                    if (response.status == 200) {
-                        return response.json();
-                    }
-                }).then(function (config) {
-                    if (config) {
-                        _MapConfigService2.default.load(_MapConfigTransformService2.default.transform(config), _this.map, URLS.proxy);
-                        _this.ready = true;
-                        _Events2.default.emit('mapReady' + '_' + _this.props.id, _this.map, _this);
-                        _this.identify();
-                    }
-                });
-            }
-        };
-
-        _this.changeShowPopup = function () {
-            var showPopup = _this.state.showPopup;
-
-            _this.setState({ showPopup: !showPopup });
-        };
-
-        _this.nextFeature = function () {
-            var activeFeature = _this.state.activeFeature;
-
-            var nextIndex = activeFeature + 1;
-            _this.setState({ activeFeature: nextIndex });
-        };
-
-        _this.previousFeature = function () {
-            var activeFeature = _this.state.activeFeature;
-
-            var previuosIndex = activeFeature - 1;
-            _this.setState({ activeFeature: previuosIndex });
-        };
-
-        _this.resetFeatureCollection = function () {
-            _this.setState({ features: [], activeFeature: 0, showPopup: false }, function () {
-                _this.overlay.setElement(undefined);
-            });
-        };
-
-        _this.getPopupProps = function () {
-            var _this$state = _this.state,
-                showPopup = _this$state.showPopup,
-                activeFeature = _this$state.activeFeature,
-                features = _this$state.features;
-
-            return {
-                showPopup: showPopup,
-                activeFeature: activeFeature,
-                features: features,
-                resetFeatureCollection: _this.resetFeatureCollection,
-                nextFeature: _this.nextFeature,
-                previousFeature: _this.previousFeature,
-                map: _this.map,
-                addOverlay: _this.addOverlay,
-                changeShowPopup: _this.changeShowPopup
-            };
-        };
-
-        _this.parseStrBool = function (boolStr) {
-            return JSON.parse(boolStr);
-        };
+        _initialiseProps.call(_this);
 
         _this.loaded = false;
         _this.state = {
@@ -23324,12 +23237,12 @@ var MapWidget = function (_BaseWidget) {
         return children;
     };
 
-    MapWidget.prototype.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
-        if (this.state.config != nextState.config) {
-            this.update(nextState.config);
-            return true;
+    MapWidget.prototype.componentDidUpdate = function componentDidUpdate(prevProps, prevState, snapshot) {
+        var config = this.props.config;
+
+        if (config !== prevProps.config) {
+            this.update(config);
         }
-        return false;
     };
 
     MapWidget.prototype.componentWillMount = function componentWillMount() {
@@ -23338,16 +23251,13 @@ var MapWidget = function (_BaseWidget) {
 
     MapWidget.prototype.componentDidMount = function componentDidMount() {
         this.map.setTarget(_reactDom2.default.findDOMNode(this.refs.map));
-        this.update(this.props.config);
     };
 
     MapWidget.prototype.render = function render() {
-        var config = this.props.config;
-
         return _react2.default.createElement(
             'div',
             { ref: 'map', className: 'map-ct' },
-            config && config.IdentifyPopup && this.parseStrBool(config.IdentifyPopup) && _react2.default.createElement(Popup, this.getPopupProps())
+            _react2.default.createElement(Popup, this.getPopupProps())
         );
     };
 
@@ -23355,6 +23265,110 @@ var MapWidget = function (_BaseWidget) {
 }(BaseWidget);
 
 MapWidget.displayName = "Map";
+
+var _initialiseProps = function _initialiseProps() {
+    var _this9 = this;
+
+    this.getFeatures = function (layer, e) {
+        var that = _this9;
+        _WMSService2.default.getFeatureInfo(layer, e.coordinate, that.map, 'application/json', function (result) {
+            var newFeatures = result.features.map(function (f) {
+                f.set("_layerTitle", result.layer.get('title'));
+                return f;
+            });
+            that.setState({ features: [].concat(that.state.features, newFeatures), mouseCoordinates: e.coordinate, showPopup: true });
+        });
+    };
+
+    this.identify = function () {
+        var that = _this9;
+        that.map.on('singleclick', function (e) {
+            that.getLayers(that.map.getLayers().getArray()).forEach(function (layer) {
+                that.setState({
+                    features: [],
+                    activeFeature: 0,
+                    mouseCoordinates: e.coordinate,
+                    showPopup: false
+                }, function () {
+                    return that.getFeatures(layer, e);
+                });
+            });
+        });
+    };
+
+    this.addOverlay = function (node) {
+        var mouseCoordinates = _this9.state.mouseCoordinates;
+
+        var position = mouseCoordinates;
+        _this9.overlay.setElement(node);
+        _this9.overlay.setPosition(position);
+    };
+
+    this.update = function (config) {
+        if (config && config.mapId) {
+            var url = getMapConfigUrl(config.mapId);
+            fetch(url, {
+                method: "GET",
+                credentials: 'include'
+            }).then(function (response) {
+                if (response.status == 200) {
+                    return response.json();
+                }
+            }).then(function (config) {
+                if (config) {
+                    _MapConfigService2.default.load(_MapConfigTransformService2.default.transform(config), _this9.map, URLS.proxy);
+                    _this9.ready = true;
+                    _Events2.default.emit('mapReady' + '_' + _this9.props.id, _this9.map, _this9);
+                    if (_this9.props.config && _this9.props.config.IdentifyPopup && _this9.parseStrBool(_this9.props.config.IdentifyPopup)) {
+                        _this9.identify();
+                    }
+                }
+            });
+        }
+    };
+
+    this.changeShowPopup = function () {
+        var showPopup = _this9.state.showPopup;
+
+        _this9.setState({ showPopup: !showPopup });
+    };
+
+    this.nextFeature = function () {
+        var activeFeature = _this9.state.activeFeature;
+
+        var nextIndex = activeFeature + 1;
+        _this9.setState({ activeFeature: nextIndex });
+    };
+
+    this.previousFeature = function () {
+        var activeFeature = _this9.state.activeFeature;
+
+        var previuosIndex = activeFeature - 1;
+        _this9.setState({ activeFeature: previuosIndex });
+    };
+
+    this.resetFeatureCollection = function () {
+        _this9.setState({ features: [], activeFeature: 0, showPopup: false }, function () {
+            _this9.overlay.setElement(undefined);
+        });
+    };
+
+    this.getPopupProps = function () {
+        var props = _extends({}, _this9.state, {
+            resetFeatureCollection: _this9.resetFeatureCollection,
+            nextFeature: _this9.nextFeature,
+            previousFeature: _this9.previousFeature,
+            map: _this9.map,
+            addOverlay: _this9.addOverlay,
+            changeShowPopup: _this9.changeShowPopup
+        });
+        return props;
+    };
+
+    this.parseStrBool = function (boolStr) {
+        return JSON.parse(boolStr);
+    };
+};
 
 var MapWidgetConfigForm = function (_FieldSet) {
     _inherits(MapWidgetConfigForm, _FieldSet);
@@ -23399,9 +23413,11 @@ var MapWidgetConfigForm = function (_FieldSet) {
 
         if (name === "mapId") {
             return this.state.maps.map(function (m) {
-                return _jsx('option', {
-                    value: m.id
-                }, void 0, m.title);
+                return _react2.default.createElement(
+                    'option',
+                    { value: m.id },
+                    m.title
+                );
             });
         }
         return config.options.map(function (m, index) {
@@ -23478,16 +23494,44 @@ var Popup = function (_React$Component) {
     Popup.prototype.resultItem = function resultItem(f) {
         var keys = f.getKeys();
         var geom = f.getGeometryName();
-        return _jsx('div', {}, void 0, _jsx('h4', {
-            className: 'identify-result-layer-title text-wrap'
-        }, void 0, f.get('_layerTitle')), _jsx('div', {
-            className: 'feature-details-table'
-        }, void 0, _jsx('table', {
-            className: 'table'
-        }, f.getId(), _jsx('tbody', {}, void 0, keys.map(function (key) {
-            if (key == geom || key == "_layerTitle") return null;
-            return _jsx('tr', {}, void 0, _jsx('th', {}, void 0, key), _jsx('td', {}, void 0, f.get(key)));
-        })))));
+        return _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(
+                'h4',
+                { className: 'identify-result-layer-title text-wrap' },
+                f.get('_layerTitle')
+            ),
+            _react2.default.createElement(
+                'div',
+                { className: 'feature-details-table' },
+                _react2.default.createElement(
+                    'table',
+                    { className: 'table', key: f.getId() },
+                    _react2.default.createElement(
+                        'tbody',
+                        null,
+                        keys.map(function (key, index) {
+                            if (key == geom || key == "_layerTitle") return null;
+                            return _react2.default.createElement(
+                                'tr',
+                                { key: index },
+                                _react2.default.createElement(
+                                    'th',
+                                    null,
+                                    key
+                                ),
+                                _react2.default.createElement(
+                                    'td',
+                                    null,
+                                    f.get(key)
+                                )
+                            );
+                        })
+                    )
+                )
+            )
+        );
     };
 
     Popup.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
@@ -23524,39 +23568,56 @@ var Popup = function (_React$Component) {
             { className: (0, _classnames2.default)({ "hidden-popup": !showPopup }), ref: function ref(node) {
                     return _this8.node = node;
                 }, id: 'popup' },
-            _jsx('div', {
-                className: 'popup-content'
-            }, void 0, _jsx('div', {
-                className: 'popup-nav'
-            }, void 0, _react2.default.createElement(
-                'button',
-                { className: 'btn btn-link btn-xs', ref: function ref(node) {
-                        return _this8.popupCloser = node;
-                    } },
-                _jsx('i', {
-                    className: 'glyphicon glyphicon-remove'
-                })
-            )), features.length > 0 && _jsx('div', {}, void 0, _jsx('div', {
-                className: 'popup-nav'
-            }, void 0, _react2.default.createElement(
-                'button',
-                { className: 'btn btn-link btn-xs', ref: function ref(node) {
-                        return _this8.prevButton = node;
-                    }, disabled: activeFeature == 0 },
-                _jsx('i', {
-                    className: 'glyphicon glyphicon-chevron-left'
-                })
-            ), activeFeature + 1, ' / ', features.length, _react2.default.createElement(
-                'button',
-                { className: 'btn btn-link btn-xs', disabled: activeFeature == features.length - 1, ref: function ref(node) {
-                        return _this8.prevButton = node;
-                    } },
-                _jsx('i', {
-                    className: 'glyphicon glyphicon-chevron-right'
-                })
-            )), this.resultItem(features[activeFeature])), features.length == 0 && _jsx('div', {
-                className: 'popup-nav'
-            }, void 0, _jsx('b', {}, void 0, "No Features At this Point")))
+            _react2.default.createElement(
+                'div',
+                { className: 'popup-content' },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'popup-nav' },
+                    _react2.default.createElement(
+                        'button',
+                        { className: 'btn btn-link btn-xs', ref: function ref(node) {
+                                return _this8.popupCloser = node;
+                            } },
+                        _react2.default.createElement('i', { className: 'glyphicon glyphicon-remove' })
+                    )
+                ),
+                features.length > 0 && _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'popup-nav' },
+                        _react2.default.createElement(
+                            'button',
+                            { className: 'btn btn-link btn-xs', ref: function ref(node) {
+                                    return _this8.prevButton = node;
+                                }, disabled: activeFeature == 0 },
+                            _react2.default.createElement('i', { className: 'glyphicon glyphicon-chevron-left' })
+                        ),
+                        activeFeature + 1,
+                        ' / ',
+                        features.length,
+                        _react2.default.createElement(
+                            'button',
+                            { className: 'btn btn-link btn-xs', disabled: activeFeature == features.length - 1, ref: function ref(node) {
+                                    return _this8.prevButton = node;
+                                } },
+                            _react2.default.createElement('i', { className: 'glyphicon glyphicon-chevron-right' })
+                        )
+                    ),
+                    this.resultItem(features[activeFeature])
+                ),
+                features.length == 0 && _react2.default.createElement(
+                    'div',
+                    { className: 'popup-nav' },
+                    _react2.default.createElement(
+                        'b',
+                        null,
+                        "No Features At this Point"
+                    )
+                )
+            )
         );
     };
 
