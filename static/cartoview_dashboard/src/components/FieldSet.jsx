@@ -34,7 +34,12 @@ class FieldSet extends Component {
     render() {
         const { schema, data } = this.state
         return <div>
-            {data && Object.keys(schema).map(key => this.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null))}
+            {data && Object.keys(schema).map((key, index) => {
+                let Field = this.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null)
+                return <div key={index} >
+                    {Field}
+                </div>
+            })}
         </div>
     }
 

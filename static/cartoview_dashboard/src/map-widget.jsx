@@ -199,7 +199,7 @@ class MapWidgetConfigForm extends FieldSet {
     }
     getSelectOptions(name, config, value) {
         if (name === "mapId") {
-            return this.state.maps.map(m => <option value={m.id}>{m.title}</option>)
+            return this.state.maps.map((m,index) => <option key={index} value={m.id}>{m.title}</option>)
         }
         return config.options.map((m, index) => <option key={index} {...this.getOptionExtraProps(m)} value={m.value}>{m.lable}</option>)
     }

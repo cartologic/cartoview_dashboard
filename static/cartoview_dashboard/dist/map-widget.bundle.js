@@ -12,7 +12,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _react = __webpack_require__(1);
+var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -91,8 +91,13 @@ var FieldSet = function (_Component2) {
         return _react2.default.createElement(
             'div',
             null,
-            data && Object.keys(schema).map(function (key) {
-                return _this3.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null);
+            data && Object.keys(schema).map(function (key, index) {
+                var Field = _this3.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null);
+                return _react2.default.createElement(
+                    'div',
+                    { key: index },
+                    Field
+                );
             })
         );
     };
@@ -183,13 +188,13 @@ exports.default = FieldSet;
 
 exports.__esModule = true;
 
-var _events = __webpack_require__(22);
+var _events = __webpack_require__(23);
 
 exports.default = new _events.EventEmitter();
 
 /***/ }),
 
-/***/ 19:
+/***/ 20:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -214,7 +219,7 @@ if (true) {
   // By explicitly using `prop-types` you are opting into new development behavior.
   // http://fb.me/prop-types-in-prod
   var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(48)(isValidElement, throwOnDirectAccess);
+  module.exports = __webpack_require__(44)(isValidElement, throwOnDirectAccess);
 } else {
   // By explicitly using `prop-types` you are opting into new production behavior.
   // http://fb.me/prop-types-in-prod
@@ -224,7 +229,7 @@ if (true) {
 
 /***/ }),
 
-/***/ 21:
+/***/ 22:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -361,7 +366,7 @@ exports.default = {
 
 /***/ }),
 
-/***/ 22:
+/***/ 23:
 /***/ (function(module, exports) {
 
 // Copyright Joyent, Inc. and other Node contributors.
@@ -670,7 +675,7 @@ function isUndefined(arg) {
 
 /***/ }),
 
-/***/ 300:
+/***/ 286:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -696,15 +701,15 @@ var _openlayers = __webpack_require__(11);
 
 var _openlayers2 = _interopRequireDefault(_openlayers);
 
-var _util = __webpack_require__(21);
+var _util = __webpack_require__(22);
 
 var _util2 = _interopRequireDefault(_util);
 
-var _LayerIdService = __webpack_require__(318);
+var _LayerIdService = __webpack_require__(304);
 
 var _LayerIdService2 = _interopRequireDefault(_LayerIdService);
 
-var _WFSService = __webpack_require__(319);
+var _WFSService = __webpack_require__(305);
 
 var _WFSService2 = _interopRequireDefault(_WFSService);
 
@@ -981,7 +986,7 @@ exports.default = new MapConfigService();
 
 /***/ }),
 
-/***/ 301:
+/***/ 287:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1399,7 +1404,7 @@ exports.default = new MapConfigTransformService();
 
 /***/ }),
 
-/***/ 318:
+/***/ 304:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1447,7 +1452,7 @@ exports.default = new LayerIdService();
 
 /***/ }),
 
-/***/ 319:
+/***/ 305:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1473,31 +1478,31 @@ var _openlayers = __webpack_require__(11);
 
 var _openlayers2 = _interopRequireDefault(_openlayers);
 
-var _util = __webpack_require__(21);
+var _util = __webpack_require__(22);
 
 var _util2 = _interopRequireDefault(_util);
 
-var _jsonix = __webpack_require__(58);
+var _jsonix = __webpack_require__(55);
 
-var _urlParse = __webpack_require__(41);
+var _urlParse = __webpack_require__(39);
 
 var _urlParse2 = _interopRequireDefault(_urlParse);
 
-var _XSD_1_ = __webpack_require__(624);
+var _XSD_1_ = __webpack_require__(596);
 
-var _XLink_1_ = __webpack_require__(76);
+var _XLink_1_ = __webpack_require__(73);
 
-var _OWS_1_0_ = __webpack_require__(495);
+var _OWS_1_0_ = __webpack_require__(482);
 
-var _Filter_1_1_ = __webpack_require__(493);
+var _Filter_1_1_ = __webpack_require__(480);
 
-var _SMIL_2_ = __webpack_require__(496);
+var _SMIL_2_ = __webpack_require__(483);
 
-var _SMIL_2_0_Language = __webpack_require__(497);
+var _SMIL_2_0_Language = __webpack_require__(484);
 
-var _GML_3_1_ = __webpack_require__(494);
+var _GML_3_1_ = __webpack_require__(481);
 
-var _WFS_1_1_ = __webpack_require__(498);
+var _WFS_1_1_ = __webpack_require__(485);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1891,14 +1896,14 @@ exports.default = new WFSService();
 
 /***/ }),
 
-/***/ 41:
+/***/ 39:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 
-var required = __webpack_require__(54)
-  , qs = __webpack_require__(49)
+var required = __webpack_require__(50)
+  , qs = __webpack_require__(45)
   , protocolre = /^([a-z][a-z0-9.+-]*:)?(\/\/)?([\S\s]*)/i
   , slashes = /^[A-Za-z][A-Za-z0-9+-.]*:\/\//;
 
@@ -1917,9 +1922,6 @@ var required = __webpack_require__(54)
 var rules = [
   ['#', 'hash'],                        // Extract from the back.
   ['?', 'query'],                       // Extract from the back.
-  function sanitize(address) {          // Sanitize what is left of the address
-    return address.replace('\\', '/');
-  },
   ['/', 'pathname'],                    // Extract from the back.
   ['@', 'auth', 1],                     // Extract from the front.
   [NaN, 'host', undefined, 1, 1],       // Set left over value.
@@ -1947,20 +1949,19 @@ var ignore = { hash: 1, query: 1 };
  *
  * @param {Object|String} loc Optional default location object.
  * @returns {Object} lolcation object.
- * @public
+ * @api public
  */
 function lolcation(loc) {
-  var location = global && global.location || {};
-  loc = loc || location;
+  loc = loc || global.location || {};
 
   var finaldestination = {}
     , type = typeof loc
     , key;
 
   if ('blob:' === loc.protocol) {
-    finaldestination = new Url(unescape(loc.pathname), {});
+    finaldestination = new URL(unescape(loc.pathname), {});
   } else if ('string' === type) {
-    finaldestination = new Url(loc, {});
+    finaldestination = new URL(loc, {});
     for (key in ignore) delete finaldestination[key];
   } else if ('object' === type) {
     for (key in loc) {
@@ -1989,7 +1990,7 @@ function lolcation(loc) {
  *
  * @param {String} address URL we want to extract from.
  * @return {ProtocolExtract} Extracted information.
- * @private
+ * @api private
  */
 function extractProtocol(address) {
   var match = protocolre.exec(address);
@@ -2007,7 +2008,7 @@ function extractProtocol(address) {
  * @param {String} relative Pathname of the relative URL.
  * @param {String} base Pathname of the base URL.
  * @return {String} Resolved pathname.
- * @private
+ * @api private
  */
 function resolve(relative, base) {
   var path = (base || '/').split('/').slice(0, -1).concat(relative.split('/'))
@@ -2040,18 +2041,15 @@ function resolve(relative, base) {
  * create an actual constructor as it's much more memory efficient and
  * faster and it pleases my OCD.
  *
- * It is worth noting that we should not use `URL` as class name to prevent
- * clashes with the global URL instance that got introduced in browsers.
- *
  * @constructor
  * @param {String} address URL we want to parse.
  * @param {Object|String} location Location defaults for relative paths.
  * @param {Boolean|Function} parser Parser for the query string.
- * @private
+ * @api public
  */
-function Url(address, location, parser) {
-  if (!(this instanceof Url)) {
-    return new Url(address, location, parser);
+function URL(address, location, parser) {
+  if (!(this instanceof URL)) {
+    return new URL(address, location, parser);
   }
 
   var relative, extracted, parse, instruction, index, key
@@ -2093,16 +2091,10 @@ function Url(address, location, parser) {
   // When the authority component is absent the URL starts with a path
   // component.
   //
-  if (!extracted.slashes) instructions[3] = [/(.*)/, 'pathname'];
+  if (!extracted.slashes) instructions[2] = [/(.*)/, 'pathname'];
 
   for (; i < instructions.length; i++) {
     instruction = instructions[i];
-
-    if (typeof instruction === 'function') {
-      address = instruction(address);
-      continue;
-    }
-
     parse = instruction[0];
     key = instruction[1];
 
@@ -2193,8 +2185,8 @@ function Url(address, location, parser) {
  *                               used to parse the query.
  *                               When setting the protocol, double slash will be
  *                               removed from the final url if it is true.
- * @returns {URL} URL instance for chaining.
- * @public
+ * @returns {URL}
+ * @api public
  */
 function set(part, value, fn) {
   var url = this;
@@ -2279,8 +2271,8 @@ function set(part, value, fn) {
  * Transform the properties back in to a valid and full URL string.
  *
  * @param {Function} stringify Optional query stringify function.
- * @returns {String} Compiled version of the URL.
- * @public
+ * @returns {String}
+ * @api public
  */
 function toString(stringify) {
   if (!stringify || 'function' !== typeof stringify) stringify = qs.stringify;
@@ -2309,23 +2301,23 @@ function toString(stringify) {
   return result;
 }
 
-Url.prototype = { set: set, toString: toString };
+URL.prototype = { set: set, toString: toString };
 
 //
 // Expose the URL parser and some additional properties that might be useful for
 // others or testing.
 //
-Url.extractProtocol = extractProtocol;
-Url.location = lolcation;
-Url.qs = qs;
+URL.extractProtocol = extractProtocol;
+URL.location = lolcation;
+URL.qs = qs;
 
-module.exports = Url;
+module.exports = URL;
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ }),
 
-/***/ 49:
+/***/ 45:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2356,18 +2348,15 @@ function querystring(query) {
     , result = {}
     , part;
 
-  while (part = parser.exec(query)) {
-    var key = decode(part[1])
-      , value = decode(part[2]);
-
-    //
-    // Prevent overriding of existing properties. This ensures that build-in
-    // methods like `toString` or __proto__ are not overriden by malicious
-    // querystrings.
-    //
-    if (key in result) continue;
-    result[key] = value;
-  }
+  //
+  // Little nifty parsing hack, leverage the fact that RegExp.exec increments
+  // the lastIndex property so we can continue executing this loop until we've
+  // parsed all results.
+  //
+  for (;
+    part = parser.exec(query);
+    result[decode(part[1])] = decode(part[2])
+  );
 
   return result;
 }
@@ -2408,7 +2397,7 @@ exports.parse = querystring;
 
 /***/ }),
 
-/***/ 493:
+/***/ 480:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var Filter_1_1_0_Module_Factory = function () {
@@ -3179,7 +3168,7 @@ else {
 
 /***/ }),
 
-/***/ 494:
+/***/ 481:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var GML_3_1_1_Module_Factory = function () {
@@ -12974,7 +12963,7 @@ else {
 
 /***/ }),
 
-/***/ 495:
+/***/ 482:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var OWS_1_0_0_Module_Factory = function () {
@@ -13647,7 +13636,7 @@ else {
 
 /***/ }),
 
-/***/ 496:
+/***/ 483:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var SMIL_2_0_Module_Factory = function () {
@@ -13907,7 +13896,7 @@ else {
 
 /***/ }),
 
-/***/ 497:
+/***/ 484:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var SMIL_2_0_Language_Module_Factory = function () {
@@ -14602,7 +14591,7 @@ else {
 
 /***/ }),
 
-/***/ 498:
+/***/ 485:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var WFS_1_1_0_Module_Factory = function () {
@@ -15517,7 +15506,7 @@ else {
 
 /***/ }),
 
-/***/ 54:
+/***/ 50:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15563,7 +15552,7 @@ module.exports = function required(port, protocol) {
 
 /***/ }),
 
-/***/ 58:
+/***/ 55:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _jsonix_factory = function(_jsonix_xmldom, _jsonix_xmlhttprequest, _jsonix_fs)
@@ -21702,7 +21691,7 @@ else
 
 /***/ }),
 
-/***/ 624:
+/***/ 596:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var XSD_1_0_Module_Factory = function () {
@@ -23122,7 +23111,7 @@ else {
 
 /***/ }),
 
-/***/ 631:
+/***/ 603:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23140,31 +23129,31 @@ var _FieldSet2 = __webpack_require__(10);
 
 var _FieldSet3 = _interopRequireDefault(_FieldSet2);
 
-var _MapConfigService = __webpack_require__(300);
+var _MapConfigService = __webpack_require__(286);
 
 var _MapConfigService2 = _interopRequireDefault(_MapConfigService);
 
-var _MapConfigTransformService = __webpack_require__(301);
+var _MapConfigTransformService = __webpack_require__(287);
 
 var _MapConfigTransformService2 = _interopRequireDefault(_MapConfigTransformService);
 
-var _propTypes = __webpack_require__(19);
+var _propTypes = __webpack_require__(20);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _react = __webpack_require__(1);
+var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(20);
+var _reactDom = __webpack_require__(21);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _WMSService = __webpack_require__(77);
+var _WMSService = __webpack_require__(74);
 
 var _WMSService2 = _interopRequireDefault(_WMSService);
 
-var _classnames = __webpack_require__(78);
+var _classnames = __webpack_require__(75);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -23412,10 +23401,10 @@ var MapWidgetConfigForm = function (_FieldSet) {
         var _this4 = this;
 
         if (name === "mapId") {
-            return this.state.maps.map(function (m) {
+            return this.state.maps.map(function (m, index) {
                 return _react2.default.createElement(
                     'option',
-                    { value: m.id },
+                    { key: index, value: m.id },
                     m.title
                 );
             });
@@ -23638,7 +23627,7 @@ Popup.propTypes = {
 
 /***/ }),
 
-/***/ 76:
+/***/ 73:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var XLink_1_0_Module_Factory = function () {
@@ -23872,7 +23861,7 @@ else {
 
 /***/ }),
 
-/***/ 77:
+/***/ 74:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23894,11 +23883,11 @@ var _createClass = function () { function defineProperties(target, props) { for 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * See the License for the specific language governing permissions and limitations under the License.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
 
-var _util = __webpack_require__(21);
+var _util = __webpack_require__(22);
 
 var _util2 = _interopRequireDefault(_util);
 
-var _urlParse = __webpack_require__(41);
+var _urlParse = __webpack_require__(39);
 
 var _urlParse2 = _interopRequireDefault(_urlParse);
 
@@ -23906,7 +23895,7 @@ var _openlayers = __webpack_require__(11);
 
 var _openlayers2 = _interopRequireDefault(_openlayers);
 
-var _SLDService = __webpack_require__(79);
+var _SLDService = __webpack_require__(76);
 
 var _SLDService2 = _interopRequireDefault(_SLDService);
 
@@ -24075,11 +24064,11 @@ exports.default = new WMSService();
 
 /***/ }),
 
-/***/ 78:
+/***/ 75:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-  Copyright (c) 2017 Jed Watson.
+  Copyright (c) 2016 Jed Watson.
   Licensed under the MIT License (MIT), see
   http://jedwatson.github.io/classnames
 */
@@ -24101,11 +24090,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 			if (argType === 'string' || argType === 'number') {
 				classes.push(arg);
-			} else if (Array.isArray(arg) && arg.length) {
-				var inner = classNames.apply(null, arg);
-				if (inner) {
-					classes.push(inner);
-				}
+			} else if (Array.isArray(arg)) {
+				classes.push(classNames.apply(null, arg));
 			} else if (argType === 'object') {
 				for (var key in arg) {
 					if (hasOwn.call(arg, key) && arg[key]) {
@@ -24119,7 +24105,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 	}
 
 	if (typeof module !== 'undefined' && module.exports) {
-		classNames.default = classNames;
 		module.exports = classNames;
 	} else if (true) {
 		// register as 'classnames', consistent with npm package name
@@ -24135,7 +24120,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 79:
+/***/ 76:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24157,17 +24142,17 @@ var _createClass = function () { function defineProperties(target, props) { for 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * See the License for the specific language governing permissions and limitations under the License.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
 
-var _jsonix = __webpack_require__(58);
+var _jsonix = __webpack_require__(55);
 
-var _XLink_1_ = __webpack_require__(76);
+var _XLink_1_ = __webpack_require__(73);
 
-var _Filter_1_0_ = __webpack_require__(88);
+var _Filter_1_0_ = __webpack_require__(85);
 
-var _GML_2_1_ = __webpack_require__(89);
+var _GML_2_1_ = __webpack_require__(86);
 
-var _SLD_1_0_0_GeoServer = __webpack_require__(90);
+var _SLD_1_0_0_GeoServer = __webpack_require__(87);
 
-var _util = __webpack_require__(21);
+var _util = __webpack_require__(22);
 
 var _util2 = _interopRequireDefault(_util);
 
@@ -24951,7 +24936,7 @@ exports.default = new SLDService();
 
 /***/ }),
 
-/***/ 88:
+/***/ 85:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var Filter_1_0_0_Module_Factory = function () {
@@ -25482,7 +25467,7 @@ else {
 
 /***/ }),
 
-/***/ 89:
+/***/ 86:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var GML_2_1_2_Module_Factory = function () {
@@ -26044,7 +26029,7 @@ else {
 
 /***/ }),
 
-/***/ 90:
+/***/ 87:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var SLD_1_0_0_GeoServer_Module_Factory = function () {
@@ -27234,4 +27219,4 @@ else {
 
 /***/ })
 
-},[631]);
+},[603]);

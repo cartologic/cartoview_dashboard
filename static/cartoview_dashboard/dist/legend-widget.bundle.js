@@ -12,7 +12,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _react = __webpack_require__(1);
+var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -91,8 +91,13 @@ var FieldSet = function (_Component2) {
         return _react2.default.createElement(
             'div',
             null,
-            data && Object.keys(schema).map(function (key) {
-                return _this3.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null);
+            data && Object.keys(schema).map(function (key, index) {
+                var Field = _this3.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null);
+                return _react2.default.createElement(
+                    'div',
+                    { key: index },
+                    Field
+                );
             })
         );
     };
@@ -183,13 +188,13 @@ exports.default = FieldSet;
 
 exports.__esModule = true;
 
-var _events = __webpack_require__(22);
+var _events = __webpack_require__(23);
 
 exports.default = new _events.EventEmitter();
 
 /***/ }),
 
-/***/ 21:
+/***/ 22:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -326,7 +331,7 @@ exports.default = {
 
 /***/ }),
 
-/***/ 22:
+/***/ 23:
 /***/ (function(module, exports) {
 
 // Copyright Joyent, Inc. and other Node contributors.
@@ -635,7 +640,7 @@ function isUndefined(arg) {
 
 /***/ }),
 
-/***/ 299:
+/***/ 285:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -657,7 +662,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * See the License for the specific language governing permissions and limitations under the License.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
 
-var _util = __webpack_require__(21);
+var _util = __webpack_require__(22);
 
 var _util2 = _interopRequireDefault(_util);
 
@@ -665,7 +670,7 @@ var _openlayers = __webpack_require__(11);
 
 var _openlayers2 = _interopRequireDefault(_openlayers);
 
-var _urlParse = __webpack_require__(41);
+var _urlParse = __webpack_require__(39);
 
 var _urlParse2 = _interopRequireDefault(_urlParse);
 
@@ -859,14 +864,14 @@ exports.default = new ArcGISRestService();
 
 /***/ }),
 
-/***/ 41:
+/***/ 39:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 
-var required = __webpack_require__(54)
-  , qs = __webpack_require__(49)
+var required = __webpack_require__(50)
+  , qs = __webpack_require__(45)
   , protocolre = /^([a-z][a-z0-9.+-]*:)?(\/\/)?([\S\s]*)/i
   , slashes = /^[A-Za-z][A-Za-z0-9+-.]*:\/\//;
 
@@ -885,9 +890,6 @@ var required = __webpack_require__(54)
 var rules = [
   ['#', 'hash'],                        // Extract from the back.
   ['?', 'query'],                       // Extract from the back.
-  function sanitize(address) {          // Sanitize what is left of the address
-    return address.replace('\\', '/');
-  },
   ['/', 'pathname'],                    // Extract from the back.
   ['@', 'auth', 1],                     // Extract from the front.
   [NaN, 'host', undefined, 1, 1],       // Set left over value.
@@ -915,20 +917,19 @@ var ignore = { hash: 1, query: 1 };
  *
  * @param {Object|String} loc Optional default location object.
  * @returns {Object} lolcation object.
- * @public
+ * @api public
  */
 function lolcation(loc) {
-  var location = global && global.location || {};
-  loc = loc || location;
+  loc = loc || global.location || {};
 
   var finaldestination = {}
     , type = typeof loc
     , key;
 
   if ('blob:' === loc.protocol) {
-    finaldestination = new Url(unescape(loc.pathname), {});
+    finaldestination = new URL(unescape(loc.pathname), {});
   } else if ('string' === type) {
-    finaldestination = new Url(loc, {});
+    finaldestination = new URL(loc, {});
     for (key in ignore) delete finaldestination[key];
   } else if ('object' === type) {
     for (key in loc) {
@@ -957,7 +958,7 @@ function lolcation(loc) {
  *
  * @param {String} address URL we want to extract from.
  * @return {ProtocolExtract} Extracted information.
- * @private
+ * @api private
  */
 function extractProtocol(address) {
   var match = protocolre.exec(address);
@@ -975,7 +976,7 @@ function extractProtocol(address) {
  * @param {String} relative Pathname of the relative URL.
  * @param {String} base Pathname of the base URL.
  * @return {String} Resolved pathname.
- * @private
+ * @api private
  */
 function resolve(relative, base) {
   var path = (base || '/').split('/').slice(0, -1).concat(relative.split('/'))
@@ -1008,18 +1009,15 @@ function resolve(relative, base) {
  * create an actual constructor as it's much more memory efficient and
  * faster and it pleases my OCD.
  *
- * It is worth noting that we should not use `URL` as class name to prevent
- * clashes with the global URL instance that got introduced in browsers.
- *
  * @constructor
  * @param {String} address URL we want to parse.
  * @param {Object|String} location Location defaults for relative paths.
  * @param {Boolean|Function} parser Parser for the query string.
- * @private
+ * @api public
  */
-function Url(address, location, parser) {
-  if (!(this instanceof Url)) {
-    return new Url(address, location, parser);
+function URL(address, location, parser) {
+  if (!(this instanceof URL)) {
+    return new URL(address, location, parser);
   }
 
   var relative, extracted, parse, instruction, index, key
@@ -1061,16 +1059,10 @@ function Url(address, location, parser) {
   // When the authority component is absent the URL starts with a path
   // component.
   //
-  if (!extracted.slashes) instructions[3] = [/(.*)/, 'pathname'];
+  if (!extracted.slashes) instructions[2] = [/(.*)/, 'pathname'];
 
   for (; i < instructions.length; i++) {
     instruction = instructions[i];
-
-    if (typeof instruction === 'function') {
-      address = instruction(address);
-      continue;
-    }
-
     parse = instruction[0];
     key = instruction[1];
 
@@ -1161,8 +1153,8 @@ function Url(address, location, parser) {
  *                               used to parse the query.
  *                               When setting the protocol, double slash will be
  *                               removed from the final url if it is true.
- * @returns {URL} URL instance for chaining.
- * @public
+ * @returns {URL}
+ * @api public
  */
 function set(part, value, fn) {
   var url = this;
@@ -1247,8 +1239,8 @@ function set(part, value, fn) {
  * Transform the properties back in to a valid and full URL string.
  *
  * @param {Function} stringify Optional query stringify function.
- * @returns {String} Compiled version of the URL.
- * @public
+ * @returns {String}
+ * @api public
  */
 function toString(stringify) {
   if (!stringify || 'function' !== typeof stringify) stringify = qs.stringify;
@@ -1277,23 +1269,23 @@ function toString(stringify) {
   return result;
 }
 
-Url.prototype = { set: set, toString: toString };
+URL.prototype = { set: set, toString: toString };
 
 //
 // Expose the URL parser and some additional properties that might be useful for
 // others or testing.
 //
-Url.extractProtocol = extractProtocol;
-Url.location = lolcation;
-Url.qs = qs;
+URL.extractProtocol = extractProtocol;
+URL.location = lolcation;
+URL.qs = qs;
 
-module.exports = Url;
+module.exports = URL;
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ }),
 
-/***/ 49:
+/***/ 45:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1324,18 +1316,15 @@ function querystring(query) {
     , result = {}
     , part;
 
-  while (part = parser.exec(query)) {
-    var key = decode(part[1])
-      , value = decode(part[2]);
-
-    //
-    // Prevent overriding of existing properties. This ensures that build-in
-    // methods like `toString` or __proto__ are not overriden by malicious
-    // querystrings.
-    //
-    if (key in result) continue;
-    result[key] = value;
-  }
+  //
+  // Little nifty parsing hack, leverage the fact that RegExp.exec increments
+  // the lastIndex property so we can continue executing this loop until we've
+  // parsed all results.
+  //
+  for (;
+    part = parser.exec(query);
+    result[decode(part[1])] = decode(part[2])
+  );
 
   return result;
 }
@@ -1376,7 +1365,7 @@ exports.parse = querystring;
 
 /***/ }),
 
-/***/ 54:
+/***/ 50:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1422,7 +1411,7 @@ module.exports = function required(port, protocol) {
 
 /***/ }),
 
-/***/ 630:
+/***/ 602:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1430,11 +1419,11 @@ module.exports = function required(port, protocol) {
 
 exports.__esModule = true;
 
-var _react = __webpack_require__(1);
+var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _ArcGISRestService = __webpack_require__(299);
+var _ArcGISRestService = __webpack_require__(285);
 
 var _ArcGISRestService2 = _interopRequireDefault(_ArcGISRestService);
 
@@ -1693,4 +1682,4 @@ exports.default = LegendWidget;
 
 /***/ })
 
-},[630]);
+},[602]);

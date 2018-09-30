@@ -12,7 +12,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _react = __webpack_require__(1);
+var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -91,8 +91,13 @@ var FieldSet = function (_Component2) {
         return _react2.default.createElement(
             'div',
             null,
-            data && Object.keys(schema).map(function (key) {
-                return _this3.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null);
+            data && Object.keys(schema).map(function (key, index) {
+                var Field = _this3.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null);
+                return _react2.default.createElement(
+                    'div',
+                    { key: index },
+                    Field
+                );
             })
         );
     };
@@ -183,13 +188,13 @@ exports.default = FieldSet;
 
 exports.__esModule = true;
 
-var _events = __webpack_require__(22);
+var _events = __webpack_require__(23);
 
 exports.default = new _events.EventEmitter();
 
 /***/ }),
 
-/***/ 22:
+/***/ 23:
 /***/ (function(module, exports) {
 
 // Copyright Joyent, Inc. and other Node contributors.
@@ -498,7 +503,7 @@ function isUndefined(arg) {
 
 /***/ }),
 
-/***/ 626:
+/***/ 598:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -514,7 +519,7 @@ var _FieldSet2 = __webpack_require__(10);
 
 var _FieldSet3 = _interopRequireDefault(_FieldSet2);
 
-var _react = __webpack_require__(1);
+var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -682,20 +687,20 @@ var ConfigFieldSet = function (_FieldSet) {
             var mapWidgets = this.props.widget.context.configManager.getMapWidgets();
             return Object.keys(mapWidgets).filter(function (widgetId) {
                 return dash.props.widgets[widgetId].type.name == "MapWidget";
-            }).map(function (widgetId) {
+            }).map(function (widgetId, index) {
                 return _react2.default.createElement(
                     'option',
-                    { value: widgetId },
+                    { key: index, value: widgetId },
                     mapWidgets[widgetId].title,
                     ' - ',
                     widgetId
                 );
             });
         } else if (name == "typeName") {
-            return this.state.layers.map(function (m) {
+            return this.state.layers.map(function (m, index) {
                 return _react2.default.createElement(
                     'option',
-                    { value: m.name },
+                    { key: index, value: m.name },
                     m.layer_params.title
                 );
             });
@@ -705,10 +710,10 @@ var ConfigFieldSet = function (_FieldSet) {
             };
             return this.state.attributes.filter(function (a) {
                 return isNumber(a);
-            }).map(function (a) {
+            }).map(function (a, index) {
                 return _react2.default.createElement(
                     'option',
-                    { value: a.attribute },
+                    { key: index, value: a.attribute },
                     a.attribute_label || a.attribute
                 );
             });
@@ -762,4 +767,4 @@ exports.default = AggregateWidget;
 
 /***/ })
 
-},[626]);
+},[598]);
