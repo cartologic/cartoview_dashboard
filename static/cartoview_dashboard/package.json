@@ -37,7 +37,7 @@
     "react-alice-carousel": "^1.1.4",
     "react-chartjs-2": "^2.0.5",
     "react-codemirror": "^0.3.0",
-    "react-dazzle": "git+https://github.com/cartologic/dazzle.git#tabs",
+    "react-dazzle": "file:../../../../../../dazzle-tabs",
     "react-dom": "^15.3.2",
     "react-draggable": "^2.1.1",
     "react-markdown": "^2.4.6",

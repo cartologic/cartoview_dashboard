@@ -37,11 +37,13 @@ class ConfigManager {
         var mapWidgets = {};
         layout.rows.forEach((row, rowIndex) => {
             row.columns.forEach((col, colIndex) => {
-                col.widgets.forEach((wId, wIndex) =>  {
-                    if(widgets[wId.key].type.name == "MapWidget")
-                    {
-                        mapWidgets[wId.key] = widgets[wId.key];
-                    }
+                col.tabs.forEach((tab, tabIndex) =>  {
+                    tab.widgets.forEach((wId, wIndex) =>  {
+                        if(widgets[wId.key].type.name == "MapWidget")
+                        {
+                            mapWidgets[wId.key] = widgets[wId.key];
+                        }
+                    });
                 });
             });
         });

@@ -73,7 +73,7 @@ class Dashboard extends Component {
     /**
      * Adds new widgget.
      */
-    onAdd = ( layout, rowIndex, columnIndex ) => {
+    onAdd = ( layout, rowIndex, columnIndex, tabIndex ) => {
         // Open the AddWidget dialog by seting the 'addWidgetDialogOpen' to true.
         // Also preserve the details such as the layout, rowIndex, and columnIndex  in 'addWidgetOptions'.
         //  This will be used later when user picks a widget to add.
@@ -84,6 +84,7 @@ class Dashboard extends Component {
                 layout,
                 rowIndex,
                 columnIndex,
+                tabIndex,
             },
         } )
     }
@@ -197,12 +198,12 @@ class Dashboard extends Component {
         this.setState( {
             widgets: this.state.widgets
         } )
-        const { layout, rowIndex, columnIndex } = this.state.addWidgetOptions
+        const { layout, rowIndex, columnIndex, tabIndex } = this.state.addWidgetOptions
         /**
          * 'AddWidget' method gives you the new layout.
          */
         this.setState( {
-            layout: addWidget( layout, rowIndex, columnIndex, id ),
+            layout: addWidget( layout, rowIndex, columnIndex, tabIndex, id ),
             addWidgetDialogOpen: false,
         } , /*this.configManager.editWidgetConfig(id)*/)
         // Close the dialogbox

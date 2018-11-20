@@ -4,46 +4,49 @@
 <html>
 <head>
 
-  <meta charset="utf-8">
-  <title>
-    {% if instance %}
-    {{ instance.title }}
-    {% else %}
-    New Dashboard
-    {% endif %}
-  </title>
+    <meta charset="utf-8">
+    <title>
+        {% if instance %}
+            {{ instance.title }}
+        {% else %}
+            New Dashboard
+        {% endif %}
+    </title>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="{{ STATIC_URL }}img/icon.png"/>
     <!-- <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en,Object.assign"></script> -->
     <!-- <link rel="stylesheet" href="https://boundlessgeo.github.io/sdk/dist/css/components.min.css"> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" >
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="{{STATIC_URL}}bootstrap/css/bootstrap.min.css" > -->
 
-    <link rel="stylesheet" href="{{STATIC_URL}}cartoview_dashboard/css/dashboard.css?v={{dbv}}" >
+    <link rel="stylesheet" href="{{ STATIC_URL }}cartoview_dashboard/css/dashboard.css?v={{ dbv }}">
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-  <div class="container">
+<div class="container">
     <div class="row" id="dash"></div>
-  </div>
-  <form id="csrf-form">
+</div>
+<form id="csrf-form">
     {% csrf_token %}
-  </form>
-    <script src="{{ STATIC_URL }}cartoview_dashboard/dist/commons.js?v={{dbv}}"></script>
-    <script src="{{ STATIC_URL }}cartoview_dashboard/dist/dashboard.bundle.js?v={{dbv}}"></script>
-    <script src="{{ STATIC_URL }}cartoview_dashboard/dist/wps-client.bundle.js?v={{dbv}}"></script>
-    <script src="{{ STATIC_URL }}cartoview_dashboard/dist/map-widget.bundle.js?v={{dbv}}"></script>
-    <script src="{{ STATIC_URL }}cartoview_dashboard/dist/aggregate-widget.bundle.js?v={{dbv}}"></script>
-    <script src="{{ STATIC_URL }}cartoview_dashboard/dist/charts-widget.bundle.js?v={{dbv}}"></script>
-    <script src="{{ STATIC_URL }}cartoview_dashboard/dist/markdown-widget.bundle.js?v={{dbv}}"></script>
-    <script src="{{ STATIC_URL }}cartoview_dashboard/dist/legend-widget.bundle.js?v={{dbv}}"></script>
-    <script src="{{ STATIC_URL }}cartoview_dashboard/dist/identify-widget.bundle.js?v={{dbv}}"></script>
-    <script type="text/javascript">
-    var props = {};
-    //{% if instance %}
+</form>
+<script src="{{ STATIC_URL }}cartoview_dashboard/dist/commons.js?v={{ dbv }}"></script>
+<script src="{{ STATIC_URL }}cartoview_dashboard/dist/dashboard.bundle.js?v={{ dbv }}"></script>
+<script src="{{ STATIC_URL }}cartoview_dashboard/dist/wps-client.bundle.js?v={{ dbv }}"></script>
+<script src="{{ STATIC_URL }}cartoview_dashboard/dist/map-widget.bundle.js?v={{ dbv }}"></script>
+<script src="{{ STATIC_URL }}cartoview_dashboard/dist/aggregate-widget.bundle.js?v={{ dbv }}"></script>
+<script src="{{ STATIC_URL }}cartoview_dashboard/dist/charts-widget.bundle.js?v={{ dbv }}"></script>
+<script src="{{ STATIC_URL }}cartoview_dashboard/dist/markdown-widget.bundle.js?v={{ dbv }}"></script>
+<script src="{{ STATIC_URL }}cartoview_dashboard/dist/legend-widget.bundle.js?v={{ dbv }}"></script>
+<script src="{{ STATIC_URL }}cartoview_dashboard/dist/identify-widget.bundle.js?v={{ dbv }}"></script>
+<script type="text/javascript">
+  var props = {};
+  //{% if instance %}
     var isNew = false;
     props = {{ instance.config | safe }};
 
@@ -55,135 +58,109 @@
     var isNew = true;
     props.widgets = {};
     props.layout = {
-      rows: [
-        {
-        columns: [{
-          className: 'col-md-12',
-          widgets: [],
+      rows: [{
+          columns: [
+            {
+              className: 'col-md-4 col-sm-6 col-xs-6',
+              tabs: [
+                {
+                  widgets: [],
+                },
+                {
+                  widgets: [],
+                },
+                {
+                  widgets: [],
+                }],
+            },
+            {
+              className: 'col-md-8 col-sm-6 col-xs-6',
+              tabs: [
+                {
+                  widgets: [],
+                },],
+            }],
         }],
-      },
-      {
-        columns: [{
-          className: 'col-md-8',
-          widgets: [],
-        },
-        {
-          className: 'col-md-4',
-          widgets: [],
-        }],
-      },
-      {
-        columns: [{
-          className: 'col-md-6',
-          widgets: [],
-        },
-        {
-          className: 'col-md-6',
-          widgets: [],
-        }],
-      },
-      {
-        columns: [{
-          className: 'col-md-4',
-          widgets: [],
-        },
-        {
-          className: 'col-md-8',
-          widgets: [],
-        }],
-      },
-      {
-        columns: [{
-          className: 'col-md-4',
-          widgets: [],
-        },
-        {
-          className: 'col-md-4',
-          widgets: [],
-        },
-        {
-          className: 'col-md-4',
-          widgets: [],
-        }],
-      },{
-        columns: [{
-          className: 'col-md-12',
-          widgets: [],
-        }],
-      }
-    ],
     };
     //{% endif %}
 
-    //{% if editable %}
+  //{% if editable %}
     props.editable = true;
     //{% endif %}
 
-    props.ref = function(d){
-      window.mainDashbord = d;
-    };
-    props.isNew = isNew;
-    console.debug(props)
+  props.ref = function (d) {
+    window.mainDashbord = d;
+  };
+  props.isNew = isNew;
+  console.debug(props)
 
-    {% if PROXY_URL %}
-        const PROXY_URL='{{PROXY_URL}}'
-    {% else %}
-        const PROXY_URL=null
-    {% endif %}
+  {% if PROXY_URL %}
+    const PROXY_URL = '{{PROXY_URL}}'
+  {% else %}
+    const PROXY_URL = null
+  {% endif %}
 
-    var URLS = {
-      geoserver: "{{ GEOSERVER_BASE_URL }}",
-      proxy: PROXY_URL,
-      static: "{{ STATIC_URL }}",
-      media: "{{ MEDIA_URL }}",
-    };
+  var URLS = {
+    geoserver: "{{ GEOSERVER_BASE_URL }}",
+    proxy: PROXY_URL,
+    static: "{{ STATIC_URL }}",
+    media: "{{ MEDIA_URL }}",
+  };
 
-    function getMapConfigUrl(id){
-      return "/maps/" + id + "/data"
-    }
-    function getRestData(url){
-      return fetch(url, {
-        credentials: 'include',
-      }).then(res=>res.json());
-    }
-    function getMapsData(){
-      return getRestData('{% url 'api_dispatch_list' api_name='api' resource_name='maps' %}');
-    }
-    function getLayersData(){
-      return getRestData( '{% url 'api_dispatch_list' api_name='api' resource_name='layers' %}');
-    }
-    function getMapLayersData(map_id){
-      return getRestData( '{% url 'api_dispatch_list' api_name='api' resource_name='maplayers' %}?fixed=false&map=' + map_id);
-    }
-    function getAttributesData(typename){
-      return getRestData('{% url 'api_dispatch_list' api_name='api' resource_name='attributes' %}?layer__typename=' + typename);
-    }
-    function addWidget(){
-      mainDashbord.showAddWidgetDialog();
-    }
-    function saveDashboard(config){
-        var csrfForm = document.getElementById("csrf-form");
-        var formData = new FormData(csrfForm);
-        Object.keys(config).forEach(function(key){
-          formData.append(key, config[key]);
-        });
-        fetch("", {
-          credentials: 'include',
-          method: 'POST',
-          body: formData
-        }).then(function(response) {
-          if(response.status == 200){
-            response.json().then(function(resJson){
-              if(resJson.success){
-                if(isNew) window.location = "../" + resJson.id + "/edit/";
-              }
-            });
+  function getMapConfigUrl(id) {
+    return "/maps/" + id + "/data"
+  }
+
+  function getRestData(url) {
+    return fetch(url, {
+      credentials: 'include',
+    }).then(res => res.json());
+  }
+
+  function getMapsData() {
+    return getRestData('{% url 'api_dispatch_list' api_name='api' resource_name='maps' %}');
+  }
+
+  function getLayersData() {
+    return getRestData('{% url 'api_dispatch_list' api_name='api' resource_name='layers' %}');
+  }
+
+  function getMapLayersData(map_id) {
+    return getRestData('{% url 'api_dispatch_list' api_name='api' resource_name='maplayers' %}?fixed=false&map=' + map_id);
+  }
+
+  function getAttributesData(typename) {
+    return getRestData('{% url 'api_dispatch_list' api_name='api' resource_name='attributes' %}?layer__typename=' + typename);
+  }
+
+  function addWidget() {
+    mainDashbord.showAddWidgetDialog();
+  }
+
+  function saveDashboard(config) {
+    var csrfForm = document.getElementById("csrf-form");
+    var formData = new FormData(csrfForm);
+    Object.keys(config).forEach(function (key) {
+      formData.append(key, config[key]);
+    });
+    fetch("", {
+      credentials: 'include',
+      method: 'POST',
+      body: formData
+    }).then(function (response) {
+      if (response.status == 200) {
+        response.json().then(function (resJson) {
+          if (resJson.success) {
+            if (isNew) window.location = "../" + resJson.id + "/edit/";
           }
         });
-    }
-    var dash = React.createElement(Dashboard, props);
-    ReactDOM.render(dash, document.getElementById("dash"));
-    </script>
+      }
+    });
+  }
+
+  var dash = React.createElement(Dashboard, props);
+  ReactDOM.render(dash, document.getElementById("dash"));
+</script>
 
 </body>
 </html>

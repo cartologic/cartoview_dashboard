@@ -12,7 +12,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _react = __webpack_require__(3);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -188,13 +188,13 @@ exports.default = FieldSet;
 
 exports.__esModule = true;
 
-var _events = __webpack_require__(23);
+var _events = __webpack_require__(21);
 
 exports.default = new _events.EventEmitter();
 
 /***/ }),
 
-/***/ 23:
+/***/ 21:
 /***/ (function(module, exports) {
 
 // Copyright Joyent, Inc. and other Node contributors.
@@ -503,7 +503,7 @@ function isUndefined(arg) {
 
 /***/ }),
 
-/***/ 598:
+/***/ 630:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -519,7 +519,7 @@ var _FieldSet2 = __webpack_require__(10);
 
 var _FieldSet3 = _interopRequireDefault(_FieldSet2);
 
-var _react = __webpack_require__(3);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -767,4 +767,4 @@ exports.default = AggregateWidget;
 
 /***/ })
 
-},[598]);
+},[630]);
