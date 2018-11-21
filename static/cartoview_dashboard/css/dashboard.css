@@ -20,7 +20,7 @@ body.edit-mode {
 }
 
 .map-ct {
-    height: 400px;
+    height: 90%;
     width: 100%;
     margin: 0;
 }
@@ -73,10 +73,19 @@ body.edit-mode {
     position: relative;
 }
 
-.bar-chart-ct,
-.line-chart-ct,
+.bar-chart-ct {
+    padding: 10px;
+    height: 100%;
+}
+
+.line-chart-ct {
+    padding: 10px;
+    height: 100%;
+}
+
 .doughnut-chart-ct {
     padding: 10px;
+    height: 100%;
 }
 
 .db-actions-ct {

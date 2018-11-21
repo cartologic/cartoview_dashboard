@@ -4,7 +4,7 @@
   "description": "Dashboard client scripts for cartoview_dashboard django app",
   "main": "index.js",
   "scripts": {
-    "build": "webpack -p",
+    "build": "webpack -p --watch",
     "dev": "webpack --watch --config webpack-dev.config.js",
     "lint": "jshint .",
     "validate": "npm ls"

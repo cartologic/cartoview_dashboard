@@ -1,7 +1,7 @@
 {% load cartoview_tags %}
 
 <!DOCTYPE html>
-<html>
+<html style="height: 100%;">
 <head>
 
     <meta charset="utf-8">
@@ -27,10 +27,19 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+        #dash > [data-reactroot],
+        #dash > [data-reactroot] .row,
+        #dash > [data-reactroot] .row .col-md-12
+        {
+            height: 95%;
+        }
+    </style>
 </head>
-<body>
-<div class="container">
-    <div class="row" id="dash"></div>
+<body style="height: 100%;">
+<div class="container" style="height: 95%;">
+    <div class="row" id="dash" style="height: 100%;"></div>
 </div>
 <form id="csrf-form">
     {% csrf_token %}
@@ -67,9 +76,11 @@
                   widgets: [],
                 },
                 {
+                  widgetSizes: [{height: '30%'}, {height: '70%'},],
                   widgets: [],
                 },
                 {
+                  widgetSizes: [{height: '33%'}, {height: '33%'}, {height: '33%'},],
                   widgets: [],
                 }],
             },
@@ -77,6 +88,7 @@
               className: 'col-md-8 col-sm-6 col-xs-6',
               tabs: [
                 {
+                  widgetSizes: [{height: '100%'},],
                   widgets: [],
                 },],
             }],

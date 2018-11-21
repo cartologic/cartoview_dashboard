@@ -19905,9 +19905,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   }, function (e, t, n) {
     "use strict";
     Object.defineProperty(t, "__esModule", { value: !0 }), t.addWidget = u, t.removeWidget = c, t.moveWidget = function (e, t, n, r) {
-      return u(c(e, t.rowIndex, t.columnIndex, t.widgetIndex), n.rowIndex, n.columnIndex, r);
+      return u(c(e, t.rowIndex, t.columnIndex, t.tabIndex, t.widgetIndex), n.rowIndex, n.columnIndex, n.tabIndex, r);
     }, t.sortWidget = function (e, t, n, r) {
-      return (0, a.default)(e, { rows: i({}, t.rowIndex, { columns: i({}, t.columnIndex, { widgets: { $splice: [[t.widgetIndex, 1], [n.widgetIndex, 0, { key: r }]] } }) }) });
+      return (0, a.default)(e, { rows: i({}, t.rowIndex, { columns: i({}, t.columnIndex, { tabs: i({}, t.tabIndex, { widgets: { $splice: [[t.widgetIndex, 1], [n.widgetIndex, 0, { key: r }]] } }) }) }) });
     };var r,
         o = n(178),
         a = (r = o) && r.__esModule ? r : { default: r };function i(e, t, n) {
@@ -20200,9 +20200,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           m = e.registerHandler,
           O = e.containerDisplayName,
           w = e.getType,
-          _ = e.collect,
-          D = e.options.arePropsEqual,
-          x = void 0 === D ? p.default : D,
+          D = e.collect,
+          _ = e.options.arePropsEqual,
+          x = void 0 === _ ? p.default : _,
           C = h.displayName || h.name || "Component",
           E = (n = t = function (e) {
         function t(e, n) {
@@ -20243,7 +20243,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           } }, { key: "handleChildRef", value: function value(e) {
             this.decoratedComponentInstance = e, this.handler.receiveComponent(e);
           } }, { key: "getCurrentState", value: function value() {
-            var e = _(this.handlerConnector.hooks, this.handlerMonitor);return e;
+            var e = D(this.handlerConnector.hooks, this.handlerMonitor);return e;
           } }, { key: "render", value: function value() {
             return u.default.createElement(h, r({}, this.props, this.state, { ref: g(h) ? this.handleChildRef : null }));
           } }]), t;
@@ -20378,7 +20378,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       }return function (e, t) {
         if ("function" != typeof t && null !== t) throw new TypeError("Super expression must either be null or a function, not " + (typeof t === "undefined" ? "undefined" : _typeof(t)));e.prototype = Object.create(t && t.prototype, { constructor: { value: e, enumerable: !1, writable: !0, configurable: !0 } }), t && (Object.setPrototypeOf ? Object.setPrototypeOf(e, t) : e.__proto__ = t);
       }(t, o.Component), r(t, [{ key: "render", value: function value() {
-          return a.default.createElement("div", null, a.default.createElement(s.default, this.props));
+          return a.default.createElement("div", { id: "Dazzle-Dashboard", key: "Dazzle-Dashboard", style: { height: "100%" } }, a.default.createElement(s.default, this.props));
         } }]), t;
     }();f.propTypes = { layout: i.default.object, widgets: i.default.object, editable: i.default.bool, rowClass: i.default.string, frameComponent: i.default.func, addWidgetComponent: i.default.func, editableColumnClass: i.default.string, droppableColumnClass: i.default.string, addWidgetComponentText: i.default.string, onRemove: i.default.func, onAdd: i.default.func, onMove: i.default.func, onEdit: i.default.func }, t.DashboardWithoutDndContext = f, t.default = (0, u.DragDropContext)(c.default)(f);
   }, function (e, t, n) {
@@ -20896,7 +20896,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         var O = y[b],
             w = t ? t(O) : O;if (O = n || 0 !== O ? O : 0, !(m ? c(m, w) : l(v, w, n))) {
           for (p = d; --p;) {
-            var _ = h[p];if (!(_ ? c(_, w) : l(e[p], w, n))) continue e;
+            var D = h[p];if (!(D ? c(D, w) : l(e[p], w, n))) continue e;
           }m && m.push(w), v.push(O);
         }
       }return v;
@@ -22068,9 +22068,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 y = s + v;d.push(3 * y / ((y + v) / h + (y + s) / g));
           }
         }d.push(c[c.length - 1]);for (var b = [], m = [], O = void 0, w = 0; w < d.length - 1; w++) {
-          O = c[w];var _ = d[w],
-              D = 1 / u[w],
-              x = _ + d[w + 1] - O - O;b.push((O - _ - x) * D), m.push(x * D * D);
+          O = c[w];var D = d[w],
+              _ = 1 / u[w],
+              x = D + d[w + 1] - O - O;b.push((O - D - x) * _), m.push(x * _ * _);
         }this.xs = t, this.ys = n, this.c1s = d, this.c2s = b, this.c3s = m;
       }return r(e, [{ key: "interpolate", value: function value(e) {
           var t = this.xs,
@@ -22172,7 +22172,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           g = e.addWidgetComponent,
           v = t.rows.map(function (e, v) {
         return r.default.createElement(a.default, { key: v, rowClass: s, columns: e.columns, widgets: n, onRemove: o, layout: t, rowIndex: v, editable: i, onAdd: u, onMove: l, onEdit: f, frameComponent: c, editableColumnClass: d, droppableColumnClass: p, addWidgetComponentText: h, addWidgetComponent: g });
-      });return r.default.createElement("div", null, v);
+      });return r.default.createElement("div", { id: "Layout-Renderer", key: "Layout-Renderer", style: { height: "100%" } }, v);
     };u.propTypes = { layout: o.default.object, widgets: o.default.object, editable: o.default.bool, onRemove: o.default.func, onAdd: o.default.func, frameComponent: o.default.func, rowClass: o.default.string, onMove: o.default.func, onEdit: o.default.func, editableColumnClass: o.default.string, droppableColumnClass: o.default.string, addWidgetComponent: o.default.func, addWidgetComponentText: o.default.string }, u.defaultProps = { layout: { rows: [] } }, t.default = u;
   }, function (e, t, n) {
     "use strict";
@@ -22197,7 +22197,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           v = e.widgets,
           y = n.map(function (e, t) {
         return r.default.createElement(a.default, { key: t, className: e.className, onAdd: h, layout: i, rowIndex: u, columnIndex: t, editable: c, onMove: g, editableColumnClass: l, droppableColumnClass: f, addWidgetComponent: p, addWidgetComponentText: d, onRemove: o, frameComponent: s, widgets: v });
-      });return r.default.createElement("div", { className: t }, y);
+      });return r.default.createElement("div", { id: "row" + u, key: "row" + u, style: { height: "100%" }, className: t }, y);
     }u.propTypes = { rowClass: o.default.string, columns: o.default.array, widgets: o.default.object, layout: o.default.object, rowIndex: o.default.number, editable: o.default.bool, frameComponent: o.default.func, editableColumnClass: o.default.string, droppableColumnClass: o.default.string, addWidgetComponent: o.default.func, addWidgetComponentText: o.default.string, onAdd: o.default.func, onRemove: o.default.func, onMove: o.default.func, onEdit: o.default.func }, u.defaultProps = { rowClass: "row" }, t.default = u;
   }, function (e, t, n) {
     "use strict";
@@ -22256,7 +22256,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
               y = e.onRemove,
               b = e.frameComponent,
               m = e.widgets,
-              O = t;return O = a ? t + " " + d : O, O = s && l ? O + " " + p : O, u(i.default.createElement("div", { className: O }, i.default.createElement(f.default, { tabs: n.rows[r].columns[o].tabs, layout: n, rowIndex: r, columnIndex: o, widgets: m, onRemove: y, frameComponent: b, onMove: v, editable: a, onAdd: c, addWidgetComponentText: h, addWidgetComponent: g })));
+              O = e.key,
+              w = t;w = a ? t + " " + d : w, w = s && l ? w + " " + p : w;return u(i.default.createElement("div", { style: { height: "100%" }, id: "column" + o, key: "column" + o, className: w }, i.default.createElement(f.default, { key: O, tabs: n.rows[r].columns[o].tabs, layout: n, rowIndex: r, columnIndex: o, widgets: m, onRemove: y, frameComponent: b, onMove: v, editable: a, onAdd: c, addWidgetComponentText: h, addWidgetComponent: g })));
         } }]), t;
     }()) || r;h.propTypes = { children: u.default.node, className: u.default.string, onAdd: u.default.func, layout: u.default.object, rowIndex: u.default.number, columnIndex: u.default.number, editable: u.default.bool, isOver: u.default.bool, canDrop: u.default.bool, editableColumnClass: u.default.string, droppableColumnClass: u.default.string, addWidgetComponentText: u.default.string, connectDropTarget: u.default.func, addWidgetComponent: u.default.func }, h.defaultProps = { editableColumnClass: "editable-column", droppableColumnClass: "droppable-column" }, t.default = h;
   }, function (e, t, n) {
@@ -22387,7 +22388,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           }),
               y = t.map(function (e, t) {
             return a.default.createElement(i.default, { key: "tab-body" + r.toString() + o.toString() + t.toString(), layout: n, rowIndex: r, columnIndex: o, tabIndex: t, widgets: g, onRemove: c, frameComponent: s, onMove: l, editable: f, onAdd: d, addWidgetComponentText: p, addWidgetComponent: h, active: t ? null : "active" });
-          });return a.default.createElement("div", null, a.default.createElement("ul", { className: "nav nav-tabs" }, v), a.default.createElement("div", { className: "tab-content" }, y));
+          }),
+              b = { height: "100%" };return a.default.createElement("div", { style: b }, a.default.createElement("ul", { className: "nav nav-tabs" }, v), a.default.createElement("div", { style: b, className: "tab-content" }, y));
         } }]), t;
     }();t.default = s;
   }, function (e, t, n) {
@@ -22434,7 +22436,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
               h(t, n, r, c);
             } }) : a.default.createElement(i.default, { text: g, onClick: function onClick() {
               h(t, n, r, c);
-            } });var m = y ? "tab-pane fade in active" : "tab-pane fade in";return a.default.createElement("div", { id: "tab" + n.toString() + r.toString() + c.toString(), className: m }, p && b, a.default.createElement(u.default, { key: r, widgets: this.props.layout.rows[n].columns[r].tabs[c].widgets, containerClassName: this.props.layout.rows[n].columns[r].containerClassName, widgetTypes: s, onRemove: l, layout: t, rowIndex: n, columnIndex: r, tabIndex: c, editable: p, frameComponent: f, onMove: d }));
+            } });var m = y ? "tab-pane fade in active" : "tab-pane fade in";return a.default.createElement("div", { id: "tab" + n.toString() + r.toString() + c.toString(), className: m, style: { height: "100%" } }, p && b, a.default.createElement(u.default, { key: "widgets" + n.toString() + r.toString() + c.toString(), widgets: this.props.layout.rows[n].columns[r].tabs[c].widgets, containerClassName: this.props.layout.rows[n].columns[r].containerClassName, widgetTypes: s, onRemove: l, layout: t, rowIndex: n, columnIndex: r, tabIndex: c, editable: p, frameComponent: f, onMove: d }));
         } }]), t;
     }();t.default = s;
   }, function (e, t, n) {
@@ -22460,19 +22462,27 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           u = e.layout,
           c = e.columnIndex,
           s = e.rowIndex,
-          l = e.editable,
-          f = e.frameComponent,
-          d = e.onMove,
-          p = e.containerClassName,
-          h = e.onEdit,
-          g = t.map(function (e, t) {
-        return o.default.createElement(i.default, { key: t, widgetName: e.key, title: n[e.key].title, onRemove: a, layout: u, columnIndex: c, rowIndex: s, widgetIndex: t, editable: l, frameComponent: f, frameSettings: n[e.key].frameSettings, onMove: d, onEdit: h }, (0, r.createElement)(n[e.key].type, n[e.key].props));
-      });return o.default.createElement("div", { className: p }, g);
+          l = e.tabIndex,
+          f = e.editable,
+          d = e.frameComponent,
+          p = e.onMove,
+          h = e.containerClassName,
+          g = e.onEdit,
+          v = t.map(function (e, t) {
+        return o.default.createElement(i.default, { key: "widgetframe-" + s.toString() + c.toString() + l.toString() + t.toString(), widgetName: e.key, title: n[e.key].title, onRemove: a, layout: u, columnIndex: c, rowIndex: s, tabIndex: l, widgetIndex: t, editable: f, frameComponent: d, frameSettings: n[e.key].frameSettings, onMove: p, onEdit: g }, (0, r.createElement)(n[e.key].type, n[e.key].props));
+      });return o.default.createElement("div", { style: { height: "100%" }, className: h }, v);
     };c.propTypes = { containerClassName: a.default.string, widgets: a.default.array, widgetTypes: a.default.object, onRemove: a.default.func, layout: a.default.object, columnIndex: a.default.number, rowIndex: a.default.number, editable: a.default.bool, frameComponent: a.default.func, onMove: a.default.func, onEdit: a.default.func }, t.default = c;
   }, function (e, t, n) {
     "use strict";
     Object.defineProperty(t, "__esModule", { value: !0 });var r,
-        o = function () {
+        o = Object.assign || function (e) {
+      for (var t = 1; t < arguments.length; t++) {
+        var n = arguments[t];for (var r in n) {
+          Object.prototype.hasOwnProperty.call(n, r) && (e[r] = n[r]);
+        }
+      }return e;
+    },
+        a = function () {
       function e(e, t) {
         for (var n = 0; n < t.length; n++) {
           var r = t[n];r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(e, r.key, r);
@@ -22481,34 +22491,34 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         return n && e(t.prototype, n), r && e(t, r), t;
       };
     }(),
-        a = n(0),
-        i = p(a),
-        u = p(n(2)),
-        c = n(184),
-        s = n(18),
-        l = n(57),
-        f = n(32),
-        d = p(n(185));function p(e) {
+        i = n(0),
+        u = h(i),
+        c = h(n(2)),
+        s = n(184),
+        l = n(18),
+        f = n(57),
+        d = n(32),
+        p = h(n(185));function h(e) {
       return e && e.__esModule ? e : { default: e };
-    }function h(e, t) {
+    }function g(e, t) {
       if (!e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return !t || "object" != (typeof t === "undefined" ? "undefined" : _typeof(t)) && "function" != typeof t ? e : t;
-    }var g = { hover: function hover(e, t, n) {
+    }var v = { hover: function hover(e, t, n) {
         var r = t.getItem().widgetIndex,
             o = e.widgetIndex;if (r !== o) {
-          var a = (0, c.findDOMNode)(n).getBoundingClientRect(),
+          var a = (0, s.findDOMNode)(n).getBoundingClientRect(),
               i = (a.bottom - a.top) / 2,
               u = t.getClientOffset().y - a.top;if (!(r < o && u < i || r > o && u > i)) {
-            var s = e.layout,
+            var c = e.layout,
                 l = e.columnIndex,
-                d = e.rowIndex;if (t.getItem().rowIndex === d && t.getItem().columnIndex === l) {
-              var p = (0, f.sortWidget)(s, { rowIndex: d, columnIndex: l, widgetIndex: r }, { rowIndex: d, columnIndex: l, widgetIndex: o }, t.getItem().widgetName);e.onMove(p), t.getItem().widgetIndex = o;
+                f = e.rowIndex;if (t.getItem().rowIndex === f && t.getItem().columnIndex === l) {
+              var p = (0, d.sortWidget)(c, { rowIndex: f, columnIndex: l, widgetIndex: r }, { rowIndex: f, columnIndex: l, widgetIndex: o }, t.getItem().widgetName);e.onMove(p), t.getItem().widgetIndex = o;
             }
           }
         }
       } },
-        v = (0, s.DropTarget)(l.WIDGET, g, function (e) {
+        y = (0, l.DropTarget)(f.WIDGET, v, function (e) {
       return { connectDropTarget: e.dropTarget() };
-    })(r = (0, s.DragSource)(l.WIDGET, { beginDrag: function beginDrag(e) {
+    })(r = (0, l.DragSource)(f.WIDGET, { beginDrag: function beginDrag(e) {
         return { widgetName: e.widgetName, rowIndex: e.rowIndex, columnIndex: e.columnIndex, widgetIndex: e.widgetIndex };
       } }, function (e, t) {
       return { connectDragSource: e.dragSource(), isDragging: t.isDragging() };
@@ -22518,39 +22528,47 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function");
         }(this, t);for (var o = arguments.length, a = Array(o), i = 0; i < o; i++) {
           a[i] = arguments[i];
-        }return n = r = h(this, (e = t.__proto__ || Object.getPrototypeOf(t)).call.apply(e, [this].concat(a))), r.edit = function () {
+        }return n = r = g(this, (e = t.__proto__ || Object.getPrototypeOf(t)).call.apply(e, [this].concat(a))), r.edit = function () {
           var e = r.props,
               t = e.layout,
               n = e.rowIndex,
               o = e.columnIndex,
-              a = e.widgetIndex;r.props.onEdit(t.rows[n].columns[o].widgets[a].key);
+              a = e.tabIndex,
+              i = e.widgetIndex;r.props.onEdit(t.rows[n].columns[o].tabs[a].widgets[i].key);
         }, r.remove = function () {
           var e = r.props,
               t = e.layout,
               n = e.rowIndex,
               o = e.columnIndex,
-              a = e.widgetIndex,
-              i = (0, f.removeWidget)(t, n, o, a);r.props.onRemove(i, n, o, a);
-        }, h(r, n);
+              a = e.tabIndex,
+              i = e.widgetIndex,
+              u = (0, d.removeWidget)(t, n, o, a, i);r.props.onRemove(u, n, o, a, i);
+        }, g(r, n);
       }return function (e, t) {
         if ("function" != typeof t && null !== t) throw new TypeError("Super expression must either be null or a function, not " + (typeof t === "undefined" ? "undefined" : _typeof(t)));e.prototype = Object.create(t && t.prototype, { constructor: { value: e, enumerable: !1, writable: !0, configurable: !0 } }), t && (Object.setPrototypeOf ? Object.setPrototypeOf(e, t) : e.__proto__ = t);
-      }(t, a.Component), o(t, [{ key: "render", value: function value() {
+      }(t, i.Component), a(t, [{ key: "render", value: function value() {
           var e = this.props,
               t = e.frameComponent,
               n = e.children,
               r = e.editable,
-              o = e.title,
-              u = e.frameSettings,
-              c = e.connectDragSource,
-              s = e.connectDropTarget,
-              l = e.isDragging,
-              f = e.rowIndex,
-              p = e.columnIndex,
-              h = e.widgetIndex,
-              g = null;g = t ? (0, a.createElement)(t, { children: n, editable: r, title: o, settings: u, onRemove: this.remove, onEdit: this.edit, rowIndex: f, columnIndex: p, widgetIndex: h, isDragging: l }) : i.default.createElement(d.default, { title: o, editable: r, children: n, onRemove: this.remove, onEdit: this.edit });var v = l ? 0 : 1,
-              y = i.default.createElement("div", { style: { opacity: v } }, g);return r ? c(s(y)) : y;
+              a = e.title,
+              c = e.frameSettings,
+              s = e.connectDragSource,
+              l = e.connectDropTarget,
+              f = e.isDragging,
+              d = e.rowIndex,
+              h = e.columnIndex,
+              g = e.tabIndex,
+              v = e.widgetIndex,
+              y = e.layout,
+              b = null;b = t ? (0, i.createElement)(t, { children: n, editable: r, title: a, settings: c, onRemove: this.remove, onEdit: this.edit, rowIndex: d, columnIndex: h, tabIndex: g, widgetIndex: v, isDragging: f }) : u.default.createElement(p.default, { title: a, editable: r, children: n, onRemove: this.remove, onEdit: this.edit });var m = null;try {
+            m = y.rows[d].columns[h].tabs[g].widgetSizes[v];
+          } catch (e) {
+            m = { height: 100 / y.rows[d].columns[h].tabs[g].widgets.length + "%" };
+          }var O = f ? 0 : 1,
+              w = u.default.createElement("div", { style: o({ opacity: O }, m) }, b);return r ? s(l(w)) : w;
         } }]), t;
-    }()) || r) || r;v.propTypes = { children: u.default.element, layout: u.default.object, columnIndex: u.default.number, rowIndex: u.default.number, widgetIndex: u.default.number, editable: u.default.bool, frameComponent: u.default.func, frameSettings: u.default.object, widgetName: u.default.string, title: u.default.string, isDragging: u.default.bool, connectDragSource: u.default.func, connectDropTarget: u.default.func, onRemove: u.default.func, onEdit: u.default.func }, v.defaultProps = { frameSettings: {} }, t.default = v;
+    }()) || r) || r;y.propTypes = { children: c.default.element, layout: c.default.object, columnIndex: c.default.number, rowIndex: c.default.number, widgetIndex: c.default.number, editable: c.default.bool, frameComponent: c.default.func, frameSettings: c.default.object, widgetName: c.default.string, title: c.default.string, isDragging: c.default.bool, connectDragSource: c.default.func, connectDropTarget: c.default.func, onRemove: c.default.func, onEdit: c.default.func }, y.defaultProps = { frameSettings: {} }, t.default = y;
   }, function (e, n) {
     e.exports = t;
   }, function (e, t, n) {
@@ -22825,6 +22843,9 @@ var CustomFrame = function (_React$Component) {
     //   return {onRemove, editable, title};
     // }
     CustomFrame.prototype.render = function render() {
+        var style = {
+            height: '100%'
+        };
         var _props = this.props,
             children = _props.children,
             onRemove = _props.onRemove,
@@ -22868,11 +22889,11 @@ var CustomFrame = function (_React$Component) {
         }
         return _react2.default.createElement(
             'div',
-            { className: 'panel panel-default' },
+            { style: style, className: 'panel panel-default' },
             header,
             _react2.default.createElement(
                 'div',
-                { className: 'panel-body widget' },
+                { style: style, className: 'panel-body widget' },
                 children
             )
         );

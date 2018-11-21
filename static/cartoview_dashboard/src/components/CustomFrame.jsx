@@ -8,6 +8,9 @@ class CustomFrame extends React.Component {
     //   return {onRemove, editable, title};
     // }
     render( ) {
+        const style = {
+            height: '100%',
+        };
         var { children, onRemove, editable, title } = this.props;
         const editWidgetConfig = this.context.configManager.editWidgetConfig;
         var header = null;
@@ -28,9 +31,9 @@ class CustomFrame extends React.Component {
             header = <div className="panel-heading">{title}</div>
         }
         return (
-            <div className="panel panel-default">
+            <div style={style} className="panel panel-default">
         {header}
-        <div className="panel-body widget">
+        <div style={style} className="panel-body widget">
             {children}
         </div>
       </div>
