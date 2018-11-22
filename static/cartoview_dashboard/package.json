@@ -43,6 +43,7 @@
     "react-markdown": "^2.4.6",
     "react-modal": "^1.6.5",
     "react-tap-event-plugin": "^1.0.0",
+    "sweetalert-react": "^0.4.11",
     "url-assembler": "^1.2.9"
   },
   "peerDependencies": {

@@ -640,7 +640,7 @@ function isUndefined(arg) {
 
 /***/ }),
 
-/***/ 300:
+/***/ 304:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1276,7 +1276,7 @@ URL.qs = qs;
 
 module.exports = URL;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)))
 
 /***/ }),
 
@@ -1406,7 +1406,7 @@ module.exports = function required(port, protocol) {
 
 /***/ }),
 
-/***/ 634:
+/***/ 652:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1418,7 +1418,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _ArcGISRestService = __webpack_require__(300);
+var _ArcGISRestService = __webpack_require__(304);
 
 var _ArcGISRestService2 = _interopRequireDefault(_ArcGISRestService);
 
@@ -1677,4 +1677,4 @@ exports.default = LegendWidget;
 
 /***/ })
 
-},[634]);
+},[652]);

@@ -194,7 +194,7 @@ exports.default = new _events.EventEmitter();
 
 /***/ }),
 
-/***/ 19:
+/***/ 17:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -675,7 +675,7 @@ function isUndefined(arg) {
 
 /***/ }),
 
-/***/ 301:
+/***/ 305:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -705,11 +705,11 @@ var _util = __webpack_require__(20);
 
 var _util2 = _interopRequireDefault(_util);
 
-var _LayerIdService = __webpack_require__(333);
+var _LayerIdService = __webpack_require__(337);
 
 var _LayerIdService2 = _interopRequireDefault(_LayerIdService);
 
-var _WFSService = __webpack_require__(334);
+var _WFSService = __webpack_require__(338);
 
 var _WFSService2 = _interopRequireDefault(_WFSService);
 
@@ -986,7 +986,7 @@ exports.default = new MapConfigService();
 
 /***/ }),
 
-/***/ 302:
+/***/ 306:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1404,7 +1404,7 @@ exports.default = new MapConfigTransformService();
 
 /***/ }),
 
-/***/ 333:
+/***/ 337:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1452,7 +1452,7 @@ exports.default = new LayerIdService();
 
 /***/ }),
 
-/***/ 334:
+/***/ 338:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1482,27 +1482,27 @@ var _util = __webpack_require__(20);
 
 var _util2 = _interopRequireDefault(_util);
 
-var _jsonix = __webpack_require__(56);
+var _jsonix = __webpack_require__(57);
 
 var _urlParse = __webpack_require__(42);
 
 var _urlParse2 = _interopRequireDefault(_urlParse);
 
-var _XSD_1_ = __webpack_require__(628);
+var _XSD_1_ = __webpack_require__(645);
 
-var _XLink_1_ = __webpack_require__(74);
+var _XLink_1_ = __webpack_require__(77);
 
-var _OWS_1_0_ = __webpack_require__(500);
+var _OWS_1_0_ = __webpack_require__(507);
 
-var _Filter_1_1_ = __webpack_require__(498);
+var _Filter_1_1_ = __webpack_require__(505);
 
-var _SMIL_2_ = __webpack_require__(501);
+var _SMIL_2_ = __webpack_require__(508);
 
-var _SMIL_2_0_Language = __webpack_require__(502);
+var _SMIL_2_0_Language = __webpack_require__(509);
 
-var _GML_3_1_ = __webpack_require__(499);
+var _GML_3_1_ = __webpack_require__(506);
 
-var _WFS_1_1_ = __webpack_require__(503);
+var _WFS_1_1_ = __webpack_require__(510);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1892,7 +1892,7 @@ var WFSService = function () {
 }();
 
 exports.default = new WFSService();
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)))
 
 /***/ }),
 
@@ -2308,7 +2308,7 @@ URL.qs = qs;
 
 module.exports = URL;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)))
 
 /***/ }),
 
@@ -2392,7 +2392,7 @@ exports.parse = querystring;
 
 /***/ }),
 
-/***/ 498:
+/***/ 505:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var Filter_1_1_0_Module_Factory = function () {
@@ -3163,7 +3163,7 @@ else {
 
 /***/ }),
 
-/***/ 499:
+/***/ 506:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var GML_3_1_1_Module_Factory = function () {
@@ -12958,7 +12958,7 @@ else {
 
 /***/ }),
 
-/***/ 500:
+/***/ 507:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var OWS_1_0_0_Module_Factory = function () {
@@ -13631,7 +13631,7 @@ else {
 
 /***/ }),
 
-/***/ 501:
+/***/ 508:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var SMIL_2_0_Module_Factory = function () {
@@ -13891,7 +13891,7 @@ else {
 
 /***/ }),
 
-/***/ 502:
+/***/ 509:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var SMIL_2_0_Language_Module_Factory = function () {
@@ -14586,7 +14586,7 @@ else {
 
 /***/ }),
 
-/***/ 503:
+/***/ 510:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var WFS_1_1_0_Module_Factory = function () {
@@ -15547,7 +15547,7 @@ module.exports = function required(port, protocol) {
 
 /***/ }),
 
-/***/ 56:
+/***/ 57:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _jsonix_factory = function(_jsonix_xmldom, _jsonix_xmlhttprequest, _jsonix_fs)
@@ -21686,7 +21686,7 @@ else
 
 /***/ }),
 
-/***/ 628:
+/***/ 645:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var XSD_1_0_Module_Factory = function () {
@@ -23106,7 +23106,7 @@ else {
 
 /***/ }),
 
-/***/ 635:
+/***/ 653:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23124,15 +23124,15 @@ var _FieldSet2 = __webpack_require__(10);
 
 var _FieldSet3 = _interopRequireDefault(_FieldSet2);
 
-var _MapConfigService = __webpack_require__(301);
+var _MapConfigService = __webpack_require__(305);
 
 var _MapConfigService2 = _interopRequireDefault(_MapConfigService);
 
-var _MapConfigTransformService = __webpack_require__(302);
+var _MapConfigTransformService = __webpack_require__(306);
 
 var _MapConfigTransformService2 = _interopRequireDefault(_MapConfigTransformService);
 
-var _propTypes = __webpack_require__(19);
+var _propTypes = __webpack_require__(17);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -23144,11 +23144,11 @@ var _reactDom = __webpack_require__(25);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _WMSService = __webpack_require__(75);
+var _WMSService = __webpack_require__(78);
 
 var _WMSService2 = _interopRequireDefault(_WMSService);
 
-var _classnames = __webpack_require__(76);
+var _classnames = __webpack_require__(79);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -23622,7 +23622,7 @@ Popup.propTypes = {
 
 /***/ }),
 
-/***/ 74:
+/***/ 77:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var XLink_1_0_Module_Factory = function () {
@@ -23856,7 +23856,7 @@ else {
 
 /***/ }),
 
-/***/ 75:
+/***/ 78:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23890,7 +23890,7 @@ var _openlayers = __webpack_require__(11);
 
 var _openlayers2 = _interopRequireDefault(_openlayers);
 
-var _SLDService = __webpack_require__(81);
+var _SLDService = __webpack_require__(84);
 
 var _SLDService2 = _interopRequireDefault(_SLDService);
 
@@ -24059,7 +24059,7 @@ exports.default = new WMSService();
 
 /***/ }),
 
-/***/ 76:
+/***/ 79:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -24115,7 +24115,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 81:
+/***/ 84:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24137,15 +24137,15 @@ var _createClass = function () { function defineProperties(target, props) { for 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * See the License for the specific language governing permissions and limitations under the License.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
 
-var _jsonix = __webpack_require__(56);
+var _jsonix = __webpack_require__(57);
 
-var _XLink_1_ = __webpack_require__(74);
+var _XLink_1_ = __webpack_require__(77);
 
-var _Filter_1_0_ = __webpack_require__(89);
+var _Filter_1_0_ = __webpack_require__(92);
 
-var _GML_2_1_ = __webpack_require__(90);
+var _GML_2_1_ = __webpack_require__(93);
 
-var _SLD_1_0_0_GeoServer = __webpack_require__(91);
+var _SLD_1_0_0_GeoServer = __webpack_require__(94);
 
 var _util = __webpack_require__(20);
 
@@ -24931,7 +24931,7 @@ exports.default = new SLDService();
 
 /***/ }),
 
-/***/ 89:
+/***/ 92:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var Filter_1_0_0_Module_Factory = function () {
@@ -25462,7 +25462,7 @@ else {
 
 /***/ }),
 
-/***/ 90:
+/***/ 93:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var GML_2_1_2_Module_Factory = function () {
@@ -26024,7 +26024,7 @@ else {
 
 /***/ }),
 
-/***/ 91:
+/***/ 94:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var SLD_1_0_0_GeoServer_Module_Factory = function () {
@@ -27214,4 +27214,4 @@ else {
 
 /***/ })
 
-},[635]);
+},[653]);

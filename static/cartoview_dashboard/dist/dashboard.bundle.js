@@ -180,16 +180,16 @@ exports.default = FieldSet;
 
 /***/ }),
 
-/***/ 108:
+/***/ 111:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(594);
+module.exports = __webpack_require__(601);
 
 
 
 /***/ }),
 
-/***/ 110:
+/***/ 113:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -213,7 +213,7 @@ module.exports = emptyObject;
 
 /***/ }),
 
-/***/ 111:
+/***/ 114:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -311,7 +311,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 /***/ }),
 
-/***/ 112:
+/***/ 115:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -325,9 +325,9 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 if (true) {
-  var invariant = __webpack_require__(78);
-  var warning = __webpack_require__(79);
-  var ReactPropTypesSecret = __webpack_require__(321);
+  var invariant = __webpack_require__(81);
+  var warning = __webpack_require__(82);
+  var ReactPropTypesSecret = __webpack_require__(325);
   var loggedTypeFailures = {};
 }
 
@@ -378,7 +378,7 @@ module.exports = checkPropTypes;
 
 /***/ }),
 
-/***/ 113:
+/***/ 116:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -418,13 +418,13 @@ if (false) {
   checkDCE();
   module.exports = require('./cjs/react-dom.production.min.js');
 } else {
-  module.exports = __webpack_require__(322);
+  module.exports = __webpack_require__(326);
 }
 
 
 /***/ }),
 
-/***/ 114:
+/***/ 117:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -468,7 +468,7 @@ exports.WidgetContainerConfigSchema = WidgetContainerConfigSchema;
 
 /***/ }),
 
-/***/ 122:
+/***/ 125:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -483,7 +483,7 @@ exports.WidgetContainerConfigSchema = WidgetContainerConfigSchema;
 
 
 var React = __webpack_require__(1);
-var factory = __webpack_require__(121);
+var factory = __webpack_require__(124);
 
 if (typeof React === 'undefined') {
   throw Error(
@@ -504,7 +504,7 @@ module.exports = factory(
 
 /***/ }),
 
-/***/ 19:
+/***/ 17:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -539,7 +539,7 @@ if (true) {
 
 /***/ }),
 
-/***/ 259:
+/***/ 262:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -742,7 +742,7 @@ if (true) {
 
 /***/ }),
 
-/***/ 286:
+/***/ 289:
 /***/ (function(module, exports) {
 
 /*!
@@ -799,7 +799,103 @@ module.exports = findTabbableDescendants;
 
 /***/ }),
 
-/***/ 295:
+/***/ 29:
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function() {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		var result = [];
+		for(var i = 0; i < this.length; i++) {
+			var item = this[i];
+			if(item[2]) {
+				result.push("@media " + item[2] + "{" + item[1] + "}");
+			} else {
+				result.push(item[1]);
+			}
+		}
+		return result.join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+
+/***/ }),
+
+/***/ 296:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+var defaultParams = {
+  title: '',
+  text: '',
+  type: null,
+  allowOutsideClick: false,
+  showConfirmButton: true,
+  showCancelButton: false,
+  closeOnConfirm: true,
+  closeOnCancel: true,
+  confirmButtonText: 'OK',
+  confirmButtonColor: '#8CD4F5',
+  cancelButtonText: 'Cancel',
+  imageUrl: null,
+  imageSize: null,
+  timer: null,
+  customClass: '',
+  html: false,
+  animation: true,
+  allowEscapeKey: true,
+  inputType: 'text',
+  inputPlaceholder: '',
+  inputValue: '',
+  showLoaderOnConfirm: false
+};
+
+exports['default'] = defaultParams;
+module.exports = exports['default'];
+
+/***/ }),
+
+/***/ 299:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -898,7 +994,7 @@ exports.default = BaseWidget;
 
 /***/ }),
 
-/***/ 296:
+/***/ 300:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -906,9 +1002,9 @@ exports.default = BaseWidget;
 
 exports.__esModule = true;
 
-__webpack_require__(616);
+__webpack_require__(623);
 
-var _reactDazzle = __webpack_require__(324);
+var _reactDazzle = __webpack_require__(328);
 
 var _reactDazzle2 = _interopRequireDefault(_reactDazzle);
 
@@ -916,7 +1012,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _AddWidgetDialog = __webpack_require__(325);
+var _AddWidgetDialog = __webpack_require__(329);
 
 var _AddWidgetDialog2 = _interopRequireDefault(_AddWidgetDialog);
 
@@ -924,25 +1020,31 @@ var _ConfigManager = __webpack_require__(43);
 
 var _ConfigManager2 = _interopRequireDefault(_ConfigManager);
 
-var _Container = __webpack_require__(327);
+var _Container = __webpack_require__(331);
 
 var _Container2 = _interopRequireDefault(_Container);
 
-var _CustomFrame = __webpack_require__(328);
+var _CustomFrame = __webpack_require__(332);
 
 var _CustomFrame2 = _interopRequireDefault(_CustomFrame);
 
-var _Header = __webpack_require__(330);
+var _Header = __webpack_require__(334);
 
 var _Header2 = _interopRequireDefault(_Header);
 
-var _DashboardToolbar = __webpack_require__(329);
+var _DashboardToolbar = __webpack_require__(333);
 
 var _DashboardToolbar2 = _interopRequireDefault(_DashboardToolbar);
 
-var _WidgetConfigDialog = __webpack_require__(332);
+var _WidgetConfigDialog = __webpack_require__(336);
 
 var _WidgetConfigDialog2 = _interopRequireDefault(_WidgetConfigDialog);
+
+var _sweetalertReact = __webpack_require__(628);
+
+var _sweetalertReact2 = _interopRequireDefault(_sweetalertReact);
+
+__webpack_require__(624);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -958,6 +1060,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 // Our styles
 //import '../styles/custom.css'
+
+// import Sweat Alert
+
+
 var widgetId = 0;
 
 var Dashboard = function (_Component) {
@@ -1002,7 +1108,8 @@ var Dashboard = function (_Component) {
             title: title,
             abstract: abstract,
             addWidgetDialogOpen: false,
-            addWidgetOptions: null
+            addWidgetOptions: null,
+            showRemoveWidgetAlert: false
         };
         _this.configManager = new _ConfigManager2.default(_this);
         _this.widgets = {};
@@ -1032,6 +1139,8 @@ var Dashboard = function (_Component) {
 
 
     Dashboard.prototype.render = function render() {
+        var _this2 = this;
+
         var _state = this.state,
             addWidgetDialogOpen = _state.addWidgetDialogOpen,
             widgets = _state.widgets,
@@ -1048,6 +1157,14 @@ var Dashboard = function (_Component) {
         return _react2.default.createElement(
             _Container2.default,
             null,
+            _react2.default.createElement(_sweetalertReact2.default, {
+                show: this.state.showRemoveWidgetAlert,
+                title: 'Tab Already contains widgets!',
+                text: 'Please remove all the widgets before you can remove the tab',
+                onConfirm: function onConfirm() {
+                    return _this2.setState({ showRemoveWidgetAlert: false });
+                }
+            }),
             _react2.default.createElement(_AddWidgetDialog2.default, { widgets: widgets, isOpen: addWidgetDialogOpen, onRequestClose: this.onRequestClose, onWidgetSelect: this.handleWidgetSelection }),
             _react2.default.createElement(_WidgetConfigDialog2.default, { isOpen: widgetConfigDialogOpen, widgetId: configWidgetId }),
             _react2.default.createElement(_Header2.default, { editable: editable, title: title, abstract: abstract, ref: 'header', onChange: this.onHeaderChanged }),
@@ -1060,7 +1177,9 @@ var Dashboard = function (_Component) {
                 editable: editable,
                 onAdd: this.onAdd,
                 onMove: this.onMove,
-                addWidgetComponentText: 'Add New Widget'
+                addWidgetComponentText: 'Add New Widget',
+                onRemoveTab: this.onRemoveTab,
+                onAddTab: this.onAddTab
             })
         );
     };
@@ -1084,10 +1203,36 @@ var Dashboard = function (_Component) {
 }(_react.Component);
 
 var _initialiseProps = function _initialiseProps() {
-    var _this2 = this;
+    var _this3 = this;
+
+    this.onRemoveTab = function (rowIndex, columnIndex, tabIndex) {
+        var updatedLayout = _this3.state.layout;
+        var widgetCount = updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgets.length;
+        var hasWidgets = widgetCount ? true : false;
+        if (!hasWidgets) {
+            updatedLayout.rows[rowIndex].columns[columnIndex].tabs.splice(tabIndex, 1);
+            _this3.setState({
+                layout: updatedLayout
+            });
+        } else {
+            _this3.setState({
+                showRemoveWidgetAlert: true
+            });
+        }
+    };
+
+    this.onAddTab = function (rowIndex, columnIndex) {
+        var updatedLayout = _this3.state.layout;
+        var numberOfTabs = updatedLayout.rows[rowIndex].columns[columnIndex].tabs.length;
+        var newEmptyTab = { widgets: [] };
+        updatedLayout.rows[rowIndex].columns[columnIndex].tabs.splice(numberOfTabs, 0, newEmptyTab);
+        _this3.setState({
+            layout: updatedLayout
+        });
+    };
 
     this.onRemove = function (layout) {
-        _this2.setState({
+        _this3.setState({
             layout: layout,
             saved: false
         });
@@ -1097,7 +1242,7 @@ var _initialiseProps = function _initialiseProps() {
         // Open the AddWidget dialog by seting the 'addWidgetDialogOpen' to true.
         // Also preserve the details such as the layout, rowIndex, and columnIndex  in 'addWidgetOptions'.
         //  This will be used later when user picks a widget to add.
-        _this2.setState({
+        _this3.setState({
             saved: false,
             addWidgetDialogOpen: true,
             addWidgetOptions: {
@@ -1110,71 +1255,71 @@ var _initialiseProps = function _initialiseProps() {
     };
 
     this.onMove = function (layout) {
-        _this2.setState({
+        _this3.setState({
             saved: false,
             layout: layout
         });
     };
 
     this.onRequestClose = function () {
-        _this2.setState({
+        _this3.setState({
             addWidgetDialogOpen: false
         });
     };
 
     this.showWidgetConfigDialog = function (id) {
-        _this2.setState({
+        _this3.setState({
             widgetConfigDialogOpen: true,
             configWidgetId: id
         });
     };
 
     this.closeWidgetConfigDialog = function (id, config) {
-        _this2.setState({
+        _this3.setState({
             widgetConfigDialogOpen: false
         });
     };
 
     this.updateWidget = function (widget, config) {
-        var widgets = _this2.state.widgets;
+        var widgets = _this3.state.widgets;
         if (widget) {
             widgets[widget.id].title = config.title;
             widgets[widget.id].props.config = config.widgetConfig;
         }
-        _this2.setState({ saved: false, widgets: widgets, widgetConfigDialogOpen: false });
+        _this3.setState({ saved: false, widgets: widgets, widgetConfigDialogOpen: false });
     };
 
     this.onHeaderChanged = function () {
-        _this2.setState({ saved: false });
+        _this3.setState({ saved: false });
     };
 
     this.save = function () {
-        _this2.setState({ saved: true });
+        _this3.setState({ saved: true });
     };
 
     this.toggleEdit = function () {
-        _this2.setState({
-            editable: !_this2.state.editable
+        _this3.setState({
+            editable: !_this3.state.editable
         });
     };
 
     this.handleWidgetSelection = function (widgetType) {
-        var id = _this2.getNewId();
+        var id = _this3.getNewId();
         var ref = function ref(w) {
             if (w) {
-                _this2.widgets[id] = w;
+                _this3.widgets[id] = w;
                 w.id = id;
             }
         };
-        _this2.state.widgets[id] = {
+        _this3.state.widgets[id] = {
             title: widgetType.displayName || widgetType.name,
             type: widgetType,
             props: { id: id, ref: ref, config: {}, isNew: true }
         };
-        _this2.setState({
-            widgets: _this2.state.widgets
+        _this3.setState({
+            widgets: _this3.state.widgets
         });
-        var _state$addWidgetOptio = _this2.state.addWidgetOptions,
+        var _state$addWidgetOptio = _this3.state.addWidgetOptions,
             layout = _state$addWidgetOptio.layout,
             rowIndex = _state$addWidgetOptio.rowIndex,
             columnIndex = _state$addWidgetOptio.columnIndex,
@@ -1183,7 +1328,7 @@ var _initialiseProps = function _initialiseProps() {
          * 'AddWidget' method gives you the new layout.
          */
 
-        _this2.setState({
+        _this3.setState({
             layout: (0, _reactDazzle.addWidget)(layout, rowIndex, columnIndex, tabIndex, id),
             addWidgetDialogOpen: false
         });
@@ -1201,36 +1346,7 @@ exports.default = Dashboard;
 
 /***/ }),
 
-/***/ 31:
-/***/ (function(module, exports) {
-
-module.exports = function(module) {
-	if(!module.webpackPolyfill) {
-		module.deprecate = function() {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if(!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-
-/***/ }),
-
-/***/ 311:
+/***/ 315:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1270,7 +1386,7 @@ module.exports = ExecutionEnvironment;
 
 /***/ }),
 
-/***/ 312:
+/***/ 316:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1306,7 +1422,7 @@ module.exports = camelize;
 
 /***/ }),
 
-/***/ 313:
+/***/ 317:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1321,7 +1437,7 @@ module.exports = camelize;
 
 
 
-var camelize = __webpack_require__(312);
+var camelize = __webpack_require__(316);
 
 var msPattern = /^-ms-/;
 
@@ -1350,7 +1466,7 @@ module.exports = camelizeStyleName;
 
 /***/ }),
 
-/***/ 314:
+/***/ 318:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1365,7 +1481,7 @@ module.exports = camelizeStyleName;
  * 
  */
 
-var isTextNode = __webpack_require__(319);
+var isTextNode = __webpack_require__(323);
 
 /*eslint-disable no-bitwise */
 
@@ -1394,7 +1510,7 @@ module.exports = containsNode;
 
 /***/ }),
 
-/***/ 315:
+/***/ 319:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1437,7 +1553,260 @@ module.exports = getActiveElement;
 
 /***/ }),
 
-/***/ 316:
+/***/ 32:
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+var stylesInDom = {},
+	memoize = function(fn) {
+		var memo;
+		return function () {
+			if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+			return memo;
+		};
+	},
+	isOldIE = memoize(function() {
+		return /msie [6-9]\b/.test(self.navigator.userAgent.toLowerCase());
+	}),
+	getHeadElement = memoize(function () {
+		return document.head || document.getElementsByTagName("head")[0];
+	}),
+	singletonElement = null,
+	singletonCounter = 0,
+	styleElementsInsertedAtTop = [];
+
+module.exports = function(list, options) {
+	if(typeof DEBUG !== "undefined" && DEBUG) {
+		if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+	}
+
+	options = options || {};
+	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+	// tags it will allow on a page
+	if (typeof options.singleton === "undefined") options.singleton = isOldIE();
+
+	// By default, add <style> tags to the bottom of <head>.
+	if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
+
+	var styles = listToStyles(list);
+	addStylesToDom(styles, options);
+
+	return function update(newList) {
+		var mayRemove = [];
+		for(var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+			domStyle.refs--;
+			mayRemove.push(domStyle);
+		}
+		if(newList) {
+			var newStyles = listToStyles(newList);
+			addStylesToDom(newStyles, options);
+		}
+		for(var i = 0; i < mayRemove.length; i++) {
+			var domStyle = mayRemove[i];
+			if(domStyle.refs === 0) {
+				for(var j = 0; j < domStyle.parts.length; j++)
+					domStyle.parts[j]();
+				delete stylesInDom[domStyle.id];
+			}
+		}
+	};
+}
+
+function addStylesToDom(styles, options) {
+	for(var i = 0; i < styles.length; i++) {
+		var item = styles[i];
+		var domStyle = stylesInDom[item.id];
+		if(domStyle) {
+			domStyle.refs++;
+			for(var j = 0; j < domStyle.parts.length; j++) {
+				domStyle.parts[j](item.parts[j]);
+			}
+			for(; j < item.parts.length; j++) {
+				domStyle.parts.push(addStyle(item.parts[j], options));
+			}
+		} else {
+			var parts = [];
+			for(var j = 0; j < item.parts.length; j++) {
+				parts.push(addStyle(item.parts[j], options));
+			}
+			stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+		}
+	}
+}
+
+function listToStyles(list) {
+	var styles = [];
+	var newStyles = {};
+	for(var i = 0; i < list.length; i++) {
+		var item = list[i];
+		var id = item[0];
+		var css = item[1];
+		var media = item[2];
+		var sourceMap = item[3];
+		var part = {css: css, media: media, sourceMap: sourceMap};
+		if(!newStyles[id])
+			styles.push(newStyles[id] = {id: id, parts: [part]});
+		else
+			newStyles[id].parts.push(part);
+	}
+	return styles;
+}
+
+function insertStyleElement(options, styleElement) {
+	var head = getHeadElement();
+	var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
+	if (options.insertAt === "top") {
+		if(!lastStyleElementInsertedAtTop) {
+			head.insertBefore(styleElement, head.firstChild);
+		} else if(lastStyleElementInsertedAtTop.nextSibling) {
+			head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
+		} else {
+			head.appendChild(styleElement);
+		}
+		styleElementsInsertedAtTop.push(styleElement);
+	} else if (options.insertAt === "bottom") {
+		head.appendChild(styleElement);
+	} else {
+		throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
+	}
+}
+
+function removeStyleElement(styleElement) {
+	styleElement.parentNode.removeChild(styleElement);
+	var idx = styleElementsInsertedAtTop.indexOf(styleElement);
+	if(idx >= 0) {
+		styleElementsInsertedAtTop.splice(idx, 1);
+	}
+}
+
+function createStyleElement(options) {
+	var styleElement = document.createElement("style");
+	styleElement.type = "text/css";
+	insertStyleElement(options, styleElement);
+	return styleElement;
+}
+
+function createLinkElement(options) {
+	var linkElement = document.createElement("link");
+	linkElement.rel = "stylesheet";
+	insertStyleElement(options, linkElement);
+	return linkElement;
+}
+
+function addStyle(obj, options) {
+	var styleElement, update, remove;
+
+	if (options.singleton) {
+		var styleIndex = singletonCounter++;
+		styleElement = singletonElement || (singletonElement = createStyleElement(options));
+		update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
+		remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
+	} else if(obj.sourceMap &&
+		typeof URL === "function" &&
+		typeof URL.createObjectURL === "function" &&
+		typeof URL.revokeObjectURL === "function" &&
+		typeof Blob === "function" &&
+		typeof btoa === "function") {
+		styleElement = createLinkElement(options);
+		update = updateLink.bind(null, styleElement);
+		remove = function() {
+			removeStyleElement(styleElement);
+			if(styleElement.href)
+				URL.revokeObjectURL(styleElement.href);
+		};
+	} else {
+		styleElement = createStyleElement(options);
+		update = applyToTag.bind(null, styleElement);
+		remove = function() {
+			removeStyleElement(styleElement);
+		};
+	}
+
+	update(obj);
+
+	return function updateStyle(newObj) {
+		if(newObj) {
+			if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
+				return;
+			update(obj = newObj);
+		} else {
+			remove();
+		}
+	};
+}
+
+var replaceText = (function () {
+	var textStore = [];
+
+	return function (index, replacement) {
+		textStore[index] = replacement;
+		return textStore.filter(Boolean).join('\n');
+	};
+})();
+
+function applyToSingletonTag(styleElement, index, remove, obj) {
+	var css = remove ? "" : obj.css;
+
+	if (styleElement.styleSheet) {
+		styleElement.styleSheet.cssText = replaceText(index, css);
+	} else {
+		var cssNode = document.createTextNode(css);
+		var childNodes = styleElement.childNodes;
+		if (childNodes[index]) styleElement.removeChild(childNodes[index]);
+		if (childNodes.length) {
+			styleElement.insertBefore(cssNode, childNodes[index]);
+		} else {
+			styleElement.appendChild(cssNode);
+		}
+	}
+}
+
+function applyToTag(styleElement, obj) {
+	var css = obj.css;
+	var media = obj.media;
+
+	if(media) {
+		styleElement.setAttribute("media", media)
+	}
+
+	if(styleElement.styleSheet) {
+		styleElement.styleSheet.cssText = css;
+	} else {
+		while(styleElement.firstChild) {
+			styleElement.removeChild(styleElement.firstChild);
+		}
+		styleElement.appendChild(document.createTextNode(css));
+	}
+}
+
+function updateLink(linkElement, obj) {
+	var css = obj.css;
+	var sourceMap = obj.sourceMap;
+
+	if(sourceMap) {
+		// http://stackoverflow.com/a/26603875
+		css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+	}
+
+	var blob = new Blob([css], { type: "text/css" });
+
+	var oldSrc = linkElement.href;
+
+	linkElement.href = URL.createObjectURL(blob);
+
+	if(oldSrc)
+		URL.revokeObjectURL(oldSrc);
+}
+
+
+/***/ }),
+
+/***/ 320:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1474,7 +1843,7 @@ module.exports = hyphenate;
 
 /***/ }),
 
-/***/ 317:
+/***/ 321:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1489,7 +1858,7 @@ module.exports = hyphenate;
 
 
 
-var hyphenate = __webpack_require__(316);
+var hyphenate = __webpack_require__(320);
 
 var msPattern = /^ms-/;
 
@@ -1517,7 +1886,7 @@ module.exports = hyphenateStyleName;
 
 /***/ }),
 
-/***/ 318:
+/***/ 322:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1546,7 +1915,7 @@ module.exports = isNode;
 
 /***/ }),
 
-/***/ 319:
+/***/ 323:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1561,7 +1930,7 @@ module.exports = isNode;
  * @typechecks
  */
 
-var isNode = __webpack_require__(318);
+var isNode = __webpack_require__(322);
 
 /**
  * @param {*} object The object to check.
@@ -1575,7 +1944,7 @@ module.exports = isTextNode;
 
 /***/ }),
 
-/***/ 320:
+/***/ 324:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1647,7 +2016,7 @@ module.exports = shallowEqual;
 
 /***/ }),
 
-/***/ 321:
+/***/ 325:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1667,7 +2036,7 @@ module.exports = ReactPropTypesSecret;
 
 /***/ }),
 
-/***/ 322:
+/***/ 326:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1688,19 +2057,19 @@ if (true) {
   (function() {
 'use strict';
 
-var React = __webpack_require__(80);
-var invariant = __webpack_require__(78);
-var warning = __webpack_require__(79);
-var ExecutionEnvironment = __webpack_require__(311);
-var _assign = __webpack_require__(111);
-var emptyFunction = __webpack_require__(77);
-var checkPropTypes = __webpack_require__(112);
-var getActiveElement = __webpack_require__(315);
-var shallowEqual = __webpack_require__(320);
-var containsNode = __webpack_require__(314);
-var emptyObject = __webpack_require__(110);
-var hyphenateStyleName = __webpack_require__(317);
-var camelizeStyleName = __webpack_require__(313);
+var React = __webpack_require__(83);
+var invariant = __webpack_require__(81);
+var warning = __webpack_require__(82);
+var ExecutionEnvironment = __webpack_require__(315);
+var _assign = __webpack_require__(114);
+var emptyFunction = __webpack_require__(80);
+var checkPropTypes = __webpack_require__(115);
+var getActiveElement = __webpack_require__(319);
+var shallowEqual = __webpack_require__(324);
+var containsNode = __webpack_require__(318);
+var emptyObject = __webpack_require__(113);
+var hyphenateStyleName = __webpack_require__(321);
+var camelizeStyleName = __webpack_require__(317);
 
 /**
  * WARNING: DO NOT manually require this module.
@@ -18195,7 +18564,7 @@ module.exports = reactDom;
 
 /***/ }),
 
-/***/ 323:
+/***/ 327:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18216,12 +18585,12 @@ if (true) {
   (function() {
 'use strict';
 
-var _assign = __webpack_require__(111);
-var emptyObject = __webpack_require__(110);
-var invariant = __webpack_require__(78);
-var warning = __webpack_require__(79);
-var emptyFunction = __webpack_require__(77);
-var checkPropTypes = __webpack_require__(112);
+var _assign = __webpack_require__(114);
+var emptyObject = __webpack_require__(113);
+var invariant = __webpack_require__(81);
+var warning = __webpack_require__(82);
+var emptyFunction = __webpack_require__(80);
+var checkPropTypes = __webpack_require__(115);
 
 // TODO: this is special because it gets imported during build.
 
@@ -19616,7 +19985,7 @@ module.exports = react;
 
 /***/ }),
 
-/***/ 324:
+/***/ 328:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19625,7 +19994,7 @@ module.exports = react;
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 !function (e, t) {
-  "object" == ( false ? "undefined" : _typeof(exports)) && "object" == ( false ? "undefined" : _typeof(module)) ? module.exports = t(__webpack_require__(80), __webpack_require__(113)) :  true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(80), __webpack_require__(113)], __WEBPACK_AMD_DEFINE_FACTORY__ = (t),
+  "object" == ( false ? "undefined" : _typeof(exports)) && "object" == ( false ? "undefined" : _typeof(module)) ? module.exports = t(__webpack_require__(83), __webpack_require__(116)) :  true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(83), __webpack_require__(116)], __WEBPACK_AMD_DEFINE_FACTORY__ = (t),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : "object" == (typeof exports === "undefined" ? "undefined" : _typeof(exports)) ? exports.dazzle = t(require("react"), require("react-dom")) : e.dazzle = t(e.react, e["react-dom"]);
@@ -19722,7 +20091,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         if (c.canDragSource(e[p])) {
           d = e[p];break;
         }
-      }if (null === d) return;var h = null;r && ((0, o.default)("function" == typeof u, "When clientOffset is provided, getSourceClientOffset must be a function."), h = u(d));var g = l.getSource(d).beginDrag(c, d);(0, o.default)((0, i.default)(g), "Item must be an object."), l.pinSource(d);var v = l.getSourceType(d);return { type: s, itemType: v, item: g, sourceId: d, clientOffset: r, sourceClientOffset: h, isSourcePublic: n };
+      }if (null === d) return;var h = null;r && ((0, o.default)("function" == typeof u, "When clientOffset is provided, getSourceClientOffset must be a function."), h = u(d));var v = l.getSource(d).beginDrag(c, d);(0, o.default)((0, i.default)(v), "Item must be an object."), l.pinSource(d);var g = l.getSourceType(d);return { type: s, itemType: g, item: v, sourceId: d, clientOffset: r, sourceClientOffset: h, isSourcePublic: n };
     }, t.publishDragSource = function () {
       if (!this.getMonitor().isDragging()) return;return { type: l };
     }, t.hover = function (e) {
@@ -19732,8 +20101,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           c = this.getRegistry();(0, o.default)(i.isDragging(), "Cannot call hover while not dragging."), (0, o.default)(!i.didDrop(), "Cannot call hover after drop.");for (var s = 0; s < r.length; s++) {
         var l = r[s];(0, o.default)(r.lastIndexOf(l) === s, "Expected targetIds to be unique in the passed array.");var d = c.getTarget(l);(0, o.default)(d, "Expected targetIds to be registered.");
       }for (var p = i.getItemType(), h = r.length - 1; h >= 0; h--) {
-        var g = r[h],
-            v = c.getTargetType(g);(0, u.default)(v, p) || r.splice(h, 1);
+        var v = r[h],
+            g = c.getTargetType(v);(0, u.default)(g, p) || r.splice(h, 1);
       }for (var y = 0; y < r.length; y++) {
         var b = r[y],
             m = c.getTarget(b);m.hover(i, b);
@@ -19876,9 +20245,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           if (u) {
             var d = i(l);d && d !== u && c(s, d, f);
           }var p = r(l);o && (p = p.concat(o(l)));for (var h = 0; h < p.length; ++h) {
-            var g = p[h];if (!(e[g] || t[g] || f && f[g])) {
-              var v = a(l, g);try {
-                n(s, g, v);
+            var v = p[h];if (!(e[v] || t[v] || f && f[v])) {
+              var g = a(l, v);try {
+                n(s, v, g);
               } catch (e) {}
             }
           }return s;
@@ -19940,8 +20309,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     } : function (e) {
       return e && "function" == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype ? "symbol" : typeof e === "undefined" ? "undefined" : _typeof(e);
     };t.default = function (e) {
-      d.default.apply(void 0, ["DragDropContext", "backend"].concat(Array.prototype.slice.call(arguments)));var t = v(e),
-          n = g(t);return function (e) {
+      d.default.apply(void 0, ["DragDropContext", "backend"].concat(Array.prototype.slice.call(arguments)));var t = g(e),
+          n = v(t);return function (e) {
         var t,
             a,
             c = e.displayName || e.name || "Component",
@@ -19976,10 +20345,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         d = p(n(17));function p(e) {
       return e && e.__esModule ? e : { default: e };
     }var h = t.CHILD_CONTEXT_TYPES = { dragDropManager: c.default.object.isRequired },
-        g = t.createChildContext = function (e, t) {
+        v = t.createChildContext = function (e, t) {
       return { dragDropManager: new s.DragDropManager(e, t) };
     },
-        v = t.unpackBackendForEs5Users = function (e) {
+        g = t.unpackBackendForEs5Users = function (e) {
       var t = e;return "object" === (void 0 === t ? "undefined" : a(t)) && "function" == typeof t.default && (t = t.default), (0, l.default)("function" == typeof t, "Expected the backend to be a function or an ES6 module exporting a default function. Read more: http://react-dnd.github.io/react-dnd/docs-drag-drop-context.html"), t;
     };
   }, function (e, t) {
@@ -20038,15 +20407,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           d = o,
           p = !0,
           h = e.length,
-          g = [],
-          v = t.length;if (!h) return g;n && (t = i(t, u(n))), l ? (d = a, p = !1) : t.length >= s && (d = c, p = !1, t = new r(t));e: for (; ++f < h;) {
+          v = [],
+          g = t.length;if (!h) return v;n && (t = i(t, u(n))), l ? (d = a, p = !1) : t.length >= s && (d = c, p = !1, t = new r(t));e: for (; ++f < h;) {
         var y = e[f],
             b = null == n ? y : n(y);if (y = l || 0 !== y ? y : 0, p && b == b) {
-          for (var m = v; m--;) {
+          for (var m = g; m--;) {
             if (t[m] === b) continue e;
-          }g.push(y);
-        } else d(t, b, l) || g.push(y);
-      }return g;
+          }v.push(y);
+        } else d(t, b, l) || v.push(y);
+      }return v;
     };
   }, function (e, t, n) {
     var r = n(77),
@@ -20135,15 +20504,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           d = e.length,
           p = !0,
           h = [],
-          g = h;if (n) p = !1, f = a;else if (d >= s) {
-        var v = t ? null : u(e);if (v) return c(v);p = !1, f = i, g = new r();
-      } else g = t ? [] : h;e: for (; ++l < d;) {
+          v = h;if (n) p = !1, f = a;else if (d >= s) {
+        var g = t ? null : u(e);if (g) return c(g);p = !1, f = i, v = new r();
+      } else v = t ? [] : h;e: for (; ++l < d;) {
         var y = e[l],
             b = t ? t(y) : y;if (y = n || 0 !== y ? y : 0, p && b == b) {
-          for (var m = g.length; m--;) {
-            if (g[m] === b) continue e;
-          }t && g.push(b), h.push(y);
-        } else f(g, b, n) || (g !== h && g.push(b), h.push(y));
+          for (var m = v.length; m--;) {
+            if (v[m] === b) continue e;
+          }t && v.push(b), h.push(y);
+        } else f(v, b, n) || (v !== h && v.push(b), h.push(y));
       }return h;
     };
   }, function (e, t) {
@@ -20194,15 +20563,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var t,
           n,
           h = e.DecoratedComponent,
-          v = e.createHandler,
+          g = e.createHandler,
           y = e.createMonitor,
           b = e.createConnector,
           m = e.registerHandler,
           O = e.containerDisplayName,
           w = e.getType,
-          D = e.collect,
-          _ = e.options.arePropsEqual,
-          x = void 0 === _ ? p.default : _,
+          _ = e.collect,
+          D = e.options.arePropsEqual,
+          x = void 0 === D ? p.default : D,
           C = h.displayName || h.name || "Component",
           E = (n = t = function (e) {
         function t(e, n) {
@@ -20210,7 +20579,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function");
           }(this, t);var r = function (e, t) {
             if (!e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return !t || "object" != (typeof t === "undefined" ? "undefined" : _typeof(t)) && "function" != typeof t ? e : t;
-          }(this, (t.__proto__ || Object.getPrototypeOf(t)).call(this, e, n));return r.handleChange = r.handleChange.bind(r), r.handleChildRef = r.handleChildRef.bind(r), (0, l.default)("object" === o(r.context.dragDropManager), "Could not find the drag and drop manager in the context of %s. Make sure to wrap the top-level component of your app with DragDropContext. Read more: http://react-dnd.github.io/react-dnd/docs-troubleshooting.html#could-not-find-the-drag-and-drop-manager-in-the-context", C, C), r.manager = r.context.dragDropManager, r.handlerMonitor = y(r.manager), r.handlerConnector = b(r.manager.getBackend()), r.handler = v(r.handlerMonitor), r.disposable = new s.SerialDisposable(), r.receiveProps(e), r.state = r.getCurrentState(), r.dispose(), r;
+          }(this, (t.__proto__ || Object.getPrototypeOf(t)).call(this, e, n));return r.handleChange = r.handleChange.bind(r), r.handleChildRef = r.handleChildRef.bind(r), (0, l.default)("object" === o(r.context.dragDropManager), "Could not find the drag and drop manager in the context of %s. Make sure to wrap the top-level component of your app with DragDropContext. Read more: http://react-dnd.github.io/react-dnd/docs-troubleshooting.html#could-not-find-the-drag-and-drop-manager-in-the-context", C, C), r.manager = r.context.dragDropManager, r.handlerMonitor = y(r.manager), r.handlerConnector = b(r.manager.getBackend()), r.handler = g(r.handlerMonitor), r.disposable = new s.SerialDisposable(), r.receiveProps(e), r.state = r.getCurrentState(), r.dispose(), r;
         }return function (e, t) {
           if ("function" != typeof t && null !== t) throw new TypeError("Super expression must either be null or a function, not " + (typeof t === "undefined" ? "undefined" : _typeof(t)));e.prototype = Object.create(t && t.prototype, { constructor: { value: e, enumerable: !1, writable: !0, configurable: !0 } }), t && (Object.setPrototypeOf ? Object.setPrototypeOf(e, t) : e.__proto__ = t);
         }(t, e), a(t, [{ key: "getHandlerId", value: function value() {
@@ -20243,9 +20612,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           } }, { key: "handleChildRef", value: function value(e) {
             this.decoratedComponentInstance = e, this.handler.receiveComponent(e);
           } }, { key: "getCurrentState", value: function value() {
-            var e = D(this.handlerConnector.hooks, this.handlerMonitor);return e;
+            var e = _(this.handlerConnector.hooks, this.handlerMonitor);return e;
           } }, { key: "render", value: function value() {
-            return u.default.createElement(h, r({}, this.props, this.state, { ref: g(h) ? this.handleChildRef : null }));
+            return u.default.createElement(h, r({}, this.props, this.state, { ref: v(h) ? this.handleChildRef : null }));
           } }]), t;
       }(i.Component), t.DecoratedComponent = h, t.displayName = O + "(" + C + ")", t.contextTypes = { dragDropManager: c.default.object.isRequired }, n);return (0, f.default)(E, h);
     };var i = n(0),
@@ -20257,7 +20626,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         d = h(n(29)),
         p = h(n(49));function h(e) {
       return e && e.__esModule ? e : { default: e };
-    }var g = function g(e) {
+    }var v = function v(e) {
       return Boolean(e && e.prototype && "function" == typeof e.prototype.render);
     };
   }, function (e, t, n) {
@@ -20489,13 +20858,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         f === l && (f = l.slice());
       }function h() {
         return s;
-      }function g(e) {
+      }function v(e) {
         if ("function" != typeof e) throw new Error("Expected listener to be a function.");var t = !0;return p(), f.push(e), function () {
           if (t) {
             t = !1, p();var n = f.indexOf(e);f.splice(n, 1);
           }
         };
-      }function v(e) {
+      }function g(e) {
         if (!(0, r.default)(e)) throw new Error("Actions must be plain objects. Use custom middleware for async actions.");if (void 0 === e.type) throw new Error('Actions may not have an undefined "type" property. Have you misspelled a constant?');if (d) throw new Error("Reducers may not dispatch actions.");try {
           d = !0, s = c(s, e);
         } finally {
@@ -20503,11 +20872,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         }for (var t = l = f, n = 0; n < t.length; n++) {
           var o = t[n];o();
         }return e;
-      }v({ type: i.INIT });return u = { dispatch: v, subscribe: g, getState: h, replaceReducer: function replaceReducer(e) {
-          if ("function" != typeof e) throw new Error("Expected the nextReducer to be a function.");c = e, v({ type: i.INIT });
+      }g({ type: i.INIT });return u = { dispatch: g, subscribe: v, getState: h, replaceReducer: function replaceReducer(e) {
+          if ("function" != typeof e) throw new Error("Expected the nextReducer to be a function.");c = e, g({ type: i.INIT });
         } }, u[o.default] = function () {
         var e,
-            t = g;return (e = { subscribe: function subscribe(e) {
+            t = v;return (e = { subscribe: function subscribe(e) {
             if ("object" != (typeof e === "undefined" ? "undefined" : _typeof(e))) throw new TypeError("Expected the observer to be an object.");function n() {
               e.next && e.next(h());
             }n();var r = t(n);return { unsubscribe: r };
@@ -20889,17 +21258,17 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         u = n(25),
         c = n(26),
         s = Math.min;e.exports = function (e, t, n) {
-      for (var l = n ? a : o, f = e[0].length, d = e.length, p = d, h = Array(d), g = 1 / 0, v = []; p--;) {
-        var y = e[p];p && t && (y = i(y, u(t))), g = s(y.length, g), h[p] = !n && (t || f >= 120 && y.length >= 120) ? new r(p && y) : void 0;
+      for (var l = n ? a : o, f = e[0].length, d = e.length, p = d, h = Array(d), v = 1 / 0, g = []; p--;) {
+        var y = e[p];p && t && (y = i(y, u(t))), v = s(y.length, v), h[p] = !n && (t || f >= 120 && y.length >= 120) ? new r(p && y) : void 0;
       }y = e[0];var b = -1,
-          m = h[0];e: for (; ++b < f && v.length < g;) {
+          m = h[0];e: for (; ++b < f && g.length < v;) {
         var O = y[b],
-            w = t ? t(O) : O;if (O = n || 0 !== O ? O : 0, !(m ? c(m, w) : l(v, w, n))) {
+            w = t ? t(O) : O;if (O = n || 0 !== O ? O : 0, !(m ? c(m, w) : l(g, w, n))) {
           for (p = d; --p;) {
-            var D = h[p];if (!(D ? c(D, w) : l(e[p], w, n))) continue e;
-          }m && m.push(w), v.push(O);
+            var _ = h[p];if (!(_ ? c(_, w) : l(e[p], w, n))) continue e;
+          }m && m.push(w), g.push(O);
         }
-      }return v;
+      }return g;
     };
   }, function (e, t, n) {
     var r = n(15);e.exports = function (e) {
@@ -21261,8 +21630,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};return h.default.apply(void 0, ["DragLayer", "collect[, options]"].concat(Array.prototype.slice.call(arguments))), (0, f.default)("function" == typeof e, 'Expected "collect" provided as the first argument to DragLayer to be a function that collects props to inject into the component. ', "Instead, received %s. Read more: http://react-dnd.github.io/react-dnd/docs-drag-layer.html", e), (0, f.default)((0, l.default)(t), 'Expected "options" provided as the second argument to DragLayer to be a plain object when specified. Instead, received %s. Read more: http://react-dnd.github.io/react-dnd/docs-drag-layer.html', t), function (n) {
         var l,
             h,
-            g = t.arePropsEqual,
-            v = void 0 === g ? p.default : g,
+            v = t.arePropsEqual,
+            g = void 0 === v ? p.default : v,
             y = n.displayName || n.name || "Component",
             b = (h = l = function (t) {
           function c(e, t) {
@@ -21276,7 +21645,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           }(c, i.Component), a(c, [{ key: "getDecoratedComponentInstance", value: function value() {
               return (0, f.default)(this.child, "In order to access an instance of the decorated component it can not be a stateless component."), this.child;
             } }, { key: "shouldComponentUpdate", value: function value(e, t) {
-              return !v(e, this.props) || !(0, d.default)(t, this.state);
+              return !g(e, this.props) || !(0, d.default)(t, this.state);
             } }]), a(c, [{ key: "componentDidMount", value: function value() {
               this.isCurrentlyMounted = !0;var e = this.manager.getMonitor();this.unsubscribeFromOffsetChange = e.subscribeToOffsetChange(this.handleChange), this.unsubscribeFromStateChange = e.subscribeToStateChange(this.handleChange), this.handleChange();
             } }, { key: "componentWillUnmount", value: function value() {
@@ -21295,14 +21664,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         }(), l.DecoratedComponent = n, l.displayName = "DragLayer(" + y + ")", l.contextTypes = { dragDropManager: c.default.object.isRequired }, h);return (0, s.default)(b, n);
       };
     };var i = n(0),
-        u = g(i),
-        c = g(n(2)),
-        s = g(n(28)),
-        l = g(n(3)),
-        f = g(n(1)),
-        d = g(n(29)),
-        p = g(n(49)),
-        h = g(n(17));function g(e) {
+        u = v(i),
+        c = v(n(2)),
+        s = v(n(28)),
+        l = v(n(3)),
+        f = v(n(1)),
+        d = v(n(29)),
+        p = v(n(49)),
+        h = v(n(17));function v(e) {
       return e && e.__esModule ? e : { default: e };
     }
   }, function (e, t, n) {
@@ -21855,7 +22224,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           s = r > 2 ? t[2] : void 0;for (s && a(t[0], t[1], s) && (r = 1); ++n < r;) {
         for (var l = t[n], f = i(l), d = -1, p = f.length; ++d < p;) {
           var h = f[d],
-              g = e[h];(void 0 === g || o(g, u[h]) && !c.call(e, h)) && (e[h] = l[h]);
+              v = e[h];(void 0 === v || o(v, u[h]) && !c.call(e, h)) && (e[h] = l[h]);
         }
       }return e;
     });e.exports = s;
@@ -21886,8 +22255,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           d = !n && !l && !f && c(e),
           p = n || l || f || d,
           h = p ? r(e.length, String) : [],
-          g = h.length;for (var v in e) {
-        !t && !s.call(e, v) || p && ("length" == v || f && ("offset" == v || "parent" == v) || d && ("buffer" == v || "byteLength" == v || "byteOffset" == v) || u(v, g)) || h.push(v);
+          v = h.length;for (var g in e) {
+        !t && !s.call(e, g) || p && ("length" == g || f && ("offset" == g || "parent" == g) || d && ("buffer" == g || "byteLength" == g || "byteOffset" == g) || u(g, v)) || h.push(g);
       }return h;
     };
   }, function (e, t) {
@@ -22023,15 +22392,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           d = e.offsetHeight,
           p = r.anchorX,
           h = r.anchorY,
-          g = function (e, t, n, r) {
+          v = function (e, t, n, r) {
         var a = e ? t.width : n,
             i = e ? t.height : r;(0, o.isSafari)() && e && (i /= window.devicePixelRatio, a /= window.devicePixelRatio);return { dragPreviewWidth: a, dragPreviewHeight: i };
       }(u, t, f, d),
-          v = g.dragPreviewWidth,
-          y = g.dragPreviewHeight,
+          g = v.dragPreviewWidth,
+          y = v.dragPreviewHeight,
           b = a.offsetX,
           m = a.offsetY,
-          O = 0 === m || m;var w;return { x: 0 === b || b ? b : new i.default([0, .5, 1], [l.x, l.x / f * v, l.x + v - f]).interpolate(p), y: O ? m : function () {
+          O = 0 === m || m;var w;return { x: 0 === b || b ? b : new i.default([0, .5, 1], [l.x, l.x / f * g, l.x + g - f]).interpolate(p), y: O ? m : function () {
           var e = new i.default([0, .5, 1], [l.y, l.y / d * y, l.y + y - d]).interpolate(h);(0, o.isSafari)() && u && (e += (window.devicePixelRatio - 1) * y);return e;
         }() };
     };var r,
@@ -22063,14 +22432,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           s = t[f + 1] - t[f], l = n[f + 1] - n[f], u.push(s), i.push(l), c.push(l / s);
         }for (var d = [c[0]], p = 0; p < u.length - 1; p++) {
           var h = c[p],
-              g = c[p + 1];if (h * g <= 0) d.push(0);else {
-            s = u[p];var v = u[p + 1],
-                y = s + v;d.push(3 * y / ((y + v) / h + (y + s) / g));
+              v = c[p + 1];if (h * v <= 0) d.push(0);else {
+            s = u[p];var g = u[p + 1],
+                y = s + g;d.push(3 * y / ((y + g) / h + (y + s) / v));
           }
         }d.push(c[c.length - 1]);for (var b = [], m = [], O = void 0, w = 0; w < d.length - 1; w++) {
-          O = c[w];var D = d[w],
-              _ = 1 / u[w],
-              x = D + d[w + 1] - O - O;b.push((O - D - x) * _), m.push(x * _ * _);
+          O = c[w];var _ = d[w],
+              D = 1 / u[w],
+              x = _ + d[w + 1] - O - O;b.push((O - _ - x) * D), m.push(x * D * D);
         }this.xs = t, this.ys = n, this.c1s = d, this.c2s = b, this.c3s = m;
       }return r(e, [{ key: "interpolate", value: function value(e) {
           var t = this.xs,
@@ -22169,10 +22538,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           d = e.editableColumnClass,
           p = e.droppableColumnClass,
           h = e.addWidgetComponentText,
-          g = e.addWidgetComponent,
-          v = t.rows.map(function (e, v) {
-        return r.default.createElement(a.default, { key: v, rowClass: s, columns: e.columns, widgets: n, onRemove: o, layout: t, rowIndex: v, editable: i, onAdd: u, onMove: l, onEdit: f, frameComponent: c, editableColumnClass: d, droppableColumnClass: p, addWidgetComponentText: h, addWidgetComponent: g });
-      });return r.default.createElement("div", { id: "Layout-Renderer", key: "Layout-Renderer", style: { height: "100%" } }, v);
+          v = e.addWidgetComponent,
+          g = e.onRemoveTab,
+          y = e.onAddTab,
+          b = t.rows.map(function (e, b) {
+        return r.default.createElement(a.default, { key: b, rowClass: s, columns: e.columns, widgets: n, onRemove: o, layout: t, rowIndex: b, editable: i, onAdd: u, onMove: l, onEdit: f, frameComponent: c, editableColumnClass: d, droppableColumnClass: p, addWidgetComponentText: h, addWidgetComponent: v, onRemoveTab: g, onAddTab: y });
+      });return r.default.createElement("div", { id: "Layout-Renderer", key: "Layout-Renderer", style: { height: "100%" } }, b);
     };u.propTypes = { layout: o.default.object, widgets: o.default.object, editable: o.default.bool, onRemove: o.default.func, onAdd: o.default.func, frameComponent: o.default.func, rowClass: o.default.string, onMove: o.default.func, onEdit: o.default.func, editableColumnClass: o.default.string, droppableColumnClass: o.default.string, addWidgetComponent: o.default.func, addWidgetComponentText: o.default.string }, u.defaultProps = { layout: { rows: [] } }, t.default = u;
   }, function (e, t, n) {
     "use strict";
@@ -22193,11 +22564,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           d = e.addWidgetComponentText,
           p = e.addWidgetComponent,
           h = e.onAdd,
-          g = e.onMove,
-          v = e.widgets,
-          y = n.map(function (e, t) {
-        return r.default.createElement(a.default, { key: t, className: e.className, onAdd: h, layout: i, rowIndex: u, columnIndex: t, editable: c, onMove: g, editableColumnClass: l, droppableColumnClass: f, addWidgetComponent: p, addWidgetComponentText: d, onRemove: o, frameComponent: s, widgets: v });
-      });return r.default.createElement("div", { id: "row" + u, key: "row" + u, style: { height: "100%" }, className: t }, y);
+          v = e.onMove,
+          g = e.widgets,
+          y = e.onRemoveTab,
+          b = e.onAddTab,
+          m = n.map(function (e, t) {
+        return r.default.createElement(a.default, { key: t, className: e.className, onAdd: h, layout: i, rowIndex: u, columnIndex: t, editable: c, onMove: v, editableColumnClass: l, droppableColumnClass: f, addWidgetComponent: p, addWidgetComponentText: d, onRemove: o, frameComponent: s, widgets: g, onRemoveTab: y, onAddTab: b });
+      });return r.default.createElement("div", { id: "row" + u, key: "row" + u, style: { height: "100%" }, className: t }, m);
     }u.propTypes = { rowClass: o.default.string, columns: o.default.array, widgets: o.default.object, layout: o.default.object, rowIndex: o.default.number, editable: o.default.bool, frameComponent: o.default.func, editableColumnClass: o.default.string, droppableColumnClass: o.default.string, addWidgetComponent: o.default.func, addWidgetComponentText: o.default.string, onAdd: o.default.func, onRemove: o.default.func, onMove: o.default.func, onEdit: o.default.func }, u.defaultProps = { rowClass: "row" }, t.default = u;
   }, function (e, t, n) {
     "use strict";
@@ -22251,13 +22624,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
               d = e.editableColumnClass,
               p = e.droppableColumnClass,
               h = e.addWidgetComponentText,
-              g = e.addWidgetComponent,
-              v = e.onMove,
+              v = e.addWidgetComponent,
+              g = e.onMove,
               y = e.onRemove,
               b = e.frameComponent,
               m = e.widgets,
               O = e.key,
-              w = t;w = a ? t + " " + d : w, w = s && l ? w + " " + p : w;return u(i.default.createElement("div", { style: { height: "100%" }, id: "column" + o, key: "column" + o, className: w }, i.default.createElement(f.default, { key: O, tabs: n.rows[r].columns[o].tabs, layout: n, rowIndex: r, columnIndex: o, widgets: m, onRemove: y, frameComponent: b, onMove: v, editable: a, onAdd: c, addWidgetComponentText: h, addWidgetComponent: g })));
+              w = e.onRemoveTab,
+              _ = e.onAddTab,
+              D = t;D = a ? t + " " + d : D, D = s && l ? D + " " + p : D;return u(i.default.createElement("div", { style: { height: "100%" }, id: "column" + o, key: "column" + o, className: D }, i.default.createElement(f.default, { key: O, tabs: n.rows[r].columns[o].tabs, layout: n, rowIndex: r, columnIndex: o, widgets: m, onRemove: y, frameComponent: b, onMove: g, editable: a, onAdd: c, addWidgetComponentText: h, addWidgetComponent: v, onRemoveTab: w, onAddTab: _ })));
         } }]), t;
     }()) || r;h.propTypes = { children: u.default.node, className: u.default.string, onAdd: u.default.func, layout: u.default.object, rowIndex: u.default.number, columnIndex: u.default.number, editable: u.default.bool, isOver: u.default.bool, canDrop: u.default.bool, editableColumnClass: u.default.string, droppableColumnClass: u.default.string, addWidgetComponentText: u.default.string, connectDropTarget: u.default.func, addWidgetComponent: u.default.func }, h.defaultProps = { editableColumnClass: "editable-column", droppableColumnClass: "droppable-column" }, t.default = h;
   }, function (e, t, n) {
@@ -22301,31 +22676,31 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         return h(t, n, "$unshift"), e.length ? e.concat(t) : t;
       }, $splice: function $splice(e, t, n, o) {
         return function (e, t) {
-          r(Array.isArray(e), "Expected $splice target to be an array; got %s", e), v(t.$splice);
+          r(Array.isArray(e), "Expected $splice target to be an array; got %s", e), g(t.$splice);
         }(t, n), e.forEach(function (e) {
-          v(e), t === o && e.length && (t = l(o)), a.apply(t, e);
+          g(e), t === o && e.length && (t = l(o)), a.apply(t, e);
         }), t;
       }, $set: function $set(e, t, n) {
         return function (e) {
           r(1 === Object.keys(e).length, "Cannot have more than one key in an object with $set");
         }(n), e;
       }, $toggle: function $toggle(e, t) {
-        g(e, "$toggle");var n = e.length ? l(t) : t;return e.forEach(function (e) {
+        v(e, "$toggle");var n = e.length ? l(t) : t;return e.forEach(function (e) {
           n[e] = !t[e];
         }), n;
       }, $unset: function $unset(e, t, n, r) {
-        return g(e, "$unset"), e.forEach(function (e) {
+        return v(e, "$unset"), e.forEach(function (e) {
           Object.hasOwnProperty.call(t, e) && (t === r && (t = l(r)), delete t[e]);
         }), t;
       }, $add: function $add(e, t, n, r) {
-        return y(t, "$add"), g(e, "$add"), "Map" === u(t) ? e.forEach(function (e) {
+        return y(t, "$add"), v(e, "$add"), "Map" === u(t) ? e.forEach(function (e) {
           var n = e[0],
               o = e[1];t === r && t.get(n) !== o && (t = l(r)), t.set(n, o);
         }) : e.forEach(function (e) {
           t !== r || t.has(e) || (t = l(r)), t.add(e);
         }), t;
       }, $remove: function $remove(e, t, n, r) {
-        return y(t, "$remove"), g(e, "$remove"), e.forEach(function (e) {
+        return y(t, "$remove"), v(e, "$remove"), e.forEach(function (e) {
           t === r && t.has(e) && (t = l(r)), t.delete(e);
         }), t;
       }, $merge: function $merge(e, t, n, o) {
@@ -22336,10 +22711,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         var n;return r("function" == typeof (n = e), "update(): expected spec of $apply to be a function; got %s.", n), e(t);
       } },
         p = f();function h(e, t, n) {
-      r(Array.isArray(e), "update(): expected target of %s to be an array; got %s.", n, e), g(t[n], n);
-    }function g(e, t) {
+      r(Array.isArray(e), "update(): expected target of %s to be an array; got %s.", n, e), v(t[n], n);
+    }function v(e, t) {
       r(Array.isArray(e), "update(): expected spec of %s to be an array; got %s. Did you forget to wrap your parameter in an array?", t, e);
-    }function v(e) {
+    }function g(e) {
       r(Array.isArray(e), "update(): expected spec of $splice to be an array of arrays; got %s. Did you forget to wrap your parameters in an array?", e);
     }function y(e, t) {
       var n = u(e);r("Map" === n || "Set" === n, "update(): %s expects a target of type Set or Map; got %s", t, n);
@@ -22356,11 +22731,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       };
     }(),
         o = n(0),
-        a = c(o),
-        i = c(n(180)),
-        u = c(n(186));function c(e) {
+        a = s(o),
+        i = s(n(180)),
+        u = s(n(186)),
+        c = s(n(187));function s(e) {
       return e && e.__esModule ? e : { default: e };
-    }var s = function (e) {
+    }var l = function (e) {
       function t() {
         return function (e, t) {
           if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function");
@@ -22375,23 +22751,26 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
               n = e.layout,
               r = e.rowIndex,
               o = e.columnIndex,
-              c = e.onRemove,
-              s = e.frameComponent,
-              l = e.onMove,
-              f = e.editable,
-              d = e.onAdd,
-              p = e.addWidgetComponentText,
-              h = e.addWidgetComponent,
+              s = e.onRemove,
+              l = e.frameComponent,
+              f = e.onMove,
+              d = e.editable,
+              p = e.onAdd,
+              h = e.addWidgetComponentText,
+              v = e.addWidgetComponent,
               g = e.widgets,
-              v = t.map(function (e, t) {
-            return a.default.createElement(u.default, { key: "tab-header" + r.toString() + o.toString() + t.toString(), rowIndex: r, columnIndex: o, tabIndex: t, active: t ? null : "active" });
+              y = e.onRemoveTab,
+              b = e.onAddTab,
+              m = { visibility: t.length < 2 && !d ? "hidden" : "visible" },
+              O = { visibility: d ? "visible" : "hidden" },
+              w = t.map(function (e, t) {
+            return a.default.createElement(u.default, { key: "tab-header-" + r.toString() + o.toString() + t.toString(), rowIndex: r, columnIndex: o, tabIndex: t, active: t ? null : "active", visibilityStyle: m, removeTabVisibilty: O, onRemoveTab: y });
+          });w.push(a.default.createElement(c.default, { key: "tab-header-" + r.toString() + o.toString() + "-add", rowIndex: r, columnIndex: o, visibilityStyle: O, onAddTab: b }));var _ = t.map(function (e, t) {
+            return a.default.createElement(i.default, { key: "tab-body" + r.toString() + o.toString() + t.toString(), layout: n, rowIndex: r, columnIndex: o, tabIndex: t, widgets: g, onRemove: s, frameComponent: l, onMove: f, editable: d, onAdd: p, addWidgetComponentText: h, addWidgetComponent: v, active: t ? null : "active" });
           }),
-              y = t.map(function (e, t) {
-            return a.default.createElement(i.default, { key: "tab-body" + r.toString() + o.toString() + t.toString(), layout: n, rowIndex: r, columnIndex: o, tabIndex: t, widgets: g, onRemove: c, frameComponent: s, onMove: l, editable: f, onAdd: d, addWidgetComponentText: p, addWidgetComponent: h, active: t ? null : "active" });
-          }),
-              b = { height: "100%" };return a.default.createElement("div", { style: b }, a.default.createElement("ul", { className: "nav nav-tabs" }, v), a.default.createElement("div", { style: b, className: "tab-content" }, y));
+              D = { height: "100%" };return a.default.createElement("div", { style: D }, a.default.createElement("ul", { className: "nav nav-tabs" }, w), a.default.createElement("div", { style: D, className: "tab-content" }, _));
         } }]), t;
-    }();t.default = s;
+    }();t.default = l;
   }, function (e, t, n) {
     "use strict";
     Object.defineProperty(t, "__esModule", { value: !0 });var r = function () {
@@ -22429,12 +22808,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
               d = e.onMove,
               p = e.editable,
               h = e.onAdd,
-              g = e.addWidgetComponentText,
-              v = e.addWidgetComponent,
+              v = e.addWidgetComponentText,
+              g = e.addWidgetComponent,
               y = e.active,
-              b = null;b = v ? (0, o.createElement)(v, { text: g, onClick: function onClick() {
+              b = null;b = g ? (0, o.createElement)(g, { text: v, onClick: function onClick() {
               h(t, n, r, c);
-            } }) : a.default.createElement(i.default, { text: g, onClick: function onClick() {
+            } }) : a.default.createElement(i.default, { text: v, onClick: function onClick() {
               h(t, n, r, c);
             } });var m = y ? "tab-pane fade in active" : "tab-pane fade in";return a.default.createElement("div", { id: "tab" + n.toString() + r.toString() + c.toString(), className: m, style: { height: "100%" } }, p && b, a.default.createElement(u.default, { key: "widgets" + n.toString() + r.toString() + c.toString(), widgets: this.props.layout.rows[n].columns[r].tabs[c].widgets, containerClassName: this.props.layout.rows[n].columns[r].containerClassName, widgetTypes: s, onRemove: l, layout: t, rowIndex: n, columnIndex: r, tabIndex: c, editable: p, frameComponent: f, onMove: d }));
         } }]), t;
@@ -22467,10 +22846,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           d = e.frameComponent,
           p = e.onMove,
           h = e.containerClassName,
-          g = e.onEdit,
-          v = t.map(function (e, t) {
-        return o.default.createElement(i.default, { key: "widgetframe-" + s.toString() + c.toString() + l.toString() + t.toString(), widgetName: e.key, title: n[e.key].title, onRemove: a, layout: u, columnIndex: c, rowIndex: s, tabIndex: l, widgetIndex: t, editable: f, frameComponent: d, frameSettings: n[e.key].frameSettings, onMove: p, onEdit: g }, (0, r.createElement)(n[e.key].type, n[e.key].props));
-      });return o.default.createElement("div", { style: { height: "100%" }, className: h }, v);
+          v = e.onEdit,
+          g = t.map(function (e, t) {
+        return o.default.createElement(i.default, { key: "widgetframe-" + s.toString() + c.toString() + l.toString() + t.toString(), widgetName: e.key, title: n[e.key].title, onRemove: a, layout: u, columnIndex: c, rowIndex: s, tabIndex: l, widgetIndex: t, editable: f, frameComponent: d, frameSettings: n[e.key].frameSettings, onMove: p, onEdit: v }, (0, r.createElement)(n[e.key].type, n[e.key].props));
+      });return o.default.createElement("div", { style: { height: "100%" }, className: h }, g);
     };c.propTypes = { containerClassName: a.default.string, widgets: a.default.array, widgetTypes: a.default.object, onRemove: a.default.func, layout: a.default.object, columnIndex: a.default.number, rowIndex: a.default.number, editable: a.default.bool, frameComponent: a.default.func, onMove: a.default.func, onEdit: a.default.func }, t.default = c;
   }, function (e, t, n) {
     "use strict";
@@ -22500,9 +22879,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         d = n(32),
         p = h(n(185));function h(e) {
       return e && e.__esModule ? e : { default: e };
-    }function g(e, t) {
+    }function v(e, t) {
       if (!e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return !t || "object" != (typeof t === "undefined" ? "undefined" : _typeof(t)) && "function" != typeof t ? e : t;
-    }var v = { hover: function hover(e, t, n) {
+    }var g = { hover: function hover(e, t, n) {
         var r = t.getItem().widgetIndex,
             o = e.widgetIndex;if (r !== o) {
           var a = (0, s.findDOMNode)(n).getBoundingClientRect(),
@@ -22516,7 +22895,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           }
         }
       } },
-        y = (0, l.DropTarget)(f.WIDGET, v, function (e) {
+        y = (0, l.DropTarget)(f.WIDGET, g, function (e) {
       return { connectDropTarget: e.dropTarget() };
     })(r = (0, l.DragSource)(f.WIDGET, { beginDrag: function beginDrag(e) {
         return { widgetName: e.widgetName, rowIndex: e.rowIndex, columnIndex: e.columnIndex, widgetIndex: e.widgetIndex };
@@ -22528,7 +22907,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function");
         }(this, t);for (var o = arguments.length, a = Array(o), i = 0; i < o; i++) {
           a[i] = arguments[i];
-        }return n = r = g(this, (e = t.__proto__ || Object.getPrototypeOf(t)).call.apply(e, [this].concat(a))), r.edit = function () {
+        }return n = r = v(this, (e = t.__proto__ || Object.getPrototypeOf(t)).call.apply(e, [this].concat(a))), r.edit = function () {
           var e = r.props,
               t = e.layout,
               n = e.rowIndex,
@@ -22543,7 +22922,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
               a = e.tabIndex,
               i = e.widgetIndex,
               u = (0, d.removeWidget)(t, n, o, a, i);r.props.onRemove(u, n, o, a, i);
-        }, g(r, n);
+        }, v(r, n);
       }return function (e, t) {
         if ("function" != typeof t && null !== t) throw new TypeError("Super expression must either be null or a function, not " + (typeof t === "undefined" ? "undefined" : _typeof(t)));e.prototype = Object.create(t && t.prototype, { constructor: { value: e, enumerable: !1, writable: !0, configurable: !0 } }), t && (Object.setPrototypeOf ? Object.setPrototypeOf(e, t) : e.__proto__ = t);
       }(t, i.Component), a(t, [{ key: "render", value: function value() {
@@ -22558,13 +22937,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
               f = e.isDragging,
               d = e.rowIndex,
               h = e.columnIndex,
-              g = e.tabIndex,
-              v = e.widgetIndex,
+              v = e.tabIndex,
+              g = e.widgetIndex,
               y = e.layout,
-              b = null;b = t ? (0, i.createElement)(t, { children: n, editable: r, title: a, settings: c, onRemove: this.remove, onEdit: this.edit, rowIndex: d, columnIndex: h, tabIndex: g, widgetIndex: v, isDragging: f }) : u.default.createElement(p.default, { title: a, editable: r, children: n, onRemove: this.remove, onEdit: this.edit });var m = null;try {
-            m = y.rows[d].columns[h].tabs[g].widgetSizes[v];
+              b = null;b = t ? (0, i.createElement)(t, { children: n, editable: r, title: a, settings: c, onRemove: this.remove, onEdit: this.edit, rowIndex: d, columnIndex: h, tabIndex: v, widgetIndex: g, isDragging: f }) : u.default.createElement(p.default, { title: a, editable: r, children: n, onRemove: this.remove, onEdit: this.edit });var m = null;try {
+            m = y.rows[d].columns[h].tabs[v].widgetSizes[g];
           } catch (e) {
-            m = { height: 100 / y.rows[d].columns[h].tabs[g].widgets.length + "%" };
+            m = { height: 100 / y.rows[d].columns[h].tabs[v].widgets.length + "%" };
           }var O = f ? 0 : 1,
               w = u.default.createElement("div", { style: o({ opacity: O }, m) }, b);return r ? s(l(w)) : w;
         } }]), t;
@@ -22614,17 +22993,55 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
               t = e.rowIndex,
               n = e.columnIndex,
               r = e.tabIndex,
-              o = e.active ? "active" : null;return i.default.createElement("li", { className: o }, i.default.createElement("a", { "data-toggle": "tab", href: "#tab" + t.toString() + n.toString() + r.toString() }, "Tab " + (r + 1).toString()));
+              o = e.active,
+              a = e.visibilityStyle,
+              u = e.removeTabVisibilty,
+              c = e.onRemoveTab,
+              s = o ? "active" : null;return i.default.createElement("li", { className: s, style: a }, i.default.createElement("a", { "data-toggle": "tab", href: "#tab" + t.toString() + n.toString() + r.toString() }, "Tab " + (r + 1).toString()), i.default.createElement("button", { style: u, onClick: function onClick() {
+              c(t, n, r);
+            }, type: "button", className: "close", "aria-label": "Close" }, i.default.createElement("span", { "aria-hidden": "true" }, "×")));
+        } }]), t;
+    }();t.default = u;
+  }, function (e, t, n) {
+    "use strict";
+    Object.defineProperty(t, "__esModule", { value: !0 });var r,
+        o = function () {
+      function e(e, t) {
+        for (var n = 0; n < t.length; n++) {
+          var r = t[n];r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(e, r.key, r);
+        }
+      }return function (t, n, r) {
+        return n && e(t.prototype, n), r && e(t, r), t;
+      };
+    }(),
+        a = n(0),
+        i = (r = a) && r.__esModule ? r : { default: r };var u = function (e) {
+      function t() {
+        return function (e, t) {
+          if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function");
+        }(this, t), function (e, t) {
+          if (!e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return !t || "object" != (typeof t === "undefined" ? "undefined" : _typeof(t)) && "function" != typeof t ? e : t;
+        }(this, (t.__proto__ || Object.getPrototypeOf(t)).apply(this, arguments));
+      }return function (e, t) {
+        if ("function" != typeof t && null !== t) throw new TypeError("Super expression must either be null or a function, not " + (typeof t === "undefined" ? "undefined" : _typeof(t)));e.prototype = Object.create(t && t.prototype, { constructor: { value: e, enumerable: !1, writable: !0, configurable: !0 } }), t && (Object.setPrototypeOf ? Object.setPrototypeOf(e, t) : e.__proto__ = t);
+      }(t, a.Component), o(t, [{ key: "render", value: function value() {
+          var e = this.props,
+              t = e.rowIndex,
+              n = e.columnIndex,
+              r = e.visibilityStyle,
+              o = e.onAddTab;return i.default.createElement("li", { style: r }, i.default.createElement("a", { href: "#", onClick: function onClick() {
+              return o(t, n);
+            } }, "Add +"));
         } }]), t;
     }();t.default = u;
   }]);
 });
 //# sourceMappingURL=lib.js.map
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13), __webpack_require__(31)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12), __webpack_require__(33)(module)))
 
 /***/ }),
 
-/***/ 325:
+/***/ 329:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22636,7 +23053,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactModal = __webpack_require__(108);
+var _reactModal = __webpack_require__(111);
 
 var _reactModal2 = _interopRequireDefault(_reactModal);
 
@@ -22708,7 +23125,36 @@ exports.default = AddWidgetDialog;
 
 /***/ }),
 
-/***/ 326:
+/***/ 33:
+/***/ (function(module, exports) {
+
+module.exports = function(module) {
+	if(!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if(!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+
+/***/ }),
+
+/***/ 330:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22717,11 +23163,11 @@ exports.default = AddWidgetDialog;
 exports.__esModule = true;
 exports.InfoModal = undefined;
 
-var _reactModal = __webpack_require__(108);
+var _reactModal = __webpack_require__(111);
 
 var _reactModal2 = _interopRequireDefault(_reactModal);
 
-var _propTypes = __webpack_require__(19);
+var _propTypes = __webpack_require__(17);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -22765,7 +23211,7 @@ InfoModal.propTypes = {
 
 /***/ }),
 
-/***/ 327:
+/***/ 331:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22805,7 +23251,7 @@ exports.default = Container;
 
 /***/ }),
 
-/***/ 328:
+/***/ 332:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22915,7 +23361,7 @@ exports.default = CustomFrame;
 
 /***/ }),
 
-/***/ 329:
+/***/ 333:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22923,7 +23369,7 @@ exports.default = CustomFrame;
 
 exports.__esModule = true;
 
-__webpack_require__(618);
+__webpack_require__(626);
 
 var _react = __webpack_require__(1);
 
@@ -23024,64 +23470,7 @@ exports.default = DashboardToolbar;
 
 /***/ }),
 
-/***/ 33:
-/***/ (function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function() {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		var result = [];
-		for(var i = 0; i < this.length; i++) {
-			var item = this[i];
-			if(item[2]) {
-				result.push("@media " + item[2] + "{" + item[1] + "}");
-			} else {
-				result.push(item[1]);
-			}
-		}
-		return result.join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-
-/***/ }),
-
-/***/ 330:
+/***/ 334:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23095,9 +23484,9 @@ var _FieldSet = __webpack_require__(10);
 
 var _FieldSet2 = _interopRequireDefault(_FieldSet);
 
-var _CommonComponents = __webpack_require__(326);
+var _CommonComponents = __webpack_require__(330);
 
-var _propTypes = __webpack_require__(19);
+var _propTypes = __webpack_require__(17);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -23222,7 +23611,7 @@ exports.default = Header;
 
 /***/ }),
 
-/***/ 331:
+/***/ 335:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23266,11 +23655,11 @@ exports.default = function (props) {
   );
 };
 
-var _Constants = __webpack_require__(114);
+var _Constants = __webpack_require__(117);
 
 var _Constants2 = _interopRequireDefault(_Constants);
 
-var _reactModal = __webpack_require__(108);
+var _reactModal = __webpack_require__(111);
 
 var _reactModal2 = _interopRequireDefault(_reactModal);
 
@@ -23278,7 +23667,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /***/ }),
 
-/***/ 332:
+/***/ 336:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23294,7 +23683,7 @@ var _FieldSet = __webpack_require__(10);
 
 var _FieldSet2 = _interopRequireDefault(_FieldSet);
 
-var _Modal = __webpack_require__(331);
+var _Modal = __webpack_require__(335);
 
 var _Modal2 = _interopRequireDefault(_Modal);
 
@@ -23302,7 +23691,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Constants = __webpack_require__(114);
+var _Constants = __webpack_require__(117);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23392,25 +23781,40 @@ exports.default = WidgetConfigDialog;
 
 /***/ }),
 
-/***/ 401:
+/***/ 405:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(33)();
+exports = module.exports = __webpack_require__(29)();
 // imports
 
 
 // module
-exports.push([module.i, ".defaultWidgetFrame {\n\tposition: relative;\n\twidth: 100%;\n\tmargin-bottom: 10px;\n\tpadding: 10px 17px;\n\tdisplay: inline-block;\n\tbackground: #fff;\n\tborder: 1px solid #E6E9ED;\n}\n\n.defaultWidgetFrameHeader {\n\tborder-bottom: 2px solid #E6E9ED;\n\tpadding: 1px 5px 6px;\n\tmargin-bottom: 10px;\n\theight: 35px;\n}\n\n.defaultWidgetFrameHeader .title {\n\tfont-size: 18px;\n  float: left;\n  display: block;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n}\n\n.defaultWidgetFrameHeader .remove {\n\tfloat: right;\n\tfont-size: 11px;\n\tcursor: pointer;\n\ttext-decoration: none;\n\tmargin-top: 5px;\n}\n\n.add-widget-button {\n\tpadding: 10px;\n\ttext-align: center;\n\tborder: 1px dotted #DCDCDC;\n\tmargin-bottom: 10px;\n\tcursor: pointer;\n\ttext-decoration: none;\n}\n\n.add-widget-link {\n\ttext-decoration: none;\n}\n\n.editable-column {\n\tborder: 1px dotted #8C8080;\n\tpadding: 10px;\n}\n\n.droppable-column {\n\tbackground-color: #E7E7E7;\n}\n", ""]);
+exports.push([module.i, ".nav-tabs > li > button {\n    display:none;\n    cursor:pointer;\n    position:absolute;\n    right: 6px;\n    top: 8px;\n    color: red;\n}\n.nav-tabs > li:hover > button {\n    display: inline-block;\n}\n\n.defaultWidgetFrame {\n\tposition: relative;\n\twidth: 100%;\n\tmargin-bottom: 10px;\n\tpadding: 10px 17px;\n\tdisplay: inline-block;\n\tbackground: #fff;\n\tborder: 1px solid #E6E9ED;\n}\n\n.defaultWidgetFrameHeader {\n\tborder-bottom: 2px solid #E6E9ED;\n\tpadding: 1px 5px 6px;\n\tmargin-bottom: 10px;\n\theight: 35px;\n}\n\n.defaultWidgetFrameHeader .title {\n\tfont-size: 18px;\n  float: left;\n  display: block;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n}\n\n.defaultWidgetFrameHeader .remove {\n\tfloat: right;\n\tfont-size: 11px;\n\tcursor: pointer;\n\ttext-decoration: none;\n\tmargin-top: 5px;\n}\n\n.add-widget-button {\n\tpadding: 10px;\n\ttext-align: center;\n\tborder: 1px dotted #DCDCDC;\n\tmargin-bottom: 10px;\n\tcursor: pointer;\n\ttext-decoration: none;\n}\n\n.add-widget-link {\n\ttext-decoration: none;\n}\n\n.editable-column {\n\tborder: 1px dotted #8C8080;\n\tpadding: 10px;\n}\n\n.droppable-column {\n\tbackground-color: #E7E7E7;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ 404:
+/***/ 407:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(33)();
+exports = module.exports = __webpack_require__(29)();
+// imports
+
+
+// module
+exports.push([module.i, "body.stop-scrolling {\n  height: 100%;\n  overflow: hidden; }\n\n.sweet-overlay {\n  background-color: black;\n  /* IE8 */\n  -ms-filter: \"progid:DXImageTransform.Microsoft.Alpha(Opacity=40)\";\n  /* IE8 */\n  background-color: rgba(0, 0, 0, 0.4);\n  position: fixed;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  display: none;\n  z-index: 10000; }\n\n.sweet-alert {\n  background-color: white;\n  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  width: 478px;\n  padding: 17px;\n  border-radius: 5px;\n  text-align: center;\n  position: fixed;\n  left: 50%;\n  top: 50%;\n  margin-left: -256px;\n  margin-top: -200px;\n  overflow: hidden;\n  display: none;\n  z-index: 99999; }\n  @media all and (max-width: 540px) {\n    .sweet-alert {\n      width: auto;\n      margin-left: 0;\n      margin-right: 0;\n      left: 15px;\n      right: 15px; } }\n  .sweet-alert h2 {\n    color: #575757;\n    font-size: 30px;\n    text-align: center;\n    font-weight: 600;\n    text-transform: none;\n    position: relative;\n    margin: 25px 0;\n    padding: 0;\n    line-height: 40px;\n    display: block; }\n  .sweet-alert p {\n    color: #797979;\n    font-size: 16px;\n    text-align: center;\n    font-weight: 300;\n    position: relative;\n    text-align: inherit;\n    float: none;\n    margin: 0;\n    padding: 0;\n    line-height: normal; }\n  .sweet-alert fieldset {\n    border: none;\n    position: relative; }\n  .sweet-alert .sa-error-container {\n    background-color: #f1f1f1;\n    margin-left: -17px;\n    margin-right: -17px;\n    overflow: hidden;\n    padding: 0 10px;\n    max-height: 0;\n    webkit-transition: padding 0.15s, max-height 0.15s;\n    transition: padding 0.15s, max-height 0.15s; }\n    .sweet-alert .sa-error-container.show {\n      padding: 10px 0;\n      max-height: 100px;\n      webkit-transition: padding 0.2s, max-height 0.2s;\n      transition: padding 0.25s, max-height 0.25s; }\n    .sweet-alert .sa-error-container .icon {\n      display: inline-block;\n      width: 24px;\n      height: 24px;\n      border-radius: 50%;\n      background-color: #ea7d7d;\n      color: white;\n      line-height: 24px;\n      text-align: center;\n      margin-right: 3px; }\n    .sweet-alert .sa-error-container p {\n      display: inline-block; }\n  .sweet-alert .sa-input-error {\n    position: absolute;\n    top: 29px;\n    right: 26px;\n    width: 20px;\n    height: 20px;\n    opacity: 0;\n    -webkit-transform: scale(0.5);\n    transform: scale(0.5);\n    -webkit-transform-origin: 50% 50%;\n    transform-origin: 50% 50%;\n    -webkit-transition: all 0.1s;\n    transition: all 0.1s; }\n    .sweet-alert .sa-input-error::before, .sweet-alert .sa-input-error::after {\n      content: \"\";\n      width: 20px;\n      height: 6px;\n      background-color: #f06e57;\n      border-radius: 3px;\n      position: absolute;\n      top: 50%;\n      margin-top: -4px;\n      left: 50%;\n      margin-left: -9px; }\n    .sweet-alert .sa-input-error::before {\n      -webkit-transform: rotate(-45deg);\n      transform: rotate(-45deg); }\n    .sweet-alert .sa-input-error::after {\n      -webkit-transform: rotate(45deg);\n      transform: rotate(45deg); }\n    .sweet-alert .sa-input-error.show {\n      opacity: 1;\n      -webkit-transform: scale(1);\n      transform: scale(1); }\n  .sweet-alert input {\n    width: 100%;\n    box-sizing: border-box;\n    border-radius: 3px;\n    border: 1px solid #d7d7d7;\n    height: 43px;\n    margin-top: 10px;\n    margin-bottom: 17px;\n    font-size: 18px;\n    box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.06);\n    padding: 0 12px;\n    display: none;\n    -webkit-transition: all 0.3s;\n    transition: all 0.3s; }\n    .sweet-alert input:focus {\n      outline: none;\n      box-shadow: 0px 0px 3px #c4e6f5;\n      border: 1px solid #b4dbed; }\n      .sweet-alert input:focus::-moz-placeholder {\n        transition: opacity 0.3s 0.03s ease;\n        opacity: 0.5; }\n      .sweet-alert input:focus:-ms-input-placeholder {\n        transition: opacity 0.3s 0.03s ease;\n        opacity: 0.5; }\n      .sweet-alert input:focus::-webkit-input-placeholder {\n        transition: opacity 0.3s 0.03s ease;\n        opacity: 0.5; }\n    .sweet-alert input::-moz-placeholder {\n      color: #bdbdbd; }\n    .sweet-alert input:-ms-input-placeholder {\n      color: #bdbdbd; }\n    .sweet-alert input::-webkit-input-placeholder {\n      color: #bdbdbd; }\n  .sweet-alert.show-input input {\n    display: block; }\n  .sweet-alert .sa-confirm-button-container {\n    display: inline-block;\n    position: relative; }\n  .sweet-alert .la-ball-fall {\n    position: absolute;\n    left: 50%;\n    top: 50%;\n    margin-left: -27px;\n    margin-top: 4px;\n    opacity: 0;\n    visibility: hidden; }\n  .sweet-alert button {\n    background-color: #8CD4F5;\n    color: white;\n    border: none;\n    box-shadow: none;\n    font-size: 17px;\n    font-weight: 500;\n    -webkit-border-radius: 4px;\n    border-radius: 5px;\n    padding: 10px 32px;\n    margin: 26px 5px 0 5px;\n    cursor: pointer; }\n    .sweet-alert button:focus {\n      outline: none;\n      box-shadow: 0 0 2px rgba(128, 179, 235, 0.5), inset 0 0 0 1px rgba(0, 0, 0, 0.05); }\n    .sweet-alert button:hover {\n      background-color: #7ecff4; }\n    .sweet-alert button:active {\n      background-color: #5dc2f1; }\n    .sweet-alert button.cancel {\n      background-color: #C1C1C1; }\n      .sweet-alert button.cancel:hover {\n        background-color: #b9b9b9; }\n      .sweet-alert button.cancel:active {\n        background-color: #a8a8a8; }\n      .sweet-alert button.cancel:focus {\n        box-shadow: rgba(197, 205, 211, 0.8) 0px 0px 2px, rgba(0, 0, 0, 0.0470588) 0px 0px 0px 1px inset !important; }\n    .sweet-alert button[disabled] {\n      opacity: .6;\n      cursor: default; }\n    .sweet-alert button.confirm[disabled] {\n      color: transparent; }\n      .sweet-alert button.confirm[disabled] ~ .la-ball-fall {\n        opacity: 1;\n        visibility: visible;\n        transition-delay: 0s; }\n    .sweet-alert button::-moz-focus-inner {\n      border: 0; }\n  .sweet-alert[data-has-cancel-button=false] button {\n    box-shadow: none !important; }\n  .sweet-alert[data-has-confirm-button=false][data-has-cancel-button=false] {\n    padding-bottom: 40px; }\n  .sweet-alert .sa-icon {\n    width: 80px;\n    height: 80px;\n    border: 4px solid gray;\n    -webkit-border-radius: 40px;\n    border-radius: 40px;\n    border-radius: 50%;\n    margin: 20px auto;\n    padding: 0;\n    position: relative;\n    box-sizing: content-box; }\n    .sweet-alert .sa-icon.sa-error {\n      border-color: #F27474; }\n      .sweet-alert .sa-icon.sa-error .sa-x-mark {\n        position: relative;\n        display: block; }\n      .sweet-alert .sa-icon.sa-error .sa-line {\n        position: absolute;\n        height: 5px;\n        width: 47px;\n        background-color: #F27474;\n        display: block;\n        top: 37px;\n        border-radius: 2px; }\n        .sweet-alert .sa-icon.sa-error .sa-line.sa-left {\n          -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n          left: 17px; }\n        .sweet-alert .sa-icon.sa-error .sa-line.sa-right {\n          -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg);\n          right: 16px; }\n    .sweet-alert .sa-icon.sa-warning {\n      border-color: #F8BB86; }\n      .sweet-alert .sa-icon.sa-warning .sa-body {\n        position: absolute;\n        width: 5px;\n        height: 47px;\n        left: 50%;\n        top: 10px;\n        -webkit-border-radius: 2px;\n        border-radius: 2px;\n        margin-left: -2px;\n        background-color: #F8BB86; }\n      .sweet-alert .sa-icon.sa-warning .sa-dot {\n        position: absolute;\n        width: 7px;\n        height: 7px;\n        -webkit-border-radius: 50%;\n        border-radius: 50%;\n        margin-left: -3px;\n        left: 50%;\n        bottom: 10px;\n        background-color: #F8BB86; }\n    .sweet-alert .sa-icon.sa-info {\n      border-color: #C9DAE1; }\n      .sweet-alert .sa-icon.sa-info::before {\n        content: \"\";\n        position: absolute;\n        width: 5px;\n        height: 29px;\n        left: 50%;\n        bottom: 17px;\n        border-radius: 2px;\n        margin-left: -2px;\n        background-color: #C9DAE1; }\n      .sweet-alert .sa-icon.sa-info::after {\n        content: \"\";\n        position: absolute;\n        width: 7px;\n        height: 7px;\n        border-radius: 50%;\n        margin-left: -3px;\n        top: 19px;\n        background-color: #C9DAE1; }\n    .sweet-alert .sa-icon.sa-success {\n      border-color: #A5DC86; }\n      .sweet-alert .sa-icon.sa-success::before, .sweet-alert .sa-icon.sa-success::after {\n        content: '';\n        -webkit-border-radius: 40px;\n        border-radius: 40px;\n        border-radius: 50%;\n        position: absolute;\n        width: 60px;\n        height: 120px;\n        background: white;\n        -webkit-transform: rotate(45deg);\n        transform: rotate(45deg); }\n      .sweet-alert .sa-icon.sa-success::before {\n        -webkit-border-radius: 120px 0 0 120px;\n        border-radius: 120px 0 0 120px;\n        top: -7px;\n        left: -33px;\n        -webkit-transform: rotate(-45deg);\n        transform: rotate(-45deg);\n        -webkit-transform-origin: 60px 60px;\n        transform-origin: 60px 60px; }\n      .sweet-alert .sa-icon.sa-success::after {\n        -webkit-border-radius: 0 120px 120px 0;\n        border-radius: 0 120px 120px 0;\n        top: -11px;\n        left: 30px;\n        -webkit-transform: rotate(-45deg);\n        transform: rotate(-45deg);\n        -webkit-transform-origin: 0px 60px;\n        transform-origin: 0px 60px; }\n      .sweet-alert .sa-icon.sa-success .sa-placeholder {\n        width: 80px;\n        height: 80px;\n        border: 4px solid rgba(165, 220, 134, 0.2);\n        -webkit-border-radius: 40px;\n        border-radius: 40px;\n        border-radius: 50%;\n        box-sizing: content-box;\n        position: absolute;\n        left: -4px;\n        top: -4px;\n        z-index: 2; }\n      .sweet-alert .sa-icon.sa-success .sa-fix {\n        width: 5px;\n        height: 90px;\n        background-color: white;\n        position: absolute;\n        left: 28px;\n        top: 8px;\n        z-index: 1;\n        -webkit-transform: rotate(-45deg);\n        transform: rotate(-45deg); }\n      .sweet-alert .sa-icon.sa-success .sa-line {\n        height: 5px;\n        background-color: #A5DC86;\n        display: block;\n        border-radius: 2px;\n        position: absolute;\n        z-index: 2; }\n        .sweet-alert .sa-icon.sa-success .sa-line.sa-tip {\n          width: 25px;\n          left: 14px;\n          top: 46px;\n          -webkit-transform: rotate(45deg);\n          transform: rotate(45deg); }\n        .sweet-alert .sa-icon.sa-success .sa-line.sa-long {\n          width: 47px;\n          right: 8px;\n          top: 38px;\n          -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg); }\n    .sweet-alert .sa-icon.sa-custom {\n      background-size: contain;\n      border-radius: 0;\n      border: none;\n      background-position: center center;\n      background-repeat: no-repeat; }\n\n/*\n * Animations\n */\n@-webkit-keyframes showSweetAlert {\n  0% {\n    transform: scale(0.7);\n    -webkit-transform: scale(0.7); }\n  45% {\n    transform: scale(1.05);\n    -webkit-transform: scale(1.05); }\n  80% {\n    transform: scale(0.95);\n    -webkit-transform: scale(0.95); }\n  100% {\n    transform: scale(1);\n    -webkit-transform: scale(1); } }\n\n@keyframes showSweetAlert {\n  0% {\n    transform: scale(0.7);\n    -webkit-transform: scale(0.7); }\n  45% {\n    transform: scale(1.05);\n    -webkit-transform: scale(1.05); }\n  80% {\n    transform: scale(0.95);\n    -webkit-transform: scale(0.95); }\n  100% {\n    transform: scale(1);\n    -webkit-transform: scale(1); } }\n\n@-webkit-keyframes hideSweetAlert {\n  0% {\n    transform: scale(1);\n    -webkit-transform: scale(1); }\n  100% {\n    transform: scale(0.5);\n    -webkit-transform: scale(0.5); } }\n\n@keyframes hideSweetAlert {\n  0% {\n    transform: scale(1);\n    -webkit-transform: scale(1); }\n  100% {\n    transform: scale(0.5);\n    -webkit-transform: scale(0.5); } }\n\n@-webkit-keyframes slideFromTop {\n  0% {\n    top: 0%; }\n  100% {\n    top: 50%; } }\n\n@keyframes slideFromTop {\n  0% {\n    top: 0%; }\n  100% {\n    top: 50%; } }\n\n@-webkit-keyframes slideToTop {\n  0% {\n    top: 50%; }\n  100% {\n    top: 0%; } }\n\n@keyframes slideToTop {\n  0% {\n    top: 50%; }\n  100% {\n    top: 0%; } }\n\n@-webkit-keyframes slideFromBottom {\n  0% {\n    top: 70%; }\n  100% {\n    top: 50%; } }\n\n@keyframes slideFromBottom {\n  0% {\n    top: 70%; }\n  100% {\n    top: 50%; } }\n\n@-webkit-keyframes slideToBottom {\n  0% {\n    top: 50%; }\n  100% {\n    top: 70%; } }\n\n@keyframes slideToBottom {\n  0% {\n    top: 50%; }\n  100% {\n    top: 70%; } }\n\n.showSweetAlert[data-animation=pop] {\n  -webkit-animation: showSweetAlert 0.3s;\n  animation: showSweetAlert 0.3s; }\n\n.showSweetAlert[data-animation=none] {\n  -webkit-animation: none;\n  animation: none; }\n\n.showSweetAlert[data-animation=slide-from-top] {\n  -webkit-animation: slideFromTop 0.3s;\n  animation: slideFromTop 0.3s; }\n\n.showSweetAlert[data-animation=slide-from-bottom] {\n  -webkit-animation: slideFromBottom 0.3s;\n  animation: slideFromBottom 0.3s; }\n\n.hideSweetAlert[data-animation=pop] {\n  -webkit-animation: hideSweetAlert 0.2s;\n  animation: hideSweetAlert 0.2s; }\n\n.hideSweetAlert[data-animation=none] {\n  -webkit-animation: none;\n  animation: none; }\n\n.hideSweetAlert[data-animation=slide-from-top] {\n  -webkit-animation: slideToTop 0.4s;\n  animation: slideToTop 0.4s; }\n\n.hideSweetAlert[data-animation=slide-from-bottom] {\n  -webkit-animation: slideToBottom 0.3s;\n  animation: slideToBottom 0.3s; }\n\n@-webkit-keyframes animateSuccessTip {\n  0% {\n    width: 0;\n    left: 1px;\n    top: 19px; }\n  54% {\n    width: 0;\n    left: 1px;\n    top: 19px; }\n  70% {\n    width: 50px;\n    left: -8px;\n    top: 37px; }\n  84% {\n    width: 17px;\n    left: 21px;\n    top: 48px; }\n  100% {\n    width: 25px;\n    left: 14px;\n    top: 45px; } }\n\n@keyframes animateSuccessTip {\n  0% {\n    width: 0;\n    left: 1px;\n    top: 19px; }\n  54% {\n    width: 0;\n    left: 1px;\n    top: 19px; }\n  70% {\n    width: 50px;\n    left: -8px;\n    top: 37px; }\n  84% {\n    width: 17px;\n    left: 21px;\n    top: 48px; }\n  100% {\n    width: 25px;\n    left: 14px;\n    top: 45px; } }\n\n@-webkit-keyframes animateSuccessLong {\n  0% {\n    width: 0;\n    right: 46px;\n    top: 54px; }\n  65% {\n    width: 0;\n    right: 46px;\n    top: 54px; }\n  84% {\n    width: 55px;\n    right: 0px;\n    top: 35px; }\n  100% {\n    width: 47px;\n    right: 8px;\n    top: 38px; } }\n\n@keyframes animateSuccessLong {\n  0% {\n    width: 0;\n    right: 46px;\n    top: 54px; }\n  65% {\n    width: 0;\n    right: 46px;\n    top: 54px; }\n  84% {\n    width: 55px;\n    right: 0px;\n    top: 35px; }\n  100% {\n    width: 47px;\n    right: 8px;\n    top: 38px; } }\n\n@-webkit-keyframes rotatePlaceholder {\n  0% {\n    transform: rotate(-45deg);\n    -webkit-transform: rotate(-45deg); }\n  5% {\n    transform: rotate(-45deg);\n    -webkit-transform: rotate(-45deg); }\n  12% {\n    transform: rotate(-405deg);\n    -webkit-transform: rotate(-405deg); }\n  100% {\n    transform: rotate(-405deg);\n    -webkit-transform: rotate(-405deg); } }\n\n@keyframes rotatePlaceholder {\n  0% {\n    transform: rotate(-45deg);\n    -webkit-transform: rotate(-45deg); }\n  5% {\n    transform: rotate(-45deg);\n    -webkit-transform: rotate(-45deg); }\n  12% {\n    transform: rotate(-405deg);\n    -webkit-transform: rotate(-405deg); }\n  100% {\n    transform: rotate(-405deg);\n    -webkit-transform: rotate(-405deg); } }\n\n.animateSuccessTip {\n  -webkit-animation: animateSuccessTip 0.75s;\n  animation: animateSuccessTip 0.75s; }\n\n.animateSuccessLong {\n  -webkit-animation: animateSuccessLong 0.75s;\n  animation: animateSuccessLong 0.75s; }\n\n.sa-icon.sa-success.animate::after {\n  -webkit-animation: rotatePlaceholder 4.25s ease-in;\n  animation: rotatePlaceholder 4.25s ease-in; }\n\n@-webkit-keyframes animateErrorIcon {\n  0% {\n    transform: rotateX(100deg);\n    -webkit-transform: rotateX(100deg);\n    opacity: 0; }\n  100% {\n    transform: rotateX(0deg);\n    -webkit-transform: rotateX(0deg);\n    opacity: 1; } }\n\n@keyframes animateErrorIcon {\n  0% {\n    transform: rotateX(100deg);\n    -webkit-transform: rotateX(100deg);\n    opacity: 0; }\n  100% {\n    transform: rotateX(0deg);\n    -webkit-transform: rotateX(0deg);\n    opacity: 1; } }\n\n.animateErrorIcon {\n  -webkit-animation: animateErrorIcon 0.5s;\n  animation: animateErrorIcon 0.5s; }\n\n@-webkit-keyframes animateXMark {\n  0% {\n    transform: scale(0.4);\n    -webkit-transform: scale(0.4);\n    margin-top: 26px;\n    opacity: 0; }\n  50% {\n    transform: scale(0.4);\n    -webkit-transform: scale(0.4);\n    margin-top: 26px;\n    opacity: 0; }\n  80% {\n    transform: scale(1.15);\n    -webkit-transform: scale(1.15);\n    margin-top: -6px; }\n  100% {\n    transform: scale(1);\n    -webkit-transform: scale(1);\n    margin-top: 0;\n    opacity: 1; } }\n\n@keyframes animateXMark {\n  0% {\n    transform: scale(0.4);\n    -webkit-transform: scale(0.4);\n    margin-top: 26px;\n    opacity: 0; }\n  50% {\n    transform: scale(0.4);\n    -webkit-transform: scale(0.4);\n    margin-top: 26px;\n    opacity: 0; }\n  80% {\n    transform: scale(1.15);\n    -webkit-transform: scale(1.15);\n    margin-top: -6px; }\n  100% {\n    transform: scale(1);\n    -webkit-transform: scale(1);\n    margin-top: 0;\n    opacity: 1; } }\n\n.animateXMark {\n  -webkit-animation: animateXMark 0.5s;\n  animation: animateXMark 0.5s; }\n\n@-webkit-keyframes pulseWarning {\n  0% {\n    border-color: #F8D486; }\n  100% {\n    border-color: #F8BB86; } }\n\n@keyframes pulseWarning {\n  0% {\n    border-color: #F8D486; }\n  100% {\n    border-color: #F8BB86; } }\n\n.pulseWarning {\n  -webkit-animation: pulseWarning 0.75s infinite alternate;\n  animation: pulseWarning 0.75s infinite alternate; }\n\n@-webkit-keyframes pulseWarningIns {\n  0% {\n    background-color: #F8D486; }\n  100% {\n    background-color: #F8BB86; } }\n\n@keyframes pulseWarningIns {\n  0% {\n    background-color: #F8D486; }\n  100% {\n    background-color: #F8BB86; } }\n\n.pulseWarningIns {\n  -webkit-animation: pulseWarningIns 0.75s infinite alternate;\n  animation: pulseWarningIns 0.75s infinite alternate; }\n\n@-webkit-keyframes rotate-loading {\n  0% {\n    transform: rotate(0deg); }\n  100% {\n    transform: rotate(360deg); } }\n\n@keyframes rotate-loading {\n  0% {\n    transform: rotate(0deg); }\n  100% {\n    transform: rotate(360deg); } }\n\n/* Internet Explorer 9 has some special quirks that are fixed here */\n/* The icons are not animated. */\n/* This file is automatically merged into sweet-alert.min.js through Gulp */\n/* Error icon */\n.sweet-alert .sa-icon.sa-error .sa-line.sa-left {\n  -ms-transform: rotate(45deg) \\9; }\n\n.sweet-alert .sa-icon.sa-error .sa-line.sa-right {\n  -ms-transform: rotate(-45deg) \\9; }\n\n/* Success icon */\n.sweet-alert .sa-icon.sa-success {\n  border-color: transparent\\9; }\n\n.sweet-alert .sa-icon.sa-success .sa-line.sa-tip {\n  -ms-transform: rotate(45deg) \\9; }\n\n.sweet-alert .sa-icon.sa-success .sa-line.sa-long {\n  -ms-transform: rotate(-45deg) \\9; }\n\n/*!\n * Load Awesome v1.1.0 (http://github.danielcardoso.net/load-awesome/)\n * Copyright 2015 Daniel Cardoso <@DanielCardoso>\n * Licensed under MIT\n */\n.la-ball-fall,\n.la-ball-fall > div {\n  position: relative;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box; }\n\n.la-ball-fall {\n  display: block;\n  font-size: 0;\n  color: #fff; }\n\n.la-ball-fall.la-dark {\n  color: #333; }\n\n.la-ball-fall > div {\n  display: inline-block;\n  float: none;\n  background-color: currentColor;\n  border: 0 solid currentColor; }\n\n.la-ball-fall {\n  width: 54px;\n  height: 18px; }\n\n.la-ball-fall > div {\n  width: 10px;\n  height: 10px;\n  margin: 4px;\n  border-radius: 100%;\n  opacity: 0;\n  -webkit-animation: ball-fall 1s ease-in-out infinite;\n  -moz-animation: ball-fall 1s ease-in-out infinite;\n  -o-animation: ball-fall 1s ease-in-out infinite;\n  animation: ball-fall 1s ease-in-out infinite; }\n\n.la-ball-fall > div:nth-child(1) {\n  -webkit-animation-delay: -200ms;\n  -moz-animation-delay: -200ms;\n  -o-animation-delay: -200ms;\n  animation-delay: -200ms; }\n\n.la-ball-fall > div:nth-child(2) {\n  -webkit-animation-delay: -100ms;\n  -moz-animation-delay: -100ms;\n  -o-animation-delay: -100ms;\n  animation-delay: -100ms; }\n\n.la-ball-fall > div:nth-child(3) {\n  -webkit-animation-delay: 0ms;\n  -moz-animation-delay: 0ms;\n  -o-animation-delay: 0ms;\n  animation-delay: 0ms; }\n\n.la-ball-fall.la-sm {\n  width: 26px;\n  height: 8px; }\n\n.la-ball-fall.la-sm > div {\n  width: 4px;\n  height: 4px;\n  margin: 2px; }\n\n.la-ball-fall.la-2x {\n  width: 108px;\n  height: 36px; }\n\n.la-ball-fall.la-2x > div {\n  width: 20px;\n  height: 20px;\n  margin: 8px; }\n\n.la-ball-fall.la-3x {\n  width: 162px;\n  height: 54px; }\n\n.la-ball-fall.la-3x > div {\n  width: 30px;\n  height: 30px;\n  margin: 12px; }\n\n/*\n * Animation\n */\n@-webkit-keyframes ball-fall {\n  0% {\n    opacity: 0;\n    -webkit-transform: translateY(-145%);\n    transform: translateY(-145%); }\n  10% {\n    opacity: .5; }\n  20% {\n    opacity: 1;\n    -webkit-transform: translateY(0);\n    transform: translateY(0); }\n  80% {\n    opacity: 1;\n    -webkit-transform: translateY(0);\n    transform: translateY(0); }\n  90% {\n    opacity: .5; }\n  100% {\n    opacity: 0;\n    -webkit-transform: translateY(145%);\n    transform: translateY(145%); } }\n\n@-moz-keyframes ball-fall {\n  0% {\n    opacity: 0;\n    -moz-transform: translateY(-145%);\n    transform: translateY(-145%); }\n  10% {\n    opacity: .5; }\n  20% {\n    opacity: 1;\n    -moz-transform: translateY(0);\n    transform: translateY(0); }\n  80% {\n    opacity: 1;\n    -moz-transform: translateY(0);\n    transform: translateY(0); }\n  90% {\n    opacity: .5; }\n  100% {\n    opacity: 0;\n    -moz-transform: translateY(145%);\n    transform: translateY(145%); } }\n\n@-o-keyframes ball-fall {\n  0% {\n    opacity: 0;\n    -o-transform: translateY(-145%);\n    transform: translateY(-145%); }\n  10% {\n    opacity: .5; }\n  20% {\n    opacity: 1;\n    -o-transform: translateY(0);\n    transform: translateY(0); }\n  80% {\n    opacity: 1;\n    -o-transform: translateY(0);\n    transform: translateY(0); }\n  90% {\n    opacity: .5; }\n  100% {\n    opacity: 0;\n    -o-transform: translateY(145%);\n    transform: translateY(145%); } }\n\n@keyframes ball-fall {\n  0% {\n    opacity: 0;\n    -webkit-transform: translateY(-145%);\n    -moz-transform: translateY(-145%);\n    -o-transform: translateY(-145%);\n    transform: translateY(-145%); }\n  10% {\n    opacity: .5; }\n  20% {\n    opacity: 1;\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -o-transform: translateY(0);\n    transform: translateY(0); }\n  80% {\n    opacity: 1;\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -o-transform: translateY(0);\n    transform: translateY(0); }\n  90% {\n    opacity: .5; }\n  100% {\n    opacity: 0;\n    -webkit-transform: translateY(145%);\n    -moz-transform: translateY(145%);\n    -o-transform: translateY(145%);\n    transform: translateY(145%); } }\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ 409:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(29)();
 // imports
 
 
@@ -23422,7 +23826,7 @@ exports.push([module.i, ".loader {\n    border: 16px solid #f3f3f3;\n    /* Ligh
 
 /***/ }),
 
-/***/ 405:
+/***/ 410:
 /***/ (function(module, exports) {
 
 module.exports = function(opts) {
@@ -23488,256 +23892,514 @@ ElementClass.prototype.toggle = function(className) {
 
 /***/ }),
 
-/***/ 41:
-/***/ (function(module, exports) {
+/***/ 413:
+/***/ (function(module, exports, __webpack_require__) {
 
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-var stylesInDom = {},
-	memoize = function(fn) {
-		var memo;
-		return function () {
-			if (typeof memo === "undefined") memo = fn.apply(this, arguments);
-			return memo;
-		};
-	},
-	isOldIE = memoize(function() {
-		return /msie [6-9]\b/.test(self.navigator.userAgent.toLowerCase());
-	}),
-	getHeadElement = memoize(function () {
-		return document.head || document.getElementsByTagName("head")[0];
-	}),
-	singletonElement = null,
-	singletonCounter = 0,
-	styleElementsInsertedAtTop = [];
+/* WEBPACK VAR INJECTION */(function(global) {/**
+ * lodash (Custom Build) <https://lodash.com/>
+ * Build: `lodash modularize exports="npm" -o ./`
+ * Copyright jQuery Foundation and other contributors <https://jquery.org/>
+ * Released under MIT license <https://lodash.com/license>
+ * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+ * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+ */
 
-module.exports = function(list, options) {
-	if(typeof DEBUG !== "undefined" && DEBUG) {
-		if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
-	}
+/** Used as references for various `Number` constants. */
+var INFINITY = 1 / 0,
+    MAX_SAFE_INTEGER = 9007199254740991;
 
-	options = options || {};
-	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-	// tags it will allow on a page
-	if (typeof options.singleton === "undefined") options.singleton = isOldIE();
+/** `Object#toString` result references. */
+var argsTag = '[object Arguments]',
+    funcTag = '[object Function]',
+    genTag = '[object GeneratorFunction]',
+    symbolTag = '[object Symbol]';
 
-	// By default, add <style> tags to the bottom of <head>.
-	if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
+/** Detect free variable `global` from Node.js. */
+var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
 
-	var styles = listToStyles(list);
-	addStylesToDom(styles, options);
+/** Detect free variable `self`. */
+var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
 
-	return function update(newList) {
-		var mayRemove = [];
-		for(var i = 0; i < styles.length; i++) {
-			var item = styles[i];
-			var domStyle = stylesInDom[item.id];
-			domStyle.refs--;
-			mayRemove.push(domStyle);
-		}
-		if(newList) {
-			var newStyles = listToStyles(newList);
-			addStylesToDom(newStyles, options);
-		}
-		for(var i = 0; i < mayRemove.length; i++) {
-			var domStyle = mayRemove[i];
-			if(domStyle.refs === 0) {
-				for(var j = 0; j < domStyle.parts.length; j++)
-					domStyle.parts[j]();
-				delete stylesInDom[domStyle.id];
-			}
-		}
-	};
+/** Used as a reference to the global object. */
+var root = freeGlobal || freeSelf || Function('return this')();
+
+/**
+ * A faster alternative to `Function#apply`, this function invokes `func`
+ * with the `this` binding of `thisArg` and the arguments of `args`.
+ *
+ * @private
+ * @param {Function} func The function to invoke.
+ * @param {*} thisArg The `this` binding of `func`.
+ * @param {Array} args The arguments to invoke `func` with.
+ * @returns {*} Returns the result of `func`.
+ */
+function apply(func, thisArg, args) {
+  switch (args.length) {
+    case 0: return func.call(thisArg);
+    case 1: return func.call(thisArg, args[0]);
+    case 2: return func.call(thisArg, args[0], args[1]);
+    case 3: return func.call(thisArg, args[0], args[1], args[2]);
+  }
+  return func.apply(thisArg, args);
 }
 
-function addStylesToDom(styles, options) {
-	for(var i = 0; i < styles.length; i++) {
-		var item = styles[i];
-		var domStyle = stylesInDom[item.id];
-		if(domStyle) {
-			domStyle.refs++;
-			for(var j = 0; j < domStyle.parts.length; j++) {
-				domStyle.parts[j](item.parts[j]);
-			}
-			for(; j < item.parts.length; j++) {
-				domStyle.parts.push(addStyle(item.parts[j], options));
-			}
-		} else {
-			var parts = [];
-			for(var j = 0; j < item.parts.length; j++) {
-				parts.push(addStyle(item.parts[j], options));
-			}
-			stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
-		}
-	}
+/**
+ * A specialized version of `_.map` for arrays without support for iteratee
+ * shorthands.
+ *
+ * @private
+ * @param {Array} [array] The array to iterate over.
+ * @param {Function} iteratee The function invoked per iteration.
+ * @returns {Array} Returns the new mapped array.
+ */
+function arrayMap(array, iteratee) {
+  var index = -1,
+      length = array ? array.length : 0,
+      result = Array(length);
+
+  while (++index < length) {
+    result[index] = iteratee(array[index], index, array);
+  }
+  return result;
 }
 
-function listToStyles(list) {
-	var styles = [];
-	var newStyles = {};
-	for(var i = 0; i < list.length; i++) {
-		var item = list[i];
-		var id = item[0];
-		var css = item[1];
-		var media = item[2];
-		var sourceMap = item[3];
-		var part = {css: css, media: media, sourceMap: sourceMap};
-		if(!newStyles[id])
-			styles.push(newStyles[id] = {id: id, parts: [part]});
-		else
-			newStyles[id].parts.push(part);
-	}
-	return styles;
+/**
+ * Appends the elements of `values` to `array`.
+ *
+ * @private
+ * @param {Array} array The array to modify.
+ * @param {Array} values The values to append.
+ * @returns {Array} Returns `array`.
+ */
+function arrayPush(array, values) {
+  var index = -1,
+      length = values.length,
+      offset = array.length;
+
+  while (++index < length) {
+    array[offset + index] = values[index];
+  }
+  return array;
 }
 
-function insertStyleElement(options, styleElement) {
-	var head = getHeadElement();
-	var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
-	if (options.insertAt === "top") {
-		if(!lastStyleElementInsertedAtTop) {
-			head.insertBefore(styleElement, head.firstChild);
-		} else if(lastStyleElementInsertedAtTop.nextSibling) {
-			head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
-		} else {
-			head.appendChild(styleElement);
-		}
-		styleElementsInsertedAtTop.push(styleElement);
-	} else if (options.insertAt === "bottom") {
-		head.appendChild(styleElement);
-	} else {
-		throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
-	}
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var objectToString = objectProto.toString;
+
+/** Built-in value references. */
+var Symbol = root.Symbol,
+    propertyIsEnumerable = objectProto.propertyIsEnumerable,
+    spreadableSymbol = Symbol ? Symbol.isConcatSpreadable : undefined;
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeMax = Math.max;
+
+/**
+ * The base implementation of `_.flatten` with support for restricting flattening.
+ *
+ * @private
+ * @param {Array} array The array to flatten.
+ * @param {number} depth The maximum recursion depth.
+ * @param {boolean} [predicate=isFlattenable] The function invoked per iteration.
+ * @param {boolean} [isStrict] Restrict to values that pass `predicate` checks.
+ * @param {Array} [result=[]] The initial result value.
+ * @returns {Array} Returns the new flattened array.
+ */
+function baseFlatten(array, depth, predicate, isStrict, result) {
+  var index = -1,
+      length = array.length;
+
+  predicate || (predicate = isFlattenable);
+  result || (result = []);
+
+  while (++index < length) {
+    var value = array[index];
+    if (depth > 0 && predicate(value)) {
+      if (depth > 1) {
+        // Recursively flatten arrays (susceptible to call stack limits).
+        baseFlatten(value, depth - 1, predicate, isStrict, result);
+      } else {
+        arrayPush(result, value);
+      }
+    } else if (!isStrict) {
+      result[result.length] = value;
+    }
+  }
+  return result;
 }
 
-function removeStyleElement(styleElement) {
-	styleElement.parentNode.removeChild(styleElement);
-	var idx = styleElementsInsertedAtTop.indexOf(styleElement);
-	if(idx >= 0) {
-		styleElementsInsertedAtTop.splice(idx, 1);
-	}
+/**
+ * The base implementation of `_.pick` without support for individual
+ * property identifiers.
+ *
+ * @private
+ * @param {Object} object The source object.
+ * @param {string[]} props The property identifiers to pick.
+ * @returns {Object} Returns the new object.
+ */
+function basePick(object, props) {
+  object = Object(object);
+  return basePickBy(object, props, function(value, key) {
+    return key in object;
+  });
 }
 
-function createStyleElement(options) {
-	var styleElement = document.createElement("style");
-	styleElement.type = "text/css";
-	insertStyleElement(options, styleElement);
-	return styleElement;
+/**
+ * The base implementation of  `_.pickBy` without support for iteratee shorthands.
+ *
+ * @private
+ * @param {Object} object The source object.
+ * @param {string[]} props The property identifiers to pick from.
+ * @param {Function} predicate The function invoked per property.
+ * @returns {Object} Returns the new object.
+ */
+function basePickBy(object, props, predicate) {
+  var index = -1,
+      length = props.length,
+      result = {};
+
+  while (++index < length) {
+    var key = props[index],
+        value = object[key];
+
+    if (predicate(value, key)) {
+      result[key] = value;
+    }
+  }
+  return result;
 }
 
-function createLinkElement(options) {
-	var linkElement = document.createElement("link");
-	linkElement.rel = "stylesheet";
-	insertStyleElement(options, linkElement);
-	return linkElement;
+/**
+ * The base implementation of `_.rest` which doesn't validate or coerce arguments.
+ *
+ * @private
+ * @param {Function} func The function to apply a rest parameter to.
+ * @param {number} [start=func.length-1] The start position of the rest parameter.
+ * @returns {Function} Returns the new function.
+ */
+function baseRest(func, start) {
+  start = nativeMax(start === undefined ? (func.length - 1) : start, 0);
+  return function() {
+    var args = arguments,
+        index = -1,
+        length = nativeMax(args.length - start, 0),
+        array = Array(length);
+
+    while (++index < length) {
+      array[index] = args[start + index];
+    }
+    index = -1;
+    var otherArgs = Array(start + 1);
+    while (++index < start) {
+      otherArgs[index] = args[index];
+    }
+    otherArgs[start] = array;
+    return apply(func, this, otherArgs);
+  };
 }
 
-function addStyle(obj, options) {
-	var styleElement, update, remove;
-
-	if (options.singleton) {
-		var styleIndex = singletonCounter++;
-		styleElement = singletonElement || (singletonElement = createStyleElement(options));
-		update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
-		remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
-	} else if(obj.sourceMap &&
-		typeof URL === "function" &&
-		typeof URL.createObjectURL === "function" &&
-		typeof URL.revokeObjectURL === "function" &&
-		typeof Blob === "function" &&
-		typeof btoa === "function") {
-		styleElement = createLinkElement(options);
-		update = updateLink.bind(null, styleElement);
-		remove = function() {
-			removeStyleElement(styleElement);
-			if(styleElement.href)
-				URL.revokeObjectURL(styleElement.href);
-		};
-	} else {
-		styleElement = createStyleElement(options);
-		update = applyToTag.bind(null, styleElement);
-		remove = function() {
-			removeStyleElement(styleElement);
-		};
-	}
-
-	update(obj);
-
-	return function updateStyle(newObj) {
-		if(newObj) {
-			if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
-				return;
-			update(obj = newObj);
-		} else {
-			remove();
-		}
-	};
+/**
+ * Checks if `value` is a flattenable `arguments` object or array.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is flattenable, else `false`.
+ */
+function isFlattenable(value) {
+  return isArray(value) || isArguments(value) ||
+    !!(spreadableSymbol && value && value[spreadableSymbol]);
 }
 
-var replaceText = (function () {
-	var textStore = [];
-
-	return function (index, replacement) {
-		textStore[index] = replacement;
-		return textStore.filter(Boolean).join('\n');
-	};
-})();
-
-function applyToSingletonTag(styleElement, index, remove, obj) {
-	var css = remove ? "" : obj.css;
-
-	if (styleElement.styleSheet) {
-		styleElement.styleSheet.cssText = replaceText(index, css);
-	} else {
-		var cssNode = document.createTextNode(css);
-		var childNodes = styleElement.childNodes;
-		if (childNodes[index]) styleElement.removeChild(childNodes[index]);
-		if (childNodes.length) {
-			styleElement.insertBefore(cssNode, childNodes[index]);
-		} else {
-			styleElement.appendChild(cssNode);
-		}
-	}
+/**
+ * Converts `value` to a string key if it's not a string or symbol.
+ *
+ * @private
+ * @param {*} value The value to inspect.
+ * @returns {string|symbol} Returns the key.
+ */
+function toKey(value) {
+  if (typeof value == 'string' || isSymbol(value)) {
+    return value;
+  }
+  var result = (value + '');
+  return (result == '0' && (1 / value) == -INFINITY) ? '-0' : result;
 }
 
-function applyToTag(styleElement, obj) {
-	var css = obj.css;
-	var media = obj.media;
-
-	if(media) {
-		styleElement.setAttribute("media", media)
-	}
-
-	if(styleElement.styleSheet) {
-		styleElement.styleSheet.cssText = css;
-	} else {
-		while(styleElement.firstChild) {
-			styleElement.removeChild(styleElement.firstChild);
-		}
-		styleElement.appendChild(document.createTextNode(css));
-	}
+/**
+ * Checks if `value` is likely an `arguments` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an `arguments` object,
+ *  else `false`.
+ * @example
+ *
+ * _.isArguments(function() { return arguments; }());
+ * // => true
+ *
+ * _.isArguments([1, 2, 3]);
+ * // => false
+ */
+function isArguments(value) {
+  // Safari 8.1 makes `arguments.callee` enumerable in strict mode.
+  return isArrayLikeObject(value) && hasOwnProperty.call(value, 'callee') &&
+    (!propertyIsEnumerable.call(value, 'callee') || objectToString.call(value) == argsTag);
 }
 
-function updateLink(linkElement, obj) {
-	var css = obj.css;
-	var sourceMap = obj.sourceMap;
+/**
+ * Checks if `value` is classified as an `Array` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an array, else `false`.
+ * @example
+ *
+ * _.isArray([1, 2, 3]);
+ * // => true
+ *
+ * _.isArray(document.body.children);
+ * // => false
+ *
+ * _.isArray('abc');
+ * // => false
+ *
+ * _.isArray(_.noop);
+ * // => false
+ */
+var isArray = Array.isArray;
 
-	if(sourceMap) {
-		// http://stackoverflow.com/a/26603875
-		css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
-	}
-
-	var blob = new Blob([css], { type: "text/css" });
-
-	var oldSrc = linkElement.href;
-
-	linkElement.href = URL.createObjectURL(blob);
-
-	if(oldSrc)
-		URL.revokeObjectURL(oldSrc);
+/**
+ * Checks if `value` is array-like. A value is considered array-like if it's
+ * not a function and has a `value.length` that's an integer greater than or
+ * equal to `0` and less than or equal to `Number.MAX_SAFE_INTEGER`.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is array-like, else `false`.
+ * @example
+ *
+ * _.isArrayLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isArrayLike(document.body.children);
+ * // => true
+ *
+ * _.isArrayLike('abc');
+ * // => true
+ *
+ * _.isArrayLike(_.noop);
+ * // => false
+ */
+function isArrayLike(value) {
+  return value != null && isLength(value.length) && !isFunction(value);
 }
 
+/**
+ * This method is like `_.isArrayLike` except that it also checks if `value`
+ * is an object.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an array-like object,
+ *  else `false`.
+ * @example
+ *
+ * _.isArrayLikeObject([1, 2, 3]);
+ * // => true
+ *
+ * _.isArrayLikeObject(document.body.children);
+ * // => true
+ *
+ * _.isArrayLikeObject('abc');
+ * // => false
+ *
+ * _.isArrayLikeObject(_.noop);
+ * // => false
+ */
+function isArrayLikeObject(value) {
+  return isObjectLike(value) && isArrayLike(value);
+}
+
+/**
+ * Checks if `value` is classified as a `Function` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a function, else `false`.
+ * @example
+ *
+ * _.isFunction(_);
+ * // => true
+ *
+ * _.isFunction(/abc/);
+ * // => false
+ */
+function isFunction(value) {
+  // The use of `Object#toString` avoids issues with the `typeof` operator
+  // in Safari 8-9 which returns 'object' for typed array and other constructors.
+  var tag = isObject(value) ? objectToString.call(value) : '';
+  return tag == funcTag || tag == genTag;
+}
+
+/**
+ * Checks if `value` is a valid array-like length.
+ *
+ * **Note:** This method is loosely based on
+ * [`ToLength`](http://ecma-international.org/ecma-262/7.0/#sec-tolength).
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
+ * @example
+ *
+ * _.isLength(3);
+ * // => true
+ *
+ * _.isLength(Number.MIN_VALUE);
+ * // => false
+ *
+ * _.isLength(Infinity);
+ * // => false
+ *
+ * _.isLength('3');
+ * // => false
+ */
+function isLength(value) {
+  return typeof value == 'number' &&
+    value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+}
+
+/**
+ * Checks if `value` is the
+ * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+ * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+ * @example
+ *
+ * _.isObject({});
+ * // => true
+ *
+ * _.isObject([1, 2, 3]);
+ * // => true
+ *
+ * _.isObject(_.noop);
+ * // => true
+ *
+ * _.isObject(null);
+ * // => false
+ */
+function isObject(value) {
+  var type = typeof value;
+  return !!value && (type == 'object' || type == 'function');
+}
+
+/**
+ * Checks if `value` is object-like. A value is object-like if it's not `null`
+ * and has a `typeof` result of "object".
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+ * @example
+ *
+ * _.isObjectLike({});
+ * // => true
+ *
+ * _.isObjectLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isObjectLike(_.noop);
+ * // => false
+ *
+ * _.isObjectLike(null);
+ * // => false
+ */
+function isObjectLike(value) {
+  return !!value && typeof value == 'object';
+}
+
+/**
+ * Checks if `value` is classified as a `Symbol` primitive or object.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
+ * @example
+ *
+ * _.isSymbol(Symbol.iterator);
+ * // => true
+ *
+ * _.isSymbol('abc');
+ * // => false
+ */
+function isSymbol(value) {
+  return typeof value == 'symbol' ||
+    (isObjectLike(value) && objectToString.call(value) == symbolTag);
+}
+
+/**
+ * Creates an object composed of the picked `object` properties.
+ *
+ * @static
+ * @since 0.1.0
+ * @memberOf _
+ * @category Object
+ * @param {Object} object The source object.
+ * @param {...(string|string[])} [props] The property identifiers to pick.
+ * @returns {Object} Returns the new object.
+ * @example
+ *
+ * var object = { 'a': 1, 'b': '2', 'c': 3 };
+ *
+ * _.pick(object, ['a', 'c']);
+ * // => { 'a': 1, 'c': 3 }
+ */
+var pick = baseRest(function(object, props) {
+  return object == null ? {} : basePick(object, arrayMap(baseFlatten(props, 1), toKey));
+});
+
+module.exports = pick;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)))
 
 /***/ }),
 
@@ -23857,7 +24519,1257 @@ exports.default = ConfigManager;
 
 /***/ }),
 
-/***/ 57:
+/***/ 504:
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_RESULT__;/*global define:false */
+/**
+ * Copyright 2012-2017 Craig Campbell
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * Mousetrap is a simple keyboard shortcut library for Javascript with
+ * no external dependencies
+ *
+ * @version 1.6.2
+ * @url craig.is/killing/mice
+ */
+(function(window, document, undefined) {
+
+    // Check if mousetrap is used inside browser, if not, return
+    if (!window) {
+        return;
+    }
+
+    /**
+     * mapping of special keycodes to their corresponding keys
+     *
+     * everything in this dictionary cannot use keypress events
+     * so it has to be here to map to the correct keycodes for
+     * keyup/keydown events
+     *
+     * @type {Object}
+     */
+    var _MAP = {
+        8: 'backspace',
+        9: 'tab',
+        13: 'enter',
+        16: 'shift',
+        17: 'ctrl',
+        18: 'alt',
+        20: 'capslock',
+        27: 'esc',
+        32: 'space',
+        33: 'pageup',
+        34: 'pagedown',
+        35: 'end',
+        36: 'home',
+        37: 'left',
+        38: 'up',
+        39: 'right',
+        40: 'down',
+        45: 'ins',
+        46: 'del',
+        91: 'meta',
+        93: 'meta',
+        224: 'meta'
+    };
+
+    /**
+     * mapping for special characters so they can support
+     *
+     * this dictionary is only used incase you want to bind a
+     * keyup or keydown event to one of these keys
+     *
+     * @type {Object}
+     */
+    var _KEYCODE_MAP = {
+        106: '*',
+        107: '+',
+        109: '-',
+        110: '.',
+        111 : '/',
+        186: ';',
+        187: '=',
+        188: ',',
+        189: '-',
+        190: '.',
+        191: '/',
+        192: '`',
+        219: '[',
+        220: '\\',
+        221: ']',
+        222: '\''
+    };
+
+    /**
+     * this is a mapping of keys that require shift on a US keypad
+     * back to the non shift equivelents
+     *
+     * this is so you can use keyup events with these keys
+     *
+     * note that this will only work reliably on US keyboards
+     *
+     * @type {Object}
+     */
+    var _SHIFT_MAP = {
+        '~': '`',
+        '!': '1',
+        '@': '2',
+        '#': '3',
+        '$': '4',
+        '%': '5',
+        '^': '6',
+        '&': '7',
+        '*': '8',
+        '(': '9',
+        ')': '0',
+        '_': '-',
+        '+': '=',
+        ':': ';',
+        '\"': '\'',
+        '<': ',',
+        '>': '.',
+        '?': '/',
+        '|': '\\'
+    };
+
+    /**
+     * this is a list of special strings you can use to map
+     * to modifier keys when you specify your keyboard shortcuts
+     *
+     * @type {Object}
+     */
+    var _SPECIAL_ALIASES = {
+        'option': 'alt',
+        'command': 'meta',
+        'return': 'enter',
+        'escape': 'esc',
+        'plus': '+',
+        'mod': /Mac|iPod|iPhone|iPad/.test(navigator.platform) ? 'meta' : 'ctrl'
+    };
+
+    /**
+     * variable to store the flipped version of _MAP from above
+     * needed to check if we should use keypress or not when no action
+     * is specified
+     *
+     * @type {Object|undefined}
+     */
+    var _REVERSE_MAP;
+
+    /**
+     * loop through the f keys, f1 to f19 and add them to the map
+     * programatically
+     */
+    for (var i = 1; i < 20; ++i) {
+        _MAP[111 + i] = 'f' + i;
+    }
+
+    /**
+     * loop through to map numbers on the numeric keypad
+     */
+    for (i = 0; i <= 9; ++i) {
+
+        // This needs to use a string cause otherwise since 0 is falsey
+        // mousetrap will never fire for numpad 0 pressed as part of a keydown
+        // event.
+        //
+        // @see https://github.com/ccampbell/mousetrap/pull/258
+        _MAP[i + 96] = i.toString();
+    }
+
+    /**
+     * cross browser add event method
+     *
+     * @param {Element|HTMLDocument} object
+     * @param {string} type
+     * @param {Function} callback
+     * @returns void
+     */
+    function _addEvent(object, type, callback) {
+        if (object.addEventListener) {
+            object.addEventListener(type, callback, false);
+            return;
+        }
+
+        object.attachEvent('on' + type, callback);
+    }
+
+    /**
+     * takes the event and returns the key character
+     *
+     * @param {Event} e
+     * @return {string}
+     */
+    function _characterFromEvent(e) {
+
+        // for keypress events we should return the character as is
+        if (e.type == 'keypress') {
+            var character = String.fromCharCode(e.which);
+
+            // if the shift key is not pressed then it is safe to assume
+            // that we want the character to be lowercase.  this means if
+            // you accidentally have caps lock on then your key bindings
+            // will continue to work
+            //
+            // the only side effect that might not be desired is if you
+            // bind something like 'A' cause you want to trigger an
+            // event when capital A is pressed caps lock will no longer
+            // trigger the event.  shift+a will though.
+            if (!e.shiftKey) {
+                character = character.toLowerCase();
+            }
+
+            return character;
+        }
+
+        // for non keypress events the special maps are needed
+        if (_MAP[e.which]) {
+            return _MAP[e.which];
+        }
+
+        if (_KEYCODE_MAP[e.which]) {
+            return _KEYCODE_MAP[e.which];
+        }
+
+        // if it is not in the special map
+
+        // with keydown and keyup events the character seems to always
+        // come in as an uppercase character whether you are pressing shift
+        // or not.  we should make sure it is always lowercase for comparisons
+        return String.fromCharCode(e.which).toLowerCase();
+    }
+
+    /**
+     * checks if two arrays are equal
+     *
+     * @param {Array} modifiers1
+     * @param {Array} modifiers2
+     * @returns {boolean}
+     */
+    function _modifiersMatch(modifiers1, modifiers2) {
+        return modifiers1.sort().join(',') === modifiers2.sort().join(',');
+    }
+
+    /**
+     * takes a key event and figures out what the modifiers are
+     *
+     * @param {Event} e
+     * @returns {Array}
+     */
+    function _eventModifiers(e) {
+        var modifiers = [];
+
+        if (e.shiftKey) {
+            modifiers.push('shift');
+        }
+
+        if (e.altKey) {
+            modifiers.push('alt');
+        }
+
+        if (e.ctrlKey) {
+            modifiers.push('ctrl');
+        }
+
+        if (e.metaKey) {
+            modifiers.push('meta');
+        }
+
+        return modifiers;
+    }
+
+    /**
+     * prevents default for this event
+     *
+     * @param {Event} e
+     * @returns void
+     */
+    function _preventDefault(e) {
+        if (e.preventDefault) {
+            e.preventDefault();
+            return;
+        }
+
+        e.returnValue = false;
+    }
+
+    /**
+     * stops propogation for this event
+     *
+     * @param {Event} e
+     * @returns void
+     */
+    function _stopPropagation(e) {
+        if (e.stopPropagation) {
+            e.stopPropagation();
+            return;
+        }
+
+        e.cancelBubble = true;
+    }
+
+    /**
+     * determines if the keycode specified is a modifier key or not
+     *
+     * @param {string} key
+     * @returns {boolean}
+     */
+    function _isModifier(key) {
+        return key == 'shift' || key == 'ctrl' || key == 'alt' || key == 'meta';
+    }
+
+    /**
+     * reverses the map lookup so that we can look for specific keys
+     * to see what can and can't use keypress
+     *
+     * @return {Object}
+     */
+    function _getReverseMap() {
+        if (!_REVERSE_MAP) {
+            _REVERSE_MAP = {};
+            for (var key in _MAP) {
+
+                // pull out the numeric keypad from here cause keypress should
+                // be able to detect the keys from the character
+                if (key > 95 && key < 112) {
+                    continue;
+                }
+
+                if (_MAP.hasOwnProperty(key)) {
+                    _REVERSE_MAP[_MAP[key]] = key;
+                }
+            }
+        }
+        return _REVERSE_MAP;
+    }
+
+    /**
+     * picks the best action based on the key combination
+     *
+     * @param {string} key - character for key
+     * @param {Array} modifiers
+     * @param {string=} action passed in
+     */
+    function _pickBestAction(key, modifiers, action) {
+
+        // if no action was picked in we should try to pick the one
+        // that we think would work best for this key
+        if (!action) {
+            action = _getReverseMap()[key] ? 'keydown' : 'keypress';
+        }
+
+        // modifier keys don't work as expected with keypress,
+        // switch to keydown
+        if (action == 'keypress' && modifiers.length) {
+            action = 'keydown';
+        }
+
+        return action;
+    }
+
+    /**
+     * Converts from a string key combination to an array
+     *
+     * @param  {string} combination like "command+shift+l"
+     * @return {Array}
+     */
+    function _keysFromString(combination) {
+        if (combination === '+') {
+            return ['+'];
+        }
+
+        combination = combination.replace(/\+{2}/g, '+plus');
+        return combination.split('+');
+    }
+
+    /**
+     * Gets info for a specific key combination
+     *
+     * @param  {string} combination key combination ("command+s" or "a" or "*")
+     * @param  {string=} action
+     * @returns {Object}
+     */
+    function _getKeyInfo(combination, action) {
+        var keys;
+        var key;
+        var i;
+        var modifiers = [];
+
+        // take the keys from this pattern and figure out what the actual
+        // pattern is all about
+        keys = _keysFromString(combination);
+
+        for (i = 0; i < keys.length; ++i) {
+            key = keys[i];
+
+            // normalize key names
+            if (_SPECIAL_ALIASES[key]) {
+                key = _SPECIAL_ALIASES[key];
+            }
+
+            // if this is not a keypress event then we should
+            // be smart about using shift keys
+            // this will only work for US keyboards however
+            if (action && action != 'keypress' && _SHIFT_MAP[key]) {
+                key = _SHIFT_MAP[key];
+                modifiers.push('shift');
+            }
+
+            // if this key is a modifier then add it to the list of modifiers
+            if (_isModifier(key)) {
+                modifiers.push(key);
+            }
+        }
+
+        // depending on what the key combination is
+        // we will try to pick the best event for it
+        action = _pickBestAction(key, modifiers, action);
+
+        return {
+            key: key,
+            modifiers: modifiers,
+            action: action
+        };
+    }
+
+    function _belongsTo(element, ancestor) {
+        if (element === null || element === document) {
+            return false;
+        }
+
+        if (element === ancestor) {
+            return true;
+        }
+
+        return _belongsTo(element.parentNode, ancestor);
+    }
+
+    function Mousetrap(targetElement) {
+        var self = this;
+
+        targetElement = targetElement || document;
+
+        if (!(self instanceof Mousetrap)) {
+            return new Mousetrap(targetElement);
+        }
+
+        /**
+         * element to attach key events to
+         *
+         * @type {Element}
+         */
+        self.target = targetElement;
+
+        /**
+         * a list of all the callbacks setup via Mousetrap.bind()
+         *
+         * @type {Object}
+         */
+        self._callbacks = {};
+
+        /**
+         * direct map of string combinations to callbacks used for trigger()
+         *
+         * @type {Object}
+         */
+        self._directMap = {};
+
+        /**
+         * keeps track of what level each sequence is at since multiple
+         * sequences can start out with the same sequence
+         *
+         * @type {Object}
+         */
+        var _sequenceLevels = {};
+
+        /**
+         * variable to store the setTimeout call
+         *
+         * @type {null|number}
+         */
+        var _resetTimer;
+
+        /**
+         * temporary state where we will ignore the next keyup
+         *
+         * @type {boolean|string}
+         */
+        var _ignoreNextKeyup = false;
+
+        /**
+         * temporary state where we will ignore the next keypress
+         *
+         * @type {boolean}
+         */
+        var _ignoreNextKeypress = false;
+
+        /**
+         * are we currently inside of a sequence?
+         * type of action ("keyup" or "keydown" or "keypress") or false
+         *
+         * @type {boolean|string}
+         */
+        var _nextExpectedAction = false;
+
+        /**
+         * resets all sequence counters except for the ones passed in
+         *
+         * @param {Object} doNotReset
+         * @returns void
+         */
+        function _resetSequences(doNotReset) {
+            doNotReset = doNotReset || {};
+
+            var activeSequences = false,
+                key;
+
+            for (key in _sequenceLevels) {
+                if (doNotReset[key]) {
+                    activeSequences = true;
+                    continue;
+                }
+                _sequenceLevels[key] = 0;
+            }
+
+            if (!activeSequences) {
+                _nextExpectedAction = false;
+            }
+        }
+
+        /**
+         * finds all callbacks that match based on the keycode, modifiers,
+         * and action
+         *
+         * @param {string} character
+         * @param {Array} modifiers
+         * @param {Event|Object} e
+         * @param {string=} sequenceName - name of the sequence we are looking for
+         * @param {string=} combination
+         * @param {number=} level
+         * @returns {Array}
+         */
+        function _getMatches(character, modifiers, e, sequenceName, combination, level) {
+            var i;
+            var callback;
+            var matches = [];
+            var action = e.type;
+
+            // if there are no events related to this keycode
+            if (!self._callbacks[character]) {
+                return [];
+            }
+
+            // if a modifier key is coming up on its own we should allow it
+            if (action == 'keyup' && _isModifier(character)) {
+                modifiers = [character];
+            }
+
+            // loop through all callbacks for the key that was pressed
+            // and see if any of them match
+            for (i = 0; i < self._callbacks[character].length; ++i) {
+                callback = self._callbacks[character][i];
+
+                // if a sequence name is not specified, but this is a sequence at
+                // the wrong level then move onto the next match
+                if (!sequenceName && callback.seq && _sequenceLevels[callback.seq] != callback.level) {
+                    continue;
+                }
+
+                // if the action we are looking for doesn't match the action we got
+                // then we should keep going
+                if (action != callback.action) {
+                    continue;
+                }
+
+                // if this is a keypress event and the meta key and control key
+                // are not pressed that means that we need to only look at the
+                // character, otherwise check the modifiers as well
+                //
+                // chrome will not fire a keypress if meta or control is down
+                // safari will fire a keypress if meta or meta+shift is down
+                // firefox will fire a keypress if meta or control is down
+                if ((action == 'keypress' && !e.metaKey && !e.ctrlKey) || _modifiersMatch(modifiers, callback.modifiers)) {
+
+                    // when you bind a combination or sequence a second time it
+                    // should overwrite the first one.  if a sequenceName or
+                    // combination is specified in this call it does just that
+                    //
+                    // @todo make deleting its own method?
+                    var deleteCombo = !sequenceName && callback.combo == combination;
+                    var deleteSequence = sequenceName && callback.seq == sequenceName && callback.level == level;
+                    if (deleteCombo || deleteSequence) {
+                        self._callbacks[character].splice(i, 1);
+                    }
+
+                    matches.push(callback);
+                }
+            }
+
+            return matches;
+        }
+
+        /**
+         * actually calls the callback function
+         *
+         * if your callback function returns false this will use the jquery
+         * convention - prevent default and stop propogation on the event
+         *
+         * @param {Function} callback
+         * @param {Event} e
+         * @returns void
+         */
+        function _fireCallback(callback, e, combo, sequence) {
+
+            // if this event should not happen stop here
+            if (self.stopCallback(e, e.target || e.srcElement, combo, sequence)) {
+                return;
+            }
+
+            if (callback(e, combo) === false) {
+                _preventDefault(e);
+                _stopPropagation(e);
+            }
+        }
+
+        /**
+         * handles a character key event
+         *
+         * @param {string} character
+         * @param {Array} modifiers
+         * @param {Event} e
+         * @returns void
+         */
+        self._handleKey = function(character, modifiers, e) {
+            var callbacks = _getMatches(character, modifiers, e);
+            var i;
+            var doNotReset = {};
+            var maxLevel = 0;
+            var processedSequenceCallback = false;
+
+            // Calculate the maxLevel for sequences so we can only execute the longest callback sequence
+            for (i = 0; i < callbacks.length; ++i) {
+                if (callbacks[i].seq) {
+                    maxLevel = Math.max(maxLevel, callbacks[i].level);
+                }
+            }
+
+            // loop through matching callbacks for this key event
+            for (i = 0; i < callbacks.length; ++i) {
+
+                // fire for all sequence callbacks
+                // this is because if for example you have multiple sequences
+                // bound such as "g i" and "g t" they both need to fire the
+                // callback for matching g cause otherwise you can only ever
+                // match the first one
+                if (callbacks[i].seq) {
+
+                    // only fire callbacks for the maxLevel to prevent
+                    // subsequences from also firing
+                    //
+                    // for example 'a option b' should not cause 'option b' to fire
+                    // even though 'option b' is part of the other sequence
+                    //
+                    // any sequences that do not match here will be discarded
+                    // below by the _resetSequences call
+                    if (callbacks[i].level != maxLevel) {
+                        continue;
+                    }
+
+                    processedSequenceCallback = true;
+
+                    // keep a list of which sequences were matches for later
+                    doNotReset[callbacks[i].seq] = 1;
+                    _fireCallback(callbacks[i].callback, e, callbacks[i].combo, callbacks[i].seq);
+                    continue;
+                }
+
+                // if there were no sequence matches but we are still here
+                // that means this is a regular match so we should fire that
+                if (!processedSequenceCallback) {
+                    _fireCallback(callbacks[i].callback, e, callbacks[i].combo);
+                }
+            }
+
+            // if the key you pressed matches the type of sequence without
+            // being a modifier (ie "keyup" or "keypress") then we should
+            // reset all sequences that were not matched by this event
+            //
+            // this is so, for example, if you have the sequence "h a t" and you
+            // type "h e a r t" it does not match.  in this case the "e" will
+            // cause the sequence to reset
+            //
+            // modifier keys are ignored because you can have a sequence
+            // that contains modifiers such as "enter ctrl+space" and in most
+            // cases the modifier key will be pressed before the next key
+            //
+            // also if you have a sequence such as "ctrl+b a" then pressing the
+            // "b" key will trigger a "keypress" and a "keydown"
+            //
+            // the "keydown" is expected when there is a modifier, but the
+            // "keypress" ends up matching the _nextExpectedAction since it occurs
+            // after and that causes the sequence to reset
+            //
+            // we ignore keypresses in a sequence that directly follow a keydown
+            // for the same character
+            var ignoreThisKeypress = e.type == 'keypress' && _ignoreNextKeypress;
+            if (e.type == _nextExpectedAction && !_isModifier(character) && !ignoreThisKeypress) {
+                _resetSequences(doNotReset);
+            }
+
+            _ignoreNextKeypress = processedSequenceCallback && e.type == 'keydown';
+        };
+
+        /**
+         * handles a keydown event
+         *
+         * @param {Event} e
+         * @returns void
+         */
+        function _handleKeyEvent(e) {
+
+            // normalize e.which for key events
+            // @see http://stackoverflow.com/questions/4285627/javascript-keycode-vs-charcode-utter-confusion
+            if (typeof e.which !== 'number') {
+                e.which = e.keyCode;
+            }
+
+            var character = _characterFromEvent(e);
+
+            // no character found then stop
+            if (!character) {
+                return;
+            }
+
+            // need to use === for the character check because the character can be 0
+            if (e.type == 'keyup' && _ignoreNextKeyup === character) {
+                _ignoreNextKeyup = false;
+                return;
+            }
+
+            self.handleKey(character, _eventModifiers(e), e);
+        }
+
+        /**
+         * called to set a 1 second timeout on the specified sequence
+         *
+         * this is so after each key press in the sequence you have 1 second
+         * to press the next key before you have to start over
+         *
+         * @returns void
+         */
+        function _resetSequenceTimer() {
+            clearTimeout(_resetTimer);
+            _resetTimer = setTimeout(_resetSequences, 1000);
+        }
+
+        /**
+         * binds a key sequence to an event
+         *
+         * @param {string} combo - combo specified in bind call
+         * @param {Array} keys
+         * @param {Function} callback
+         * @param {string=} action
+         * @returns void
+         */
+        function _bindSequence(combo, keys, callback, action) {
+
+            // start off by adding a sequence level record for this combination
+            // and setting the level to 0
+            _sequenceLevels[combo] = 0;
+
+            /**
+             * callback to increase the sequence level for this sequence and reset
+             * all other sequences that were active
+             *
+             * @param {string} nextAction
+             * @returns {Function}
+             */
+            function _increaseSequence(nextAction) {
+                return function() {
+                    _nextExpectedAction = nextAction;
+                    ++_sequenceLevels[combo];
+                    _resetSequenceTimer();
+                };
+            }
+
+            /**
+             * wraps the specified callback inside of another function in order
+             * to reset all sequence counters as soon as this sequence is done
+             *
+             * @param {Event} e
+             * @returns void
+             */
+            function _callbackAndReset(e) {
+                _fireCallback(callback, e, combo);
+
+                // we should ignore the next key up if the action is key down
+                // or keypress.  this is so if you finish a sequence and
+                // release the key the final key will not trigger a keyup
+                if (action !== 'keyup') {
+                    _ignoreNextKeyup = _characterFromEvent(e);
+                }
+
+                // weird race condition if a sequence ends with the key
+                // another sequence begins with
+                setTimeout(_resetSequences, 10);
+            }
+
+            // loop through keys one at a time and bind the appropriate callback
+            // function.  for any key leading up to the final one it should
+            // increase the sequence. after the final, it should reset all sequences
+            //
+            // if an action is specified in the original bind call then that will
+            // be used throughout.  otherwise we will pass the action that the
+            // next key in the sequence should match.  this allows a sequence
+            // to mix and match keypress and keydown events depending on which
+            // ones are better suited to the key provided
+            for (var i = 0; i < keys.length; ++i) {
+                var isFinal = i + 1 === keys.length;
+                var wrappedCallback = isFinal ? _callbackAndReset : _increaseSequence(action || _getKeyInfo(keys[i + 1]).action);
+                _bindSingle(keys[i], wrappedCallback, action, combo, i);
+            }
+        }
+
+        /**
+         * binds a single keyboard combination
+         *
+         * @param {string} combination
+         * @param {Function} callback
+         * @param {string=} action
+         * @param {string=} sequenceName - name of sequence if part of sequence
+         * @param {number=} level - what part of the sequence the command is
+         * @returns void
+         */
+        function _bindSingle(combination, callback, action, sequenceName, level) {
+
+            // store a direct mapped reference for use with Mousetrap.trigger
+            self._directMap[combination + ':' + action] = callback;
+
+            // make sure multiple spaces in a row become a single space
+            combination = combination.replace(/\s+/g, ' ');
+
+            var sequence = combination.split(' ');
+            var info;
+
+            // if this pattern is a sequence of keys then run through this method
+            // to reprocess each pattern one key at a time
+            if (sequence.length > 1) {
+                _bindSequence(combination, sequence, callback, action);
+                return;
+            }
+
+            info = _getKeyInfo(combination, action);
+
+            // make sure to initialize array if this is the first time
+            // a callback is added for this key
+            self._callbacks[info.key] = self._callbacks[info.key] || [];
+
+            // remove an existing match if there is one
+            _getMatches(info.key, info.modifiers, {type: info.action}, sequenceName, combination, level);
+
+            // add this call back to the array
+            // if it is a sequence put it at the beginning
+            // if not put it at the end
+            //
+            // this is important because the way these are processed expects
+            // the sequence ones to come first
+            self._callbacks[info.key][sequenceName ? 'unshift' : 'push']({
+                callback: callback,
+                modifiers: info.modifiers,
+                action: info.action,
+                seq: sequenceName,
+                level: level,
+                combo: combination
+            });
+        }
+
+        /**
+         * binds multiple combinations to the same callback
+         *
+         * @param {Array} combinations
+         * @param {Function} callback
+         * @param {string|undefined} action
+         * @returns void
+         */
+        self._bindMultiple = function(combinations, callback, action) {
+            for (var i = 0; i < combinations.length; ++i) {
+                _bindSingle(combinations[i], callback, action);
+            }
+        };
+
+        // start!
+        _addEvent(targetElement, 'keypress', _handleKeyEvent);
+        _addEvent(targetElement, 'keydown', _handleKeyEvent);
+        _addEvent(targetElement, 'keyup', _handleKeyEvent);
+    }
+
+    /**
+     * binds an event to mousetrap
+     *
+     * can be a single key, a combination of keys separated with +,
+     * an array of keys, or a sequence of keys separated by spaces
+     *
+     * be sure to list the modifier keys first to make sure that the
+     * correct key ends up getting bound (the last key in the pattern)
+     *
+     * @param {string|Array} keys
+     * @param {Function} callback
+     * @param {string=} action - 'keypress', 'keydown', or 'keyup'
+     * @returns void
+     */
+    Mousetrap.prototype.bind = function(keys, callback, action) {
+        var self = this;
+        keys = keys instanceof Array ? keys : [keys];
+        self._bindMultiple.call(self, keys, callback, action);
+        return self;
+    };
+
+    /**
+     * unbinds an event to mousetrap
+     *
+     * the unbinding sets the callback function of the specified key combo
+     * to an empty function and deletes the corresponding key in the
+     * _directMap dict.
+     *
+     * TODO: actually remove this from the _callbacks dictionary instead
+     * of binding an empty function
+     *
+     * the keycombo+action has to be exactly the same as
+     * it was defined in the bind method
+     *
+     * @param {string|Array} keys
+     * @param {string} action
+     * @returns void
+     */
+    Mousetrap.prototype.unbind = function(keys, action) {
+        var self = this;
+        return self.bind.call(self, keys, function() {}, action);
+    };
+
+    /**
+     * triggers an event that has already been bound
+     *
+     * @param {string} keys
+     * @param {string=} action
+     * @returns void
+     */
+    Mousetrap.prototype.trigger = function(keys, action) {
+        var self = this;
+        if (self._directMap[keys + ':' + action]) {
+            self._directMap[keys + ':' + action]({}, keys);
+        }
+        return self;
+    };
+
+    /**
+     * resets the library back to its initial state.  this is useful
+     * if you want to clear out the current keyboard shortcuts and bind
+     * new ones - for example if you switch to another page
+     *
+     * @returns void
+     */
+    Mousetrap.prototype.reset = function() {
+        var self = this;
+        self._callbacks = {};
+        self._directMap = {};
+        return self;
+    };
+
+    /**
+     * should we stop this event before firing off callbacks
+     *
+     * @param {Event} e
+     * @param {Element} element
+     * @return {boolean}
+     */
+    Mousetrap.prototype.stopCallback = function(e, element) {
+        var self = this;
+
+        // if the element has the class "mousetrap" then no need to stop
+        if ((' ' + element.className + ' ').indexOf(' mousetrap ') > -1) {
+            return false;
+        }
+
+        if (_belongsTo(element, self.target)) {
+            return false;
+        }
+
+        // stop for input, select, and textarea
+        return element.tagName == 'INPUT' || element.tagName == 'SELECT' || element.tagName == 'TEXTAREA' || element.isContentEditable;
+    };
+
+    /**
+     * exposes _handleKey publicly so it can be overwritten by extensions
+     */
+    Mousetrap.prototype.handleKey = function() {
+        var self = this;
+        return self._handleKey.apply(self, arguments);
+    };
+
+    /**
+     * allow custom key mappings
+     */
+    Mousetrap.addKeycodes = function(object) {
+        for (var key in object) {
+            if (object.hasOwnProperty(key)) {
+                _MAP[key] = object[key];
+            }
+        }
+        _REVERSE_MAP = null;
+    };
+
+    /**
+     * Init the global mousetrap functions
+     *
+     * This method is needed to allow the global mousetrap functions to work
+     * now that mousetrap is a constructor function.
+     */
+    Mousetrap.init = function() {
+        var documentMousetrap = Mousetrap(document);
+        for (var method in documentMousetrap) {
+            if (method.charAt(0) !== '_') {
+                Mousetrap[method] = (function(method) {
+                    return function() {
+                        return documentMousetrap[method].apply(documentMousetrap, arguments);
+                    };
+                } (method));
+            }
+        }
+    };
+
+    Mousetrap.init();
+
+    // expose mousetrap to the global object
+    window.Mousetrap = Mousetrap;
+
+    // expose as a common js module
+    if (typeof module !== 'undefined' && module.exports) {
+        module.exports = Mousetrap;
+    }
+
+    // expose mousetrap as an AMD module
+    if (true) {
+        !(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
+            return Mousetrap;
+        }.call(exports, __webpack_require__, exports, module),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+    }
+}) (typeof window !== 'undefined' ? window : null, typeof  window !== 'undefined' ? document : null);
+
+
+/***/ }),
+
+/***/ 54:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+var hasClass = function hasClass(elem, className) {
+  return new RegExp(' ' + className + ' ').test(' ' + elem.className + ' ');
+};
+
+var addClass = function addClass(elem, className) {
+  if (!hasClass(elem, className)) {
+    elem.className += ' ' + className;
+  }
+};
+
+var removeClass = function removeClass(elem, className) {
+  var newClass = ' ' + elem.className.replace(/[\t\r\n]/g, ' ') + ' ';
+  if (hasClass(elem, className)) {
+    while (newClass.indexOf(' ' + className + ' ') >= 0) {
+      newClass = newClass.replace(' ' + className + ' ', ' ');
+    }
+    elem.className = newClass.replace(/^\s+|\s+$/g, '');
+  }
+};
+
+var escapeHtml = function escapeHtml(str) {
+  var div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+};
+
+var _show = function _show(elem) {
+  elem.style.opacity = '';
+  elem.style.display = 'block';
+};
+
+var show = function show(elems) {
+  if (elems && !elems.length) {
+    return _show(elems);
+  }
+  for (var i = 0; i < elems.length; ++i) {
+    _show(elems[i]);
+  }
+};
+
+var _hide = function _hide(elem) {
+  elem.style.opacity = '';
+  elem.style.display = 'none';
+};
+
+var hide = function hide(elems) {
+  if (elems && !elems.length) {
+    return _hide(elems);
+  }
+  for (var i = 0; i < elems.length; ++i) {
+    _hide(elems[i]);
+  }
+};
+
+var isDescendant = function isDescendant(parent, child) {
+  var node = child.parentNode;
+  while (node !== null) {
+    if (node === parent) {
+      return true;
+    }
+    node = node.parentNode;
+  }
+  return false;
+};
+
+var getTopMargin = function getTopMargin(elem) {
+  elem.style.left = '-9999px';
+  elem.style.display = 'block';
+
+  var height = elem.clientHeight,
+      padding;
+  if (typeof getComputedStyle !== 'undefined') {
+    // IE 8
+    padding = parseInt(getComputedStyle(elem).getPropertyValue('padding-top'), 10);
+  } else {
+    padding = parseInt(elem.currentStyle.padding);
+  }
+
+  elem.style.left = '';
+  elem.style.display = 'none';
+  return '-' + parseInt((height + padding) / 2) + 'px';
+};
+
+var fadeIn = function fadeIn(elem, interval) {
+  if (+elem.style.opacity < 1) {
+    interval = interval || 16;
+    elem.style.opacity = 0;
+    elem.style.display = 'block';
+    var last = +new Date();
+    var tick = (function (_tick) {
+      function tick() {
+        return _tick.apply(this, arguments);
+      }
+
+      tick.toString = function () {
+        return _tick.toString();
+      };
+
+      return tick;
+    })(function () {
+      elem.style.opacity = +elem.style.opacity + (new Date() - last) / 100;
+      last = +new Date();
+
+      if (+elem.style.opacity < 1) {
+        setTimeout(tick, interval);
+      }
+    });
+    tick();
+  }
+  elem.style.display = 'block'; //fallback IE8
+};
+
+var fadeOut = function fadeOut(elem, interval) {
+  interval = interval || 16;
+  elem.style.opacity = 1;
+  var last = +new Date();
+  var tick = (function (_tick2) {
+    function tick() {
+      return _tick2.apply(this, arguments);
+    }
+
+    tick.toString = function () {
+      return _tick2.toString();
+    };
+
+    return tick;
+  })(function () {
+    elem.style.opacity = +elem.style.opacity - (new Date() - last) / 100;
+    last = +new Date();
+
+    if (+elem.style.opacity > 0) {
+      setTimeout(tick, interval);
+    } else {
+      elem.style.display = 'none';
+    }
+  });
+  tick();
+};
+
+var fireClick = function fireClick(node) {
+  // Taken from http://www.nonobtrusive.com/2011/11/29/programatically-fire-crossbrowser-click-event-with-javascript/
+  // Then fixed for today's Chrome browser.
+  if (typeof MouseEvent === 'function') {
+    // Up-to-date approach
+    var mevt = new MouseEvent('click', {
+      view: window,
+      bubbles: false,
+      cancelable: true
+    });
+    node.dispatchEvent(mevt);
+  } else if (document.createEvent) {
+    // Fallback
+    var evt = document.createEvent('MouseEvents');
+    evt.initEvent('click', false, false);
+    node.dispatchEvent(evt);
+  } else if (document.createEventObject) {
+    node.fireEvent('onclick');
+  } else if (typeof node.onclick === 'function') {
+    node.onclick();
+  }
+};
+
+var stopEventPropagation = function stopEventPropagation(e) {
+  // In particular, make sure the space bar doesn't scroll the main window.
+  if (typeof e.stopPropagation === 'function') {
+    e.stopPropagation();
+    e.preventDefault();
+  } else if (window.event && window.event.hasOwnProperty('cancelBubble')) {
+    window.event.cancelBubble = true;
+  }
+};
+
+exports.hasClass = hasClass;
+exports.addClass = addClass;
+exports.removeClass = removeClass;
+exports.escapeHtml = escapeHtml;
+exports._show = _show;
+exports.show = show;
+exports._hide = _hide;
+exports.hide = hide;
+exports.isDescendant = isDescendant;
+exports.getTopMargin = getTopMargin;
+exports.fadeIn = fadeIn;
+exports.fadeOut = fadeOut;
+exports.fireClick = fireClick;
+exports.stopEventPropagation = stopEventPropagation;
+
+/***/ }),
+
+/***/ 58:
 /***/ (function(module, exports) {
 
 /**
@@ -24501,21 +26413,21 @@ module.exports = assign;
 
 /***/ }),
 
-/***/ 594:
+/***/ 601:
 /***/ (function(module, exports, __webpack_require__) {
 
 var React = __webpack_require__(1);
 var ReactDOM = __webpack_require__(25);
-var DOMFactories = __webpack_require__(259);
-var PropTypes = __webpack_require__(19);
-var ExecutionEnvironment = __webpack_require__(600);
-var ModalPortal = React.createFactory(__webpack_require__(595));
-var ariaAppHider = __webpack_require__(596);
-var refCount = __webpack_require__(598);
-var elementClass = __webpack_require__(405);
+var DOMFactories = __webpack_require__(262);
+var PropTypes = __webpack_require__(17);
+var ExecutionEnvironment = __webpack_require__(607);
+var ModalPortal = React.createFactory(__webpack_require__(602));
+var ariaAppHider = __webpack_require__(603);
+var refCount = __webpack_require__(605);
+var elementClass = __webpack_require__(410);
 var renderSubtreeIntoContainer = __webpack_require__(25).unstable_renderSubtreeIntoContainer;
-var Assign = __webpack_require__(57);
-var createReactClass = __webpack_require__(122);
+var Assign = __webpack_require__(58);
+var createReactClass = __webpack_require__(125);
 
 var SafeHTMLElement = ExecutionEnvironment.canUseDOM ? window.HTMLElement : {};
 var AppElement = ExecutionEnvironment.canUseDOM ? document.body : {appendChild: function() {}};
@@ -24686,15 +26598,15 @@ module.exports = Modal
 
 /***/ }),
 
-/***/ 595:
+/***/ 602:
 /***/ (function(module, exports, __webpack_require__) {
 
 var React = __webpack_require__(1);
-var DOMFactories = __webpack_require__(259);
-var focusManager = __webpack_require__(597);
-var scopeTab = __webpack_require__(599);
-var Assign = __webpack_require__(57);
-var createReactClass = __webpack_require__(122);
+var DOMFactories = __webpack_require__(262);
+var focusManager = __webpack_require__(604);
+var scopeTab = __webpack_require__(606);
+var Assign = __webpack_require__(58);
+var createReactClass = __webpack_require__(125);
 
 var div = DOMFactories.div;
 
@@ -24896,7 +26808,7 @@ var ModalPortal = module.exports = createReactClass({
 
 /***/ }),
 
-/***/ 596:
+/***/ 603:
 /***/ (function(module, exports) {
 
 var _element = typeof document !== 'undefined' ? document.body : null;
@@ -24945,10 +26857,10 @@ exports.resetForTesting = resetForTesting;
 
 /***/ }),
 
-/***/ 597:
+/***/ 604:
 /***/ (function(module, exports, __webpack_require__) {
 
-var findTabbable = __webpack_require__(286);
+var findTabbable = __webpack_require__(289);
 var focusLaterElements = [];
 var modalElement = null;
 var needToFocus = false;
@@ -25020,7 +26932,7 @@ exports.teardownScopedFocus = function() {
 
 /***/ }),
 
-/***/ 598:
+/***/ 605:
 /***/ (function(module, exports) {
 
 var modals = [];
@@ -25046,10 +26958,10 @@ module.exports = {
 
 /***/ }),
 
-/***/ 599:
+/***/ 606:
 /***/ (function(module, exports, __webpack_require__) {
 
-var findTabbable = __webpack_require__(286);
+var findTabbable = __webpack_require__(289);
 
 module.exports = function(node, event) {
   var tabbable = findTabbable(node);
@@ -25072,7 +26984,7 @@ module.exports = function(node, event) {
 
 /***/ }),
 
-/***/ 600:
+/***/ 607:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -25119,16 +27031,16 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 616:
+/***/ 623:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(401);
+var content = __webpack_require__(405);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(41)(content, {});
+var update = __webpack_require__(32)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -25146,16 +27058,43 @@ if(false) {
 
 /***/ }),
 
-/***/ 618:
+/***/ 624:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(404);
+var content = __webpack_require__(407);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(41)(content, {});
+var update = __webpack_require__(32)(content, {});
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../css-loader/index.js!./sweetalert.css", function() {
+			var newContent = require("!!../../css-loader/index.js!./sweetalert.css");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ 626:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(409);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// add the styles to the DOM
+var update = __webpack_require__(32)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -25173,17 +27112,1248 @@ if(false) {
 
 /***/ }),
 
+/***/ 627:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _propTypes = __webpack_require__(17);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _sweetalert = __webpack_require__(635);
+
+var _sweetalert2 = _interopRequireDefault(_sweetalert);
+
+var _lodash = __webpack_require__(413);
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+var _mousetrap = __webpack_require__(504);
+
+var _mousetrap2 = _interopRequireDefault(_mousetrap);
+
+var _warning = __webpack_require__(646);
+
+var _warning2 = _interopRequireDefault(_warning);
+
+var _outsideTargetHandlerFactory = __webpack_require__(630);
+
+var _outsideTargetHandlerFactory2 = _interopRequireDefault(_outsideTargetHandlerFactory);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ALLOWS_KEYS = ['title', 'text', 'type', 'customClass', 'showCancelButton', 'showConfirmButton', 'confirmButtonText', 'confirmButtonColor', 'cancelButtonText', 'imageUrl', 'imageSize', 'html', 'animation', 'inputType', 'inputValue', 'inputPlaceholder', 'showLoaderOnConfirm'];
+
+var REMOVED_KEYS = ['timer', 'closeOnConfirm', 'closeOnCancel', 'allowOutsideClick', 'allowEscapeKey'];
+
+var OVERWRITE_PROPS = {
+  closeOnConfirm: false,
+  closeOnCancel: false,
+  allowOutsideClick: false,
+  allowEscapeKey: false
+};
+
+// reference: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input
+var ALLOWS_INPUT_TYPES = ['button', 'checkbox', 'color', 'date', 'datetime', 'datetime-local', 'email', 'file', 'hidden', 'image', 'month', 'number', 'password', 'radio', 'range', 'reset', 'search', 'submit', 'tel', 'text', 'time', 'url', 'week'];
+
+function warningRemoved(props) {
+  REMOVED_KEYS.forEach(function (key) {
+    (0, _warning2.default)(props[key] === undefined, '%s has been removed from sweetalert-react, pass `show` props and use event hook instead.', '`' + key + '`');
+  });
+}
+
+var SweetAlert = function (_Component) {
+  _inherits(SweetAlert, _Component);
+
+  /* eslint-disable react/no-unused-prop-types */
+  function SweetAlert(props, context) {
+    _classCallCheck(this, SweetAlert);
+
+    var _this = _possibleConstructorReturn(this, (SweetAlert.__proto__ || Object.getPrototypeOf(SweetAlert)).call(this, props, context));
+
+    _this._show = false;
+    return _this;
+  }
+  /* eslint-enable react/no-unused-prop-types */
+
+  _createClass(SweetAlert, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.setupWithProps(this.props);
+
+      if (this.props.onOutsideClick) {
+        this.registerOutsideClickHandler(this.props.onOutsideClick);
+      }
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(props) {
+      this.setupWithProps(props);
+
+      var oldOutsideClickHandler = this.props.onOutsideClick;
+      var newOutsideClickHandler = props.onOutsideClick;
+
+      if (oldOutsideClickHandler !== newOutsideClickHandler) {
+        if (oldOutsideClickHandler && newOutsideClickHandler) {
+          this.unregisterOutsideClickHandler();
+          this.registerOutsideClickHandler(newOutsideClickHandler);
+        } else if (oldOutsideClickHandler && !newOutsideClickHandler) {
+          this.unregisterOutsideClickHandler();
+        } else if (!oldOutsideClickHandler && newOutsideClickHandler) {
+          this.registerOutsideClickHandler(newOutsideClickHandler);
+        }
+      }
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this.unregisterOutsideClickHandler();
+      this.unbindEscapeKey();
+    }
+  }, {
+    key: 'setupWithProps',
+    value: function setupWithProps(props) {
+      var _this2 = this;
+
+      warningRemoved(props);
+      var show = props.show,
+          onConfirm = props.onConfirm,
+          onCancel = props.onCancel,
+          onClose = props.onClose,
+          onEscapeKey = props.onEscapeKey;
+
+      if (show) {
+        (0, _sweetalert2.default)(_extends({}, (0, _lodash2.default)(props, ALLOWS_KEYS), OVERWRITE_PROPS), function (isConfirm) {
+          return _this2.handleClick(isConfirm, onConfirm, onCancel);
+        });
+        this._show = true;
+        if (onEscapeKey) this.bindEscapeKey(onEscapeKey);
+      } else {
+        this.handleClose(onClose);
+      }
+    }
+  }, {
+    key: 'registerOutsideClickHandler',
+    value: function registerOutsideClickHandler(handler) {
+      this._outsideClickHandler = (0, _outsideTargetHandlerFactory2.default)(document.getElementsByClassName('sweet-alert')[0], handler);
+      this.enableOutsideClick();
+    }
+  }, {
+    key: 'unregisterOutsideClickHandler',
+    value: function unregisterOutsideClickHandler() {
+      this.disableOutsideClick();
+      this._outsideClickHandler = null;
+    }
+  }, {
+    key: 'enableOutsideClick',
+    value: function enableOutsideClick() {
+      var fn = this._outsideClickHandler;
+      if (fn) {
+        document.addEventListener('mousedown', fn);
+        document.addEventListener('touchstart', fn);
+      }
+    }
+  }, {
+    key: 'disableOutsideClick',
+    value: function disableOutsideClick() {
+      var fn = this._outsideClickHandler;
+      if (fn) {
+        document.removeEventListener('mousedown', fn);
+        document.removeEventListener('touchstart', fn);
+      }
+    }
+  }, {
+    key: 'bindEscapeKey',
+    value: function bindEscapeKey(onEscapeKey) {
+      _mousetrap2.default.bind('esc', onEscapeKey);
+    }
+  }, {
+    key: 'unbindEscapeKey',
+    value: function unbindEscapeKey() {
+      _mousetrap2.default.unbind('esc');
+    }
+  }, {
+    key: 'handleClick',
+    value: function handleClick(isConfirm, onConfirm, onCancel) {
+      if (isConfirm !== false) {
+        if (onConfirm) onConfirm(isConfirm);
+      } else {
+        if (onCancel) onCancel(); // eslint-disable-line no-lonely-if
+      }
+    }
+  }, {
+    key: 'handleClose',
+    value: function handleClose(onClose) {
+      if (this._show) {
+        _sweetalert2.default.close();
+        this.unbindEscapeKey();
+        if (onClose) onClose();
+        this._show = false;
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return null;
+    }
+  }]);
+
+  return SweetAlert;
+}(_react.Component);
+
+SweetAlert.propTypes = {
+  // sweetalert option
+  title: _propTypes2.default.string.isRequired,
+  text: _propTypes2.default.string,
+  type: _propTypes2.default.oneOf(['warning', 'error', 'success', 'info', 'input']),
+  customClass: _propTypes2.default.string,
+  showCancelButton: _propTypes2.default.bool,
+  showConfirmButton: _propTypes2.default.bool,
+  confirmButtonText: _propTypes2.default.string,
+  confirmButtonColor: _propTypes2.default.string,
+  cancelButtonText: _propTypes2.default.string,
+  imageUrl: _propTypes2.default.string,
+  imageSize: function imageSize(props, propName) {
+    if (!/^[1-9]\d*x[1-9]\d*/.test(props[propName])) {
+      return new Error('imageSize should have the format like this: "80x80"');
+    }
+  },
+
+  html: _propTypes2.default.bool,
+  animation: _propTypes2.default.oneOfType([_propTypes2.default.bool, _propTypes2.default.oneOf(['pop', 'slide-from-top', 'slide-from-bottom'])]),
+  inputType: _propTypes2.default.oneOf(ALLOWS_INPUT_TYPES),
+  inputPlaceholder: _propTypes2.default.string,
+  inputValue: _propTypes2.default.string,
+  showLoaderOnConfirm: _propTypes2.default.bool,
+
+  // custom option
+  show: _propTypes2.default.bool,
+  onConfirm: _propTypes2.default.func,
+  onCancel: _propTypes2.default.func,
+  onClose: _propTypes2.default.func,
+  onEscapeKey: _propTypes2.default.func,
+  onOutsideClick: _propTypes2.default.func
+};
+SweetAlert.defaultProps = {
+  // sweetalert option
+  text: null,
+  type: null,
+  customClass: null,
+  showCancelButton: false,
+  showConfirmButton: true,
+  confirmButtonText: 'OK',
+  confirmButtonColor: '#aedef4',
+  cancelButtonText: 'Cancel',
+  imageUrl: null,
+  imageSize: '80x80',
+  html: false,
+  animation: true,
+  inputType: 'text',
+  inputPlaceholder: null,
+  inputValue: null,
+  showLoaderOnConfirm: false,
+
+  // custom option
+  show: false
+};
+exports.default = SweetAlert;
+
+/***/ }),
+
+/***/ 628:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+if (typeof window === 'undefined') {
+  module.exports = function () {
+    return null;
+  };
+} else {
+  module.exports = __webpack_require__(627); // eslint-disable-line global-require
+}
+
+/***/ }),
+
+/***/ 629:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = isDOMEquals;
+/**
+ * Determinate whether dom1 and dom2 is the same dom or not.
+ *
+ * @param  {HTMLElement}  dom1
+ * @param  {HTMLElement}  dom2
+ * @return {Boolean}
+ */
+function isDOMEquals(dom1, dom2) {
+  return dom1 === dom2;
+}
+
+/***/ }),
+
+/***/ 630:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = outsideTargetHandlerFactory;
+
+var _isDOMEquals = __webpack_require__(629);
+
+var _isDOMEquals2 = _interopRequireDefault(_isDOMEquals);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ *
+ * @param  {HTMLElement}  targetNode
+ * @param  {HTMLElement}  eventHandler
+ * @return {Boolean}
+ */
+function outsideTargetHandlerFactory(targetNode, eventHandler) {
+  return function (evt) {
+    evt.stopPropagation();
+    var current = evt.target;
+    var found = false;
+    while (current.parentNode) {
+      found = (0, _isDOMEquals2.default)(current, targetNode);
+      if (found) return;
+      current = current.parentNode;
+    }
+    eventHandler(evt);
+  };
+}
+
+/***/ }),
+
+/***/ 631:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+var _colorLuminance = __webpack_require__(76);
+
+var _getModal = __webpack_require__(75);
+
+var _hasClass$isDescendant = __webpack_require__(54);
+
+/*
+ * User clicked on "Confirm"/"OK" or "Cancel"
+ */
+var handleButton = function handleButton(event, params, modal) {
+  var e = event || window.event;
+  var target = e.target || e.srcElement;
+
+  var targetedConfirm = target.className.indexOf('confirm') !== -1;
+  var targetedOverlay = target.className.indexOf('sweet-overlay') !== -1;
+  var modalIsVisible = _hasClass$isDescendant.hasClass(modal, 'visible');
+  var doneFunctionExists = params.doneFunction && modal.getAttribute('data-has-done-function') === 'true';
+
+  // Since the user can change the background-color of the confirm button programmatically,
+  // we must calculate what the color should be on hover/active
+  var normalColor, hoverColor, activeColor;
+  if (targetedConfirm && params.confirmButtonColor) {
+    normalColor = params.confirmButtonColor;
+    hoverColor = _colorLuminance.colorLuminance(normalColor, -0.04);
+    activeColor = _colorLuminance.colorLuminance(normalColor, -0.14);
+  }
+
+  function shouldSetConfirmButtonColor(color) {
+    if (targetedConfirm && params.confirmButtonColor) {
+      target.style.backgroundColor = color;
+    }
+  }
+
+  switch (e.type) {
+    case 'mouseover':
+      shouldSetConfirmButtonColor(hoverColor);
+      break;
+
+    case 'mouseout':
+      shouldSetConfirmButtonColor(normalColor);
+      break;
+
+    case 'mousedown':
+      shouldSetConfirmButtonColor(activeColor);
+      break;
+
+    case 'mouseup':
+      shouldSetConfirmButtonColor(hoverColor);
+      break;
+
+    case 'focus':
+      var $confirmButton = modal.querySelector('button.confirm');
+      var $cancelButton = modal.querySelector('button.cancel');
+
+      if (targetedConfirm) {
+        $cancelButton.style.boxShadow = 'none';
+      } else {
+        $confirmButton.style.boxShadow = 'none';
+      }
+      break;
+
+    case 'click':
+      var clickedOnModal = modal === target;
+      var clickedOnModalChild = _hasClass$isDescendant.isDescendant(modal, target);
+
+      // Ignore click outside if allowOutsideClick is false
+      if (!clickedOnModal && !clickedOnModalChild && modalIsVisible && !params.allowOutsideClick) {
+        break;
+      }
+
+      if (targetedConfirm && doneFunctionExists && modalIsVisible) {
+        handleConfirm(modal, params);
+      } else if (doneFunctionExists && modalIsVisible || targetedOverlay) {
+        handleCancel(modal, params);
+      } else if (_hasClass$isDescendant.isDescendant(modal, target) && target.tagName === 'BUTTON') {
+        sweetAlert.close();
+      }
+      break;
+  }
+};
+
+/*
+ *  User clicked on "Confirm"/"OK"
+ */
+var handleConfirm = function handleConfirm(modal, params) {
+  var callbackValue = true;
+
+  if (_hasClass$isDescendant.hasClass(modal, 'show-input')) {
+    callbackValue = modal.querySelector('input').value;
+
+    if (!callbackValue) {
+      callbackValue = '';
+    }
+  }
+
+  params.doneFunction(callbackValue);
+
+  if (params.closeOnConfirm) {
+    sweetAlert.close();
+  }
+  // Disable cancel and confirm button if the parameter is true
+  if (params.showLoaderOnConfirm) {
+    sweetAlert.disableButtons();
+  }
+};
+
+/*
+ *  User clicked on "Cancel"
+ */
+var handleCancel = function handleCancel(modal, params) {
+  // Check if callback function expects a parameter (to track cancel actions)
+  var functionAsStr = String(params.doneFunction).replace(/\s/g, '');
+  var functionHandlesCancel = functionAsStr.substring(0, 9) === 'function(' && functionAsStr.substring(9, 10) !== ')';
+
+  if (functionHandlesCancel) {
+    params.doneFunction(false);
+  }
+
+  if (params.closeOnCancel) {
+    sweetAlert.close();
+  }
+};
+
+exports['default'] = {
+  handleButton: handleButton,
+  handleConfirm: handleConfirm,
+  handleCancel: handleCancel
+};
+module.exports = exports['default'];
+
+/***/ }),
+
 /***/ 632:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+var _stopEventPropagation$fireClick = __webpack_require__(54);
+
+var _setFocusStyle = __webpack_require__(75);
+
+var handleKeyDown = function handleKeyDown(event, params, modal) {
+  var e = event || window.event;
+  var keyCode = e.keyCode || e.which;
+
+  var $okButton = modal.querySelector('button.confirm');
+  var $cancelButton = modal.querySelector('button.cancel');
+  var $modalButtons = modal.querySelectorAll('button[tabindex]');
+
+  if ([9, 13, 32, 27].indexOf(keyCode) === -1) {
+    // Don't do work on keys we don't care about.
+    return;
+  }
+
+  var $targetElement = e.target || e.srcElement;
+
+  var btnIndex = -1; // Find the button - note, this is a nodelist, not an array.
+  for (var i = 0; i < $modalButtons.length; i++) {
+    if ($targetElement === $modalButtons[i]) {
+      btnIndex = i;
+      break;
+    }
+  }
+
+  if (keyCode === 9) {
+    // TAB
+    if (btnIndex === -1) {
+      // No button focused. Jump to the confirm button.
+      $targetElement = $okButton;
+    } else {
+      // Cycle to the next button
+      if (btnIndex === $modalButtons.length - 1) {
+        $targetElement = $modalButtons[0];
+      } else {
+        $targetElement = $modalButtons[btnIndex + 1];
+      }
+    }
+
+    _stopEventPropagation$fireClick.stopEventPropagation(e);
+    $targetElement.focus();
+
+    if (params.confirmButtonColor) {
+      _setFocusStyle.setFocusStyle($targetElement, params.confirmButtonColor);
+    }
+  } else {
+    if (keyCode === 13) {
+      if ($targetElement.tagName === 'INPUT') {
+        $targetElement = $okButton;
+        $okButton.focus();
+      }
+
+      if (btnIndex === -1) {
+        // ENTER/SPACE clicked outside of a button.
+        $targetElement = $okButton;
+      } else {
+        // Do nothing - let the browser handle it.
+        $targetElement = undefined;
+      }
+    } else if (keyCode === 27 && params.allowEscapeKey === true) {
+      $targetElement = $cancelButton;
+      _stopEventPropagation$fireClick.fireClick($targetElement, e);
+    } else {
+      // Fallback - let the browser handle it.
+      $targetElement = undefined;
+    }
+  }
+};
+
+exports['default'] = handleKeyDown;
+module.exports = exports['default'];
+
+/***/ }),
+
+/***/ 633:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var injectedHTML =
+
+// Dark overlay
+"<div class=\"sweet-overlay\" tabIndex=\"-1\"></div>" +
+
+// Modal
+"<div class=\"sweet-alert\">" +
+
+// Error icon
+"<div class=\"sa-icon sa-error\">\n      <span class=\"sa-x-mark\">\n        <span class=\"sa-line sa-left\"></span>\n        <span class=\"sa-line sa-right\"></span>\n      </span>\n    </div>" +
+
+// Warning icon
+"<div class=\"sa-icon sa-warning\">\n      <span class=\"sa-body\"></span>\n      <span class=\"sa-dot\"></span>\n    </div>" +
+
+// Info icon
+"<div class=\"sa-icon sa-info\"></div>" +
+
+// Success icon
+"<div class=\"sa-icon sa-success\">\n      <span class=\"sa-line sa-tip\"></span>\n      <span class=\"sa-line sa-long\"></span>\n\n      <div class=\"sa-placeholder\"></div>\n      <div class=\"sa-fix\"></div>\n    </div>" + "<div class=\"sa-icon sa-custom\"></div>" +
+
+// Title, text and input
+"<h2>Title</h2>\n    <p>Text</p>\n    <fieldset>\n      <input type=\"text\" tabIndex=\"3\" />\n      <div class=\"sa-input-error\"></div>\n    </fieldset>" +
+
+// Input errors
+"<div class=\"sa-error-container\">\n      <div class=\"icon\">!</div>\n      <p>Not valid!</p>\n    </div>" +
+
+// Cancel and confirm buttons
+"<div class=\"sa-button-container\">\n      <button class=\"cancel\" tabIndex=\"2\">Cancel</button>\n      <div class=\"sa-confirm-button-container\">\n        <button class=\"confirm\" tabIndex=\"1\">OK</button>" +
+
+// Loading animation
+"<div class=\"la-ball-fall\">\n          <div></div>\n          <div></div>\n          <div></div>\n        </div>\n      </div>\n    </div>" +
+
+// End of modal
+"</div>";
+
+exports["default"] = injectedHTML;
+module.exports = exports["default"];
+
+/***/ }),
+
+/***/ 634:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+var _isIE8 = __webpack_require__(76);
+
+var _getModal$getInput$setFocusStyle = __webpack_require__(75);
+
+var _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide = __webpack_require__(54);
+
+var alertTypes = ['error', 'warning', 'info', 'success', 'input', 'prompt'];
+
+/*
+ * Set type, text and actions on modal
+ */
+var setParameters = function setParameters(params) {
+  var modal = _getModal$getInput$setFocusStyle.getModal();
+
+  var $title = modal.querySelector('h2');
+  var $text = modal.querySelector('p');
+  var $cancelBtn = modal.querySelector('button.cancel');
+  var $confirmBtn = modal.querySelector('button.confirm');
+
+  /*
+   * Title
+   */
+  $title.innerHTML = params.html ? params.title : _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide.escapeHtml(params.title).split('\n').join('<br>');
+
+  /*
+   * Text
+   */
+  $text.innerHTML = params.html ? params.text : _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide.escapeHtml(params.text || '').split('\n').join('<br>');
+  if (params.text) _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide.show($text);
+
+  /*
+   * Custom class
+   */
+  if (params.customClass) {
+    _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide.addClass(modal, params.customClass);
+    modal.setAttribute('data-custom-class', params.customClass);
+  } else {
+    // Find previously set classes and remove them
+    var customClass = modal.getAttribute('data-custom-class');
+    _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide.removeClass(modal, customClass);
+    modal.setAttribute('data-custom-class', '');
+  }
+
+  /*
+   * Icon
+   */
+  _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide.hide(modal.querySelectorAll('.sa-icon'));
+
+  if (params.type && !_isIE8.isIE8()) {
+    var _ret = (function () {
+
+      var validType = false;
+
+      for (var i = 0; i < alertTypes.length; i++) {
+        if (params.type === alertTypes[i]) {
+          validType = true;
+          break;
+        }
+      }
+
+      if (!validType) {
+        logStr('Unknown alert type: ' + params.type);
+        return {
+          v: false
+        };
+      }
+
+      var typesWithIcons = ['success', 'error', 'warning', 'info'];
+      var $icon = undefined;
+
+      if (typesWithIcons.indexOf(params.type) !== -1) {
+        $icon = modal.querySelector('.sa-icon.' + 'sa-' + params.type);
+        _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide.show($icon);
+      }
+
+      var $input = _getModal$getInput$setFocusStyle.getInput();
+
+      // Animate icon
+      switch (params.type) {
+
+        case 'success':
+          _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide.addClass($icon, 'animate');
+          _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide.addClass($icon.querySelector('.sa-tip'), 'animateSuccessTip');
+          _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide.addClass($icon.querySelector('.sa-long'), 'animateSuccessLong');
+          break;
+
+        case 'error':
+          _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide.addClass($icon, 'animateErrorIcon');
+          _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide.addClass($icon.querySelector('.sa-x-mark'), 'animateXMark');
+          break;
+
+        case 'warning':
+          _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide.addClass($icon, 'pulseWarning');
+          _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide.addClass($icon.querySelector('.sa-body'), 'pulseWarningIns');
+          _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide.addClass($icon.querySelector('.sa-dot'), 'pulseWarningIns');
+          break;
+
+        case 'input':
+        case 'prompt':
+          $input.setAttribute('type', params.inputType);
+          $input.value = params.inputValue;
+          $input.setAttribute('placeholder', params.inputPlaceholder);
+          _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide.addClass(modal, 'show-input');
+          setTimeout(function () {
+            $input.focus();
+            $input.addEventListener('keyup', swal.resetInputError);
+          }, 400);
+          break;
+      }
+    })();
+
+    if (typeof _ret === 'object') {
+      return _ret.v;
+    }
+  }
+
+  /*
+   * Custom image
+   */
+  if (params.imageUrl) {
+    var $customIcon = modal.querySelector('.sa-icon.sa-custom');
+
+    $customIcon.style.backgroundImage = 'url(' + params.imageUrl + ')';
+    _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide.show($customIcon);
+
+    var _imgWidth = 80;
+    var _imgHeight = 80;
+
+    if (params.imageSize) {
+      var dimensions = params.imageSize.toString().split('x');
+      var imgWidth = dimensions[0];
+      var imgHeight = dimensions[1];
+
+      if (!imgWidth || !imgHeight) {
+        logStr('Parameter imageSize expects value with format WIDTHxHEIGHT, got ' + params.imageSize);
+      } else {
+        _imgWidth = imgWidth;
+        _imgHeight = imgHeight;
+      }
+    }
+
+    $customIcon.setAttribute('style', $customIcon.getAttribute('style') + 'width:' + _imgWidth + 'px; height:' + _imgHeight + 'px');
+  }
+
+  /*
+   * Show cancel button?
+   */
+  modal.setAttribute('data-has-cancel-button', params.showCancelButton);
+  if (params.showCancelButton) {
+    $cancelBtn.style.display = 'inline-block';
+  } else {
+    _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide.hide($cancelBtn);
+  }
+
+  /*
+   * Show confirm button?
+   */
+  modal.setAttribute('data-has-confirm-button', params.showConfirmButton);
+  if (params.showConfirmButton) {
+    $confirmBtn.style.display = 'inline-block';
+  } else {
+    _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide.hide($confirmBtn);
+  }
+
+  /*
+   * Custom text on cancel/confirm buttons
+   */
+  if (params.cancelButtonText) {
+    $cancelBtn.innerHTML = _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide.escapeHtml(params.cancelButtonText);
+  }
+  if (params.confirmButtonText) {
+    $confirmBtn.innerHTML = _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide.escapeHtml(params.confirmButtonText);
+  }
+
+  /*
+   * Custom color on confirm button
+   */
+  if (params.confirmButtonColor) {
+    // Set confirm button to selected background color
+    $confirmBtn.style.backgroundColor = params.confirmButtonColor;
+
+    // Set the confirm button color to the loading ring
+    $confirmBtn.style.borderLeftColor = params.confirmLoadingButtonColor;
+    $confirmBtn.style.borderRightColor = params.confirmLoadingButtonColor;
+
+    // Set box-shadow to default focused button
+    _getModal$getInput$setFocusStyle.setFocusStyle($confirmBtn, params.confirmButtonColor);
+  }
+
+  /*
+   * Allow outside click
+   */
+  modal.setAttribute('data-allow-outside-click', params.allowOutsideClick);
+
+  /*
+   * Callback function
+   */
+  var hasDoneFunction = params.doneFunction ? true : false;
+  modal.setAttribute('data-has-done-function', hasDoneFunction);
+
+  /*
+   * Animation
+   */
+  if (!params.animation) {
+    modal.setAttribute('data-animation', 'none');
+  } else if (typeof params.animation === 'string') {
+    modal.setAttribute('data-animation', params.animation); // Custom animation
+  } else {
+    modal.setAttribute('data-animation', 'pop');
+  }
+
+  /*
+   * Timer
+   */
+  modal.setAttribute('data-timer', params.timer);
+};
+
+exports['default'] = setParameters;
+module.exports = exports['default'];
+
+/***/ }),
+
+/***/ 635:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireWildcard = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+// SweetAlert
+// 2014-2015 (c) - Tristan Edwards
+// github.com/t4t5/sweetalert
+
+/*
+ * jQuery-like functions for manipulating the DOM
+ */
+
+var _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide$isDescendant$getTopMargin$fadeIn$fadeOut$fireClick$stopEventPropagation = __webpack_require__(54);
+
+/*
+ * Handy utilities
+ */
+
+var _extend$hexToRgb$isIE8$logStr$colorLuminance = __webpack_require__(76);
+
+/*
+ *  Handle sweetAlert's DOM elements
+ */
+
+var _sweetAlertInitialize$getModal$getOverlay$getInput$setFocusStyle$openModal$resetInput$fixVerticalPosition = __webpack_require__(75);
+
+// Handle button events and keyboard events
+
+var _handleButton$handleConfirm$handleCancel = __webpack_require__(631);
+
+var _handleKeyDown = __webpack_require__(632);
+
+var _handleKeyDown2 = _interopRequireWildcard(_handleKeyDown);
+
+// Default values
+
+var _defaultParams = __webpack_require__(296);
+
+var _defaultParams2 = _interopRequireWildcard(_defaultParams);
+
+var _setParameters = __webpack_require__(634);
+
+var _setParameters2 = _interopRequireWildcard(_setParameters);
+
+/*
+ * Remember state in cases where opening and handling a modal will fiddle with it.
+ * (We also use window.previousActiveElement as a global variable)
+ */
+var previousWindowKeyDown;
+var lastFocusedButton;
+
+/*
+ * Global sweetAlert function
+ * (this is what the user calls)
+ */
+var sweetAlert, swal;
+
+exports['default'] = sweetAlert = swal = function () {
+  var customizations = arguments[0];
+
+  _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide$isDescendant$getTopMargin$fadeIn$fadeOut$fireClick$stopEventPropagation.addClass(document.body, 'stop-scrolling');
+  _sweetAlertInitialize$getModal$getOverlay$getInput$setFocusStyle$openModal$resetInput$fixVerticalPosition.resetInput();
+
+  /*
+   * Use argument if defined or default value from params object otherwise.
+   * Supports the case where a default value is boolean true and should be
+   * overridden by a corresponding explicit argument which is boolean false.
+   */
+  function argumentOrDefault(key) {
+    var args = customizations;
+    return args[key] === undefined ? _defaultParams2['default'][key] : args[key];
+  }
+
+  if (customizations === undefined) {
+    _extend$hexToRgb$isIE8$logStr$colorLuminance.logStr('SweetAlert expects at least 1 attribute!');
+    return false;
+  }
+
+  var params = _extend$hexToRgb$isIE8$logStr$colorLuminance.extend({}, _defaultParams2['default']);
+
+  switch (typeof customizations) {
+
+    // Ex: swal("Hello", "Just testing", "info");
+    case 'string':
+      params.title = customizations;
+      params.text = arguments[1] || '';
+      params.type = arguments[2] || '';
+      break;
+
+    // Ex: swal({ title:"Hello", text: "Just testing", type: "info" });
+    case 'object':
+      if (customizations.title === undefined) {
+        _extend$hexToRgb$isIE8$logStr$colorLuminance.logStr('Missing "title" argument!');
+        return false;
+      }
+
+      params.title = customizations.title;
+
+      for (var customName in _defaultParams2['default']) {
+        params[customName] = argumentOrDefault(customName);
+      }
+
+      // Show "Confirm" instead of "OK" if cancel button is visible
+      params.confirmButtonText = params.showCancelButton ? 'Confirm' : _defaultParams2['default'].confirmButtonText;
+      params.confirmButtonText = argumentOrDefault('confirmButtonText');
+
+      // Callback function when clicking on "OK"/"Cancel"
+      params.doneFunction = arguments[1] || null;
+
+      break;
+
+    default:
+      _extend$hexToRgb$isIE8$logStr$colorLuminance.logStr('Unexpected type of argument! Expected "string" or "object", got ' + typeof customizations);
+      return false;
+
+  }
+
+  _setParameters2['default'](params);
+  _sweetAlertInitialize$getModal$getOverlay$getInput$setFocusStyle$openModal$resetInput$fixVerticalPosition.fixVerticalPosition();
+  _sweetAlertInitialize$getModal$getOverlay$getInput$setFocusStyle$openModal$resetInput$fixVerticalPosition.openModal(arguments[1]);
+
+  // Modal interactions
+  var modal = _sweetAlertInitialize$getModal$getOverlay$getInput$setFocusStyle$openModal$resetInput$fixVerticalPosition.getModal();
+
+  /*
+   * Make sure all modal buttons respond to all events
+   */
+  var $buttons = modal.querySelectorAll('button');
+  var buttonEvents = ['onclick', 'onmouseover', 'onmouseout', 'onmousedown', 'onmouseup', 'onfocus'];
+  var onButtonEvent = function onButtonEvent(e) {
+    return _handleButton$handleConfirm$handleCancel.handleButton(e, params, modal);
+  };
+
+  for (var btnIndex = 0; btnIndex < $buttons.length; btnIndex++) {
+    for (var evtIndex = 0; evtIndex < buttonEvents.length; evtIndex++) {
+      var btnEvt = buttonEvents[evtIndex];
+      $buttons[btnIndex][btnEvt] = onButtonEvent;
+    }
+  }
+
+  // Clicking outside the modal dismisses it (if allowed by user)
+  _sweetAlertInitialize$getModal$getOverlay$getInput$setFocusStyle$openModal$resetInput$fixVerticalPosition.getOverlay().onclick = onButtonEvent;
+
+  previousWindowKeyDown = window.onkeydown;
+
+  var onKeyEvent = function onKeyEvent(e) {
+    return _handleKeyDown2['default'](e, params, modal);
+  };
+  window.onkeydown = onKeyEvent;
+
+  window.onfocus = function () {
+    // When the user has focused away and focused back from the whole window.
+    setTimeout(function () {
+      // Put in a timeout to jump out of the event sequence.
+      // Calling focus() in the event sequence confuses things.
+      if (lastFocusedButton !== undefined) {
+        lastFocusedButton.focus();
+        lastFocusedButton = undefined;
+      }
+    }, 0);
+  };
+
+  // Show alert with enabled buttons always
+  swal.enableButtons();
+};
+
+/*
+ * Set default params for each popup
+ * @param {Object} userParams
+ */
+sweetAlert.setDefaults = swal.setDefaults = function (userParams) {
+  if (!userParams) {
+    throw new Error('userParams is required');
+  }
+  if (typeof userParams !== 'object') {
+    throw new Error('userParams has to be a object');
+  }
+
+  _extend$hexToRgb$isIE8$logStr$colorLuminance.extend(_defaultParams2['default'], userParams);
+};
+
+/*
+ * Animation when closing modal
+ */
+sweetAlert.close = swal.close = function () {
+  var modal = _sweetAlertInitialize$getModal$getOverlay$getInput$setFocusStyle$openModal$resetInput$fixVerticalPosition.getModal();
+
+  _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide$isDescendant$getTopMargin$fadeIn$fadeOut$fireClick$stopEventPropagation.fadeOut(_sweetAlertInitialize$getModal$getOverlay$getInput$setFocusStyle$openModal$resetInput$fixVerticalPosition.getOverlay(), 5);
+  _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide$isDescendant$getTopMargin$fadeIn$fadeOut$fireClick$stopEventPropagation.fadeOut(modal, 5);
+  _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide$isDescendant$getTopMargin$fadeIn$fadeOut$fireClick$stopEventPropagation.removeClass(modal, 'showSweetAlert');
+  _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide$isDescendant$getTopMargin$fadeIn$fadeOut$fireClick$stopEventPropagation.addClass(modal, 'hideSweetAlert');
+  _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide$isDescendant$getTopMargin$fadeIn$fadeOut$fireClick$stopEventPropagation.removeClass(modal, 'visible');
+
+  /*
+   * Reset icon animations
+   */
+  var $successIcon = modal.querySelector('.sa-icon.sa-success');
+  _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide$isDescendant$getTopMargin$fadeIn$fadeOut$fireClick$stopEventPropagation.removeClass($successIcon, 'animate');
+  _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide$isDescendant$getTopMargin$fadeIn$fadeOut$fireClick$stopEventPropagation.removeClass($successIcon.querySelector('.sa-tip'), 'animateSuccessTip');
+  _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide$isDescendant$getTopMargin$fadeIn$fadeOut$fireClick$stopEventPropagation.removeClass($successIcon.querySelector('.sa-long'), 'animateSuccessLong');
+
+  var $errorIcon = modal.querySelector('.sa-icon.sa-error');
+  _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide$isDescendant$getTopMargin$fadeIn$fadeOut$fireClick$stopEventPropagation.removeClass($errorIcon, 'animateErrorIcon');
+  _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide$isDescendant$getTopMargin$fadeIn$fadeOut$fireClick$stopEventPropagation.removeClass($errorIcon.querySelector('.sa-x-mark'), 'animateXMark');
+
+  var $warningIcon = modal.querySelector('.sa-icon.sa-warning');
+  _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide$isDescendant$getTopMargin$fadeIn$fadeOut$fireClick$stopEventPropagation.removeClass($warningIcon, 'pulseWarning');
+  _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide$isDescendant$getTopMargin$fadeIn$fadeOut$fireClick$stopEventPropagation.removeClass($warningIcon.querySelector('.sa-body'), 'pulseWarningIns');
+  _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide$isDescendant$getTopMargin$fadeIn$fadeOut$fireClick$stopEventPropagation.removeClass($warningIcon.querySelector('.sa-dot'), 'pulseWarningIns');
+
+  // Reset custom class (delay so that UI changes aren't visible)
+  setTimeout(function () {
+    var customClass = modal.getAttribute('data-custom-class');
+    _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide$isDescendant$getTopMargin$fadeIn$fadeOut$fireClick$stopEventPropagation.removeClass(modal, customClass);
+  }, 300);
+
+  // Make page scrollable again
+  _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide$isDescendant$getTopMargin$fadeIn$fadeOut$fireClick$stopEventPropagation.removeClass(document.body, 'stop-scrolling');
+
+  // Reset the page to its previous state
+  window.onkeydown = previousWindowKeyDown;
+  if (window.previousActiveElement) {
+    window.previousActiveElement.focus();
+  }
+  lastFocusedButton = undefined;
+  clearTimeout(modal.timeout);
+
+  return true;
+};
+
+/*
+ * Validation of the input field is done by user
+ * If something is wrong => call showInputError with errorMessage
+ */
+sweetAlert.showInputError = swal.showInputError = function (errorMessage) {
+  var modal = _sweetAlertInitialize$getModal$getOverlay$getInput$setFocusStyle$openModal$resetInput$fixVerticalPosition.getModal();
+
+  var $errorIcon = modal.querySelector('.sa-input-error');
+  _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide$isDescendant$getTopMargin$fadeIn$fadeOut$fireClick$stopEventPropagation.addClass($errorIcon, 'show');
+
+  var $errorContainer = modal.querySelector('.sa-error-container');
+  _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide$isDescendant$getTopMargin$fadeIn$fadeOut$fireClick$stopEventPropagation.addClass($errorContainer, 'show');
+
+  $errorContainer.querySelector('p').innerHTML = errorMessage;
+
+  setTimeout(function () {
+    sweetAlert.enableButtons();
+  }, 1);
+
+  modal.querySelector('input').focus();
+};
+
+/*
+ * Reset input error DOM elements
+ */
+sweetAlert.resetInputError = swal.resetInputError = function (event) {
+  // If press enter => ignore
+  if (event && event.keyCode === 13) {
+    return false;
+  }
+
+  var $modal = _sweetAlertInitialize$getModal$getOverlay$getInput$setFocusStyle$openModal$resetInput$fixVerticalPosition.getModal();
+
+  var $errorIcon = $modal.querySelector('.sa-input-error');
+  _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide$isDescendant$getTopMargin$fadeIn$fadeOut$fireClick$stopEventPropagation.removeClass($errorIcon, 'show');
+
+  var $errorContainer = $modal.querySelector('.sa-error-container');
+  _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide$isDescendant$getTopMargin$fadeIn$fadeOut$fireClick$stopEventPropagation.removeClass($errorContainer, 'show');
+};
+
+/*
+ * Disable confirm and cancel buttons
+ */
+sweetAlert.disableButtons = swal.disableButtons = function (event) {
+  var modal = _sweetAlertInitialize$getModal$getOverlay$getInput$setFocusStyle$openModal$resetInput$fixVerticalPosition.getModal();
+  var $confirmButton = modal.querySelector('button.confirm');
+  var $cancelButton = modal.querySelector('button.cancel');
+  $confirmButton.disabled = true;
+  $cancelButton.disabled = true;
+};
+
+/*
+ * Enable confirm and cancel buttons
+ */
+sweetAlert.enableButtons = swal.enableButtons = function (event) {
+  var modal = _sweetAlertInitialize$getModal$getOverlay$getInput$setFocusStyle$openModal$resetInput$fixVerticalPosition.getModal();
+  var $confirmButton = modal.querySelector('button.confirm');
+  var $cancelButton = modal.querySelector('button.cancel');
+  $confirmButton.disabled = false;
+  $cancelButton.disabled = false;
+};
+
+if (typeof window !== 'undefined') {
+  // The 'handle-click' module requires
+  // that 'sweetAlert' was set as global.
+  window.sweetAlert = window.swal = sweetAlert;
+} else {
+  _extend$hexToRgb$isIE8$logStr$colorLuminance.logStr('SweetAlert is a frontend module!');
+}
+module.exports = exports['default'];
+
+/***/ }),
+
+/***/ 646:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Copyright 2014-2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
+
+
+
+/**
+ * Similar to invariant but only logs a warning if the condition is not met.
+ * This can be used to log issues in development environments in critical
+ * paths. Removing the logging code for production environments will keep the
+ * same logic and follow the same code paths.
+ */
+
+var warning = function() {};
+
+if (true) {
+  warning = function(condition, format, args) {
+    var len = arguments.length;
+    args = new Array(len > 2 ? len - 2 : 0);
+    for (var key = 2; key < len; key++) {
+      args[key - 2] = arguments[key];
+    }
+    if (format === undefined) {
+      throw new Error(
+        '`warning(condition, format, ...args)` requires a warning ' +
+        'message argument'
+      );
+    }
+
+    if (format.length < 10 || (/^[s\W]*$/).test(format)) {
+      throw new Error(
+        'The warning format should be able to uniquely identify this ' +
+        'warning. Please, use a more descriptive format than: ' + format
+      );
+    }
+
+    if (!condition) {
+      var argIndex = 0;
+      var message = 'Warning: ' +
+        format.replace(/%s/g, function() {
+          return args[argIndex++];
+        });
+      if (typeof console !== 'undefined') {
+        console.error(message);
+      }
+      try {
+        // This error was thrown as a convenience so that you can use this stack
+        // to find the callsite that caused this warning to fire.
+        throw new Error(message);
+      } catch(x) {}
+    }
+  };
+}
+
+module.exports = warning;
+
+
+/***/ }),
+
+/***/ 650:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 
-var _BaseWidget = __webpack_require__(295);
+var _BaseWidget = __webpack_require__(299);
 
 var _BaseWidget2 = _interopRequireDefault(_BaseWidget);
 
-var _Dashboard = __webpack_require__(296);
+var _Dashboard = __webpack_require__(300);
 
 var _Dashboard2 = _interopRequireDefault(_Dashboard);
 
@@ -25201,11 +28371,265 @@ global.Dashboard = _Dashboard2.default;
 global.BaseWidget = _BaseWidget2.default;
 global.React = _react2.default;
 global.ReactDOM = _reactDom2.default;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)))
 
 /***/ }),
 
-/***/ 77:
+/***/ 75:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireWildcard = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+var _hexToRgb = __webpack_require__(76);
+
+var _removeClass$getTopMargin$fadeIn$show$addClass = __webpack_require__(54);
+
+var _defaultParams = __webpack_require__(296);
+
+var _defaultParams2 = _interopRequireWildcard(_defaultParams);
+
+/*
+ * Add modal + overlay to DOM
+ */
+
+var _injectedHTML = __webpack_require__(633);
+
+var _injectedHTML2 = _interopRequireWildcard(_injectedHTML);
+
+var modalClass = '.sweet-alert';
+var overlayClass = '.sweet-overlay';
+
+var sweetAlertInitialize = function sweetAlertInitialize() {
+  var sweetWrap = document.createElement('div');
+  sweetWrap.innerHTML = _injectedHTML2['default'];
+
+  // Append elements to body
+  while (sweetWrap.firstChild) {
+    document.body.appendChild(sweetWrap.firstChild);
+  }
+};
+
+/*
+ * Get DOM element of modal
+ */
+var getModal = (function (_getModal) {
+  function getModal() {
+    return _getModal.apply(this, arguments);
+  }
+
+  getModal.toString = function () {
+    return _getModal.toString();
+  };
+
+  return getModal;
+})(function () {
+  var $modal = document.querySelector(modalClass);
+
+  if (!$modal) {
+    sweetAlertInitialize();
+    $modal = getModal();
+  }
+
+  return $modal;
+});
+
+/*
+ * Get DOM element of input (in modal)
+ */
+var getInput = function getInput() {
+  var $modal = getModal();
+  if ($modal) {
+    return $modal.querySelector('input');
+  }
+};
+
+/*
+ * Get DOM element of overlay
+ */
+var getOverlay = function getOverlay() {
+  return document.querySelector(overlayClass);
+};
+
+/*
+ * Add box-shadow style to button (depending on its chosen bg-color)
+ */
+var setFocusStyle = function setFocusStyle($button, bgColor) {
+  var rgbColor = _hexToRgb.hexToRgb(bgColor);
+  $button.style.boxShadow = '0 0 2px rgba(' + rgbColor + ', 0.8), inset 0 0 0 1px rgba(0, 0, 0, 0.05)';
+};
+
+/*
+ * Animation when opening modal
+ */
+var openModal = function openModal(callback) {
+  var $modal = getModal();
+  _removeClass$getTopMargin$fadeIn$show$addClass.fadeIn(getOverlay(), 10);
+  _removeClass$getTopMargin$fadeIn$show$addClass.show($modal);
+  _removeClass$getTopMargin$fadeIn$show$addClass.addClass($modal, 'showSweetAlert');
+  _removeClass$getTopMargin$fadeIn$show$addClass.removeClass($modal, 'hideSweetAlert');
+
+  window.previousActiveElement = document.activeElement;
+  var $okButton = $modal.querySelector('button.confirm');
+  $okButton.focus();
+
+  setTimeout(function () {
+    _removeClass$getTopMargin$fadeIn$show$addClass.addClass($modal, 'visible');
+  }, 500);
+
+  var timer = $modal.getAttribute('data-timer');
+
+  if (timer !== 'null' && timer !== '') {
+    var timerCallback = callback;
+    $modal.timeout = setTimeout(function () {
+      var doneFunctionExists = (timerCallback || null) && $modal.getAttribute('data-has-done-function') === 'true';
+      if (doneFunctionExists) {
+        timerCallback(null);
+      } else {
+        sweetAlert.close();
+      }
+    }, timer);
+  }
+};
+
+/*
+ * Reset the styling of the input
+ * (for example if errors have been shown)
+ */
+var resetInput = function resetInput() {
+  var $modal = getModal();
+  var $input = getInput();
+
+  _removeClass$getTopMargin$fadeIn$show$addClass.removeClass($modal, 'show-input');
+  $input.value = _defaultParams2['default'].inputValue;
+  $input.setAttribute('type', _defaultParams2['default'].inputType);
+  $input.setAttribute('placeholder', _defaultParams2['default'].inputPlaceholder);
+
+  resetInputError();
+};
+
+var resetInputError = function resetInputError(event) {
+  // If press enter => ignore
+  if (event && event.keyCode === 13) {
+    return false;
+  }
+
+  var $modal = getModal();
+
+  var $errorIcon = $modal.querySelector('.sa-input-error');
+  _removeClass$getTopMargin$fadeIn$show$addClass.removeClass($errorIcon, 'show');
+
+  var $errorContainer = $modal.querySelector('.sa-error-container');
+  _removeClass$getTopMargin$fadeIn$show$addClass.removeClass($errorContainer, 'show');
+};
+
+/*
+ * Set "margin-top"-property on modal based on its computed height
+ */
+var fixVerticalPosition = function fixVerticalPosition() {
+  var $modal = getModal();
+  $modal.style.marginTop = _removeClass$getTopMargin$fadeIn$show$addClass.getTopMargin(getModal());
+};
+
+exports.sweetAlertInitialize = sweetAlertInitialize;
+exports.getModal = getModal;
+exports.getOverlay = getOverlay;
+exports.getInput = getInput;
+exports.setFocusStyle = setFocusStyle;
+exports.openModal = openModal;
+exports.resetInput = resetInput;
+exports.resetInputError = resetInputError;
+exports.fixVerticalPosition = fixVerticalPosition;
+
+/***/ }),
+
+/***/ 76:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+/*
+ * Allow user to pass their own params
+ */
+var extend = function extend(a, b) {
+  for (var key in b) {
+    if (b.hasOwnProperty(key)) {
+      a[key] = b[key];
+    }
+  }
+  return a;
+};
+
+/*
+ * Convert HEX codes to RGB values (#000000 -> rgb(0,0,0))
+ */
+var hexToRgb = function hexToRgb(hex) {
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? parseInt(result[1], 16) + ', ' + parseInt(result[2], 16) + ', ' + parseInt(result[3], 16) : null;
+};
+
+/*
+ * Check if the user is using Internet Explorer 8 (for fallbacks)
+ */
+var isIE8 = function isIE8() {
+  return window.attachEvent && !window.addEventListener;
+};
+
+/*
+ * IE compatible logging for developers
+ */
+var logStr = function logStr(string) {
+  if (window.console) {
+    // IE...
+    window.console.log('SweetAlert: ' + string);
+  }
+};
+
+/*
+ * Set hover, active and focus-states for buttons 
+ * (source: http://www.sitepoint.com/javascript-generate-lighter-darker-color)
+ */
+var colorLuminance = function colorLuminance(hex, lum) {
+  // Validate hex string
+  hex = String(hex).replace(/[^0-9a-f]/gi, '');
+  if (hex.length < 6) {
+    hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+  }
+  lum = lum || 0;
+
+  // Convert to decimal and change luminosity
+  var rgb = '#';
+  var c;
+  var i;
+
+  for (i = 0; i < 3; i++) {
+    c = parseInt(hex.substr(i * 2, 2), 16);
+    c = Math.round(Math.min(Math.max(0, c + c * lum), 255)).toString(16);
+    rgb += ('00' + c).substr(c.length);
+  }
+
+  return rgb;
+};
+
+exports.extend = extend;
+exports.hexToRgb = hexToRgb;
+exports.isIE8 = isIE8;
+exports.logStr = logStr;
+exports.colorLuminance = colorLuminance;
+
+/***/ }),
+
+/***/ 80:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25248,7 +28672,7 @@ module.exports = emptyFunction;
 
 /***/ }),
 
-/***/ 78:
+/***/ 81:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25308,7 +28732,7 @@ module.exports = invariant;
 
 /***/ }),
 
-/***/ 79:
+/***/ 82:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25322,7 +28746,7 @@ module.exports = invariant;
 
 
 
-var emptyFunction = __webpack_require__(77);
+var emptyFunction = __webpack_require__(80);
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -25377,7 +28801,7 @@ module.exports = warning;
 
 /***/ }),
 
-/***/ 80:
+/***/ 83:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25386,10 +28810,10 @@ module.exports = warning;
 if (false) {
   module.exports = require('./cjs/react.production.min.js');
 } else {
-  module.exports = __webpack_require__(323);
+  module.exports = __webpack_require__(327);
 }
 
 
 /***/ })
 
-},[632]);
+},[650]);

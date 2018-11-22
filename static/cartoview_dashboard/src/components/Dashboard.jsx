@@ -16,6 +16,11 @@ import WidgetConfigDialog from './WidgetConfigDialog.jsx'
 
 // Our styles
 //import '../styles/custom.css'
+
+// import Sweat Alert
+import SweetAlert from 'sweetalert-react';
+import 'sweetalert/dist/sweetalert.css';
+
 var widgetId = 0
 class Dashboard extends Component {
     constructor( props ) {
@@ -23,7 +28,7 @@ class Dashboard extends Component {
         var { widgets,
             layout,
             editable,
-            isNew, 
+            isNew,
             isOwner,
             title,
             abstract } = props
@@ -52,6 +57,7 @@ class Dashboard extends Component {
             abstract,
             addWidgetDialogOpen: false,
             addWidgetOptions: null,
+            showRemoveWidgetAlert: false
         }
         this.configManager = new ConfigManager( this )
         this.widgets = {}
@@ -60,6 +66,32 @@ class Dashboard extends Component {
         return {
             configManager: this.configManager
         }
+    }
+
+    onRemoveTab = (rowIndex, columnIndex, tabIndex) => {
+        const updatedLayout = this.state.layout;
+        const widgetCount = updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgets.length;
+        const hasWidgets = widgetCount ? true : false;
+        if (!hasWidgets) {
+            updatedLayout.rows[rowIndex].columns[columnIndex].tabs.splice(tabIndex, 1);
+            this.setState({
+                layout: updatedLayout,
+            });
+        } else {
+            this.setState({
+                showRemoveWidgetAlert: true,
+            });
+        }
+    }
+
+    onAddTab = (rowIndex, columnIndex) => {
+        const updatedLayout = this.state.layout;
+        const numberOfTabs = updatedLayout.rows[rowIndex].columns[columnIndex].tabs.length;
+        const newEmptyTab = {widgets: []};
+        updatedLayout.rows[rowIndex].columns[columnIndex].tabs.splice(numberOfTabs, 0, newEmptyTab);
+            this.setState({
+                layout: updatedLayout,
+        });
     }
     /**
      * When a widget is removed, the layout should be set again.
@@ -143,6 +175,12 @@ class Dashboard extends Component {
         } = this.state
         return (
             <Container>
+                <SweetAlert
+                    show={this.state.showRemoveWidgetAlert}
+                    title="Tab Already contains widgets!"
+                    text="Please remove all the widgets before you can remove the tab"
+                    onConfirm={() => this.setState({ showRemoveWidgetAlert: false })}
+                />
         <AddWidgetDialog widgets={widgets} isOpen={addWidgetDialogOpen} onRequestClose={this.onRequestClose} onWidgetSelect={this.handleWidgetSelection} />
         <WidgetConfigDialog isOpen={widgetConfigDialogOpen} widgetId={configWidgetId} />
         <Header editable={editable} title={title} abstract={abstract} ref="header" onChange={this.onHeaderChanged}/>
@@ -156,6 +194,8 @@ class Dashboard extends Component {
           onAdd={this.onAdd}
           onMove={this.onMove}
           addWidgetComponentText="Add New Widget"
+          onRemoveTab={this.onRemoveTab}
+          onAddTab={this.onAddTab}
         />
 
       </Container>
