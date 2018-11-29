@@ -20091,7 +20091,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         if (c.canDragSource(e[p])) {
           d = e[p];break;
         }
-      }if (null === d) return;var h = null;r && ((0, o.default)("function" == typeof u, "When clientOffset is provided, getSourceClientOffset must be a function."), h = u(d));var v = l.getSource(d).beginDrag(c, d);(0, o.default)((0, i.default)(v), "Item must be an object."), l.pinSource(d);var g = l.getSourceType(d);return { type: s, itemType: g, item: v, sourceId: d, clientOffset: r, sourceClientOffset: h, isSourcePublic: n };
+      }if (null === d) return;var h = null;r && ((0, o.default)("function" == typeof u, "When clientOffset is provided, getSourceClientOffset must be a function."), h = u(d));var g = l.getSource(d).beginDrag(c, d);(0, o.default)((0, i.default)(g), "Item must be an object."), l.pinSource(d);var v = l.getSourceType(d);return { type: s, itemType: v, item: g, sourceId: d, clientOffset: r, sourceClientOffset: h, isSourcePublic: n };
     }, t.publishDragSource = function () {
       if (!this.getMonitor().isDragging()) return;return { type: l };
     }, t.hover = function (e) {
@@ -20101,8 +20101,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           c = this.getRegistry();(0, o.default)(i.isDragging(), "Cannot call hover while not dragging."), (0, o.default)(!i.didDrop(), "Cannot call hover after drop.");for (var s = 0; s < r.length; s++) {
         var l = r[s];(0, o.default)(r.lastIndexOf(l) === s, "Expected targetIds to be unique in the passed array.");var d = c.getTarget(l);(0, o.default)(d, "Expected targetIds to be registered.");
       }for (var p = i.getItemType(), h = r.length - 1; h >= 0; h--) {
-        var v = r[h],
-            g = c.getTargetType(v);(0, u.default)(g, p) || r.splice(h, 1);
+        var g = r[h],
+            v = c.getTargetType(g);(0, u.default)(v, p) || r.splice(h, 1);
       }for (var y = 0; y < r.length; y++) {
         var b = r[y],
             m = c.getTarget(b);m.hover(i, b);
@@ -20245,9 +20245,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           if (u) {
             var d = i(l);d && d !== u && c(s, d, f);
           }var p = r(l);o && (p = p.concat(o(l)));for (var h = 0; h < p.length; ++h) {
-            var v = p[h];if (!(e[v] || t[v] || f && f[v])) {
-              var g = a(l, v);try {
-                n(s, v, g);
+            var g = p[h];if (!(e[g] || t[g] || f && f[g])) {
+              var v = a(l, g);try {
+                n(s, g, v);
               } catch (e) {}
             }
           }return s;
@@ -20309,8 +20309,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     } : function (e) {
       return e && "function" == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype ? "symbol" : typeof e === "undefined" ? "undefined" : _typeof(e);
     };t.default = function (e) {
-      d.default.apply(void 0, ["DragDropContext", "backend"].concat(Array.prototype.slice.call(arguments)));var t = g(e),
-          n = v(t);return function (e) {
+      d.default.apply(void 0, ["DragDropContext", "backend"].concat(Array.prototype.slice.call(arguments)));var t = v(e),
+          n = g(t);return function (e) {
         var t,
             a,
             c = e.displayName || e.name || "Component",
@@ -20345,10 +20345,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         d = p(n(17));function p(e) {
       return e && e.__esModule ? e : { default: e };
     }var h = t.CHILD_CONTEXT_TYPES = { dragDropManager: c.default.object.isRequired },
-        v = t.createChildContext = function (e, t) {
+        g = t.createChildContext = function (e, t) {
       return { dragDropManager: new s.DragDropManager(e, t) };
     },
-        g = t.unpackBackendForEs5Users = function (e) {
+        v = t.unpackBackendForEs5Users = function (e) {
       var t = e;return "object" === (void 0 === t ? "undefined" : a(t)) && "function" == typeof t.default && (t = t.default), (0, l.default)("function" == typeof t, "Expected the backend to be a function or an ES6 module exporting a default function. Read more: http://react-dnd.github.io/react-dnd/docs-drag-drop-context.html"), t;
     };
   }, function (e, t) {
@@ -20407,15 +20407,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           d = o,
           p = !0,
           h = e.length,
-          v = [],
-          g = t.length;if (!h) return v;n && (t = i(t, u(n))), l ? (d = a, p = !1) : t.length >= s && (d = c, p = !1, t = new r(t));e: for (; ++f < h;) {
+          g = [],
+          v = t.length;if (!h) return g;n && (t = i(t, u(n))), l ? (d = a, p = !1) : t.length >= s && (d = c, p = !1, t = new r(t));e: for (; ++f < h;) {
         var y = e[f],
             b = null == n ? y : n(y);if (y = l || 0 !== y ? y : 0, p && b == b) {
-          for (var m = g; m--;) {
+          for (var m = v; m--;) {
             if (t[m] === b) continue e;
-          }v.push(y);
-        } else d(t, b, l) || v.push(y);
-      }return v;
+          }g.push(y);
+        } else d(t, b, l) || g.push(y);
+      }return g;
     };
   }, function (e, t, n) {
     var r = n(77),
@@ -20504,15 +20504,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           d = e.length,
           p = !0,
           h = [],
-          v = h;if (n) p = !1, f = a;else if (d >= s) {
-        var g = t ? null : u(e);if (g) return c(g);p = !1, f = i, v = new r();
-      } else v = t ? [] : h;e: for (; ++l < d;) {
+          g = h;if (n) p = !1, f = a;else if (d >= s) {
+        var v = t ? null : u(e);if (v) return c(v);p = !1, f = i, g = new r();
+      } else g = t ? [] : h;e: for (; ++l < d;) {
         var y = e[l],
             b = t ? t(y) : y;if (y = n || 0 !== y ? y : 0, p && b == b) {
-          for (var m = v.length; m--;) {
-            if (v[m] === b) continue e;
-          }t && v.push(b), h.push(y);
-        } else f(v, b, n) || (v !== h && v.push(b), h.push(y));
+          for (var m = g.length; m--;) {
+            if (g[m] === b) continue e;
+          }t && g.push(b), h.push(y);
+        } else f(g, b, n) || (g !== h && g.push(b), h.push(y));
       }return h;
     };
   }, function (e, t) {
@@ -20563,7 +20563,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var t,
           n,
           h = e.DecoratedComponent,
-          g = e.createHandler,
+          v = e.createHandler,
           y = e.createMonitor,
           b = e.createConnector,
           m = e.registerHandler,
@@ -20579,7 +20579,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function");
           }(this, t);var r = function (e, t) {
             if (!e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return !t || "object" != (typeof t === "undefined" ? "undefined" : _typeof(t)) && "function" != typeof t ? e : t;
-          }(this, (t.__proto__ || Object.getPrototypeOf(t)).call(this, e, n));return r.handleChange = r.handleChange.bind(r), r.handleChildRef = r.handleChildRef.bind(r), (0, l.default)("object" === o(r.context.dragDropManager), "Could not find the drag and drop manager in the context of %s. Make sure to wrap the top-level component of your app with DragDropContext. Read more: http://react-dnd.github.io/react-dnd/docs-troubleshooting.html#could-not-find-the-drag-and-drop-manager-in-the-context", C, C), r.manager = r.context.dragDropManager, r.handlerMonitor = y(r.manager), r.handlerConnector = b(r.manager.getBackend()), r.handler = g(r.handlerMonitor), r.disposable = new s.SerialDisposable(), r.receiveProps(e), r.state = r.getCurrentState(), r.dispose(), r;
+          }(this, (t.__proto__ || Object.getPrototypeOf(t)).call(this, e, n));return r.handleChange = r.handleChange.bind(r), r.handleChildRef = r.handleChildRef.bind(r), (0, l.default)("object" === o(r.context.dragDropManager), "Could not find the drag and drop manager in the context of %s. Make sure to wrap the top-level component of your app with DragDropContext. Read more: http://react-dnd.github.io/react-dnd/docs-troubleshooting.html#could-not-find-the-drag-and-drop-manager-in-the-context", C, C), r.manager = r.context.dragDropManager, r.handlerMonitor = y(r.manager), r.handlerConnector = b(r.manager.getBackend()), r.handler = v(r.handlerMonitor), r.disposable = new s.SerialDisposable(), r.receiveProps(e), r.state = r.getCurrentState(), r.dispose(), r;
         }return function (e, t) {
           if ("function" != typeof t && null !== t) throw new TypeError("Super expression must either be null or a function, not " + (typeof t === "undefined" ? "undefined" : _typeof(t)));e.prototype = Object.create(t && t.prototype, { constructor: { value: e, enumerable: !1, writable: !0, configurable: !0 } }), t && (Object.setPrototypeOf ? Object.setPrototypeOf(e, t) : e.__proto__ = t);
         }(t, e), a(t, [{ key: "getHandlerId", value: function value() {
@@ -20614,7 +20614,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           } }, { key: "getCurrentState", value: function value() {
             var e = _(this.handlerConnector.hooks, this.handlerMonitor);return e;
           } }, { key: "render", value: function value() {
-            return u.default.createElement(h, r({}, this.props, this.state, { ref: v(h) ? this.handleChildRef : null }));
+            return u.default.createElement(h, r({}, this.props, this.state, { ref: g(h) ? this.handleChildRef : null }));
           } }]), t;
       }(i.Component), t.DecoratedComponent = h, t.displayName = O + "(" + C + ")", t.contextTypes = { dragDropManager: c.default.object.isRequired }, n);return (0, f.default)(E, h);
     };var i = n(0),
@@ -20626,7 +20626,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         d = h(n(29)),
         p = h(n(49));function h(e) {
       return e && e.__esModule ? e : { default: e };
-    }var v = function v(e) {
+    }var g = function g(e) {
       return Boolean(e && e.prototype && "function" == typeof e.prototype.render);
     };
   }, function (e, t, n) {
@@ -20858,13 +20858,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         f === l && (f = l.slice());
       }function h() {
         return s;
-      }function v(e) {
+      }function g(e) {
         if ("function" != typeof e) throw new Error("Expected listener to be a function.");var t = !0;return p(), f.push(e), function () {
           if (t) {
             t = !1, p();var n = f.indexOf(e);f.splice(n, 1);
           }
         };
-      }function g(e) {
+      }function v(e) {
         if (!(0, r.default)(e)) throw new Error("Actions must be plain objects. Use custom middleware for async actions.");if (void 0 === e.type) throw new Error('Actions may not have an undefined "type" property. Have you misspelled a constant?');if (d) throw new Error("Reducers may not dispatch actions.");try {
           d = !0, s = c(s, e);
         } finally {
@@ -20872,11 +20872,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         }for (var t = l = f, n = 0; n < t.length; n++) {
           var o = t[n];o();
         }return e;
-      }g({ type: i.INIT });return u = { dispatch: g, subscribe: v, getState: h, replaceReducer: function replaceReducer(e) {
-          if ("function" != typeof e) throw new Error("Expected the nextReducer to be a function.");c = e, g({ type: i.INIT });
+      }v({ type: i.INIT });return u = { dispatch: v, subscribe: g, getState: h, replaceReducer: function replaceReducer(e) {
+          if ("function" != typeof e) throw new Error("Expected the nextReducer to be a function.");c = e, v({ type: i.INIT });
         } }, u[o.default] = function () {
         var e,
-            t = v;return (e = { subscribe: function subscribe(e) {
+            t = g;return (e = { subscribe: function subscribe(e) {
             if ("object" != (typeof e === "undefined" ? "undefined" : _typeof(e))) throw new TypeError("Expected the observer to be an object.");function n() {
               e.next && e.next(h());
             }n();var r = t(n);return { unsubscribe: r };
@@ -21258,17 +21258,17 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         u = n(25),
         c = n(26),
         s = Math.min;e.exports = function (e, t, n) {
-      for (var l = n ? a : o, f = e[0].length, d = e.length, p = d, h = Array(d), v = 1 / 0, g = []; p--;) {
-        var y = e[p];p && t && (y = i(y, u(t))), v = s(y.length, v), h[p] = !n && (t || f >= 120 && y.length >= 120) ? new r(p && y) : void 0;
+      for (var l = n ? a : o, f = e[0].length, d = e.length, p = d, h = Array(d), g = 1 / 0, v = []; p--;) {
+        var y = e[p];p && t && (y = i(y, u(t))), g = s(y.length, g), h[p] = !n && (t || f >= 120 && y.length >= 120) ? new r(p && y) : void 0;
       }y = e[0];var b = -1,
-          m = h[0];e: for (; ++b < f && g.length < v;) {
+          m = h[0];e: for (; ++b < f && v.length < g;) {
         var O = y[b],
-            w = t ? t(O) : O;if (O = n || 0 !== O ? O : 0, !(m ? c(m, w) : l(g, w, n))) {
+            w = t ? t(O) : O;if (O = n || 0 !== O ? O : 0, !(m ? c(m, w) : l(v, w, n))) {
           for (p = d; --p;) {
             var _ = h[p];if (!(_ ? c(_, w) : l(e[p], w, n))) continue e;
-          }m && m.push(w), g.push(O);
+          }m && m.push(w), v.push(O);
         }
-      }return g;
+      }return v;
     };
   }, function (e, t, n) {
     var r = n(15);e.exports = function (e) {
@@ -21630,8 +21630,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};return h.default.apply(void 0, ["DragLayer", "collect[, options]"].concat(Array.prototype.slice.call(arguments))), (0, f.default)("function" == typeof e, 'Expected "collect" provided as the first argument to DragLayer to be a function that collects props to inject into the component. ', "Instead, received %s. Read more: http://react-dnd.github.io/react-dnd/docs-drag-layer.html", e), (0, f.default)((0, l.default)(t), 'Expected "options" provided as the second argument to DragLayer to be a plain object when specified. Instead, received %s. Read more: http://react-dnd.github.io/react-dnd/docs-drag-layer.html', t), function (n) {
         var l,
             h,
-            v = t.arePropsEqual,
-            g = void 0 === v ? p.default : v,
+            g = t.arePropsEqual,
+            v = void 0 === g ? p.default : g,
             y = n.displayName || n.name || "Component",
             b = (h = l = function (t) {
           function c(e, t) {
@@ -21645,7 +21645,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           }(c, i.Component), a(c, [{ key: "getDecoratedComponentInstance", value: function value() {
               return (0, f.default)(this.child, "In order to access an instance of the decorated component it can not be a stateless component."), this.child;
             } }, { key: "shouldComponentUpdate", value: function value(e, t) {
-              return !g(e, this.props) || !(0, d.default)(t, this.state);
+              return !v(e, this.props) || !(0, d.default)(t, this.state);
             } }]), a(c, [{ key: "componentDidMount", value: function value() {
               this.isCurrentlyMounted = !0;var e = this.manager.getMonitor();this.unsubscribeFromOffsetChange = e.subscribeToOffsetChange(this.handleChange), this.unsubscribeFromStateChange = e.subscribeToStateChange(this.handleChange), this.handleChange();
             } }, { key: "componentWillUnmount", value: function value() {
@@ -21664,14 +21664,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         }(), l.DecoratedComponent = n, l.displayName = "DragLayer(" + y + ")", l.contextTypes = { dragDropManager: c.default.object.isRequired }, h);return (0, s.default)(b, n);
       };
     };var i = n(0),
-        u = v(i),
-        c = v(n(2)),
-        s = v(n(28)),
-        l = v(n(3)),
-        f = v(n(1)),
-        d = v(n(29)),
-        p = v(n(49)),
-        h = v(n(17));function v(e) {
+        u = g(i),
+        c = g(n(2)),
+        s = g(n(28)),
+        l = g(n(3)),
+        f = g(n(1)),
+        d = g(n(29)),
+        p = g(n(49)),
+        h = g(n(17));function g(e) {
       return e && e.__esModule ? e : { default: e };
     }
   }, function (e, t, n) {
@@ -22224,7 +22224,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           s = r > 2 ? t[2] : void 0;for (s && a(t[0], t[1], s) && (r = 1); ++n < r;) {
         for (var l = t[n], f = i(l), d = -1, p = f.length; ++d < p;) {
           var h = f[d],
-              v = e[h];(void 0 === v || o(v, u[h]) && !c.call(e, h)) && (e[h] = l[h]);
+              g = e[h];(void 0 === g || o(g, u[h]) && !c.call(e, h)) && (e[h] = l[h]);
         }
       }return e;
     });e.exports = s;
@@ -22255,8 +22255,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           d = !n && !l && !f && c(e),
           p = n || l || f || d,
           h = p ? r(e.length, String) : [],
-          v = h.length;for (var g in e) {
-        !t && !s.call(e, g) || p && ("length" == g || f && ("offset" == g || "parent" == g) || d && ("buffer" == g || "byteLength" == g || "byteOffset" == g) || u(g, v)) || h.push(g);
+          g = h.length;for (var v in e) {
+        !t && !s.call(e, v) || p && ("length" == v || f && ("offset" == v || "parent" == v) || d && ("buffer" == v || "byteLength" == v || "byteOffset" == v) || u(v, g)) || h.push(v);
       }return h;
     };
   }, function (e, t) {
@@ -22392,15 +22392,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           d = e.offsetHeight,
           p = r.anchorX,
           h = r.anchorY,
-          v = function (e, t, n, r) {
+          g = function (e, t, n, r) {
         var a = e ? t.width : n,
             i = e ? t.height : r;(0, o.isSafari)() && e && (i /= window.devicePixelRatio, a /= window.devicePixelRatio);return { dragPreviewWidth: a, dragPreviewHeight: i };
       }(u, t, f, d),
-          g = v.dragPreviewWidth,
-          y = v.dragPreviewHeight,
+          v = g.dragPreviewWidth,
+          y = g.dragPreviewHeight,
           b = a.offsetX,
           m = a.offsetY,
-          O = 0 === m || m;var w;return { x: 0 === b || b ? b : new i.default([0, .5, 1], [l.x, l.x / f * g, l.x + g - f]).interpolate(p), y: O ? m : function () {
+          O = 0 === m || m;var w;return { x: 0 === b || b ? b : new i.default([0, .5, 1], [l.x, l.x / f * v, l.x + v - f]).interpolate(p), y: O ? m : function () {
           var e = new i.default([0, .5, 1], [l.y, l.y / d * y, l.y + y - d]).interpolate(h);(0, o.isSafari)() && u && (e += (window.devicePixelRatio - 1) * y);return e;
         }() };
     };var r,
@@ -22432,9 +22432,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           s = t[f + 1] - t[f], l = n[f + 1] - n[f], u.push(s), i.push(l), c.push(l / s);
         }for (var d = [c[0]], p = 0; p < u.length - 1; p++) {
           var h = c[p],
-              v = c[p + 1];if (h * v <= 0) d.push(0);else {
-            s = u[p];var g = u[p + 1],
-                y = s + g;d.push(3 * y / ((y + g) / h + (y + s) / v));
+              g = c[p + 1];if (h * g <= 0) d.push(0);else {
+            s = u[p];var v = u[p + 1],
+                y = s + v;d.push(3 * y / ((y + v) / h + (y + s) / g));
           }
         }d.push(c[c.length - 1]);for (var b = [], m = [], O = void 0, w = 0; w < d.length - 1; w++) {
           O = c[w];var _ = d[w],
@@ -22538,11 +22538,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           d = e.editableColumnClass,
           p = e.droppableColumnClass,
           h = e.addWidgetComponentText,
-          v = e.addWidgetComponent,
-          g = e.onRemoveTab,
+          g = e.addWidgetComponent,
+          v = e.onRemoveTab,
           y = e.onAddTab,
           b = t.rows.map(function (e, b) {
-        return r.default.createElement(a.default, { key: b, rowClass: s, columns: e.columns, widgets: n, onRemove: o, layout: t, rowIndex: b, editable: i, onAdd: u, onMove: l, onEdit: f, frameComponent: c, editableColumnClass: d, droppableColumnClass: p, addWidgetComponentText: h, addWidgetComponent: v, onRemoveTab: g, onAddTab: y });
+        return r.default.createElement(a.default, { key: b, rowClass: s, columns: e.columns, widgets: n, onRemove: o, layout: t, rowIndex: b, editable: i, onAdd: u, onMove: l, onEdit: f, frameComponent: c, editableColumnClass: d, droppableColumnClass: p, addWidgetComponentText: h, addWidgetComponent: g, onRemoveTab: v, onAddTab: y });
       });return r.default.createElement("div", { id: "Layout-Renderer", key: "Layout-Renderer", style: { height: "100%" } }, b);
     };u.propTypes = { layout: o.default.object, widgets: o.default.object, editable: o.default.bool, onRemove: o.default.func, onAdd: o.default.func, frameComponent: o.default.func, rowClass: o.default.string, onMove: o.default.func, onEdit: o.default.func, editableColumnClass: o.default.string, droppableColumnClass: o.default.string, addWidgetComponent: o.default.func, addWidgetComponentText: o.default.string }, u.defaultProps = { layout: { rows: [] } }, t.default = u;
   }, function (e, t, n) {
@@ -22564,12 +22564,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           d = e.addWidgetComponentText,
           p = e.addWidgetComponent,
           h = e.onAdd,
-          v = e.onMove,
-          g = e.widgets,
+          g = e.onMove,
+          v = e.widgets,
           y = e.onRemoveTab,
           b = e.onAddTab,
           m = n.map(function (e, t) {
-        return r.default.createElement(a.default, { key: t, className: e.className, onAdd: h, layout: i, rowIndex: u, columnIndex: t, editable: c, onMove: v, editableColumnClass: l, droppableColumnClass: f, addWidgetComponent: p, addWidgetComponentText: d, onRemove: o, frameComponent: s, widgets: g, onRemoveTab: y, onAddTab: b });
+        return r.default.createElement(a.default, { key: t, className: e.className, onAdd: h, layout: i, rowIndex: u, columnIndex: t, editable: c, onMove: g, editableColumnClass: l, droppableColumnClass: f, addWidgetComponent: p, addWidgetComponentText: d, onRemove: o, frameComponent: s, widgets: v, onRemoveTab: y, onAddTab: b });
       });return r.default.createElement("div", { id: "row" + u, key: "row" + u, style: { height: "100%" }, className: t }, m);
     }u.propTypes = { rowClass: o.default.string, columns: o.default.array, widgets: o.default.object, layout: o.default.object, rowIndex: o.default.number, editable: o.default.bool, frameComponent: o.default.func, editableColumnClass: o.default.string, droppableColumnClass: o.default.string, addWidgetComponent: o.default.func, addWidgetComponentText: o.default.string, onAdd: o.default.func, onRemove: o.default.func, onMove: o.default.func, onEdit: o.default.func }, u.defaultProps = { rowClass: "row" }, t.default = u;
   }, function (e, t, n) {
@@ -22624,15 +22624,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
               d = e.editableColumnClass,
               p = e.droppableColumnClass,
               h = e.addWidgetComponentText,
-              v = e.addWidgetComponent,
-              g = e.onMove,
+              g = e.addWidgetComponent,
+              v = e.onMove,
               y = e.onRemove,
               b = e.frameComponent,
               m = e.widgets,
               O = e.key,
               w = e.onRemoveTab,
               _ = e.onAddTab,
-              D = t;D = a ? t + " " + d : D, D = s && l ? D + " " + p : D;return u(i.default.createElement("div", { style: { height: "100%" }, id: "column" + o, key: "column" + o, className: D }, i.default.createElement(f.default, { key: O, tabs: n.rows[r].columns[o].tabs, layout: n, rowIndex: r, columnIndex: o, widgets: m, onRemove: y, frameComponent: b, onMove: g, editable: a, onAdd: c, addWidgetComponentText: h, addWidgetComponent: v, onRemoveTab: w, onAddTab: _ })));
+              D = t;D = a ? t + " " + d : D, D = s && l ? D + " " + p : D;return u(i.default.createElement("div", { style: { height: "100%" }, id: "column" + o, key: "column" + o, className: D }, i.default.createElement(f.default, { key: O, tabs: n.rows[r].columns[o].tabs, layout: n, rowIndex: r, columnIndex: o, widgets: m, onRemove: y, frameComponent: b, onMove: v, editable: a, onAdd: c, addWidgetComponentText: h, addWidgetComponent: g, onRemoveTab: w, onAddTab: _ })));
         } }]), t;
     }()) || r;h.propTypes = { children: u.default.node, className: u.default.string, onAdd: u.default.func, layout: u.default.object, rowIndex: u.default.number, columnIndex: u.default.number, editable: u.default.bool, isOver: u.default.bool, canDrop: u.default.bool, editableColumnClass: u.default.string, droppableColumnClass: u.default.string, addWidgetComponentText: u.default.string, connectDropTarget: u.default.func, addWidgetComponent: u.default.func }, h.defaultProps = { editableColumnClass: "editable-column", droppableColumnClass: "droppable-column" }, t.default = h;
   }, function (e, t, n) {
@@ -22676,31 +22676,31 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         return h(t, n, "$unshift"), e.length ? e.concat(t) : t;
       }, $splice: function $splice(e, t, n, o) {
         return function (e, t) {
-          r(Array.isArray(e), "Expected $splice target to be an array; got %s", e), g(t.$splice);
+          r(Array.isArray(e), "Expected $splice target to be an array; got %s", e), v(t.$splice);
         }(t, n), e.forEach(function (e) {
-          g(e), t === o && e.length && (t = l(o)), a.apply(t, e);
+          v(e), t === o && e.length && (t = l(o)), a.apply(t, e);
         }), t;
       }, $set: function $set(e, t, n) {
         return function (e) {
           r(1 === Object.keys(e).length, "Cannot have more than one key in an object with $set");
         }(n), e;
       }, $toggle: function $toggle(e, t) {
-        v(e, "$toggle");var n = e.length ? l(t) : t;return e.forEach(function (e) {
+        g(e, "$toggle");var n = e.length ? l(t) : t;return e.forEach(function (e) {
           n[e] = !t[e];
         }), n;
       }, $unset: function $unset(e, t, n, r) {
-        return v(e, "$unset"), e.forEach(function (e) {
+        return g(e, "$unset"), e.forEach(function (e) {
           Object.hasOwnProperty.call(t, e) && (t === r && (t = l(r)), delete t[e]);
         }), t;
       }, $add: function $add(e, t, n, r) {
-        return y(t, "$add"), v(e, "$add"), "Map" === u(t) ? e.forEach(function (e) {
+        return y(t, "$add"), g(e, "$add"), "Map" === u(t) ? e.forEach(function (e) {
           var n = e[0],
               o = e[1];t === r && t.get(n) !== o && (t = l(r)), t.set(n, o);
         }) : e.forEach(function (e) {
           t !== r || t.has(e) || (t = l(r)), t.add(e);
         }), t;
       }, $remove: function $remove(e, t, n, r) {
-        return y(t, "$remove"), v(e, "$remove"), e.forEach(function (e) {
+        return y(t, "$remove"), g(e, "$remove"), e.forEach(function (e) {
           t === r && t.has(e) && (t = l(r)), t.delete(e);
         }), t;
       }, $merge: function $merge(e, t, n, o) {
@@ -22711,10 +22711,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         var n;return r("function" == typeof (n = e), "update(): expected spec of $apply to be a function; got %s.", n), e(t);
       } },
         p = f();function h(e, t, n) {
-      r(Array.isArray(e), "update(): expected target of %s to be an array; got %s.", n, e), v(t[n], n);
-    }function v(e, t) {
+      r(Array.isArray(e), "update(): expected target of %s to be an array; got %s.", n, e), g(t[n], n);
+    }function g(e, t) {
       r(Array.isArray(e), "update(): expected spec of %s to be an array; got %s. Did you forget to wrap your parameter in an array?", t, e);
-    }function g(e) {
+    }function v(e) {
       r(Array.isArray(e), "update(): expected spec of $splice to be an array of arrays; got %s. Did you forget to wrap your parameters in an array?", e);
     }function y(e, t) {
       var n = u(e);r("Map" === n || "Set" === n, "update(): %s expects a target of type Set or Map; got %s", t, n);
@@ -22757,16 +22757,16 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
               d = e.editable,
               p = e.onAdd,
               h = e.addWidgetComponentText,
-              v = e.addWidgetComponent,
-              g = e.widgets,
+              g = e.addWidgetComponent,
+              v = e.widgets,
               y = e.onRemoveTab,
               b = e.onAddTab,
               m = { visibility: t.length < 2 && !d ? "hidden" : "visible" },
               O = { visibility: d ? "visible" : "hidden" },
               w = t.map(function (e, t) {
-            return a.default.createElement(u.default, { key: "tab-header-" + r.toString() + o.toString() + t.toString(), rowIndex: r, columnIndex: o, tabIndex: t, active: t ? null : "active", visibilityStyle: m, removeTabVisibilty: O, onRemoveTab: y });
+            var i = n.rows[r].columns[o].tabs[t].title;return a.default.createElement(u.default, { key: "tab-header-" + r.toString() + o.toString() + t.toString(), rowIndex: r, columnIndex: o, tabIndex: t, active: t ? null : "active", visibilityStyle: m, title: i });
           });w.push(a.default.createElement(c.default, { key: "tab-header-" + r.toString() + o.toString() + "-add", rowIndex: r, columnIndex: o, visibilityStyle: O, onAddTab: b }));var _ = t.map(function (e, t) {
-            return a.default.createElement(i.default, { key: "tab-body" + r.toString() + o.toString() + t.toString(), layout: n, rowIndex: r, columnIndex: o, tabIndex: t, widgets: g, onRemove: s, frameComponent: l, onMove: f, editable: d, onAdd: p, addWidgetComponentText: h, addWidgetComponent: v, active: t ? null : "active" });
+            return a.default.createElement(i.default, { key: "tab-body" + r.toString() + o.toString() + t.toString(), layout: n, rowIndex: r, columnIndex: o, tabIndex: t, widgets: v, onRemove: s, frameComponent: l, onMove: f, editable: d, onAdd: p, addWidgetComponentText: h, addWidgetComponent: g, active: t ? null : "active", removeTabVisibilty: O, onRemoveTab: y });
           }),
               D = { height: "100%" };return a.default.createElement("div", { style: D }, a.default.createElement("ul", { className: "nav nav-tabs" }, w), a.default.createElement("div", { style: D, className: "tab-content" }, _));
         } }]), t;
@@ -22808,14 +22808,18 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
               d = e.onMove,
               p = e.editable,
               h = e.onAdd,
-              v = e.addWidgetComponentText,
-              g = e.addWidgetComponent,
+              g = e.addWidgetComponentText,
+              v = e.addWidgetComponent,
               y = e.active,
-              b = null;b = g ? (0, o.createElement)(g, { text: v, onClick: function onClick() {
+              b = e.removeTabVisibilty,
+              m = e.onRemoveTab,
+              O = null;O = v ? (0, o.createElement)(v, { text: g, onClick: function onClick() {
               h(t, n, r, c);
-            } }) : a.default.createElement(i.default, { text: v, onClick: function onClick() {
+            } }) : a.default.createElement(i.default, { text: g, onClick: function onClick() {
               h(t, n, r, c);
-            } });var m = y ? "tab-pane fade in active" : "tab-pane fade in";return a.default.createElement("div", { id: "tab" + n.toString() + r.toString() + c.toString(), className: m, style: { height: "100%" } }, p && b, a.default.createElement(u.default, { key: "widgets" + n.toString() + r.toString() + c.toString(), widgets: this.props.layout.rows[n].columns[r].tabs[c].widgets, containerClassName: this.props.layout.rows[n].columns[r].containerClassName, widgetTypes: s, onRemove: l, layout: t, rowIndex: n, columnIndex: r, tabIndex: c, editable: p, frameComponent: f, onMove: d }));
+            } });var w = y ? "tab-pane fade in active" : "tab-pane fade in";return a.default.createElement("div", { id: "tab" + n.toString() + r.toString() + c.toString(), className: w, style: { height: "100%" } }, a.default.createElement("div", { style: b, className: "btn-group" }, a.default.createElement("button", { style: b, type: "button", className: "btn btn-outline-info", "data-toggle": "modal", "data-target": "#exampleModal" }, a.default.createElement("span", { className: "glyphicon glyphicon-cog" })), a.default.createElement("button", { style: b, onClick: function onClick() {
+              m(n, r, c);
+            }, type: "button", className: "btn btn-outline-danger" }, a.default.createElement("span", { className: "glyphicon glyphicon-trash" }))), p && O, a.default.createElement(u.default, { key: "widgets" + n.toString() + r.toString() + c.toString(), widgets: this.props.layout.rows[n].columns[r].tabs[c].widgets, containerClassName: this.props.layout.rows[n].columns[r].containerClassName, widgetTypes: s, onRemove: l, layout: t, rowIndex: n, columnIndex: r, tabIndex: c, editable: p, frameComponent: f, onMove: d }));
         } }]), t;
     }();t.default = s;
   }, function (e, t, n) {
@@ -22846,10 +22850,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           d = e.frameComponent,
           p = e.onMove,
           h = e.containerClassName,
-          v = e.onEdit,
-          g = t.map(function (e, t) {
-        return o.default.createElement(i.default, { key: "widgetframe-" + s.toString() + c.toString() + l.toString() + t.toString(), widgetName: e.key, title: n[e.key].title, onRemove: a, layout: u, columnIndex: c, rowIndex: s, tabIndex: l, widgetIndex: t, editable: f, frameComponent: d, frameSettings: n[e.key].frameSettings, onMove: p, onEdit: v }, (0, r.createElement)(n[e.key].type, n[e.key].props));
-      });return o.default.createElement("div", { style: { height: "100%" }, className: h }, g);
+          g = e.onEdit,
+          v = t.map(function (e, t) {
+        return o.default.createElement(i.default, { key: "widgetframe-" + s.toString() + c.toString() + l.toString() + t.toString(), widgetName: e.key, title: n[e.key].title, onRemove: a, layout: u, columnIndex: c, rowIndex: s, tabIndex: l, widgetIndex: t, editable: f, frameComponent: d, frameSettings: n[e.key].frameSettings, onMove: p, onEdit: g }, (0, r.createElement)(n[e.key].type, n[e.key].props));
+      });return o.default.createElement("div", { style: { height: "100%" }, className: h }, v);
     };c.propTypes = { containerClassName: a.default.string, widgets: a.default.array, widgetTypes: a.default.object, onRemove: a.default.func, layout: a.default.object, columnIndex: a.default.number, rowIndex: a.default.number, editable: a.default.bool, frameComponent: a.default.func, onMove: a.default.func, onEdit: a.default.func }, t.default = c;
   }, function (e, t, n) {
     "use strict";
@@ -22879,9 +22883,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         d = n(32),
         p = h(n(185));function h(e) {
       return e && e.__esModule ? e : { default: e };
-    }function v(e, t) {
+    }function g(e, t) {
       if (!e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return !t || "object" != (typeof t === "undefined" ? "undefined" : _typeof(t)) && "function" != typeof t ? e : t;
-    }var g = { hover: function hover(e, t, n) {
+    }var v = { hover: function hover(e, t, n) {
         var r = t.getItem().widgetIndex,
             o = e.widgetIndex;if (r !== o) {
           var a = (0, s.findDOMNode)(n).getBoundingClientRect(),
@@ -22895,7 +22899,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           }
         }
       } },
-        y = (0, l.DropTarget)(f.WIDGET, g, function (e) {
+        y = (0, l.DropTarget)(f.WIDGET, v, function (e) {
       return { connectDropTarget: e.dropTarget() };
     })(r = (0, l.DragSource)(f.WIDGET, { beginDrag: function beginDrag(e) {
         return { widgetName: e.widgetName, rowIndex: e.rowIndex, columnIndex: e.columnIndex, widgetIndex: e.widgetIndex };
@@ -22907,7 +22911,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function");
         }(this, t);for (var o = arguments.length, a = Array(o), i = 0; i < o; i++) {
           a[i] = arguments[i];
-        }return n = r = v(this, (e = t.__proto__ || Object.getPrototypeOf(t)).call.apply(e, [this].concat(a))), r.edit = function () {
+        }return n = r = g(this, (e = t.__proto__ || Object.getPrototypeOf(t)).call.apply(e, [this].concat(a))), r.edit = function () {
           var e = r.props,
               t = e.layout,
               n = e.rowIndex,
@@ -22922,7 +22926,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
               a = e.tabIndex,
               i = e.widgetIndex,
               u = (0, d.removeWidget)(t, n, o, a, i);r.props.onRemove(u, n, o, a, i);
-        }, v(r, n);
+        }, g(r, n);
       }return function (e, t) {
         if ("function" != typeof t && null !== t) throw new TypeError("Super expression must either be null or a function, not " + (typeof t === "undefined" ? "undefined" : _typeof(t)));e.prototype = Object.create(t && t.prototype, { constructor: { value: e, enumerable: !1, writable: !0, configurable: !0 } }), t && (Object.setPrototypeOf ? Object.setPrototypeOf(e, t) : e.__proto__ = t);
       }(t, i.Component), a(t, [{ key: "render", value: function value() {
@@ -22937,13 +22941,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
               f = e.isDragging,
               d = e.rowIndex,
               h = e.columnIndex,
-              v = e.tabIndex,
-              g = e.widgetIndex,
+              g = e.tabIndex,
+              v = e.widgetIndex,
               y = e.layout,
-              b = null;b = t ? (0, i.createElement)(t, { children: n, editable: r, title: a, settings: c, onRemove: this.remove, onEdit: this.edit, rowIndex: d, columnIndex: h, tabIndex: v, widgetIndex: g, isDragging: f }) : u.default.createElement(p.default, { title: a, editable: r, children: n, onRemove: this.remove, onEdit: this.edit });var m = null;try {
-            m = y.rows[d].columns[h].tabs[v].widgetSizes[g];
+              b = null;b = t ? (0, i.createElement)(t, { children: n, editable: r, title: a, settings: c, onRemove: this.remove, onEdit: this.edit, rowIndex: d, columnIndex: h, tabIndex: g, widgetIndex: v, isDragging: f }) : u.default.createElement(p.default, { title: a, editable: r, children: n, onRemove: this.remove, onEdit: this.edit });var m = null;try {
+            m = y.rows[d].columns[h].tabs[g].widgetSizes[v];
           } catch (e) {
-            m = { height: 100 / y.rows[d].columns[h].tabs[v].widgets.length + "%" };
+            m = { height: 100 / y.rows[d].columns[h].tabs[g].widgets.length + "%" };
           }var O = f ? 0 : 1,
               w = u.default.createElement("div", { style: o({ opacity: O }, m) }, b);return r ? s(l(w)) : w;
         } }]), t;
@@ -22995,11 +22999,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
               r = e.tabIndex,
               o = e.active,
               a = e.visibilityStyle,
-              u = e.removeTabVisibilty,
-              c = e.onRemoveTab,
-              s = o ? "active" : null;return i.default.createElement("li", { className: s, style: a }, i.default.createElement("a", { "data-toggle": "tab", href: "#tab" + t.toString() + n.toString() + r.toString() }, "Tab " + (r + 1).toString()), i.default.createElement("button", { style: u, onClick: function onClick() {
-              c(t, n, r);
-            }, type: "button", className: "close", "aria-label": "Close" }, i.default.createElement("span", { "aria-hidden": "true" }, "×")));
+              u = e.title,
+              c = o ? "active" : null;return i.default.createElement("li", { className: c, style: a }, i.default.createElement("a", { "data-toggle": "tab", href: "#tab" + t.toString() + n.toString() + r.toString() }, u || "Tab " + (r + 1).toString()));
         } }]), t;
     }();t.default = u;
   }, function (e, t, n) {
@@ -23029,9 +23030,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
               t = e.rowIndex,
               n = e.columnIndex,
               r = e.visibilityStyle,
-              o = e.onAddTab;return i.default.createElement("li", { style: r }, i.default.createElement("a", { href: "#", onClick: function onClick() {
+              o = e.onAddTab;return i.default.createElement("li", { style: r, className: "" }, i.default.createElement("a", { href: "#", onClick: function onClick() {
               return o(t, n);
-            } }, "Add +"));
+            } }, i.default.createElement("span", { className: "round-tabs two" }, i.default.createElement("i", { className: "glyphicon glyphicon-plus" }))));
         } }]), t;
     }();t.default = u;
   }]);
