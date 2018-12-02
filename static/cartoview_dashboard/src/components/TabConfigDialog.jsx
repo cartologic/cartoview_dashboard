@@ -10,7 +10,7 @@ class TabConfigDialog extends React.Component {
                 columnIndex: 0,
                 tabIndex: 0,
                 tabTitle: 'Default Tab title',
-                layoutNumber: 4,
+                layoutNumber: 3,
             },
         };
     }

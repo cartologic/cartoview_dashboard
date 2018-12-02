@@ -99,11 +99,11 @@ class Dashboard extends Component {
         });
     }
     onConfigureTab = (rowIndex, columnIndex, tabIndex) => {
-        let layoutNumber = 4;
+        let layoutNumber = 3;
         let widgetSizesLength = this.state.layout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes.length;
         switch (widgetSizesLength) {
             case 0:
-                layoutNumber = 4;
+                layoutNumber = 3;
                 break;
             case 1:
                 layoutNumber = 4;
@@ -114,11 +114,8 @@ class Dashboard extends Component {
                 else
                     layoutNumber = 2;
                 break;
-            case 3:
-                layoutNumber = 3;
-                break
             default:
-                layoutNumber = 4;
+                layoutNumber = 3;
         }
         this.setState({
             TabConfigDialogOpen: true,
@@ -147,16 +144,16 @@ class Dashboard extends Component {
             case 1:
                 updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [{height: '30%'}, {height: '70%'}];
                 break;
-          case 2:
+            case 2:
                 updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [{height: '70%'}, {height: '30%'}];
                 break;
-          case 3:
-                updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [{height: '33%'}, {height: '33%'}, {height: '33%'}];
+            case 3:
+                updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [];
                 break;
-          case 4:
+            case 4:
                 updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [{height: '100%'}];
                 break;
-          default:
+            default:
                 updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [];
         }
         this.setState({

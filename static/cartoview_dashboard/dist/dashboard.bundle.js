@@ -1300,11 +1300,11 @@ var _initialiseProps = function _initialiseProps() {
     };
 
     this.onConfigureTab = function (rowIndex, columnIndex, tabIndex) {
-        var layoutNumber = 4;
+        var layoutNumber = 3;
         var widgetSizesLength = _this3.state.layout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes.length;
         switch (widgetSizesLength) {
             case 0:
-                layoutNumber = 4;
+                layoutNumber = 3;
                 break;
             case 1:
                 layoutNumber = 4;
@@ -1312,11 +1312,8 @@ var _initialiseProps = function _initialiseProps() {
             case 2:
                 if (_this3.state.layout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes[0].height == '30%') layoutNumber = 1;else layoutNumber = 2;
                 break;
-            case 3:
-                layoutNumber = 3;
-                break;
             default:
-                layoutNumber = 4;
+                layoutNumber = 3;
         }
         _this3.setState({
             TabConfigDialogOpen: true,
@@ -1351,7 +1348,7 @@ var _initialiseProps = function _initialiseProps() {
                 updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [{ height: '70%' }, { height: '30%' }];
                 break;
             case 3:
-                updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [{ height: '33%' }, { height: '33%' }, { height: '33%' }];
+                updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [];
                 break;
             case 4:
                 updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [{ height: '100%' }];
@@ -23881,7 +23878,7 @@ var TabConfigDialog = function (_React$Component) {
                 columnIndex: 0,
                 tabIndex: 0,
                 tabTitle: 'Default Tab title',
-                layoutNumber: 4
+                layoutNumber: 3
             }
         };
         return _this;
