@@ -1278,7 +1278,8 @@ var _initialiseProps = function _initialiseProps() {
         if (!hasWidgets) {
             updatedLayout.rows[rowIndex].columns[columnIndex].tabs.splice(tabIndex, 1);
             _this3.setState({
-                layout: updatedLayout
+                layout: updatedLayout,
+                saved: false
             });
         } else {
             _this3.setState({
@@ -1293,7 +1294,8 @@ var _initialiseProps = function _initialiseProps() {
         var newEmptyTab = { widgetSizes: [], widgets: [] };
         updatedLayout.rows[rowIndex].columns[columnIndex].tabs.splice(numberOfTabs, 0, newEmptyTab);
         _this3.setState({
-            layout: updatedLayout
+            layout: updatedLayout,
+            saved: false
         });
     };
 
@@ -1359,7 +1361,8 @@ var _initialiseProps = function _initialiseProps() {
         }
         _this3.setState({
             layout: updatedLayout,
-            TabConfigDialogOpen: false
+            TabConfigDialogOpen: false,
+            saved: false
         });
         console.log("Saved Tab, ", tabConfiguration);
     };
@@ -23375,15 +23378,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Container = function Container(_ref) {
   var children = _ref.children;
 
+  var style = {
+    height: '95%'
+  };
   return _react2.default.createElement(
-    "div",
-    { className: "container" },
+    'div',
+    { className: 'container', style: style },
     _react2.default.createElement(
-      "div",
-      { className: "row" },
+      'div',
+      { className: 'row' },
       _react2.default.createElement(
-        "div",
-        { className: "col-md-12" },
+        'div',
+        { className: 'col-md-12' },
         children
       )
     )
@@ -23650,109 +23656,172 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Header = function (_React$Component) {
-    _inherits(Header, _React$Component);
+  _inherits(Header, _React$Component);
 
-    function Header(props) {
-        _classCallCheck(this, Header);
+  function Header(props) {
+    _classCallCheck(this, Header);
 
-        var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
+    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
 
-        _this.onRequestClose = function () {
-            var open = _this.state.open;
+    _this.onRequestClose = function () {
+      var open = _this.state.open;
 
-            _this.setState({ open: !open });
-        };
+      _this.setState({ open: !open });
+    };
 
-        _this.state = {
-            open: false
-        };
-        return _this;
-    }
+    _this.state = {
+      open: false
+    };
+    return _this;
+  }
 
-    Header.prototype.render = function render() {
-        var open = this.state.open;
-        var _props = this.props,
-            editable = _props.editable,
-            title = _props.title,
-            abstract = _props.abstract,
-            _onChange = _props.onChange;
+  Header.prototype.render = function render() {
+    var open = this.state.open;
+    var _props = this.props,
+        editable = _props.editable,
+        title = _props.title,
+        abstract = _props.abstract,
+        _onChange = _props.onChange;
 
-        if (editable) {
-            var data = { title: title, abstract: abstract };
-            var schema = {
-                title: {
-                    type: "text",
-                    props: {
-                        placeholder: "Dashboard Title",
-                        onChange: function onChange(e) {
-                            var data = _extends({}, e.target.fieldSet.state.data);
-                            data.title = e.target.value;
-                            e.target.fieldSet.setState({ data: data });
-                            // notify dashboard to changed "saved" state
-                            _onChange();
-                        }
-                    }
-                },
-                abstract: {
-                    type: "textarea",
-                    props: {
-                        placeholder: "About this dashboard...",
-                        onChange: function onChange(e) {
-                            var data = _extends({}, e.target.fieldSet.state.data);
-                            data.abstract = e.target.value;
-                            e.target.fieldSet.setState({ data: data });
-                            // notify dashboard to changed "saved" state
-                            _onChange();
-                        }
-                    }
-                }
-            };
-            return _react2.default.createElement(_FieldSet2.default, { data: data, schema: schema, ref: 'headerForm' });
+    if (editable) {
+      var data = { title: title, abstract: abstract };
+      var schema = {
+        title: {
+          type: "text",
+          props: {
+            placeholder: "Dashboard Title",
+            onChange: function onChange(e) {
+              var data = _extends({}, e.target.fieldSet.state.data);
+              data.title = e.target.value;
+              e.target.fieldSet.setState({ data: data });
+              // notify dashboard to changed "saved" state
+              _onChange();
+            }
+          }
+        },
+        abstract: {
+          type: "textarea",
+          props: {
+            placeholder: "About this dashboard...",
+            onChange: function onChange(e) {
+              var data = _extends({}, e.target.fieldSet.state.data);
+              data.abstract = e.target.value;
+              e.target.fieldSet.setState({ data: data });
+              // notify dashboard to changed "saved" state
+              _onChange();
+            }
+          }
         }
-        return _react2.default.createElement(
+      };
+      return _react2.default.createElement(
+        'div',
+        { className: 'accordion', id: 'accordionExample' },
+        _react2.default.createElement(
+          'div',
+          { className: 'card' },
+          _react2.default.createElement(
             'div',
-            { className: 'dashboard-header' },
+            { className: 'card-header', id: 'headingThree' },
             _react2.default.createElement(
+              'h5',
+              { className: 'mb-0' },
+              _react2.default.createElement(
+                'button',
+                { className: 'btn btn-link collapsed', type: 'button', 'data-toggle': 'collapse',
+                  'data-target': '#collapseThree', 'aria-expanded': 'false', 'aria-controls': 'collapseThree' },
+                'Title and Abstract'
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { id: 'collapseThree', className: 'collapse', 'aria-labelledby': 'headingThree',
+              'data-parent': '#accordionExample' },
+            _react2.default.createElement(
+              'div',
+              { className: 'card-body' },
+              _react2.default.createElement(_FieldSet2.default, { data: data, schema: schema, ref: 'headerForm' })
+            )
+          )
+        )
+      );
+    }
+    return _react2.default.createElement(
+      'div',
+      { className: 'accordion', id: 'accordionExample' },
+      _react2.default.createElement(
+        'div',
+        { className: 'card' },
+        _react2.default.createElement(
+          'div',
+          { className: 'card-header', id: 'headingThree' },
+          _react2.default.createElement(
+            'h5',
+            { className: 'mb-0' },
+            _react2.default.createElement(
+              'button',
+              { className: 'btn btn-link collapsed', type: 'button', 'data-toggle': 'collapse',
+                'data-target': '#collapseThree', 'aria-expanded': 'false', 'aria-controls': 'collapseThree' },
+              'Title and Abstract'
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { id: 'collapseThree', className: 'collapse', 'aria-labelledby': 'headingThree',
+            'data-parent': '#accordionExample' },
+          _react2.default.createElement(
+            'div',
+            { className: 'card-body' },
+            _react2.default.createElement(
+              'div',
+              { className: 'dashboard-header' },
+              _react2.default.createElement(
                 'div',
                 { className: 'flex-element fill-empty title-wrap' },
                 _react2.default.createElement(
-                    'h3',
-                    { className: 'header-title title-wrap' },
-                    title
+                  'h3',
+                  { className: 'header-title title-wrap' },
+                  title
                 )
-            ),
-            _react2.default.createElement(
+              ),
+              _react2.default.createElement(
                 'div',
                 { className: 'flex-element' },
                 _react2.default.createElement(
-                    'button',
-                    { onClick: this.onRequestClose, className: 'btn btn-primary' },
-                    _react2.default.createElement('i', { className: 'fa fa-info-circle', style: { fontSize: 20 } })
+                  'button',
+                  { onClick: this.onRequestClose, className: 'btn btn-primary' },
+                  _react2.default.createElement('i', { className: 'fa fa-info-circle',
+                    style: { fontSize: 20 } })
                 )
-            ),
-            _react2.default.createElement(
+              ),
+              _react2.default.createElement(
                 _CommonComponents.InfoModal,
                 { onRequestClose: this.onRequestClose, open: open, title: 'About' },
                 _react2.default.createElement(
-                    'p',
-                    null,
-                    abstract
+                  'p',
+                  null,
+                  abstract
                 )
+              )
             )
-        );
-    };
+          )
+        )
+      )
+    );
+  };
 
-    Header.prototype.getData = function getData() {
-        return this.refs.headerForm.getData();
-    };
+  Header.prototype.getData = function getData() {
+    return this.refs.headerForm.getData();
+  };
 
-    return Header;
+  return Header;
 }(_react2.default.Component);
 
 Header.propTypes = {
-    editable: _propTypes2.default.bool,
-    title: _propTypes2.default.string,
-    abstract: _propTypes2.default.string
+  editable: _propTypes2.default.bool,
+  title: _propTypes2.default.string,
+  abstract: _propTypes2.default.string
 };
 exports.default = Header;
 

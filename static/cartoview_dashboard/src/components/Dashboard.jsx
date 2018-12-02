@@ -79,6 +79,7 @@ class Dashboard extends Component {
             updatedLayout.rows[rowIndex].columns[columnIndex].tabs.splice(tabIndex, 1);
             this.setState({
                 layout: updatedLayout,
+                saved: false,
             });
         } else {
             this.setState({
@@ -94,6 +95,7 @@ class Dashboard extends Component {
         updatedLayout.rows[rowIndex].columns[columnIndex].tabs.splice(numberOfTabs, 0, newEmptyTab);
             this.setState({
                 layout: updatedLayout,
+                saved: false,
         });
     }
     onConfigureTab = (rowIndex, columnIndex, tabIndex) => {
@@ -159,7 +161,8 @@ class Dashboard extends Component {
         }
         this.setState({
             layout: updatedLayout,
-            TabConfigDialogOpen: false
+            TabConfigDialogOpen: false,
+                saved: false,
         });
         console.log("Saved Tab, ", tabConfiguration);
     }

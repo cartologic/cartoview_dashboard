@@ -1,8 +1,11 @@
 import React, { PropTypes } from 'react';
 
 const Container = ({children}) => {
+  const style = {
+    height: '95%',
+  };
   return (
-    <div className="container">
+    <div className="container" style={style}>
       <div className="row">
         <div className="col-md-12">
         {children}

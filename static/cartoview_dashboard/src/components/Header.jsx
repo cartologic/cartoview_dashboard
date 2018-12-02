@@ -46,19 +46,59 @@ class Header extends React.Component {
                     }
                 }
             }
-            return <FieldSet data={data} schema={schema} ref="headerForm"/>
+            return (
+              <div className="accordion" id="accordionExample">
+                <div className="card">
+                  <div className="card-header" id="headingThree">
+                    <h5 className="mb-0">
+                      <button className="btn btn-link collapsed" type="button" data-toggle="collapse"
+                              data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Title and Abstract
+                      </button>
+                    </h5>
+                  </div>
+                  <div id="collapseThree" className="collapse" aria-labelledby="headingThree"
+                       data-parent="#accordionExample">
+                    <div className="card-body">
+                      <FieldSet data={data} schema={schema} ref="headerForm"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
         }
-        return <div className="dashboard-header">
+        return (
+          <div className="accordion" id="accordionExample">
+            <div className="card">
+              <div className="card-header" id="headingThree">
+                <h5 className="mb-0">
+                  <button className="btn btn-link collapsed" type="button" data-toggle="collapse"
+                          data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Title and Abstract
+                  </button>
+                </h5>
+              </div>
+              <div id="collapseThree" className="collapse" aria-labelledby="headingThree"
+                   data-parent="#accordionExample">
+                <div className="card-body">
+                  <div className="dashboard-header">
                     <div className="flex-element fill-empty title-wrap">
                       <h3 className="header-title title-wrap">{title}</h3>
                     </div>
                     <div className="flex-element">
-                        <button onClick={this.onRequestClose} className="btn btn-primary"><i className="fa fa-info-circle" style={{fontSize:20}}></i></button>
+                      <button onClick={this.onRequestClose} className="btn btn-primary"><i className="fa fa-info-circle"
+                                                                                           style={{fontSize: 20}}></i>
+                      </button>
                     </div>
-                    <InfoModal onRequestClose={this.onRequestClose} open={open} title="About" >
-                        <p>{abstract}</p>
+                    <InfoModal onRequestClose={this.onRequestClose} open={open} title="About">
+                      <p>{abstract}</p>
                     </InfoModal>
+                  </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        );
     }
     getData( ) {
         return this.refs.headerForm.getData( )
