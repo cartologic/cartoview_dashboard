@@ -13,6 +13,7 @@ import CustomFrame from './CustomFrame.jsx'
 import Header from './Header.jsx'
 import Toolbar from './DashboardToolbar.jsx'
 import WidgetConfigDialog from './WidgetConfigDialog.jsx'
+import TabConfigDialog from './TabConfigDialog.jsx';
 
 // Our styles
 //import '../styles/custom.css'
@@ -57,7 +58,9 @@ class Dashboard extends Component {
             abstract,
             addWidgetDialogOpen: false,
             addWidgetOptions: null,
-            showRemoveWidgetAlert: false
+            showRemoveWidgetAlert: false,
+            TabConfigDialogOpen: false,
+            tabConfiguration: {}
         }
         this.configManager = new ConfigManager( this )
         this.widgets = {}
@@ -87,10 +90,82 @@ class Dashboard extends Component {
     onAddTab = (rowIndex, columnIndex) => {
         const updatedLayout = this.state.layout;
         const numberOfTabs = updatedLayout.rows[rowIndex].columns[columnIndex].tabs.length;
-        const newEmptyTab = {widgets: []};
+        const newEmptyTab = {widgetSizes: [], widgets: []};
         updatedLayout.rows[rowIndex].columns[columnIndex].tabs.splice(numberOfTabs, 0, newEmptyTab);
             this.setState({
                 layout: updatedLayout,
+        });
+    }
+    onConfigureTab = (rowIndex, columnIndex, tabIndex) => {
+        let layoutNumber = 4;
+        let widgetSizesLength = this.state.layout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes.length;
+        switch (widgetSizesLength) {
+            case 0:
+                layoutNumber = 4;
+                break;
+            case 1:
+                layoutNumber = 4;
+                break;
+            case 2:
+                if (this.state.layout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes[0].height == '30%')
+                    layoutNumber = 1;
+                else
+                    layoutNumber = 2;
+                break;
+            case 3:
+                layoutNumber = 3;
+                break
+            default:
+                layoutNumber = 4;
+        }
+        this.setState({
+            TabConfigDialogOpen: true,
+            tabConfiguration: {
+                rowIndex: rowIndex,
+                columnIndex: columnIndex,
+                tabIndex: tabIndex,
+                tabTitle: this.state.layout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].title,
+                layoutNumber: layoutNumber,
+            }
+        });
+    }
+    showConfigureTab = (rowIndex, columnIndex, tabIndex) => {
+        this.setState({
+          TabConfigDialogOpen: true,
+        });
+    }
+    saveTabConfigurations = (tabConfiguration) => {
+        const rowIndex = tabConfiguration.rowIndex;
+        const columnIndex = tabConfiguration.columnIndex;
+        const tabIndex = tabConfiguration.tabIndex;
+        const tabTitle = tabConfiguration.tabTitle;
+        const updatedLayout = this.state.layout;
+        updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].title = tabTitle;
+        switch (tabConfiguration.layoutNumber) {
+            case 1:
+                updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [{height: '30%'}, {height: '70%'}];
+                break;
+          case 2:
+                updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [{height: '70%'}, {height: '30%'}];
+                break;
+          case 3:
+                updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [{height: '33%'}, {height: '33%'}, {height: '33%'}];
+                break;
+          case 4:
+                updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [{height: '100%'}];
+                break;
+          default:
+                updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [];
+        }
+        this.setState({
+            layout: updatedLayout,
+            TabConfigDialogOpen: false
+        });
+        console.log("Saved Tab, ", tabConfiguration);
+    }
+    hideTabConfigDialog = () => {
+        this.setState({
+            TabConfigDialogOpen: false
         });
     }
     /**
@@ -164,6 +239,7 @@ class Dashboard extends Component {
             addWidgetDialogOpen,
             widgets,
             widgetConfigDialogOpen,
+            TabConfigDialogOpen,
             configWidgetId,
             editable,
             title,
@@ -171,7 +247,8 @@ class Dashboard extends Component {
             isNew,
             saved,
             isOwner,
-            layout
+            layout,
+            tabConfiguration,
         } = this.state
         return (
             <Container>
@@ -183,6 +260,7 @@ class Dashboard extends Component {
                 />
         <AddWidgetDialog widgets={widgets} isOpen={addWidgetDialogOpen} onRequestClose={this.onRequestClose} onWidgetSelect={this.handleWidgetSelection} />
         <WidgetConfigDialog isOpen={widgetConfigDialogOpen} widgetId={configWidgetId} />
+        <TabConfigDialog isOpen={TabConfigDialogOpen} tabConfiguration={this.state.tabConfiguration} saveTabConfigurations={this.saveTabConfigurations} hideTabConfigDialog={this.hideTabConfigDialog}/>
         <Header editable={editable} title={title} abstract={abstract} ref="header" onChange={this.onHeaderChanged}/>
         <Toolbar isNew={isNew} editable={editable} saved={saved} isOwner={isOwner} />
         <DazzleDashboard
@@ -196,6 +274,7 @@ class Dashboard extends Component {
           addWidgetComponentText="Add New Widget"
           onRemoveTab={this.onRemoveTab}
           onAddTab={this.onAddTab}
+          onConfigureTab={this.onConfigureTab}
         />
 
       </Container>

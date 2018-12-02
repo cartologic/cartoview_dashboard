@@ -6,6 +6,12 @@ class ConfigManager {
         this.currentWidgetId = widgetId
         this.dashboard.showWidgetConfigDialog( widgetId )
     }
+    editTabConfig = ( rowIndex, columnIndex, tabIndex ) => {
+        this.currrentRowIndex = rowIndex;
+        this.currentColumnIndex = columnIndex;
+        this.currentTabIndex = tabIndex;
+        this.dashboard.showConfigureTabDialog(rowIndex, columnIndex, tabIndex)
+    }
     getWidgetInfo = ( id ) => {
         const widget = this.dashboard.widgets[ id ]
         const widgetType = this.dashboard.state.widgets[ id ].type

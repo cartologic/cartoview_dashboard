@@ -697,7 +697,7 @@ module.exports = function() {
 
 /***/ }),
 
-/***/ 301:
+/***/ 302:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -705,7 +705,7 @@ module.exports = function() {
 
 exports.__esModule = true;
 
-__webpack_require__(625);
+__webpack_require__(626);
 
 var _Events = __webpack_require__(14);
 
@@ -1232,7 +1232,7 @@ function updateLink(linkElement, obj) {
 
 /***/ }),
 
-/***/ 408:
+/***/ 409:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(29)();
@@ -7928,13 +7928,13 @@ else
 
 /***/ }),
 
-/***/ 625:
+/***/ 626:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(408);
+var content = __webpack_require__(409);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(32)(content, {});
@@ -7955,13 +7955,13 @@ if(false) {
 
 /***/ }),
 
-/***/ 651:
+/***/ 652:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _IdentifyWidget = __webpack_require__(301);
+var _IdentifyWidget = __webpack_require__(302);
 
 var _IdentifyWidget2 = _interopRequireDefault(_IdentifyWidget);
 
@@ -11505,4 +11505,4 @@ else {
 
 /***/ })
 
-},[651]);
+},[652]);

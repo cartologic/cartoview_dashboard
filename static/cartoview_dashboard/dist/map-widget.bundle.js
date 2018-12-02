@@ -675,7 +675,7 @@ function isUndefined(arg) {
 
 /***/ }),
 
-/***/ 305:
+/***/ 306:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -705,11 +705,11 @@ var _util = __webpack_require__(20);
 
 var _util2 = _interopRequireDefault(_util);
 
-var _LayerIdService = __webpack_require__(337);
+var _LayerIdService = __webpack_require__(338);
 
 var _LayerIdService2 = _interopRequireDefault(_LayerIdService);
 
-var _WFSService = __webpack_require__(338);
+var _WFSService = __webpack_require__(339);
 
 var _WFSService2 = _interopRequireDefault(_WFSService);
 
@@ -986,7 +986,7 @@ exports.default = new MapConfigService();
 
 /***/ }),
 
-/***/ 306:
+/***/ 307:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1404,7 +1404,7 @@ exports.default = new MapConfigTransformService();
 
 /***/ }),
 
-/***/ 337:
+/***/ 338:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1452,7 +1452,7 @@ exports.default = new LayerIdService();
 
 /***/ }),
 
-/***/ 338:
+/***/ 339:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1488,21 +1488,21 @@ var _urlParse = __webpack_require__(42);
 
 var _urlParse2 = _interopRequireDefault(_urlParse);
 
-var _XSD_1_ = __webpack_require__(645);
+var _XSD_1_ = __webpack_require__(646);
 
 var _XLink_1_ = __webpack_require__(77);
 
-var _OWS_1_0_ = __webpack_require__(507);
+var _OWS_1_0_ = __webpack_require__(508);
 
-var _Filter_1_1_ = __webpack_require__(505);
+var _Filter_1_1_ = __webpack_require__(506);
 
-var _SMIL_2_ = __webpack_require__(508);
+var _SMIL_2_ = __webpack_require__(509);
 
-var _SMIL_2_0_Language = __webpack_require__(509);
+var _SMIL_2_0_Language = __webpack_require__(510);
 
-var _GML_3_1_ = __webpack_require__(506);
+var _GML_3_1_ = __webpack_require__(507);
 
-var _WFS_1_1_ = __webpack_require__(510);
+var _WFS_1_1_ = __webpack_require__(511);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2392,7 +2392,7 @@ exports.parse = querystring;
 
 /***/ }),
 
-/***/ 505:
+/***/ 506:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var Filter_1_1_0_Module_Factory = function () {
@@ -3163,7 +3163,7 @@ else {
 
 /***/ }),
 
-/***/ 506:
+/***/ 507:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var GML_3_1_1_Module_Factory = function () {
@@ -12958,7 +12958,7 @@ else {
 
 /***/ }),
 
-/***/ 507:
+/***/ 508:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var OWS_1_0_0_Module_Factory = function () {
@@ -13631,7 +13631,7 @@ else {
 
 /***/ }),
 
-/***/ 508:
+/***/ 509:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var SMIL_2_0_Module_Factory = function () {
@@ -13891,7 +13891,7 @@ else {
 
 /***/ }),
 
-/***/ 509:
+/***/ 510:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var SMIL_2_0_Language_Module_Factory = function () {
@@ -14586,7 +14586,7 @@ else {
 
 /***/ }),
 
-/***/ 510:
+/***/ 511:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var WFS_1_1_0_Module_Factory = function () {
@@ -21686,7 +21686,7 @@ else
 
 /***/ }),
 
-/***/ 645:
+/***/ 646:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var XSD_1_0_Module_Factory = function () {
@@ -23106,7 +23106,7 @@ else {
 
 /***/ }),
 
-/***/ 653:
+/***/ 654:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23124,11 +23124,11 @@ var _FieldSet2 = __webpack_require__(10);
 
 var _FieldSet3 = _interopRequireDefault(_FieldSet2);
 
-var _MapConfigService = __webpack_require__(305);
+var _MapConfigService = __webpack_require__(306);
 
 var _MapConfigService2 = _interopRequireDefault(_MapConfigService);
 
-var _MapConfigTransformService = __webpack_require__(306);
+var _MapConfigTransformService = __webpack_require__(307);
 
 var _MapConfigTransformService2 = _interopRequireDefault(_MapConfigTransformService);
 
@@ -27214,4 +27214,4 @@ else {
 
 /***/ })
 
-},[653]);
+},[654]);

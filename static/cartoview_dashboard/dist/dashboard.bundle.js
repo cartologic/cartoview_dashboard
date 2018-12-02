@@ -183,7 +183,7 @@ exports.default = FieldSet;
 /***/ 111:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(601);
+module.exports = __webpack_require__(602);
 
 
 
@@ -327,7 +327,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 if (true) {
   var invariant = __webpack_require__(81);
   var warning = __webpack_require__(82);
-  var ReactPropTypesSecret = __webpack_require__(325);
+  var ReactPropTypesSecret = __webpack_require__(326);
   var loggedTypeFailures = {};
 }
 
@@ -418,13 +418,69 @@ if (false) {
   checkDCE();
   module.exports = require('./cjs/react-dom.production.min.js');
 } else {
-  module.exports = __webpack_require__(326);
+  module.exports = __webpack_require__(327);
 }
 
 
 /***/ }),
 
 /***/ 117:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+exports.default = function (props) {
+  return React.createElement(
+    _reactModal2.default,
+    { contentLabel: "modal", className: 'modal-dialog', isOpen: props.isOpen, style: _Constants2.default },
+    React.createElement(
+      'div',
+      { className: '' },
+      React.createElement(
+        'div',
+        { className: 'panel panel-default' },
+        React.createElement(
+          'div',
+          { className: 'panel-heading' },
+          props.title,
+          React.createElement(
+            'div',
+            { className: 'pull-right' },
+            React.createElement(
+              'a',
+              { className: 'btn btn-link btn-xs', onClick: function onClick(e) {
+                  e.preventDefault();props.close();
+                } },
+              React.createElement('i', { className: 'glyphicon glyphicon-remove' })
+            )
+          )
+        ),
+        React.createElement(
+          'div',
+          { className: 'panel-body' },
+          props.children
+        )
+      )
+    )
+  );
+};
+
+var _Constants = __webpack_require__(118);
+
+var _Constants2 = _interopRequireDefault(_Constants);
+
+var _reactModal = __webpack_require__(111);
+
+var _reactModal2 = _interopRequireDefault(_reactModal);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+
+/***/ 118:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -468,7 +524,7 @@ exports.WidgetContainerConfigSchema = WidgetContainerConfigSchema;
 
 /***/ }),
 
-/***/ 125:
+/***/ 126:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -483,7 +539,7 @@ exports.WidgetContainerConfigSchema = WidgetContainerConfigSchema;
 
 
 var React = __webpack_require__(1);
-var factory = __webpack_require__(124);
+var factory = __webpack_require__(125);
 
 if (typeof React === 'undefined') {
   throw Error(
@@ -539,7 +595,7 @@ if (true) {
 
 /***/ }),
 
-/***/ 262:
+/***/ 263:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -742,63 +798,6 @@ if (true) {
 
 /***/ }),
 
-/***/ 289:
-/***/ (function(module, exports) {
-
-/*!
- * Adapted from jQuery UI core
- *
- * http://jqueryui.com
- *
- * Copyright 2014 jQuery Foundation and other contributors
- * Released under the MIT license.
- * http://jquery.org/license
- *
- * http://api.jqueryui.com/category/ui-core/
- */
-
-function focusable(element, isTabIndexNotNaN) {
-  var nodeName = element.nodeName.toLowerCase();
-  return (/input|select|textarea|button|object/.test(nodeName) ?
-    !element.disabled :
-    "a" === nodeName ?
-      element.href || isTabIndexNotNaN :
-      isTabIndexNotNaN) && visible(element);
-}
-
-function hidden(el) {
-  return (el.offsetWidth <= 0 && el.offsetHeight <= 0) ||
-    el.style.display === 'none';
-}
-
-function visible(element) {
-  while (element) {
-    if (element === document.body) break;
-    if (hidden(element)) return false;
-    element = element.parentNode;
-  }
-  return true;
-}
-
-function tabbable(element) {
-  var tabIndex = element.getAttribute('tabindex');
-  if (tabIndex === null) tabIndex = undefined;
-  var isTabIndexNaN = isNaN(tabIndex);
-  return (isTabIndexNaN || tabIndex >= 0) && focusable(element, !isTabIndexNaN);
-}
-
-function findTabbableDescendants(element) {
-  return [].slice.call(element.querySelectorAll('*'), 0).filter(function(el) {
-    return tabbable(el);
-  });
-}
-
-module.exports = findTabbableDescendants;
-
-
-
-/***/ }),
-
 /***/ 29:
 /***/ (function(module, exports) {
 
@@ -856,7 +855,64 @@ module.exports = function() {
 
 /***/ }),
 
-/***/ 296:
+/***/ 290:
+/***/ (function(module, exports) {
+
+/*!
+ * Adapted from jQuery UI core
+ *
+ * http://jqueryui.com
+ *
+ * Copyright 2014 jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ *
+ * http://api.jqueryui.com/category/ui-core/
+ */
+
+function focusable(element, isTabIndexNotNaN) {
+  var nodeName = element.nodeName.toLowerCase();
+  return (/input|select|textarea|button|object/.test(nodeName) ?
+    !element.disabled :
+    "a" === nodeName ?
+      element.href || isTabIndexNotNaN :
+      isTabIndexNotNaN) && visible(element);
+}
+
+function hidden(el) {
+  return (el.offsetWidth <= 0 && el.offsetHeight <= 0) ||
+    el.style.display === 'none';
+}
+
+function visible(element) {
+  while (element) {
+    if (element === document.body) break;
+    if (hidden(element)) return false;
+    element = element.parentNode;
+  }
+  return true;
+}
+
+function tabbable(element) {
+  var tabIndex = element.getAttribute('tabindex');
+  if (tabIndex === null) tabIndex = undefined;
+  var isTabIndexNaN = isNaN(tabIndex);
+  return (isTabIndexNaN || tabIndex >= 0) && focusable(element, !isTabIndexNaN);
+}
+
+function findTabbableDescendants(element) {
+  return [].slice.call(element.querySelectorAll('*'), 0).filter(function(el) {
+    return tabbable(el);
+  });
+}
+
+module.exports = findTabbableDescendants;
+
+
+
+/***/ }),
+
+/***/ 297:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -895,7 +951,7 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 299:
+/***/ 300:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -994,7 +1050,7 @@ exports.default = BaseWidget;
 
 /***/ }),
 
-/***/ 300:
+/***/ 301:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1002,9 +1058,9 @@ exports.default = BaseWidget;
 
 exports.__esModule = true;
 
-__webpack_require__(623);
+__webpack_require__(624);
 
-var _reactDazzle = __webpack_require__(328);
+var _reactDazzle = __webpack_require__(329);
 
 var _reactDazzle2 = _interopRequireDefault(_reactDazzle);
 
@@ -1012,7 +1068,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _AddWidgetDialog = __webpack_require__(329);
+var _AddWidgetDialog = __webpack_require__(330);
 
 var _AddWidgetDialog2 = _interopRequireDefault(_AddWidgetDialog);
 
@@ -1020,31 +1076,35 @@ var _ConfigManager = __webpack_require__(43);
 
 var _ConfigManager2 = _interopRequireDefault(_ConfigManager);
 
-var _Container = __webpack_require__(331);
+var _Container = __webpack_require__(332);
 
 var _Container2 = _interopRequireDefault(_Container);
 
-var _CustomFrame = __webpack_require__(332);
+var _CustomFrame = __webpack_require__(333);
 
 var _CustomFrame2 = _interopRequireDefault(_CustomFrame);
 
-var _Header = __webpack_require__(334);
+var _Header = __webpack_require__(335);
 
 var _Header2 = _interopRequireDefault(_Header);
 
-var _DashboardToolbar = __webpack_require__(333);
+var _DashboardToolbar = __webpack_require__(334);
 
 var _DashboardToolbar2 = _interopRequireDefault(_DashboardToolbar);
 
-var _WidgetConfigDialog = __webpack_require__(336);
+var _WidgetConfigDialog = __webpack_require__(337);
 
 var _WidgetConfigDialog2 = _interopRequireDefault(_WidgetConfigDialog);
 
-var _sweetalertReact = __webpack_require__(628);
+var _TabConfigDialog = __webpack_require__(336);
+
+var _TabConfigDialog2 = _interopRequireDefault(_TabConfigDialog);
+
+var _sweetalertReact = __webpack_require__(629);
 
 var _sweetalertReact2 = _interopRequireDefault(_sweetalertReact);
 
-__webpack_require__(624);
+__webpack_require__(625);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1109,7 +1169,9 @@ var Dashboard = function (_Component) {
             abstract: abstract,
             addWidgetDialogOpen: false,
             addWidgetOptions: null,
-            showRemoveWidgetAlert: false
+            showRemoveWidgetAlert: false,
+            TabConfigDialogOpen: false,
+            tabConfiguration: {}
         };
         _this.configManager = new _ConfigManager2.default(_this);
         _this.widgets = {};
@@ -1145,6 +1207,7 @@ var Dashboard = function (_Component) {
             addWidgetDialogOpen = _state.addWidgetDialogOpen,
             widgets = _state.widgets,
             widgetConfigDialogOpen = _state.widgetConfigDialogOpen,
+            TabConfigDialogOpen = _state.TabConfigDialogOpen,
             configWidgetId = _state.configWidgetId,
             editable = _state.editable,
             title = _state.title,
@@ -1152,7 +1215,8 @@ var Dashboard = function (_Component) {
             isNew = _state.isNew,
             saved = _state.saved,
             isOwner = _state.isOwner,
-            layout = _state.layout;
+            layout = _state.layout,
+            tabConfiguration = _state.tabConfiguration;
 
         return _react2.default.createElement(
             _Container2.default,
@@ -1167,6 +1231,7 @@ var Dashboard = function (_Component) {
             }),
             _react2.default.createElement(_AddWidgetDialog2.default, { widgets: widgets, isOpen: addWidgetDialogOpen, onRequestClose: this.onRequestClose, onWidgetSelect: this.handleWidgetSelection }),
             _react2.default.createElement(_WidgetConfigDialog2.default, { isOpen: widgetConfigDialogOpen, widgetId: configWidgetId }),
+            _react2.default.createElement(_TabConfigDialog2.default, { isOpen: TabConfigDialogOpen, tabConfiguration: this.state.tabConfiguration, saveTabConfigurations: this.saveTabConfigurations, hideTabConfigDialog: this.hideTabConfigDialog }),
             _react2.default.createElement(_Header2.default, { editable: editable, title: title, abstract: abstract, ref: 'header', onChange: this.onHeaderChanged }),
             _react2.default.createElement(_DashboardToolbar2.default, { isNew: isNew, editable: editable, saved: saved, isOwner: isOwner }),
             _react2.default.createElement(_reactDazzle2.default, {
@@ -1179,7 +1244,8 @@ var Dashboard = function (_Component) {
                 onMove: this.onMove,
                 addWidgetComponentText: 'Add New Widget',
                 onRemoveTab: this.onRemoveTab,
-                onAddTab: this.onAddTab
+                onAddTab: this.onAddTab,
+                onConfigureTab: this.onConfigureTab
             })
         );
     };
@@ -1224,10 +1290,83 @@ var _initialiseProps = function _initialiseProps() {
     this.onAddTab = function (rowIndex, columnIndex) {
         var updatedLayout = _this3.state.layout;
         var numberOfTabs = updatedLayout.rows[rowIndex].columns[columnIndex].tabs.length;
-        var newEmptyTab = { widgets: [] };
+        var newEmptyTab = { widgetSizes: [], widgets: [] };
         updatedLayout.rows[rowIndex].columns[columnIndex].tabs.splice(numberOfTabs, 0, newEmptyTab);
         _this3.setState({
             layout: updatedLayout
+        });
+    };
+
+    this.onConfigureTab = function (rowIndex, columnIndex, tabIndex) {
+        var layoutNumber = 4;
+        var widgetSizesLength = _this3.state.layout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes.length;
+        switch (widgetSizesLength) {
+            case 0:
+                layoutNumber = 4;
+                break;
+            case 1:
+                layoutNumber = 4;
+                break;
+            case 2:
+                if (_this3.state.layout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes[0].height == '30%') layoutNumber = 1;else layoutNumber = 2;
+                break;
+            case 3:
+                layoutNumber = 3;
+                break;
+            default:
+                layoutNumber = 4;
+        }
+        _this3.setState({
+            TabConfigDialogOpen: true,
+            tabConfiguration: {
+                rowIndex: rowIndex,
+                columnIndex: columnIndex,
+                tabIndex: tabIndex,
+                tabTitle: _this3.state.layout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].title,
+                layoutNumber: layoutNumber
+            }
+        });
+    };
+
+    this.showConfigureTab = function (rowIndex, columnIndex, tabIndex) {
+        _this3.setState({
+            TabConfigDialogOpen: true
+        });
+    };
+
+    this.saveTabConfigurations = function (tabConfiguration) {
+        var rowIndex = tabConfiguration.rowIndex;
+        var columnIndex = tabConfiguration.columnIndex;
+        var tabIndex = tabConfiguration.tabIndex;
+        var tabTitle = tabConfiguration.tabTitle;
+        var updatedLayout = _this3.state.layout;
+        updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].title = tabTitle;
+        switch (tabConfiguration.layoutNumber) {
+            case 1:
+                updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [{ height: '30%' }, { height: '70%' }];
+                break;
+            case 2:
+                updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [{ height: '70%' }, { height: '30%' }];
+                break;
+            case 3:
+                updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [{ height: '33%' }, { height: '33%' }, { height: '33%' }];
+                break;
+            case 4:
+                updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [{ height: '100%' }];
+                break;
+            default:
+                updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [];
+        }
+        _this3.setState({
+            layout: updatedLayout,
+            TabConfigDialogOpen: false
+        });
+        console.log("Saved Tab, ", tabConfiguration);
+    };
+
+    this.hideTabConfigDialog = function () {
+        _this3.setState({
+            TabConfigDialogOpen: false
         });
     };
 
@@ -1346,7 +1485,7 @@ exports.default = Dashboard;
 
 /***/ }),
 
-/***/ 315:
+/***/ 316:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1386,7 +1525,7 @@ module.exports = ExecutionEnvironment;
 
 /***/ }),
 
-/***/ 316:
+/***/ 317:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1422,7 +1561,7 @@ module.exports = camelize;
 
 /***/ }),
 
-/***/ 317:
+/***/ 318:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1437,7 +1576,7 @@ module.exports = camelize;
 
 
 
-var camelize = __webpack_require__(316);
+var camelize = __webpack_require__(317);
 
 var msPattern = /^-ms-/;
 
@@ -1466,7 +1605,7 @@ module.exports = camelizeStyleName;
 
 /***/ }),
 
-/***/ 318:
+/***/ 319:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1481,7 +1620,7 @@ module.exports = camelizeStyleName;
  * 
  */
 
-var isTextNode = __webpack_require__(323);
+var isTextNode = __webpack_require__(324);
 
 /*eslint-disable no-bitwise */
 
@@ -1507,49 +1646,6 @@ function containsNode(outerNode, innerNode) {
 }
 
 module.exports = containsNode;
-
-/***/ }),
-
-/***/ 319:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- * @typechecks
- */
-
-/* eslint-disable fb-www/typeof-undefined */
-
-/**
- * Same as document.activeElement but wraps in a try-catch block. In IE it is
- * not safe to call document.activeElement if there is nothing focused.
- *
- * The activeElement will be null only if the document or document body is not
- * yet defined.
- *
- * @param {?DOMDocument} doc Defaults to current document.
- * @return {?DOMElement}
- */
-function getActiveElement(doc) /*?DOMElement*/{
-  doc = doc || (typeof document !== 'undefined' ? document : undefined);
-  if (typeof doc === 'undefined') {
-    return null;
-  }
-  try {
-    return doc.activeElement || doc.body;
-  } catch (e) {
-    return doc.body;
-  }
-}
-
-module.exports = getActiveElement;
 
 /***/ }),
 
@@ -1821,6 +1917,49 @@ function updateLink(linkElement, obj) {
  * @typechecks
  */
 
+/* eslint-disable fb-www/typeof-undefined */
+
+/**
+ * Same as document.activeElement but wraps in a try-catch block. In IE it is
+ * not safe to call document.activeElement if there is nothing focused.
+ *
+ * The activeElement will be null only if the document or document body is not
+ * yet defined.
+ *
+ * @param {?DOMDocument} doc Defaults to current document.
+ * @return {?DOMElement}
+ */
+function getActiveElement(doc) /*?DOMElement*/{
+  doc = doc || (typeof document !== 'undefined' ? document : undefined);
+  if (typeof doc === 'undefined') {
+    return null;
+  }
+  try {
+    return doc.activeElement || doc.body;
+  } catch (e) {
+    return doc.body;
+  }
+}
+
+module.exports = getActiveElement;
+
+/***/ }),
+
+/***/ 321:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * @typechecks
+ */
+
 var _uppercasePattern = /([A-Z])/g;
 
 /**
@@ -1843,7 +1982,7 @@ module.exports = hyphenate;
 
 /***/ }),
 
-/***/ 321:
+/***/ 322:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1858,7 +1997,7 @@ module.exports = hyphenate;
 
 
 
-var hyphenate = __webpack_require__(320);
+var hyphenate = __webpack_require__(321);
 
 var msPattern = /^ms-/;
 
@@ -1886,7 +2025,7 @@ module.exports = hyphenateStyleName;
 
 /***/ }),
 
-/***/ 322:
+/***/ 323:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1915,7 +2054,7 @@ module.exports = isNode;
 
 /***/ }),
 
-/***/ 323:
+/***/ 324:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1930,7 +2069,7 @@ module.exports = isNode;
  * @typechecks
  */
 
-var isNode = __webpack_require__(322);
+var isNode = __webpack_require__(323);
 
 /**
  * @param {*} object The object to check.
@@ -1944,7 +2083,7 @@ module.exports = isTextNode;
 
 /***/ }),
 
-/***/ 324:
+/***/ 325:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2016,7 +2155,7 @@ module.exports = shallowEqual;
 
 /***/ }),
 
-/***/ 325:
+/***/ 326:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2036,7 +2175,7 @@ module.exports = ReactPropTypesSecret;
 
 /***/ }),
 
-/***/ 326:
+/***/ 327:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2060,16 +2199,16 @@ if (true) {
 var React = __webpack_require__(83);
 var invariant = __webpack_require__(81);
 var warning = __webpack_require__(82);
-var ExecutionEnvironment = __webpack_require__(315);
+var ExecutionEnvironment = __webpack_require__(316);
 var _assign = __webpack_require__(114);
 var emptyFunction = __webpack_require__(80);
 var checkPropTypes = __webpack_require__(115);
-var getActiveElement = __webpack_require__(319);
-var shallowEqual = __webpack_require__(324);
-var containsNode = __webpack_require__(318);
+var getActiveElement = __webpack_require__(320);
+var shallowEqual = __webpack_require__(325);
+var containsNode = __webpack_require__(319);
 var emptyObject = __webpack_require__(113);
-var hyphenateStyleName = __webpack_require__(321);
-var camelizeStyleName = __webpack_require__(317);
+var hyphenateStyleName = __webpack_require__(322);
+var camelizeStyleName = __webpack_require__(318);
 
 /**
  * WARNING: DO NOT manually require this module.
@@ -18564,7 +18703,7 @@ module.exports = reactDom;
 
 /***/ }),
 
-/***/ 327:
+/***/ 328:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19985,7 +20124,7 @@ module.exports = react;
 
 /***/ }),
 
-/***/ 328:
+/***/ 329:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22541,9 +22680,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           g = e.addWidgetComponent,
           v = e.onRemoveTab,
           y = e.onAddTab,
-          b = t.rows.map(function (e, b) {
-        return r.default.createElement(a.default, { key: b, rowClass: s, columns: e.columns, widgets: n, onRemove: o, layout: t, rowIndex: b, editable: i, onAdd: u, onMove: l, onEdit: f, frameComponent: c, editableColumnClass: d, droppableColumnClass: p, addWidgetComponentText: h, addWidgetComponent: g, onRemoveTab: v, onAddTab: y });
-      });return r.default.createElement("div", { id: "Layout-Renderer", key: "Layout-Renderer", style: { height: "100%" } }, b);
+          b = e.onConfigureTab,
+          m = t.rows.map(function (e, m) {
+        return r.default.createElement(a.default, { key: m, rowClass: s, columns: e.columns, widgets: n, onRemove: o, layout: t, rowIndex: m, editable: i, onAdd: u, onMove: l, onEdit: f, frameComponent: c, editableColumnClass: d, droppableColumnClass: p, addWidgetComponentText: h, addWidgetComponent: g, onRemoveTab: v, onAddTab: y, onConfigureTab: b });
+      });return r.default.createElement("div", { id: "Layout-Renderer", key: "Layout-Renderer", style: { height: "100%" } }, m);
     };u.propTypes = { layout: o.default.object, widgets: o.default.object, editable: o.default.bool, onRemove: o.default.func, onAdd: o.default.func, frameComponent: o.default.func, rowClass: o.default.string, onMove: o.default.func, onEdit: o.default.func, editableColumnClass: o.default.string, droppableColumnClass: o.default.string, addWidgetComponent: o.default.func, addWidgetComponentText: o.default.string }, u.defaultProps = { layout: { rows: [] } }, t.default = u;
   }, function (e, t, n) {
     "use strict";
@@ -22568,9 +22708,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           v = e.widgets,
           y = e.onRemoveTab,
           b = e.onAddTab,
-          m = n.map(function (e, t) {
-        return r.default.createElement(a.default, { key: t, className: e.className, onAdd: h, layout: i, rowIndex: u, columnIndex: t, editable: c, onMove: g, editableColumnClass: l, droppableColumnClass: f, addWidgetComponent: p, addWidgetComponentText: d, onRemove: o, frameComponent: s, widgets: v, onRemoveTab: y, onAddTab: b });
-      });return r.default.createElement("div", { id: "row" + u, key: "row" + u, style: { height: "100%" }, className: t }, m);
+          m = e.onConfigureTab,
+          O = n.map(function (e, t) {
+        return r.default.createElement(a.default, { key: t, className: e.className, onAdd: h, layout: i, rowIndex: u, columnIndex: t, editable: c, onMove: g, editableColumnClass: l, droppableColumnClass: f, addWidgetComponent: p, addWidgetComponentText: d, onRemove: o, frameComponent: s, widgets: v, onRemoveTab: y, onAddTab: b, onConfigureTab: m });
+      });return r.default.createElement("div", { id: "row" + u, key: "row" + u, style: { height: "100%" }, className: t }, O);
     }u.propTypes = { rowClass: o.default.string, columns: o.default.array, widgets: o.default.object, layout: o.default.object, rowIndex: o.default.number, editable: o.default.bool, frameComponent: o.default.func, editableColumnClass: o.default.string, droppableColumnClass: o.default.string, addWidgetComponent: o.default.func, addWidgetComponentText: o.default.string, onAdd: o.default.func, onRemove: o.default.func, onMove: o.default.func, onEdit: o.default.func }, u.defaultProps = { rowClass: "row" }, t.default = u;
   }, function (e, t, n) {
     "use strict";
@@ -22632,7 +22773,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
               O = e.key,
               w = e.onRemoveTab,
               _ = e.onAddTab,
-              D = t;D = a ? t + " " + d : D, D = s && l ? D + " " + p : D;return u(i.default.createElement("div", { style: { height: "100%" }, id: "column" + o, key: "column" + o, className: D }, i.default.createElement(f.default, { key: O, tabs: n.rows[r].columns[o].tabs, layout: n, rowIndex: r, columnIndex: o, widgets: m, onRemove: y, frameComponent: b, onMove: v, editable: a, onAdd: c, addWidgetComponentText: h, addWidgetComponent: g, onRemoveTab: w, onAddTab: _ })));
+              D = e.onConfigureTab,
+              x = t;x = a ? t + " " + d : x, x = s && l ? x + " " + p : x;return u(i.default.createElement("div", { style: { height: "100%" }, id: "column" + o, key: "column" + o, className: x }, i.default.createElement(f.default, { key: O, tabs: n.rows[r].columns[o].tabs, layout: n, rowIndex: r, columnIndex: o, widgets: m, onRemove: y, frameComponent: b, onMove: v, editable: a, onAdd: c, addWidgetComponentText: h, addWidgetComponent: g, onRemoveTab: w, onAddTab: _, onConfigureTab: D })));
         } }]), t;
     }()) || r;h.propTypes = { children: u.default.node, className: u.default.string, onAdd: u.default.func, layout: u.default.object, rowIndex: u.default.number, columnIndex: u.default.number, editable: u.default.bool, isOver: u.default.bool, canDrop: u.default.bool, editableColumnClass: u.default.string, droppableColumnClass: u.default.string, addWidgetComponentText: u.default.string, connectDropTarget: u.default.func, addWidgetComponent: u.default.func }, h.defaultProps = { editableColumnClass: "editable-column", droppableColumnClass: "droppable-column" }, t.default = h;
   }, function (e, t, n) {
@@ -22761,14 +22903,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
               v = e.widgets,
               y = e.onRemoveTab,
               b = e.onAddTab,
-              m = { visibility: t.length < 2 && !d ? "hidden" : "visible" },
-              O = { visibility: d ? "visible" : "hidden" },
-              w = t.map(function (e, t) {
-            var i = n.rows[r].columns[o].tabs[t].title;return a.default.createElement(u.default, { key: "tab-header-" + r.toString() + o.toString() + t.toString(), rowIndex: r, columnIndex: o, tabIndex: t, active: t ? null : "active", visibilityStyle: m, title: i });
-          });w.push(a.default.createElement(c.default, { key: "tab-header-" + r.toString() + o.toString() + "-add", rowIndex: r, columnIndex: o, visibilityStyle: O, onAddTab: b }));var _ = t.map(function (e, t) {
-            return a.default.createElement(i.default, { key: "tab-body" + r.toString() + o.toString() + t.toString(), layout: n, rowIndex: r, columnIndex: o, tabIndex: t, widgets: v, onRemove: s, frameComponent: l, onMove: f, editable: d, onAdd: p, addWidgetComponentText: h, addWidgetComponent: g, active: t ? null : "active", removeTabVisibilty: O, onRemoveTab: y });
+              m = e.onConfigureTab,
+              O = { visibility: t.length < 2 && !d ? "hidden" : "visible" },
+              w = { visibility: d ? "visible" : "hidden" },
+              _ = t.map(function (e, t) {
+            var i = n.rows[r].columns[o].tabs[t].title;return a.default.createElement(u.default, { key: "tab-header-" + r.toString() + o.toString() + t.toString(), rowIndex: r, columnIndex: o, tabIndex: t, active: t ? null : "active", visibilityStyle: O, title: i });
+          });_.push(a.default.createElement(c.default, { key: "tab-header-" + r.toString() + o.toString() + "-add", rowIndex: r, columnIndex: o, visibilityStyle: w, onAddTab: b }));var D = t.map(function (e, t) {
+            return a.default.createElement(i.default, { key: "tab-body" + r.toString() + o.toString() + t.toString(), layout: n, rowIndex: r, columnIndex: o, tabIndex: t, widgets: v, onRemove: s, frameComponent: l, onMove: f, editable: d, onAdd: p, addWidgetComponentText: h, addWidgetComponent: g, active: t ? null : "active", removeTabVisibilty: w, onRemoveTab: y, onConfigureTab: m });
           }),
-              D = { height: "100%" };return a.default.createElement("div", { style: D }, a.default.createElement("ul", { className: "nav nav-tabs" }, w), a.default.createElement("div", { style: D, className: "tab-content" }, _));
+              x = { height: "100%" };return a.default.createElement("div", { style: x }, a.default.createElement("ul", { className: "nav nav-tabs" }, _), a.default.createElement("div", { style: x, className: "tab-content" }, D));
         } }]), t;
     }();t.default = l;
   }, function (e, t, n) {
@@ -22813,13 +22956,16 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
               y = e.active,
               b = e.removeTabVisibilty,
               m = e.onRemoveTab,
-              O = null;O = v ? (0, o.createElement)(v, { text: g, onClick: function onClick() {
+              O = e.onConfigureTab,
+              w = null;w = v ? (0, o.createElement)(v, { text: g, onClick: function onClick() {
               h(t, n, r, c);
             } }) : a.default.createElement(i.default, { text: g, onClick: function onClick() {
               h(t, n, r, c);
-            } });var w = y ? "tab-pane fade in active" : "tab-pane fade in";return a.default.createElement("div", { id: "tab" + n.toString() + r.toString() + c.toString(), className: w, style: { height: "100%" } }, a.default.createElement("div", { style: b, className: "btn-group" }, a.default.createElement("button", { style: b, type: "button", className: "btn btn-outline-info", "data-toggle": "modal", "data-target": "#exampleModal" }, a.default.createElement("span", { className: "glyphicon glyphicon-cog" })), a.default.createElement("button", { style: b, onClick: function onClick() {
+            } });var _ = y ? "tab-pane fade in active" : "tab-pane fade in";return a.default.createElement("div", { id: "tab" + n.toString() + r.toString() + c.toString(), className: _, style: { height: "100%" } }, a.default.createElement("div", { style: b, className: "btn-group" }, a.default.createElement("button", { style: b, onClick: function onClick() {
+              O(n, r, c);
+            }, type: "button", className: "btn btn-outline-info", "data-toggle": "modal", "data-target": "#exampleModal" }, a.default.createElement("span", { className: "glyphicon glyphicon-cog" })), a.default.createElement("button", { style: b, onClick: function onClick() {
               m(n, r, c);
-            }, type: "button", className: "btn btn-outline-danger" }, a.default.createElement("span", { className: "glyphicon glyphicon-trash" }))), p && O, a.default.createElement(u.default, { key: "widgets" + n.toString() + r.toString() + c.toString(), widgets: this.props.layout.rows[n].columns[r].tabs[c].widgets, containerClassName: this.props.layout.rows[n].columns[r].containerClassName, widgetTypes: s, onRemove: l, layout: t, rowIndex: n, columnIndex: r, tabIndex: c, editable: p, frameComponent: f, onMove: d }));
+            }, type: "button", className: "btn btn-outline-danger" }, a.default.createElement("span", { className: "glyphicon glyphicon-trash" }))), p && w, a.default.createElement(u.default, { key: "widgets" + n.toString() + r.toString() + c.toString(), widgets: this.props.layout.rows[n].columns[r].tabs[c].widgets, containerClassName: this.props.layout.rows[n].columns[r].containerClassName, widgetTypes: s, onRemove: l, layout: t, rowIndex: n, columnIndex: r, tabIndex: c, editable: p, frameComponent: f, onMove: d }));
         } }]), t;
     }();t.default = s;
   }, function (e, t, n) {
@@ -23042,7 +23188,36 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 /***/ }),
 
-/***/ 329:
+/***/ 33:
+/***/ (function(module, exports) {
+
+module.exports = function(module) {
+	if(!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if(!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+
+/***/ }),
+
+/***/ 330:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23126,36 +23301,7 @@ exports.default = AddWidgetDialog;
 
 /***/ }),
 
-/***/ 33:
-/***/ (function(module, exports) {
-
-module.exports = function(module) {
-	if(!module.webpackPolyfill) {
-		module.deprecate = function() {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if(!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-
-/***/ }),
-
-/***/ 330:
+/***/ 331:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23212,7 +23358,7 @@ InfoModal.propTypes = {
 
 /***/ }),
 
-/***/ 331:
+/***/ 332:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23252,7 +23398,7 @@ exports.default = Container;
 
 /***/ }),
 
-/***/ 332:
+/***/ 333:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23362,7 +23508,7 @@ exports.default = CustomFrame;
 
 /***/ }),
 
-/***/ 333:
+/***/ 334:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23370,7 +23516,7 @@ exports.default = CustomFrame;
 
 exports.__esModule = true;
 
-__webpack_require__(626);
+__webpack_require__(627);
 
 var _react = __webpack_require__(1);
 
@@ -23471,7 +23617,7 @@ exports.default = DashboardToolbar;
 
 /***/ }),
 
-/***/ 334:
+/***/ 335:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23485,7 +23631,7 @@ var _FieldSet = __webpack_require__(10);
 
 var _FieldSet2 = _interopRequireDefault(_FieldSet);
 
-var _CommonComponents = __webpack_require__(330);
+var _CommonComponents = __webpack_require__(331);
 
 var _propTypes = __webpack_require__(17);
 
@@ -23612,7 +23758,7 @@ exports.default = Header;
 
 /***/ }),
 
-/***/ 335:
+/***/ 336:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23620,55 +23766,221 @@ exports.default = Header;
 
 exports.__esModule = true;
 
-exports.default = function (props) {
-  return React.createElement(
-    _reactModal2.default,
-    { contentLabel: "modal", className: 'modal-dialog', isOpen: props.isOpen, style: _Constants2.default },
-    React.createElement(
-      'div',
-      { className: '' },
-      React.createElement(
-        'div',
-        { className: 'panel panel-default' },
-        React.createElement(
-          'div',
-          { className: 'panel-heading' },
-          props.title,
-          React.createElement(
-            'div',
-            { className: 'pull-right' },
-            React.createElement(
-              'a',
-              { className: 'btn btn-link btn-xs', onClick: function onClick(e) {
-                  e.preventDefault();props.close();
-                } },
-              React.createElement('i', { className: 'glyphicon glyphicon-remove' })
-            )
-          )
-        ),
-        React.createElement(
-          'div',
-          { className: 'panel-body' },
-          props.children
-        )
-      )
-    )
-  );
-};
+var _Modal = __webpack_require__(117);
 
-var _Constants = __webpack_require__(117);
+var _Modal2 = _interopRequireDefault(_Modal);
 
-var _Constants2 = _interopRequireDefault(_Constants);
+var _react = __webpack_require__(1);
 
-var _reactModal = __webpack_require__(111);
-
-var _reactModal2 = _interopRequireDefault(_reactModal);
+var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var TabConfigDialog = function (_React$Component) {
+    _inherits(TabConfigDialog, _React$Component);
+
+    function TabConfigDialog(props) {
+        _classCallCheck(this, TabConfigDialog);
+
+        var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
+
+        _this.handleTabTitleChange = function (event) {
+            var updatedTabConfiguration = _this.state.tabConfiguration;
+            updatedTabConfiguration.tabTitle = event.target.value;
+            _this.setState({
+                tabConfiguration: updatedTabConfiguration
+            });
+        };
+
+        _this.handleLayoutSelect = function (layoutNumber) {
+            var updatedTabConfiguration = _this.state.tabConfiguration;
+            updatedTabConfiguration.layoutNumber = layoutNumber;
+            _this.setState({
+                tabConfiguration: updatedTabConfiguration
+            });
+        };
+
+        _this.state = {
+            tabConfiguration: props.tabConfiguration ? props.tabConfiguration : {
+                rowIndex: 0,
+                columnIndex: 0,
+                tabIndex: 0,
+                tabTitle: 'Default Tab title',
+                layoutNumber: 4
+            }
+        };
+        return _this;
+    }
+
+    TabConfigDialog.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+        this.setState({
+            tabConfiguration: nextProps.tabConfiguration ? nextProps.tabConfiguration : {
+                rowIndex: nextProps.tabConfiguration.rowIndex,
+                columnIndex: nextProps.tabConfiguration.columnIndex,
+                tabIndex: nextProps.tabConfiguration.tabIndex,
+                tabTitle: nextProps.tabConfiguration.tabTitle
+            }
+        });
+    };
+
+    TabConfigDialog.prototype.render = function render() {
+        var _this2 = this;
+
+        var _props = this.props,
+            isOpen = _props.isOpen,
+            tabConfiguration = _props.tabConfiguration,
+            saveTabConfigurations = _props.saveTabConfigurations,
+            hideTabConfigDialog = _props.hideTabConfigDialog;
+
+        if (!isOpen) return null;
+        var style = {
+            display: 'none'
+        };
+        var checkedClassName = "img-thumbnail img-check check";
+        var unCheckedClassName = "img-thumbnail img-check";
+        return _react2.default.createElement(
+            _Modal2.default,
+            { isOpen: isOpen, title: 'Configure Tab', close: hideTabConfigDialog },
+            _react2.default.createElement(
+                'form',
+                { className: 'form-horizontal' },
+                _react2.default.createElement(
+                    'fieldset',
+                    null,
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'form-group' },
+                        _react2.default.createElement(
+                            'label',
+                            { className: 'col-md-2 control-label', htmlFor: 'tabtitle' },
+                            'Tab Title'
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'col-md-10' },
+                            _react2.default.createElement('input', {
+                                value: this.state.tabConfiguration.tabTitle,
+                                onChange: this.handleTabTitleChange,
+                                id: 'tabtitle', name: 'tabtitle', type: 'text', placeholder: 'Enter Tab Title',
+                                className: 'form-control input-md' })
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'form-group' },
+                        _react2.default.createElement(
+                            'label',
+                            { className: 'col-md-2 control-label', htmlFor: 'layouts' },
+                            'Layout'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'form-group' },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'col-md-3 box' },
+                            _react2.default.createElement(
+                                'label',
+                                { className: 'btn btn-light', onClick: function onClick() {
+                                        return _this2.handleLayoutSelect(1);
+                                    } },
+                                _react2.default.createElement('img', {
+                                    src: '/static/cartoview_dashboard/img/Layout1.png',
+                                    className: tabConfiguration.layoutNumber == 1 ? checkedClassName : unCheckedClassName }),
+                                _react2.default.createElement('input', { type: 'radio', name: 'chk1', id: 'item4', value: 'val1', className: 'hidden',
+                                    autoComplete: 'off' })
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'col-md-3 box' },
+                            _react2.default.createElement(
+                                'label',
+                                { className: 'btn btn-light', onClick: function onClick() {
+                                        return _this2.handleLayoutSelect(2);
+                                    } },
+                                _react2.default.createElement('img', {
+                                    src: '/static/cartoview_dashboard/img/Layout2.png',
+                                    className: tabConfiguration.layoutNumber == 2 ? checkedClassName : unCheckedClassName }),
+                                _react2.default.createElement('input', { type: 'radio', name: 'chk1', id: 'item4', value: 'val2', className: 'hidden',
+                                    autoComplete: 'off' })
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'col-md-3 box' },
+                            _react2.default.createElement(
+                                'label',
+                                { className: 'btn btn-light', onClick: function onClick() {
+                                        return _this2.handleLayoutSelect(3);
+                                    } },
+                                _react2.default.createElement('img', {
+                                    src: '/static/cartoview_dashboard/img/Layout3.png',
+                                    className: tabConfiguration.layoutNumber == 3 ? checkedClassName : unCheckedClassName }),
+                                _react2.default.createElement('input', { type: 'radio', name: 'chk1', id: 'item4', value: 'val3', className: 'hidden',
+                                    autoComplete: 'off' })
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'col-md-3 box' },
+                            _react2.default.createElement(
+                                'label',
+                                { className: 'btn btn-light', onClick: function onClick() {
+                                        return _this2.handleLayoutSelect(4);
+                                    } },
+                                _react2.default.createElement('img', {
+                                    src: '/static/cartoview_dashboard/img/Layout4.png',
+                                    className: tabConfiguration.layoutNumber == 4 ? checkedClassName : unCheckedClassName }),
+                                _react2.default.createElement('input', { type: 'radio', name: 'chk1', id: 'item4', value: 'val3', className: 'hidden',
+                                    autoComplete: 'off' })
+                            )
+                        )
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'pull-right' },
+                    _react2.default.createElement(
+                        'a',
+                        { className: 'btn btn-primary', type: 'submit',
+                            onClick: function onClick(e) {
+                                saveTabConfigurations(_this2.state.tabConfiguration);
+                            } },
+                        _react2.default.createElement('i', { className: 'glyphicon glyphicon-ok' }),
+                        ' ',
+                        "Apply"
+                    ),
+                    _react2.default.createElement(
+                        'a',
+                        { className: 'btn btn-danger',
+                            onClick: function onClick(e) {
+                                hideTabConfigDialog();
+                            } },
+                        _react2.default.createElement('i', { className: 'glyphicon glyphicon-remove' }),
+                        ' ',
+                        "Cancel"
+                    )
+                )
+            )
+        );
+    };
+
+    return TabConfigDialog;
+}(_react2.default.Component);
+
+exports.default = TabConfigDialog;
+
 /***/ }),
 
-/***/ 336:
+/***/ 337:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23684,7 +23996,7 @@ var _FieldSet = __webpack_require__(10);
 
 var _FieldSet2 = _interopRequireDefault(_FieldSet);
 
-var _Modal = __webpack_require__(335);
+var _Modal = __webpack_require__(117);
 
 var _Modal2 = _interopRequireDefault(_Modal);
 
@@ -23692,7 +24004,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Constants = __webpack_require__(117);
+var _Constants = __webpack_require__(118);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23782,7 +24094,7 @@ exports.default = WidgetConfigDialog;
 
 /***/ }),
 
-/***/ 405:
+/***/ 406:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(29)();
@@ -23797,7 +24109,7 @@ exports.push([module.i, ".nav-tabs > li > button {\n    display:none;\n    curso
 
 /***/ }),
 
-/***/ 407:
+/***/ 408:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(29)();
@@ -23812,7 +24124,7 @@ exports.push([module.i, "body.stop-scrolling {\n  height: 100%;\n  overflow: hid
 
 /***/ }),
 
-/***/ 409:
+/***/ 410:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(29)();
@@ -23827,7 +24139,7 @@ exports.push([module.i, ".loader {\n    border: 16px solid #f3f3f3;\n    /* Ligh
 
 /***/ }),
 
-/***/ 410:
+/***/ 411:
 /***/ (function(module, exports) {
 
 module.exports = function(opts) {
@@ -23893,7 +24205,7 @@ ElementClass.prototype.toggle = function(className) {
 
 /***/ }),
 
-/***/ 413:
+/***/ 414:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/**
@@ -24425,6 +24737,13 @@ var ConfigManager = function () {
             _this.dashboard.showWidgetConfigDialog(widgetId);
         };
 
+        this.editTabConfig = function (rowIndex, columnIndex, tabIndex) {
+            _this.currrentRowIndex = rowIndex;
+            _this.currentColumnIndex = columnIndex;
+            _this.currentTabIndex = tabIndex;
+            _this.dashboard.showConfigureTabDialog(rowIndex, columnIndex, tabIndex);
+        };
+
         this.getWidgetInfo = function (id) {
             var widget = _this.dashboard.widgets[id];
             var widgetType = _this.dashboard.state.widgets[id].type;
@@ -24520,7 +24839,7 @@ exports.default = ConfigManager;
 
 /***/ }),
 
-/***/ 504:
+/***/ 505:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/*global define:false */
@@ -26414,21 +26733,21 @@ module.exports = assign;
 
 /***/ }),
 
-/***/ 601:
+/***/ 602:
 /***/ (function(module, exports, __webpack_require__) {
 
 var React = __webpack_require__(1);
 var ReactDOM = __webpack_require__(25);
-var DOMFactories = __webpack_require__(262);
+var DOMFactories = __webpack_require__(263);
 var PropTypes = __webpack_require__(17);
-var ExecutionEnvironment = __webpack_require__(607);
-var ModalPortal = React.createFactory(__webpack_require__(602));
-var ariaAppHider = __webpack_require__(603);
-var refCount = __webpack_require__(605);
-var elementClass = __webpack_require__(410);
+var ExecutionEnvironment = __webpack_require__(608);
+var ModalPortal = React.createFactory(__webpack_require__(603));
+var ariaAppHider = __webpack_require__(604);
+var refCount = __webpack_require__(606);
+var elementClass = __webpack_require__(411);
 var renderSubtreeIntoContainer = __webpack_require__(25).unstable_renderSubtreeIntoContainer;
 var Assign = __webpack_require__(58);
-var createReactClass = __webpack_require__(125);
+var createReactClass = __webpack_require__(126);
 
 var SafeHTMLElement = ExecutionEnvironment.canUseDOM ? window.HTMLElement : {};
 var AppElement = ExecutionEnvironment.canUseDOM ? document.body : {appendChild: function() {}};
@@ -26599,15 +26918,15 @@ module.exports = Modal
 
 /***/ }),
 
-/***/ 602:
+/***/ 603:
 /***/ (function(module, exports, __webpack_require__) {
 
 var React = __webpack_require__(1);
-var DOMFactories = __webpack_require__(262);
-var focusManager = __webpack_require__(604);
-var scopeTab = __webpack_require__(606);
+var DOMFactories = __webpack_require__(263);
+var focusManager = __webpack_require__(605);
+var scopeTab = __webpack_require__(607);
 var Assign = __webpack_require__(58);
-var createReactClass = __webpack_require__(125);
+var createReactClass = __webpack_require__(126);
 
 var div = DOMFactories.div;
 
@@ -26809,7 +27128,7 @@ var ModalPortal = module.exports = createReactClass({
 
 /***/ }),
 
-/***/ 603:
+/***/ 604:
 /***/ (function(module, exports) {
 
 var _element = typeof document !== 'undefined' ? document.body : null;
@@ -26858,10 +27177,10 @@ exports.resetForTesting = resetForTesting;
 
 /***/ }),
 
-/***/ 604:
+/***/ 605:
 /***/ (function(module, exports, __webpack_require__) {
 
-var findTabbable = __webpack_require__(289);
+var findTabbable = __webpack_require__(290);
 var focusLaterElements = [];
 var modalElement = null;
 var needToFocus = false;
@@ -26933,7 +27252,7 @@ exports.teardownScopedFocus = function() {
 
 /***/ }),
 
-/***/ 605:
+/***/ 606:
 /***/ (function(module, exports) {
 
 var modals = [];
@@ -26959,10 +27278,10 @@ module.exports = {
 
 /***/ }),
 
-/***/ 606:
+/***/ 607:
 /***/ (function(module, exports, __webpack_require__) {
 
-var findTabbable = __webpack_require__(289);
+var findTabbable = __webpack_require__(290);
 
 module.exports = function(node, event) {
   var tabbable = findTabbable(node);
@@ -26985,7 +27304,7 @@ module.exports = function(node, event) {
 
 /***/ }),
 
-/***/ 607:
+/***/ 608:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -27032,13 +27351,13 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 623:
+/***/ 624:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(405);
+var content = __webpack_require__(406);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(32)(content, {});
@@ -27059,13 +27378,13 @@ if(false) {
 
 /***/ }),
 
-/***/ 624:
+/***/ 625:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(407);
+var content = __webpack_require__(408);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(32)(content, {});
@@ -27086,13 +27405,13 @@ if(false) {
 
 /***/ }),
 
-/***/ 626:
+/***/ 627:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(409);
+var content = __webpack_require__(410);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(32)(content, {});
@@ -27113,7 +27432,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 627:
+/***/ 628:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27133,23 +27452,23 @@ var _propTypes = __webpack_require__(17);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _sweetalert = __webpack_require__(635);
+var _sweetalert = __webpack_require__(636);
 
 var _sweetalert2 = _interopRequireDefault(_sweetalert);
 
-var _lodash = __webpack_require__(413);
+var _lodash = __webpack_require__(414);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-var _mousetrap = __webpack_require__(504);
+var _mousetrap = __webpack_require__(505);
 
 var _mousetrap2 = _interopRequireDefault(_mousetrap);
 
-var _warning = __webpack_require__(646);
+var _warning = __webpack_require__(647);
 
 var _warning2 = _interopRequireDefault(_warning);
 
-var _outsideTargetHandlerFactory = __webpack_require__(630);
+var _outsideTargetHandlerFactory = __webpack_require__(631);
 
 var _outsideTargetHandlerFactory2 = _interopRequireDefault(_outsideTargetHandlerFactory);
 
@@ -27379,7 +27698,7 @@ exports.default = SweetAlert;
 
 /***/ }),
 
-/***/ 628:
+/***/ 629:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27390,12 +27709,12 @@ if (typeof window === 'undefined') {
     return null;
   };
 } else {
-  module.exports = __webpack_require__(627); // eslint-disable-line global-require
+  module.exports = __webpack_require__(628); // eslint-disable-line global-require
 }
 
 /***/ }),
 
-/***/ 629:
+/***/ 630:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27418,7 +27737,7 @@ function isDOMEquals(dom1, dom2) {
 
 /***/ }),
 
-/***/ 630:
+/***/ 631:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27429,7 +27748,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = outsideTargetHandlerFactory;
 
-var _isDOMEquals = __webpack_require__(629);
+var _isDOMEquals = __webpack_require__(630);
 
 var _isDOMEquals2 = _interopRequireDefault(_isDOMEquals);
 
@@ -27457,7 +27776,7 @@ function outsideTargetHandlerFactory(targetNode, eventHandler) {
 
 /***/ }),
 
-/***/ 631:
+/***/ 632:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27599,7 +27918,7 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 632:
+/***/ 633:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27685,7 +28004,7 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 633:
+/***/ 634:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27734,7 +28053,7 @@ module.exports = exports["default"];
 
 /***/ }),
 
-/***/ 634:
+/***/ 635:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27966,7 +28285,7 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 635:
+/***/ 636:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28001,19 +28320,19 @@ var _sweetAlertInitialize$getModal$getOverlay$getInput$setFocusStyle$openModal$r
 
 // Handle button events and keyboard events
 
-var _handleButton$handleConfirm$handleCancel = __webpack_require__(631);
+var _handleButton$handleConfirm$handleCancel = __webpack_require__(632);
 
-var _handleKeyDown = __webpack_require__(632);
+var _handleKeyDown = __webpack_require__(633);
 
 var _handleKeyDown2 = _interopRequireWildcard(_handleKeyDown);
 
 // Default values
 
-var _defaultParams = __webpack_require__(296);
+var _defaultParams = __webpack_require__(297);
 
 var _defaultParams2 = _interopRequireWildcard(_defaultParams);
 
-var _setParameters = __webpack_require__(634);
+var _setParameters = __webpack_require__(635);
 
 var _setParameters2 = _interopRequireWildcard(_setParameters);
 
@@ -28276,7 +28595,7 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 646:
+/***/ 647:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28344,17 +28663,17 @@ module.exports = warning;
 
 /***/ }),
 
-/***/ 650:
+/***/ 651:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 
-var _BaseWidget = __webpack_require__(299);
+var _BaseWidget = __webpack_require__(300);
 
 var _BaseWidget2 = _interopRequireDefault(_BaseWidget);
 
-var _Dashboard = __webpack_require__(300);
+var _Dashboard = __webpack_require__(301);
 
 var _Dashboard2 = _interopRequireDefault(_Dashboard);
 
@@ -28392,7 +28711,7 @@ var _hexToRgb = __webpack_require__(76);
 
 var _removeClass$getTopMargin$fadeIn$show$addClass = __webpack_require__(54);
 
-var _defaultParams = __webpack_require__(296);
+var _defaultParams = __webpack_require__(297);
 
 var _defaultParams2 = _interopRequireWildcard(_defaultParams);
 
@@ -28400,7 +28719,7 @@ var _defaultParams2 = _interopRequireWildcard(_defaultParams);
  * Add modal + overlay to DOM
  */
 
-var _injectedHTML = __webpack_require__(633);
+var _injectedHTML = __webpack_require__(634);
 
 var _injectedHTML2 = _interopRequireWildcard(_injectedHTML);
 
@@ -28811,10 +29130,10 @@ module.exports = warning;
 if (false) {
   module.exports = require('./cjs/react.production.min.js');
 } else {
-  module.exports = __webpack_require__(327);
+  module.exports = __webpack_require__(328);
 }
 
 
 /***/ })
 
-},[650]);
+},[651]);
