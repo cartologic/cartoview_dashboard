@@ -12,7 +12,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _react = __webpack_require__(3);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -188,13 +188,13 @@ exports.default = FieldSet;
 
 exports.__esModule = true;
 
-var _events = __webpack_require__(23);
+var _events = __webpack_require__(21);
 
 exports.default = new _events.EventEmitter();
 
 /***/ }),
 
-/***/ 22:
+/***/ 20:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -331,7 +331,7 @@ exports.default = {
 
 /***/ }),
 
-/***/ 23:
+/***/ 21:
 /***/ (function(module, exports) {
 
 // Copyright Joyent, Inc. and other Node contributors.
@@ -640,7 +640,64 @@ function isUndefined(arg) {
 
 /***/ }),
 
-/***/ 282:
+/***/ 29:
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function() {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		var result = [];
+		for(var i = 0; i < this.length; i++) {
+			var item = this[i];
+			if(item[2]) {
+				result.push("@media " + item[2] + "{" + item[1] + "}");
+			} else {
+				result.push(item[1]);
+			}
+		}
+		return result.join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+
+/***/ }),
+
+/***/ 302:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -648,7 +705,7 @@ function isUndefined(arg) {
 
 exports.__esModule = true;
 
-__webpack_require__(584);
+__webpack_require__(626);
 
 var _Events = __webpack_require__(14);
 
@@ -658,11 +715,11 @@ var _FieldSet2 = __webpack_require__(10);
 
 var _FieldSet3 = _interopRequireDefault(_FieldSet2);
 
-var _react = __webpack_require__(3);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _WMSService = __webpack_require__(74);
+var _WMSService = __webpack_require__(78);
 
 var _WMSService2 = _interopRequireDefault(_WMSService);
 
@@ -929,78 +986,6 @@ exports.default = IdentifyWidget;
 	MIT License http://www.opensource.org/licenses/mit-license.php
 	Author Tobias Koppers @sokra
 */
-// css base code, injected by the css-loader
-module.exports = function() {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		var result = [];
-		for(var i = 0; i < this.length; i++) {
-			var item = this[i];
-			if(item[2]) {
-				result.push("@media " + item[2] + "{" + item[1] + "}");
-			} else {
-				result.push(item[1]);
-			}
-		}
-		return result.join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-
-/***/ }),
-
-/***/ 371:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(32)();
-// imports
-
-
-// module
-exports.push([module.i, ".identify-no-results{\n  padding: 10px;\n}\n.identify-navigate{\n  padding: 0 5px;\n}\n.identify-result-ct{\n  overflow: auto;\n  min-height: 100px;\n  max-height: 300px;\n}\n.identify-result-layer-title{\n  margin-left: 10px;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ 38:
-/***/ (function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
 var stylesInDom = {},
 	memoize = function(fn) {
 		var memo;
@@ -1247,14 +1232,29 @@ function updateLink(linkElement, obj) {
 
 /***/ }),
 
-/***/ 39:
+/***/ 409:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(29)();
+// imports
+
+
+// module
+exports.push([module.i, ".identify-no-results{\n  padding: 10px;\n}\n.identify-navigate{\n  padding: 0 5px;\n}\n.identify-result-ct{\n  overflow: auto;\n  min-height: 100px;\n  max-height: 300px;\n}\n.identify-result-layer-title{\n  margin-left: 10px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ 42:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 
-var required = __webpack_require__(50)
-  , qs = __webpack_require__(45)
+var required = __webpack_require__(53)
+  , qs = __webpack_require__(48)
   , protocolre = /^([a-z][a-z0-9.+-]*:)?(\/\/)?([\S\s]*)/i
   , slashes = /^[A-Za-z][A-Za-z0-9+-.]*:\/\//;
 
@@ -1590,13 +1590,8 @@ function set(part, value, fn) {
       break;
 
     case 'pathname':
-    case 'hash':
-      if (value) {
-        var char = part === 'pathname' ? '/' : '#';
-        url[part] = value.charAt(0) !== char ? char + value : value;
-      } else {
-        url[part] = value;
-      }
+      url.pathname = value.length && value.charAt(0) !== '/' ? '/' + value : value;
+
       break;
 
     default:
@@ -1664,11 +1659,11 @@ URL.qs = qs;
 
 module.exports = URL;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)))
 
 /***/ }),
 
-/***/ 45:
+/***/ 48:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1748,7 +1743,7 @@ exports.parse = querystring;
 
 /***/ }),
 
-/***/ 50:
+/***/ 53:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1794,7 +1789,7 @@ module.exports = function required(port, protocol) {
 
 /***/ }),
 
-/***/ 55:
+/***/ 57:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _jsonix_factory = function(_jsonix_xmldom, _jsonix_xmlhttprequest, _jsonix_fs)
@@ -7933,16 +7928,16 @@ else
 
 /***/ }),
 
-/***/ 584:
+/***/ 626:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(371);
+var content = __webpack_require__(409);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(38)(content, {});
+var update = __webpack_require__(32)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -7960,13 +7955,13 @@ if(false) {
 
 /***/ }),
 
-/***/ 601:
+/***/ 652:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _IdentifyWidget = __webpack_require__(282);
+var _IdentifyWidget = __webpack_require__(302);
 
 var _IdentifyWidget2 = _interopRequireDefault(_IdentifyWidget);
 
@@ -7974,7 +7969,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /***/ }),
 
-/***/ 73:
+/***/ 77:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var XLink_1_0_Module_Factory = function () {
@@ -8208,7 +8203,7 @@ else {
 
 /***/ }),
 
-/***/ 74:
+/***/ 78:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8230,11 +8225,11 @@ var _createClass = function () { function defineProperties(target, props) { for 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * See the License for the specific language governing permissions and limitations under the License.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
 
-var _util = __webpack_require__(22);
+var _util = __webpack_require__(20);
 
 var _util2 = _interopRequireDefault(_util);
 
-var _urlParse = __webpack_require__(39);
+var _urlParse = __webpack_require__(42);
 
 var _urlParse2 = _interopRequireDefault(_urlParse);
 
@@ -8242,7 +8237,7 @@ var _openlayers = __webpack_require__(11);
 
 var _openlayers2 = _interopRequireDefault(_openlayers);
 
-var _SLDService = __webpack_require__(76);
+var _SLDService = __webpack_require__(84);
 
 var _SLDService2 = _interopRequireDefault(_SLDService);
 
@@ -8411,7 +8406,7 @@ exports.default = new WMSService();
 
 /***/ }),
 
-/***/ 76:
+/***/ 84:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8433,17 +8428,17 @@ var _createClass = function () { function defineProperties(target, props) { for 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * See the License for the specific language governing permissions and limitations under the License.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
 
-var _jsonix = __webpack_require__(55);
+var _jsonix = __webpack_require__(57);
 
-var _XLink_1_ = __webpack_require__(73);
+var _XLink_1_ = __webpack_require__(77);
 
-var _Filter_1_0_ = __webpack_require__(85);
+var _Filter_1_0_ = __webpack_require__(92);
 
-var _GML_2_1_ = __webpack_require__(86);
+var _GML_2_1_ = __webpack_require__(93);
 
-var _SLD_1_0_0_GeoServer = __webpack_require__(87);
+var _SLD_1_0_0_GeoServer = __webpack_require__(94);
 
-var _util = __webpack_require__(22);
+var _util = __webpack_require__(20);
 
 var _util2 = _interopRequireDefault(_util);
 
@@ -9227,7 +9222,7 @@ exports.default = new SLDService();
 
 /***/ }),
 
-/***/ 85:
+/***/ 92:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var Filter_1_0_0_Module_Factory = function () {
@@ -9758,7 +9753,7 @@ else {
 
 /***/ }),
 
-/***/ 86:
+/***/ 93:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var GML_2_1_2_Module_Factory = function () {
@@ -10320,7 +10315,7 @@ else {
 
 /***/ }),
 
-/***/ 87:
+/***/ 94:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var SLD_1_0_0_GeoServer_Module_Factory = function () {
@@ -11510,4 +11505,4 @@ else {
 
 /***/ })
 
-},[601]);
+},[652]);

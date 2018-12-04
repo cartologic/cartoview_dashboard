@@ -13,9 +13,15 @@ import CustomFrame from './CustomFrame.jsx'
 import Header from './Header.jsx'
 import Toolbar from './DashboardToolbar.jsx'
 import WidgetConfigDialog from './WidgetConfigDialog.jsx'
+import TabConfigDialog from './TabConfigDialog.jsx';
 
 // Our styles
 //import '../styles/custom.css'
+
+// import Sweat Alert
+import SweetAlert from 'sweetalert-react';
+import 'sweetalert/dist/sweetalert.css';
+
 var widgetId = 0
 class Dashboard extends Component {
     constructor( props ) {
@@ -23,7 +29,7 @@ class Dashboard extends Component {
         var { widgets,
             layout,
             editable,
-            isNew, 
+            isNew,
             isOwner,
             title,
             abstract } = props
@@ -52,6 +58,9 @@ class Dashboard extends Component {
             abstract,
             addWidgetDialogOpen: false,
             addWidgetOptions: null,
+            showRemoveWidgetAlert: false,
+            TabConfigDialogOpen: false,
+            tabConfiguration: {}
         }
         this.configManager = new ConfigManager( this )
         this.widgets = {}
@@ -60,6 +69,104 @@ class Dashboard extends Component {
         return {
             configManager: this.configManager
         }
+    }
+
+    onRemoveTab = (rowIndex, columnIndex, tabIndex) => {
+        const updatedLayout = this.state.layout;
+        const widgetCount = updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgets.length;
+        const hasWidgets = widgetCount ? true : false;
+        if (!hasWidgets) {
+            updatedLayout.rows[rowIndex].columns[columnIndex].tabs.splice(tabIndex, 1);
+            this.setState({
+                layout: updatedLayout,
+                saved: false,
+            });
+        } else {
+            this.setState({
+                showRemoveWidgetAlert: true,
+            });
+        }
+    }
+
+    onAddTab = (rowIndex, columnIndex) => {
+        const updatedLayout = this.state.layout;
+        const numberOfTabs = updatedLayout.rows[rowIndex].columns[columnIndex].tabs.length;
+        const newEmptyTab = {widgetSizes: [], widgets: []};
+        updatedLayout.rows[rowIndex].columns[columnIndex].tabs.splice(numberOfTabs, 0, newEmptyTab);
+            this.setState({
+                layout: updatedLayout,
+                saved: false,
+        });
+    }
+    onConfigureTab = (rowIndex, columnIndex, tabIndex) => {
+        let layoutNumber = 3;
+        let widgetSizesLength = this.state.layout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes.length;
+        switch (widgetSizesLength) {
+            case 0:
+                layoutNumber = 3;
+                break;
+            case 1:
+                layoutNumber = 4;
+                break;
+            case 2:
+                if (this.state.layout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes[0].height == '30%')
+                    layoutNumber = 1;
+                else
+                    layoutNumber = 2;
+                break;
+            default:
+                layoutNumber = 3;
+        }
+        this.setState({
+            TabConfigDialogOpen: true,
+            tabConfiguration: {
+                rowIndex: rowIndex,
+                columnIndex: columnIndex,
+                tabIndex: tabIndex,
+                tabTitle: this.state.layout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].title,
+                layoutNumber: layoutNumber,
+            }
+        });
+    }
+    showConfigureTab = (rowIndex, columnIndex, tabIndex) => {
+        this.setState({
+          TabConfigDialogOpen: true,
+        });
+    }
+    saveTabConfigurations = (tabConfiguration) => {
+        const rowIndex = tabConfiguration.rowIndex;
+        const columnIndex = tabConfiguration.columnIndex;
+        const tabIndex = tabConfiguration.tabIndex;
+        const tabTitle = tabConfiguration.tabTitle;
+        const updatedLayout = this.state.layout;
+        updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].title = tabTitle;
+        switch (tabConfiguration.layoutNumber) {
+            case 1:
+                updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [{height: '30%'}, {height: '70%'}];
+                break;
+            case 2:
+                updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [{height: '70%'}, {height: '30%'}];
+                break;
+            case 3:
+                updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [];
+                break;
+            case 4:
+                updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [{height: '100%'}];
+                break;
+            default:
+                updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [];
+        }
+        this.setState({
+            layout: updatedLayout,
+            TabConfigDialogOpen: false,
+                saved: false,
+        });
+        console.log("Saved Tab, ", tabConfiguration);
+    }
+    hideTabConfigDialog = () => {
+        this.setState({
+            TabConfigDialogOpen: false
+        });
     }
     /**
      * When a widget is removed, the layout should be set again.
@@ -73,7 +180,7 @@ class Dashboard extends Component {
     /**
      * Adds new widgget.
      */
-    onAdd = ( layout, rowIndex, columnIndex ) => {
+    onAdd = ( layout, rowIndex, columnIndex, tabIndex ) => {
         // Open the AddWidget dialog by seting the 'addWidgetDialogOpen' to true.
         // Also preserve the details such as the layout, rowIndex, and columnIndex  in 'addWidgetOptions'.
         //  This will be used later when user picks a widget to add.
@@ -84,6 +191,7 @@ class Dashboard extends Component {
                 layout,
                 rowIndex,
                 columnIndex,
+                tabIndex,
             },
         } )
     }
@@ -131,6 +239,7 @@ class Dashboard extends Component {
             addWidgetDialogOpen,
             widgets,
             widgetConfigDialogOpen,
+            TabConfigDialogOpen,
             configWidgetId,
             editable,
             title,
@@ -138,12 +247,20 @@ class Dashboard extends Component {
             isNew,
             saved,
             isOwner,
-            layout
+            layout,
+            tabConfiguration,
         } = this.state
         return (
             <Container>
+                <SweetAlert
+                    show={this.state.showRemoveWidgetAlert}
+                    title="Tab Already contains widgets!"
+                    text="Please remove all the widgets before you can remove the tab"
+                    onConfirm={() => this.setState({ showRemoveWidgetAlert: false })}
+                />
         <AddWidgetDialog widgets={widgets} isOpen={addWidgetDialogOpen} onRequestClose={this.onRequestClose} onWidgetSelect={this.handleWidgetSelection} />
         <WidgetConfigDialog isOpen={widgetConfigDialogOpen} widgetId={configWidgetId} />
+        <TabConfigDialog isOpen={TabConfigDialogOpen} tabConfiguration={this.state.tabConfiguration} saveTabConfigurations={this.saveTabConfigurations} hideTabConfigDialog={this.hideTabConfigDialog}/>
         <Header editable={editable} title={title} abstract={abstract} ref="header" onChange={this.onHeaderChanged}/>
         <Toolbar isNew={isNew} editable={editable} saved={saved} isOwner={isOwner} />
         <DazzleDashboard
@@ -155,6 +272,9 @@ class Dashboard extends Component {
           onAdd={this.onAdd}
           onMove={this.onMove}
           addWidgetComponentText="Add New Widget"
+          onRemoveTab={this.onRemoveTab}
+          onAddTab={this.onAddTab}
+          onConfigureTab={this.onConfigureTab}
         />
 
       </Container>
@@ -197,12 +317,12 @@ class Dashboard extends Component {
         this.setState( {
             widgets: this.state.widgets
         } )
-        const { layout, rowIndex, columnIndex } = this.state.addWidgetOptions
+        const { layout, rowIndex, columnIndex, tabIndex } = this.state.addWidgetOptions
         /**
          * 'AddWidget' method gives you the new layout.
          */
         this.setState( {
-            layout: addWidget( layout, rowIndex, columnIndex, id ),
+            layout: addWidget( layout, rowIndex, columnIndex, tabIndex, id ),
             addWidgetDialogOpen: false,
         } , /*this.configManager.editWidgetConfig(id)*/)
         // Close the dialogbox

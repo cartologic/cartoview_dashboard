@@ -223,7 +223,7 @@ class BarChartWidget extends BaseChartWidget {
     }
     render() {
         return <div className="bar-chart-ct">
-            <Bar data={this.state.data} options={{ responsive: true, animationSteps: 100 }} height={500} width={800} />
+            <Bar data={this.state.data} options={{ responsive: true, animationSteps: 100 }}/>
         </div>;
     }
 };
@@ -258,7 +258,7 @@ class LineChartWidget extends BaseChartWidget {
     render() {
         return (
             <div className="line-chart-ct">
-                <Line data={this.state.data} options={{ responsive: true, animationSteps: 100 }} height={500} width={800} />
+                <Line data={this.state.data} options={{ responsive: true, animationSteps: 100 }} />
             </div>
         );
     }
@@ -303,7 +303,7 @@ class DoughnutChartWidget extends BaseChartWidget {
     render() {
         return (
             <div className="doughnut-chart-ct">
-                <Doughnut data={this.state.data} options={{ animationEasing: 'easeInSine', showTooltips: true }} height={300} width={400} />
+                <Doughnut data={this.state.data} options={{ animationEasing: 'easeInSine', showTooltips: true }} />
             </div>
         );
     }

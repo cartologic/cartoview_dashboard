@@ -6,6 +6,12 @@ class ConfigManager {
         this.currentWidgetId = widgetId
         this.dashboard.showWidgetConfigDialog( widgetId )
     }
+    editTabConfig = ( rowIndex, columnIndex, tabIndex ) => {
+        this.currrentRowIndex = rowIndex;
+        this.currentColumnIndex = columnIndex;
+        this.currentTabIndex = tabIndex;
+        this.dashboard.showConfigureTabDialog(rowIndex, columnIndex, tabIndex)
+    }
     getWidgetInfo = ( id ) => {
         const widget = this.dashboard.widgets[ id ]
         const widgetType = this.dashboard.state.widgets[ id ].type
@@ -37,11 +43,13 @@ class ConfigManager {
         var mapWidgets = {};
         layout.rows.forEach((row, rowIndex) => {
             row.columns.forEach((col, colIndex) => {
-                col.widgets.forEach((wId, wIndex) =>  {
-                    if(widgets[wId.key].type.name == "MapWidget")
-                    {
-                        mapWidgets[wId.key] = widgets[wId.key];
-                    }
+                col.tabs.forEach((tab, tabIndex) =>  {
+                    tab.widgets.forEach((wId, wIndex) =>  {
+                        if(widgets[wId.key].type.name == "MapWidget")
+                        {
+                            mapWidgets[wId.key] = widgets[wId.key];
+                        }
+                    });
                 });
             });
         });

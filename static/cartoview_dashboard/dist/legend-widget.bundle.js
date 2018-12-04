@@ -12,7 +12,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _react = __webpack_require__(3);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -188,13 +188,13 @@ exports.default = FieldSet;
 
 exports.__esModule = true;
 
-var _events = __webpack_require__(23);
+var _events = __webpack_require__(21);
 
 exports.default = new _events.EventEmitter();
 
 /***/ }),
 
-/***/ 22:
+/***/ 20:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -331,7 +331,7 @@ exports.default = {
 
 /***/ }),
 
-/***/ 23:
+/***/ 21:
 /***/ (function(module, exports) {
 
 // Copyright Joyent, Inc. and other Node contributors.
@@ -640,7 +640,7 @@ function isUndefined(arg) {
 
 /***/ }),
 
-/***/ 285:
+/***/ 305:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -662,7 +662,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * See the License for the specific language governing permissions and limitations under the License.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
 
-var _util = __webpack_require__(22);
+var _util = __webpack_require__(20);
 
 var _util2 = _interopRequireDefault(_util);
 
@@ -670,7 +670,7 @@ var _openlayers = __webpack_require__(11);
 
 var _openlayers2 = _interopRequireDefault(_openlayers);
 
-var _urlParse = __webpack_require__(39);
+var _urlParse = __webpack_require__(42);
 
 var _urlParse2 = _interopRequireDefault(_urlParse);
 
@@ -864,14 +864,14 @@ exports.default = new ArcGISRestService();
 
 /***/ }),
 
-/***/ 39:
+/***/ 42:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 
-var required = __webpack_require__(50)
-  , qs = __webpack_require__(45)
+var required = __webpack_require__(53)
+  , qs = __webpack_require__(48)
   , protocolre = /^([a-z][a-z0-9.+-]*:)?(\/\/)?([\S\s]*)/i
   , slashes = /^[A-Za-z][A-Za-z0-9+-.]*:\/\//;
 
@@ -1207,13 +1207,8 @@ function set(part, value, fn) {
       break;
 
     case 'pathname':
-    case 'hash':
-      if (value) {
-        var char = part === 'pathname' ? '/' : '#';
-        url[part] = value.charAt(0) !== char ? char + value : value;
-      } else {
-        url[part] = value;
-      }
+      url.pathname = value.length && value.charAt(0) !== '/' ? '/' + value : value;
+
       break;
 
     default:
@@ -1281,11 +1276,11 @@ URL.qs = qs;
 
 module.exports = URL;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)))
 
 /***/ }),
 
-/***/ 45:
+/***/ 48:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1365,7 +1360,7 @@ exports.parse = querystring;
 
 /***/ }),
 
-/***/ 50:
+/***/ 53:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1411,7 +1406,7 @@ module.exports = function required(port, protocol) {
 
 /***/ }),
 
-/***/ 602:
+/***/ 653:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1419,11 +1414,11 @@ module.exports = function required(port, protocol) {
 
 exports.__esModule = true;
 
-var _react = __webpack_require__(3);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _ArcGISRestService = __webpack_require__(285);
+var _ArcGISRestService = __webpack_require__(305);
 
 var _ArcGISRestService2 = _interopRequireDefault(_ArcGISRestService);
 
@@ -1682,4 +1677,4 @@ exports.default = LegendWidget;
 
 /***/ })
 
-},[602]);
+},[653]);
