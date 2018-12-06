@@ -35909,7 +35909,7 @@ var BarChartWidget = function (_BaseChartWidget) {
         return _react2.default.createElement(
             'div',
             { className: 'bar-chart-ct' },
-            _react2.default.createElement(_reactChartjs.Bar, { data: this.state.data, options: { responsive: true, animationSteps: 100 } })
+            _react2.default.createElement(_reactChartjs.Bar, { data: this.state.data, options: { responsive: true, animationSteps: 100, maintainAspectRatio: false } })
         );
     };
 
@@ -35957,7 +35957,7 @@ var LineChartWidget = function (_BaseChartWidget2) {
         return _react2.default.createElement(
             'div',
             { className: 'line-chart-ct' },
-            _react2.default.createElement(_reactChartjs.Line, { data: this.state.data, options: { responsive: true, animationSteps: 100 } })
+            _react2.default.createElement(_reactChartjs.Line, { data: this.state.data, options: { responsive: true, animationSteps: 100, maintainAspectRatio: false } })
         );
     };
 
@@ -36020,7 +36020,7 @@ var DoughnutChartWidget = function (_BaseChartWidget3) {
         return _react2.default.createElement(
             'div',
             { className: 'doughnut-chart-ct' },
-            _react2.default.createElement(_reactChartjs.Doughnut, { data: this.state.data, options: { animationEasing: 'easeInSine', showTooltips: true } })
+            _react2.default.createElement(_reactChartjs.Doughnut, { data: this.state.data, options: { animationEasing: 'easeInSine', showTooltips: true, maintainAspectRatio: false } })
         );
     };
 
