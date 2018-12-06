@@ -17,7 +17,7 @@ class CustomFrame extends React.Component {
         if ( editable ) {
             header =
                 <div className="panel-heading">
-          {title} - {children.props.id}
+          {title}
           <div className="btn-group pull-right">
             <a onClick={(e) => {e.preventDefault(); editWidgetConfig(children.props.id);}} className="btn btn-link btn-xs">
               <i className="glyphicon glyphicon-cog"></i>

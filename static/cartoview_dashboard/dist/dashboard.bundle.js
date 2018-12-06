@@ -23469,8 +23469,6 @@ var CustomFrame = function (_React$Component) {
                 'div',
                 { className: 'panel-heading' },
                 title,
-                ' - ',
-                children.props.id,
                 _react2.default.createElement(
                     'div',
                     { className: 'btn-group pull-right' },
