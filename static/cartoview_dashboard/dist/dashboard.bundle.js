@@ -1291,7 +1291,7 @@ var _initialiseProps = function _initialiseProps() {
     this.onAddTab = function (rowIndex, columnIndex) {
         var updatedLayout = _this3.state.layout;
         var numberOfTabs = updatedLayout.rows[rowIndex].columns[columnIndex].tabs.length;
-        var newEmptyTab = { widgetSizes: [], widgets: [] };
+        var newEmptyTab = { title: "New Tab", widgetSizes: [], widgets: [] };
         updatedLayout.rows[rowIndex].columns[columnIndex].tabs.splice(numberOfTabs, 0, newEmptyTab);
         _this3.setState({
             layout: updatedLayout,
@@ -1343,15 +1343,27 @@ var _initialiseProps = function _initialiseProps() {
         switch (tabConfiguration.layoutNumber) {
             case 1:
                 updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [{ height: '30%' }, { height: '70%' }];
+                while (updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgets.length > 2) {
+                    updatedLayout = (0, _reactDazzle.removeWidget)(updatedLayout, rowIndex, columnIndex, tabIndex, 2);
+                }
                 break;
             case 2:
                 updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [{ height: '70%' }, { height: '30%' }];
+                while (updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgets.length > 2) {
+                    updatedLayout = (0, _reactDazzle.removeWidget)(updatedLayout, rowIndex, columnIndex, tabIndex, 2);
+                }
                 break;
             case 3:
                 updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [];
+                while (updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgets.length > 3) {
+                    updatedLayout = (0, _reactDazzle.removeWidget)(updatedLayout, rowIndex, columnIndex, tabIndex, 3);
+                }
                 break;
             case 4:
                 updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [{ height: '100%' }];
+                while (updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgets.length > 1) {
+                    updatedLayout = (0, _reactDazzle.removeWidget)(updatedLayout, rowIndex, columnIndex, tabIndex, 1);
+                }
                 break;
             default:
                 updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [];
@@ -20857,6 +20869,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         return r.DashboardWithoutDndContext;
       } });var o = n(32);Object.defineProperty(t, "addWidget", { enumerable: !0, get: function get() {
         return o.addWidget;
+      } }), Object.defineProperty(t, "removeWidget", { enumerable: !0, get: function get() {
+        return o.removeWidget;
       } });
   }, function (e, t, n) {
     "use strict";
@@ -23455,8 +23469,6 @@ var CustomFrame = function (_React$Component) {
                 'div',
                 { className: 'panel-heading' },
                 title,
-                ' - ',
-                children.props.id,
                 _react2.default.createElement(
                     'div',
                     { className: 'btn-group pull-right' },
@@ -23743,69 +23755,74 @@ var Header = function (_React$Component) {
         )
       );
     }
-    return _react2.default.createElement(
-      'div',
-      { className: 'accordion', id: 'accordionExample' },
-      _react2.default.createElement(
+    if (title === "No title provided") {
+      return _react2.default.createElement(
         'div',
-        { className: 'card' },
+        null,
+        _react2.default.createElement('br', null)
+      );
+    } else {
+      return _react2.default.createElement(
+        'div',
+        { className: 'accordion', id: 'accordionExample' },
         _react2.default.createElement(
           'div',
-          { className: 'card-header', id: 'headingThree' },
-          _react2.default.createElement(
-            'h5',
-            { className: 'mb-0' },
-            _react2.default.createElement(
-              'button',
-              { className: 'btn btn-link collapsed', type: 'button', 'data-toggle': 'collapse',
-                'data-target': '#collapseThree', 'aria-expanded': 'false', 'aria-controls': 'collapseThree' },
-              'Title and Abstract'
-            )
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { id: 'collapseThree', className: 'collapse', 'aria-labelledby': 'headingThree',
-            'data-parent': '#accordionExample' },
+          { className: 'card' },
           _react2.default.createElement(
             'div',
-            { className: 'card-body' },
+            { className: 'card-header', id: 'headingThree' },
+            _react2.default.createElement(
+              'h5',
+              { className: 'mb-0' },
+              _react2.default.createElement(
+                'button',
+                { className: 'btn btn-link collapsed', type: 'button', 'data-toggle': 'collapse',
+                  'data-target': '#collapseThree', 'aria-expanded': 'false', 'aria-controls': 'collapseThree' },
+                'Title and Abstract'
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { id: 'collapseThree', className: 'collapse', 'aria-labelledby': 'headingThree',
+              'data-parent': '#accordionExample' },
             _react2.default.createElement(
               'div',
-              { className: 'dashboard-header' },
+              { className: 'card-body' },
               _react2.default.createElement(
                 'div',
-                { className: 'flex-element fill-empty title-wrap' },
+                { className: 'dashboard-header' },
                 _react2.default.createElement(
-                  'h3',
-                  { className: 'header-title title-wrap' },
-                  title
-                )
+                  'div',
+                  { className: 'flex-element fill-empty title-wrap' },
+                  _react2.default.createElement(
+                    'h3',
+                    { className: 'header-title title-wrap' },
+                    title
+                  )
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'flex-element' },
+                  _react2.default.createElement(
+                    'button',
+                    { onClick: this.onRequestClose, className: 'btn btn-primary' },
+                    _react2.default.createElement('i', { className: 'fa fa-info-circle',
+                      style: { fontSize: 20 } })
+                  )
+                ),
+                _react2.default.createElement(_CommonComponents.InfoModal, { onRequestClose: this.onRequestClose, open: open, title: 'About' })
               ),
               _react2.default.createElement(
-                'div',
-                { className: 'flex-element' },
-                _react2.default.createElement(
-                  'button',
-                  { onClick: this.onRequestClose, className: 'btn btn-primary' },
-                  _react2.default.createElement('i', { className: 'fa fa-info-circle',
-                    style: { fontSize: 20 } })
-                )
-              ),
-              _react2.default.createElement(
-                _CommonComponents.InfoModal,
-                { onRequestClose: this.onRequestClose, open: open, title: 'About' },
-                _react2.default.createElement(
-                  'p',
-                  null,
-                  abstract
-                )
+                'p',
+                null,
+                abstract
               )
             )
           )
         )
-      )
-    );
+      );
+    }
   };
 
   Header.prototype.getData = function getData() {

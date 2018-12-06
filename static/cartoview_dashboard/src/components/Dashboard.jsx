@@ -1,7 +1,7 @@
 // Default styes of dazzle.
 import 'react-dazzle/lib/style/style.css'
 
-import DazzleDashboard, { addWidget } from 'react-dazzle'
+import DazzleDashboard, { addWidget, removeWidget } from 'react-dazzle'
 import React, { Component, PropTypes } from 'react'
 
 import AddWidgetDialog from './AddWidgetDialog.jsx'
@@ -91,7 +91,7 @@ class Dashboard extends Component {
     onAddTab = (rowIndex, columnIndex) => {
         const updatedLayout = this.state.layout;
         const numberOfTabs = updatedLayout.rows[rowIndex].columns[columnIndex].tabs.length;
-        const newEmptyTab = {widgetSizes: [], widgets: []};
+        const newEmptyTab = {title: "New Tab", widgetSizes: [], widgets: []};
         updatedLayout.rows[rowIndex].columns[columnIndex].tabs.splice(numberOfTabs, 0, newEmptyTab);
             this.setState({
                 layout: updatedLayout,
@@ -138,20 +138,32 @@ class Dashboard extends Component {
         const columnIndex = tabConfiguration.columnIndex;
         const tabIndex = tabConfiguration.tabIndex;
         const tabTitle = tabConfiguration.tabTitle;
-        const updatedLayout = this.state.layout;
+        let updatedLayout = this.state.layout;
         updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].title = tabTitle;
         switch (tabConfiguration.layoutNumber) {
             case 1:
                 updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [{height: '30%'}, {height: '70%'}];
+                while (updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgets.length > 2) {
+                    updatedLayout = removeWidget(updatedLayout, rowIndex, columnIndex, tabIndex, 2);
+                }
                 break;
             case 2:
                 updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [{height: '70%'}, {height: '30%'}];
+                while (updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgets.length > 2) {
+                    updatedLayout = removeWidget(updatedLayout, rowIndex, columnIndex, tabIndex, 2);
+                }
                 break;
             case 3:
                 updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [];
+                while (updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgets.length > 3) {
+                    updatedLayout = removeWidget(updatedLayout, rowIndex, columnIndex, tabIndex, 3);
+                }
                 break;
             case 4:
                 updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [{height: '100%'}];
+                while (updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgets.length > 1) {
+                    updatedLayout = removeWidget(updatedLayout, rowIndex, columnIndex, tabIndex, 1);
+                }
                 break;
             default:
                 updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [];
