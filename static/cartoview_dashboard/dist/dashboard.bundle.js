@@ -23743,69 +23743,74 @@ var Header = function (_React$Component) {
         )
       );
     }
-    return _react2.default.createElement(
-      'div',
-      { className: 'accordion', id: 'accordionExample' },
-      _react2.default.createElement(
+    if (title === "No title provided") {
+      return _react2.default.createElement(
         'div',
-        { className: 'card' },
+        null,
+        _react2.default.createElement('br', null)
+      );
+    } else {
+      return _react2.default.createElement(
+        'div',
+        { className: 'accordion', id: 'accordionExample' },
         _react2.default.createElement(
           'div',
-          { className: 'card-header', id: 'headingThree' },
-          _react2.default.createElement(
-            'h5',
-            { className: 'mb-0' },
-            _react2.default.createElement(
-              'button',
-              { className: 'btn btn-link collapsed', type: 'button', 'data-toggle': 'collapse',
-                'data-target': '#collapseThree', 'aria-expanded': 'false', 'aria-controls': 'collapseThree' },
-              'Title and Abstract'
-            )
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { id: 'collapseThree', className: 'collapse', 'aria-labelledby': 'headingThree',
-            'data-parent': '#accordionExample' },
+          { className: 'card' },
           _react2.default.createElement(
             'div',
-            { className: 'card-body' },
+            { className: 'card-header', id: 'headingThree' },
+            _react2.default.createElement(
+              'h5',
+              { className: 'mb-0' },
+              _react2.default.createElement(
+                'button',
+                { className: 'btn btn-link collapsed', type: 'button', 'data-toggle': 'collapse',
+                  'data-target': '#collapseThree', 'aria-expanded': 'false', 'aria-controls': 'collapseThree' },
+                'Title and Abstract'
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { id: 'collapseThree', className: 'collapse', 'aria-labelledby': 'headingThree',
+              'data-parent': '#accordionExample' },
             _react2.default.createElement(
               'div',
-              { className: 'dashboard-header' },
+              { className: 'card-body' },
               _react2.default.createElement(
                 'div',
-                { className: 'flex-element fill-empty title-wrap' },
+                { className: 'dashboard-header' },
                 _react2.default.createElement(
-                  'h3',
-                  { className: 'header-title title-wrap' },
-                  title
-                )
+                  'div',
+                  { className: 'flex-element fill-empty title-wrap' },
+                  _react2.default.createElement(
+                    'h3',
+                    { className: 'header-title title-wrap' },
+                    title
+                  )
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'flex-element' },
+                  _react2.default.createElement(
+                    'button',
+                    { onClick: this.onRequestClose, className: 'btn btn-primary' },
+                    _react2.default.createElement('i', { className: 'fa fa-info-circle',
+                      style: { fontSize: 20 } })
+                  )
+                ),
+                _react2.default.createElement(_CommonComponents.InfoModal, { onRequestClose: this.onRequestClose, open: open, title: 'About' })
               ),
               _react2.default.createElement(
-                'div',
-                { className: 'flex-element' },
-                _react2.default.createElement(
-                  'button',
-                  { onClick: this.onRequestClose, className: 'btn btn-primary' },
-                  _react2.default.createElement('i', { className: 'fa fa-info-circle',
-                    style: { fontSize: 20 } })
-                )
-              ),
-              _react2.default.createElement(
-                _CommonComponents.InfoModal,
-                { onRequestClose: this.onRequestClose, open: open, title: 'About' },
-                _react2.default.createElement(
-                  'p',
-                  null,
-                  abstract
-                )
+                'p',
+                null,
+                abstract
               )
             )
           )
         )
-      )
-    );
+      );
+    }
   };
 
   Header.prototype.getData = function getData() {
