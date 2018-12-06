@@ -45,9 +45,6 @@ class TabConfigDialog extends React.Component {
     render() {
         const {isOpen, tabConfiguration, saveTabConfigurations, hideTabConfigDialog} = this.props;
         if (!isOpen) return null
-        const style = {
-            display: 'none'
-        };
         const checkedClassName = "img-thumbnail img-check check";
         const unCheckedClassName = "img-thumbnail img-check";
         return <Modal isOpen={isOpen} title="Configure Tab" close={hideTabConfigDialog}>
@@ -69,6 +66,7 @@ class TabConfigDialog extends React.Component {
                     </div>
                     <div className="form-group">
                         <div className="col-md-3 box">
+                            <strong className="center">1:2</strong>
                             <label className="btn btn-light" onClick={() => this.handleLayoutSelect(1)}>
                                 <img
                                     src="/static/cartoview_dashboard/img/Layout1.png"
@@ -78,6 +76,7 @@ class TabConfigDialog extends React.Component {
                             </label>
                         </div>
                         <div className="col-md-3 box">
+                            <strong className="center">2:1</strong>
                             <label className="btn btn-light" onClick={() => this.handleLayoutSelect(2)}>
                                 <img
                                     src="/static/cartoview_dashboard/img/Layout2.png"
@@ -87,6 +86,7 @@ class TabConfigDialog extends React.Component {
                             </label>
                         </div>
                         <div className="col-md-3 box">
+                            <strong className="center">1:3</strong>
                             <label className="btn btn-light" onClick={() => this.handleLayoutSelect(3)}>
                                 <img
                                     src="/static/cartoview_dashboard/img/Layout3.png"
@@ -96,6 +96,7 @@ class TabConfigDialog extends React.Component {
                             </label>
                         </div>
                         <div className="col-md-3 box">
+                            <strong className="center">1:1</strong>
                             <label className="btn btn-light" onClick={() => this.handleLayoutSelect(4)}>
                                 <img
                                     src="/static/cartoview_dashboard/img/Layout4.png"
