@@ -23922,9 +23922,6 @@ var TabConfigDialog = function (_React$Component) {
             hideTabConfigDialog = _props.hideTabConfigDialog;
 
         if (!isOpen) return null;
-        var style = {
-            display: 'none'
-        };
         var checkedClassName = "img-thumbnail img-check check";
         var unCheckedClassName = "img-thumbnail img-check";
         return _react2.default.createElement(
@@ -23970,6 +23967,11 @@ var TabConfigDialog = function (_React$Component) {
                             'div',
                             { className: 'col-md-3 box' },
                             _react2.default.createElement(
+                                'strong',
+                                { className: 'center' },
+                                '1:2'
+                            ),
+                            _react2.default.createElement(
                                 'label',
                                 { className: 'btn btn-light', onClick: function onClick() {
                                         return _this2.handleLayoutSelect(1);
@@ -23984,6 +23986,11 @@ var TabConfigDialog = function (_React$Component) {
                         _react2.default.createElement(
                             'div',
                             { className: 'col-md-3 box' },
+                            _react2.default.createElement(
+                                'center',
+                                null,
+                                '2:1'
+                            ),
                             _react2.default.createElement(
                                 'label',
                                 { className: 'btn btn-light', onClick: function onClick() {
@@ -24000,6 +24007,11 @@ var TabConfigDialog = function (_React$Component) {
                             'div',
                             { className: 'col-md-3 box' },
                             _react2.default.createElement(
+                                'center',
+                                null,
+                                '1:3'
+                            ),
+                            _react2.default.createElement(
                                 'label',
                                 { className: 'btn btn-light', onClick: function onClick() {
                                         return _this2.handleLayoutSelect(3);
@@ -24014,6 +24026,11 @@ var TabConfigDialog = function (_React$Component) {
                         _react2.default.createElement(
                             'div',
                             { className: 'col-md-3 box' },
+                            _react2.default.createElement(
+                                'center',
+                                null,
+                                '1:1'
+                            ),
                             _react2.default.createElement(
                                 'label',
                                 { className: 'btn btn-light', onClick: function onClick() {
