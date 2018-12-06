@@ -1343,15 +1343,27 @@ var _initialiseProps = function _initialiseProps() {
         switch (tabConfiguration.layoutNumber) {
             case 1:
                 updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [{ height: '30%' }, { height: '70%' }];
+                while (updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgets.length > 2) {
+                    updatedLayout = (0, _reactDazzle.removeWidget)(updatedLayout, rowIndex, columnIndex, tabIndex, 2);
+                }
                 break;
             case 2:
                 updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [{ height: '70%' }, { height: '30%' }];
+                while (updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgets.length > 2) {
+                    updatedLayout = (0, _reactDazzle.removeWidget)(updatedLayout, rowIndex, columnIndex, tabIndex, 2);
+                }
                 break;
             case 3:
                 updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [];
+                while (updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgets.length > 3) {
+                    updatedLayout = (0, _reactDazzle.removeWidget)(updatedLayout, rowIndex, columnIndex, tabIndex, 3);
+                }
                 break;
             case 4:
                 updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [{ height: '100%' }];
+                while (updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgets.length > 1) {
+                    updatedLayout = (0, _reactDazzle.removeWidget)(updatedLayout, rowIndex, columnIndex, tabIndex, 1);
+                }
                 break;
             default:
                 updatedLayout.rows[rowIndex].columns[columnIndex].tabs[tabIndex].widgetSizes = [];
@@ -20857,6 +20869,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         return r.DashboardWithoutDndContext;
       } });var o = n(32);Object.defineProperty(t, "addWidget", { enumerable: !0, get: function get() {
         return o.addWidget;
+      } }), Object.defineProperty(t, "removeWidget", { enumerable: !0, get: function get() {
+        return o.removeWidget;
       } });
   }, function (e, t, n) {
     "use strict";
