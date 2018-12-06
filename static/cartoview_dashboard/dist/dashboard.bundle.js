@@ -1291,7 +1291,7 @@ var _initialiseProps = function _initialiseProps() {
     this.onAddTab = function (rowIndex, columnIndex) {
         var updatedLayout = _this3.state.layout;
         var numberOfTabs = updatedLayout.rows[rowIndex].columns[columnIndex].tabs.length;
-        var newEmptyTab = { widgetSizes: [], widgets: [] };
+        var newEmptyTab = { title: "New Tab", widgetSizes: [], widgets: [] };
         updatedLayout.rows[rowIndex].columns[columnIndex].tabs.splice(numberOfTabs, 0, newEmptyTab);
         _this3.setState({
             layout: updatedLayout,

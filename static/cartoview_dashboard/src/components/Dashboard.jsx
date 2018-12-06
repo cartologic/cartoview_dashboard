@@ -91,7 +91,7 @@ class Dashboard extends Component {
     onAddTab = (rowIndex, columnIndex) => {
         const updatedLayout = this.state.layout;
         const numberOfTabs = updatedLayout.rows[rowIndex].columns[columnIndex].tabs.length;
-        const newEmptyTab = {widgetSizes: [], widgets: []};
+        const newEmptyTab = {title: "New Tab", widgetSizes: [], widgets: []};
         updatedLayout.rows[rowIndex].columns[columnIndex].tabs.splice(numberOfTabs, 0, newEmptyTab);
             this.setState({
                 layout: updatedLayout,
