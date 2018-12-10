@@ -23987,8 +23987,8 @@ var TabConfigDialog = function (_React$Component) {
                             'div',
                             { className: 'col-md-3 box' },
                             _react2.default.createElement(
-                                'center',
-                                null,
+                                'strong',
+                                { className: 'center' },
                                 '2:1'
                             ),
                             _react2.default.createElement(
@@ -24007,8 +24007,8 @@ var TabConfigDialog = function (_React$Component) {
                             'div',
                             { className: 'col-md-3 box' },
                             _react2.default.createElement(
-                                'center',
-                                null,
+                                'strong',
+                                { className: 'center' },
                                 '1:3'
                             ),
                             _react2.default.createElement(
@@ -24027,8 +24027,8 @@ var TabConfigDialog = function (_React$Component) {
                             'div',
                             { className: 'col-md-3 box' },
                             _react2.default.createElement(
-                                'center',
-                                null,
+                                'strong',
+                                { className: 'center' },
                                 '1:1'
                             ),
                             _react2.default.createElement(
