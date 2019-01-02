@@ -1,6 +1,6 @@
 webpackJsonp([4],{
 
-/***/ 298:
+/***/ 290:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26,7 +26,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 299:
+/***/ 291:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -247,7 +247,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 303:
+/***/ 295:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -257,7 +257,7 @@ exports.__esModule = true;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _urlAssembler = __webpack_require__(637);
+var _urlAssembler = __webpack_require__(616);
 
 var _urlAssembler2 = _interopRequireDefault(_urlAssembler);
 
@@ -323,7 +323,7 @@ exports.default = URLS;
 
 /***/ }),
 
-/***/ 304:
+/***/ 296:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -348,57 +348,28 @@ var removeTrailingSlash = exports.removeTrailingSlash = function removeTrailingS
 
 /***/ }),
 
-/***/ 309:
+/***/ 301:
 /***/ (function(module, exports) {
 
 module.exports = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><wps:Execute version=\"1.0.0\" service=\"WPS\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://www.opengis.net/wps/1.0.0\" xmlns:wfs=\"http://www.opengis.net/wfs\" xmlns:wps=\"http://www.opengis.net/wps/1.0.0\" xmlns:ows=\"http://www.opengis.net/ows/1.1\" xmlns:gml=\"http://www.opengis.net/gml\" xmlns:ogc=\"http://www.opengis.net/ogc\" xmlns:wcs=\"http://www.opengis.net/wcs/1.1.1\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xsi:schemaLocation=\"http://www.opengis.net/wps/1.0.0 http://schemas.opengis.net/wps/1.0.0/wpsAll.xsd\">\n  <ows:Identifier>gs:Aggregate</ows:Identifier>\n  <wps:DataInputs>\n    <wps:Input>\n      <ows:Identifier>features</ows:Identifier>\n      <wps:Reference mimeType=\"text/xml\" xlink:href=\"http://geoserver/wfs\" method=\"POST\">\n        <wps:Body>\n          <wfs:GetFeature service=\"WFS\" version=\"1.0.0\" outputFormat=\"GML2\" xmlns:geonode=\"http://www.geonode.org/\">\n            <wfs:Query typeName=\"__typeName__\">\n            __filters__\n            </wfs:Query>\n          </wfs:GetFeature>\n        </wps:Body>\n      </wps:Reference>\n    </wps:Input>\n    <wps:Input>\n  <ows:Identifier>aggregationAttribute</ows:Identifier>\n    <wps:Data>\n      <wps:LiteralData>__aggregationAttribute__</wps:LiteralData>\n    </wps:Data>\n  </wps:Input>\n  <wps:Input>\n  <ows:Identifier>function</ows:Identifier>\n    <wps:Data>\n      <wps:LiteralData>__aggregationFunction__</wps:LiteralData>\n    </wps:Data>\n  </wps:Input>\n    __groupBy__\n  </wps:DataInputs>\n   <wps:ResponseForm>\n      <wps:RawDataOutput mimeType=\"application/json\">\n        <ows:Identifier>result</ows:Identifier>\n      </wps:RawDataOutput>\n    </wps:ResponseForm>\n</wps:Execute>\n"
 
 /***/ }),
 
-/***/ 310:
+/***/ 302:
 /***/ (function(module, exports) {
 
 module.exports = "<ogc:Filter>\n\n  <ogc:BBOX>\n    <ogc:PropertyName></ogc:PropertyName>\n    <gml:Envelope srsName=\"http://www.opengis.net/gml/srs/epsg.xml#3857\">\n      <gml:upperCorner>__minx__ __miny__</gml:upperCorner>\n      <gml:lowerCorner>__maxx__ __maxy__</gml:lowerCorner>\n    </gml:Envelope>\n  </ogc:BBOX>\n\n</ogc:Filter>\n"
 
 /***/ }),
 
-/***/ 311:
+/***/ 303:
 /***/ (function(module, exports) {
 
 module.exports = "<wps:Input>\n  <ows:Identifier>groupByAttributes</ows:Identifier>\n  <wps:Data>\n    <wps:LiteralData>__attributes__</wps:LiteralData>\n  </wps:Data>\n</wps:Input>"
 
 /***/ }),
 
-/***/ 33:
-/***/ (function(module, exports) {
-
-module.exports = function(module) {
-	if(!module.webpackPolyfill) {
-		module.deprecate = function() {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if(!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-
-/***/ }),
-
-/***/ 514:
+/***/ 492:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module, global) {var __WEBPACK_AMD_DEFINE_RESULT__;/*! https://mths.be/punycode v1.4.1 by @mathias */
@@ -934,11 +905,11 @@ module.exports = function(module) {
 
 }(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)(module), __webpack_require__(12)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(54)(module), __webpack_require__(12)))
 
 /***/ }),
 
-/***/ 515:
+/***/ 493:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1030,7 +1001,7 @@ var isArray = Array.isArray || function (xs) {
 
 /***/ }),
 
-/***/ 516:
+/***/ 494:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1123,27 +1094,56 @@ var objectKeys = Object.keys || function (obj) {
 
 /***/ }),
 
-/***/ 517:
+/***/ 495:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-exports.decode = exports.parse = __webpack_require__(515);
-exports.encode = exports.stringify = __webpack_require__(516);
+exports.decode = exports.parse = __webpack_require__(493);
+exports.encode = exports.stringify = __webpack_require__(494);
 
 
 /***/ }),
 
-/***/ 637:
+/***/ 54:
+/***/ (function(module, exports) {
+
+module.exports = function(module) {
+	if(!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if(!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+
+/***/ }),
+
+/***/ 616:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(639)();
+module.exports = __webpack_require__(618)();
 
 
 /***/ }),
 
-/***/ 638:
+/***/ 617:
 /***/ (function(module, exports) {
 
 
@@ -1172,13 +1172,13 @@ module.exports = function selectUrlFields (assembler) {
 
 /***/ }),
 
-/***/ 639:
+/***/ 618:
 /***/ (function(module, exports, __webpack_require__) {
 
-var extend = __webpack_require__(640);
-var url = __webpack_require__(644);
-var qs = __webpack_require__(641);
-var selectUrlFields = __webpack_require__(638);
+var extend = __webpack_require__(619);
+var url = __webpack_require__(623);
+var qs = __webpack_require__(620);
+var selectUrlFields = __webpack_require__(617);
 
 module.exports = function (request) {
 
@@ -1332,7 +1332,7 @@ module.exports = function (request) {
 
 /***/ }),
 
-/***/ 640:
+/***/ 619:
 /***/ (function(module, exports) {
 
 var hasOwn = Object.prototype.hasOwnProperty;
@@ -1458,15 +1458,15 @@ module.exports = function extend() {
 
 /***/ }),
 
-/***/ 641:
+/***/ 620:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var stringify = __webpack_require__(643);
-var parse = __webpack_require__(642);
-var formats = __webpack_require__(298);
+var stringify = __webpack_require__(622);
+var parse = __webpack_require__(621);
+var formats = __webpack_require__(290);
 
 module.exports = {
     formats: formats,
@@ -1477,13 +1477,13 @@ module.exports = {
 
 /***/ }),
 
-/***/ 642:
+/***/ 621:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(299);
+var utils = __webpack_require__(291);
 
 var has = Object.prototype.hasOwnProperty;
 
@@ -1659,14 +1659,14 @@ module.exports = function (str, opts) {
 
 /***/ }),
 
-/***/ 643:
+/***/ 622:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(299);
-var formats = __webpack_require__(298);
+var utils = __webpack_require__(291);
+var formats = __webpack_require__(290);
 
 var arrayPrefixGenerators = {
     brackets: function brackets(prefix) { // eslint-disable-line func-name-matching
@@ -1877,7 +1877,7 @@ module.exports = function (object, opts) {
 
 /***/ }),
 
-/***/ 644:
+/***/ 623:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1904,8 +1904,8 @@ module.exports = function (object, opts) {
 
 
 
-var punycode = __webpack_require__(514);
-var util = __webpack_require__(645);
+var punycode = __webpack_require__(492);
+var util = __webpack_require__(624);
 
 exports.parse = urlParse;
 exports.resolve = urlResolve;
@@ -1980,7 +1980,7 @@ var protocolPattern = /^([a-z0-9.+-]+:)/i,
       'gopher:': true,
       'file:': true
     },
-    querystring = __webpack_require__(517);
+    querystring = __webpack_require__(495);
 
 function urlParse(url, parseQueryString, slashesDenoteHost) {
   if (url && util.isObject(url) && url instanceof Url) return url;
@@ -2617,7 +2617,7 @@ Url.prototype.parseHost = function() {
 
 /***/ }),
 
-/***/ 645:
+/***/ 624:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2641,26 +2641,26 @@ module.exports = {
 
 /***/ }),
 
-/***/ 656:
+/***/ 635:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 
-var _URLS = __webpack_require__(303);
+var _URLS = __webpack_require__(295);
 
 var _URLS2 = _interopRequireDefault(_URLS);
 
-var _helpers = __webpack_require__(304);
+var _helpers = __webpack_require__(296);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var xmlTpls = {
-    aggregate: __webpack_require__(309),
-    groupBy: __webpack_require__(311),
-    filters: __webpack_require__(310)
+    aggregate: __webpack_require__(301),
+    groupBy: __webpack_require__(303),
+    filters: __webpack_require__(302)
 };
 
 var WpsClient = function () {
@@ -2711,4 +2711,4 @@ global.WpsClient = WpsClient;
 
 /***/ })
 
-},[656]);
+},[635]);

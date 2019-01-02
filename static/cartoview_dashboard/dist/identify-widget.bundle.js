@@ -188,13 +188,13 @@ exports.default = FieldSet;
 
 exports.__esModule = true;
 
-var _events = __webpack_require__(21);
+var _events = __webpack_require__(22);
 
 exports.default = new _events.EventEmitter();
 
 /***/ }),
 
-/***/ 20:
+/***/ 21:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -331,7 +331,7 @@ exports.default = {
 
 /***/ }),
 
-/***/ 21:
+/***/ 22:
 /***/ (function(module, exports) {
 
 // Copyright Joyent, Inc. and other Node contributors.
@@ -697,7 +697,7 @@ module.exports = function() {
 
 /***/ }),
 
-/***/ 302:
+/***/ 294:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -705,7 +705,7 @@ module.exports = function() {
 
 exports.__esModule = true;
 
-__webpack_require__(626);
+__webpack_require__(605);
 
 var _Events = __webpack_require__(14);
 
@@ -1232,7 +1232,7 @@ function updateLink(linkElement, obj) {
 
 /***/ }),
 
-/***/ 409:
+/***/ 387:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(29)();
@@ -1247,14 +1247,14 @@ exports.push([module.i, ".identify-no-results{\n  padding: 10px;\n}\n.identify-n
 
 /***/ }),
 
-/***/ 42:
+/***/ 41:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 
-var required = __webpack_require__(53)
-  , qs = __webpack_require__(48)
+var required = __webpack_require__(52)
+  , qs = __webpack_require__(47)
   , protocolre = /^([a-z][a-z0-9.+-]*:)?(\/\/)?([\S\s]*)/i
   , slashes = /^[A-Za-z][A-Za-z0-9+-.]*:\/\//;
 
@@ -1663,7 +1663,7 @@ module.exports = URL;
 
 /***/ }),
 
-/***/ 48:
+/***/ 47:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1743,7 +1743,7 @@ exports.parse = querystring;
 
 /***/ }),
 
-/***/ 53:
+/***/ 52:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7928,13 +7928,13 @@ else
 
 /***/ }),
 
-/***/ 626:
+/***/ 605:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(409);
+var content = __webpack_require__(387);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(32)(content, {});
@@ -7955,13 +7955,13 @@ if(false) {
 
 /***/ }),
 
-/***/ 652:
+/***/ 631:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _IdentifyWidget = __webpack_require__(302);
+var _IdentifyWidget = __webpack_require__(294);
 
 var _IdentifyWidget2 = _interopRequireDefault(_IdentifyWidget);
 
@@ -8225,11 +8225,11 @@ var _createClass = function () { function defineProperties(target, props) { for 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * See the License for the specific language governing permissions and limitations under the License.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
 
-var _util = __webpack_require__(20);
+var _util = __webpack_require__(21);
 
 var _util2 = _interopRequireDefault(_util);
 
-var _urlParse = __webpack_require__(42);
+var _urlParse = __webpack_require__(41);
 
 var _urlParse2 = _interopRequireDefault(_urlParse);
 
@@ -8237,7 +8237,7 @@ var _openlayers = __webpack_require__(11);
 
 var _openlayers2 = _interopRequireDefault(_openlayers);
 
-var _SLDService = __webpack_require__(84);
+var _SLDService = __webpack_require__(80);
 
 var _SLDService2 = _interopRequireDefault(_SLDService);
 
@@ -8406,7 +8406,7 @@ exports.default = new WMSService();
 
 /***/ }),
 
-/***/ 84:
+/***/ 80:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8432,13 +8432,13 @@ var _jsonix = __webpack_require__(57);
 
 var _XLink_1_ = __webpack_require__(77);
 
-var _Filter_1_0_ = __webpack_require__(92);
+var _Filter_1_0_ = __webpack_require__(88);
 
-var _GML_2_1_ = __webpack_require__(93);
+var _GML_2_1_ = __webpack_require__(89);
 
-var _SLD_1_0_0_GeoServer = __webpack_require__(94);
+var _SLD_1_0_0_GeoServer = __webpack_require__(90);
 
-var _util = __webpack_require__(20);
+var _util = __webpack_require__(21);
 
 var _util2 = _interopRequireDefault(_util);
 
@@ -9222,7 +9222,7 @@ exports.default = new SLDService();
 
 /***/ }),
 
-/***/ 92:
+/***/ 88:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var Filter_1_0_0_Module_Factory = function () {
@@ -9753,7 +9753,7 @@ else {
 
 /***/ }),
 
-/***/ 93:
+/***/ 89:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var GML_2_1_2_Module_Factory = function () {
@@ -10315,7 +10315,7 @@ else {
 
 /***/ }),
 
-/***/ 94:
+/***/ 90:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var SLD_1_0_0_GeoServer_Module_Factory = function () {
@@ -11505,4 +11505,4 @@ else {
 
 /***/ })
 
-},[652]);
+},[631]);

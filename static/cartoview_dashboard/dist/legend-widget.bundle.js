@@ -188,13 +188,13 @@ exports.default = FieldSet;
 
 exports.__esModule = true;
 
-var _events = __webpack_require__(21);
+var _events = __webpack_require__(22);
 
 exports.default = new _events.EventEmitter();
 
 /***/ }),
 
-/***/ 20:
+/***/ 21:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -331,7 +331,7 @@ exports.default = {
 
 /***/ }),
 
-/***/ 21:
+/***/ 22:
 /***/ (function(module, exports) {
 
 // Copyright Joyent, Inc. and other Node contributors.
@@ -640,7 +640,7 @@ function isUndefined(arg) {
 
 /***/ }),
 
-/***/ 305:
+/***/ 297:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -662,7 +662,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * See the License for the specific language governing permissions and limitations under the License.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
 
-var _util = __webpack_require__(20);
+var _util = __webpack_require__(21);
 
 var _util2 = _interopRequireDefault(_util);
 
@@ -670,7 +670,7 @@ var _openlayers = __webpack_require__(11);
 
 var _openlayers2 = _interopRequireDefault(_openlayers);
 
-var _urlParse = __webpack_require__(42);
+var _urlParse = __webpack_require__(41);
 
 var _urlParse2 = _interopRequireDefault(_urlParse);
 
@@ -864,14 +864,14 @@ exports.default = new ArcGISRestService();
 
 /***/ }),
 
-/***/ 42:
+/***/ 41:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 
-var required = __webpack_require__(53)
-  , qs = __webpack_require__(48)
+var required = __webpack_require__(52)
+  , qs = __webpack_require__(47)
   , protocolre = /^([a-z][a-z0-9.+-]*:)?(\/\/)?([\S\s]*)/i
   , slashes = /^[A-Za-z][A-Za-z0-9+-.]*:\/\//;
 
@@ -1280,7 +1280,7 @@ module.exports = URL;
 
 /***/ }),
 
-/***/ 48:
+/***/ 47:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1360,7 +1360,7 @@ exports.parse = querystring;
 
 /***/ }),
 
-/***/ 53:
+/***/ 52:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1406,7 +1406,7 @@ module.exports = function required(port, protocol) {
 
 /***/ }),
 
-/***/ 653:
+/***/ 632:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1418,7 +1418,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _ArcGISRestService = __webpack_require__(305);
+var _ArcGISRestService = __webpack_require__(297);
 
 var _ArcGISRestService2 = _interopRequireDefault(_ArcGISRestService);
 
@@ -1523,6 +1523,8 @@ var Legend = function (_Component2) {
                     var s = layer.getSource(),
                         p = s.getParams();
                     var url = s.getUrls()[0];
+                    url = url.replace("ows", "wms");
+                    console.log(url);
                     url += url.indexOf("?") == -1 ? "?" : "&";
                     url += "layer=" + p.LAYERS;
                     url += "&request=GetLegendGraphic&format=image%2Fpng&transparent=true&legend_options=fontAntiAliasing:true;fontSize:14;&width=30&height=30";
@@ -1677,4 +1679,4 @@ exports.default = LegendWidget;
 
 /***/ })
 
-},[653]);
+},[632]);

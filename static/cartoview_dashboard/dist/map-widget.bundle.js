@@ -188,7 +188,7 @@ exports.default = FieldSet;
 
 exports.__esModule = true;
 
-var _events = __webpack_require__(21);
+var _events = __webpack_require__(22);
 
 exports.default = new _events.EventEmitter();
 
@@ -219,7 +219,7 @@ if (true) {
   // By explicitly using `prop-types` you are opting into new development behavior.
   // http://fb.me/prop-types-in-prod
   var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(47)(isValidElement, throwOnDirectAccess);
+  module.exports = __webpack_require__(46)(isValidElement, throwOnDirectAccess);
 } else {
   // By explicitly using `prop-types` you are opting into new production behavior.
   // http://fb.me/prop-types-in-prod
@@ -229,7 +229,7 @@ if (true) {
 
 /***/ }),
 
-/***/ 20:
+/***/ 21:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -366,7 +366,7 @@ exports.default = {
 
 /***/ }),
 
-/***/ 21:
+/***/ 22:
 /***/ (function(module, exports) {
 
 // Copyright Joyent, Inc. and other Node contributors.
@@ -675,7 +675,7 @@ function isUndefined(arg) {
 
 /***/ }),
 
-/***/ 306:
+/***/ 298:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -701,15 +701,15 @@ var _openlayers = __webpack_require__(11);
 
 var _openlayers2 = _interopRequireDefault(_openlayers);
 
-var _util = __webpack_require__(20);
+var _util = __webpack_require__(21);
 
 var _util2 = _interopRequireDefault(_util);
 
-var _LayerIdService = __webpack_require__(338);
+var _LayerIdService = __webpack_require__(316);
 
 var _LayerIdService2 = _interopRequireDefault(_LayerIdService);
 
-var _WFSService = __webpack_require__(339);
+var _WFSService = __webpack_require__(317);
 
 var _WFSService2 = _interopRequireDefault(_WFSService);
 
@@ -986,7 +986,7 @@ exports.default = new MapConfigService();
 
 /***/ }),
 
-/***/ 307:
+/***/ 299:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1404,7 +1404,7 @@ exports.default = new MapConfigTransformService();
 
 /***/ }),
 
-/***/ 338:
+/***/ 316:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1452,7 +1452,7 @@ exports.default = new LayerIdService();
 
 /***/ }),
 
-/***/ 339:
+/***/ 317:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1478,31 +1478,31 @@ var _openlayers = __webpack_require__(11);
 
 var _openlayers2 = _interopRequireDefault(_openlayers);
 
-var _util = __webpack_require__(20);
+var _util = __webpack_require__(21);
 
 var _util2 = _interopRequireDefault(_util);
 
 var _jsonix = __webpack_require__(57);
 
-var _urlParse = __webpack_require__(42);
+var _urlParse = __webpack_require__(41);
 
 var _urlParse2 = _interopRequireDefault(_urlParse);
 
-var _XSD_1_ = __webpack_require__(646);
+var _XSD_1_ = __webpack_require__(625);
 
 var _XLink_1_ = __webpack_require__(77);
 
-var _OWS_1_0_ = __webpack_require__(508);
+var _OWS_1_0_ = __webpack_require__(486);
 
-var _Filter_1_1_ = __webpack_require__(506);
+var _Filter_1_1_ = __webpack_require__(484);
 
-var _SMIL_2_ = __webpack_require__(509);
+var _SMIL_2_ = __webpack_require__(487);
 
-var _SMIL_2_0_Language = __webpack_require__(510);
+var _SMIL_2_0_Language = __webpack_require__(488);
 
-var _GML_3_1_ = __webpack_require__(507);
+var _GML_3_1_ = __webpack_require__(485);
 
-var _WFS_1_1_ = __webpack_require__(511);
+var _WFS_1_1_ = __webpack_require__(489);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1896,14 +1896,14 @@ exports.default = new WFSService();
 
 /***/ }),
 
-/***/ 42:
+/***/ 41:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 
-var required = __webpack_require__(53)
-  , qs = __webpack_require__(48)
+var required = __webpack_require__(52)
+  , qs = __webpack_require__(47)
   , protocolre = /^([a-z][a-z0-9.+-]*:)?(\/\/)?([\S\s]*)/i
   , slashes = /^[A-Za-z][A-Za-z0-9+-.]*:\/\//;
 
@@ -2312,7 +2312,7 @@ module.exports = URL;
 
 /***/ }),
 
-/***/ 48:
+/***/ 47:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2392,7 +2392,7 @@ exports.parse = querystring;
 
 /***/ }),
 
-/***/ 506:
+/***/ 484:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var Filter_1_1_0_Module_Factory = function () {
@@ -3163,7 +3163,7 @@ else {
 
 /***/ }),
 
-/***/ 507:
+/***/ 485:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var GML_3_1_1_Module_Factory = function () {
@@ -12958,7 +12958,7 @@ else {
 
 /***/ }),
 
-/***/ 508:
+/***/ 486:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var OWS_1_0_0_Module_Factory = function () {
@@ -13631,7 +13631,7 @@ else {
 
 /***/ }),
 
-/***/ 509:
+/***/ 487:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var SMIL_2_0_Module_Factory = function () {
@@ -13891,7 +13891,7 @@ else {
 
 /***/ }),
 
-/***/ 510:
+/***/ 488:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var SMIL_2_0_Language_Module_Factory = function () {
@@ -14586,7 +14586,7 @@ else {
 
 /***/ }),
 
-/***/ 511:
+/***/ 489:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var WFS_1_1_0_Module_Factory = function () {
@@ -15501,7 +15501,7 @@ else {
 
 /***/ }),
 
-/***/ 53:
+/***/ 52:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21686,7 +21686,7 @@ else
 
 /***/ }),
 
-/***/ 646:
+/***/ 625:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var XSD_1_0_Module_Factory = function () {
@@ -23106,7 +23106,7 @@ else {
 
 /***/ }),
 
-/***/ 654:
+/***/ 633:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23124,11 +23124,11 @@ var _FieldSet2 = __webpack_require__(10);
 
 var _FieldSet3 = _interopRequireDefault(_FieldSet2);
 
-var _MapConfigService = __webpack_require__(306);
+var _MapConfigService = __webpack_require__(298);
 
 var _MapConfigService2 = _interopRequireDefault(_MapConfigService);
 
-var _MapConfigTransformService = __webpack_require__(307);
+var _MapConfigTransformService = __webpack_require__(299);
 
 var _MapConfigTransformService2 = _interopRequireDefault(_MapConfigTransformService);
 
@@ -23140,7 +23140,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(25);
+var _reactDom = __webpack_require__(20);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -23878,11 +23878,11 @@ var _createClass = function () { function defineProperties(target, props) { for 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * See the License for the specific language governing permissions and limitations under the License.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
 
-var _util = __webpack_require__(20);
+var _util = __webpack_require__(21);
 
 var _util2 = _interopRequireDefault(_util);
 
-var _urlParse = __webpack_require__(42);
+var _urlParse = __webpack_require__(41);
 
 var _urlParse2 = _interopRequireDefault(_urlParse);
 
@@ -23890,7 +23890,7 @@ var _openlayers = __webpack_require__(11);
 
 var _openlayers2 = _interopRequireDefault(_openlayers);
 
-var _SLDService = __webpack_require__(84);
+var _SLDService = __webpack_require__(80);
 
 var _SLDService2 = _interopRequireDefault(_SLDService);
 
@@ -24115,7 +24115,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 84:
+/***/ 80:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24141,13 +24141,13 @@ var _jsonix = __webpack_require__(57);
 
 var _XLink_1_ = __webpack_require__(77);
 
-var _Filter_1_0_ = __webpack_require__(92);
+var _Filter_1_0_ = __webpack_require__(88);
 
-var _GML_2_1_ = __webpack_require__(93);
+var _GML_2_1_ = __webpack_require__(89);
 
-var _SLD_1_0_0_GeoServer = __webpack_require__(94);
+var _SLD_1_0_0_GeoServer = __webpack_require__(90);
 
-var _util = __webpack_require__(20);
+var _util = __webpack_require__(21);
 
 var _util2 = _interopRequireDefault(_util);
 
@@ -24931,7 +24931,7 @@ exports.default = new SLDService();
 
 /***/ }),
 
-/***/ 92:
+/***/ 88:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var Filter_1_0_0_Module_Factory = function () {
@@ -25462,7 +25462,7 @@ else {
 
 /***/ }),
 
-/***/ 93:
+/***/ 89:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var GML_2_1_2_Module_Factory = function () {
@@ -26024,7 +26024,7 @@ else {
 
 /***/ }),
 
-/***/ 94:
+/***/ 90:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var SLD_1_0_0_GeoServer_Module_Factory = function () {
@@ -27214,4 +27214,4 @@ else {
 
 /***/ })
 
-},[654]);
+},[633]);
