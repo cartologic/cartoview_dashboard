@@ -1528,6 +1528,7 @@ var Legend = function (_Component2) {
                     var s = layer.getSource(),
                         p = s.getParams();
                     var url = s.getUrls()[0];
+                    url = url.replace("ows", "wms");
                     url += url.indexOf("?") == -1 ? "?" : "&";
                     url += "layer=" + p.LAYERS;
                     url += "&request=GetLegendGraphic&format=image%2Fpng&transparent=true&legend_options=fontAntiAliasing:true;fontSize:14;&width=30&height=30";

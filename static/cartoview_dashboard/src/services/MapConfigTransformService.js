@@ -214,6 +214,22 @@ var MapConfigTransformService = function () {
       for (i = 0, ii = data.map.layers.length; i < ii; ++i) {
         var layer = data.map.layers[i];
         var source = data.sources[layer.source];
+        var sourceType = source.type;
+        // create proper source type based on map json returned from geonode
+        if (Object.keys(source).length == 0 && layer.type === "osm") {
+            sourceType = "gxp_osmsource";
+            source.ptype = sourceType;
+        } else if (layer.provider && layer.provider === "OpenTopoMap") {
+            layer.type = 'OpenLayers.Layer.XYZ';
+            sourceType = "gxp_olsource";
+            source.ptype = "gxp_olsource";
+        } else if (Object.keys(source).length === 0 && layer.type === "empty") {
+            sourceType = "gxp_olsource";
+            source.ptype = "gxp_olsource";
+        }
+        if (!sourceType) {
+            sourceType = data.defaultSourceType;
+        }
         var url = source.url;
         var layerConfig = {
           properties: {
@@ -224,12 +240,17 @@ var MapConfigTransformService = function () {
             name: layer.name
           }
         };
-        if (source.ptype === 'gxp_olsource' && layer.type === 'OpenLayers.Layer.XYZ') {
+        if (sourceType === 'gxp_olsource' && layer.type === 'OpenLayers.Layer.XYZ') {
           layerConfig.type = 'Tile';
-          layerConfig.properties.title = layer.args[0];
+          layerConfig.properties.title = layer.args && layer.args.length > 0 ? layer.args[0] : layerConfig.properties.title;
           layerConfig.properties.name = layerConfig.properties.title.split(' ').join('_');
           var xyzUrls;
-          var urlConfig = layer.args[1];
+          var urlConfig = layer.args && layer.args.lenght ? layer.args[1] : undefined;
+          if (layer.provider && layer.provider === "OpenTopoMap") {
+              urlConfig = ['https://a.tile.opentopomap.org/{z}/{x}/{y}.png',
+                  'https://b.tile.opentopomap.org/{z}/{x}/{y}.png',
+                  'https://c.tile.opentopomap.org/{z}/{x}/{y}.png'];
+          }
           if (Array.isArray(urlConfig)) {
             xyzUrls = urlConfig;
           } else {
@@ -248,10 +269,10 @@ var MapConfigTransformService = function () {
               urls: xyzUrls
             }
           };
-          if (layer.args.length === 3 && layer.args[2].attribution) {
+          if (layer.args && layer.args.length === 3 && layer.args[2].attribution) {
             layerConfig.source.properties.attributions = [layer.args[2].attribution];
           }
-        } else if (source.ptype === 'gxp_osmsource') {
+        } else if (sourceType === 'gxp_osmsource') {
           if (!layer.group) {
             // force OSM as base layer
             layerConfig.properties.type = 'base';
@@ -263,7 +284,7 @@ var MapConfigTransformService = function () {
               crossOrigin: 'anonymous'
             }
           };
-        } else if (source.ptype === 'gxp_arcrestsource') {
+        } else if (sourceType === 'gxp_arcrestsource') {
           layerConfig.type = 'Tile';
           layerConfig.source = {
             type: 'TileArcGISRest',
@@ -276,18 +297,21 @@ var MapConfigTransformService = function () {
               }
             }
           };
-        } else if (source.ptype === 'gxp_wmscsource' && layer.name) {
+        } else if (sourceType === 'gxp_wmscsource' && layer.name) {
           layerConfig.properties.popupInfo = '#AllAttributes';
           layerConfig.properties.isSelectable = layer.queryable;
           layerConfig.properties.isWFST = layer.queryable;
+          // if (layer.capability) {
+          //   if (layer.queryable === undefined) {
+          //     layerConfig.properties.isSelectable = layer.capability.queryable;
+          //     layerConfig.properties.isWFST = layer.capability.queryable;
+          //   }
+          //   layerConfig.properties.styleName = layer.capability.styles[0].name;
+          //   layerConfig.properties.legendUrl = layer.capability.styles[0].legend.href;
+          //   layerConfig.properties.EX_GeographicBoundingBox = layer.capability.llbbox;
+          // }
           if (layer.capability) {
-            if (layer.queryable === undefined) {
-              layerConfig.properties.isSelectable = layer.capability.queryable;
-              layerConfig.properties.isWFST = layer.capability.queryable;
-            }
-            layerConfig.properties.styleName = layer.capability.styles[0].name;
-            layerConfig.properties.legendUrl = layer.capability.styles[0].legend.href;
-            layerConfig.properties.EX_GeographicBoundingBox = layer.capability.llbbox;
+            layerConfig.properties.extent = layer.capability.bbox[data.map.projection].bbox;
           }
           if (!layerConfig.properties.EX_GeographicBoundingBox) {
             if (layer.bbox && layer.srs && _openlayers2.default.proj.get(layer.srs)) {
@@ -317,7 +341,7 @@ var MapConfigTransformService = function () {
               urls: [url]
             }
           };
-        } else if (source.ptype === 'gxp_mapboxsource') {
+        } else if (sourceType === 'gxp_mapboxsource') {
           var urls = ['http://a.tiles.mapbox.com/v1/mapbox.' + layer.name + '/', 'http://b.tiles.mapbox.com/v1/mapbox.' + layer.name + '/', 'http://c.tiles.mapbox.com/v1/mapbox.' + layer.name + '/', 'http://d.tiles.mapbox.com/v1/mapbox.' + layer.name + '/'];
           var attribution = /^world/.test(layer.name) ? '<a href="http://mapbox.com">MapBox</a> | Some Data &copy; OSM CC-BY-SA | <a href="http://mapbox.com/tos">Terms of Service</a>' : '<a href="http://mapbox.com">MapBox</a> | <a href="http://mapbox.com/tos">Terms of Service</a>';
           var maxZoom = {
@@ -346,7 +370,7 @@ var MapConfigTransformService = function () {
               maxZoom: maxZoom[layer.name]
             }
           };
-        } else if (source.ptype === 'gxp_bingsource') {
+        } else if (sourceType === 'gxp_bingsource') {
           layerConfig.type = 'Tile';
           layerConfig.source = {
             type: 'BingMaps',
@@ -355,7 +379,17 @@ var MapConfigTransformService = function () {
               imagerySet: layer.name
             }
           };
-        } else {
+        } else if (sourceType === "gxp_olsource") {
+          layerConfig.type = 'Tile';
+          layerConfig.source = {
+              type: 'XYZ',
+              properties: {
+                  crossOrigin: crossOrigin,
+                  urls: ['']
+              }
+            }
+        }
+        else {
           if (opt_errors) {
             opt_errors.push({
               msg: 'Unable to load layer ' + layerConfig.properties.title,
