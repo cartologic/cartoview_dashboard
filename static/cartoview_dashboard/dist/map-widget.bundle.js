@@ -23634,6 +23634,10 @@ var MapConfigService = function () {
       }
       var view = map.getView(),
           proj = _openlayers2.default.proj.get(viewConfig.projection);
+      // 1. The map json returned from geonode has wrong "center projection" than the returned saved "map" projection
+      // 2. Guessed that the used center projection is 'EPSG:4326'
+      // 3. the following line is suggested to transform to the current view projection
+      viewConfig.center = _openlayers2.default.proj.transform(viewConfig.center, "EPSG:4326", viewConfig.projection);
       if (proj && !_openlayers2.default.proj.equivalent(view.getProjection(), proj)) {
         map.setView(new _openlayers2.default.View({
           center: viewConfig.center,
