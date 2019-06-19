@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import ArcGISRestService from 'boundless-sdk/services/ArcGISRestService'
 import Events from './events/Events.jsx'
@@ -9,12 +9,12 @@ class ArcGISLegend extends Component {
     render() {
         if (this.state && this.state.legendInfo) {
             var layers = this.state.legendInfo.layers;
-            const style = {width: 'auto', height: 'auto'};
+            const style = { width: 'auto', height: 'auto' };
             return <div>
                 {
                     layers.map(l => {
                         return l.legend.map(legend => <div>
-                            <img style={style} src={'data:' + legend.contentType + ';base64,' + legend.imageData}/>
+                            <img style={style} src={'data:' + legend.contentType + ';base64,' + legend.imageData} />
                             <span>{legend.label}</span>
                         </div>)
                     })
@@ -29,14 +29,14 @@ class ArcGISLegend extends Component {
         var source = layer.getSource();
         var url = source.getUrls()[0];
         ArcGISRestService.getLegend(url, (legendInfo) => {
-            this.setState({legendInfo});
+            this.setState({ legendInfo });
         });
     }
 }
 
 class Legend extends Component {
     render() {
-        const {map} = this.props;
+        const { map } = this.props;
         const legends = this.getLegends(map.getLayers().getArray())
         return <div>
             {legends}
@@ -54,6 +54,8 @@ class Legend extends Component {
                     var s = layer.getSource(),
                         p = s.getParams();
                     var url = s.getUrls()[0];
+                    url = url.replace("ows", "wms")
+                    console.log(url)
                     url += (url.indexOf("?") == -1) ? "?" :
                         "&";
                     url += "layer=" + p.LAYERS;
@@ -63,13 +65,13 @@ class Legend extends Component {
                     legends.push(
                         <div>
                             <h4>{layer.get('title')}</h4>
-                            <img src={url}/>
+                            <img src={url} />
                         </div>
                     );
                 } else if (layer.getSource() instanceof ol.source
                     .TileArcGISRest) {
                     legends.push(
-                        <div><h4>{layer.get('title')}</h4> <ArcGISLegend layer={layer}/></div>
+                        <div><h4>{layer.get('title')}</h4> <ArcGISLegend layer={layer} /></div>
                     );
                 }
             }
@@ -80,9 +82,9 @@ class Legend extends Component {
     hasLegend(layer) {
         return (layer instanceof ol.layer.Tile && layer.getSource() instanceof ol
             .source.TileWMS) || (layer instanceof ol.layer.Image &&
-            layer.getSource() instanceof ol.source.ImageWMS) || (
-            layer instanceof ol.layer.Tile && layer.getSource() instanceof ol
-                .source.TileArcGISRest);
+                layer.getSource() instanceof ol.source.ImageWMS) || (
+                layer instanceof ol.layer.Tile && layer.getSource() instanceof ol
+                    .source.TileArcGISRest);
     }
 
     isWMS(layer) {
@@ -100,9 +102,9 @@ class LegendWidget extends BaseWidget {
         }
         return <div style={style}>
             {
-                this.state && this.state.ready ? <Legend map={this.state.map}/> :
+                this.state && this.state.ready ? <Legend map={this.state.map} /> :
                     <span>The map for this Legend widget must be configured.  Click <i
-                        className="glyphicon glyphicon-cog" style={{color:'#337ab7'}}></i> icon and select a map within this dashboard.</span>
+                        className="glyphicon glyphicon-cog" style={{ color: '#337ab7' }}></i> icon and select a map within this dashboard.</span>
             }
         </div>;
     }
@@ -121,10 +123,10 @@ class LegendWidget extends BaseWidget {
     attachToMapWidget(mapWidgetId) {
         var mapWidget = this.context.configManager.getWidget(mapWidgetId);
         if (mapWidget && mapWidget.ready) {
-            this.setState({ready: true, map: mapWidget.map})
+            this.setState({ ready: true, map: mapWidget.map })
         } else {
             Events.on('mapReady' + '_' + mapWidgetId, (map) => {
-                this.setState({ready: true, map})
+                this.setState({ ready: true, map })
             });
         }
     }
