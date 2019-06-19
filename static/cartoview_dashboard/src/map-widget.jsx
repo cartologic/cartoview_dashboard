@@ -1,7 +1,6 @@
 import Events from './events/Events.jsx'
 import FieldSet from './components/FieldSet.jsx'
-import MapConfigService from 'boundless-sdk/services/MapConfigService'
-// import MapConfigTransformService from 'boundless-sdk/services/MapConfigTransformService'
+import MapConfigService from './services/MapConfigService'
 import MapConfigTransformService from './services/MapConfigTransformService'
 import PropTypes from 'prop-types'
 import React from 'react'

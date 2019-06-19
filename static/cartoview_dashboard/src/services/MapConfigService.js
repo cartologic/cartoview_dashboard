@@ -20,15 +20,15 @@ var _openlayers = require('openlayers');
 
 var _openlayers2 = _interopRequireDefault(_openlayers);
 
-var _util = require('../util');
+var _util = require('boundless-sdk/util');
 
 var _util2 = _interopRequireDefault(_util);
 
-var _LayerIdService = require('./LayerIdService');
+var _LayerIdService = require('boundless-sdk/services/LayerIdService');
 
 var _LayerIdService2 = _interopRequireDefault(_LayerIdService);
 
-var _WFSService = require('./WFSService');
+var _WFSService = require('boundless-sdk/services/WFSService');
 
 var _WFSService2 = _interopRequireDefault(_WFSService);
 
