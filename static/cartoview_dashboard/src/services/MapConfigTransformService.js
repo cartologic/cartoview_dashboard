@@ -301,18 +301,18 @@ var MapConfigTransformService = function () {
           layerConfig.properties.popupInfo = '#AllAttributes';
           layerConfig.properties.isSelectable = layer.queryable;
           layerConfig.properties.isWFST = layer.queryable;
-          // if (layer.capability) {
-          //   if (layer.queryable === undefined) {
-          //     layerConfig.properties.isSelectable = layer.capability.queryable;
-          //     layerConfig.properties.isWFST = layer.capability.queryable;
-          //   }
-          //   layerConfig.properties.styleName = layer.capability.styles[0].name;
-          //   layerConfig.properties.legendUrl = layer.capability.styles[0].legend.href;
-          //   layerConfig.properties.EX_GeographicBoundingBox = layer.capability.llbbox;
-          // }
           if (layer.capability) {
-            layerConfig.properties.extent = layer.capability.bbox[data.map.projection].bbox;
+            if (layer.queryable === undefined) {
+              layerConfig.properties.isSelectable = layer.capability.queryable;
+              layerConfig.properties.isWFST = layer.capability.queryable;
+            }
+            layerConfig.properties.styleName = layer.capability.styles[0].name;
+            layerConfig.properties.legendUrl = layer.capability.styles[0].legend.href;
+            layerConfig.properties.EX_GeographicBoundingBox = layer.capability.llbbox;
           }
+          // if (layer.capability) {
+          //   layerConfig.properties.extent = layer.capability.bbox[data.map.projection].bbox;
+          // }
           if (!layerConfig.properties.EX_GeographicBoundingBox) {
             if (layer.bbox && layer.srs && _openlayers2.default.proj.get(layer.srs)) {
               layerConfig.properties.EX_GeographicBoundingBox = _openlayers2.default.proj.transformExtent(layer.bbox, layer.srs, 'EPSG:4326');
