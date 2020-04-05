@@ -1,6 +1,6 @@
 webpackJsonp([6],{
 
-/***/ 10:
+/***/ 12:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8,193 +8,13 @@ webpackJsonp([6],{
 
 exports.__esModule = true;
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _react = __webpack_require__(3);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var JSONField = function (_Component) {
-    _inherits(JSONField, _Component);
-
-    function JSONField(props) {
-        _classCallCheck(this, JSONField);
-
-        var _this = _possibleConstructorReturn(this, _Component.call(this, props));
-
-        Object.defineProperty(_this, 'value', {
-            get: function get() {
-                return JSON.parse(_this.refs.textarea.value);
-            },
-            set: function set(newValue) {
-                _this.refs.textarea.value = JSON.stringify(newValue || {});
-            },
-            enumerable: true,
-            configurable: true
-        });
-        return _this;
-    }
-
-    JSONField.prototype.render = function render() {
-        var props = _objectWithoutProperties(this.props, []);
-
-        delete props.ref;
-        return _react2.default.createElement('textarea', _extends({}, props, { ref: 'textarea' }));
-    };
-
-    return JSONField;
-}(_react.Component);
-
-var FieldSet = function (_Component2) {
-    _inherits(FieldSet, _Component2);
-
-    function FieldSet(props) {
-        _classCallCheck(this, FieldSet);
-
-        var _this2 = _possibleConstructorReturn(this, _Component2.call(this, props));
-
-        _this2.state = {
-            schema: props.schema || _this2.getSchema(props),
-            data: props.data || _this2.getInitialData(props)
-        };
-        _this2.fields = {};
-        return _this2;
-    }
-
-    FieldSet.prototype.getSchema = function getSchema() {
-        return {};
-    };
-
-    FieldSet.prototype.getInitialData = function getInitialData() {
-        return {};
-    };
-
-    FieldSet.prototype.render = function render() {
-        var _this3 = this;
-
-        var _state = this.state,
-            schema = _state.schema,
-            data = _state.data;
-
-        return _react2.default.createElement(
-            'div',
-            null,
-            data && Object.keys(schema).map(function (key, index) {
-                var Field = _this3.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null);
-                return _react2.default.createElement(
-                    'div',
-                    { key: index },
-                    Field
-                );
-            })
-        );
-    };
-
-    FieldSet.prototype.field = function field(name, schema, value) {
-        var _this4 = this;
-
-        var _schema$props = schema.props,
-            props = _schema$props === undefined ? {} : _schema$props;
-
-        props.className = "form-control";
-        props.ref = function (f) {
-            if (f) {
-                f.value = value;
-                _this4.fields[name] = f;
-                f.fieldSet = _this4;
-            }
-        };
-        var field = null;
-
-        if (['text', 'number', 'url', 'email'].indexOf(schema.type) != -1) {
-            props.type = schema.type;
-            field = _react2.default.createElement('input', props);
-        } else if (schema.type == "textarea") {
-            field = _react2.default.createElement('textarea', props);
-        } else if (schema.type == "json") {
-            field = _react2.default.createElement(JSONField, props);
-        } else if (schema.type == 'select') {
-            field = _react2.default.createElement(
-                'select',
-                props,
-                this.getSelectOptions(name, schema, value)
-            );
-        }
-        var label = schema.label || name.charAt(0).toUpperCase() + name.slice(1);
-        return _react2.default.createElement(
-            'div',
-            { className: 'form-group' },
-            _react2.default.createElement(
-                'label',
-                null,
-                label
-            ),
-            field
-        );
-    };
-
-    FieldSet.prototype.getSelectOptions = function getSelectOptions(name, schema, value) {
-        var options = schema.options;
-
-        if (!options) return null;
-        if ((typeof options === 'undefined' ? 'undefined' : _typeof(options)) == "object") {
-            return Object.keys(options).map(function (key) {
-                return _react2.default.createElement(
-                    'option',
-                    { value: key },
-                    options[key]
-                );
-            });
-        } else if (typeof options == 'function') {
-            return options(this, this.state.data);
-        }
-        return null;
-    };
-
-    FieldSet.prototype.getData = function getData() {
-        var _this5 = this;
-
-        var data = {};
-        Object.keys(this.fields).map(function (key) {
-            data[key] = _this5.fields[key].value;
-        });
-        return data;
-    };
-
-    return FieldSet;
-}(_react.Component);
-
-exports.default = FieldSet;
-
-/***/ }),
-
-/***/ 14:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-
-var _events = __webpack_require__(23);
+var _events = __webpack_require__(20);
 
 exports.default = new _events.EventEmitter();
 
 /***/ }),
 
-/***/ 22:
+/***/ 19:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -204,7 +24,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _openlayers = __webpack_require__(11);
+var _openlayers = __webpack_require__(9);
 
 var _openlayers2 = _interopRequireDefault(_openlayers);
 
@@ -331,9 +151,10 @@ exports.default = {
 
 /***/ }),
 
-/***/ 23:
-/***/ (function(module, exports) {
+/***/ 20:
+/***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -355,9 +176,39 @@ exports.default = {
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
+
+var R = typeof Reflect === 'object' ? Reflect : null
+var ReflectApply = R && typeof R.apply === 'function'
+  ? R.apply
+  : function ReflectApply(target, receiver, args) {
+    return Function.prototype.apply.call(target, receiver, args);
+  }
+
+var ReflectOwnKeys
+if (R && typeof R.ownKeys === 'function') {
+  ReflectOwnKeys = R.ownKeys
+} else if (Object.getOwnPropertySymbols) {
+  ReflectOwnKeys = function ReflectOwnKeys(target) {
+    return Object.getOwnPropertyNames(target)
+      .concat(Object.getOwnPropertySymbols(target));
+  };
+} else {
+  ReflectOwnKeys = function ReflectOwnKeys(target) {
+    return Object.getOwnPropertyNames(target);
+  };
+}
+
+function ProcessEmitWarning(warning) {
+  if (console && console.warn) console.warn(warning);
+}
+
+var NumberIsNaN = Number.isNaN || function NumberIsNaN(value) {
+  return value !== value;
+}
+
 function EventEmitter() {
-  this._events = this._events || {};
-  this._maxListeners = this._maxListeners || undefined;
+  EventEmitter.init.call(this);
 }
 module.exports = EventEmitter;
 
@@ -365,282 +216,396 @@ module.exports = EventEmitter;
 EventEmitter.EventEmitter = EventEmitter;
 
 EventEmitter.prototype._events = undefined;
+EventEmitter.prototype._eventsCount = 0;
 EventEmitter.prototype._maxListeners = undefined;
 
 // By default EventEmitters will print a warning if more than 10 listeners are
 // added to it. This is a useful default which helps finding memory leaks.
-EventEmitter.defaultMaxListeners = 10;
+var defaultMaxListeners = 10;
+
+function checkListener(listener) {
+  if (typeof listener !== 'function') {
+    throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof listener);
+  }
+}
+
+Object.defineProperty(EventEmitter, 'defaultMaxListeners', {
+  enumerable: true,
+  get: function() {
+    return defaultMaxListeners;
+  },
+  set: function(arg) {
+    if (typeof arg !== 'number' || arg < 0 || NumberIsNaN(arg)) {
+      throw new RangeError('The value of "defaultMaxListeners" is out of range. It must be a non-negative number. Received ' + arg + '.');
+    }
+    defaultMaxListeners = arg;
+  }
+});
+
+EventEmitter.init = function() {
+
+  if (this._events === undefined ||
+      this._events === Object.getPrototypeOf(this)._events) {
+    this._events = Object.create(null);
+    this._eventsCount = 0;
+  }
+
+  this._maxListeners = this._maxListeners || undefined;
+};
 
 // Obviously not all Emitters should be limited to 10. This function allows
 // that to be increased. Set to zero for unlimited.
-EventEmitter.prototype.setMaxListeners = function(n) {
-  if (!isNumber(n) || n < 0 || isNaN(n))
-    throw TypeError('n must be a positive number');
+EventEmitter.prototype.setMaxListeners = function setMaxListeners(n) {
+  if (typeof n !== 'number' || n < 0 || NumberIsNaN(n)) {
+    throw new RangeError('The value of "n" is out of range. It must be a non-negative number. Received ' + n + '.');
+  }
   this._maxListeners = n;
   return this;
 };
 
-EventEmitter.prototype.emit = function(type) {
-  var er, handler, len, args, i, listeners;
+function _getMaxListeners(that) {
+  if (that._maxListeners === undefined)
+    return EventEmitter.defaultMaxListeners;
+  return that._maxListeners;
+}
 
-  if (!this._events)
-    this._events = {};
+EventEmitter.prototype.getMaxListeners = function getMaxListeners() {
+  return _getMaxListeners(this);
+};
 
-  // If there is no 'error' event listener then throw.
-  if (type === 'error') {
-    if (!this._events.error ||
-        (isObject(this._events.error) && !this._events.error.length)) {
-      er = arguments[1];
-      if (er instanceof Error) {
-        throw er; // Unhandled 'error' event
-      } else {
-        // At least give some kind of context to the user
-        var err = new Error('Uncaught, unspecified "error" event. (' + er + ')');
-        err.context = er;
-        throw err;
-      }
-    }
-  }
+EventEmitter.prototype.emit = function emit(type) {
+  var args = [];
+  for (var i = 1; i < arguments.length; i++) args.push(arguments[i]);
+  var doError = (type === 'error');
 
-  handler = this._events[type];
-
-  if (isUndefined(handler))
+  var events = this._events;
+  if (events !== undefined)
+    doError = (doError && events.error === undefined);
+  else if (!doError)
     return false;
 
-  if (isFunction(handler)) {
-    switch (arguments.length) {
-      // fast cases
-      case 1:
-        handler.call(this);
-        break;
-      case 2:
-        handler.call(this, arguments[1]);
-        break;
-      case 3:
-        handler.call(this, arguments[1], arguments[2]);
-        break;
-      // slower
-      default:
-        args = Array.prototype.slice.call(arguments, 1);
-        handler.apply(this, args);
+  // If there is no 'error' event listener then throw.
+  if (doError) {
+    var er;
+    if (args.length > 0)
+      er = args[0];
+    if (er instanceof Error) {
+      // Note: The comments on the `throw` lines are intentional, they show
+      // up in Node's output if this results in an unhandled exception.
+      throw er; // Unhandled 'error' event
     }
-  } else if (isObject(handler)) {
-    args = Array.prototype.slice.call(arguments, 1);
-    listeners = handler.slice();
-    len = listeners.length;
-    for (i = 0; i < len; i++)
-      listeners[i].apply(this, args);
+    // At least give some kind of context to the user
+    var err = new Error('Unhandled error.' + (er ? ' (' + er.message + ')' : ''));
+    err.context = er;
+    throw err; // Unhandled 'error' event
+  }
+
+  var handler = events[type];
+
+  if (handler === undefined)
+    return false;
+
+  if (typeof handler === 'function') {
+    ReflectApply(handler, this, args);
+  } else {
+    var len = handler.length;
+    var listeners = arrayClone(handler, len);
+    for (var i = 0; i < len; ++i)
+      ReflectApply(listeners[i], this, args);
   }
 
   return true;
 };
 
-EventEmitter.prototype.addListener = function(type, listener) {
+function _addListener(target, type, listener, prepend) {
   var m;
+  var events;
+  var existing;
 
-  if (!isFunction(listener))
-    throw TypeError('listener must be a function');
+  checkListener(listener);
 
-  if (!this._events)
-    this._events = {};
+  events = target._events;
+  if (events === undefined) {
+    events = target._events = Object.create(null);
+    target._eventsCount = 0;
+  } else {
+    // To avoid recursion in the case that type === "newListener"! Before
+    // adding it to the listeners, first emit "newListener".
+    if (events.newListener !== undefined) {
+      target.emit('newListener', type,
+                  listener.listener ? listener.listener : listener);
 
-  // To avoid recursion in the case that type === "newListener"! Before
-  // adding it to the listeners, first emit "newListener".
-  if (this._events.newListener)
-    this.emit('newListener', type,
-              isFunction(listener.listener) ?
-              listener.listener : listener);
+      // Re-assign `events` because a newListener handler could have caused the
+      // this._events to be assigned to a new object
+      events = target._events;
+    }
+    existing = events[type];
+  }
 
-  if (!this._events[type])
+  if (existing === undefined) {
     // Optimize the case of one listener. Don't need the extra array object.
-    this._events[type] = listener;
-  else if (isObject(this._events[type]))
-    // If we've already got an array, just append.
-    this._events[type].push(listener);
-  else
-    // Adding the second element, need to change to array.
-    this._events[type] = [this._events[type], listener];
-
-  // Check for listener leak
-  if (isObject(this._events[type]) && !this._events[type].warned) {
-    if (!isUndefined(this._maxListeners)) {
-      m = this._maxListeners;
+    existing = events[type] = listener;
+    ++target._eventsCount;
+  } else {
+    if (typeof existing === 'function') {
+      // Adding the second element, need to change to array.
+      existing = events[type] =
+        prepend ? [listener, existing] : [existing, listener];
+      // If we've already got an array, just append.
+    } else if (prepend) {
+      existing.unshift(listener);
     } else {
-      m = EventEmitter.defaultMaxListeners;
+      existing.push(listener);
     }
 
-    if (m && m > 0 && this._events[type].length > m) {
-      this._events[type].warned = true;
-      console.error('(node) warning: possible EventEmitter memory ' +
-                    'leak detected. %d listeners added. ' +
-                    'Use emitter.setMaxListeners() to increase limit.',
-                    this._events[type].length);
-      if (typeof console.trace === 'function') {
-        // not supported in IE 10
-        console.trace();
-      }
+    // Check for listener leak
+    m = _getMaxListeners(target);
+    if (m > 0 && existing.length > m && !existing.warned) {
+      existing.warned = true;
+      // No error code for this since it is a Warning
+      // eslint-disable-next-line no-restricted-syntax
+      var w = new Error('Possible EventEmitter memory leak detected. ' +
+                          existing.length + ' ' + String(type) + ' listeners ' +
+                          'added. Use emitter.setMaxListeners() to ' +
+                          'increase limit');
+      w.name = 'MaxListenersExceededWarning';
+      w.emitter = target;
+      w.type = type;
+      w.count = existing.length;
+      ProcessEmitWarning(w);
     }
   }
 
-  return this;
+  return target;
+}
+
+EventEmitter.prototype.addListener = function addListener(type, listener) {
+  return _addListener(this, type, listener, false);
 };
 
 EventEmitter.prototype.on = EventEmitter.prototype.addListener;
 
-EventEmitter.prototype.once = function(type, listener) {
-  if (!isFunction(listener))
-    throw TypeError('listener must be a function');
+EventEmitter.prototype.prependListener =
+    function prependListener(type, listener) {
+      return _addListener(this, type, listener, true);
+    };
 
-  var fired = false;
-
-  function g() {
-    this.removeListener(type, g);
-
-    if (!fired) {
-      fired = true;
-      listener.apply(this, arguments);
-    }
-  }
-
-  g.listener = listener;
-  this.on(type, g);
-
-  return this;
-};
-
-// emits a 'removeListener' event iff the listener was removed
-EventEmitter.prototype.removeListener = function(type, listener) {
-  var list, position, length, i;
-
-  if (!isFunction(listener))
-    throw TypeError('listener must be a function');
-
-  if (!this._events || !this._events[type])
-    return this;
-
-  list = this._events[type];
-  length = list.length;
-  position = -1;
-
-  if (list === listener ||
-      (isFunction(list.listener) && list.listener === listener)) {
-    delete this._events[type];
-    if (this._events.removeListener)
-      this.emit('removeListener', type, listener);
-
-  } else if (isObject(list)) {
-    for (i = length; i-- > 0;) {
-      if (list[i] === listener ||
-          (list[i].listener && list[i].listener === listener)) {
-        position = i;
-        break;
-      }
-    }
-
-    if (position < 0)
-      return this;
-
-    if (list.length === 1) {
-      list.length = 0;
-      delete this._events[type];
-    } else {
-      list.splice(position, 1);
-    }
-
-    if (this._events.removeListener)
-      this.emit('removeListener', type, listener);
-  }
-
-  return this;
-};
-
-EventEmitter.prototype.removeAllListeners = function(type) {
-  var key, listeners;
-
-  if (!this._events)
-    return this;
-
-  // not listening for removeListener, no need to emit
-  if (!this._events.removeListener) {
+function onceWrapper() {
+  if (!this.fired) {
+    this.target.removeListener(this.type, this.wrapFn);
+    this.fired = true;
     if (arguments.length === 0)
-      this._events = {};
-    else if (this._events[type])
-      delete this._events[type];
-    return this;
+      return this.listener.call(this.target);
+    return this.listener.apply(this.target, arguments);
   }
+}
 
-  // emit removeListener for all listeners on all events
-  if (arguments.length === 0) {
-    for (key in this._events) {
-      if (key === 'removeListener') continue;
-      this.removeAllListeners(key);
-    }
-    this.removeAllListeners('removeListener');
-    this._events = {};
-    return this;
-  }
+function _onceWrap(target, type, listener) {
+  var state = { fired: false, wrapFn: undefined, target: target, type: type, listener: listener };
+  var wrapped = onceWrapper.bind(state);
+  wrapped.listener = listener;
+  state.wrapFn = wrapped;
+  return wrapped;
+}
 
-  listeners = this._events[type];
-
-  if (isFunction(listeners)) {
-    this.removeListener(type, listeners);
-  } else if (listeners) {
-    // LIFO order
-    while (listeners.length)
-      this.removeListener(type, listeners[listeners.length - 1]);
-  }
-  delete this._events[type];
-
+EventEmitter.prototype.once = function once(type, listener) {
+  checkListener(listener);
+  this.on(type, _onceWrap(this, type, listener));
   return this;
 };
 
-EventEmitter.prototype.listeners = function(type) {
-  var ret;
-  if (!this._events || !this._events[type])
-    ret = [];
-  else if (isFunction(this._events[type]))
-    ret = [this._events[type]];
-  else
-    ret = this._events[type].slice();
-  return ret;
+EventEmitter.prototype.prependOnceListener =
+    function prependOnceListener(type, listener) {
+      checkListener(listener);
+      this.prependListener(type, _onceWrap(this, type, listener));
+      return this;
+    };
+
+// Emits a 'removeListener' event if and only if the listener was removed.
+EventEmitter.prototype.removeListener =
+    function removeListener(type, listener) {
+      var list, events, position, i, originalListener;
+
+      checkListener(listener);
+
+      events = this._events;
+      if (events === undefined)
+        return this;
+
+      list = events[type];
+      if (list === undefined)
+        return this;
+
+      if (list === listener || list.listener === listener) {
+        if (--this._eventsCount === 0)
+          this._events = Object.create(null);
+        else {
+          delete events[type];
+          if (events.removeListener)
+            this.emit('removeListener', type, list.listener || listener);
+        }
+      } else if (typeof list !== 'function') {
+        position = -1;
+
+        for (i = list.length - 1; i >= 0; i--) {
+          if (list[i] === listener || list[i].listener === listener) {
+            originalListener = list[i].listener;
+            position = i;
+            break;
+          }
+        }
+
+        if (position < 0)
+          return this;
+
+        if (position === 0)
+          list.shift();
+        else {
+          spliceOne(list, position);
+        }
+
+        if (list.length === 1)
+          events[type] = list[0];
+
+        if (events.removeListener !== undefined)
+          this.emit('removeListener', type, originalListener || listener);
+      }
+
+      return this;
+    };
+
+EventEmitter.prototype.off = EventEmitter.prototype.removeListener;
+
+EventEmitter.prototype.removeAllListeners =
+    function removeAllListeners(type) {
+      var listeners, events, i;
+
+      events = this._events;
+      if (events === undefined)
+        return this;
+
+      // not listening for removeListener, no need to emit
+      if (events.removeListener === undefined) {
+        if (arguments.length === 0) {
+          this._events = Object.create(null);
+          this._eventsCount = 0;
+        } else if (events[type] !== undefined) {
+          if (--this._eventsCount === 0)
+            this._events = Object.create(null);
+          else
+            delete events[type];
+        }
+        return this;
+      }
+
+      // emit removeListener for all listeners on all events
+      if (arguments.length === 0) {
+        var keys = Object.keys(events);
+        var key;
+        for (i = 0; i < keys.length; ++i) {
+          key = keys[i];
+          if (key === 'removeListener') continue;
+          this.removeAllListeners(key);
+        }
+        this.removeAllListeners('removeListener');
+        this._events = Object.create(null);
+        this._eventsCount = 0;
+        return this;
+      }
+
+      listeners = events[type];
+
+      if (typeof listeners === 'function') {
+        this.removeListener(type, listeners);
+      } else if (listeners !== undefined) {
+        // LIFO order
+        for (i = listeners.length - 1; i >= 0; i--) {
+          this.removeListener(type, listeners[i]);
+        }
+      }
+
+      return this;
+    };
+
+function _listeners(target, type, unwrap) {
+  var events = target._events;
+
+  if (events === undefined)
+    return [];
+
+  var evlistener = events[type];
+  if (evlistener === undefined)
+    return [];
+
+  if (typeof evlistener === 'function')
+    return unwrap ? [evlistener.listener || evlistener] : [evlistener];
+
+  return unwrap ?
+    unwrapListeners(evlistener) : arrayClone(evlistener, evlistener.length);
+}
+
+EventEmitter.prototype.listeners = function listeners(type) {
+  return _listeners(this, type, true);
 };
 
-EventEmitter.prototype.listenerCount = function(type) {
-  if (this._events) {
-    var evlistener = this._events[type];
-
-    if (isFunction(evlistener))
-      return 1;
-    else if (evlistener)
-      return evlistener.length;
-  }
-  return 0;
+EventEmitter.prototype.rawListeners = function rawListeners(type) {
+  return _listeners(this, type, false);
 };
 
 EventEmitter.listenerCount = function(emitter, type) {
-  return emitter.listenerCount(type);
+  if (typeof emitter.listenerCount === 'function') {
+    return emitter.listenerCount(type);
+  } else {
+    return listenerCount.call(emitter, type);
+  }
 };
 
-function isFunction(arg) {
-  return typeof arg === 'function';
+EventEmitter.prototype.listenerCount = listenerCount;
+function listenerCount(type) {
+  var events = this._events;
+
+  if (events !== undefined) {
+    var evlistener = events[type];
+
+    if (typeof evlistener === 'function') {
+      return 1;
+    } else if (evlistener !== undefined) {
+      return evlistener.length;
+    }
+  }
+
+  return 0;
 }
 
-function isNumber(arg) {
-  return typeof arg === 'number';
+EventEmitter.prototype.eventNames = function eventNames() {
+  return this._eventsCount > 0 ? ReflectOwnKeys(this._events) : [];
+};
+
+function arrayClone(arr, n) {
+  var copy = new Array(n);
+  for (var i = 0; i < n; ++i)
+    copy[i] = arr[i];
+  return copy;
 }
 
-function isObject(arg) {
-  return typeof arg === 'object' && arg !== null;
+function spliceOne(list, index) {
+  for (; index + 1 < list.length; index++)
+    list[index] = list[index + 1];
+  list.pop();
 }
 
-function isUndefined(arg) {
-  return arg === void 0;
+function unwrapListeners(arr) {
+  var ret = new Array(arr.length);
+  for (var i = 0; i < ret.length; ++i) {
+    ret[i] = arr[i].listener || arr[i];
+  }
+  return ret;
 }
 
 
 /***/ }),
 
-/***/ 285:
+/***/ 291:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -662,15 +627,15 @@ var _createClass = function () { function defineProperties(target, props) { for 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * See the License for the specific language governing permissions and limitations under the License.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
 
-var _util = __webpack_require__(22);
+var _util = __webpack_require__(19);
 
 var _util2 = _interopRequireDefault(_util);
 
-var _openlayers = __webpack_require__(11);
+var _openlayers = __webpack_require__(9);
 
 var _openlayers2 = _interopRequireDefault(_openlayers);
 
-var _urlParse = __webpack_require__(39);
+var _urlParse = __webpack_require__(35);
 
 var _urlParse2 = _interopRequireDefault(_urlParse);
 
@@ -864,16 +829,28 @@ exports.default = new ArcGISRestService();
 
 /***/ }),
 
-/***/ 39:
+/***/ 35:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 
-var required = __webpack_require__(50)
-  , qs = __webpack_require__(45)
+var required = __webpack_require__(47)
+  , qs = __webpack_require__(41)
+  , slashes = /^[A-Za-z][A-Za-z0-9+-.]*:\/\//
   , protocolre = /^([a-z][a-z0-9.+-]*:)?(\/\/)?([\S\s]*)/i
-  , slashes = /^[A-Za-z][A-Za-z0-9+-.]*:\/\//;
+  , whitespace = '[\\x09\\x0A\\x0B\\x0C\\x0D\\x20\\xA0\\u1680\\u180E\\u2000\\u2001\\u2002\\u2003\\u2004\\u2005\\u2006\\u2007\\u2008\\u2009\\u200A\\u202F\\u205F\\u3000\\u2028\\u2029\\uFEFF]'
+  , left = new RegExp('^'+ whitespace +'+');
+
+/**
+ * Trim a given string.
+ *
+ * @param {String} str String to trim.
+ * @public
+ */
+function trimLeft(str) {
+  return (str ? str : '').toString().replace(left, '');
+}
 
 /**
  * These are the parse rules for the URL parser, it informs the parser
@@ -890,6 +867,9 @@ var required = __webpack_require__(50)
 var rules = [
   ['#', 'hash'],                        // Extract from the back.
   ['?', 'query'],                       // Extract from the back.
+  function sanitize(address) {          // Sanitize what is left of the address
+    return address.replace('\\', '/');
+  },
   ['/', 'pathname'],                    // Extract from the back.
   ['@', 'auth', 1],                     // Extract from the front.
   [NaN, 'host', undefined, 1, 1],       // Set left over value.
@@ -917,19 +897,27 @@ var ignore = { hash: 1, query: 1 };
  *
  * @param {Object|String} loc Optional default location object.
  * @returns {Object} lolcation object.
- * @api public
+ * @public
  */
 function lolcation(loc) {
-  loc = loc || global.location || {};
+  var globalVar;
+
+  if (typeof window !== 'undefined') globalVar = window;
+  else if (typeof global !== 'undefined') globalVar = global;
+  else if (typeof self !== 'undefined') globalVar = self;
+  else globalVar = {};
+
+  var location = globalVar.location || {};
+  loc = loc || location;
 
   var finaldestination = {}
     , type = typeof loc
     , key;
 
   if ('blob:' === loc.protocol) {
-    finaldestination = new URL(unescape(loc.pathname), {});
+    finaldestination = new Url(unescape(loc.pathname), {});
   } else if ('string' === type) {
-    finaldestination = new URL(loc, {});
+    finaldestination = new Url(loc, {});
     for (key in ignore) delete finaldestination[key];
   } else if ('object' === type) {
     for (key in loc) {
@@ -958,9 +946,10 @@ function lolcation(loc) {
  *
  * @param {String} address URL we want to extract from.
  * @return {ProtocolExtract} Extracted information.
- * @api private
+ * @private
  */
 function extractProtocol(address) {
+  address = trimLeft(address);
   var match = protocolre.exec(address);
 
   return {
@@ -976,9 +965,11 @@ function extractProtocol(address) {
  * @param {String} relative Pathname of the relative URL.
  * @param {String} base Pathname of the base URL.
  * @return {String} Resolved pathname.
- * @api private
+ * @private
  */
 function resolve(relative, base) {
+  if (relative === '') return base;
+
   var path = (base || '/').split('/').slice(0, -1).concat(relative.split('/'))
     , i = path.length
     , last = path[i - 1]
@@ -1009,15 +1000,20 @@ function resolve(relative, base) {
  * create an actual constructor as it's much more memory efficient and
  * faster and it pleases my OCD.
  *
+ * It is worth noting that we should not use `URL` as class name to prevent
+ * clashes with the global URL instance that got introduced in browsers.
+ *
  * @constructor
  * @param {String} address URL we want to parse.
- * @param {Object|String} location Location defaults for relative paths.
- * @param {Boolean|Function} parser Parser for the query string.
- * @api public
+ * @param {Object|String} [location] Location defaults for relative paths.
+ * @param {Boolean|Function} [parser] Parser for the query string.
+ * @private
  */
-function URL(address, location, parser) {
-  if (!(this instanceof URL)) {
-    return new URL(address, location, parser);
+function Url(address, location, parser) {
+  address = trimLeft(address);
+
+  if (!(this instanceof Url)) {
+    return new Url(address, location, parser);
   }
 
   var relative, extracted, parse, instruction, index, key
@@ -1059,10 +1055,16 @@ function URL(address, location, parser) {
   // When the authority component is absent the URL starts with a path
   // component.
   //
-  if (!extracted.slashes) instructions[2] = [/(.*)/, 'pathname'];
+  if (!extracted.slashes) instructions[3] = [/(.*)/, 'pathname'];
 
   for (; i < instructions.length; i++) {
     instruction = instructions[i];
+
+    if (typeof instruction === 'function') {
+      address = instruction(address);
+      continue;
+    }
+
     parse = instruction[0];
     key = instruction[1];
 
@@ -1153,8 +1155,8 @@ function URL(address, location, parser) {
  *                               used to parse the query.
  *                               When setting the protocol, double slash will be
  *                               removed from the final url if it is true.
- * @returns {URL}
- * @api public
+ * @returns {URL} URL instance for chaining.
+ * @public
  */
 function set(part, value, fn) {
   var url = this;
@@ -1239,8 +1241,8 @@ function set(part, value, fn) {
  * Transform the properties back in to a valid and full URL string.
  *
  * @param {Function} stringify Optional query stringify function.
- * @returns {String}
- * @api public
+ * @returns {String} Compiled version of the URL.
+ * @public
  */
 function toString(stringify) {
   if (!stringify || 'function' !== typeof stringify) stringify = qs.stringify;
@@ -1269,39 +1271,60 @@ function toString(stringify) {
   return result;
 }
 
-URL.prototype = { set: set, toString: toString };
+Url.prototype = { set: set, toString: toString };
 
 //
 // Expose the URL parser and some additional properties that might be useful for
 // others or testing.
 //
-URL.extractProtocol = extractProtocol;
-URL.location = lolcation;
-URL.qs = qs;
+Url.extractProtocol = extractProtocol;
+Url.location = lolcation;
+Url.trimLeft = trimLeft;
+Url.qs = qs;
 
-module.exports = URL;
+module.exports = Url;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
 
 /***/ }),
 
-/***/ 45:
+/***/ 41:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var has = Object.prototype.hasOwnProperty;
+var has = Object.prototype.hasOwnProperty
+  , undef;
 
 /**
  * Decode a URI encoded string.
  *
  * @param {String} input The URI encoded string.
- * @returns {String} The decoded string.
+ * @returns {String|Null} The decoded string.
  * @api private
  */
 function decode(input) {
-  return decodeURIComponent(input.replace(/\+/g, ' '));
+  try {
+    return decodeURIComponent(input.replace(/\+/g, ' '));
+  } catch (e) {
+    return null;
+  }
+}
+
+/**
+ * Attempts to encode a given input.
+ *
+ * @param {String} input The string that needs to be encoded.
+ * @returns {String|Null} The encoded string.
+ * @api private
+ */
+function encode(input) {
+  try {
+    return encodeURIComponent(input);
+  } catch (e) {
+    return null;
+  }
 }
 
 /**
@@ -1316,15 +1339,21 @@ function querystring(query) {
     , result = {}
     , part;
 
-  //
-  // Little nifty parsing hack, leverage the fact that RegExp.exec increments
-  // the lastIndex property so we can continue executing this loop until we've
-  // parsed all results.
-  //
-  for (;
-    part = parser.exec(query);
-    result[decode(part[1])] = decode(part[2])
-  );
+  while (part = parser.exec(query)) {
+    var key = decode(part[1])
+      , value = decode(part[2]);
+
+    //
+    // Prevent overriding of existing properties. This ensures that build-in
+    // methods like `toString` or __proto__ are not overriden by malicious
+    // querystrings.
+    //
+    // In the case if failed decoding, we want to omit the key/value pairs
+    // from the result.
+    //
+    if (key === null || value === null || key in result) continue;
+    result[key] = value;
+  }
 
   return result;
 }
@@ -1340,16 +1369,36 @@ function querystring(query) {
 function querystringify(obj, prefix) {
   prefix = prefix || '';
 
-  var pairs = [];
+  var pairs = []
+    , value
+    , key;
 
   //
   // Optionally prefix with a '?' if needed
   //
   if ('string' !== typeof prefix) prefix = '?';
 
-  for (var key in obj) {
+  for (key in obj) {
     if (has.call(obj, key)) {
-      pairs.push(encodeURIComponent(key) +'='+ encodeURIComponent(obj[key]));
+      value = obj[key];
+
+      //
+      // Edge cases where we actually want to encode the value to an empty
+      // string instead of the stringified value.
+      //
+      if (!value && (value === null || value === undef || isNaN(value))) {
+        value = '';
+      }
+
+      key = encodeURIComponent(key);
+      value = encodeURIComponent(value);
+
+      //
+      // If we failed to encode the strings, we should bail out as we don't
+      // want to add invalid strings to the query.
+      //
+      if (key === null || value === null) continue;
+      pairs.push(key +'='+ value);
     }
   }
 
@@ -1365,7 +1414,7 @@ exports.parse = querystring;
 
 /***/ }),
 
-/***/ 50:
+/***/ 47:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1411,7 +1460,7 @@ module.exports = function required(port, protocol) {
 
 /***/ }),
 
-/***/ 602:
+/***/ 565:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1419,23 +1468,23 @@ module.exports = function required(port, protocol) {
 
 exports.__esModule = true;
 
-var _react = __webpack_require__(3);
+var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _ArcGISRestService = __webpack_require__(285);
+var _ArcGISRestService = __webpack_require__(291);
 
 var _ArcGISRestService2 = _interopRequireDefault(_ArcGISRestService);
 
-var _Events = __webpack_require__(14);
+var _Events = __webpack_require__(12);
 
 var _Events2 = _interopRequireDefault(_Events);
 
-var _FieldSet2 = __webpack_require__(10);
+var _FieldSet2 = __webpack_require__(8);
 
 var _FieldSet3 = _interopRequireDefault(_FieldSet2);
 
-var _openlayers = __webpack_require__(11);
+var _openlayers = __webpack_require__(9);
 
 var _openlayers2 = _interopRequireDefault(_openlayers);
 
@@ -1529,6 +1578,7 @@ var Legend = function (_Component2) {
                         p = s.getParams();
                     var url = s.getUrls()[0];
                     url = url.replace("ows", "wms");
+                    console.log(url);
                     url += url.indexOf("?") == -1 ? "?" : "&";
                     url += "layer=" + p.LAYERS;
                     url += "&request=GetLegendGraphic&format=image%2Fpng&transparent=true&legend_options=fontAntiAliasing:true;fontSize:14;&width=30&height=30";
@@ -1681,6 +1731,186 @@ LegendWidget.ConfigForm = ConfigForm;
 Dashboard.registerWidget(LegendWidget);
 exports.default = LegendWidget;
 
+/***/ }),
+
+/***/ 8:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var JSONField = function (_Component) {
+    _inherits(JSONField, _Component);
+
+    function JSONField(props) {
+        _classCallCheck(this, JSONField);
+
+        var _this = _possibleConstructorReturn(this, _Component.call(this, props));
+
+        Object.defineProperty(_this, 'value', {
+            get: function get() {
+                return JSON.parse(_this.refs.textarea.value);
+            },
+            set: function set(newValue) {
+                _this.refs.textarea.value = JSON.stringify(newValue || {});
+            },
+            enumerable: true,
+            configurable: true
+        });
+        return _this;
+    }
+
+    JSONField.prototype.render = function render() {
+        var props = _objectWithoutProperties(this.props, []);
+
+        delete props.ref;
+        return _react2.default.createElement('textarea', _extends({}, props, { ref: 'textarea' }));
+    };
+
+    return JSONField;
+}(_react.Component);
+
+var FieldSet = function (_Component2) {
+    _inherits(FieldSet, _Component2);
+
+    function FieldSet(props) {
+        _classCallCheck(this, FieldSet);
+
+        var _this2 = _possibleConstructorReturn(this, _Component2.call(this, props));
+
+        _this2.state = {
+            schema: props.schema || _this2.getSchema(props),
+            data: props.data || _this2.getInitialData(props)
+        };
+        _this2.fields = {};
+        return _this2;
+    }
+
+    FieldSet.prototype.getSchema = function getSchema() {
+        return {};
+    };
+
+    FieldSet.prototype.getInitialData = function getInitialData() {
+        return {};
+    };
+
+    FieldSet.prototype.render = function render() {
+        var _this3 = this;
+
+        var _state = this.state,
+            schema = _state.schema,
+            data = _state.data;
+
+        return _react2.default.createElement(
+            'div',
+            null,
+            data && Object.keys(schema).map(function (key, index) {
+                var Field = _this3.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null);
+                return _react2.default.createElement(
+                    'div',
+                    { key: index },
+                    Field
+                );
+            })
+        );
+    };
+
+    FieldSet.prototype.field = function field(name, schema, value) {
+        var _this4 = this;
+
+        var _schema$props = schema.props,
+            props = _schema$props === undefined ? {} : _schema$props;
+
+        props.className = "form-control";
+        props.ref = function (f) {
+            if (f) {
+                f.value = value;
+                _this4.fields[name] = f;
+                f.fieldSet = _this4;
+            }
+        };
+        var field = null;
+
+        if (['text', 'number', 'url', 'email'].indexOf(schema.type) != -1) {
+            props.type = schema.type;
+            field = _react2.default.createElement('input', props);
+        } else if (schema.type == "textarea") {
+            field = _react2.default.createElement('textarea', props);
+        } else if (schema.type == "json") {
+            field = _react2.default.createElement(JSONField, props);
+        } else if (schema.type == 'select') {
+            field = _react2.default.createElement(
+                'select',
+                props,
+                this.getSelectOptions(name, schema, value)
+            );
+        }
+        var label = schema.label || name.charAt(0).toUpperCase() + name.slice(1);
+        return _react2.default.createElement(
+            'div',
+            { className: 'form-group' },
+            _react2.default.createElement(
+                'label',
+                null,
+                label
+            ),
+            field
+        );
+    };
+
+    FieldSet.prototype.getSelectOptions = function getSelectOptions(name, schema, value) {
+        var options = schema.options;
+
+        if (!options) return null;
+        if ((typeof options === 'undefined' ? 'undefined' : _typeof(options)) == "object") {
+            return Object.keys(options).map(function (key) {
+                return _react2.default.createElement(
+                    'option',
+                    { value: key },
+                    options[key]
+                );
+            });
+        } else if (typeof options == 'function') {
+            return options(this, this.state.data);
+        }
+        return null;
+    };
+
+    FieldSet.prototype.getData = function getData() {
+        var _this5 = this;
+
+        var data = {};
+        Object.keys(this.fields).map(function (key) {
+            data[key] = _this5.fields[key].value;
+        });
+        return data;
+    };
+
+    return FieldSet;
+}(_react.Component);
+
+exports.default = FieldSet;
+
 /***/ })
 
-},[602]);
+},[565]);

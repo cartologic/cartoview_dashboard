@@ -1,6 +1,6 @@
 webpackJsonp([3],{
 
-/***/ 10:
+/***/ 12:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8,193 +8,13 @@ webpackJsonp([3],{
 
 exports.__esModule = true;
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _react = __webpack_require__(3);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var JSONField = function (_Component) {
-    _inherits(JSONField, _Component);
-
-    function JSONField(props) {
-        _classCallCheck(this, JSONField);
-
-        var _this = _possibleConstructorReturn(this, _Component.call(this, props));
-
-        Object.defineProperty(_this, 'value', {
-            get: function get() {
-                return JSON.parse(_this.refs.textarea.value);
-            },
-            set: function set(newValue) {
-                _this.refs.textarea.value = JSON.stringify(newValue || {});
-            },
-            enumerable: true,
-            configurable: true
-        });
-        return _this;
-    }
-
-    JSONField.prototype.render = function render() {
-        var props = _objectWithoutProperties(this.props, []);
-
-        delete props.ref;
-        return _react2.default.createElement('textarea', _extends({}, props, { ref: 'textarea' }));
-    };
-
-    return JSONField;
-}(_react.Component);
-
-var FieldSet = function (_Component2) {
-    _inherits(FieldSet, _Component2);
-
-    function FieldSet(props) {
-        _classCallCheck(this, FieldSet);
-
-        var _this2 = _possibleConstructorReturn(this, _Component2.call(this, props));
-
-        _this2.state = {
-            schema: props.schema || _this2.getSchema(props),
-            data: props.data || _this2.getInitialData(props)
-        };
-        _this2.fields = {};
-        return _this2;
-    }
-
-    FieldSet.prototype.getSchema = function getSchema() {
-        return {};
-    };
-
-    FieldSet.prototype.getInitialData = function getInitialData() {
-        return {};
-    };
-
-    FieldSet.prototype.render = function render() {
-        var _this3 = this;
-
-        var _state = this.state,
-            schema = _state.schema,
-            data = _state.data;
-
-        return _react2.default.createElement(
-            'div',
-            null,
-            data && Object.keys(schema).map(function (key, index) {
-                var Field = _this3.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null);
-                return _react2.default.createElement(
-                    'div',
-                    { key: index },
-                    Field
-                );
-            })
-        );
-    };
-
-    FieldSet.prototype.field = function field(name, schema, value) {
-        var _this4 = this;
-
-        var _schema$props = schema.props,
-            props = _schema$props === undefined ? {} : _schema$props;
-
-        props.className = "form-control";
-        props.ref = function (f) {
-            if (f) {
-                f.value = value;
-                _this4.fields[name] = f;
-                f.fieldSet = _this4;
-            }
-        };
-        var field = null;
-
-        if (['text', 'number', 'url', 'email'].indexOf(schema.type) != -1) {
-            props.type = schema.type;
-            field = _react2.default.createElement('input', props);
-        } else if (schema.type == "textarea") {
-            field = _react2.default.createElement('textarea', props);
-        } else if (schema.type == "json") {
-            field = _react2.default.createElement(JSONField, props);
-        } else if (schema.type == 'select') {
-            field = _react2.default.createElement(
-                'select',
-                props,
-                this.getSelectOptions(name, schema, value)
-            );
-        }
-        var label = schema.label || name.charAt(0).toUpperCase() + name.slice(1);
-        return _react2.default.createElement(
-            'div',
-            { className: 'form-group' },
-            _react2.default.createElement(
-                'label',
-                null,
-                label
-            ),
-            field
-        );
-    };
-
-    FieldSet.prototype.getSelectOptions = function getSelectOptions(name, schema, value) {
-        var options = schema.options;
-
-        if (!options) return null;
-        if ((typeof options === 'undefined' ? 'undefined' : _typeof(options)) == "object") {
-            return Object.keys(options).map(function (key) {
-                return _react2.default.createElement(
-                    'option',
-                    { value: key },
-                    options[key]
-                );
-            });
-        } else if (typeof options == 'function') {
-            return options(this, this.state.data);
-        }
-        return null;
-    };
-
-    FieldSet.prototype.getData = function getData() {
-        var _this5 = this;
-
-        var data = {};
-        Object.keys(this.fields).map(function (key) {
-            data[key] = _this5.fields[key].value;
-        });
-        return data;
-    };
-
-    return FieldSet;
-}(_react.Component);
-
-exports.default = FieldSet;
-
-/***/ }),
-
-/***/ 14:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-
-var _events = __webpack_require__(23);
+var _events = __webpack_require__(20);
 
 exports.default = new _events.EventEmitter();
 
 /***/ }),
 
-/***/ 20:
+/***/ 17:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -205,21 +25,12 @@ exports.default = new _events.EventEmitter();
  */
 
 if (true) {
-  var REACT_ELEMENT_TYPE = (typeof Symbol === 'function' &&
-    Symbol.for &&
-    Symbol.for('react.element')) ||
-    0xeac7;
-
-  var isValidElement = function(object) {
-    return typeof object === 'object' &&
-      object !== null &&
-      object.$$typeof === REACT_ELEMENT_TYPE;
-  };
+  var ReactIs = __webpack_require__(46);
 
   // By explicitly using `prop-types` you are opting into new development behavior.
   // http://fb.me/prop-types-in-prod
   var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(44)(isValidElement, throwOnDirectAccess);
+  module.exports = __webpack_require__(40)(ReactIs.isElement, throwOnDirectAccess);
 } else {
   // By explicitly using `prop-types` you are opting into new production behavior.
   // http://fb.me/prop-types-in-prod
@@ -229,7 +40,7 @@ if (true) {
 
 /***/ }),
 
-/***/ 22:
+/***/ 19:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -239,7 +50,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _openlayers = __webpack_require__(11);
+var _openlayers = __webpack_require__(9);
 
 var _openlayers2 = _interopRequireDefault(_openlayers);
 
@@ -366,9 +177,10 @@ exports.default = {
 
 /***/ }),
 
-/***/ 23:
-/***/ (function(module, exports) {
+/***/ 20:
+/***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -390,9 +202,39 @@ exports.default = {
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
+
+var R = typeof Reflect === 'object' ? Reflect : null
+var ReflectApply = R && typeof R.apply === 'function'
+  ? R.apply
+  : function ReflectApply(target, receiver, args) {
+    return Function.prototype.apply.call(target, receiver, args);
+  }
+
+var ReflectOwnKeys
+if (R && typeof R.ownKeys === 'function') {
+  ReflectOwnKeys = R.ownKeys
+} else if (Object.getOwnPropertySymbols) {
+  ReflectOwnKeys = function ReflectOwnKeys(target) {
+    return Object.getOwnPropertyNames(target)
+      .concat(Object.getOwnPropertySymbols(target));
+  };
+} else {
+  ReflectOwnKeys = function ReflectOwnKeys(target) {
+    return Object.getOwnPropertyNames(target);
+  };
+}
+
+function ProcessEmitWarning(warning) {
+  if (console && console.warn) console.warn(warning);
+}
+
+var NumberIsNaN = Number.isNaN || function NumberIsNaN(value) {
+  return value !== value;
+}
+
 function EventEmitter() {
-  this._events = this._events || {};
-  this._maxListeners = this._maxListeners || undefined;
+  EventEmitter.init.call(this);
 }
 module.exports = EventEmitter;
 
@@ -400,282 +242,1188 @@ module.exports = EventEmitter;
 EventEmitter.EventEmitter = EventEmitter;
 
 EventEmitter.prototype._events = undefined;
+EventEmitter.prototype._eventsCount = 0;
 EventEmitter.prototype._maxListeners = undefined;
 
 // By default EventEmitters will print a warning if more than 10 listeners are
 // added to it. This is a useful default which helps finding memory leaks.
-EventEmitter.defaultMaxListeners = 10;
+var defaultMaxListeners = 10;
+
+function checkListener(listener) {
+  if (typeof listener !== 'function') {
+    throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof listener);
+  }
+}
+
+Object.defineProperty(EventEmitter, 'defaultMaxListeners', {
+  enumerable: true,
+  get: function() {
+    return defaultMaxListeners;
+  },
+  set: function(arg) {
+    if (typeof arg !== 'number' || arg < 0 || NumberIsNaN(arg)) {
+      throw new RangeError('The value of "defaultMaxListeners" is out of range. It must be a non-negative number. Received ' + arg + '.');
+    }
+    defaultMaxListeners = arg;
+  }
+});
+
+EventEmitter.init = function() {
+
+  if (this._events === undefined ||
+      this._events === Object.getPrototypeOf(this)._events) {
+    this._events = Object.create(null);
+    this._eventsCount = 0;
+  }
+
+  this._maxListeners = this._maxListeners || undefined;
+};
 
 // Obviously not all Emitters should be limited to 10. This function allows
 // that to be increased. Set to zero for unlimited.
-EventEmitter.prototype.setMaxListeners = function(n) {
-  if (!isNumber(n) || n < 0 || isNaN(n))
-    throw TypeError('n must be a positive number');
+EventEmitter.prototype.setMaxListeners = function setMaxListeners(n) {
+  if (typeof n !== 'number' || n < 0 || NumberIsNaN(n)) {
+    throw new RangeError('The value of "n" is out of range. It must be a non-negative number. Received ' + n + '.');
+  }
   this._maxListeners = n;
   return this;
 };
 
-EventEmitter.prototype.emit = function(type) {
-  var er, handler, len, args, i, listeners;
+function _getMaxListeners(that) {
+  if (that._maxListeners === undefined)
+    return EventEmitter.defaultMaxListeners;
+  return that._maxListeners;
+}
 
-  if (!this._events)
-    this._events = {};
+EventEmitter.prototype.getMaxListeners = function getMaxListeners() {
+  return _getMaxListeners(this);
+};
 
-  // If there is no 'error' event listener then throw.
-  if (type === 'error') {
-    if (!this._events.error ||
-        (isObject(this._events.error) && !this._events.error.length)) {
-      er = arguments[1];
-      if (er instanceof Error) {
-        throw er; // Unhandled 'error' event
-      } else {
-        // At least give some kind of context to the user
-        var err = new Error('Uncaught, unspecified "error" event. (' + er + ')');
-        err.context = er;
-        throw err;
-      }
-    }
-  }
+EventEmitter.prototype.emit = function emit(type) {
+  var args = [];
+  for (var i = 1; i < arguments.length; i++) args.push(arguments[i]);
+  var doError = (type === 'error');
 
-  handler = this._events[type];
-
-  if (isUndefined(handler))
+  var events = this._events;
+  if (events !== undefined)
+    doError = (doError && events.error === undefined);
+  else if (!doError)
     return false;
 
-  if (isFunction(handler)) {
-    switch (arguments.length) {
-      // fast cases
-      case 1:
-        handler.call(this);
-        break;
-      case 2:
-        handler.call(this, arguments[1]);
-        break;
-      case 3:
-        handler.call(this, arguments[1], arguments[2]);
-        break;
-      // slower
-      default:
-        args = Array.prototype.slice.call(arguments, 1);
-        handler.apply(this, args);
+  // If there is no 'error' event listener then throw.
+  if (doError) {
+    var er;
+    if (args.length > 0)
+      er = args[0];
+    if (er instanceof Error) {
+      // Note: The comments on the `throw` lines are intentional, they show
+      // up in Node's output if this results in an unhandled exception.
+      throw er; // Unhandled 'error' event
     }
-  } else if (isObject(handler)) {
-    args = Array.prototype.slice.call(arguments, 1);
-    listeners = handler.slice();
-    len = listeners.length;
-    for (i = 0; i < len; i++)
-      listeners[i].apply(this, args);
+    // At least give some kind of context to the user
+    var err = new Error('Unhandled error.' + (er ? ' (' + er.message + ')' : ''));
+    err.context = er;
+    throw err; // Unhandled 'error' event
+  }
+
+  var handler = events[type];
+
+  if (handler === undefined)
+    return false;
+
+  if (typeof handler === 'function') {
+    ReflectApply(handler, this, args);
+  } else {
+    var len = handler.length;
+    var listeners = arrayClone(handler, len);
+    for (var i = 0; i < len; ++i)
+      ReflectApply(listeners[i], this, args);
   }
 
   return true;
 };
 
-EventEmitter.prototype.addListener = function(type, listener) {
+function _addListener(target, type, listener, prepend) {
   var m;
+  var events;
+  var existing;
 
-  if (!isFunction(listener))
-    throw TypeError('listener must be a function');
+  checkListener(listener);
 
-  if (!this._events)
-    this._events = {};
+  events = target._events;
+  if (events === undefined) {
+    events = target._events = Object.create(null);
+    target._eventsCount = 0;
+  } else {
+    // To avoid recursion in the case that type === "newListener"! Before
+    // adding it to the listeners, first emit "newListener".
+    if (events.newListener !== undefined) {
+      target.emit('newListener', type,
+                  listener.listener ? listener.listener : listener);
 
-  // To avoid recursion in the case that type === "newListener"! Before
-  // adding it to the listeners, first emit "newListener".
-  if (this._events.newListener)
-    this.emit('newListener', type,
-              isFunction(listener.listener) ?
-              listener.listener : listener);
+      // Re-assign `events` because a newListener handler could have caused the
+      // this._events to be assigned to a new object
+      events = target._events;
+    }
+    existing = events[type];
+  }
 
-  if (!this._events[type])
+  if (existing === undefined) {
     // Optimize the case of one listener. Don't need the extra array object.
-    this._events[type] = listener;
-  else if (isObject(this._events[type]))
-    // If we've already got an array, just append.
-    this._events[type].push(listener);
-  else
-    // Adding the second element, need to change to array.
-    this._events[type] = [this._events[type], listener];
-
-  // Check for listener leak
-  if (isObject(this._events[type]) && !this._events[type].warned) {
-    if (!isUndefined(this._maxListeners)) {
-      m = this._maxListeners;
+    existing = events[type] = listener;
+    ++target._eventsCount;
+  } else {
+    if (typeof existing === 'function') {
+      // Adding the second element, need to change to array.
+      existing = events[type] =
+        prepend ? [listener, existing] : [existing, listener];
+      // If we've already got an array, just append.
+    } else if (prepend) {
+      existing.unshift(listener);
     } else {
-      m = EventEmitter.defaultMaxListeners;
+      existing.push(listener);
     }
 
-    if (m && m > 0 && this._events[type].length > m) {
-      this._events[type].warned = true;
-      console.error('(node) warning: possible EventEmitter memory ' +
-                    'leak detected. %d listeners added. ' +
-                    'Use emitter.setMaxListeners() to increase limit.',
-                    this._events[type].length);
-      if (typeof console.trace === 'function') {
-        // not supported in IE 10
-        console.trace();
-      }
+    // Check for listener leak
+    m = _getMaxListeners(target);
+    if (m > 0 && existing.length > m && !existing.warned) {
+      existing.warned = true;
+      // No error code for this since it is a Warning
+      // eslint-disable-next-line no-restricted-syntax
+      var w = new Error('Possible EventEmitter memory leak detected. ' +
+                          existing.length + ' ' + String(type) + ' listeners ' +
+                          'added. Use emitter.setMaxListeners() to ' +
+                          'increase limit');
+      w.name = 'MaxListenersExceededWarning';
+      w.emitter = target;
+      w.type = type;
+      w.count = existing.length;
+      ProcessEmitWarning(w);
     }
   }
 
-  return this;
+  return target;
+}
+
+EventEmitter.prototype.addListener = function addListener(type, listener) {
+  return _addListener(this, type, listener, false);
 };
 
 EventEmitter.prototype.on = EventEmitter.prototype.addListener;
 
-EventEmitter.prototype.once = function(type, listener) {
-  if (!isFunction(listener))
-    throw TypeError('listener must be a function');
+EventEmitter.prototype.prependListener =
+    function prependListener(type, listener) {
+      return _addListener(this, type, listener, true);
+    };
 
-  var fired = false;
-
-  function g() {
-    this.removeListener(type, g);
-
-    if (!fired) {
-      fired = true;
-      listener.apply(this, arguments);
-    }
-  }
-
-  g.listener = listener;
-  this.on(type, g);
-
-  return this;
-};
-
-// emits a 'removeListener' event iff the listener was removed
-EventEmitter.prototype.removeListener = function(type, listener) {
-  var list, position, length, i;
-
-  if (!isFunction(listener))
-    throw TypeError('listener must be a function');
-
-  if (!this._events || !this._events[type])
-    return this;
-
-  list = this._events[type];
-  length = list.length;
-  position = -1;
-
-  if (list === listener ||
-      (isFunction(list.listener) && list.listener === listener)) {
-    delete this._events[type];
-    if (this._events.removeListener)
-      this.emit('removeListener', type, listener);
-
-  } else if (isObject(list)) {
-    for (i = length; i-- > 0;) {
-      if (list[i] === listener ||
-          (list[i].listener && list[i].listener === listener)) {
-        position = i;
-        break;
-      }
-    }
-
-    if (position < 0)
-      return this;
-
-    if (list.length === 1) {
-      list.length = 0;
-      delete this._events[type];
-    } else {
-      list.splice(position, 1);
-    }
-
-    if (this._events.removeListener)
-      this.emit('removeListener', type, listener);
-  }
-
-  return this;
-};
-
-EventEmitter.prototype.removeAllListeners = function(type) {
-  var key, listeners;
-
-  if (!this._events)
-    return this;
-
-  // not listening for removeListener, no need to emit
-  if (!this._events.removeListener) {
+function onceWrapper() {
+  if (!this.fired) {
+    this.target.removeListener(this.type, this.wrapFn);
+    this.fired = true;
     if (arguments.length === 0)
-      this._events = {};
-    else if (this._events[type])
-      delete this._events[type];
-    return this;
+      return this.listener.call(this.target);
+    return this.listener.apply(this.target, arguments);
   }
+}
 
-  // emit removeListener for all listeners on all events
-  if (arguments.length === 0) {
-    for (key in this._events) {
-      if (key === 'removeListener') continue;
-      this.removeAllListeners(key);
-    }
-    this.removeAllListeners('removeListener');
-    this._events = {};
-    return this;
-  }
+function _onceWrap(target, type, listener) {
+  var state = { fired: false, wrapFn: undefined, target: target, type: type, listener: listener };
+  var wrapped = onceWrapper.bind(state);
+  wrapped.listener = listener;
+  state.wrapFn = wrapped;
+  return wrapped;
+}
 
-  listeners = this._events[type];
-
-  if (isFunction(listeners)) {
-    this.removeListener(type, listeners);
-  } else if (listeners) {
-    // LIFO order
-    while (listeners.length)
-      this.removeListener(type, listeners[listeners.length - 1]);
-  }
-  delete this._events[type];
-
+EventEmitter.prototype.once = function once(type, listener) {
+  checkListener(listener);
+  this.on(type, _onceWrap(this, type, listener));
   return this;
 };
 
-EventEmitter.prototype.listeners = function(type) {
-  var ret;
-  if (!this._events || !this._events[type])
-    ret = [];
-  else if (isFunction(this._events[type]))
-    ret = [this._events[type]];
-  else
-    ret = this._events[type].slice();
-  return ret;
+EventEmitter.prototype.prependOnceListener =
+    function prependOnceListener(type, listener) {
+      checkListener(listener);
+      this.prependListener(type, _onceWrap(this, type, listener));
+      return this;
+    };
+
+// Emits a 'removeListener' event if and only if the listener was removed.
+EventEmitter.prototype.removeListener =
+    function removeListener(type, listener) {
+      var list, events, position, i, originalListener;
+
+      checkListener(listener);
+
+      events = this._events;
+      if (events === undefined)
+        return this;
+
+      list = events[type];
+      if (list === undefined)
+        return this;
+
+      if (list === listener || list.listener === listener) {
+        if (--this._eventsCount === 0)
+          this._events = Object.create(null);
+        else {
+          delete events[type];
+          if (events.removeListener)
+            this.emit('removeListener', type, list.listener || listener);
+        }
+      } else if (typeof list !== 'function') {
+        position = -1;
+
+        for (i = list.length - 1; i >= 0; i--) {
+          if (list[i] === listener || list[i].listener === listener) {
+            originalListener = list[i].listener;
+            position = i;
+            break;
+          }
+        }
+
+        if (position < 0)
+          return this;
+
+        if (position === 0)
+          list.shift();
+        else {
+          spliceOne(list, position);
+        }
+
+        if (list.length === 1)
+          events[type] = list[0];
+
+        if (events.removeListener !== undefined)
+          this.emit('removeListener', type, originalListener || listener);
+      }
+
+      return this;
+    };
+
+EventEmitter.prototype.off = EventEmitter.prototype.removeListener;
+
+EventEmitter.prototype.removeAllListeners =
+    function removeAllListeners(type) {
+      var listeners, events, i;
+
+      events = this._events;
+      if (events === undefined)
+        return this;
+
+      // not listening for removeListener, no need to emit
+      if (events.removeListener === undefined) {
+        if (arguments.length === 0) {
+          this._events = Object.create(null);
+          this._eventsCount = 0;
+        } else if (events[type] !== undefined) {
+          if (--this._eventsCount === 0)
+            this._events = Object.create(null);
+          else
+            delete events[type];
+        }
+        return this;
+      }
+
+      // emit removeListener for all listeners on all events
+      if (arguments.length === 0) {
+        var keys = Object.keys(events);
+        var key;
+        for (i = 0; i < keys.length; ++i) {
+          key = keys[i];
+          if (key === 'removeListener') continue;
+          this.removeAllListeners(key);
+        }
+        this.removeAllListeners('removeListener');
+        this._events = Object.create(null);
+        this._eventsCount = 0;
+        return this;
+      }
+
+      listeners = events[type];
+
+      if (typeof listeners === 'function') {
+        this.removeListener(type, listeners);
+      } else if (listeners !== undefined) {
+        // LIFO order
+        for (i = listeners.length - 1; i >= 0; i--) {
+          this.removeListener(type, listeners[i]);
+        }
+      }
+
+      return this;
+    };
+
+function _listeners(target, type, unwrap) {
+  var events = target._events;
+
+  if (events === undefined)
+    return [];
+
+  var evlistener = events[type];
+  if (evlistener === undefined)
+    return [];
+
+  if (typeof evlistener === 'function')
+    return unwrap ? [evlistener.listener || evlistener] : [evlistener];
+
+  return unwrap ?
+    unwrapListeners(evlistener) : arrayClone(evlistener, evlistener.length);
+}
+
+EventEmitter.prototype.listeners = function listeners(type) {
+  return _listeners(this, type, true);
 };
 
-EventEmitter.prototype.listenerCount = function(type) {
-  if (this._events) {
-    var evlistener = this._events[type];
-
-    if (isFunction(evlistener))
-      return 1;
-    else if (evlistener)
-      return evlistener.length;
-  }
-  return 0;
+EventEmitter.prototype.rawListeners = function rawListeners(type) {
+  return _listeners(this, type, false);
 };
 
 EventEmitter.listenerCount = function(emitter, type) {
-  return emitter.listenerCount(type);
+  if (typeof emitter.listenerCount === 'function') {
+    return emitter.listenerCount(type);
+  } else {
+    return listenerCount.call(emitter, type);
+  }
 };
 
-function isFunction(arg) {
-  return typeof arg === 'function';
+EventEmitter.prototype.listenerCount = listenerCount;
+function listenerCount(type) {
+  var events = this._events;
+
+  if (events !== undefined) {
+    var evlistener = events[type];
+
+    if (typeof evlistener === 'function') {
+      return 1;
+    } else if (evlistener !== undefined) {
+      return evlistener.length;
+    }
+  }
+
+  return 0;
 }
 
-function isNumber(arg) {
-  return typeof arg === 'number';
+EventEmitter.prototype.eventNames = function eventNames() {
+  return this._eventsCount > 0 ? ReflectOwnKeys(this._events) : [];
+};
+
+function arrayClone(arr, n) {
+  var copy = new Array(n);
+  for (var i = 0; i < n; ++i)
+    copy[i] = arr[i];
+  return copy;
 }
 
-function isObject(arg) {
-  return typeof arg === 'object' && arg !== null;
+function spliceOne(list, index) {
+  for (; index + 1 < list.length; index++)
+    list[index] = list[index + 1];
+  list.pop();
 }
 
-function isUndefined(arg) {
-  return arg === void 0;
+function unwrapListeners(arr) {
+  var ret = new Array(arr.length);
+  for (var i = 0; i < ret.length; ++i) {
+    ret[i] = arr[i].listener || arr[i];
+  }
+  return ret;
 }
 
 
 /***/ }),
 
-/***/ 304:
+/***/ 289:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+  };
+}(); /*
+      * Copyright 2015-present Boundless Spatial Inc., http://boundlessgeo.com
+      * Licensed under the Apache License, Version 2.0 (the "License").
+      * You may not use this file except in compliance with the License.
+      * You may obtain a copy of the License at
+      * http://www.apache.org/licenses/LICENSE-2.0
+      * Unless required by applicable law or agreed to in writing, software
+      * distributed under the License is distributed on an "AS IS" BASIS,
+      * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+      * See the License for the specific language governing permissions and limitations under the License.
+      */
+
+var _openlayers = __webpack_require__(9);
+
+var _openlayers2 = _interopRequireDefault(_openlayers);
+
+var _util = __webpack_require__(19);
+
+var _util2 = _interopRequireDefault(_util);
+
+var _LayerIdService = __webpack_require__(308);
+
+var _LayerIdService2 = _interopRequireDefault(_LayerIdService);
+
+var _WFSService = __webpack_require__(309);
+
+var _WFSService2 = _interopRequireDefault(_WFSService);
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+var MapConfigService = function () {
+  function MapConfigService() {
+    _classCallCheck(this, MapConfigService);
+  }
+
+  _createClass(MapConfigService, [{
+    key: 'generateSourceFromConfig',
+    value: function generateSourceFromConfig(map, config, opt_proxy, opt_wfsUrl, opt_wfsTypeName) {
+      var props = config.properties || {};
+      if (props.attributions) {
+        var attributions = [];
+        for (var i = 0, ii = props.attributions.length; i < ii; ++i) {
+          attributions.push(new _openlayers2.default.Attribution({
+            html: props.attributions[i]
+          }));
+        }
+        props.attributions = attributions;
+      }
+      props.wrapX = false;
+      if (config.type === 'Cluster') {
+        props.source = this.generateSourceFromConfig(map, config.source, opt_proxy, opt_wfsUrl, opt_wfsTypeName);
+      }
+      if (config.type === 'Vector') {
+        props.format = props.format.type === 'GeoJSON' ? new _openlayers2.default.format.GeoJSON() : undefined;
+        if (opt_wfsUrl && opt_wfsTypeName) {
+          return _WFSService2.default.createSource(opt_wfsUrl, map.getView().getProjection(), opt_wfsTypeName, opt_proxy);
+        }
+      }
+      if (config.type === 'TMS') {
+        config.type = 'XYZ';
+        var urls = props.urls || [props.url];
+        props.tileUrlFunction = function (tileCoord, pixelRatio, projection) {
+          var min = 0;
+          var max = urls.length - 1;
+          var idx = Math.floor(Math.random() * (max - min + 1)) + min;
+          var x, y, z;
+          z = tileCoord[0];
+          x = tileCoord[1];
+          y = tileCoord[2] + (1 << z);
+          return urls[idx] + z + '/' + x + '/' + y + '.' + props.format;
+        };
+        delete props.urls;
+        delete props.url;
+        var source = new _openlayers2.default.source[config.type](props);
+        source.set('originalType', 'TMS');
+        source.set('originalProperties', Object.assign({}, props, {
+          urls: urls
+        }));
+        return source;
+      }
+      var sourceObj = new _openlayers2.default.source[config.type](props);
+      if (opt_proxy && config.type === 'TileWMS') {
+        sourceObj.once('tileloaderror', function () {
+          sourceObj.setTileLoadFunction(function () {
+            var tileLoadFn = sourceObj.getTileLoadFunction();
+            return function (tile, src) {
+              tileLoadFn(tile, _util2.default.getProxiedUrl(src, opt_proxy));
+            };
+          }());
+        });
+      }
+      return sourceObj;
+    }
+  }, {
+    key: 'generateLayerFromConfig',
+    value: function generateLayerFromConfig(config, map, opt_proxy) {
+      var type = config.type;
+      var layerConfig = config.properties || {};
+      layerConfig.id = _LayerIdService2.default.generateId();
+      if (type === 'Group') {
+        layerConfig.layers = [];
+        for (var i = 0, ii = config.children.length; i < ii; ++i) {
+          layerConfig.layers.push(this.generateLayerFromConfig(config.children[i], map, opt_proxy));
+        }
+      }
+      var layer = new _openlayers2.default.layer[type](layerConfig);
+      var sourceConfig = config.source;
+      if (sourceConfig) {
+        var source = this.generateSourceFromConfig(map, sourceConfig, opt_proxy, layerConfig.url, layerConfig.name);
+        layer.setSource(source);
+      }
+      return layer;
+    }
+  }, {
+    key: 'getLayerType',
+    value: function getLayerType(layer) {
+      if (layer instanceof _openlayers2.default.layer.Group) {
+        return 'Group';
+      } else if (layer instanceof _openlayers2.default.layer.Vector) {
+        return 'Vector';
+      } else if (layer instanceof _openlayers2.default.layer.Tile) {
+        return 'Tile';
+      } else if (layer instanceof _openlayers2.default.layer.Image) {
+        return 'Image';
+      }
+    }
+  }, {
+    key: 'getFormatType',
+    value: function getFormatType(format) {
+      if (format instanceof _openlayers2.default.format.GeoJSON) {
+        return 'GeoJSON';
+      }
+    }
+  }, {
+    key: 'getSourceConfig',
+    value: function getSourceConfig(source) {
+      var config = {};
+      var attributions;
+      var attr = source.getAttributions();
+      if (attr !== null) {
+        attributions = [];
+        for (var i = 0, ii = attr.length; i < ii; ++i) {
+          attributions.push(attr[i].getHTML());
+        }
+      }
+      if (source instanceof _openlayers2.default.source.TileWMS) {
+        config.type = 'TileWMS';
+        config.properties = {
+          params: source.getParams(),
+          urls: source.getUrls()
+        };
+      } else if (source instanceof _openlayers2.default.source.Cluster) {
+        config.type = 'Cluster';
+        config.source = this.getSourceConfig(source.getSource());
+      } else if (source instanceof _openlayers2.default.source.Vector) {
+        config.type = 'Vector';
+        config.properties = {
+          attributions: attributions,
+          format: {
+            type: this.getFormatType(source.getFormat())
+          },
+          url: source.getUrl()
+        };
+      } else if (source instanceof _openlayers2.default.source.ImageWMS) {
+        config.type = 'ImageWMS';
+        config.properties = {
+          url: source.getUrl(),
+          params: source.getParams(),
+          attributions: attributions
+        };
+      } else if (source instanceof _openlayers2.default.source.OSM) {
+        config.type = 'OSM';
+        config.properties = {
+          attributions: attributions
+        };
+      } else if (source instanceof _openlayers2.default.source.BingMaps) {
+        config.type = 'BingMaps';
+        config.properties = {
+          key: source.getApiKey(),
+          imagerySet: source.getImagerySet()
+        };
+      } else if (source instanceof _openlayers2.default.source.XYZ) {
+        if (source.get('originalType') === 'TMS') {
+          config.type = 'TMS';
+          config.properties = source.get('originalProperties');
+        } else {
+          config.type = 'XYZ';
+          config.properties = {
+            attributions: attributions,
+            urls: source.getUrls()
+          };
+        }
+      } else if (source instanceof _openlayers2.default.source.TileArcGISRest) {
+        config.type = 'TileArcGISRest';
+        config.properties = {
+          urls: source.getUrls(),
+          params: source.getParams()
+        };
+      }
+      return config;
+    }
+  }, {
+    key: 'getLayerConfig',
+    value: function getLayerConfig(config, layer) {
+      config.type = this.getLayerType(layer);
+      config.properties = layer.getProperties();
+      delete config.properties.maxResolution;
+      delete config.properties.minResolution;
+      var source = config.type !== 'Group' ? layer.getSource() : null;
+      if (source) {
+        delete config.properties.source;
+        config.source = this.getSourceConfig(source);
+      }
+      if (layer instanceof _openlayers2.default.layer.Group) {
+        delete config.properties.layers;
+        config.children = [];
+        layer.getLayers().forEach(function (child) {
+          if (child.get('title') !== null) {
+            var childConfig = {};
+            config.children.push(childConfig);
+            this.getLayerConfig(childConfig, child);
+          }
+        }, this);
+      }
+      return config;
+    }
+  }, {
+    key: 'load',
+    value: function load(mapConfig, map, opt_proxy) {
+      var viewConfig = mapConfig.view;
+      var layerConfig = mapConfig.layers;
+      var remove = [];
+      map.getLayers().forEach(function (lyr) {
+        if (lyr.get('title') !== null) {
+          remove.push(lyr);
+        }
+      });
+      var i, ii;
+      for (i = 0, ii = remove.length; i < ii; ++i) {
+        map.removeLayer(remove[i]);
+      }
+      for (i = 0, ii = layerConfig.length; i < ii; ++i) {
+        var layer = this.generateLayerFromConfig(layerConfig[i], map, opt_proxy);
+        map.addLayer(layer);
+      }
+      var view = map.getView(),
+          proj = _openlayers2.default.proj.get(viewConfig.projection);
+      // 1. The map json returned from geonode has wrong "center projection" than the returned saved "map" projection
+      // 2. Guessed that the used center projection is 'EPSG:4326'
+      // 3. the following line is suggested to transform to the current view projection
+      viewConfig.center = _openlayers2.default.proj.transform(viewConfig.center, "EPSG:4326", viewConfig.projection);
+      if (proj && !_openlayers2.default.proj.equivalent(view.getProjection(), proj)) {
+        map.setView(new _openlayers2.default.View({
+          center: viewConfig.center,
+          resolution: viewConfig.resolution,
+          zoom: viewConfig.zoom,
+          rotation: viewConfig.rotation,
+          projection: viewConfig.projection
+        }));
+      } else {
+        view.setCenter(viewConfig.center);
+        if (viewConfig.resolution !== undefined) {
+          view.setResolution(viewConfig.resolution);
+        } else if (viewConfig.zoom !== undefined) {
+          view.setZoom(viewConfig.zoom);
+        }
+        if (viewConfig.rotation !== undefined) {
+          view.setRotation(viewConfig.rotation);
+        }
+      }
+    }
+  }, {
+    key: 'save',
+    value: function save(map) {
+      var layers = [];
+      map.getLayers().forEach(function (layer) {
+        if (layer.get('title') !== null) {
+          var config = {};
+          layers.push(config);
+          this.getLayerConfig(config, layer);
+        }
+      }, this);
+      var config = {};
+      config.layers = layers;
+      var view = map.getView();
+      config.view = {
+        projection: view.getProjection().getCode(),
+        center: view.getCenter(),
+        resolution: view.getResolution(),
+        zoom: view.getZoom(),
+        rotation: view.getRotation()
+      };
+      return config;
+    }
+  }]);
+
+  return MapConfigService;
+}();
+
+exports.default = new MapConfigService();
+
+/***/ }),
+
+/***/ 290:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+  };
+}(); /*
+      * Copyright 2015-present Boundless Spatial Inc., http://boundlessgeo.com
+      * Licensed under the Apache License, Version 2.0 (the "License").
+      * You may not use this file except in compliance with the License.
+      * You may obtain a copy of the License at
+      * http://www.apache.org/licenses/LICENSE-2.0
+      * Unless required by applicable law or agreed to in writing, software
+      * distributed under the License is distributed on an "AS IS" BASIS,
+      * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+      * See the License for the specific language governing permissions and limitations under the License.
+      */
+
+var _openlayers = __webpack_require__(9);
+
+var _openlayers2 = _interopRequireDefault(_openlayers);
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+var sourceIdx;
+
+var baseMapTitle = 'Base Maps';
+var gxpGroup = 'background';
+
+/**
+ * Transforms GXP style map config to our internal format.
+ */
+
+var MapConfigTransformService = function () {
+  function MapConfigTransformService() {
+    _classCallCheck(this, MapConfigTransformService);
+  }
+
+  _createClass(MapConfigTransformService, [{
+    key: '_writeLayer',
+    value: function _writeLayer(config, sources, layers, group) {
+      var key;
+      var layerConfig = {};
+      // name is mandatory
+      layerConfig.name = config.properties.name || config.properties.title.split(' ').join('_');
+      layerConfig.title = config.properties.title;
+      layerConfig.visibility = config.properties.visible;
+      if (group) {
+        layerConfig.group = group;
+      }
+      layers.push(layerConfig);
+      if (config.source.type === 'XYZ') {
+        layerConfig.type = 'OpenLayers.Layer.XYZ';
+        var options;
+        if (config.source.properties.attributions && config.source.properties.attributions.length > 0) {
+          options = { attribution: config.source.properties.attributions[0] };
+        }
+        layerConfig.args = [config.properties.title, config.source.properties.urls[0]];
+        if (options) {
+          layerConfig.args.push(options);
+        }
+        sourceIdx++;
+        sources[sourceIdx] = {
+          ptype: 'gxp_olsource'
+        };
+      } else if (config.source.type === 'TileArcGISRest') {
+        layerConfig.layerid = config.source.properties.params.LAYERS;
+        sourceIdx++;
+        sources[sourceIdx] = {
+          url: config.source.properties.urls[0],
+          ptype: 'gxp_arcrestsource'
+        };
+      } else if (config.source.type === 'BingMaps') {
+        var hasBing = false;
+        for (key in sources) {
+          if (sources[key].ptype == 'gxp_bingsource' && sources[key].apiKey === config.source.properties.key) {
+            hasBing = true;
+            break;
+          }
+        }
+        if (!hasBing) {
+          sourceIdx++;
+          sources[sourceIdx] = {
+            ptype: 'gxp_bingsource',
+            apiKey: config.source.properties.key
+          };
+        }
+      } else if (config.source.type === 'TMS') {
+        if (config.source.properties.urls[0].indexOf('tiles.mapbox.com/v1/mapbox') !== -1) {
+          var hasMapBox = false;
+          for (key in sources) {
+            if (sources[key].ptype == 'gxp_mapboxsource') {
+              hasMapBox = true;
+              break;
+            }
+          }
+          if (!hasMapBox) {
+            sourceIdx++;
+            sources[sourceIdx] = {
+              ptype: 'gxp_mapboxsource'
+            };
+          }
+        }
+      } else if (config.source.type === 'TileWMS') {
+        if (config.source.properties.params.SLD_BODY) {
+          layerConfig.params = {
+            TILED: 'false',
+            SLD_BODY: config.source.properties.params.SLD_BODY
+          };
+        }
+        layerConfig.queryable = config.properties.isSelectable;
+        layerConfig.capability = {
+          queryable: config.properties.isSelectable,
+          styles: [{
+            name: config.properties.styleName,
+            legend: {
+              href: config.properties.legendUrl
+            }
+          }],
+          llbbox: config.properties.EX_GeographicBoundingBox
+        };
+        var hasWMSC = false;
+        for (key in sources) {
+          if (sources[key].ptype == 'gxp_wmscsource' && sources[key].url === config.source.url) {
+            hasWMSC = true;
+            break;
+          }
+        }
+        if (!hasWMSC) {
+          sourceIdx++;
+          sources[sourceIdx] = {
+            ptype: 'gxp_wmscsource',
+            url: config.source.properties.urls[0]
+          };
+        }
+      } else if (config.source.type === 'OSM') {
+        var hasOSM = false;
+        for (key in sources) {
+          if (sources[key].ptype == 'gxp_osmsource') {
+            hasOSM = true;
+            break;
+          }
+        }
+        if (!hasOSM) {
+          sourceIdx++;
+          sources[sourceIdx] = {
+            ptype: 'gxp_osmsource'
+          };
+        }
+        if (!layerConfig.name) {
+          layerConfig.name = 'mapnik';
+        }
+      }
+      layerConfig.source = '' + sourceIdx;
+    }
+  }, {
+    key: 'write',
+    value: function write(data) {
+      var viewConfig = data.view;
+      var layerConfig = data.layers;
+      var layers = [];
+      var sources = {};
+      sourceIdx = -1;
+      for (var i = 0, ii = layerConfig.length; i < ii; ++i) {
+        if (layerConfig[i].type === 'Group') {
+          for (var j = 0, jj = layerConfig[i].children.length; j < jj; ++j) {
+            var config = layerConfig[i].children[j];
+            this._writeLayer(config, sources, layers, layerConfig[i].properties.title.replace(baseMapTitle, gxpGroup));
+          }
+        } else {
+          this._writeLayer(layerConfig[i], sources, layers);
+        }
+      }
+      var result = {
+        sources: sources
+      };
+      result.map = {
+        layers: layers,
+        center: viewConfig.center,
+        projection: viewConfig.projection,
+        zoom: viewConfig.zoom
+      };
+      return result;
+    }
+  }, {
+    key: '_transformTileService',
+    value: function _transformTileService(layerConfig) {
+      var thumbnail;
+      if (layerConfig.source.type === 'OSM') {
+        thumbnail = 'https://a.tile.openstreetmap.org/0/0/0.png';
+      } else {
+        if (layerConfig.source.properties.urls) {
+          thumbnail = layerConfig.source.properties.urls[0].replace('{z}', '0').replace('{y}', '0').replace('{x}', '0');
+        }
+      }
+      return {
+        name: layerConfig.properties.name,
+        description: layerConfig.properties.title,
+        standard: layerConfig.source.type,
+        attribution: layerConfig.source.properties.attributions ? layerConfig.source.properties.attributions[0] : undefined,
+        endpoint: layerConfig.source.properties.urls ? layerConfig.source.properties.urls[0] : undefined,
+        thumbnail: thumbnail
+      };
+    }
+  }, {
+    key: 'transform',
+    value: function transform(data, opt_errors, opt_tileServices) {
+      var i,
+          ii,
+          layers = [];
+      var groups = {};
+      for (i = 0, ii = data.map.layers.length; i < ii; ++i) {
+        var layer = data.map.layers[i];
+        var source = data.sources[layer.source];
+        var sourceType = source.type;
+        // create proper source type based on map json returned from geonode
+        if (Object.keys(source).length == 0 && layer.type === "osm") {
+          sourceType = "gxp_osmsource";
+          source.ptype = sourceType;
+        } else if (layer.provider && layer.provider === "OpenTopoMap") {
+          layer.type = 'OpenLayers.Layer.XYZ';
+          sourceType = "gxp_olsource";
+          source.ptype = "gxp_olsource";
+        } else if (Object.keys(source).length === 0 && layer.type === "empty") {
+          sourceType = "gxp_olsource";
+          source.ptype = "gxp_olsource";
+        }
+        if (!sourceType) {
+          sourceType = data.defaultSourceType;
+        }
+        var url = source.url;
+        var layerConfig = {
+          properties: {
+            isRemovable: true,
+            visible: layer.visibility,
+            title: layer.title || (layer.name ? layer.name.split(':').pop() : undefined),
+            id: layer.name,
+            name: layer.name
+          }
+        };
+        if (sourceType === 'gxp_olsource' && layer.type === 'OpenLayers.Layer.XYZ') {
+          layerConfig.type = 'Tile';
+          layerConfig.properties.title = layer.args && layer.args.length > 0 ? layer.args[0] : layerConfig.properties.title;
+          layerConfig.properties.name = layerConfig.properties.title.split(' ').join('_');
+          var xyzUrls;
+          var urlConfig = layer.args && layer.args.lenght ? layer.args[1] : undefined;
+          if (layer.provider && layer.provider === "OpenTopoMap") {
+            urlConfig = ['https://a.tile.opentopomap.org/{z}/{x}/{y}.png', 'https://b.tile.opentopomap.org/{z}/{x}/{y}.png', 'https://c.tile.opentopomap.org/{z}/{x}/{y}.png'];
+          }
+          if (Array.isArray(urlConfig)) {
+            xyzUrls = urlConfig;
+          } else {
+            xyzUrls = [urlConfig];
+          }
+          for (var j = 0, jj = xyzUrls.length; j < jj; ++j) {
+            xyzUrls[j] = xyzUrls[j].replace(/\$/g, '');
+            if (xyzUrls[j].indexOf('cartocdn') !== -1) {
+              xyzUrls[j] = xyzUrls[j].replace('https:', 'http:');
+            }
+          }
+          layerConfig.source = {
+            type: 'XYZ',
+            properties: {
+              crossOrigin: 'anonymous',
+              urls: xyzUrls
+            }
+          };
+          if (layer.args && layer.args.length === 3 && layer.args[2].attribution) {
+            layerConfig.source.properties.attributions = [layer.args[2].attribution];
+          }
+        } else if (sourceType === 'gxp_osmsource') {
+          if (!layer.group) {
+            // force OSM as base layer
+            layerConfig.properties.type = 'base';
+          }
+          layerConfig.type = 'Tile';
+          layerConfig.source = {
+            type: 'OSM',
+            properties: {
+              crossOrigin: 'anonymous'
+            }
+          };
+        } else if (sourceType === 'gxp_arcrestsource') {
+          layerConfig.type = 'Tile';
+          layerConfig.source = {
+            type: 'TileArcGISRest',
+            properties: {
+              crossOrigin: 'anonymous',
+              urls: [url],
+              params: {
+                LAYERS: layer.layerid,
+                FORMAT: layer.format
+              }
+            }
+          };
+        } else if (sourceType === 'gxp_wmscsource' && layer.name) {
+          layerConfig.properties.popupInfo = '#AllAttributes';
+          layerConfig.properties.isSelectable = layer.queryable;
+          layerConfig.properties.isWFST = layer.queryable;
+          if (layer.capability) {
+            if (layer.queryable === undefined) {
+              layerConfig.properties.isSelectable = layer.capability.queryable;
+              layerConfig.properties.isWFST = layer.capability.queryable;
+            }
+            layerConfig.properties.styleName = layer.capability.styles[0].name;
+            layerConfig.properties.legendUrl = layer.capability.styles[0].legend.href;
+            layerConfig.properties.EX_GeographicBoundingBox = layer.capability.llbbox;
+          }
+          // if (layer.capability) {
+          //   layerConfig.properties.extent = layer.capability.bbox[data.map.projection].bbox;
+          // }
+          if (!layerConfig.properties.EX_GeographicBoundingBox) {
+            if (layer.bbox && layer.srs && _openlayers2.default.proj.get(layer.srs)) {
+              layerConfig.properties.EX_GeographicBoundingBox = _openlayers2.default.proj.transformExtent(layer.bbox, layer.srs, 'EPSG:4326');
+            }
+          }
+          layerConfig.type = 'Tile';
+          var params = layer.params || {};
+          params.LAYERS = layer.name;
+          if (params.TILED === undefined) {
+            params.TILED = 'TRUE';
+          }
+          if (layer.styles) {
+            params.STYLES = layer.styles;
+          }
+          if (layer.format) {
+            params.FORMAT = layer.format;
+          }
+          if (layer.transparent !== undefined) {
+            params.TRANSPARENT = layer.transparent;
+          }
+          layerConfig.source = {
+            type: 'TileWMS',
+            properties: {
+              crossOrigin: 'anonymous',
+              params: params,
+              urls: [url]
+            }
+          };
+        } else if (sourceType === 'gxp_mapboxsource') {
+          var urls = ['http://a.tiles.mapbox.com/v1/mapbox.' + layer.name + '/', 'http://b.tiles.mapbox.com/v1/mapbox.' + layer.name + '/', 'http://c.tiles.mapbox.com/v1/mapbox.' + layer.name + '/', 'http://d.tiles.mapbox.com/v1/mapbox.' + layer.name + '/'];
+          var attribution = /^world/.test(layer.name) ? '<a href="http://mapbox.com">MapBox</a> | Some Data &copy; OSM CC-BY-SA | <a href="http://mapbox.com/tos">Terms of Service</a>' : '<a href="http://mapbox.com">MapBox</a> | <a href="http://mapbox.com/tos">Terms of Service</a>';
+          var maxZoom = {
+            'blue-marble-topo-bathy-jan': 8,
+            'blue-marble-topo-bathy-jul': 8,
+            'blue-marble-topo-jan': 8,
+            'blue-marble-topo-jul': 8,
+            'control-room': 8,
+            'geography-class': 8,
+            'natural-earth-hypso': 6,
+            'natural-earth-hypso-bathy': 6,
+            'natural-earth-1': 6,
+            'natural-earth-2': 6,
+            'world-dark': 11,
+            'world-light': 11,
+            'world-glass': 10,
+            'world-print': 9
+          };
+          layerConfig.type = 'Tile';
+          layerConfig.source = {
+            type: 'TMS',
+            properties: {
+              attributions: [attribution],
+              format: 'png',
+              urls: urls,
+              maxZoom: maxZoom[layer.name]
+            }
+          };
+        } else if (sourceType === 'gxp_bingsource') {
+          layerConfig.type = 'Tile';
+          layerConfig.source = {
+            type: 'BingMaps',
+            properties: {
+              key: source.apiKey,
+              imagerySet: layer.name
+            }
+          };
+        } else if (sourceType === "gxp_olsource") {
+          layerConfig.type = 'Tile';
+          layerConfig.source = {
+            type: 'XYZ',
+            properties: {
+              crossOrigin: crossOrigin,
+              urls: ['']
+            }
+          };
+        } else {
+          if (opt_errors) {
+            opt_errors.push({
+              msg: 'Unable to load layer ' + layerConfig.properties.title,
+              layer: layer,
+              source: source
+            });
+          }
+          layerConfig = undefined;
+        }
+        if (layerConfig !== undefined) {
+          if (layer.group) {
+            if (layer.group === gxpGroup) {
+              layerConfig.properties.type = 'base';
+              if (opt_tileServices) {
+                var tileService = this._transformTileService(layerConfig);
+                if (tileService) {
+                  opt_tileServices.push(tileService);
+                }
+              }
+            }
+            if (!groups[layer.group]) {
+              groups[layer.group] = {
+                type: 'Group',
+                properties: {
+                  name: layer.group,
+                  title: layer.group === gxpGroup ? baseMapTitle : layer.group,
+                  type: layer.group === gxpGroup ? 'base-group' : undefined
+                },
+                children: []
+              };
+              layers.push(groups[layer.group]);
+            }
+            groups[layer.group].children.push(layerConfig);
+          } else {
+            layers.push(layerConfig);
+          }
+        }
+      }
+      return {
+        layers: layers,
+        view: {
+          center: data.map.center,
+          projection: data.map.projection,
+          zoom: data.map.zoom
+        }
+      };
+    }
+  }]);
+
+  return MapConfigTransformService;
+}();
+
+exports.default = new MapConfigTransformService();
+
+/***/ }),
+
+/***/ 308:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -723,7 +1471,7 @@ exports.default = new LayerIdService();
 
 /***/ }),
 
-/***/ 305:
+/***/ 309:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -745,35 +1493,35 @@ var _createClass = function () { function defineProperties(target, props) { for 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * See the License for the specific language governing permissions and limitations under the License.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
 
-var _openlayers = __webpack_require__(11);
+var _openlayers = __webpack_require__(9);
 
 var _openlayers2 = _interopRequireDefault(_openlayers);
 
-var _util = __webpack_require__(22);
+var _util = __webpack_require__(19);
 
 var _util2 = _interopRequireDefault(_util);
 
-var _jsonix = __webpack_require__(55);
+var _jsonix = __webpack_require__(49);
 
-var _urlParse = __webpack_require__(39);
+var _urlParse = __webpack_require__(35);
 
 var _urlParse2 = _interopRequireDefault(_urlParse);
 
-var _XSD_1_ = __webpack_require__(596);
+var _XSD_1_ = __webpack_require__(559);
 
-var _XLink_1_ = __webpack_require__(73);
+var _XLink_1_ = __webpack_require__(66);
 
-var _OWS_1_0_ = __webpack_require__(482);
+var _OWS_1_0_ = __webpack_require__(446);
 
-var _Filter_1_1_ = __webpack_require__(480);
+var _Filter_1_1_ = __webpack_require__(444);
 
-var _SMIL_2_ = __webpack_require__(483);
+var _SMIL_2_ = __webpack_require__(447);
 
-var _SMIL_2_0_Language = __webpack_require__(484);
+var _SMIL_2_0_Language = __webpack_require__(448);
 
-var _GML_3_1_ = __webpack_require__(481);
+var _GML_3_1_ = __webpack_require__(445);
 
-var _WFS_1_1_ = __webpack_require__(485);
+var _WFS_1_1_ = __webpack_require__(449);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1163,20 +1911,32 @@ var WFSService = function () {
 }();
 
 exports.default = new WFSService();
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
 
 /***/ }),
 
-/***/ 39:
+/***/ 35:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 
-var required = __webpack_require__(50)
-  , qs = __webpack_require__(45)
+var required = __webpack_require__(47)
+  , qs = __webpack_require__(41)
+  , slashes = /^[A-Za-z][A-Za-z0-9+-.]*:\/\//
   , protocolre = /^([a-z][a-z0-9.+-]*:)?(\/\/)?([\S\s]*)/i
-  , slashes = /^[A-Za-z][A-Za-z0-9+-.]*:\/\//;
+  , whitespace = '[\\x09\\x0A\\x0B\\x0C\\x0D\\x20\\xA0\\u1680\\u180E\\u2000\\u2001\\u2002\\u2003\\u2004\\u2005\\u2006\\u2007\\u2008\\u2009\\u200A\\u202F\\u205F\\u3000\\u2028\\u2029\\uFEFF]'
+  , left = new RegExp('^'+ whitespace +'+');
+
+/**
+ * Trim a given string.
+ *
+ * @param {String} str String to trim.
+ * @public
+ */
+function trimLeft(str) {
+  return (str ? str : '').toString().replace(left, '');
+}
 
 /**
  * These are the parse rules for the URL parser, it informs the parser
@@ -1193,6 +1953,9 @@ var required = __webpack_require__(50)
 var rules = [
   ['#', 'hash'],                        // Extract from the back.
   ['?', 'query'],                       // Extract from the back.
+  function sanitize(address) {          // Sanitize what is left of the address
+    return address.replace('\\', '/');
+  },
   ['/', 'pathname'],                    // Extract from the back.
   ['@', 'auth', 1],                     // Extract from the front.
   [NaN, 'host', undefined, 1, 1],       // Set left over value.
@@ -1220,19 +1983,27 @@ var ignore = { hash: 1, query: 1 };
  *
  * @param {Object|String} loc Optional default location object.
  * @returns {Object} lolcation object.
- * @api public
+ * @public
  */
 function lolcation(loc) {
-  loc = loc || global.location || {};
+  var globalVar;
+
+  if (typeof window !== 'undefined') globalVar = window;
+  else if (typeof global !== 'undefined') globalVar = global;
+  else if (typeof self !== 'undefined') globalVar = self;
+  else globalVar = {};
+
+  var location = globalVar.location || {};
+  loc = loc || location;
 
   var finaldestination = {}
     , type = typeof loc
     , key;
 
   if ('blob:' === loc.protocol) {
-    finaldestination = new URL(unescape(loc.pathname), {});
+    finaldestination = new Url(unescape(loc.pathname), {});
   } else if ('string' === type) {
-    finaldestination = new URL(loc, {});
+    finaldestination = new Url(loc, {});
     for (key in ignore) delete finaldestination[key];
   } else if ('object' === type) {
     for (key in loc) {
@@ -1261,9 +2032,10 @@ function lolcation(loc) {
  *
  * @param {String} address URL we want to extract from.
  * @return {ProtocolExtract} Extracted information.
- * @api private
+ * @private
  */
 function extractProtocol(address) {
+  address = trimLeft(address);
   var match = protocolre.exec(address);
 
   return {
@@ -1279,9 +2051,11 @@ function extractProtocol(address) {
  * @param {String} relative Pathname of the relative URL.
  * @param {String} base Pathname of the base URL.
  * @return {String} Resolved pathname.
- * @api private
+ * @private
  */
 function resolve(relative, base) {
+  if (relative === '') return base;
+
   var path = (base || '/').split('/').slice(0, -1).concat(relative.split('/'))
     , i = path.length
     , last = path[i - 1]
@@ -1312,15 +2086,20 @@ function resolve(relative, base) {
  * create an actual constructor as it's much more memory efficient and
  * faster and it pleases my OCD.
  *
+ * It is worth noting that we should not use `URL` as class name to prevent
+ * clashes with the global URL instance that got introduced in browsers.
+ *
  * @constructor
  * @param {String} address URL we want to parse.
- * @param {Object|String} location Location defaults for relative paths.
- * @param {Boolean|Function} parser Parser for the query string.
- * @api public
+ * @param {Object|String} [location] Location defaults for relative paths.
+ * @param {Boolean|Function} [parser] Parser for the query string.
+ * @private
  */
-function URL(address, location, parser) {
-  if (!(this instanceof URL)) {
-    return new URL(address, location, parser);
+function Url(address, location, parser) {
+  address = trimLeft(address);
+
+  if (!(this instanceof Url)) {
+    return new Url(address, location, parser);
   }
 
   var relative, extracted, parse, instruction, index, key
@@ -1362,10 +2141,16 @@ function URL(address, location, parser) {
   // When the authority component is absent the URL starts with a path
   // component.
   //
-  if (!extracted.slashes) instructions[2] = [/(.*)/, 'pathname'];
+  if (!extracted.slashes) instructions[3] = [/(.*)/, 'pathname'];
 
   for (; i < instructions.length; i++) {
     instruction = instructions[i];
+
+    if (typeof instruction === 'function') {
+      address = instruction(address);
+      continue;
+    }
+
     parse = instruction[0];
     key = instruction[1];
 
@@ -1456,8 +2241,8 @@ function URL(address, location, parser) {
  *                               used to parse the query.
  *                               When setting the protocol, double slash will be
  *                               removed from the final url if it is true.
- * @returns {URL}
- * @api public
+ * @returns {URL} URL instance for chaining.
+ * @public
  */
 function set(part, value, fn) {
   var url = this;
@@ -1542,8 +2327,8 @@ function set(part, value, fn) {
  * Transform the properties back in to a valid and full URL string.
  *
  * @param {Function} stringify Optional query stringify function.
- * @returns {String}
- * @api public
+ * @returns {String} Compiled version of the URL.
+ * @public
  */
 function toString(stringify) {
   if (!stringify || 'function' !== typeof stringify) stringify = qs.stringify;
@@ -1572,39 +2357,60 @@ function toString(stringify) {
   return result;
 }
 
-URL.prototype = { set: set, toString: toString };
+Url.prototype = { set: set, toString: toString };
 
 //
 // Expose the URL parser and some additional properties that might be useful for
 // others or testing.
 //
-URL.extractProtocol = extractProtocol;
-URL.location = lolcation;
-URL.qs = qs;
+Url.extractProtocol = extractProtocol;
+Url.location = lolcation;
+Url.trimLeft = trimLeft;
+Url.qs = qs;
 
-module.exports = URL;
+module.exports = Url;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
 
 /***/ }),
 
-/***/ 45:
+/***/ 41:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var has = Object.prototype.hasOwnProperty;
+var has = Object.prototype.hasOwnProperty
+  , undef;
 
 /**
  * Decode a URI encoded string.
  *
  * @param {String} input The URI encoded string.
- * @returns {String} The decoded string.
+ * @returns {String|Null} The decoded string.
  * @api private
  */
 function decode(input) {
-  return decodeURIComponent(input.replace(/\+/g, ' '));
+  try {
+    return decodeURIComponent(input.replace(/\+/g, ' '));
+  } catch (e) {
+    return null;
+  }
+}
+
+/**
+ * Attempts to encode a given input.
+ *
+ * @param {String} input The string that needs to be encoded.
+ * @returns {String|Null} The encoded string.
+ * @api private
+ */
+function encode(input) {
+  try {
+    return encodeURIComponent(input);
+  } catch (e) {
+    return null;
+  }
 }
 
 /**
@@ -1619,15 +2425,21 @@ function querystring(query) {
     , result = {}
     , part;
 
-  //
-  // Little nifty parsing hack, leverage the fact that RegExp.exec increments
-  // the lastIndex property so we can continue executing this loop until we've
-  // parsed all results.
-  //
-  for (;
-    part = parser.exec(query);
-    result[decode(part[1])] = decode(part[2])
-  );
+  while (part = parser.exec(query)) {
+    var key = decode(part[1])
+      , value = decode(part[2]);
+
+    //
+    // Prevent overriding of existing properties. This ensures that build-in
+    // methods like `toString` or __proto__ are not overriden by malicious
+    // querystrings.
+    //
+    // In the case if failed decoding, we want to omit the key/value pairs
+    // from the result.
+    //
+    if (key === null || value === null || key in result) continue;
+    result[key] = value;
+  }
 
   return result;
 }
@@ -1643,16 +2455,36 @@ function querystring(query) {
 function querystringify(obj, prefix) {
   prefix = prefix || '';
 
-  var pairs = [];
+  var pairs = []
+    , value
+    , key;
 
   //
   // Optionally prefix with a '?' if needed
   //
   if ('string' !== typeof prefix) prefix = '?';
 
-  for (var key in obj) {
+  for (key in obj) {
     if (has.call(obj, key)) {
-      pairs.push(encodeURIComponent(key) +'='+ encodeURIComponent(obj[key]));
+      value = obj[key];
+
+      //
+      // Edge cases where we actually want to encode the value to an empty
+      // string instead of the stringified value.
+      //
+      if (!value && (value === null || value === undef || isNaN(value))) {
+        value = '';
+      }
+
+      key = encodeURIComponent(key);
+      value = encodeURIComponent(value);
+
+      //
+      // If we failed to encode the strings, we should bail out as we don't
+      // want to add invalid strings to the query.
+      //
+      if (key === null || value === null) continue;
+      pairs.push(key +'='+ value);
     }
   }
 
@@ -1668,7 +2500,7 @@ exports.parse = querystring;
 
 /***/ }),
 
-/***/ 480:
+/***/ 444:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var Filter_1_1_0_Module_Factory = function () {
@@ -2439,7 +3271,7 @@ else {
 
 /***/ }),
 
-/***/ 481:
+/***/ 445:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var GML_3_1_1_Module_Factory = function () {
@@ -12234,7 +13066,7 @@ else {
 
 /***/ }),
 
-/***/ 482:
+/***/ 446:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var OWS_1_0_0_Module_Factory = function () {
@@ -12907,7 +13739,7 @@ else {
 
 /***/ }),
 
-/***/ 483:
+/***/ 447:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var SMIL_2_0_Module_Factory = function () {
@@ -13167,7 +13999,7 @@ else {
 
 /***/ }),
 
-/***/ 484:
+/***/ 448:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var SMIL_2_0_Language_Module_Factory = function () {
@@ -13862,7 +14694,7 @@ else {
 
 /***/ }),
 
-/***/ 485:
+/***/ 449:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var WFS_1_1_0_Module_Factory = function () {
@@ -14777,7 +15609,7 @@ else {
 
 /***/ }),
 
-/***/ 50:
+/***/ 47:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14823,7 +15655,7 @@ module.exports = function required(port, protocol) {
 
 /***/ }),
 
-/***/ 55:
+/***/ 49:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _jsonix_factory = function(_jsonix_xmldom, _jsonix_xmlhttprequest, _jsonix_fs)
@@ -20962,7 +21794,7 @@ else
 
 /***/ }),
 
-/***/ 596:
+/***/ 559:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var XSD_1_0_Module_Factory = function () {
@@ -22382,7 +23214,7 @@ else {
 
 /***/ }),
 
-/***/ 603:
+/***/ 566:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22392,43 +23224,43 @@ exports.__esModule = true;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _Events = __webpack_require__(14);
+var _Events = __webpack_require__(12);
 
 var _Events2 = _interopRequireDefault(_Events);
 
-var _FieldSet2 = __webpack_require__(10);
+var _FieldSet2 = __webpack_require__(8);
 
 var _FieldSet3 = _interopRequireDefault(_FieldSet2);
 
-var _MapConfigService = __webpack_require__(608);
+var _MapConfigService = __webpack_require__(289);
 
 var _MapConfigService2 = _interopRequireDefault(_MapConfigService);
 
-var _MapConfigTransformService = __webpack_require__(607);
+var _MapConfigTransformService = __webpack_require__(290);
 
 var _MapConfigTransformService2 = _interopRequireDefault(_MapConfigTransformService);
 
-var _propTypes = __webpack_require__(20);
+var _propTypes = __webpack_require__(17);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _react = __webpack_require__(3);
+var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(21);
+var _reactDom = __webpack_require__(18);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _WMSService = __webpack_require__(74);
+var _WMSService = __webpack_require__(67);
 
 var _WMSService2 = _interopRequireDefault(_WMSService);
 
-var _classnames = __webpack_require__(75);
+var _classnames = __webpack_require__(68);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _openlayers = __webpack_require__(11);
+var _openlayers = __webpack_require__(9);
 
 var _openlayers2 = _interopRequireDefault(_openlayers);
 
@@ -22898,799 +23730,7 @@ Popup.propTypes = {
 
 /***/ }),
 
-/***/ 607:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () {
-  function defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }return function (Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
-  };
-}(); /*
-      * Copyright 2015-present Boundless Spatial Inc., http://boundlessgeo.com
-      * Licensed under the Apache License, Version 2.0 (the "License").
-      * You may not use this file except in compliance with the License.
-      * You may obtain a copy of the License at
-      * http://www.apache.org/licenses/LICENSE-2.0
-      * Unless required by applicable law or agreed to in writing, software
-      * distributed under the License is distributed on an "AS IS" BASIS,
-      * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-      * See the License for the specific language governing permissions and limitations under the License.
-      */
-
-var _openlayers = __webpack_require__(11);
-
-var _openlayers2 = _interopRequireDefault(_openlayers);
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
-
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-
-var sourceIdx;
-
-var baseMapTitle = 'Base Maps';
-var gxpGroup = 'background';
-
-/**
- * Transforms GXP style map config to our internal format.
- */
-
-var MapConfigTransformService = function () {
-  function MapConfigTransformService() {
-    _classCallCheck(this, MapConfigTransformService);
-  }
-
-  _createClass(MapConfigTransformService, [{
-    key: '_writeLayer',
-    value: function _writeLayer(config, sources, layers, group) {
-      var key;
-      var layerConfig = {};
-      // name is mandatory
-      layerConfig.name = config.properties.name || config.properties.title.split(' ').join('_');
-      layerConfig.title = config.properties.title;
-      layerConfig.visibility = config.properties.visible;
-      if (group) {
-        layerConfig.group = group;
-      }
-      layers.push(layerConfig);
-      if (config.source.type === 'XYZ') {
-        layerConfig.type = 'OpenLayers.Layer.XYZ';
-        var options;
-        if (config.source.properties.attributions && config.source.properties.attributions.length > 0) {
-          options = { attribution: config.source.properties.attributions[0] };
-        }
-        layerConfig.args = [config.properties.title, config.source.properties.urls[0]];
-        if (options) {
-          layerConfig.args.push(options);
-        }
-        sourceIdx++;
-        sources[sourceIdx] = {
-          ptype: 'gxp_olsource'
-        };
-      } else if (config.source.type === 'TileArcGISRest') {
-        layerConfig.layerid = config.source.properties.params.LAYERS;
-        sourceIdx++;
-        sources[sourceIdx] = {
-          url: config.source.properties.urls[0],
-          ptype: 'gxp_arcrestsource'
-        };
-      } else if (config.source.type === 'BingMaps') {
-        var hasBing = false;
-        for (key in sources) {
-          if (sources[key].ptype == 'gxp_bingsource' && sources[key].apiKey === config.source.properties.key) {
-            hasBing = true;
-            break;
-          }
-        }
-        if (!hasBing) {
-          sourceIdx++;
-          sources[sourceIdx] = {
-            ptype: 'gxp_bingsource',
-            apiKey: config.source.properties.key
-          };
-        }
-      } else if (config.source.type === 'TMS') {
-        if (config.source.properties.urls[0].indexOf('tiles.mapbox.com/v1/mapbox') !== -1) {
-          var hasMapBox = false;
-          for (key in sources) {
-            if (sources[key].ptype == 'gxp_mapboxsource') {
-              hasMapBox = true;
-              break;
-            }
-          }
-          if (!hasMapBox) {
-            sourceIdx++;
-            sources[sourceIdx] = {
-              ptype: 'gxp_mapboxsource'
-            };
-          }
-        }
-      } else if (config.source.type === 'TileWMS') {
-        if (config.source.properties.params.SLD_BODY) {
-          layerConfig.params = {
-            TILED: 'false',
-            SLD_BODY: config.source.properties.params.SLD_BODY
-          };
-        }
-        layerConfig.queryable = config.properties.isSelectable;
-        layerConfig.capability = {
-          queryable: config.properties.isSelectable,
-          styles: [{
-            name: config.properties.styleName,
-            legend: {
-              href: config.properties.legendUrl
-            }
-          }],
-          llbbox: config.properties.EX_GeographicBoundingBox
-        };
-        var hasWMSC = false;
-        for (key in sources) {
-          if (sources[key].ptype == 'gxp_wmscsource' && sources[key].url === config.source.url) {
-            hasWMSC = true;
-            break;
-          }
-        }
-        if (!hasWMSC) {
-          sourceIdx++;
-          sources[sourceIdx] = {
-            ptype: 'gxp_wmscsource',
-            url: config.source.properties.urls[0]
-          };
-        }
-      } else if (config.source.type === 'OSM') {
-        var hasOSM = false;
-        for (key in sources) {
-          if (sources[key].ptype == 'gxp_osmsource') {
-            hasOSM = true;
-            break;
-          }
-        }
-        if (!hasOSM) {
-          sourceIdx++;
-          sources[sourceIdx] = {
-            ptype: 'gxp_osmsource'
-          };
-        }
-        if (!layerConfig.name) {
-          layerConfig.name = 'mapnik';
-        }
-      }
-      layerConfig.source = '' + sourceIdx;
-    }
-  }, {
-    key: 'write',
-    value: function write(data) {
-      var viewConfig = data.view;
-      var layerConfig = data.layers;
-      var layers = [];
-      var sources = {};
-      sourceIdx = -1;
-      for (var i = 0, ii = layerConfig.length; i < ii; ++i) {
-        if (layerConfig[i].type === 'Group') {
-          for (var j = 0, jj = layerConfig[i].children.length; j < jj; ++j) {
-            var config = layerConfig[i].children[j];
-            this._writeLayer(config, sources, layers, layerConfig[i].properties.title.replace(baseMapTitle, gxpGroup));
-          }
-        } else {
-          this._writeLayer(layerConfig[i], sources, layers);
-        }
-      }
-      var result = {
-        sources: sources
-      };
-      result.map = {
-        layers: layers,
-        center: viewConfig.center,
-        projection: viewConfig.projection,
-        zoom: viewConfig.zoom
-      };
-      return result;
-    }
-  }, {
-    key: '_transformTileService',
-    value: function _transformTileService(layerConfig) {
-      var thumbnail;
-      if (layerConfig.source.type === 'OSM') {
-        thumbnail = 'https://a.tile.openstreetmap.org/0/0/0.png';
-      } else {
-        if (layerConfig.source.properties.urls) {
-          thumbnail = layerConfig.source.properties.urls[0].replace('{z}', '0').replace('{y}', '0').replace('{x}', '0');
-        }
-      }
-      return {
-        name: layerConfig.properties.name,
-        description: layerConfig.properties.title,
-        standard: layerConfig.source.type,
-        attribution: layerConfig.source.properties.attributions ? layerConfig.source.properties.attributions[0] : undefined,
-        endpoint: layerConfig.source.properties.urls ? layerConfig.source.properties.urls[0] : undefined,
-        thumbnail: thumbnail
-      };
-    }
-  }, {
-    key: 'transform',
-    value: function transform(data, opt_errors, opt_tileServices) {
-      var i,
-          ii,
-          layers = [];
-      var groups = {};
-      for (i = 0, ii = data.map.layers.length; i < ii; ++i) {
-        var layer = data.map.layers[i];
-        var source = data.sources[layer.source];
-        var sourceType = source.type;
-        // create proper source type based on map json returned from geonode
-        if (Object.keys(source).length == 0 && layer.type === "osm") {
-          sourceType = "gxp_osmsource";
-          source.ptype = sourceType;
-        } else if (layer.provider && layer.provider === "OpenTopoMap") {
-          layer.type = 'OpenLayers.Layer.XYZ';
-          sourceType = "gxp_olsource";
-          source.ptype = "gxp_olsource";
-        } else if (Object.keys(source).length === 0 && layer.type === "empty") {
-          sourceType = "gxp_olsource";
-          source.ptype = "gxp_olsource";
-        }
-        if (!sourceType) {
-          sourceType = data.defaultSourceType;
-        }
-        var url = source.url;
-        var layerConfig = {
-          properties: {
-            isRemovable: true,
-            visible: layer.visibility,
-            title: layer.title || (layer.name ? layer.name.split(':').pop() : undefined),
-            id: layer.name,
-            name: layer.name
-          }
-        };
-        if (sourceType === 'gxp_olsource' && layer.type === 'OpenLayers.Layer.XYZ') {
-          layerConfig.type = 'Tile';
-          layerConfig.properties.title = layer.args && layer.args.length > 0 ? layer.args[0] : layerConfig.properties.title;
-          layerConfig.properties.name = layerConfig.properties.title.split(' ').join('_');
-          var xyzUrls;
-          var urlConfig = layer.args && layer.args.lenght ? layer.args[1] : undefined;
-          if (layer.provider && layer.provider === "OpenTopoMap") {
-            urlConfig = ['https://a.tile.opentopomap.org/{z}/{x}/{y}.png', 'https://b.tile.opentopomap.org/{z}/{x}/{y}.png', 'https://c.tile.opentopomap.org/{z}/{x}/{y}.png'];
-          }
-          if (Array.isArray(urlConfig)) {
-            xyzUrls = urlConfig;
-          } else {
-            xyzUrls = [urlConfig];
-          }
-          for (var j = 0, jj = xyzUrls.length; j < jj; ++j) {
-            xyzUrls[j] = xyzUrls[j].replace(/\$/g, '');
-            if (xyzUrls[j].indexOf('cartocdn') !== -1) {
-              xyzUrls[j] = xyzUrls[j].replace('https:', 'http:');
-            }
-          }
-          layerConfig.source = {
-            type: 'XYZ',
-            properties: {
-              crossOrigin: 'anonymous',
-              urls: xyzUrls
-            }
-          };
-          if (layer.args && layer.args.length === 3 && layer.args[2].attribution) {
-            layerConfig.source.properties.attributions = [layer.args[2].attribution];
-          }
-        } else if (sourceType === 'gxp_osmsource') {
-          if (!layer.group) {
-            // force OSM as base layer
-            layerConfig.properties.type = 'base';
-          }
-          layerConfig.type = 'Tile';
-          layerConfig.source = {
-            type: 'OSM',
-            properties: {
-              crossOrigin: 'anonymous'
-            }
-          };
-        } else if (sourceType === 'gxp_arcrestsource') {
-          layerConfig.type = 'Tile';
-          layerConfig.source = {
-            type: 'TileArcGISRest',
-            properties: {
-              crossOrigin: 'anonymous',
-              urls: [url],
-              params: {
-                LAYERS: layer.layerid,
-                FORMAT: layer.format
-              }
-            }
-          };
-        } else if (sourceType === 'gxp_wmscsource' && layer.name) {
-          layerConfig.properties.popupInfo = '#AllAttributes';
-          layerConfig.properties.isSelectable = layer.queryable;
-          layerConfig.properties.isWFST = layer.queryable;
-          // if (layer.capability) {
-          //   if (layer.queryable === undefined) {
-          //     layerConfig.properties.isSelectable = layer.capability.queryable;
-          //     layerConfig.properties.isWFST = layer.capability.queryable;
-          //   }
-          //   layerConfig.properties.styleName = layer.capability.styles[0].name;
-          //   layerConfig.properties.legendUrl = layer.capability.styles[0].legend.href;
-          //   layerConfig.properties.EX_GeographicBoundingBox = layer.capability.llbbox;
-          // }
-          if (layer.capability) {
-            layerConfig.properties.extent = layer.capability.bbox[data.map.projection].bbox;
-          }
-          if (!layerConfig.properties.EX_GeographicBoundingBox) {
-            if (layer.bbox && layer.srs && _openlayers2.default.proj.get(layer.srs)) {
-              layerConfig.properties.EX_GeographicBoundingBox = _openlayers2.default.proj.transformExtent(layer.bbox, layer.srs, 'EPSG:4326');
-            }
-          }
-          layerConfig.type = 'Tile';
-          var params = layer.params || {};
-          params.LAYERS = layer.name;
-          if (params.TILED === undefined) {
-            params.TILED = 'TRUE';
-          }
-          if (layer.styles) {
-            params.STYLES = layer.styles;
-          }
-          if (layer.format) {
-            params.FORMAT = layer.format;
-          }
-          if (layer.transparent !== undefined) {
-            params.TRANSPARENT = layer.transparent;
-          }
-          layerConfig.source = {
-            type: 'TileWMS',
-            properties: {
-              crossOrigin: 'anonymous',
-              params: params,
-              urls: [url]
-            }
-          };
-        } else if (sourceType === 'gxp_mapboxsource') {
-          var urls = ['http://a.tiles.mapbox.com/v1/mapbox.' + layer.name + '/', 'http://b.tiles.mapbox.com/v1/mapbox.' + layer.name + '/', 'http://c.tiles.mapbox.com/v1/mapbox.' + layer.name + '/', 'http://d.tiles.mapbox.com/v1/mapbox.' + layer.name + '/'];
-          var attribution = /^world/.test(layer.name) ? '<a href="http://mapbox.com">MapBox</a> | Some Data &copy; OSM CC-BY-SA | <a href="http://mapbox.com/tos">Terms of Service</a>' : '<a href="http://mapbox.com">MapBox</a> | <a href="http://mapbox.com/tos">Terms of Service</a>';
-          var maxZoom = {
-            'blue-marble-topo-bathy-jan': 8,
-            'blue-marble-topo-bathy-jul': 8,
-            'blue-marble-topo-jan': 8,
-            'blue-marble-topo-jul': 8,
-            'control-room': 8,
-            'geography-class': 8,
-            'natural-earth-hypso': 6,
-            'natural-earth-hypso-bathy': 6,
-            'natural-earth-1': 6,
-            'natural-earth-2': 6,
-            'world-dark': 11,
-            'world-light': 11,
-            'world-glass': 10,
-            'world-print': 9
-          };
-          layerConfig.type = 'Tile';
-          layerConfig.source = {
-            type: 'TMS',
-            properties: {
-              attributions: [attribution],
-              format: 'png',
-              urls: urls,
-              maxZoom: maxZoom[layer.name]
-            }
-          };
-        } else if (sourceType === 'gxp_bingsource') {
-          layerConfig.type = 'Tile';
-          layerConfig.source = {
-            type: 'BingMaps',
-            properties: {
-              key: source.apiKey,
-              imagerySet: layer.name
-            }
-          };
-        } else if (sourceType === "gxp_olsource") {
-          layerConfig.type = 'Tile';
-          layerConfig.source = {
-            type: 'XYZ',
-            properties: {
-              crossOrigin: crossOrigin,
-              urls: ['']
-            }
-          };
-        } else {
-          if (opt_errors) {
-            opt_errors.push({
-              msg: 'Unable to load layer ' + layerConfig.properties.title,
-              layer: layer,
-              source: source
-            });
-          }
-          layerConfig = undefined;
-        }
-        if (layerConfig !== undefined) {
-          if (layer.group) {
-            if (layer.group === gxpGroup) {
-              layerConfig.properties.type = 'base';
-              if (opt_tileServices) {
-                var tileService = this._transformTileService(layerConfig);
-                if (tileService) {
-                  opt_tileServices.push(tileService);
-                }
-              }
-            }
-            if (!groups[layer.group]) {
-              groups[layer.group] = {
-                type: 'Group',
-                properties: {
-                  name: layer.group,
-                  title: layer.group === gxpGroup ? baseMapTitle : layer.group,
-                  type: layer.group === gxpGroup ? 'base-group' : undefined
-                },
-                children: []
-              };
-              layers.push(groups[layer.group]);
-            }
-            groups[layer.group].children.push(layerConfig);
-          } else {
-            layers.push(layerConfig);
-          }
-        }
-      }
-      return {
-        layers: layers,
-        view: {
-          center: data.map.center,
-          projection: data.map.projection,
-          zoom: data.map.zoom
-        }
-      };
-    }
-  }]);
-
-  return MapConfigTransformService;
-}();
-
-exports.default = new MapConfigTransformService();
-
-/***/ }),
-
-/***/ 608:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () {
-  function defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }return function (Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
-  };
-}(); /*
-      * Copyright 2015-present Boundless Spatial Inc., http://boundlessgeo.com
-      * Licensed under the Apache License, Version 2.0 (the "License").
-      * You may not use this file except in compliance with the License.
-      * You may obtain a copy of the License at
-      * http://www.apache.org/licenses/LICENSE-2.0
-      * Unless required by applicable law or agreed to in writing, software
-      * distributed under the License is distributed on an "AS IS" BASIS,
-      * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-      * See the License for the specific language governing permissions and limitations under the License.
-      */
-
-var _openlayers = __webpack_require__(11);
-
-var _openlayers2 = _interopRequireDefault(_openlayers);
-
-var _util = __webpack_require__(22);
-
-var _util2 = _interopRequireDefault(_util);
-
-var _LayerIdService = __webpack_require__(304);
-
-var _LayerIdService2 = _interopRequireDefault(_LayerIdService);
-
-var _WFSService = __webpack_require__(305);
-
-var _WFSService2 = _interopRequireDefault(_WFSService);
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
-
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-
-var MapConfigService = function () {
-  function MapConfigService() {
-    _classCallCheck(this, MapConfigService);
-  }
-
-  _createClass(MapConfigService, [{
-    key: 'generateSourceFromConfig',
-    value: function generateSourceFromConfig(map, config, opt_proxy, opt_wfsUrl, opt_wfsTypeName) {
-      var props = config.properties || {};
-      if (props.attributions) {
-        var attributions = [];
-        for (var i = 0, ii = props.attributions.length; i < ii; ++i) {
-          attributions.push(new _openlayers2.default.Attribution({
-            html: props.attributions[i]
-          }));
-        }
-        props.attributions = attributions;
-      }
-      props.wrapX = false;
-      if (config.type === 'Cluster') {
-        props.source = this.generateSourceFromConfig(map, config.source, opt_proxy, opt_wfsUrl, opt_wfsTypeName);
-      }
-      if (config.type === 'Vector') {
-        props.format = props.format.type === 'GeoJSON' ? new _openlayers2.default.format.GeoJSON() : undefined;
-        if (opt_wfsUrl && opt_wfsTypeName) {
-          return _WFSService2.default.createSource(opt_wfsUrl, map.getView().getProjection(), opt_wfsTypeName, opt_proxy);
-        }
-      }
-      if (config.type === 'TMS') {
-        config.type = 'XYZ';
-        var urls = props.urls || [props.url];
-        props.tileUrlFunction = function (tileCoord, pixelRatio, projection) {
-          var min = 0;
-          var max = urls.length - 1;
-          var idx = Math.floor(Math.random() * (max - min + 1)) + min;
-          var x, y, z;
-          z = tileCoord[0];
-          x = tileCoord[1];
-          y = tileCoord[2] + (1 << z);
-          return urls[idx] + z + '/' + x + '/' + y + '.' + props.format;
-        };
-        delete props.urls;
-        delete props.url;
-        var source = new _openlayers2.default.source[config.type](props);
-        source.set('originalType', 'TMS');
-        source.set('originalProperties', Object.assign({}, props, {
-          urls: urls
-        }));
-        return source;
-      }
-      var sourceObj = new _openlayers2.default.source[config.type](props);
-      if (opt_proxy && config.type === 'TileWMS') {
-        sourceObj.once('tileloaderror', function () {
-          sourceObj.setTileLoadFunction(function () {
-            var tileLoadFn = sourceObj.getTileLoadFunction();
-            return function (tile, src) {
-              tileLoadFn(tile, _util2.default.getProxiedUrl(src, opt_proxy));
-            };
-          }());
-        });
-      }
-      return sourceObj;
-    }
-  }, {
-    key: 'generateLayerFromConfig',
-    value: function generateLayerFromConfig(config, map, opt_proxy) {
-      var type = config.type;
-      var layerConfig = config.properties || {};
-      layerConfig.id = _LayerIdService2.default.generateId();
-      if (type === 'Group') {
-        layerConfig.layers = [];
-        for (var i = 0, ii = config.children.length; i < ii; ++i) {
-          layerConfig.layers.push(this.generateLayerFromConfig(config.children[i], map, opt_proxy));
-        }
-      }
-      var layer = new _openlayers2.default.layer[type](layerConfig);
-      var sourceConfig = config.source;
-      if (sourceConfig) {
-        var source = this.generateSourceFromConfig(map, sourceConfig, opt_proxy, layerConfig.url, layerConfig.name);
-        layer.setSource(source);
-      }
-      return layer;
-    }
-  }, {
-    key: 'getLayerType',
-    value: function getLayerType(layer) {
-      if (layer instanceof _openlayers2.default.layer.Group) {
-        return 'Group';
-      } else if (layer instanceof _openlayers2.default.layer.Vector) {
-        return 'Vector';
-      } else if (layer instanceof _openlayers2.default.layer.Tile) {
-        return 'Tile';
-      } else if (layer instanceof _openlayers2.default.layer.Image) {
-        return 'Image';
-      }
-    }
-  }, {
-    key: 'getFormatType',
-    value: function getFormatType(format) {
-      if (format instanceof _openlayers2.default.format.GeoJSON) {
-        return 'GeoJSON';
-      }
-    }
-  }, {
-    key: 'getSourceConfig',
-    value: function getSourceConfig(source) {
-      var config = {};
-      var attributions;
-      var attr = source.getAttributions();
-      if (attr !== null) {
-        attributions = [];
-        for (var i = 0, ii = attr.length; i < ii; ++i) {
-          attributions.push(attr[i].getHTML());
-        }
-      }
-      if (source instanceof _openlayers2.default.source.TileWMS) {
-        config.type = 'TileWMS';
-        config.properties = {
-          params: source.getParams(),
-          urls: source.getUrls()
-        };
-      } else if (source instanceof _openlayers2.default.source.Cluster) {
-        config.type = 'Cluster';
-        config.source = this.getSourceConfig(source.getSource());
-      } else if (source instanceof _openlayers2.default.source.Vector) {
-        config.type = 'Vector';
-        config.properties = {
-          attributions: attributions,
-          format: {
-            type: this.getFormatType(source.getFormat())
-          },
-          url: source.getUrl()
-        };
-      } else if (source instanceof _openlayers2.default.source.ImageWMS) {
-        config.type = 'ImageWMS';
-        config.properties = {
-          url: source.getUrl(),
-          params: source.getParams(),
-          attributions: attributions
-        };
-      } else if (source instanceof _openlayers2.default.source.OSM) {
-        config.type = 'OSM';
-        config.properties = {
-          attributions: attributions
-        };
-      } else if (source instanceof _openlayers2.default.source.BingMaps) {
-        config.type = 'BingMaps';
-        config.properties = {
-          key: source.getApiKey(),
-          imagerySet: source.getImagerySet()
-        };
-      } else if (source instanceof _openlayers2.default.source.XYZ) {
-        if (source.get('originalType') === 'TMS') {
-          config.type = 'TMS';
-          config.properties = source.get('originalProperties');
-        } else {
-          config.type = 'XYZ';
-          config.properties = {
-            attributions: attributions,
-            urls: source.getUrls()
-          };
-        }
-      } else if (source instanceof _openlayers2.default.source.TileArcGISRest) {
-        config.type = 'TileArcGISRest';
-        config.properties = {
-          urls: source.getUrls(),
-          params: source.getParams()
-        };
-      }
-      return config;
-    }
-  }, {
-    key: 'getLayerConfig',
-    value: function getLayerConfig(config, layer) {
-      config.type = this.getLayerType(layer);
-      config.properties = layer.getProperties();
-      delete config.properties.maxResolution;
-      delete config.properties.minResolution;
-      var source = config.type !== 'Group' ? layer.getSource() : null;
-      if (source) {
-        delete config.properties.source;
-        config.source = this.getSourceConfig(source);
-      }
-      if (layer instanceof _openlayers2.default.layer.Group) {
-        delete config.properties.layers;
-        config.children = [];
-        layer.getLayers().forEach(function (child) {
-          if (child.get('title') !== null) {
-            var childConfig = {};
-            config.children.push(childConfig);
-            this.getLayerConfig(childConfig, child);
-          }
-        }, this);
-      }
-      return config;
-    }
-  }, {
-    key: 'load',
-    value: function load(mapConfig, map, opt_proxy) {
-      var viewConfig = mapConfig.view;
-      var layerConfig = mapConfig.layers;
-      var remove = [];
-      map.getLayers().forEach(function (lyr) {
-        if (lyr.get('title') !== null) {
-          remove.push(lyr);
-        }
-      });
-      var i, ii;
-      for (i = 0, ii = remove.length; i < ii; ++i) {
-        map.removeLayer(remove[i]);
-      }
-      for (i = 0, ii = layerConfig.length; i < ii; ++i) {
-        var layer = this.generateLayerFromConfig(layerConfig[i], map, opt_proxy);
-        map.addLayer(layer);
-      }
-      var view = map.getView(),
-          proj = _openlayers2.default.proj.get(viewConfig.projection);
-      // 1. The map json returned from geonode has wrong "center projection" than the returned saved "map" projection
-      // 2. Guessed that the used center projection is 'EPSG:4326'
-      // 3. the following line is suggested to transform to the current view projection
-      viewConfig.center = _openlayers2.default.proj.transform(viewConfig.center, "EPSG:4326", viewConfig.projection);
-      if (proj && !_openlayers2.default.proj.equivalent(view.getProjection(), proj)) {
-        map.setView(new _openlayers2.default.View({
-          center: viewConfig.center,
-          resolution: viewConfig.resolution,
-          zoom: viewConfig.zoom,
-          rotation: viewConfig.rotation,
-          projection: viewConfig.projection
-        }));
-      } else {
-        view.setCenter(viewConfig.center);
-        if (viewConfig.resolution !== undefined) {
-          view.setResolution(viewConfig.resolution);
-        } else if (viewConfig.zoom !== undefined) {
-          view.setZoom(viewConfig.zoom);
-        }
-        if (viewConfig.rotation !== undefined) {
-          view.setRotation(viewConfig.rotation);
-        }
-      }
-    }
-  }, {
-    key: 'save',
-    value: function save(map) {
-      var layers = [];
-      map.getLayers().forEach(function (layer) {
-        if (layer.get('title') !== null) {
-          var config = {};
-          layers.push(config);
-          this.getLayerConfig(config, layer);
-        }
-      }, this);
-      var config = {};
-      config.layers = layers;
-      var view = map.getView();
-      config.view = {
-        projection: view.getProjection().getCode(),
-        center: view.getCenter(),
-        resolution: view.getResolution(),
-        zoom: view.getZoom(),
-        rotation: view.getRotation()
-      };
-      return config;
-    }
-  }]);
-
-  return MapConfigService;
-}();
-
-exports.default = new MapConfigService();
-
-/***/ }),
-
-/***/ 73:
+/***/ 66:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var XLink_1_0_Module_Factory = function () {
@@ -23924,7 +23964,7 @@ else {
 
 /***/ }),
 
-/***/ 74:
+/***/ 67:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23946,19 +23986,19 @@ var _createClass = function () { function defineProperties(target, props) { for 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * See the License for the specific language governing permissions and limitations under the License.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
 
-var _util = __webpack_require__(22);
+var _util = __webpack_require__(19);
 
 var _util2 = _interopRequireDefault(_util);
 
-var _urlParse = __webpack_require__(39);
+var _urlParse = __webpack_require__(35);
 
 var _urlParse2 = _interopRequireDefault(_urlParse);
 
-var _openlayers = __webpack_require__(11);
+var _openlayers = __webpack_require__(9);
 
 var _openlayers2 = _interopRequireDefault(_openlayers);
 
-var _SLDService = __webpack_require__(76);
+var _SLDService = __webpack_require__(69);
 
 var _SLDService2 = _interopRequireDefault(_SLDService);
 
@@ -24127,11 +24167,11 @@ exports.default = new WMSService();
 
 /***/ }),
 
-/***/ 75:
+/***/ 68:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-  Copyright (c) 2016 Jed Watson.
+  Copyright (c) 2017 Jed Watson.
   Licensed under the MIT License (MIT), see
   http://jedwatson.github.io/classnames
 */
@@ -24153,8 +24193,11 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 			if (argType === 'string' || argType === 'number') {
 				classes.push(arg);
-			} else if (Array.isArray(arg)) {
-				classes.push(classNames.apply(null, arg));
+			} else if (Array.isArray(arg) && arg.length) {
+				var inner = classNames.apply(null, arg);
+				if (inner) {
+					classes.push(inner);
+				}
 			} else if (argType === 'object') {
 				for (var key in arg) {
 					if (hasOwn.call(arg, key) && arg[key]) {
@@ -24168,6 +24211,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 	}
 
 	if (typeof module !== 'undefined' && module.exports) {
+		classNames.default = classNames;
 		module.exports = classNames;
 	} else if (true) {
 		// register as 'classnames', consistent with npm package name
@@ -24183,7 +24227,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ 76:
+/***/ 69:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24205,17 +24249,17 @@ var _createClass = function () { function defineProperties(target, props) { for 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * See the License for the specific language governing permissions and limitations under the License.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
 
-var _jsonix = __webpack_require__(55);
+var _jsonix = __webpack_require__(49);
 
-var _XLink_1_ = __webpack_require__(73);
+var _XLink_1_ = __webpack_require__(66);
 
-var _Filter_1_0_ = __webpack_require__(85);
+var _Filter_1_0_ = __webpack_require__(80);
 
-var _GML_2_1_ = __webpack_require__(86);
+var _GML_2_1_ = __webpack_require__(81);
 
-var _SLD_1_0_0_GeoServer = __webpack_require__(87);
+var _SLD_1_0_0_GeoServer = __webpack_require__(82);
 
-var _util = __webpack_require__(22);
+var _util = __webpack_require__(19);
 
 var _util2 = _interopRequireDefault(_util);
 
@@ -24999,7 +25043,187 @@ exports.default = new SLDService();
 
 /***/ }),
 
-/***/ 85:
+/***/ 8:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var JSONField = function (_Component) {
+    _inherits(JSONField, _Component);
+
+    function JSONField(props) {
+        _classCallCheck(this, JSONField);
+
+        var _this = _possibleConstructorReturn(this, _Component.call(this, props));
+
+        Object.defineProperty(_this, 'value', {
+            get: function get() {
+                return JSON.parse(_this.refs.textarea.value);
+            },
+            set: function set(newValue) {
+                _this.refs.textarea.value = JSON.stringify(newValue || {});
+            },
+            enumerable: true,
+            configurable: true
+        });
+        return _this;
+    }
+
+    JSONField.prototype.render = function render() {
+        var props = _objectWithoutProperties(this.props, []);
+
+        delete props.ref;
+        return _react2.default.createElement('textarea', _extends({}, props, { ref: 'textarea' }));
+    };
+
+    return JSONField;
+}(_react.Component);
+
+var FieldSet = function (_Component2) {
+    _inherits(FieldSet, _Component2);
+
+    function FieldSet(props) {
+        _classCallCheck(this, FieldSet);
+
+        var _this2 = _possibleConstructorReturn(this, _Component2.call(this, props));
+
+        _this2.state = {
+            schema: props.schema || _this2.getSchema(props),
+            data: props.data || _this2.getInitialData(props)
+        };
+        _this2.fields = {};
+        return _this2;
+    }
+
+    FieldSet.prototype.getSchema = function getSchema() {
+        return {};
+    };
+
+    FieldSet.prototype.getInitialData = function getInitialData() {
+        return {};
+    };
+
+    FieldSet.prototype.render = function render() {
+        var _this3 = this;
+
+        var _state = this.state,
+            schema = _state.schema,
+            data = _state.data;
+
+        return _react2.default.createElement(
+            'div',
+            null,
+            data && Object.keys(schema).map(function (key, index) {
+                var Field = _this3.field(key, schema[key], schema[key].getValue ? schema[key].getValue(data) : data[key] || null);
+                return _react2.default.createElement(
+                    'div',
+                    { key: index },
+                    Field
+                );
+            })
+        );
+    };
+
+    FieldSet.prototype.field = function field(name, schema, value) {
+        var _this4 = this;
+
+        var _schema$props = schema.props,
+            props = _schema$props === undefined ? {} : _schema$props;
+
+        props.className = "form-control";
+        props.ref = function (f) {
+            if (f) {
+                f.value = value;
+                _this4.fields[name] = f;
+                f.fieldSet = _this4;
+            }
+        };
+        var field = null;
+
+        if (['text', 'number', 'url', 'email'].indexOf(schema.type) != -1) {
+            props.type = schema.type;
+            field = _react2.default.createElement('input', props);
+        } else if (schema.type == "textarea") {
+            field = _react2.default.createElement('textarea', props);
+        } else if (schema.type == "json") {
+            field = _react2.default.createElement(JSONField, props);
+        } else if (schema.type == 'select') {
+            field = _react2.default.createElement(
+                'select',
+                props,
+                this.getSelectOptions(name, schema, value)
+            );
+        }
+        var label = schema.label || name.charAt(0).toUpperCase() + name.slice(1);
+        return _react2.default.createElement(
+            'div',
+            { className: 'form-group' },
+            _react2.default.createElement(
+                'label',
+                null,
+                label
+            ),
+            field
+        );
+    };
+
+    FieldSet.prototype.getSelectOptions = function getSelectOptions(name, schema, value) {
+        var options = schema.options;
+
+        if (!options) return null;
+        if ((typeof options === 'undefined' ? 'undefined' : _typeof(options)) == "object") {
+            return Object.keys(options).map(function (key) {
+                return _react2.default.createElement(
+                    'option',
+                    { value: key },
+                    options[key]
+                );
+            });
+        } else if (typeof options == 'function') {
+            return options(this, this.state.data);
+        }
+        return null;
+    };
+
+    FieldSet.prototype.getData = function getData() {
+        var _this5 = this;
+
+        var data = {};
+        Object.keys(this.fields).map(function (key) {
+            data[key] = _this5.fields[key].value;
+        });
+        return data;
+    };
+
+    return FieldSet;
+}(_react.Component);
+
+exports.default = FieldSet;
+
+/***/ }),
+
+/***/ 80:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var Filter_1_0_0_Module_Factory = function () {
@@ -25530,7 +25754,7 @@ else {
 
 /***/ }),
 
-/***/ 86:
+/***/ 81:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var GML_2_1_2_Module_Factory = function () {
@@ -26092,7 +26316,7 @@ else {
 
 /***/ }),
 
-/***/ 87:
+/***/ 82:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var SLD_1_0_0_GeoServer_Module_Factory = function () {
@@ -27282,4 +27506,4 @@ else {
 
 /***/ })
 
-},[603]);
+},[566]);
